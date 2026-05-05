@@ -116,11 +116,11 @@ export function StudentDashboard() {
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                     <div className="animate-in fade-in slide-in-from-left duration-700">
                         <div className="flex items-center gap-2 mb-3">
-                            <span className="w-3 h-3 rounded-full bg-blue-600 animate-pulse" />
+                            <span className="w-3 h-3 rounded-full bg-accent animate-pulse" />
                             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500">User Session Active</p>
                         </div>
                         <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-slate-900 dark:text-white leading-none flex flex-wrap items-center gap-4">
-                            My <span className="text-blue-600 italic">Dashboard</span>
+                            My <span className="text-accent italic">Dashboard</span>
                         </h2>
                         <p className="text-lg text-slate-500 dark:text-slate-400 font-medium mt-4 max-w-xl">
                             {user ? `Welcome back, ${user.fullName.split(' ')[0]}. ` : ""}
@@ -131,7 +131,7 @@ export function StudentDashboard() {
                     <div className="flex items-center gap-3 animate-in fade-in slide-in-from-right duration-700">
                         <RoleGuard allowedRoles={["ADMIN"]}>
                             <Link href="/admin/lab-designer">
-                                <Button className="h-14 px-8 uppercase font-black tracking-widest bg-slate-900 dark:bg-white dark:text-slate-900 text-white hover:bg-black dark:hover:bg-slate-200 rounded-2xl shadow-xl shadow-slate-200 dark:shadow-none transition-transform active:scale-95">
+                                <Button className="h-14 px-8 uppercase font-black tracking-widest bg-primary dark:bg-white dark:text-primary text-white hover:bg-black dark:hover:bg-slate-200 rounded-2xl shadow-xl shadow-slate-200 dark:shadow-none transition-transform active:scale-95">
                                     + Create New Lab
                                 </Button>
                             </Link>
@@ -225,7 +225,7 @@ export function StudentDashboard() {
                     <div className="space-y-8">
                         {/* Student Specific: Practical Exams */}
                         <RoleGuard allowedRoles={["STUDENT"]}>
-                            <div className="border-2 border-indigo-600/20 rounded-[3rem] p-10 bg-indigo-600 text-white relative overflow-hidden group shadow-2xl shadow-indigo-200 dark:shadow-none">
+                            <div className="border-2 border-accent/20 rounded-[3rem] p-10 bg-accent text-white relative overflow-hidden group shadow-2xl shadow-accent/20 dark:shadow-none">
                                 <div className="absolute top-0 right-0 p-32 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-1000"></div>
                                 <div className="relative z-10">
                                     <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
@@ -236,7 +236,7 @@ export function StudentDashboard() {
                                         Check for active or upcoming timed examinations assigned to your batch.
                                     </p>
                                     <Link href="/dashboard/exams">
-                                        <Button className="h-12 px-8 uppercase font-black tracking-widest bg-white text-indigo-600 hover:bg-slate-50 rounded-xl transition-transform active:scale-95 text-xs">
+                                        <Button className="h-12 px-8 uppercase font-black tracking-widest bg-white text-accent hover:bg-slate-50 rounded-xl transition-transform active:scale-95 text-xs">
                                             Enter Exam Portal
                                         </Button>
                                     </Link>

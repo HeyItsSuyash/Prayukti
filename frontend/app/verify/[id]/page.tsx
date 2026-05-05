@@ -31,7 +31,7 @@ export default function VerifyCertificatePage() {
         <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4 font-sans">
             <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
                 {/* Header */}
-                <div className={`p-8 text-center ${isValid ? 'bg-blue-600' : 'bg-red-600'} text-white`}>
+                <div className={`p-8 text-center ${isValid ? 'bg-primary' : 'bg-red-600'} text-white`}>
                     <div className="flex justify-center mb-4">
                         {isValid ? (
                             <CheckCircle className="w-16 h-16" />
@@ -43,7 +43,7 @@ export default function VerifyCertificatePage() {
                         {isValid ? "Authentic Certificate" : "Verification Failed"}
                     </h1>
                     <p className="mt-2 opacity-90 font-medium">
-                        {isValid ? "This certificate is officially issued by Prayukti Virtual Lab." : "The certificate provided could not be verified."}
+                        {isValid ? "This certificate is officially issued by MUJ Online Virtual Lab." : "The certificate provided could not be verified."}
                     </p>
                 </div>
 
@@ -51,7 +51,7 @@ export default function VerifyCertificatePage() {
                 <div className="p-8 space-y-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <User className="w-6 h-6 text-blue-600 mt-1" />
+                            <User className="w-6 h-6 text-accent mt-1" />
                             <div>
                                 <p className="text-xs font-bold uppercase text-slate-400 tracking-wider">Student Name</p>
                                 <p className="text-lg font-bold text-slate-800">{studentName}</p>
@@ -59,7 +59,7 @@ export default function VerifyCertificatePage() {
                         </div>
 
                         <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <BookOpen className="w-6 h-6 text-blue-600 mt-1" />
+                            <BookOpen className="w-6 h-6 text-accent mt-1" />
                             <div>
                                 <p className="text-xs font-bold uppercase text-slate-400 tracking-wider">Course/Subject</p>
                                 <p className="text-lg font-bold text-slate-800">{subject}</p>
@@ -67,7 +67,7 @@ export default function VerifyCertificatePage() {
                         </div>
 
                         <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <Calendar className="w-6 h-6 text-blue-600 mt-1" />
+                            <Calendar className="w-6 h-6 text-accent mt-1" />
                             <div>
                                 <p className="text-xs font-bold uppercase text-slate-400 tracking-wider">Issue Date</p>
                                 <p className="text-lg font-bold text-slate-800">{formattedDate}</p>
@@ -75,10 +75,10 @@ export default function VerifyCertificatePage() {
                         </div>
 
                         <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <Award className="w-6 h-6 text-blue-600 mt-1" />
+                            <Award className="w-6 h-6 text-accent mt-1" />
                             <div>
                                 <p className="text-xs font-bold uppercase text-slate-400 tracking-wider">Certificate ID</p>
-                                <p className="text-sm font-mono font-bold text-blue-600">{certificateId}</p>
+                                <p className="text-sm font-mono font-bold text-accent">{certificateId}</p>
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@ export default function VerifyCertificatePage() {
                             </Button>
                         </Link>
                         <Button
-                            className="w-full sm:w-auto h-12 uppercase font-bold tracking-wider px-8 bg-blue-600 hover:bg-blue-700"
+                            className="w-full sm:w-auto h-12 uppercase font-bold tracking-wider px-8 bg-accent hover:bg-accent/90"
                             onClick={() => window.print()}
                         >
                             Print Details
@@ -101,7 +101,7 @@ export default function VerifyCertificatePage() {
                 {/* Footer */}
                 <div className="bg-slate-50 p-6 border-t border-slate-200 text-center">
                     <p className="text-sm text-slate-500 font-medium">
-                        Prayukti Virtual Lab &copy; 2025 - Secure Verification System
+                        MUJ Online Virtual Lab &copy; 2025 - Secure Verification System
                     </p>
                 </div>
             </div>

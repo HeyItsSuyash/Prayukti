@@ -1,0 +1,162 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  TEACHER
+  ADMIN
+}
+
+enum ExamStatus {
+  UPCOMING
+  ACTIVE
+  COMPLETED
+}
+
+enum AttendanceStatus {
+  PRESENT
+  INACTIVE
+  ABSENT
+  IN_PROGRESS
+}
+
+model User {
+  id                String               @id @default(uuid())
+  email             String               @unique
+  passwordHash      String
+  fullName          String
+  role              Role                 @default(STUDENT)
+  rollNo            String?              @unique
+  enrollmentNo      String?
+  branch            String?
+  year              Int?
+  semester          Int?
+  isVerified        Boolean              @default(false)
+  otp               String?
+  otpExpiry         DateTime?
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+
+  // Relations
+  assignedSubjects  Subject[]            @relation("UserSubjects")
+  examsCreated      Exam[]               @relation("TeacherExams")
+  examsAssigned     Exam[]               @relation("StudentExams")
+  attendanceLogs    AttendanceLog[]
+  activities        ExperimentActivity[]
+  alerts            TeacherAlert[]
+  suspicious        SuspiciousActivity[]
+  refreshTokens     RefreshToken[]
+}
+
+model Subject {
+  id          String   @id @default(uuid())
+  code        String   @unique // e.g., BCS-301
+  name        String
+  branch      String?
+  createdAt   DateTime @default(now())
+
+  // Relations
+  users       User[]   @relation("UserSubjects")
+  experiments Experiment[]
+  exams       Exam[]
+  logs        AttendanceLog[]
+}
+
+model Experiment {
+  id          String   @id @default(uuid())
+  slug        String   @unique // e.g., "cn-exp-1"
+  title       String
+  description String?
+  subjectId   String
+  subject     Subject  @relation(fields: [subjectId], references: [id])
+  createdAt   DateTime @default(now())
+
+  // Relations
+  exams       Exam[]
+  activities  ExperimentActivity[]
+}
+
+model Exam {
+  id              String       @id @default(uuid())
+  title           String
+  subjectId       String
+  subject         Subject      @relation(fields: [subjectId], references: [id])
+  experimentId    String
+  experiment      Experiment   @relation(fields: [experimentId], references: [id])
+  teacherId       String
+  teacher         User         @relation("TeacherExams", fields: [teacherId], references: [id])
+  durationMinutes Int
+  startTime       DateTime
+  status          ExamStatus   @default(UPCOMING)
+  createdAt       DateTime     @default(now())
+
+  // Relations
+  students        User[]       @relation("StudentExams")
+}
+
+model AttendanceLog {
+  id              String           @id @default(uuid())
+  userId          String
+  user            User             @relation(fields: [userId], references: [id])
+  subjectId       String?
+  subject         Subject?         @relation(fields: [subjectId], references: [id])
+  labId           String?
+  loginTime       DateTime         @default(now())
+  logoutTime      DateTime?
+  sessionDuration Int?             @default(0) // in minutes
+  activityScore   Int?             @default(0)
+  status          AttendanceStatus @default(IN_PROGRESS)
+  ipAddress       String?
+  date            DateTime         @default(now()) // used for quick daily filtering
+  isSuspicious    Boolean          @default(false)
+}
+
+model ExperimentActivity {
+  id              String     @id @default(uuid())
+  userId          String
+  user            User       @relation(fields: [userId], references: [id])
+  experimentId    String
+  experiment      Experiment @relation(fields: [experimentId], references: [id])
+  resultGenerated Boolean    @default(false)
+  score           Int?       @default(0)
+  lastRunAt       DateTime   @default(now())
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model TeacherAlert {
+  id          String   @id @default(uuid())
+  studentId   String
+  student     User     @relation(fields: [studentId], references: [id])
+  message     String
+  resolved    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model SuspiciousActivity {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  activity    String
+  severity    String   @default("low")
+  createdAt   DateTime @default(now())
+}
+
+model Setting {
+  id    String @id @default(uuid())
+  key   String @unique
+  value String
+}

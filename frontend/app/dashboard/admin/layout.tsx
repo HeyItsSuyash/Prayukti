@@ -68,13 +68,13 @@ function AdminSidebar({ isSidebarOpen, setIsSidebarOpen, handleLogout }: any) {
             <div className="relative z-10 flex flex-col h-full">
                 {/* Header/Logo */}
                 <div className="flex items-center gap-3 mb-10 px-2">
-                    <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-xl shadow-indigo-900/40">
+                    <div className="w-12 h-12 bg-accent rounded-2xl flex items-center justify-center shadow-xl shadow-slate-900/40">
                         <Shield className="text-white fill-current" size={24} />
                     </div>
                     {isSidebarOpen && (
                         <div className="animate-in fade-in slide-in-from-left-2 duration-500">
-                            <h2 className="font-black tracking-tighter text-2xl text-white leading-none">Prayukti</h2>
-                            <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mt-1">Admin Console</p>
+                            <h2 className="font-black tracking-tighter text-2xl text-white leading-none">MUJ Online</h2>
+                            <p className="text-[10px] font-black text-accent uppercase tracking-widest mt-1">Admin Console</p>
                         </div>
                     )}
                 </div>
@@ -87,7 +87,7 @@ function AdminSidebar({ isSidebarOpen, setIsSidebarOpen, handleLogout }: any) {
                             href={`/dashboard/admin?view=${item.id}`}
                             className={`flex items-center group p-4 rounded-2xl transition-all relative ${
                                 currentView === item.id 
-                                ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-900/50 scale-[1.02]' 
+                                ? 'bg-accent text-white shadow-xl shadow-slate-900/50 scale-[1.02]' 
                                 : 'text-slate-500 hover:text-white hover:bg-white/5'
                             } ${!isSidebarOpen && 'justify-center px-0'}`}
                         >

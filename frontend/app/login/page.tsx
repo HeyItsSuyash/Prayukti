@@ -4,20 +4,66 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Loader2, GraduationCap, School, ShieldCheck, User, Lock, Mail } from "lucide-react";
+import { 
+    Loader2, 
+    GraduationCap, 
+    School, 
+    ShieldCheck, 
+    User, 
+    Lock, 
+    Mail, 
+    ArrowRight, 
+    ChevronLeft, 
+    Eye, 
+    EyeOff, 
+    Quote,
+    AlertCircle,
+    CheckCircle2
+} from "lucide-react";
 import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 type UserRole = "student" | "teacher" | "admin";
 
+const slides = [
+    {
+        tag: "Academic Excellence",
+        title: "Empowering Engineers, Simulating Future.",
+        description: "Experience the next generation of virtual laboratories. Access industry-standard simulations and track your academic journey.",
+        testimonial: null
+    },
+    {
+        tag: "Faculty Voice",
+        title: "Precision in Every Pixel.",
+        description: "Standardized modules designed to align perfectly with your university syllabus.",
+        testimonial: {
+            text: "The virtual labs have revolutionized my learning experience. The simulations are incredibly accurate and easy to use.",
+            author: "Dr. S. K. Singh",
+            position: "Professor, IT Dept"
+        }
+    },
+    {
+        tag: "Student Impact",
+        title: "Learn Anywhere, Anytime.",
+        description: "Join over 5,000+ students mastering engineering concepts from the comfort of their homes.",
+        testimonial: {
+            text: "Prayukti provides a seamless way to conduct experiments remotely. It's an essential tool for modern education at MMMUT.",
+            author: "Anjali Sharma",
+            position: "B.Tech Final Year"
+        }
+    }
+];
+
 export default function LoginPage() {
     const [role, setRole] = useState<UserRole>("student");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
+    const [currentSlide, setCurrentSlide] = useState(0);
     const router = useRouter();
 
     useEffect(() => {
@@ -25,15 +71,20 @@ export default function LoginPage() {
         setSuccess(false);
     }, [role, email, password]);
 
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % slides.length);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, []);
+
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
         setLoading(true);
 
         try {
-            // Role specific endpoint handling
-            const endpoint = role === 'student' ? '/api/auth/login' : '/api/auth/login'; // Adjust if teacher/admin have different routes
-
+            const endpoint = '/api/auth/login';
             const response = await axios.post(`${API_URL}${endpoint}`, {
                 email,
                 password
@@ -41,7 +92,6 @@ export default function LoginPage() {
 
             const { token, user } = response.data;
 
-            // Store token and user info
             if (typeof window !== 'undefined') {
                 localStorage.setItem("vlab_token", token);
                 localStorage.setItem("vlab_user", JSON.stringify(user));
@@ -60,7 +110,6 @@ export default function LoginPage() {
             const message = err.response?.data?.message || "Login failed";
             setError(message);
 
-            // Handle unverified user redirect
             if (message === "Your account is not verified" && role === 'student') {
                 localStorage.setItem("verifyEmail", email);
                 router.push("/verify");
@@ -70,31 +119,39 @@ export default function LoginPage() {
         }
     };
 
-    const handleTestLogin = async () => {
+    const handleTestLogin = async (targetRole: UserRole) => {
         try {
             setError("");
             setLoading(true);
-            const response = await fetch(
-                `${API_URL}/api/auth/login`,
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        email: 'test.student@mmmut.ac.in',
-                        password: 'test123'
-                    })
-                }
-            );
+            
+            const testEmail = targetRole === 'student' ? "test.student@mmmut.ac.in" :
+                            targetRole === 'teacher' ? "test.faculty@mmmut.ac.in" :
+                            "test.admin@mmmut.ac.in";
+
+            const response = await fetch(`${API_URL}/api/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: testEmail,
+                    password: 'password123'
+                })
+            });
             const data = await response.json();
             if (data.token) {
                 localStorage.setItem('vlab_token', data.token);
                 localStorage.setItem('vlab_user', JSON.stringify(data.user));
-                localStorage.setItem('studentName', data.user?.fullName || '');
-                localStorage.setItem('studentRoll', data.user?.rollNo || '');
+                if (targetRole === 'student') {
+                    localStorage.setItem('studentName', data.user?.fullName || '');
+                    localStorage.setItem('studentRoll', data.user?.rollNo || '');
+                }
                 setSuccess(true);
-                setTimeout(() => router.push('/dashboard'), 1000);
+                setTimeout(() => {
+                    if (targetRole === 'teacher') router.push('/dashboard/teacher');
+                    else if (targetRole === 'admin') router.push('/dashboard/admin');
+                    else router.push('/dashboard');
+                }, 1000);
             } else {
-                setError(data.message || 'Test login failed — check backend credentials');
+                setError(data.message || 'Test login failed');
             }
         } catch (err: any) {
             setError('Test login error: ' + err.message);
@@ -103,268 +160,233 @@ export default function LoginPage() {
         }
     };
 
-    const handleTeacherLogin = async () => {
-        try {
-            setError("");
-            setLoading(true);
-            const response = await fetch(
-                `${API_URL}/api/auth/login`,
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        email: 'teacher@mmmut.ac.in',
-                        password: 'teacher123'
-                    })
-                }
-            );
-            const data = await response.json();
-            if (data.token) {
-                localStorage.setItem('vlab_token', data.token);
-                localStorage.setItem('vlab_user', JSON.stringify(data.user));
-                setSuccess(true);
-                setTimeout(() => router.push('/dashboard/teacher'), 1000);
-            } else {
-                setError(data.message || 'Teacher login failed — check backend credentials');
-            }
-        } catch (err: any) {
-            setError('Teacher login error: ' + err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleAdminLogin = async () => {
-        try {
-            setError("");
-            setLoading(true);
-            const response = await fetch(
-                `${API_URL}/api/auth/login`,
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        email: 'admin@mmmut.ac.in',
-                        password: 'admin123' // Placeholder credentials
-                    })
-                }
-            );
-            const data = await response.json();
-            if (data.token) {
-                localStorage.setItem('vlab_token', data.token);
-                localStorage.setItem('vlab_user', JSON.stringify(data.user));
-                setSuccess(true);
-                setTimeout(() => router.push('/dashboard/admin'), 1000);
-            } else {
-                setError(data.message || 'Admin login failed — check backend credentials');
-            }
-        } catch (err: any) {
-            setError('Admin login error: ' + err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const getRoleStyles = (r: UserRole) => {
-        if (role === r) {
-            return "bg-white text-slate-900 shadow-sm ring-1 ring-black/5";
-        }
-        return "text-white/60 hover:bg-white/10 hover:text-white";
-    };
-
     return (
-        <div suppressHydrationWarning className="min-h-screen flex items-center justify-center bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:4rem_4rem] p-4">
-            <div className="max-w-md w-full bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-slate-100">
-                <div className={`p-10 text-center relative overflow-hidden transition-all duration-500 
-                    ${role === 'student' ? 'bg-[#d32f2f]' : role === 'teacher' ? 'bg-orange-600' : 'bg-slate-800'}`}>
-
-                    <div className="absolute inset-0 opacity-10 pointer-events-none">
-                        <div className="absolute top-0 left-0 w-24 h-24 border-8 border-white rounded-full -translate-x-12 -translate-y-12"></div>
-                        <div className="absolute bottom-0 right-0 w-40 h-40 border-8 border-white rounded-full translate-x-12 translate-y-12"></div>
+        <div className="h-screen flex bg-white font-sans selection:bg-orange-100 overflow-hidden">
+            {/* Left Sidebar - Carousel */}
+            <div className="hidden lg:flex lg:w-1/2 relative bg-primary overflow-hidden items-stretch">
+                {/* Background Image with Overlay */}
+                <div 
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000"
+                    style={{ backgroundImage: `url('/muj_auth_sidebar_bg_1778010617249.png')` }}
+                />
+                <div className="absolute inset-0 bg-primary/80" />
+                
+                {/* Sidebar Content */}
+                <div className="relative z-10 flex flex-col justify-between w-full p-12">
+                    <div className="flex items-center justify-between">
+                        <Link href="/" className="flex items-center gap-3 group">
+                            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary transform group-hover:scale-105 transition-all duration-500 shadow-xl overflow-hidden border-2 border-white/20">
+                                <img 
+                                    src="http://www.mmmut.ac.in/images/largelogo.jpg" 
+                                    alt="MMMUT Logo" 
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="text-2xl font-black text-white tracking-tight leading-none">Prayukti <span className="text-accent">x MMMUT</span></span>
+                                <span className="text-[10px] font-bold text-white/60 tracking-wider uppercase mt-1">Virtual Lab System</span>
+                            </div>
+                        </Link>
+                        
+                        <Link href="/" className="flex items-center gap-2 text-white/80 hover:text-white font-bold text-sm bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-xl transition-all border border-white/10">
+                            Back to website <ArrowRight size={16} />
+                        </Link>
                     </div>
 
-                    <h1 className="text-white text-4xl font-black tracking-tight relative z-10">Prayukti vLAB</h1>
-                    <p className="text-white/80 text-[10px] font-black uppercase tracking-[0.2em] mt-2 relative z-10">
-                        {role === 'student' ? 'Student Portal' : role === 'teacher' ? 'Faculty Portal' : 'Administrator Control'}
-                    </p>
+                    {/* Carousel slides */}
+                    <div className="relative flex-1 flex flex-col justify-center py-10">
+                        {slides.map((slide, idx) => (
+                            <div 
+                                key={idx}
+                                className={`absolute inset-0 flex flex-col justify-center transition-all duration-1000 ${
+                                    idx === currentSlide ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
+                                }`}
+                            >
+                                <div className="space-y-6">
+                                    <div className="space-y-2">
+                                        <span className="text-accent font-black uppercase tracking-[0.3em] text-[10px] bg-accent/10 px-3 py-1 rounded-xl border border-accent/20">{slide.tag}</span>
+                                        <h2 className="text-5xl font-black text-white leading-tight">
+                                            {slide.title}
+                                        </h2>
+                                    </div>
+                                    
+                                    {slide.testimonial ? (
+                                        <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-[2rem] space-y-4 max-w-lg shadow-2xl relative">
+                                            <Quote className="absolute -top-4 -left-4 text-accent w-10 h-10 opacity-50" />
+                                            <p className="text-white/90 text-xl font-medium leading-relaxed">
+                                                "{slide.testimonial.text}"
+                                            </p>
+                                            <div className="flex items-center gap-3 pt-2">
+                                                <div className="w-10 h-10 bg-accent/20 rounded-xl flex items-center justify-center text-accent">
+                                                    <User size={20} />
+                                                </div>
+                                                <div>
+                                                    <div className="text-white font-bold text-sm">{slide.testimonial.author}</div>
+                                                    <div className="text-white/40 text-xs font-black uppercase tracking-widest">{slide.testimonial.position}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <p className="text-white/70 max-w-md font-medium text-lg leading-relaxed">
+                                            {slide.description}
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
 
-                    {/* Role Switcher Inside Header */}
-                    <div className="mt-8 p-1 bg-black/20 backdrop-blur-md rounded-xl flex relative z-10">
-                        <button onClick={() => setRole('student')} className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-xs font-bold rounded-lg transition-all ${getRoleStyles('student')}`}>
-                            <GraduationCap size={14} /> Student
-                        </button>
-                        <button onClick={() => setRole('teacher')} className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-xs font-bold rounded-lg transition-all ${getRoleStyles('teacher')}`}>
-                            <School size={14} /> Teacher
-                        </button>
-                        <button onClick={() => setRole('admin')} className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-xs font-bold rounded-lg transition-all ${getRoleStyles('admin')}`}>
-                            <ShieldCheck size={14} /> Admin
-                        </button>
+                    <div className="flex flex-col gap-6">
+                        <div className="flex gap-3">
+                            {slides.map((_, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => setCurrentSlide(idx)}
+                                    className={`h-1.5 rounded-xl transition-all duration-500 ${
+                                        idx === currentSlide ? "w-12 bg-accent shadow-[0_0_15px_rgba(243,111,33,0.5)]" : "w-4 bg-white/20 hover:bg-white/40"
+                                    }`}
+                                />
+                            ))}
+                        </div>
+                        
+                        <div className="flex items-center gap-6 text-white/40 text-[10px] font-black uppercase tracking-widest">
+                            <span>&copy; 2025 Madan Mohan Malaviya University of Technology</span>
+                            <span>•</span>
+                            <span>Gorakhpur, UP</span>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div className="p-10">
-                    {!success ? (
+            {/* Right Side - Form Container */}
+            <div className="w-full lg:w-1/2 flex flex-col items-center justify-center p-8 md:p-12 lg:p-20">
+                <div className="max-w-md w-full space-y-10">
+                    {/* Header */}
+                    <div className="space-y-4">
+                        <Link href="/student-auth" className="inline-flex items-center gap-2 text-slate-400 hover:text-primary font-bold text-xs uppercase tracking-widest transition-colors mb-4">
+                            <ChevronLeft size={16} /> Back
+                        </Link>
+                        <h1 className="text-4xl font-black text-primary tracking-tight">Sign in to account</h1>
+                        <p className="text-slate-500 font-medium text-sm">
+                            Access the Prayukti x MMMUT Virtual Lab infrastructure.
+                        </p>
+                    </div>
+
+                    {/* Role Selection */}
+                    <div className="flex p-1.5 bg-slate-100 rounded-2xl gap-1">
+                        {(['student', 'teacher', 'admin'] as UserRole[]).map((r) => (
+                            <button
+                                key={r}
+                                onClick={() => setRole(r)}
+                                className={`flex-1 py-3.5 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all ${
+                                    role === r 
+                                    ? 'bg-white text-primary shadow-lg ring-1 ring-black/5' 
+                                    : 'text-slate-400 hover:text-slate-600 hover:bg-slate-200/50'
+                                }`}
+                            >
+                                <div className="flex items-center justify-center gap-2">
+                                    {r === 'student' ? <GraduationCap size={14} /> : r === 'teacher' ? <School size={14} /> : <ShieldCheck size={14} />}
+                                    {r}
+                                </div>
+                            </button>
+                        ))}
+                    </div>
+
+                    {success ? (
+                        <div className="text-center py-12 space-y-6 animate-in fade-in zoom-in duration-500">
+                            <div className="w-24 h-24 bg-green-50 text-green-600 rounded-3xl flex items-center justify-center mx-auto shadow-xl shadow-green-100 transform rotate-12">
+                                <CheckCircle2 size={48} />
+                            </div>
+                            <div className="space-y-2">
+                                <h3 className="text-3xl font-black text-primary tracking-tight">Access Granted</h3>
+                                <p className="text-slate-500 font-medium">Secure session initialized. Redirecting...</p>
+                            </div>
+                        </div>
+                    ) : (
                         <form onSubmit={handleLogin} className="space-y-6">
                             <div className="space-y-2">
                                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">University Email</label>
-                                <div className="relative">
+                                <div className="relative group">
                                     <input
                                         type="email"
                                         required
                                         placeholder="name@mmmut.ac.in"
-                                        className="w-full px-5 py-4 bg-slate-50 border-2 border-transparent focus:border-orange-500 focus:bg-white rounded-2xl outline-none transition-all text-slate-700 font-semibold pl-12"
+                                        className="w-full px-5 py-4 bg-slate-50 border-2 border-transparent focus:border-accent focus:bg-white rounded-2xl outline-none transition-all text-slate-700 font-bold pl-12 group-hover:bg-slate-100"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                     />
-                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 group-focus-within:text-accent transition-colors" />
                                 </div>
                             </div>
 
                             <div className="space-y-2">
                                 <div className="flex justify-between items-end pr-1">
                                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Password</label>
-                                    <button type="button" className="text-[10px] font-black text-orange-600 uppercase tracking-tighter hover:underline">Forgot password?</button>
+                                    <button type="button" className="text-[10px] font-black text-accent uppercase tracking-widest hover:underline">Forgot password?</button>
                                 </div>
-                                <div className="relative">
+                                <div className="relative group">
                                     <input
-                                        type="password"
+                                        type={showPassword ? "text" : "password"}
                                         required
                                         placeholder="••••••••"
-                                        className="w-full px-5 py-4 bg-slate-50 border-2 border-transparent focus:border-orange-500 focus:bg-white rounded-2xl outline-none transition-all text-slate-700 font-semibold pl-12"
+                                        className="w-full px-5 py-4 bg-slate-50 border-2 border-transparent focus:border-accent focus:bg-white rounded-2xl outline-none transition-all text-slate-700 font-bold pl-12 group-hover:bg-slate-100"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
-                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 group-focus-within:text-accent transition-colors" />
+                                    <button 
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-accent transition-colors"
+                                    >
+                                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                    </button>
                                 </div>
                             </div>
 
                             {error && (
-                                <div className="p-4 bg-red-50 border border-red-100 text-red-600 text-[11px] font-black rounded-xl animate-shake">
-                                    🚨 {error.toUpperCase()}
+                                <div className="p-4 bg-red-50 border-2 border-red-100 text-red-600 text-[10px] font-black rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-1">
+                                    <AlertCircle className="w-5 h-5 shrink-0" />
+                                    {error.toUpperCase()}
                                 </div>
                             )}
 
-                            <Button
-                                suppressHydrationWarning
-                                type="submit"
-                                disabled={loading}
-                                className={`w-full py-8 text-lg font-black tracking-widest rounded-2xl shadow-xl transition-all active:scale-[0.98]
-                                    ${role === 'student' ? 'bg-[#f57f17] hover:bg-[#e65100] shadow-orange-100' :
-                                        role === 'teacher' ? 'bg-orange-600 hover:bg-orange-700 shadow-orange-200' :
-                                            'bg-slate-700 hover:bg-slate-800 shadow-slate-200'}`}
-                            >
-                                {loading ? <Loader2 className="animate-spin" /> : "AUTHENTICATE"}
-                            </Button>
-
-                            <Button
-                                type="button"
-                                variant="outline"
-                                onClick={async (e) => {
-                                    e.preventDefault();
-
-                                    const testEmail = role === 'student' ? "test.student@mmmut.ac.in" :
-                                        role === 'teacher' ? "test.faculty@mmmut.ac.in" :
-                                            "test.admin@mmmut.ac.in";
-
-                                    setEmail(testEmail);
-                                    setPassword("password123");
-
-                                    setError("");
-                                    setLoading(true);
-
-                                    try {
-                                        const response = await axios.post(`${API_URL}/api/auth/login`, {
-                                            email: testEmail,
-                                            password: "password123"
-                                        });
-
-                                        const { token, user } = response.data;
-
-                                        // Store token and user info
-                                        if (typeof window !== 'undefined') {
-                                            localStorage.setItem("vlab_token", token);
-                                            localStorage.setItem("vlab_user", JSON.stringify(user));
-                                        }
-
-                                        setSuccess(true);
-                                        setTimeout(() => {
-                                            router.push("/dashboard");
-                                        }, 1000);
-
-                                    } catch (err: any) {
-                                        const message = err.response?.data?.message || "Test Login failed";
-                                        setError(message);
-                                    } finally {
-                                        setLoading(false);
-                                    }
-                                }}
-                                className="w-full py-6 text-sm font-bold tracking-wider rounded-2xl border-2 border-slate-200 hover:bg-slate-50 text-slate-500 mt-4"
-                            >
-                                TEST SIGN IN ({role.toUpperCase()})
-                            </Button>
-                            {role === 'student' && (
-                                <button
-                                    suppressHydrationWarning
-                                    type="button"
-                                    onClick={handleTestLogin}
+                            <div className="space-y-4">
+                                <Button
+                                    type="submit"
                                     disabled={loading}
-                                    className="w-full py-3 text-xs font-bold tracking-wider rounded-2xl border-2 border-slate-200 hover:bg-slate-50 text-slate-400 hover:text-slate-600 transition-all mt-1"
+                                    className="w-full py-8 text-lg font-black tracking-widest rounded-2xl shadow-xl shadow-accent/20 bg-accent hover:bg-accent/90 text-white transition-all active:scale-[0.98] border-0"
                                 >
-                                    ⚡ QUICK STUDENT LOGIN (dev only)
-                                </button>
-                            )}
+                                    {loading ? <Loader2 className="animate-spin" /> : "SIGN IN"}
+                                </Button>
+                                
+                                <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                                    Don't have an account? <Link href="/register" className="text-accent hover:underline">Register Now</Link>
+                                </p>
+                            </div>
 
-                            {role === 'teacher' && (
-                                <button
-                                    type="button"
-                                    onClick={handleTeacherLogin}
-                                    disabled={loading}
-                                    className="w-full py-3 text-xs font-bold tracking-wider rounded-2xl border-2 border-slate-200 hover:bg-slate-50 text-slate-400 hover:text-slate-600 transition-all mt-2"
-                                >
-                                    🎓 QUICK TEACHER LOGIN (dev only)
-                                </button>
-                            )}
-
-                            {role === 'admin' && (
-                                <button
-                                    type="button"
-                                    onClick={handleAdminLogin}
-                                    disabled={loading}
-                                    className="w-full py-3 text-xs font-bold tracking-wider rounded-2xl border-2 border-slate-200 hover:bg-slate-50 text-slate-400 hover:text-slate-600 transition-all mt-2"
-                                >
-                                    🛡️ QUICK ADMIN LOGIN (dev only)
-                                </button>
-                            )}
-
-                            {role === 'student' && (
-                                <div className="text-center pt-4">
-                                    <p className="text-xs font-bold text-slate-400">
-                                        DON'T HAVE AN ACCOUNT? <Link href="/register" className="text-orange-600 hover:underline">REGISTER HERE</Link>
-                                    </p>
+                            <div className="relative py-4">
+                                <div className="absolute inset-0 flex items-center">
+                                    <div className="w-full border-t border-slate-100"></div>
                                 </div>
-                            )}
+                                <div className="relative flex justify-center text-[10px] font-black uppercase tracking-[0.2em]">
+                                    <span className="bg-white px-4 text-slate-400">Quick Dev Access</span>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 gap-3">
+                                <Button 
+                                    type="button" 
+                                    variant="outline" 
+                                    className="h-14 rounded-2xl font-bold gap-3 border-2 border-slate-100 hover:bg-slate-50 transition-all text-slate-500 uppercase tracking-widest text-[10px]"
+                                    onClick={() => handleTestLogin(role)}
+                                >
+                                    <CheckCircle2 size={18} className="text-green-500" />
+                                    Bypass Authentication ({role})
+                                </Button>
+                            </div>
                         </form>
-                    ) : (
-                        <div className="text-center py-10 space-y-6">
-                            <div className="w-20 h-20 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto transition-transform scale-110">
-                                <ShieldCheck size={40} />
-                            </div>
-                            <h3 className="text-2xl font-black text-slate-900 tracking-tight">Access Granted</h3>
-                            <p className="text-slate-500 font-medium">
-                                Secure session initialized. <br />
-                                Redirecting to your dashboard...
-                            </p>
-                            <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                                <div className="h-full bg-green-500 animate-progress"></div>
-                            </div>
-                        </div>
                     )}
-                </div>
-
-                <div className="bg-slate-50 p-6 text-center border-t border-slate-100">
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                        &copy; 2025 Madan Mohan Malaviya University of Technology
-                    </p>
                 </div>
             </div>
         </div>

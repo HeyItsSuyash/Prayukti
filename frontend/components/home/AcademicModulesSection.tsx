@@ -2,7 +2,18 @@
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowRight, Layers } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { 
+    ArrowRight, 
+    Layers, 
+    Network, 
+    Cpu, 
+    Code2, 
+    Database,
+    Globe,
+    Binary
+} from "lucide-react";
+import { motion } from "framer-motion";
 
 // ─── Types ────────────────────────────────────────────────────
 interface ModuleItem {
@@ -13,9 +24,8 @@ interface ModuleItem {
     description: string;
     imageSrc: string;
     imageAlt: string;
-    icon: string;
+    icon: React.ReactNode;
     tag: string;
-    offset?: boolean; // stagger offset for alt layout
 }
 
 // ─── Module data ──────────────────────────────────────────────
@@ -23,52 +33,50 @@ const modules: ModuleItem[] = [
     {
         id: "cn",
         title: "Computer Networks",
-        number: "#01",
+        number: "01",
         href: "/dashboard/cn",
         description:
-            "Simulate complex topologies, packet flows, and protocol behaviors including CSMA/CD, Token Ring, and OSI Layer interactions.",
+            "Simulate complex topologies, packet flows, and protocol behaviors including CSMA/CD and OSI Layer interactions.",
         imageSrc: "/cn-module.jpg.jpg",
         imageAlt: "Computer Networks",
-        icon: "🌐",
-        tag: "Simulation Type: Topology & Protocol",
+        icon: <Globe className="w-6 h-6" />,
+        tag: "Topology & Protocol",
     },
     {
         id: "dld",
-        title: "Digital Logic & Design",
-        number: "#02",
+        title: "Digital Logic Design",
+        number: "02",
         href: "/dashboard/dld",
         description:
             "Build and test logic circuits, master flip-flops, and visualize gate-level operations with real-time waveform analysis.",
         imageSrc: "/dld-module.jpg.jpg",
         imageAlt: "Digital Logic & Design",
-        icon: "🧠",
-        tag: "Simulation Type: Circuit Design",
-        offset: true,
+        icon: <Binary className="w-6 h-6" />,
+        tag: "Circuit Simulation",
     },
     {
         id: "oops",
-        title: "Object Oriented Programming",
-        number: "#03",
+        title: "OOPs with C++ / Java",
+        number: "03",
         href: "/dashboard/oops",
         description:
             "Visualize memory allocation, inheritance hierarchies, and polymorphism through interactive code simulation.",
         imageSrc: "/oops-module.jpg.jpg",
         imageAlt: "Object Oriented Programming",
-        icon: "💻",
-        tag: "Simulation Type: Code Execution",
+        icon: <Code2 className="w-6 h-6" />,
+        tag: "Code Logic",
     },
     {
         id: "dbms",
-        title: "Database Management System",
-        number: "#04",
+        title: "Database Systems",
+        number: "04",
         href: "/dashboard/dbms",
         description:
-            "Design schemas, normalize tables, and execute complex SQL queries in a visual environment.",
+            "Design schemas, normalize tables, and execute complex SQL queries in a high-fidelity visual database environment.",
         imageSrc: "/dbms-module.jpg.jpg",
         imageAlt: "Database Management System",
-        icon: "🗄️",
-        tag: "Simulation Type: Query Design",
-        offset: true,
+        icon: <Database className="w-6 h-6" />,
+        tag: "Relational Design",
     },
 ];
 
@@ -76,130 +84,98 @@ const modules: ModuleItem[] = [
 function useAuthNavigate() {
     const router = useRouter();
     return (labHref: string) => {
-        const token =
-            typeof window !== "undefined"
-                ? localStorage.getItem("vlab_token") ||
-                localStorage.getItem("token") ||
-                localStorage.getItem("authToken") ||
-                sessionStorage.getItem("token")
-                : null;
+        const token = typeof window !== "undefined" ? localStorage.getItem("vlab_token") : null;
         router.push(token ? labHref : "/login");
     };
 }
 
 // ─── Individual Module Card ───────────────────────────────────
-function ModuleCard({ mod }: { mod: ModuleItem }) {
+function ModuleCard({ mod, index }: { mod: ModuleItem, index: number }) {
     const navigate = useAuthNavigate();
     return (
-        <div
-            className={`flex flex-col gap-6 group cursor-pointer${mod.offset ? " md:mt-24" : ""}`}
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 }}
+            className="group relative bg-white dark:bg-slate-900 rounded-[2rem] border-2 border-slate-100 dark:border-slate-800 p-8 hover:border-accent transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-accent/5 flex flex-col h-full overflow-hidden cursor-pointer"
             onClick={() => navigate(mod.href)}
         >
-            {/* Image banner */}
-            <div className="w-full h-[400px] bg-slate-50 dark:bg-slate-900 rounded-[2.5rem] relative overflow-hidden card-interaction">
+            <div className="relative w-full h-48 mb-6 overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-800">
                 <img
                     src={mod.imageSrc}
                     alt={mod.imageAlt}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-                {/* Icon badge */}
-                <div className="absolute top-8 right-8 w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20">
-                    <span className="text-3xl">{mod.icon}</span>
-                </div>
-                {/* Overlay label */}
-                <div className="absolute bottom-0 left-0 p-10 w-full translate-y-4 group-hover:translate-y-0 transition-transform duration-500 z-20">
-                    <div className="inline-block px-3 py-1 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-full mb-3">
-                        Simulation Active
-                    </div>
-                    <p className="font-bold text-white uppercase text-xs tracking-widest opacity-70">{mod.tag}</p>
-                </div>
             </div>
 
-            {/* Card body */}
-            <div className="px-2">
-                <div className="flex justify-between items-baseline mb-3">
-                    <h3 className="text-3xl font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            {/* Background Number */}
+            <span className="absolute top-4 right-8 text-8xl font-black text-slate-50 dark:text-slate-800/50 -z-0 select-none group-hover:text-accent/5 transition-colors">{mod.number}</span>
+            
+            <div className="relative z-10 flex-1 space-y-6">
+                <div className="w-14 h-14 rounded-2xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all duration-500 shadow-inner">
+                    {mod.icon}
+                </div>
+                
+                <div className="space-y-2">
+                    <span className="text-[10px] font-black text-accent uppercase tracking-[0.2em]">{mod.tag}</span>
+                    <h3 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight italic group-hover:text-accent transition-colors">
                         {mod.title}
                     </h3>
-                    <span className="text-xs font-bold text-slate-400">{mod.number}</span>
                 </div>
-                <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-6">
+
+                <p className="text-sm text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
                     {mod.description}
                 </p>
-                <button
-                    onClick={(e) => { e.stopPropagation(); navigate(mod.href); }}
-                    className="inline-flex items-center gap-3 font-bold uppercase text-xs tracking-[0.2em] text-blue-600 dark:text-blue-400 group/link hover:gap-5 transition-all duration-300"
-                >
-                    Explore Laboratory{" "}
-                    <span className="transform group-hover/link:translate-x-2 transition-transform text-xl">→</span>
-                </button>
             </div>
-        </div>
+
+            <div className="relative z-10 mt-10 pt-8 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between group/btn">
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary dark:text-slate-400 group-hover:text-accent transition-colors">Launch Module</span>
+                <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary dark:text-white group-hover:bg-accent group-hover:text-white group-hover:translate-x-1 transition-all">
+                    <ArrowRight size={16} />
+                </div>
+            </div>
+        </motion.div>
     );
 }
 
 // ─── Full Academic Modules Section ────────────────────────────
 export function AcademicModulesSection() {
-    const router = useRouter();
-
     return (
-        <section className="py-32 bg-white dark:bg-slate-950">
-            <div className="container mx-auto px-4">
-                {/* Section header */}
-                <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8 border-b border-slate-200 dark:border-slate-800 pb-8">
-                    <div>
-                        <h2 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter mb-4">
-                            ACADEMIC <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-violet-600">
-                                MODULES
-                            </span>
+        <section className="py-32 bg-white dark:bg-slate-950 relative overflow-hidden">
+            {/* Decorative background element */}
+            <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-accent/5 rounded-full blur-[120px] -z-0 translate-x-1/2 -translate-y-1/2"></div>
+            
+            <div className="container mx-auto px-6 max-w-7xl relative z-10">
+                <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
+                    <div className="space-y-4">
+                        <span className="text-accent font-black uppercase tracking-[0.3em] text-[10px] bg-accent/10 px-4 py-1.5 rounded-full inline-block">Curriculum Alignment</span>
+                        <h2 className="text-5xl md:text-7xl font-black text-primary dark:text-white uppercase tracking-tighter italic leading-[0.9]">
+                            Academic <br />
+                            <span className="text-accent not-italic">Modules</span>
                         </h2>
-                        <p className="text-xl text-slate-500 dark:text-slate-400 font-medium max-w-md">
-                            Curriculum-aligned virtual laboratories tailored for precision and interactivity.
-                        </p>
                     </div>
-                    <div className="mb-2">
-                        <div className="text-right hidden md:block">
-                            <p className="font-black text-8xl text-indigo-50 dark:text-indigo-900/10 leading-none -mb-6">04</p>
-                            <p className="font-bold text-slate-900 dark:text-white uppercase tracking-widest text-sm">Active Domains</p>
-                        </div>
-                    </div>
+                    <p className="text-slate-500 dark:text-slate-400 font-medium max-w-md text-lg leading-relaxed border-l-4 border-accent pl-8 italic">
+                        Precision-engineered virtual laboratories designed strictly for the MMMUT Gorakhpur engineering syllabus.
+                    </p>
                 </div>
 
-                {/* 2-col staggered module grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24">
-                    {modules.map((mod) => (
-                        <ModuleCard key={mod.id} mod={mod} />
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8">
+                    {modules.map((mod, i) => (
+                        <ModuleCard key={mod.id} mod={mod} index={i} />
                     ))}
                 </div>
 
-                {/* ── See All Subjects CTA ── */}
-                <div className="mt-20 flex flex-col items-center gap-5">
-                    {/* Divider */}
-                    <div className="flex items-center gap-4 w-full max-w-lg">
-                        <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
-                        <span className="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">More subjects coming soon</span>
-                        <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
-                    </div>
-
-                    {/* Big CTA button */}
-                    <button
-                        onClick={() => router.push("/explore")}
-                        className="group relative inline-flex items-center gap-3 px-12 py-5 rounded-2xl text-base font-black uppercase tracking-widest text-white overflow-hidden shadow-2xl shadow-blue-500/20 hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-1"
+                <div className="mt-20 text-center">
+                    <Link 
+                        href="/explore"
+                        className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-primary dark:text-slate-400 hover:text-accent transition-all group"
                     >
-                        {/* Gradient fill */}
-                        <span className="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 group-hover:from-blue-700 group-hover:via-indigo-700 group-hover:to-violet-700 transition-colors duration-300" />
-                        {/* Shine sweep */}
-                        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
-                        <Layers className="relative w-5 h-5" />
-                        <span className="relative">See All Subjects</span>
-                        <ArrowRight className="relative w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" />
-                    </button>
-
-                    <p className="text-sm text-slate-400 dark:text-slate-500 font-medium">
-                        Browse & filter all labs on the <span className="font-bold text-slate-600 dark:text-slate-400">Explore</span> page
-                    </p>
+                        Explore All Subjects
+                        <div className="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all">
+                            <ArrowRight size={14} />
+                        </div>
+                    </Link>
                 </div>
             </div>
         </section>

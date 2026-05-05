@@ -185,7 +185,7 @@ export default function TeacherDashboard() {
                                     <SelectItem value="Digital Logic Design">Digital Logic Design</SelectItem>
                                 </SelectContent>
                             </Select>
-                            <Button variant="outline" className="hidden border-indigo-200 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-800 md:flex" onClick={() => router.push('/dashboard/teacher/exams')}>
+                            <Button variant="outline" className="hidden border-accent/20 text-accent hover:bg-accent/5 hover:text-accent md:flex" onClick={() => router.push('/dashboard/teacher/exams')}>
                                 <BookOpen className="w-4 h-4 mr-2" />
                                 Manage Exams
                             </Button>
@@ -204,7 +204,7 @@ export default function TeacherDashboard() {
                                 value={stats.total}
                                 subtext="Enrolled in this subject"
                                 icon={Users}
-                                colorClass="text-blue-600"
+                                colorClass="text-accent"
                             />
                             <OverviewCard
                                 title="Avg. Completion"

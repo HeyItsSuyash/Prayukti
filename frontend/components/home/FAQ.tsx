@@ -1,102 +1,109 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 const faqs = [
     {
-        question: "What is this platform?",
-        answer: "A comprehensive virtual lab environment specifically designed for engineering students to bridge the gap between theory and practice. It allows you to perform complex experiments online with high-fidelity simulations that mirror real-world lab equipment."
+        question: "What is Prayukti Virtual Lab?",
+        answer: "A comprehensive virtual lab environment specifically designed for engineering students at MMMUT to bridge the gap between theory and practice. It allows you to perform complex experiments online with high-fidelity simulations."
     },
     {
-        question: "Is it syllabus-based?",
-        answer: "Absolutely. Every experiment hosted on this platform is meticulously aligned with major university engineering syllabi to ensure academic relevance. We regularly update our content to match the latest curriculum changes."
+        question: "Is it strictly aligned with MMMUT syllabus?",
+        answer: "Yes. Every experiment hosted on this platform is meticulously aligned with the official MMMUT engineering syllabus to ensure academic relevance and help you prepare for your practical exams."
     },
     {
-        question: "Do I need to install anything?",
-        answer: "No installation or specialized hardware is required to use the platform. Our cloud-based architecture allows you to access all simulation tools and resources directly through any modern web browser."
+        question: "Do I need to install any software?",
+        answer: "No installation or specialized hardware is required. Our cloud-based architecture allows you to access all simulation tools and resources directly through any modern web browser."
     },
     {
-        question: "Are viva questions included?",
-        answer: "Yes, we provide an extensive database of viva-voice questions and detailed answers for every experiment. This helps students prepare effectively for their practical examinations and builds a deeper conceptual understanding."
+        question: "How do I track my progress?",
+        answer: "Every experiment you complete is automatically logged in your student dashboard. You can view your attendance, simulation scores, and download completion certificates directly from your profile."
     },
     {
-        question: "Is it free to use?",
-        answer: "The platform offers a robust set of basic features and experiments completely free of charge to all students. For those seeking enhanced capabilities, advanced analytics, and premium content, we offer affordable subscription plans."
+        question: "Can I access labs from mobile?",
+        answer: "Yes, Prayukti is built with a mobile-first philosophy. While complex simulations are best experienced on larger screens, most features and basic labs are fully accessible on smartphones."
     },
     {
-        question: "How will this help in exams?",
-        answer: "By providing repeatable, hands-on practice, the platform reinforces theoretical concepts and improves practical retention. The integrated viva preparation ensures that you are fully confident and well-prepared for final lab exams."
+        question: "What if I forget my university login?",
+        answer: "You can use the 'Forgot Password' feature with your official @mmmut.ac.in email address. For roll number or enrollment issues, please contact your department coordinator."
+    },
+    {
+        question: "Are these labs valid for internal assessments?",
+        answer: "Absolutely. Prayukti is the official virtual laboratory partner for MMMUT, and many departments use these simulations as part of their continuous evaluation and lab assessment process."
     }
 ];
 
 export function FAQ() {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
-    const [showAll, setShowAll] = useState(false);
-
-    const displayedFaqs = showAll ? faqs : faqs.slice(0, 3);
 
     return (
-        <section className="py-24 bg-white dark:bg-slate-950">
-            <div className="container mx-auto px-4 max-w-5xl">
-                <h2 className="text-4xl font-black text-slate-900 dark:text-white mb-12 px-2 tracking-tighter">
-                    FREQUENTLY ASKED <br />
-                    <span className="text-blue-600">QUESTIONS</span>
-                </h2>
+        <section className="py-32 bg-white dark:bg-slate-950">
+            <div className="container mx-auto px-4 max-w-4xl">
+                <div className="text-center mb-20 space-y-4">
+                    <h2 className="text-5xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter uppercase leading-none">
+                        Frequently Asked <span className="text-accent">Questions</span>
+                    </h2>
+                    <p className="text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest text-[10px] bg-slate-100 dark:bg-slate-900 inline-block px-4 py-1.5 rounded-full">
+                        Comprehensive Answers for Your Journey
+                    </p>
+                </div>
 
-                <div className="border border-slate-200 dark:border-slate-800 rounded-[2rem] overflow-hidden shadow-sm bg-white dark:bg-slate-900/50 backdrop-blur-sm card-interaction">
-                    <div className="divide-y divide-slate-100 dark:divide-slate-800">
-                        {displayedFaqs.map((faq, index) => (
-                            <div key={index} className="bg-white dark:bg-slate-900/40">
-                                <button
-                                    onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                                    className="w-full flex items-center p-6 text-left hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group"
-                                >
-                                    <span className="flex-shrink-0 mr-4">
-                                        <motion.div
-                                            animate={{ rotate: openIndex === index ? 0 : -90 }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            <ChevronDown className="w-5 h-5 text-slate-900 dark:text-slate-100" />
-                                        </motion.div>
-                                    </span>
-                                    <span className="text-base font-bold text-slate-900 dark:text-slate-100">{faq.question}</span>
-                                </button>
+                <div className="space-y-4">
+                    <div className="border border-slate-200 dark:border-slate-800 rounded-[2rem] overflow-hidden shadow-2xl shadow-slate-200/50 dark:shadow-none bg-white dark:bg-slate-900/50 backdrop-blur-sm">
+                        <div className="divide-y divide-slate-100 dark:divide-slate-800">
+                            {faqs.map((faq, index) => (
+                                <div key={index} className="bg-white dark:bg-slate-900/40">
+                                    <button
+                                        onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                                        className="w-full flex items-center p-8 text-left hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group"
+                                    >
+                                        <span className="flex-shrink-0 mr-6">
+                                            <motion.div
+                                                animate={{ rotate: openIndex === index ? 0 : -90 }}
+                                                transition={{ duration: 0.2 }}
+                                                className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${openIndex === index ? 'bg-accent text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-400'}`}
+                                            >
+                                                <ChevronDown className="w-5 h-5" />
+                                            </motion.div>
+                                        </span>
+                                        <span className="text-lg font-bold text-slate-900 dark:text-slate-100 leading-tight">{faq.question}</span>
+                                    </button>
 
-                                <AnimatePresence>
-                                    {openIndex === index && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.3, ease: "easeInOut" }}
-                                            className="overflow-hidden"
-                                        >
-                                            <div className="px-14 pb-6 text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
-                                                {faq.answer}
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-                        ))}
+                                    <AnimatePresence>
+                                        {openIndex === index && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: "auto", opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                                                className="overflow-hidden"
+                                            >
+                                                <div className="px-24 pb-10 text-slate-600 dark:text-slate-400 leading-relaxed font-medium text-base">
+                                                    {faq.answer}
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
-                    <button
-                        onClick={() => setShowAll(!showAll)}
-                        className="w-full p-4 text-sm font-bold text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors flex items-center justify-center gap-2 border-t border-slate-100 dark:border-slate-800 btn-interaction"
-                    >
-                        {showAll ? (
-                            <>
-                                Show less <ChevronUp className="w-4 h-4" />
-                            </>
-                        ) : (
-                            <>
-                                Show all {faqs.length} questions <ChevronDown className="w-4 h-4" />
-                            </>
-                        )}
-                    </button>
+                    <div className="pt-12 text-center">
+                        <p className="text-slate-500 dark:text-slate-400 font-medium text-sm">
+                            Not what you're looking for? Try our detailed{" "}
+                            <Link href="/faq" className="text-accent font-bold hover:underline inline-flex items-center gap-1 group">
+                                FAQ Section <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                            {" "}or contact{" "}
+                            <Link href="/support" className="text-accent font-bold hover:underline inline-flex items-center gap-1 group">
+                                Support <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>

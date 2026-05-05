@@ -101,7 +101,7 @@ export async function POST(req: Request) {
 
         // 3. Send Email
         const info = await transporter.sendMail({
-            from: `"Prayukti vLab" <${smtpUser}>`,
+            from: `"MUJ Online Virtual Lab" <${smtpUser}>`,
             to,
             subject,
             html,

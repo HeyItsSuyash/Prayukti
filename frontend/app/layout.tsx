@@ -1,25 +1,17 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
-import { Outfit } from "next/font/google";
+import { Inter } from "next/font/google";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-});
 
-const outfit = Outfit({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
-  title: "Prayukti vLAB",
-  description: "Virtual Laboratory for MMMUT Gorakhpur",
+  title: "Prayukti x MMMUT",
+  description: "Virtual Laboratory Platform for Madan Mohan Malaviya University of Technology, Gorakhpur",
 };
 
 export default function RootLayout({
@@ -29,8 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} font-sans antialiased`} suppressHydrationWarning>
+      <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
         {children}
+        <ScrollToTop />
       </body>
     </html>
   );

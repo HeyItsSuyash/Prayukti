@@ -67,7 +67,7 @@ export function StudentDetailView({ student }: StudentDetailViewProps) {
                     subject: template.subject,
                     html: `
                         <div style="font-family: Arial, sans-serif; color: #333;">
-                            <h2 style="color: #d32f2f;">Prayukti vLab</h2>
+                            <h2 style="color: #d32f2f;">MUJ Online Virtual Lab</h2>
                             ${template.body}
                             <br/>
                             <a href="${process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'}" style="background-color: #d32f2f; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Login to Dashboard</a>

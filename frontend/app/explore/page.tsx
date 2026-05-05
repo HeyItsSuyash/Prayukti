@@ -8,36 +8,39 @@ import Link from "next/link";
 import { useState } from "react";
 import {
     Search, Filter, ArrowRight, TrendingUp, Flame,
-    BookOpen, FlaskConical, Star, ChevronDown
+    BookOpen, FlaskConical, Star, ChevronDown,
+    Monitor, Zap, Signal, Settings, Construction,
+    Database, Globe, Binary, Code2, ShieldCheck,
+    Lock
 } from "lucide-react";
 import { getLabs } from "@/lib/labs/registry";
 
 // ─── Static Data ─────────────────────────────────────────────
 const BRANCHES = [
-    { name: "Computer Science Engineering", icon: "💻", code: "CSE", subjects: 4, practicals: 17, color: "from-blue-500 to-indigo-600" },
-    { name: "Electrical Engineering", icon: "⚡", code: "EE", subjects: 3, practicals: 12, color: "from-yellow-500 to-orange-500", comingSoon: true },
-    { name: "Electronics & Comm.", icon: "📡", code: "ECE", subjects: 3, practicals: 14, color: "from-purple-500 to-violet-600", comingSoon: true },
-    { name: "Mechanical Engineering", icon: "⚙️", code: "ME", subjects: 3, practicals: 10, color: "from-slate-500 to-slate-700", comingSoon: true },
-    { name: "Civil Engineering", icon: "🏗️", code: "CE", subjects: 2, practicals: 8, color: "from-green-500 to-emerald-600", comingSoon: true },
+    { name: "Computer Science Engineering", icon: <Monitor className="w-8 h-8" />, code: "CSE", subjects: 4, practicals: 17, color: "from-accent to-accent" },
+    { name: "Electrical Engineering", icon: <Zap className="w-8 h-8" />, code: "EE", subjects: 3, practicals: 12, color: "from-yellow-500 to-orange-500", comingSoon: true },
+    { name: "Electronics & Comm.", icon: <Signal className="w-8 h-8" />, code: "ECE", subjects: 3, practicals: 14, color: "from-purple-500 to-violet-600", comingSoon: true },
+    { name: "Mechanical Engineering", icon: <Settings className="w-8 h-8" />, code: "ME", subjects: 3, practicals: 10, color: "from-slate-500 to-slate-700", comingSoon: true },
+    { name: "Civil Engineering", icon: <Construction className="w-8 h-8" />, code: "CE", subjects: 2, practicals: 8, color: "from-green-500 to-emerald-600", comingSoon: true },
 ];
 
 const SUBJECTS = [
-    { name: "Database Management System", code: "DBMS", semester: "5th Semester", experiments: 5, icon: "🗄️", difficulty: "Intermediate", href: "/dashboard/dbms", color: "blue" },
-    { name: "Computer Networks", code: "CN", semester: "5th Semester", experiments: 5, icon: "🌐", difficulty: "Intermediate", href: "/dashboard/cn", color: "indigo" },
-    { name: "Digital Logic & Design", code: "DLD", semester: "3rd Semester", experiments: 4, icon: "🧠", difficulty: "Beginner", href: "/dashboard/dld", color: "purple" },
-    { name: "Object Oriented Programming", code: "OOPS", semester: "4th Semester", experiments: 4, icon: "💻", difficulty: "Beginner", href: "/dashboard/oops", color: "violet" },
+    { name: "Database Management System", code: "DBMS", semester: "5th Semester", experiments: 5, icon: <Database className="w-8 h-8" />, difficulty: "Intermediate", href: "/dashboard/dbms", color: "blue" },
+    { name: "Computer Networks", code: "CN", semester: "5th Semester", experiments: 5, icon: <Globe className="w-8 h-8" />, difficulty: "Intermediate", href: "/dashboard/cn", color: "indigo" },
+    { name: "Digital Logic & Design", code: "DLD", semester: "3rd Semester", experiments: 4, icon: <Binary className="w-8 h-8" />, difficulty: "Beginner", href: "/dashboard/dld", color: "purple" },
+    { name: "Object Oriented Programming", code: "OOPS", semester: "4th Semester", experiments: 4, icon: <Code2 className="w-8 h-8" />, difficulty: "Beginner", href: "/dashboard/oops", color: "violet" },
 ];
 
 const SEMESTERS = ["All Semesters", "1st Semester", "2nd Semester", "3rd Semester", "4th Semester", "5th Semester", "6th Semester", "7th Semester", "8th Semester"];
 const DIFFICULTIES = ["All Levels", "Beginner", "Intermediate", "Advanced"];
 
 const TRENDING = [
-    { title: "Study and Verification of Logic Gates", subject: "DLD", difficulty: "Easy", practices: "2.1k", href: "/dashboard/dld/dld-exp-1", icon: "⚡" },
-    { title: "OSI vs TCP/IP Reference Models", subject: "CN", difficulty: "Easy", practices: "1.8k", href: "/dashboard/cn/cn-exp-1", icon: "🌐" },
-    { title: "Introduction to DBMS", subject: "DBMS", difficulty: "Easy", practices: "1.6k", href: "/dashboard/dbms/dbms-exp-1", icon: "🗄️" },
-    { title: "Introduction to Classes and Objects", subject: "OOPS", difficulty: "Easy", practices: "1.3k", href: "/dashboard/oops/oops-exp-1", icon: "💻" },
-    { title: "CSMA/CD Protocol Study", subject: "CN", difficulty: "Medium", practices: "980", href: "/dashboard/cn/cn-exp-2", icon: "🌐" },
-    { title: "Database Application Development", subject: "DBMS", difficulty: "Medium", practices: "850", href: "/dashboard/dbms/dbms-exp-2", icon: "🗄️" },
+    { title: "Study and Verification of Logic Gates", subject: "DLD", difficulty: "Easy", practices: "2.1k", href: "/dashboard/dld/dld-exp-1", icon: <Binary className="w-6 h-6" /> },
+    { title: "OSI vs TCP/IP Reference Models", subject: "CN", difficulty: "Easy", practices: "1.8k", href: "/dashboard/cn/cn-exp-1", icon: <Globe className="w-6 h-6" /> },
+    { title: "Introduction to DBMS", subject: "DBMS", difficulty: "Easy", practices: "1.6k", href: "/dashboard/dbms/dbms-exp-1", icon: <Database className="w-6 h-6" /> },
+    { title: "Introduction to Classes and Objects", subject: "OOPS", difficulty: "Easy", practices: "1.3k", href: "/dashboard/oops/oops-exp-1", icon: <Code2 className="w-6 h-6" /> },
+    { title: "CSMA/CD Protocol Study", subject: "CN", difficulty: "Medium", practices: "980", href: "/dashboard/cn/cn-exp-2", icon: <Globe className="w-6 h-6" /> },
+    { title: "Database Application Development", subject: "DBMS", difficulty: "Medium", practices: "850", href: "/dashboard/dbms/dbms-exp-2", icon: <Database className="w-6 h-6" /> },
 ];
 
 const difficultyColor: Record<string, string> = {
@@ -86,7 +89,7 @@ export default function ExplorePage() {
     });
 
     return (
-        <div className="flex flex-col min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden">
+        <div className="flex flex-col min-h-screen bg-white dark:bg-slate-950 text-primary dark:text-slate-100 selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden">
             <Navbar />
 
             <main className="flex-1">
@@ -105,7 +108,7 @@ export default function ExplorePage() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5 }}
-                            className="inline-flex items-center gap-2 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-indigo-100 dark:border-indigo-800/50 mb-8"
+                            className="inline-flex items-center gap-2 bg-indigo-50 dark:bg-indigo-900/30 text-accent dark:text-indigo-400 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-indigo-100 dark:border-indigo-800/50 mb-8"
                         >
                             <FlaskConical className="w-4 h-4" />
                             {allLabs.length} Experiments Available
@@ -115,10 +118,10 @@ export default function ExplorePage() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.7, delay: 0.15 }}
-                            className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-6"
+                            className="text-4xl md:text-6xl lg:text-7xl font-black text-primary dark:text-white leading-[1.1] tracking-tight mb-6"
                         >
                             Explore{" "}
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent">
                                 Virtual Labs
                             </span>
                         </motion.h1>
@@ -142,11 +145,11 @@ export default function ExplorePage() {
                             {[
                                 { label: "Subjects", value: "4" },
                                 { label: "Experiments", value: `${allLabs.length}+` },
-                                { label: "Universities", value: "1" },
+                                { label: "University", value: "MMMUT" },
                                 { label: "Access", value: "24/7" },
                             ].map((stat) => (
                                 <div key={stat.label} className="text-center">
-                                    <p className="text-3xl font-black text-blue-600 dark:text-blue-400">{stat.value}</p>
+                                    <p className="text-3xl font-black text-accent dark:text-blue-400">{stat.value}</p>
                                     <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">{stat.label}</p>
                                 </div>
                             ))}
@@ -155,42 +158,34 @@ export default function ExplorePage() {
                 </section>
 
                 {/* ─── Search & Filter Bar ───────────────────────────────── */}
-                <section className="py-10 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200/60 dark:border-slate-800/60 sticky top-16 z-30 backdrop-blur-md">
+                <section className="py-10 bg-slate-50 dark:bg-primary/40 border-y border-slate-200/60 dark:border-slate-800/60 sticky top-16 z-30 backdrop-blur-md">
                     <div className="container mx-auto px-4">
                         <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center">
                             {/* Search */}
                             <div className="relative flex-1 min-w-0 group">
-                                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl blur opacity-0 group-focus-within:opacity-20 transition duration-500" />
-                                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 w-5 h-5 transition-colors z-10" />
+                                <div className="absolute -inset-0.5 bg-gradient-to-r from-accent to-accent rounded-xl blur opacity-0 group-focus-within:opacity-20 transition duration-500" />
+                                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-accent w-5 h-5 transition-colors z-10" />
                                 <input
                                     type="text"
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
                                     placeholder="Search subject or experiment…"
-                                    className="relative w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all font-medium shadow-sm"
+                                    className="relative w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-primary text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent transition-all font-medium shadow-sm"
                                 />
                             </div>
 
                             {/* University */}
                             <div className="relative">
                                 <select
-                                    className="appearance-none pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition-all shadow-sm"
+                                    className="appearance-none pl-10 pr-10 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-primary text-primary dark:text-white font-semibold focus:outline-none focus:ring-2 focus:ring-accent/40 transition-all shadow-sm"
                                     defaultValue="MMMUT"
                                 >
-                                    <optgroup label="✅ Active">
-                                        <option value="MMMUT">MMMUT, Gorakhpur</option>
-                                    </optgroup>
-                                    <optgroup label="🔒 Coming Soon">
-                                        <option disabled>AKTU, Lucknow (Coming Soon)</option>
-                                        <option disabled>BBDU, Lucknow (Coming Soon)</option>
-                                        <option disabled>Amity University, Noida (Coming Soon)</option>
-                                        <option disabled>HBTU, Kanpur (Coming Soon)</option>
-                                        <option disabled>DDU, Gorakhpur (Coming Soon)</option>
-                                        <option disabled>NIT Allahabad (Coming Soon)</option>
-                                        <option disabled>DTU, Delhi (Coming Soon)</option>
-                                        <option disabled>SRM University (Coming Soon)</option>
-                                    </optgroup>
+                                    <option value="MMMUT">MMMUT, Gorakhpur</option>
+                                    <option value="HBTU">HBTU, Kanpur (Coming Soon)</option>
+                                    <option value="AKTU">AKTU, Lucknow (Coming Soon)</option>
+                                    <option value="NIT">NIT Allahabad (Coming Soon)</option>
                                 </select>
+                                <ShieldCheck className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600 pointer-events-none" />
                                 <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
                             </div>
 
@@ -199,7 +194,7 @@ export default function ExplorePage() {
                                 <select
                                     value={semester}
                                     onChange={(e) => setSemester(e.target.value)}
-                                    className="appearance-none pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition-all shadow-sm"
+                                    className="appearance-none pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-primary text-primary dark:text-white font-semibold focus:outline-none focus:ring-2 focus:ring-accent/40 transition-all shadow-sm"
                                 >
                                     {SEMESTERS.map((s) => <option key={s}>{s}</option>)}
                                 </select>
@@ -211,7 +206,7 @@ export default function ExplorePage() {
                                 <select
                                     value={difficulty}
                                     onChange={(e) => setDifficulty(e.target.value)}
-                                    className="appearance-none pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition-all shadow-sm"
+                                    className="appearance-none pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-primary text-primary dark:text-white font-semibold focus:outline-none focus:ring-2 focus:ring-accent/40 transition-all shadow-sm"
                                 >
                                     {DIFFICULTIES.map((d) => <option key={d}>{d}</option>)}
                                 </select>
@@ -219,7 +214,7 @@ export default function ExplorePage() {
                             </div>
 
                             {/* Filter Icon (visual) */}
-                            <div className="hidden md:flex items-center justify-center w-13 h-13 bg-blue-600 text-white rounded-xl px-4 py-3.5 shadow-md shadow-blue-500/20">
+                            <div className="hidden md:flex items-center justify-center w-13 h-13 bg-accent text-white rounded-xl px-4 py-3.5 shadow-md shadow-accent/20">
                                 <Filter className="w-5 h-5" />
                             </div>
                         </div>
@@ -230,23 +225,23 @@ export default function ExplorePage() {
                 <section className="py-24 bg-white dark:bg-slate-950">
                     <div className="container mx-auto px-4">
                         <motion.div {...fadeUp()} className="mb-14">
-                            <span className="text-blue-600 dark:text-blue-400 font-bold uppercase tracking-[0.2em] text-xs mb-2 block">By Department</span>
-                            <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">Browse by Branch</h2>
+                            <span className="text-accent dark:text-blue-400 font-bold uppercase tracking-[0.2em] text-xs mb-2 block">By Department</span>
+                            <h2 className="text-3xl md:text-4xl font-black text-primary dark:text-white tracking-tight">Browse by Branch</h2>
                         </motion.div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {BRANCHES.map((branch, i) => (
                                 <motion.div key={branch.code} {...fadeUp(i * 0.08)}>
-                                    <div className={`group relative bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-500/10 ${branch.comingSoon ? "opacity-70" : "cursor-pointer"}`}>
+                                    <div className={`group relative bg-white dark:bg-primary border border-slate-100 dark:border-slate-800 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-accent/10 ${branch.comingSoon ? "opacity-70" : "cursor-pointer"}`}>
                                         {branch.comingSoon && (
                                             <span className="absolute top-5 right-5 text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-full border border-slate-200 dark:border-slate-700">
                                                 Coming Soon
                                             </span>
                                         )}
-                                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${branch.color} flex items-center justify-center text-2xl mb-6 shadow-lg`}>
+                                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${branch.color} flex items-center justify-center text-white text-2xl mb-6 shadow-lg`}>
                                             {branch.icon}
                                         </div>
-                                        <h3 className="font-bold text-slate-900 dark:text-white text-lg mb-3 leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                        <h3 className="font-bold text-primary dark:text-white text-lg mb-3 leading-snug group-hover:text-accent dark:group-hover:text-blue-400 transition-colors">
                                             {branch.name}
                                         </h3>
                                         <div className="flex gap-4 text-sm text-slate-500 dark:text-slate-400 mb-6">
@@ -259,7 +254,7 @@ export default function ExplorePage() {
                                             </Button>
                                         ) : (
                                             <Link href="/explore#subjects">
-                                                <Button className="rounded-full h-9 px-5 text-sm font-bold btn-gradient btn-interaction">
+                                                <Button className="rounded-full h-9 px-5 text-sm font-bold bg-accent hover:bg-accent/90 text-white">
                                                     Explore Branch <ArrowRight className="ml-2 w-4 h-4" />
                                                 </Button>
                                             </Link>
@@ -272,31 +267,31 @@ export default function ExplorePage() {
                 </section>
 
                 {/* ─── Subject Grid ──────────────────────────────────────── */}
-                <section id="subjects" className="py-24 bg-slate-50/60 dark:bg-slate-900/20 border-y border-slate-200/50 dark:border-slate-800/50">
+                <section id="subjects" className="py-24 bg-slate-50/60 dark:bg-primary/20 border-y border-slate-200/50 dark:border-slate-800/50">
                     <div className="container mx-auto px-4">
                         <motion.div {...fadeUp()} className="mb-14">
-                            <span className="text-indigo-600 dark:text-indigo-400 font-bold uppercase tracking-[0.2em] text-xs mb-2 block">Syllabus-Mapped</span>
-                            <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">All Subjects</h2>
+                            <span className="text-accent dark:text-indigo-400 font-bold uppercase tracking-[0.2em] text-xs mb-2 block">Syllabus-Mapped</span>
+                            <h2 className="text-3xl md:text-4xl font-black text-primary dark:text-white tracking-tight">All Subjects</h2>
                         </motion.div>
 
                         {filteredSubjects.length === 0 ? (
                             <div className="text-center py-20 text-slate-400 dark:text-slate-600">
                                 <FlaskConical className="w-12 h-12 mx-auto mb-4 opacity-30" />
                                 <p className="text-lg font-semibold">No subjects match your filters.</p>
-                                <button onClick={() => { setSearch(""); setSemester("All Semesters"); setDifficulty("All Levels"); }} className="mt-4 text-blue-600 font-bold underline">Reset filters</button>
+                                <button onClick={() => { setSearch(""); setSemester("All Semesters"); setDifficulty("All Levels"); }} className="mt-4 text-accent font-bold underline">Reset filters</button>
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                                 {filteredSubjects.map((subject, i) => (
                                     <motion.div key={subject.code} {...fadeUp(i * 0.1)}>
-                                        <div className={`group relative bg-white dark:bg-slate-900 border-2 ${subjectColorMap[subject.color]} dark:border-slate-800 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col h-full`}>
-                                            <div className={`w-14 h-14 ${subjectIconBg[subject.color]} rounded-2xl flex items-center justify-center text-3xl mb-5`}>
+                                        <div className={`group relative bg-white dark:bg-primary border-2 ${subjectColorMap[subject.color]} dark:border-slate-800 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col h-full shadow-sm`}>
+                                            <div className={`w-14 h-14 ${subjectIconBg[subject.color]} rounded-2xl flex items-center justify-center text-accent dark:text-white mb-5`}>
                                                 {subject.icon}
                                             </div>
                                             <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-full border w-fit mb-3 ${difficultyColor[subject.difficulty]}`}>
                                                 {subject.difficulty}
                                             </span>
-                                            <h3 className="font-bold text-slate-900 dark:text-white text-base mb-1 leading-snug group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                            <h3 className="font-bold text-primary dark:text-white text-base mb-1 leading-snug group-hover:text-accent dark:group-hover:text-indigo-400 transition-colors">
                                                 {subject.name}
                                             </h3>
                                             <p className="text-xs text-slate-400 dark:text-slate-500 mb-4">{subject.semester}</p>
@@ -305,7 +300,7 @@ export default function ExplorePage() {
                                                     <FlaskConical className="w-4 h-4" /> {subject.experiments} Experiments
                                                 </span>
                                                 <Link href={subject.href}>
-                                                    <Button size="sm" className="rounded-full h-8 px-4 text-xs font-bold btn-gradient btn-interaction">
+                                                    <Button size="sm" className="rounded-full h-8 px-4 text-xs font-bold bg-accent hover:bg-accent/90 text-white">
                                                         Start <ArrowRight className="ml-1.5 w-3 h-3" />
                                                     </Button>
                                                 </Link>
@@ -323,12 +318,12 @@ export default function ExplorePage() {
                     <div className="container mx-auto px-4">
                         <motion.div {...fadeUp()} className="mb-14 flex items-end justify-between flex-wrap gap-4">
                             <div>
-                                <span className="text-purple-600 dark:text-purple-400 font-bold uppercase tracking-[0.2em] text-xs mb-2 block">Most Practiced</span>
-                                <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-3">
+                                <span className="text-accent dark:text-purple-400 font-bold uppercase tracking-[0.2em] text-xs mb-2 block">Most Practiced</span>
+                                <h2 className="text-3xl md:text-4xl font-black text-primary dark:text-white tracking-tight flex items-center gap-3">
                                     Trending Labs <Flame className="w-7 h-7 text-orange-500" />
                                 </h2>
                             </div>
-                            <Link href="/dashboard/dld" className="text-sm font-bold text-blue-600 dark:text-blue-400 underline underline-offset-4 hover:text-blue-700 transition-colors">
+                            <Link href="/dashboard/dld" className="text-sm font-bold text-accent dark:text-blue-400 underline underline-offset-4 hover:text-accent transition-colors">
                                 See all experiments →
                             </Link>
                         </motion.div>
@@ -337,10 +332,10 @@ export default function ExplorePage() {
                             {TRENDING.map((item, i) => (
                                 <motion.div key={item.title} {...fadeUp(i * 0.07)}>
                                     <Link href={item.href}>
-                                        <div className="group bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-purple-500/10 hover:border-purple-200 dark:hover:border-purple-900 cursor-pointer h-full flex flex-col">
+                                        <div className="group bg-white dark:bg-primary border border-slate-100 dark:border-slate-800 rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-purple-500/10 hover:border-purple-200 dark:hover:border-purple-900 cursor-pointer h-full flex flex-col shadow-sm">
                                             <div className="flex items-start justify-between mb-4">
                                                 <div className="flex items-center gap-3">
-                                                    <span className="text-2xl">{item.icon}</span>
+                                                    <div className="text-accent dark:text-white">{item.icon}</div>
                                                     <span className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border ${difficultyColor[item.difficulty]}`}>
                                                         {item.difficulty}
                                                     </span>
@@ -351,7 +346,7 @@ export default function ExplorePage() {
                                                 </div>
                                             </div>
 
-                                            <h3 className="font-bold text-slate-900 dark:text-white text-base leading-snug mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                            <h3 className="font-bold text-primary dark:text-white text-base leading-snug mb-3 group-hover:text-accent dark:group-hover:text-purple-400 transition-colors">
                                                 {item.title}
                                             </h3>
 
@@ -376,9 +371,9 @@ export default function ExplorePage() {
                 {/* ─── Closing CTA ───────────────────────────────────────── */}
                 <section className="py-24 bg-white dark:bg-slate-950">
                     <div className="container mx-auto px-4">
-                        <div className="bg-slate-900 dark:bg-slate-800 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden group">
-                            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px] -mr-48 -mt-48 group-hover:scale-110 transition-transform duration-1000" />
-                            <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] -ml-48 -mb-48 group-hover:scale-110 transition-transform duration-1000" />
+                        <div className="bg-primary dark:bg-slate-800 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] -mr-48 -mt-48 group-hover:scale-110 transition-transform duration-1000" />
+                            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] -ml-48 -mb-48 group-hover:scale-110 transition-transform duration-1000" />
                             <div className="relative z-10">
                                 <motion.h2 {...fadeUp()} className="text-3xl md:text-5xl font-black text-white tracking-tight mb-6">
                                     Start Practicing <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Today</span>
@@ -388,12 +383,12 @@ export default function ExplorePage() {
                                 </motion.p>
                                 <motion.div {...fadeUp(0.2)} className="flex flex-col sm:flex-row gap-4 justify-center">
                                     <Link href="/login">
-                                        <Button size="lg" className="h-14 px-10 text-lg rounded-full btn-gradient btn-interaction w-full sm:w-auto">
+                                        <Button size="lg" className="h-14 px-10 text-lg rounded-full bg-accent hover:bg-accent/90 text-white shadow-xl shadow-accent/30 border-0 w-full sm:w-auto">
                                             Start Practicing <ArrowRight className="ml-2 w-5 h-5" />
                                         </Button>
                                     </Link>
                                     <Link href="/dashboard/dld">
-                                        <Button size="lg" className="h-14 px-10 text-lg rounded-full border-2 border-slate-700 text-white hover:bg-white/10 transition-all btn-interaction w-full sm:w-auto">
+                                        <Button size="lg" className="h-14 px-10 text-lg rounded-full border-2 border-slate-700 text-white hover:bg-white/10 transition-all w-full sm:w-auto">
                                             Browse All Labs
                                         </Button>
                                     </Link>

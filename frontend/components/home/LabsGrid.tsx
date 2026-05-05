@@ -263,13 +263,13 @@ export function LabsGrid() {
                 {/* Header */}
                 <div className="flex flex-col md:flex-row items-end justify-between mb-14 gap-6">
                     <div className="max-w-xl">
-                        <span className="inline-flex items-center gap-2 text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-[0.3em] mb-3">
+                        <span className="inline-flex items-center gap-2 text-[10px] font-black text-accent dark:text-accent uppercase tracking-[0.3em] mb-3">
                             <BookOpen className="w-3.5 h-3.5" />
                             Academic Modules
                         </span>
                         <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mt-2 leading-tight uppercase italic">
                             Explore Our <br />
-                            <span className="text-blue-600">Virtual Ecosystem</span>
+                            <span className="text-accent">Virtual Ecosystem</span>
                         </h2>
                         <p className="text-slate-500 dark:text-slate-400 text-base font-medium mt-4 max-w-md">
                             Syllabus-aligned virtual labs for every core engineering subject — practice anytime, anywhere.
@@ -279,7 +279,7 @@ export function LabsGrid() {
                     {/* Desktop "See All" beside header */}
                     <button
                         onClick={handleSeeAll}
-                        className="hidden md:flex items-center gap-2.5 h-12 px-8 rounded-full font-bold uppercase tracking-widest text-xs border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-white hover:border-blue-600 hover:text-blue-600 dark:hover:border-blue-500 dark:hover:text-blue-400 transition-all duration-200 shadow-sm hover:shadow-md group"
+                        className="hidden md:flex items-center gap-2.5 h-12 px-8 rounded-full font-bold uppercase tracking-widest text-xs border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-white hover:border-accent hover:text-accent dark:hover:border-accent dark:hover:text-accent transition-all duration-200 shadow-sm hover:shadow-md group"
                     >
                         <Layers className="w-4 h-4" />
                         View All Labs
@@ -304,10 +304,10 @@ export function LabsGrid() {
 
                     <button
                         onClick={handleSeeAll}
-                        className="group relative inline-flex items-center gap-3 px-10 py-4 rounded-2xl text-base font-black uppercase tracking-widest text-white overflow-hidden shadow-xl shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-0.5"
+                        className="group relative inline-flex items-center gap-3 px-10 py-4 rounded-2xl text-base font-black uppercase tracking-widest text-white overflow-hidden shadow-xl shadow-accent/25 hover:shadow-accent/40 transition-all duration-300 hover:-translate-y-0.5"
                     >
                         {/* Gradient background */}
-                        <span className="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 transition-all duration-300 group-hover:from-blue-700 group-hover:via-indigo-700 group-hover:to-purple-700" />
+                        <span className="absolute inset-0 bg-gradient-to-r from-accent to-accent transition-all duration-300 group-hover:from-accent group-hover:to-accent" />
                         {/* Shine sweep */}
                         <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
                         <Layers className="relative w-5 h-5" />

@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { CheckCircle2, ArrowRight, Target, Eye, Rocket, Info } from "lucide-react";
+import { CheckCircle2, ArrowRight, Target, Eye, Rocket, Info, AlertTriangle, Sparkles } from "lucide-react";
 
 export default function AboutPage() {
     const fadeIn = {
@@ -16,7 +16,7 @@ export default function AboutPage() {
     };
 
     return (
-        <div className="flex flex-col min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden">
+        <div className="flex flex-col min-h-screen bg-white dark:bg-slate-950 text-primary dark:text-slate-100 selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden">
             <Navbar />
 
             <main className="flex-1">
@@ -35,19 +35,19 @@ export default function AboutPage() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5 }}
-                            className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-blue-100 dark:border-blue-800/50 mb-8"
+                            className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 text-accent dark:text-blue-400 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-blue-100 dark:border-blue-800/50 mb-8"
                         >
                             <Info className="w-4 h-4" />
-                            About Prayukti vLAB
+                            About Prayukti x MMMUT
                         </motion.div>
 
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.7, delay: 0.2 }}
-                            className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8"
+                            className="text-4xl md:text-6xl lg:text-7xl font-black text-primary dark:text-white leading-[1.1] tracking-tight mb-8"
                         >
-                            Redefining <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Practical Learning</span> <br />
+                            Redefining <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent">Practical Learning</span> <br />
                             for Engineering Students
                         </motion.h1>
 
@@ -63,12 +63,12 @@ export default function AboutPage() {
                 </section>
 
                 {/* Who We Are Section */}
-                <section className="py-24 bg-slate-50/50 dark:bg-slate-900/20 border-y border-slate-200/50 dark:border-slate-800/50">
+                <section className="py-24 bg-slate-50/50 dark:bg-primary/20 border-y border-slate-200/50 dark:border-slate-800/50">
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto text-center">
                             <motion.h2
                                 {...fadeIn}
-                                className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-8"
+                                className="text-3xl md:text-4xl font-black text-primary dark:text-white tracking-tight mb-8"
                             >
                                 Who We Are
                             </motion.h2>
@@ -78,7 +78,7 @@ export default function AboutPage() {
                                 className="text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed space-y-6"
                             >
                                 <p>
-                                    Prayukti vLAB is a cutting-edge Virtual Laboratory platform designed specifically for engineering students to perform syllabus-based practical experiments online. We understand that technical education thrives on experimentation, but physical laboratory access can often be a bottleneck in a student's journey.
+                                    Prayukti is a cutting-edge Virtual Laboratory platform designed specifically for engineering students to perform syllabus-based practical experiments online. We understand that technical education thrives on experimentation, but physical laboratory access can often be a bottleneck in a student's journey.
                                 </p>
                                 <p>
                                     Currently aligned with the official syllabus of <strong>Madan Mohan Malaviya University of Technology (MMMUT)</strong>, our platform provides a high-fidelity, interactive environment where students can master complex concepts through standardized modules, ensuring they are industry-ready and academically proficient.
@@ -92,20 +92,20 @@ export default function AboutPage() {
                 <section className="py-32 bg-white dark:bg-slate-950">
                     <div className="container mx-auto px-4">
                         <div className="text-center mb-20">
-                            <span className="text-blue-600 dark:text-blue-400 font-bold uppercase tracking-[0.2em] text-xs mb-3 block">Comparison</span>
-                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">The Problem We Solve</h2>
+                            <span className="text-accent dark:text-blue-400 font-bold uppercase tracking-[0.2em] text-xs mb-3 block">Comparison</span>
+                            <h2 className="text-4xl md:text-5xl font-black text-primary dark:text-white tracking-tight">The Problem We Solve</h2>
                         </div>
 
                         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 max-w-6xl mx-auto">
                             {/* Challenges */}
                             <motion.div
                                 {...fadeIn}
-                                className="bg-slate-50 dark:bg-slate-900/50 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 relative group"
+                                className="bg-slate-50 dark:bg-primary/50 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 relative group"
                             >
-                                <div className="absolute -top-6 -left-6 w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-2xl flex items-center justify-center text-red-600 text-2xl border-2 border-white dark:border-slate-800 shadow-xl">
-                                    ⚠️
+                                <div className="absolute -top-6 -left-6 w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-2xl flex items-center justify-center text-red-600 border-2 border-white dark:border-slate-800 shadow-xl">
+                                    <AlertTriangle className="w-8 h-8" />
                                 </div>
-                                <h3 className="text-2xl font-bold mb-8 text-slate-900 dark:text-white">Traditional Lab Challenges</h3>
+                                <h3 className="text-2xl font-bold mb-8 text-primary dark:text-white">Traditional Lab Challenges</h3>
                                 <ul className="space-y-6">
                                     {[
                                         { title: "Limited Lab Access", desc: "Laboratories are often only available during specific hours, restricting student practice time." },
@@ -127,10 +127,10 @@ export default function AboutPage() {
                             <motion.div
                                 {...fadeIn}
                                 transition={{ duration: 0.6, delay: 0.2 }}
-                                className="bg-blue-600 p-10 rounded-[2.5rem] border border-blue-500 shadow-2xl shadow-blue-500/20 relative group text-white"
+                                className="bg-accent p-10 rounded-[2.5rem] border border-accent shadow-2xl shadow-accent/20 relative group text-white"
                             >
-                                <div className="absolute -top-6 -right-6 w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-blue-600 text-3xl border-2 border-blue-500 shadow-xl">
-                                    ✨
+                                <div className="absolute -top-6 -right-6 w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-accent border-2 border-accent shadow-xl">
+                                    <Sparkles className="w-8 h-8" />
                                 </div>
                                 <h3 className="text-2xl font-bold mb-8">Prayukti Solution</h3>
                                 <ul className="space-y-6">
@@ -161,23 +161,23 @@ export default function AboutPage() {
                                 {...fadeIn}
                                 className="inline-flex items-center justify-center w-20 h-20 bg-indigo-50 dark:bg-indigo-900/30 rounded-3xl mb-8"
                             >
-                                <Target className="w-10 h-10 text-indigo-600 dark:text-indigo-400" />
+                                <Target className="w-10 h-10 text-accent dark:text-indigo-400" />
                             </motion.div>
                             <motion.h2
                                 {...fadeIn}
-                                className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-8"
+                                className="text-3xl md:text-5xl font-black text-primary dark:text-white tracking-tight mb-8"
                             >
                                 Our Mission
                             </motion.h2>
                             <motion.p
                                 {...fadeIn}
-                                className="text-2xl md:text-1xl  bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 leading-tight"
+                                className="text-2xl md:text-1xl  bg-clip-text text-transparent bg-gradient-to-r from-accent via-accent to-accent leading-tight"
                             >
                                 "To build a nationwide virtual lab ecosystem that ensures every engineering student can access accurate, syllabus-aligned practical learning anytime, anywhere . <br /> We aim to create a unified, technology-driven platform that bridges the gap between theoretical knowledge and hands-on experimentation, empowering students with confidence, clarity, and real-world readiness."
                             </motion.p>
                             <motion.div
                                 {...fadeIn}
-                                className="h-1 w-24 bg-indigo-600 mx-auto mt-12 rounded-full"
+                                className="h-1 w-24 bg-accent mx-auto mt-12 rounded-full"
                             ></motion.div>
                         </div>
                     </div>
@@ -188,8 +188,8 @@ export default function AboutPage() {
                     <div className="container mx-auto px-4">
                         <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
                             <motion.div {...fadeIn}>
-                                <span className="text-indigo-600 dark:text-indigo-400 font-black uppercase tracking-[0.3em] text-[10px] mb-6 block">Future Roadmap</span>
-                                <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-8">Vision for the Future</h2>
+                                <span className="text-accent dark:text-indigo-400 font-black uppercase tracking-[0.3em] text-[10px] mb-6 block">Future Roadmap</span>
+                                <h2 className="text-4xl md:text-5xl font-black text-primary dark:text-white tracking-tight mb-8">Vision for the Future</h2>
                                 <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-12">
                                     We are not just a virtual lab; we are building a nationwide ecosystem for engineering excellence. Our goal is to scale beyond MMMUT to empower students across India.
                                 </p>
@@ -201,11 +201,11 @@ export default function AboutPage() {
                                         { icon: <Info className="w-6 h-6" />, title: "Collaborative Labs", desc: "Introducing multiplayer-style collaborative lab sessions where students can experiment together." }
                                     ].map((item, i) => (
                                         <div key={i} className="flex gap-6 items-start">
-                                            <div className="w-12 h-12 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex items-center justify-center flex-shrink-0 text-blue-600 dark:text-blue-400">
+                                            <div className="w-12 h-12 rounded-2xl bg-slate-50 dark:bg-primary border border-slate-100 dark:border-slate-800 flex items-center justify-center flex-shrink-0 text-accent dark:text-blue-400">
                                                 {item.icon}
                                             </div>
                                             <div>
-                                                <h4 className="font-bold text-slate-900 dark:text-white mb-1">{item.title}</h4>
+                                                <h4 className="font-bold text-primary dark:text-white mb-1">{item.title}</h4>
                                                 <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{item.desc}</p>
                                             </div>
                                         </div>
@@ -221,21 +221,21 @@ export default function AboutPage() {
                                 {/* Visual Representation of Vision - Abstract shapes */}
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <div className="relative w-64 h-64">
-                                        <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+                                        <div className="absolute inset-0 bg-accent/20 rounded-full blur-3xl animate-pulse"></div>
                                         <div className="absolute top-0 left-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-2xl animate-blob"></div>
                                         <div className="absolute bottom-0 right-0 w-40 h-40 bg-purple-500/20 rounded-full blur-2xl animate-blob animation-delay-2000"></div>
                                     </div>
                                 </div>
                                 <div className="absolute inset-0 p-12 flex flex-col justify-end">
                                     <div className="glass p-8 rounded-3xl border border-white/20 shadow-2xl">
-                                        <p className="text-sm font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-2">Expansion Insight</p>
-                                        <p className="text-2xl font-black text-slate-900 dark:text-white mb-4">India's First Truly Syllabus-Centric vLAB Ecosystem.</p>
+                                        <p className="text-sm font-bold text-accent dark:text-indigo-400 uppercase tracking-widest mb-2">Expansion Insight</p>
+                                        <p className="text-2xl font-black text-primary dark:text-white mb-4">India's First Truly Syllabus-Centric vLAB Ecosystem.</p>
                                         <div className="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
                                             <motion.div
                                                 initial={{ width: 0 }}
                                                 whileInView={{ width: "65%" }}
                                                 transition={{ duration: 1.5, delay: 0.5 }}
-                                                className="h-full bg-indigo-600"
+                                                className="h-full bg-accent"
                                             ></motion.div>
                                         </div>
                                     </div>
@@ -248,18 +248,18 @@ export default function AboutPage() {
                 {/* Closing CTA */}
                 <section className="py-32 relative overflow-hidden bg-white dark:bg-slate-950">
                     <div className="container mx-auto px-4">
-                        <div className="bg-slate-900 dark:bg-white rounded-[3.5rem] p-12 md:p-24 text-center relative overflow-hidden group">
+                        <div className="bg-primary dark:bg-white rounded-[3.5rem] p-12 md:p-24 text-center relative overflow-hidden group">
                             {/* Background Accents */}
-                            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px] -mr-48 -mt-48 transition-transform duration-1000 group-hover:scale-110"></div>
-                            <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] -ml-48 -mb-48 transition-transform duration-1000 group-hover:scale-110"></div>
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] -mr-48 -mt-48 transition-transform duration-1000 group-hover:scale-110"></div>
+                            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] -ml-48 -mb-48 transition-transform duration-1000 group-hover:scale-110"></div>
 
                             <div className="relative z-10">
                                 <motion.h2
                                     {...fadeIn}
-                                    className="text-4xl md:text-6xl font-black text-white dark:text-slate-900 tracking-tight mb-8"
+                                    className="text-4xl md:text-6xl font-black text-white dark:text-primary tracking-tight mb-8"
                                 >
                                     Join the Future of <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400 dark:from-blue-600 dark:to-indigo-600">Practical Learning</span>
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400 dark:from-accent dark:to-accent">Practical Learning</span>
                                 </motion.h2>
                                 <motion.p
                                     {...fadeIn}
@@ -272,12 +272,12 @@ export default function AboutPage() {
                                     className="flex flex-col sm:flex-row gap-6 justify-center"
                                 >
                                     <Link href="/login">
-                                        <Button size="lg" className="h-16 px-12 text-xl rounded-full btn-gradient btn-interaction w-full sm:w-auto">
+                                        <Button size="lg" className="h-16 px-12 text-xl rounded-xl bg-accent hover:bg-accent/90 text-white w-full sm:w-auto">
                                             Start Practicing <ArrowRight className="ml-3 w-6 h-6" />
                                         </Button>
                                     </Link>
-                                    <Link href="/dashboard/dld">
-                                        <Button size="lg" className="h-16 px-12 text-xl rounded-full border-2 border-slate-700 dark:border-slate-200 text-white dark:text-slate-900 hover:bg-white/10 dark:hover:bg-slate-100 transition-all btn-interaction w-full sm:w-auto">
+                                    <Link href="/labs">
+                                        <Button size="lg" className="h-16 px-12 text-xl rounded-xl border-2 border-slate-700 dark:border-slate-200 text-white dark:text-primary hover:bg-white/10 dark:hover:bg-slate-100 transition-all w-full sm:w-auto">
                                             Explore Labs
                                         </Button>
                                     </Link>

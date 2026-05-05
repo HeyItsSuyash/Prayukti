@@ -28,22 +28,22 @@ function QuickLinkButton({ label, icon: Icon, onClick }: { label: string, icon: 
         <Button 
             variant="outline" 
             onClick={onClick}
-            className="flex flex-col items-center justify-center h-24 rounded-3xl border-slate-100 hover:bg-indigo-50 hover:border-indigo-100 group transition-all"
+            className="flex flex-col items-center justify-center h-24 rounded-3xl border-slate-100 hover:bg-accent/5 hover:border-accent/20 group transition-all"
         >
-            <div className="p-3 bg-slate-50 group-hover:bg-indigo-100 rounded-2xl mb-2 transition-colors">
-                <Icon size={18} className="text-slate-400 group-hover:text-indigo-600" />
+            <div className="p-3 bg-slate-50 group-hover:bg-accent/10 rounded-2xl mb-2 transition-colors">
+                <Icon size={18} className="text-slate-400 group-hover:text-accent" />
             </div>
-            <span className="text-[10px] font-black text-slate-500 group-hover:text-indigo-700 uppercase tracking-tighter">{label}</span>
+            <span className="text-[10px] font-black text-slate-500 group-hover:text-accent uppercase tracking-tighter">{label}</span>
         </Button>
     );
 }
 
 function StatCard({ title, value, subtext, icon: Icon, color }: any) {
     return (
-        <Card className="rounded-[2.5rem] border-none shadow-2xl shadow-slate-100/50 hover:scale-[1.02] transition-all bg-white overflow-hidden group border-b-4 border-transparent hover:border-indigo-600/20">
+        <Card className="rounded-[2.5rem] border-none shadow-2xl shadow-slate-100/50 hover:scale-[1.02] transition-all bg-white overflow-hidden group border-b-4 border-transparent hover:border-accent/20">
             <CardContent className="p-8">
                 <div className="flex justify-between items-start mb-6">
-                    <div className="p-4 bg-slate-50 rounded-[1.5rem] group-hover:bg-indigo-50 transition-colors">
+                    <div className="p-4 bg-slate-50 rounded-[1.5rem] group-hover:bg-accent/5 transition-colors">
                         <Icon size={24} className={color} />
                     </div>
                 </div>
@@ -155,7 +155,7 @@ function AdminContent() {
                         </div>
 
                         <div className="grid gap-6 md:grid-cols-4">
-                            <StatCard title="Total Students" value={data.length} subtext="Enrolled successfully" icon={Users} color="text-indigo-600" />
+                            <StatCard title="Total Students" value={data.length} subtext="Enrolled successfully" icon={Users} color="text-accent" />
                             <StatCard title="Total Staff" value={teachers.length} subtext="Active administration" icon={ShieldCheck} color="text-emerald-500" />
                             <StatCard title="Active Session" value="ENABLED" subtext="System online" icon={Activity} color="text-amber-500" />
                             <StatCard title="Security" value="SAFE" subtext="Mock Auth Active" icon={Shield} color="text-emerald-600" />
@@ -166,7 +166,7 @@ function AdminContent() {
                                 <Card className="rounded-[2.5rem] border-none shadow-2xl shadow-slate-200/50 overflow-hidden bg-white">
                                     <div className="p-8 pb-4 flex justify-between items-center bg-white border-b border-slate-50">
                                         <h3 className="text-xl font-black text-slate-900 tracking-tight uppercase">Recent Students</h3>
-                                        <Button variant="link" className="text-indigo-600 font-black text-xs uppercase" onClick={() => router.push('?view=students')}>
+                                        <Button variant="link" className="text-accent font-black text-xs uppercase" onClick={() => router.push('?view=students')}>
                                             View All
                                         </Button>
                                     </div>
@@ -177,7 +177,7 @@ function AdminContent() {
                             </div>
 
                             <div className="lg:col-span-3 space-y-8">
-                                <Card className="rounded-[2.5rem] border-none bg-indigo-600 text-white p-8 shadow-2xl shadow-indigo-200 overflow-hidden relative group">
+                                <Card className="rounded-[2.5rem] border-none bg-accent text-white p-8 shadow-2xl shadow-accent/20 overflow-hidden relative group">
                                     <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform">
                                         <UserPlus size={120} />
                                     </div>
@@ -188,7 +188,7 @@ function AdminContent() {
                                         <h3 className="text-2xl font-black tracking-tighter">Fast Enrollment</h3>
                                         <Button 
                                             onClick={() => router.push('?view=students')}
-                                            className="w-full bg-white text-indigo-600 hover:bg-slate-50 font-black py-6 rounded-2xl uppercase"
+                                            className="w-full bg-white text-accent hover:bg-slate-50 font-black py-6 rounded-2xl uppercase"
                                         >
                                             Open Form
                                         </Button>

@@ -14,7 +14,7 @@ export default function TeacherAnalytics() {
                     <Link href="/dashboard" className="text-gray-500 hover:text-black">
                         <ArrowLeft className="h-5 w-5" />
                     </Link>
-                    <h1 className="text-xl font-bold text-indigo-600">Teacher Analytics <span className="text-gray-400 font-normal">| Prayukti vLAB</span></h1>
+                    <h1 className="text-xl font-bold text-accent">Teacher Analytics <span className="text-gray-400 font-normal">| MUJ Online</span></h1>
                 </div>
             </header>
 
@@ -69,7 +69,7 @@ export default function TeacherAnalytics() {
                                 <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
                                     <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                                         <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                            <BarChart2 className="h-4 w-4 text-indigo-500" /> Student Progress Matrix
+                                            <BarChart2 className="h-4 w-4 text-accent" /> Student Progress Matrix
                                         </h3>
                                         <Button variant="outline" size="sm">Export Report</Button>
                                     </div>
@@ -149,7 +149,7 @@ export default function TeacherAnalytics() {
                                             <label className="text-[10px] font-black text-slate-400 uppercase">Teacher Feedback</label>
                                             <textarea className="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 outline-none h-24 text-sm" placeholder="Provide constructive comments..."></textarea>
                                         </div>
-                                        <Button className="w-full bg-indigo-600 hover:bg-indigo-700 py-6 rounded-2xl font-bold shadow-lg shadow-indigo-200">
+                                        <Button className="w-full bg-accent hover:bg-accent/90 py-6 rounded-2xl font-bold shadow-lg shadow-accent/20">
                                             Submit Evaluation
                                         </Button>
                                     </div>
