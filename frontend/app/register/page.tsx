@@ -4,28 +4,28 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { 
-    Loader2, 
-    Mail, 
-    User, 
-    Lock, 
-    ArrowRight, 
-    Hash, 
-    ChevronLeft, 
-    Eye, 
-    EyeOff, 
+import {
+    Loader2,
+    Mail,
+    User,
+    Lock,
+    ArrowRight,
+    Hash,
+    ChevronLeft,
+    Eye,
+    EyeOff,
     Quote,
     CheckCircle2,
     AlertCircle
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { 
-    Select, 
-    SelectContent, 
-    SelectItem, 
-    SelectTrigger, 
-    SelectValue 
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue
 } from "@/components/ui/select";
 import axios from "axios";
 
@@ -156,20 +156,20 @@ export default function RegisterPage() {
             {/* Left Sidebar - Carousel */}
             <div className="hidden lg:flex lg:w-5/12 relative bg-primary overflow-hidden h-full">
                 {/* Background Image with Overlay */}
-                <div 
+                <div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-1000"
                     style={{ backgroundImage: `url('/muj_auth_sidebar_bg_1778010617249.png')` }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/60 to-transparent" />
-                
+
                 {/* Sidebar Content */}
                 <div className="relative z-10 flex flex-col justify-between w-full h-full p-12">
                     <div className="flex items-center justify-between">
                         <Link href="/" className="flex items-center gap-3 group">
                             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary transform group-hover:scale-105 transition-all duration-500 shadow-xl overflow-hidden border-2 border-white/20">
-                                <img 
-                                    src="http://www.mmmut.ac.in/images/largelogo.jpg" 
-                                    alt="MMMUT Logo" 
+                                <img
+                                    src="http://www.mmmut.ac.in/images/largelogo.jpg"
+                                    alt="MMMUT Logo"
                                     className="w-full h-full object-cover"
                                 />
                             </div>
@@ -178,7 +178,7 @@ export default function RegisterPage() {
                                 <span className="text-[10px] font-bold text-white/60 tracking-wider uppercase mt-1">Virtual Lab System</span>
                             </div>
                         </Link>
-                        
+
                         <Link href="/" className="flex items-center gap-2 text-white/80 hover:text-white font-bold text-sm bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-xl transition-all border border-white/10">
                             Back to website <ArrowRight size={16} />
                         </Link>
@@ -187,11 +187,10 @@ export default function RegisterPage() {
                     {/* Carousel slides */}
                     <div className="relative flex-1 flex flex-col justify-center py-10">
                         {slides.map((slide, idx) => (
-                            <div 
+                            <div
                                 key={idx}
-                                className={`absolute inset-0 flex flex-col justify-center transition-all duration-1000 ${
-                                    idx === currentSlide ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
-                                }`}
+                                className={`absolute inset-0 flex flex-col justify-center transition-all duration-1000 ${idx === currentSlide ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
+                                    }`}
                             >
                                 <div className="space-y-6">
                                     <div className="space-y-2">
@@ -200,11 +199,11 @@ export default function RegisterPage() {
                                             {slide.title}
                                         </h2>
                                     </div>
-                                    
+
                                     {slide.testimonial ? (
                                         <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-[2rem] space-y-4 max-w-lg shadow-2xl relative">
                                             <Quote className="absolute -top-4 -left-4 text-accent w-10 h-10 opacity-50" />
-                                            <p className="text-white/90 text-xl font-medium leading-relaxed italic">
+                                            <p className="text-white/90 text-xl font-medium leading-relaxed">
                                                 "{slide.testimonial.text}"
                                             </p>
                                             <div className="flex items-center gap-3 pt-2">
@@ -233,13 +232,12 @@ export default function RegisterPage() {
                                 <button
                                     key={idx}
                                     onClick={() => setCurrentSlide(idx)}
-                                    className={`h-1.5 rounded-xl transition-all duration-500 ${
-                                        idx === currentSlide ? "w-12 bg-accent shadow-[0_0_15px_rgba(243,111,33,0.5)]" : "w-4 bg-white/20 hover:bg-white/40"
-                                    }`}
+                                    className={`h-1.5 rounded-xl transition-all duration-500 ${idx === currentSlide ? "w-12 bg-accent shadow-[0_0_15px_rgba(243,111,33,0.5)]" : "w-4 bg-white/20 hover:bg-white/40"
+                                        }`}
                                 />
                             ))}
                         </div>
-                        
+
                         <div className="flex items-center gap-6 text-white/40 text-[10px] font-black uppercase tracking-widest">
                             <span>&copy; 2025 Madan Mohan Malaviya University of Technology</span>
                             <span>•</span>
@@ -254,22 +252,22 @@ export default function RegisterPage() {
                 <div className="max-w-xl w-full space-y-8">
                     {/* Header */}
                     <div className="space-y-4">
-                        <button 
+                        <button
                             onClick={step === 1 ? () => router.push("/student-auth") : prevStep}
                             className="inline-flex items-center gap-2 text-slate-400 hover:text-primary font-bold text-xs uppercase tracking-widest transition-colors mb-4"
                         >
                             <ChevronLeft size={16} /> {step === 1 ? "Back" : "Previous Step"}
                         </button>
-                        
+
                         <div className="flex justify-between items-end">
                             <div>
-                                <h1 className="text-4xl font-black text-primary tracking-tight">Create account</h1>
+                                <h1 className="text-4xl font-black text-primary tracking-tight">Create an account</h1>
                                 <p className="text-slate-500 font-medium text-sm mt-1">
                                     Step {step} of 3 • {step === 1 ? "Account Basics" : step === 2 ? "University Details" : "Academic Info"}
                                 </p>
                             </div>
                             <div className="flex gap-1.5 pb-2">
-                                {[1,2,3].map(i => (
+                                {[1, 2, 3].map(i => (
                                     <div key={i} className={`h-1.5 rounded-full transition-all duration-500 ${step >= i ? "w-6 bg-accent" : "w-2 bg-slate-200"}`} />
                                 ))}
                             </div>
@@ -327,7 +325,7 @@ export default function RegisterPage() {
                                             required
                                         />
                                         <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-accent transition-colors" size={20} />
-                                        <button 
+                                        <button
                                             type="button"
                                             onClick={() => setShowPassword(!showPassword)}
                                             className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-accent transition-colors"
@@ -399,7 +397,7 @@ export default function RegisterPage() {
                                                 <SelectValue placeholder="Year" />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                {[1,2,3,4].map(y => <SelectItem key={y} value={y.toString()}>{y}st Year</SelectItem>)}
+                                                {[1, 2, 3, 4].map(y => <SelectItem key={y} value={y.toString()}>{y}st Year</SelectItem>)}
                                             </SelectContent>
                                         </Select>
                                     </div>
@@ -410,15 +408,15 @@ export default function RegisterPage() {
                                                 <SelectValue placeholder="Semester" />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                {[1,2,3,4,5,6,7,8].map(s => <SelectItem key={s} value={s.toString()}>Sem {s}</SelectItem>)}
+                                                {[1, 2, 3, 4, 5, 6, 7, 8].map(s => <SelectItem key={s} value={s.toString()}>Sem {s}</SelectItem>)}
                                             </SelectContent>
                                         </Select>
                                     </div>
                                 </div>
 
                                 <div className="flex items-center gap-3 py-2 bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-200">
-                                    <input 
-                                        type="checkbox" 
+                                    <input
+                                        type="checkbox"
                                         id="terms"
                                         checked={agreeTerms}
                                         onChange={(e) => setAgreeTerms(e.target.checked)}
@@ -451,7 +449,7 @@ export default function RegisterPage() {
                                     )}
                                 </Button>
                             )}
-                            
+
                             <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest pt-2">
                                 {step === 1 ? (
                                     <>Already have an account? <Link href="/login" className="text-accent hover:underline">Sign In</Link></>

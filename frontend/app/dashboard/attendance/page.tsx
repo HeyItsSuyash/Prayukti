@@ -58,7 +58,7 @@ export default function StudentAttendancePage() {
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-black text-slate-900 dark:text-white uppercase italic">
+                            <div className="text-2xl font-black text-slate-900 dark:text-white uppercase">
                                 {risk?.risk_status || "Standard"}
                             </div>
                             <p className="text-[10px] text-slate-500 mt-1 uppercase font-bold tracking-wider">Overall Engagement</p>
@@ -73,7 +73,7 @@ export default function StudentAttendancePage() {
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-black text-slate-900 dark:text-white uppercase italic">
+                            <div className="text-2xl font-black text-slate-900 dark:text-white uppercase">
                                 {Math.round((risk?.total_lab_time || 0) / 60)}h { (risk?.total_lab_time || 0) % 60}m
                             </div>
                             <p className="text-[10px] text-slate-500 mt-1 uppercase font-bold tracking-wider">Time spent in Labs</p>

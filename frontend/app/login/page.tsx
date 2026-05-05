@@ -4,18 +4,18 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { 
-    Loader2, 
-    GraduationCap, 
-    School, 
-    ShieldCheck, 
-    User, 
-    Lock, 
-    Mail, 
-    ArrowRight, 
-    ChevronLeft, 
-    Eye, 
-    EyeOff, 
+import {
+    Loader2,
+    GraduationCap,
+    School,
+    ShieldCheck,
+    User,
+    Lock,
+    Mail,
+    ArrowRight,
+    ChevronLeft,
+    Eye,
+    EyeOff,
     Quote,
     AlertCircle,
     CheckCircle2
@@ -123,10 +123,10 @@ export default function LoginPage() {
         try {
             setError("");
             setLoading(true);
-            
+
             const testEmail = targetRole === 'student' ? "test.student@mmmut.ac.in" :
-                            targetRole === 'teacher' ? "test.faculty@mmmut.ac.in" :
-                            "test.admin@mmmut.ac.in";
+                targetRole === 'teacher' ? "test.faculty@mmmut.ac.in" :
+                    "test.admin@mmmut.ac.in";
 
             const response = await fetch(`${API_URL}/api/auth/login`, {
                 method: 'POST',
@@ -165,20 +165,20 @@ export default function LoginPage() {
             {/* Left Sidebar - Carousel */}
             <div className="hidden lg:flex lg:w-1/2 relative bg-primary overflow-hidden items-stretch">
                 {/* Background Image with Overlay */}
-                <div 
+                <div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-1000"
                     style={{ backgroundImage: `url('/muj_auth_sidebar_bg_1778010617249.png')` }}
                 />
                 <div className="absolute inset-0 bg-primary/80" />
-                
+
                 {/* Sidebar Content */}
                 <div className="relative z-10 flex flex-col justify-between w-full p-12">
                     <div className="flex items-center justify-between">
                         <Link href="/" className="flex items-center gap-3 group">
                             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary transform group-hover:scale-105 transition-all duration-500 shadow-xl overflow-hidden border-2 border-white/20">
-                                <img 
-                                    src="http://www.mmmut.ac.in/images/largelogo.jpg" 
-                                    alt="MMMUT Logo" 
+                                <img
+                                    src="http://www.mmmut.ac.in/images/largelogo.jpg"
+                                    alt="MMMUT Logo"
                                     className="w-full h-full object-cover"
                                 />
                             </div>
@@ -187,7 +187,7 @@ export default function LoginPage() {
                                 <span className="text-[10px] font-bold text-white/60 tracking-wider uppercase mt-1">Virtual Lab System</span>
                             </div>
                         </Link>
-                        
+
                         <Link href="/" className="flex items-center gap-2 text-white/80 hover:text-white font-bold text-sm bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-xl transition-all border border-white/10">
                             Back to website <ArrowRight size={16} />
                         </Link>
@@ -196,11 +196,10 @@ export default function LoginPage() {
                     {/* Carousel slides */}
                     <div className="relative flex-1 flex flex-col justify-center py-10">
                         {slides.map((slide, idx) => (
-                            <div 
+                            <div
                                 key={idx}
-                                className={`absolute inset-0 flex flex-col justify-center transition-all duration-1000 ${
-                                    idx === currentSlide ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
-                                }`}
+                                className={`absolute inset-0 flex flex-col justify-center transition-all duration-1000 ${idx === currentSlide ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
+                                    }`}
                             >
                                 <div className="space-y-6">
                                     <div className="space-y-2">
@@ -209,7 +208,7 @@ export default function LoginPage() {
                                             {slide.title}
                                         </h2>
                                     </div>
-                                    
+
                                     {slide.testimonial ? (
                                         <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-[2rem] space-y-4 max-w-lg shadow-2xl relative">
                                             <Quote className="absolute -top-4 -left-4 text-accent w-10 h-10 opacity-50" />
@@ -242,13 +241,12 @@ export default function LoginPage() {
                                 <button
                                     key={idx}
                                     onClick={() => setCurrentSlide(idx)}
-                                    className={`h-1.5 rounded-xl transition-all duration-500 ${
-                                        idx === currentSlide ? "w-12 bg-accent shadow-[0_0_15px_rgba(243,111,33,0.5)]" : "w-4 bg-white/20 hover:bg-white/40"
-                                    }`}
+                                    className={`h-1.5 rounded-xl transition-all duration-500 ${idx === currentSlide ? "w-12 bg-accent shadow-[0_0_15px_rgba(243,111,33,0.5)]" : "w-4 bg-white/20 hover:bg-white/40"
+                                        }`}
                                 />
                             ))}
                         </div>
-                        
+
                         <div className="flex items-center gap-6 text-white/40 text-[10px] font-black uppercase tracking-widest">
                             <span>&copy; 2025 Madan Mohan Malaviya University of Technology</span>
                             <span>•</span>
@@ -266,10 +264,8 @@ export default function LoginPage() {
                         <Link href="/student-auth" className="inline-flex items-center gap-2 text-slate-400 hover:text-primary font-bold text-xs uppercase tracking-widest transition-colors mb-4">
                             <ChevronLeft size={16} /> Back
                         </Link>
-                        <h1 className="text-4xl font-black text-primary tracking-tight">Sign in to account</h1>
-                        <p className="text-slate-500 font-medium text-sm">
-                            Access the Prayukti x MMMUT Virtual Lab infrastructure.
-                        </p>
+                        <h1 className="text-4xl font-black text-primary tracking-tight">Sign in to your account</h1>
+
                     </div>
 
                     {/* Role Selection */}
@@ -278,11 +274,10 @@ export default function LoginPage() {
                             <button
                                 key={r}
                                 onClick={() => setRole(r)}
-                                className={`flex-1 py-3.5 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all ${
-                                    role === r 
-                                    ? 'bg-white text-primary shadow-lg ring-1 ring-black/5' 
+                                className={`flex-1 py-3.5 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all ${role === r
+                                    ? 'bg-white text-primary shadow-lg ring-1 ring-black/5'
                                     : 'text-slate-400 hover:text-slate-600 hover:bg-slate-200/50'
-                                }`}
+                                    }`}
                             >
                                 <div className="flex items-center justify-center gap-2">
                                     {r === 'student' ? <GraduationCap size={14} /> : r === 'teacher' ? <School size={14} /> : <ShieldCheck size={14} />}
@@ -334,7 +329,7 @@ export default function LoginPage() {
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 group-focus-within:text-accent transition-colors" />
-                                    <button 
+                                    <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
                                         className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-accent transition-colors"
@@ -359,7 +354,7 @@ export default function LoginPage() {
                                 >
                                     {loading ? <Loader2 className="animate-spin" /> : "SIGN IN"}
                                 </Button>
-                                
+
                                 <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest">
                                     Don't have an account? <Link href="/register" className="text-accent hover:underline">Register Now</Link>
                                 </p>
@@ -375,9 +370,9 @@ export default function LoginPage() {
                             </div>
 
                             <div className="grid grid-cols-1 gap-3">
-                                <Button 
-                                    type="button" 
-                                    variant="outline" 
+                                <Button
+                                    type="button"
+                                    variant="outline"
                                     className="h-14 rounded-2xl font-bold gap-3 border-2 border-slate-100 hover:bg-slate-50 transition-all text-slate-500 uppercase tracking-widest text-[10px]"
                                     onClick={() => handleTestLogin(role)}
                                 >

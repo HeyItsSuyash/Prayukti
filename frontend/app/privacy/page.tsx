@@ -26,21 +26,21 @@ export default function PrivacyPage() {
                         </section>
 
                         <section className="space-y-4">
-                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight italic">2. How We Use Data</h2>
+                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight">2. How We Use Data</h2>
                             <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
                                 Your data is used exclusively to maintain your academic profile, generate certificates, and provide faculty with progress reports. We do not sell or share your data with third-party advertisers.
                             </p>
                         </section>
 
                         <section className="space-y-4">
-                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight italic">3. Data Security</h2>
+                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight">3. Data Security</h2>
                             <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
                                 We implement industry-standard encryption (AES-256) and secure JWT-based authentication to protect your university credentials and academic records.
                             </p>
                         </section>
 
                         <section className="space-y-4">
-                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight italic">4. University Access</h2>
+                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight">4. University Access</h2>
                             <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
                                 Authorized university faculty and administrators have access to your performance data for internal assessment purposes only.
                             </p>

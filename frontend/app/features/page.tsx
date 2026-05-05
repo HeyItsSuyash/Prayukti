@@ -174,7 +174,7 @@ export default function FeaturesPage() {
                 <div className="container mx-auto px-4">
                     <div className="max-w-xl mx-auto text-center mb-16">
                         <h2 className="text-4xl font-black text-primary dark:text-white uppercase tracking-tighter mb-4">Old Ways vs <span className="text-accent">The Future.</span></h2>
-                        <p className="text-slate-600 dark:text-slate-400 font-medium italic">"Virtualization isn't just an alternative, it's an upgrade."</p>
+                        <p className="text-slate-600 dark:text-slate-400 font-medium">"Virtualization isn't just an alternative, it's an upgrade."</p>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-px bg-slate-200 dark:bg-slate-800 rounded-[3rem] overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl">

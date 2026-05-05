@@ -26,7 +26,7 @@ export default function CookiePolicyPage() {
                         </section>
 
                         <section className="space-y-4">
-                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight italic">2. Types of Cookies</h2>
+                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight">2. Types of Cookies</h2>
                             <ul className="list-disc pl-6 text-slate-600 dark:text-slate-400 font-medium space-y-2">
                                 <li><strong>Session Cookies:</strong> Temporary cookies used to identify your session while you are active.</li>
                                 <li><strong>Security Cookies:</strong> HttpOnly cookies used to store your secure authentication tokens (JWT).</li>
@@ -35,7 +35,7 @@ export default function CookiePolicyPage() {
                         </section>
 
                         <section className="space-y-4">
-                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight italic">3. Managing Cookies</h2>
+                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight">3. Managing Cookies</h2>
                             <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
                                 You can disable cookies in your browser settings, but please note that this will prevent you from logging in and accessing the virtual lab modules.
                             </p>

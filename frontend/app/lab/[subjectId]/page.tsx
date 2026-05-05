@@ -112,7 +112,7 @@ export default function LabPage() {
                     ) : error ? (
                         <div className="flex flex-col items-center justify-center py-20 bg-red-50 dark:bg-red-950/20 rounded-[2.5rem] border border-red-100 dark:border-red-900/30 text-center px-6">
                             <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
-                            <h3 className="text-xl font-black text-red-600 dark:text-red-400 uppercase italic">Connection Issue</h3>
+                            <h3 className="text-xl font-black text-red-600 dark:text-red-400 uppercase">Connection Issue</h3>
                             <p className="text-red-500/80 dark:text-red-400/80 max-w-md mx-auto mt-2 font-medium">
                                 {error}
                             </p>

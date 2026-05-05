@@ -119,7 +119,7 @@ function ModuleCard({ mod, index }: { mod: ModuleItem, index: number }) {
                 
                 <div className="space-y-2">
                     <span className="text-[10px] font-black text-accent uppercase tracking-[0.2em]">{mod.tag}</span>
-                    <h3 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight italic group-hover:text-accent transition-colors">
+                    <h3 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight group-hover:text-accent transition-colors">
                         {mod.title}
                     </h3>
                 </div>
@@ -150,12 +150,12 @@ export function AcademicModulesSection() {
                 <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
                     <div className="space-y-4">
                         <span className="text-accent font-black uppercase tracking-[0.3em] text-[10px] bg-accent/10 px-4 py-1.5 rounded-full inline-block">Curriculum Alignment</span>
-                        <h2 className="text-5xl md:text-7xl font-black text-primary dark:text-white uppercase tracking-tighter italic leading-[0.9]">
+                        <h2 className="text-5xl md:text-7xl font-black text-primary dark:text-white uppercase tracking-tighter leading-[0.9]">
                             Academic <br />
-                            <span className="text-accent not-italic">Modules</span>
+                            <span className="text-accent">Modules</span>
                         </h2>
                     </div>
-                    <p className="text-slate-500 dark:text-slate-400 font-medium max-w-md text-lg leading-relaxed border-l-4 border-accent pl-8 italic">
+                    <p className="text-slate-500 dark:text-slate-400 font-medium max-w-md text-lg leading-relaxed border-l-4 border-accent pl-8">
                         Precision-engineered virtual laboratories designed strictly for the MMMUT Gorakhpur engineering syllabus.
                     </p>
                 </div>

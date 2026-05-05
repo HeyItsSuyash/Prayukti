@@ -63,7 +63,7 @@ export function UniversityAlignment() {
 
                     <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white uppercase tracking-tighter leading-tight mb-8">
                         University-Aligned Today. <br />
-                        <span className="text-blue-600 italic">Expanding Nationwide Tomorrow.</span>
+                        <span className="text-blue-600">Expanding Nationwide Tomorrow.</span>
                     </h2>
 
                     <div className="space-y-6 text-lg font-medium text-slate-600 dark:text-slate-400">

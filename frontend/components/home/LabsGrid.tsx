@@ -267,7 +267,7 @@ export function LabsGrid() {
                             <BookOpen className="w-3.5 h-3.5" />
                             Academic Modules
                         </span>
-                        <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mt-2 leading-tight uppercase italic">
+                        <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mt-2 leading-tight uppercase">
                             Explore Our <br />
                             <span className="text-accent">Virtual Ecosystem</span>
                         </h2>

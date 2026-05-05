@@ -49,7 +49,7 @@ function StatCard({ title, value, subtext, icon: Icon, color }: any) {
                 </div>
                 <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2">{title}</h3>
                 <div className="text-4xl font-black text-slate-900 tracking-tighter mb-1">{value}</div>
-                {subtext && <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">{subtext}</p>}
+                {subtext && <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{subtext}</p>}
             </CardContent>
         </Card>
     );
@@ -148,7 +148,7 @@ function AdminContent() {
                     <div className="space-y-8 animate-in fade-in duration-700">
                         <div className="flex justify-between items-center mb-2">
                             <div>
-                                <h1 className="text-4xl font-black text-slate-900 tracking-tighter uppercase italic">Control Center</h1>
+                                <h1 className="text-4xl font-black text-slate-900 tracking-tighter uppercase">Control Center</h1>
                                 <p className="text-slate-500 text-sm font-medium">Core system management and analytical overview.</p>
                             </div>
                             <Button variant="outline" className="rounded-2xl border-slate-200" onClick={handleLogout}>Logout</Button>

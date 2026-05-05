@@ -25,7 +25,7 @@ export function FeatureHighlight({ title, description, icon: Icon, imageComponen
                     <Icon className="w-4 h-4 text-blue-600" />
                     <span className="text-[10px] font-black uppercase tracking-widest text-blue-600">Feature Highlight</span>
                 </div>
-                <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tighter uppercase italic">
+                <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tighter uppercase">
                     {title}
                 </h2>
                 <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed font-medium max-w-xl">
@@ -33,7 +33,7 @@ export function FeatureHighlight({ title, description, icon: Icon, imageComponen
                 </p>
                 <div className="flex gap-4">
                     <div className="w-1 h-16 bg-gradient-to-b from-blue-600 to-indigo-600 rounded-full"></div>
-                    <p className="text-sm font-bold text-slate-500 italic max-w-md">"Our proprietary VLAB engine allows students to experiment with industry-grade tools directly within their browser, zero installation required."</p>
+                    <p className="text-sm font-bold text-slate-500 max-w-md">"Our proprietary VLAB engine allows students to experiment with industry-grade tools directly within their browser, zero installation required."</p>
                 </div>
             </motion.div>
 

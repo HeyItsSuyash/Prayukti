@@ -27,21 +27,21 @@ export default function TermsPage() {
                         </section>
 
                         <section className="space-y-4">
-                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight italic">2. Use of Platform</h2>
+                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight">2. Use of Platform</h2>
                             <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
                                 Users are granted a limited, non-exclusive license to access simulation tools and academic resources. Any attempt to reverse engineer, disrupt services, or use the platform for non-academic commercial purposes is strictly prohibited.
                             </p>
                         </section>
 
                         <section className="space-y-4">
-                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight italic">3. Academic Integrity</h2>
+                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight">3. Academic Integrity</h2>
                             <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
                                 Students must use the platform honestly. Simulation results and certificates generated on Prayukti must reflect the student's own work. Fraudulent activities or impersonation will be reported to the respective department heads.
                             </p>
                         </section>
 
                         <section className="space-y-4">
-                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight italic">4. Intellectual Property</h2>
+                            <h2 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight">4. Intellectual Property</h2>
                             <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
                                 All simulation models, software code, and educational content are the intellectual property of Prayukti x MMMUT and its developers. Unauthorized distribution of platform content is a violation of university policy.
                             </p>

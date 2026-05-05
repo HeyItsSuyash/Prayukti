@@ -56,10 +56,10 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-5xl md:text-8xl font-black text-white leading-[0.95] tracking-tighter uppercase italic"
+                className="text-5xl md:text-8xl font-black text-white leading-[0.95] tracking-tighter uppercase"
               >
                 MAKING IT<br />
-                <span className="text-accent not-italic">PRACTICAL.</span>
+                <span className="text-accent">PRACTICAL.</span>
               </motion.h1>
 
               <motion.div
@@ -95,16 +95,16 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className="flex flex-wrap gap-10 pt-16 border-t border-white/5"
+                className="flex flex-wrap gap-4 md:gap-8 pt-16 border-t border-white/5"
               >
                 {[
                   { icon: ShieldCheck, label: "University Verified" },
                   { icon: Cpu, label: "Real-time physics" },
                   { icon: Play, label: "Instant Access" }
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 text-white/30">
-                    <item.icon className="w-5 h-5 text-accent/50" />
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em]">{item.label}</span>
+                  <div key={i} className="flex items-center gap-2.5 text-white/30 whitespace-nowrap">
+                    <item.icon className="w-4 h-4 md:w-5 md:h-5 text-accent/50" />
+                    <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em]">{item.label}</span>
                   </div>
                 ))}
               </motion.div>

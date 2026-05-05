@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import { AssistantBot } from "@/components/ui/AssistantBot";
 
 
 const inter = Inter({
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
         {children}
         <ScrollToTop />
+        <AssistantBot />
       </body>
     </html>
   );

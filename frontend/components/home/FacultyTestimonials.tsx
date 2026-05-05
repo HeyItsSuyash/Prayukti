@@ -64,7 +64,7 @@ export function FacultyTestimonials() {
             <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center mb-20">
                     <span className="text-accent font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">Institutional Vision</span>
-                    <h2 className="text-4xl md:text-6xl font-black text-primary dark:text-white tracking-tighter uppercase italic leading-none">
+                    <h2 className="text-4xl md:text-6xl font-black text-primary dark:text-white tracking-tighter uppercase leading-none">
                         Establishment <br />
                         <span className="text-blue-600">& Leadership</span>
                     </h2>
@@ -97,7 +97,7 @@ export function FacultyTestimonials() {
                             {/* Content */}
                             <div className="flex-1 space-y-6">
                                 <Quote className="w-12 h-12 text-accent/20" />
-                                <p className="text-xl md:text-2xl text-slate-700 dark:text-slate-300 font-medium italic leading-relaxed">
+                                <p className="text-xl md:text-2xl text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
                                     "{faculty[index].message}"
                                 </p>
                                 <div className="pt-6 border-t border-slate-100 dark:border-slate-800">
