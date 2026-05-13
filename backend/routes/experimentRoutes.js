@@ -1,21 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const experimentController = require('../controllers/experimentController');
+const { protect, authorize } = require('../middleware/authMiddleware');
 
-// Base routes
+// Public routes - read-only
 router.get('/', experimentController.getExperiments);
-router.post('/', experimentController.createExperiment);
-
-// Convenience / Seed routes
-router.post('/create', experimentController.createExperiment);
-router.post('/seed', experimentController.seedExperiments);
-
-// Detail routes
 router.get('/:experimentId', experimentController.getExperimentById);
-router.put('/:id', experimentController.updateExperiment);
-router.delete('/:id', experimentController.deleteExperiment);
-
-// Filter routes
 router.get('/subject/:subjectId', experimentController.getExperimentsBySubject);
+
+// Admin only routes
+router.post('/', protect, authorize('admin'), experimentController.createExperiment);
+router.post('/create', protect, authorize('admin'), experimentController.createExperiment);
+router.post('/seed', protect, authorize('admin'), experimentController.seedExperiments);
+router.put('/:id', protect, authorize('admin'), experimentController.updateExperiment);
+router.delete('/:id', protect, authorize('admin'), experimentController.deleteExperiment);
 
 module.exports = router;
