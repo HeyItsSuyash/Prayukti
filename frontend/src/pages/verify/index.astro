@@ -1,0 +1,14 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import VerifyPage from '../../components/VerifyPage';
+import { Navbar } from '../../components/layout/Navbar';
+import { Footer } from '../../components/layout/Footer';
+---
+
+<Layout title="Verify Account - Prayukti x MMMUT">
+  <div class="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950 font-sans selection:bg-orange-100">
+    <Navbar client:load pathname={Astro.url.pathname} />
+    <VerifyPage client:only="react" />
+    <Footer client:idle />
+  </div>
+</Layout>

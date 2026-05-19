@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FeaturesPage from '../components/FeaturesPage';
+import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
+---
+
+<Layout title="Features - Prayukti x MMMUT">
+  <Navbar client:load pathname={Astro.url.pathname} />
+  <FeaturesPage client:load />
+  <Footer client:idle />
+</Layout>

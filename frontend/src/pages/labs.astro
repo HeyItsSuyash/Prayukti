@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LabsPage from '../components/LabsPage';
+import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
+---
+
+<Layout title="Labs - Prayukti x MMMUT">
+  <Navbar client:load pathname={Astro.url.pathname} />
+  <LabsPage client:load />
+  <Footer client:idle />
+</Layout>

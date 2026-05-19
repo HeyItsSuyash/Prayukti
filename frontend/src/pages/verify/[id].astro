@@ -1,0 +1,14 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import VerifyCertificatePage from '../../components/VerifyCertificatePage';
+
+const { id } = Astro.params;
+
+if (!id) {
+  return Astro.redirect('/');
+}
+---
+
+<Layout title="Verify Certificate - Prayukti x MMMUT">
+  <VerifyCertificatePage certificateId={id} client:only="react" />
+</Layout>

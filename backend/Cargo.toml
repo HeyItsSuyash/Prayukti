@@ -1,0 +1,25 @@
+[package]
+name = "backend"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = { version = "0.7.5", features = ["macros", "multipart"] }
+tokio = { version = "1.38.0", features = ["full"] }
+sqlx = { version = "0.7.4", features = ["runtime-tokio-native-tls", "postgres", "uuid", "chrono", "json"] }
+serde = { version = "1.0.204", features = ["derive"] }
+serde_json = "1.0.120"
+jsonwebtoken = "9.3.0"
+bcrypt = "0.15.1"
+reqwest = { version = "0.12.5", features = ["json"] }
+lettre = { version = "0.11.7", features = ["tokio1-native-tls", "smtp-transport"] }
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+tower-http = { version = "0.5.2", features = ["cors", "trace", "limit"] }
+uuid = { version = "1.10.0", features = ["v4", "serde"] }
+validator = { version = "0.18.1", features = ["derive"] }
+chrono = { version = "0.4.38", features = ["serde"] }
+dotenvy = "0.15.7"
+async-trait = "0.1.81"
+rand = "0.8.5"
+regex = "1.10.5"

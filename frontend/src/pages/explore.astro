@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ExplorePage from '../components/ExplorePage';
+import { Navbar } from '../components/layout/Navbar';
+import { Footer } from '../components/layout/Footer';
+---
+
+<Layout title="Explore Labs - Prayukti x MMMUT">
+  <Navbar client:load pathname={Astro.url.pathname} />
+  <ExplorePage client:load />
+  <Footer client:idle />
+</Layout>
