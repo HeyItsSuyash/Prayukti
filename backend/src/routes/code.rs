@@ -142,7 +142,7 @@ pub async fn run_code(
             .bind(upsert_id)
             .bind(student_id)
             .bind(experiment_id)
-            .bind(time_spent_inc)
+            .bind(time_spent_inc.round() as i32)
             .bind(exp_name)
             .execute(&state.db)
             .await;

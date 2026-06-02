@@ -47,7 +47,6 @@ pub async fn compute_student_risk(
         "SELECT COUNT(DISTINCT experiment_id) FROM experiment_activities WHERE student_id = $1 AND result_generated = TRUE"
     )
     .bind(student_id)
-    .bind(student_id)
     .fetch_one(db)
     .await?
     .get(0);

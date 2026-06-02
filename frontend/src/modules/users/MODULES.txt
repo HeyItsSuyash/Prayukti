@@ -1,0 +1,8 @@
+Module Name: users
+Purpose: [Brief description of the module's core responsibility]
+Owners: [@github_username1, @github_username2]
+Allowed Modifications: [What files/logic owners can modify freely]
+Forbidden Modifications: [What cannot be modified without cross-module approval]
+Public APIs: [List of APIs/Endpoints or Frontend Hooks exposed to other modules]
+Dependencies: [Other modules this module depends on (e.g., auth, shared)]
+Future Responsibilities: [Upcoming features or planned scope]

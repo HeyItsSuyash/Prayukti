@@ -13,6 +13,7 @@ mod models;
 mod utils;
 mod middleware;
 mod routes;
+mod domains;
 
 use crate::config::Config;
 use crate::state::AppState;
@@ -79,8 +80,7 @@ async fn main() {
         .route("/create", post(routes::experiment::create_experiment))
         .route("/seed", post(routes::experiment::seed_experiments))
         .route("/subject/:subject_id", get(routes::experiment::get_experiments_by_subject))
-        .route("/:experiment_id", get(routes::experiment::get_experiment_by_id))
-        .route("/:id", put(routes::experiment::update_experiment).delete(routes::experiment::delete_experiment));
+        .route("/:id", get(routes::experiment::get_experiment_by_id).put(routes::experiment::update_experiment).delete(routes::experiment::delete_experiment));
 
     let code_router = Router::new()
         .route("/run", post(routes::code::run_code))
@@ -103,6 +103,7 @@ async fn main() {
         .nest("/api/experiments", experiment_router)
         .nest("/api/code", code_router)
         .nest("/api/attendance", attendance_router)
+        .nest("/api/v2/institutions", domains::institutions::routes::router())
         .layer(cors)
         .layer(TraceLayer::new_for_http())
         .with_state(state);
@@ -111,7 +112,7 @@ async fn main() {
     info!("Server listening on {}", addr);
 
     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
-    axum::serve(listener, app).await.unwrap();
+    axum::serve(listener, app.into_make_service_with_connect_info::<SocketAddr>()).await.unwrap();
 }
 
 async fn health_check() -> Json<serde_json::Value> {
