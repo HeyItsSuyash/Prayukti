@@ -125,15 +125,22 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
                         {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                     </button>
 
-                    {isLoggedIn && pathname !== "/" ? (
-                        <Button
-                            variant="ghost"
-                            onClick={handleLogout}
-                            className="flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 font-bold uppercase tracking-widest text-[11px] h-10 px-5 rounded-xl"
-                        >
-                            <LogOut size={15} />
-                            Logout
-                        </Button>
+                    {isLoggedIn ? (
+                        <div className="flex items-center gap-3">
+                            <a href="/dashboard">
+                                <Button variant="outline" className="h-10 px-6 rounded-xl font-bold uppercase tracking-widest text-xs">
+                                    Dashboard
+                                </Button>
+                            </a>
+                            <Button
+                                variant="ghost"
+                                onClick={handleLogout}
+                                className="flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 font-bold uppercase tracking-widest text-[11px] h-10 px-5 rounded-xl border border-red-100"
+                            >
+                                <LogOut size={15} />
+                                Logout
+                            </Button>
+                        </div>
                     ) : (
                         <div className="flex items-center gap-3">
                             <a href="/explore">
@@ -184,15 +191,22 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
                             </a>
                         ))}
                         <div className="h-px bg-border my-4" />
-                        {isLoggedIn && pathname !== "/" ? (
-                            <Button
-                                variant="outline"
-                                onClick={() => { setIsMobileMenuOpen(false); handleLogout(); }}
-                                className="w-full h-12 rounded-lg font-bold uppercase tracking-widest text-red-600 border-red-200 hover:bg-red-50 flex items-center justify-center gap-2"
-                            >
-                                <LogOut size={18} />
-                                Logout
-                            </Button>
+                        {isLoggedIn ? (
+                            <div className="flex flex-col gap-3">
+                                <a href="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <Button variant="outline" className="w-full h-12 rounded-lg font-bold uppercase tracking-widest">
+                                        Dashboard
+                                    </Button>
+                                </a>
+                                <Button
+                                    variant="outline"
+                                    onClick={() => { setIsMobileMenuOpen(false); handleLogout(); }}
+                                    className="w-full h-12 rounded-lg font-bold uppercase tracking-widest text-red-600 border-red-200 hover:bg-red-50 flex items-center justify-center gap-2"
+                                >
+                                    <LogOut size={18} />
+                                    Logout
+                                </Button>
+                            </div>
                         ) : (
                             <div className="flex flex-col gap-3">
                                 <a href="/explore" onClick={() => setIsMobileMenuOpen(false)}>
