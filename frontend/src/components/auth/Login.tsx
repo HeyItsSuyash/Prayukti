@@ -65,7 +65,11 @@ export default function LoginPage() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
-    
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         setError("");
@@ -160,6 +164,14 @@ export default function LoginPage() {
             setLoading(false);
         }
     };
+
+    if (!mounted) {
+        return (
+            <div className="h-screen flex bg-white font-sans items-center justify-center">
+                <Loader2 className="animate-spin text-accent w-10 h-10" />
+            </div>
+        );
+    }
 
     return (
         <div className="h-screen flex bg-white font-sans selection:bg-orange-100 overflow-hidden">
