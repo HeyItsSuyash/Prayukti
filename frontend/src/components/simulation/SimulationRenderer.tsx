@@ -3,20 +3,41 @@
 import React, { lazy, Suspense } from "react";
 import { Loader2 } from "lucide-react";
 
-// Dynamic imports with React.lazy
+// CN
 const OSISimulation = lazy(() => import("@/components/simulation/cn/OSISimulation"));
 const CSMASimulation = lazy(() => import("@/components/simulation/cn/CSMASimulation"));
 const TokenProtocolsSimulation = lazy(() => import("@/components/simulation/cn/TokenProtocolsSimulation"));
 const SlidingWindowSimulation = lazy(() => import("@/components/simulation/cn/SlidingWindowSimulation"));
+const ARPSimulation = lazy(() => import("@/components/simulation/cn/ARPSimulation"));
+const DVRSimulation = lazy(() => import("@/components/simulation/cn/DVRSimulation"));
+const SelectiveRepeatSimulation = lazy(() => import("@/components/simulation/cn/SelectiveRepeatSimulation"));
+
+// DLD
 const CircuitCanvas = lazy(() => import("@/components/simulation/dld/CircuitCanvas"));
+
+// OOPS
 const OOPSCompiler = lazy(() => import("@/components/simulation/oops/OOPSCompiler"));
+
+// DAA
 const DAACompiler = lazy(() => import("@/components/simulation/daa/DAACompiler"));
+
+// DBMS
 const BasicOperationsSimulation = lazy(() => import("@/components/simulation/dbms/BasicOperationsSimulation"));
 const ApplicationDevelopmentSimulation = lazy(() => import("@/components/simulation/dbms/ApplicationDevelopmentSimulation"));
 const SQLQueriesSimulation = lazy(() => import("@/components/simulation/dbms/SQLQueriesSimulation"));
 const NormalizationSimulation = lazy(() => import("@/components/simulation/dbms/NormalizationSimulation"));
 const HostLanguageSimulation = lazy(() => import("@/components/simulation/dbms/HostLanguageSimulation"));
+
+// MPMC
 const MPMCSimulator = lazy(() => import("@/components/simulation/mpmc/MPMCSimulator"));
+
+// Error Detection
+const CRC = lazy(() => import("@/components/simulation/error-detection/CRC"));
+const Checksum = lazy(() => import("@/components/simulation/error-detection/Checksum"));
+const HammingCode = lazy(() => import("@/components/simulation/error-detection/HammingCode"));
+const ParityCheck = lazy(() => import("@/components/simulation/error-detection/ParityCheck"));
+
+// Core
 const CodeCompiler = lazy(() => import("@/components/simulation/core/CodeCompiler"));
 
 const LoadingSpinner = () => (
@@ -31,29 +52,11 @@ const COMPONENT_MAP: Record<string, React.ComponentType<any>> = {
     // CN
     "cn-exp-1": OSISimulation,
     "cn-exp-2": CSMASimulation,
-    "cn-exp-3": TokenProtocolsSimulation,
-    "cn-exp-4": SlidingWindowSimulation,
-
-    // DLD
-    "dld-exp-1": CircuitCanvas,
-    "dld-exp-2": CircuitCanvas,
-    "dld-exp-3": CircuitCanvas,
-    "dld-exp-4": CircuitCanvas,
-    "dld-exp-5": CircuitCanvas,
-    "dld-exp-6": CircuitCanvas,
-    "dld-exp-7": CircuitCanvas,
-    "dld-exp-8": CircuitCanvas,
-    "dld-exp-9": CircuitCanvas,
-    "dld-exp-10": CircuitCanvas,
-
-    // OOPS
-    "oops-exp-1": OOPSCompiler,
-    "oops-exp-2": OOPSCompiler,
-    "oops-exp-3": OOPSCompiler,
-    "oops-exp-4": OOPSCompiler,
-
-    // DAA
-    "daa-exp-1": DAACompiler,
+    "cn-exp-3": ARPSimulation,
+    "cn-exp-4": DVRSimulation,
+    "cn-exp-5": SelectiveRepeatSimulation,
+    "cn-exp-6": SlidingWindowSimulation,
+    "cn-exp-7": TokenProtocolsSimulation,
 
     // DBMS
     "dbms-exp-1": BasicOperationsSimulation,
@@ -62,15 +65,15 @@ const COMPONENT_MAP: Record<string, React.ComponentType<any>> = {
     "dbms-exp-4": NormalizationSimulation,
     "dbms-exp-5": HostLanguageSimulation,
 
-    // MPMC
+    // Phase 3
+    "daa-exp-1": DAACompiler,
+    "dld-exp-1": CircuitCanvas,
     "mpmc-exp-1": MPMCSimulator,
-    "mpmc-exp-2": MPMCSimulator,
-    "mpmc-exp-3": MPMCSimulator,
-    "mpmc-exp-4": MPMCSimulator,
-    "mpmc-exp-5": MPMCSimulator,
-    "mpmc-exp-6": MPMCSimulator,
-    "mpmc-exp-7": MPMCSimulator,
-    "mpmc-exp-8": MPMCSimulator,
+    "oops-exp-1": OOPSCompiler,
+    "error-detection-exp-1": CRC,
+    "error-detection-exp-2": Checksum,
+    "error-detection-exp-3": HammingCode,
+    "error-detection-exp-4": ParityCheck,
 
     // C Programming & DSA (Fallback to CodeCompiler for coding experiments)
     "c-exp-1": CodeCompiler,
@@ -95,7 +98,8 @@ export default function SimulationRenderer({ labId, initialCode, language }: {
         else if (lowerId.startsWith('oops')) Component = COMPONENT_MAP['oops-exp-1'];
         else if (lowerId.startsWith('dbms')) Component = COMPONENT_MAP['dbms-exp-1'];
         else if (lowerId.startsWith('mpmc')) Component = COMPONENT_MAP['mpmc-exp-1'];
-        else if (lowerId.startsWith('c-') || lowerId.startsWith('dsa-')) Component = CodeCompiler;
+        else if (lowerId.startsWith('error')) Component = COMPONENT_MAP['error-detection-exp-1'];
+        else if (lowerId.startsWith('c-') || lowerId.startsWith('dsa-') || lowerId.startsWith('daa-')) Component = CodeCompiler;
         else Component = COMPONENT_MAP['dld-exp-1']; // Default to DLD circuit builder
     }
 

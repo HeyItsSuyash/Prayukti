@@ -456,12 +456,8 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
     );
 
     return (
-        <div className="flex h-screen flex-col bg-gray-50 font-sans overflow-hidden">
-            <header className="bg-white border-b shadow-sm z-10 p-3 flex justify-between items-center shrink-0">
-                <div className="flex items-center gap-3">
-                    <a href="/dashboard/dbms" className="p-2 hover:bg-gray-100 rounded-full"> <ArrowLeft size={18} className="text-gray-600" /> </a>
-                    <h1 className="font-bold text-gray-800">Experiment 4: Normalization Analysis</h1>
-                </div>
+        <div className="flex h-full flex-col bg-gray-50 font-sans overflow-hidden">
+            <header className="bg-white border-b shadow-sm z-10 p-3 flex justify-end items-center shrink-0">
                 <div className="flex items-center gap-2">
                     {feedback && <span className="text-xs text-green-600 font-medium mr-2">{feedback}</span>}
                     {isExam && !readonly && (

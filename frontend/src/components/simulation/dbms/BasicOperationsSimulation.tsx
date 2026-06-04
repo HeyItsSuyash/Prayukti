@@ -217,11 +217,9 @@ export default function BasicOperationsSimulation({ mode = "LEARNING", initialDa
     };
 
     return (
-        <div className="flex h-screen flex-col bg-gray-100 font-sans overflow-hidden">
+        <div className="flex h-full flex-col bg-gray-100 font-sans overflow-hidden">
             <header className="bg-white border-b shadow-sm z-10 p-3 flex justify-between items-center shrink-0">
                 <div className="flex items-center gap-3">
-                    <a href="/dashboard/dbms/1" className="p-2 hover:bg-gray-100 rounded-full"> <ArrowLeft size={18} className="text-gray-600" /> </a>
-                    <h1 className="font-bold text-gray-800">Basic Operations Simulator</h1>
                     <span className="bg-[#f57f17]/10 text-[#f57f17] text-xs px-2 py-1 rounded font-medium border border-[#f57f17]/20">{selectedDBType} Mode</span>
                 </div>
                 <div className="flex gap-2 items-center">

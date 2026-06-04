@@ -360,13 +360,9 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
     };
 
     return (
-        <div className="flex h-screen flex-col bg-gray-50 text-gray-900 font-sans overflow-hidden">
+        <div className="flex h-full flex-col bg-gray-50 text-gray-900 font-sans overflow-hidden">
             {/* Header */}
-            <header className="bg-white border-b border-gray-200 p-3 flex justify-between items-center shrink-0 shadow-sm">
-                <div className="flex items-center gap-3">
-                    <a href="/dashboard/dbms" className="p-2 hover:bg-gray-100 rounded-full transition-colors"> <ArrowLeft size={18} className="text-gray-600" /> </a>
-                    <h1 className="font-bold text-gray-800">Exp 5: Host Language Interface</h1>
-                </div>
+            <header className="bg-white border-b border-gray-200 p-3 flex justify-end items-center shrink-0 shadow-sm">
                 <div className="flex items-center gap-4">
                     {feedback && <span className="text-xs text-green-600 font-medium">{feedback}</span>}
                     {isExam && !readonly && (

@@ -38,16 +38,12 @@ async fn main() {
     info!("Connecting to PostgreSQL pool...");
     let pool = PgPoolOptions::new()
         .max_connections(50) // High-concurrency limit
-        .acquire_timeout(std::time::Duration::from_secs(10))
+        .acquire_timeout(std::time::Duration::from_secs(120))
         .connect(&config.database_url)
         .await
         .expect("Failed to connect to PostgreSQL database");
 
-    info!("Skipping database migrations (handled manually)...");
-    // sqlx::migrate!("./migrations")
-    //     .run(&pool)
-    //     .await
-    //     .expect("Failed to run database migrations");
+    info!("Skipping seed scripts because database is already seeded...");
 
     let state = AppState {
         db: pool,

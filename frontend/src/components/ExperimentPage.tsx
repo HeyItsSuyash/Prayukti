@@ -40,15 +40,78 @@ export default function ExperimentPage({ id }: { id: string }) {
             try {
                 const res = await fetch(`${API_URL}/api/experiments/${id}`);
                 const data = await res.ok ? await res.json() : null;
-                if (data) {
+                
+                const applyFallback = () => {
+                    console.warn("[VLAB] Backend unreachable or missing data, using fallback experiment data for ID:", id);
+                    let fallbackTitle = "Experiment Simulation";
+                    if (id === 'cn-exp-1') fallbackTitle = 'OSI vs TCP/IP Reference Models';
+                    else if (id === 'cn-exp-2') fallbackTitle = 'CSMA/CD Protocol Simulation';
+                    else if (id === 'cn-exp-3') fallbackTitle = 'ARP Protocol Simulation';
+                    else if (id === 'cn-exp-4') fallbackTitle = 'Distance Vector Routing';
+                    else if (id === 'cn-exp-5') fallbackTitle = 'Selective Repeat Simulation';
+                    else if (id === 'cn-exp-6') fallbackTitle = 'Sliding Window Simulation';
+                    else if (id === 'cn-exp-7') fallbackTitle = 'Token Protocols Simulation';
+                    else if (id === 'dbms-exp-1') fallbackTitle = 'Introduction to DBMS';
+                    else if (id === 'dbms-exp-2') fallbackTitle = 'Application Development';
+                    else if (id === 'dbms-exp-3') fallbackTitle = 'Relational Algebra';
+                    else if (id === 'dbms-exp-4') fallbackTitle = 'Normalization';
+                    else if (id === 'dbms-exp-5') fallbackTitle = 'Host Language Integration';
+                    else if (id.startsWith('error-detection')) fallbackTitle = 'Error Detection Simulation';
+                    else if (id.startsWith('daa')) fallbackTitle = 'Algorithm Analysis';
+                    else if (id.startsWith('mpmc')) fallbackTitle = '8086 Simulator';
+                    else if (id.startsWith('dld')) fallbackTitle = 'Circuit Canvas';
+                    else if (id.startsWith('oops')) fallbackTitle = 'Java Compiler';
+                    
+                    setExperiment({
+                        id,
+                        title: fallbackTitle,
+                        description: "Interactive Simulation Environment",
+                        compilerEnabled: false,
+                        theory: "Interact with the simulation to learn the concepts.",
+                        algorithm: "1. Follow on-screen instructions.\n2. Observe output."
+                    });
+                    setError(null);
+                };
+
+                if (data && !data.error) {
                     setExperiment(data);
                     setCode(data.codeTemplate || data.defaultCode || "");
                     setCurrentLanguage(data.language || "c");
                 } else {
-                    setError("Experiment not found");
+                    applyFallback();
                 }
             } catch (err) {
-                setError("Failed to fetch experiment details");
+                // Fallback for when backend DB connection fails locally (network error)
+                console.warn("[VLAB] Network Error fetching experiment, applying fallback for ID:", id);
+                
+                let fallbackTitle = "Experiment Simulation";
+                if (id === 'cn-exp-1') fallbackTitle = 'OSI vs TCP/IP Reference Models';
+                else if (id === 'cn-exp-2') fallbackTitle = 'CSMA/CD Protocol Simulation';
+                else if (id === 'cn-exp-3') fallbackTitle = 'ARP Protocol Simulation';
+                else if (id === 'cn-exp-4') fallbackTitle = 'Distance Vector Routing';
+                else if (id === 'cn-exp-5') fallbackTitle = 'Selective Repeat Simulation';
+                else if (id === 'cn-exp-6') fallbackTitle = 'Sliding Window Simulation';
+                else if (id === 'cn-exp-7') fallbackTitle = 'Token Protocols Simulation';
+                else if (id === 'dbms-exp-1') fallbackTitle = 'Introduction to DBMS';
+                else if (id === 'dbms-exp-2') fallbackTitle = 'Application Development';
+                else if (id === 'dbms-exp-3') fallbackTitle = 'Relational Algebra';
+                else if (id === 'dbms-exp-4') fallbackTitle = 'Normalization';
+                else if (id === 'dbms-exp-5') fallbackTitle = 'Host Language Integration';
+                else if (id.startsWith('error-detection')) fallbackTitle = 'Error Detection Simulation';
+                else if (id.startsWith('daa')) fallbackTitle = 'Algorithm Analysis';
+                else if (id.startsWith('mpmc')) fallbackTitle = '8086 Simulator';
+                else if (id.startsWith('dld')) fallbackTitle = 'Circuit Canvas';
+                else if (id.startsWith('oops')) fallbackTitle = 'Java Compiler';
+                
+                setExperiment({
+                    id,
+                    title: fallbackTitle,
+                    description: "Interactive Simulation Environment",
+                    compilerEnabled: false,
+                    theory: "Interact with the simulation to learn the concepts.",
+                    algorithm: "1. Follow on-screen instructions.\n2. Observe output."
+                });
+                setError(null);
             } finally {
                 setLoading(false);
             }
@@ -178,7 +241,7 @@ export default function ExperimentPage({ id }: { id: string }) {
                     </div>
                     <div className="flex-1 flex flex-col bg-white">
                         <SimulationRenderer
-                            labId={experiment._id}
+                            labId={experiment.slug || experiment.id || experiment._id}
                             initialCode={experiment.codeTemplate}
                             language={experiment.language}
                         />

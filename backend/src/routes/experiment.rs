@@ -146,17 +146,18 @@ pub async fn get_experiments(
 
     let query_res = if let Some(ref sub_id_str) = params.subject_id {
         if let Ok(sub_id) = Uuid::parse_str(sub_id_str) {
+            sqlx::query_as::<_, Experiment>("SELECT * FROM experiments WHERE subject_id = $1")
+                .bind(sub_id)
+                .fetch_all(&state.db)
+                .await
+        } else {
+            // Treat sub_id_str as a slug
             sqlx::query_as::<_, Experiment>(
-                "SELECT * FROM experiments WHERE subject_id = $1"
+                "SELECT e.* FROM experiments e JOIN subjects s ON e.subject_id = s.id WHERE s.slug = $1"
             )
-            .bind(sub_id)
+            .bind(sub_id_str)
             .fetch_all(&state.db)
             .await
-        } else {
-            return (
-                StatusCode::BAD_REQUEST,
-                Json(json!({ "message": "Invalid subjectId format" })),
-            );
         }
     } else {
         sqlx::query_as::<_, Experiment>("SELECT * FROM experiments")
@@ -234,22 +235,18 @@ pub async fn get_experiment_by_id(
 ) -> impl IntoResponse {
     info!("[EXPERIMENT] Fetching experiment by ID: {}", experiment_id_str);
 
-    let exp_id = match Uuid::parse_str(&experiment_id_str) {
-        Ok(uid) => uid,
-        Err(_) => {
-            return (
-                StatusCode::BAD_REQUEST,
-                Json(json!({ "message": "Invalid experiment ID format" })),
-            );
-        }
+    let exp_res = if let Ok(exp_id) = Uuid::parse_str(&experiment_id_str) {
+        sqlx::query_as::<_, Experiment>("SELECT * FROM experiments WHERE id = $1")
+            .bind(exp_id)
+            .fetch_optional(&state.db)
+            .await
+    } else {
+        // Fallback to slug lookup if it's not a valid UUID
+        sqlx::query_as::<_, Experiment>("SELECT * FROM experiments WHERE slug = $1")
+            .bind(&experiment_id_str)
+            .fetch_optional(&state.db)
+            .await
     };
-
-    let exp_res = sqlx::query_as::<_, Experiment>(
-        "SELECT * FROM experiments WHERE id = $1"
-    )
-    .bind(exp_id)
-    .fetch_optional(&state.db)
-    .await;
 
     match exp_res {
         Ok(Some(exp)) => {
@@ -647,7 +644,16 @@ pub async fn seed_experiments(
             "subject_id": sub_id.to_string(),
             "title": "OSI vs TCP/IP Reference Models",
             "theory": "OSI has 7 layers, TCP/IP has 4.",
-            "language": "Universal"
+            "language": "Universal",
+            "slug": "cn-exp-1"
+        }));
+        default_experiments.push(json!({
+            "subject_id": sub_id.to_string(),
+            "title": "CSMA/CD Protocol Simulation",
+            "theory": "Carrier Sense Multiple Access with Collision Detection is a network protocol for carrier transmission.",
+            "algorithm": "1. Check if channel is idle\n2. If idle, transmit data\n3. If collision, wait random backoff\n4. Retransmit",
+            "language": "Universal",
+            "slug": "cn-exp-2"
         }));
     }
 
@@ -656,7 +662,16 @@ pub async fn seed_experiments(
             "subject_id": sub_id.to_string(),
             "title": "Introduction to DBMS (DDL/DML)",
             "theory": "Learn SQL commands: CREATE, INSERT, SELECT, UPDATE, DELETE.",
-            "language": "SQL"
+            "language": "SQL",
+            "slug": "dbms-exp-1"
+        }));
+        default_experiments.push(json!({
+            "subject_id": sub_id.to_string(),
+            "title": "Relational Algebra Operations",
+            "theory": "Select, Project, Union, and Join operations in relational databases.",
+            "algorithm": "1. Select (σ)\n2. Project (π)\n3. Cartesian Product (×)\n4. Join (⨝)",
+            "language": "SQL",
+            "slug": "dbms-exp-3"
         }));
     }
 
@@ -723,7 +738,10 @@ pub async fn seed_experiments(
         let algorithm = ex["algorithm"].as_str();
         let code_template = ex["code_template"].as_str();
         let language = ex["language"].as_str().unwrap_or("Universal");
-        let slug = title.to_lowercase().replace(' ', "-");
+        let slug = ex["slug"]
+            .as_str()
+            .map(|s| s.to_string())
+            .unwrap_or_else(|| title.to_lowercase().replace(' ', "-"));
 
         let exp_id = Uuid::new_v4();
 
