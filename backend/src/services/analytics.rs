@@ -1,7 +1,7 @@
 use sqlx::{PgPool, Row};
 use uuid::Uuid;
 use chrono::{Datelike, Utc, TimeZone};
-use tracing::{error, info};
+use tracing::info;
 
 use crate::models::analytics::StudentRiskResponse;
 

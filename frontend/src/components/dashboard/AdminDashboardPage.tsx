@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import { Suspense, useState, useEffect, useMemo } from 'react';
 // Removed next/navigation
 
@@ -73,9 +75,8 @@ function AdminContent() {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-            const token = localStorage.getItem('vlab_token');
-            const res = await fetch(`${baseUrl}/api/users`, {
+                        const token = localStorage.getItem('vlab_token');
+            const res = await fetch(`${API_URL}/api/users`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -119,7 +120,7 @@ function AdminContent() {
         try {
             const token = localStorage.getItem('vlab_token');
             if (token) {
-                await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/attendance/logout`, {
+                await fetch(`${process.env.NEXT_PUBLIC_API_URL || API_URL}/api/attendance/logout`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,

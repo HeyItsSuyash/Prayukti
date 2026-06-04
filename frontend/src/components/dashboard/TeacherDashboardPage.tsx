@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import { useState, useMemo, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -47,9 +49,8 @@ export default function TeacherDashboard() {
 
     const loadData = async () => {
         try {
-            const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-            const token = localStorage.getItem('vlab_token');
-            const res = await fetch(`${baseUrl}/api/users`, {
+                        const token = localStorage.getItem('vlab_token');
+            const res = await fetch(`${API_URL}/api/users`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

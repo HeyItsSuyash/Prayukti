@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { 
@@ -76,7 +78,7 @@ export function ExperimentManagement() {
     }, [selectedSubject]);
 
     const fetchSubjects = async () => {
-        const res = await fetch('http://localhost:5000/api/subjects');
+        const res = await fetch(`${API_URL}/api/subjects`);
         const data = await res.json();
         setSubjects(data);
     };
@@ -85,7 +87,7 @@ export function ExperimentManagement() {
         setLoading(true);
         try {
             const url = selectedSubject === 'all' 
-                ? 'http://localhost:5000/api/experiments' 
+                ? `${API_URL}/api/experiments` 
                 : `http://localhost:5000/api/experiments?subjectId=${selectedSubject}`;
             const res = await fetch(url);
             const data = await res.json();
@@ -100,7 +102,7 @@ export function ExperimentManagement() {
     const handleCreate = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const res = await fetch('http://localhost:5000/api/experiments', {
+            const res = await fetch(`${API_URL}/api/experiments`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)

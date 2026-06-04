@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { ReactFlow, Controls, Background, BackgroundVariant, useNodesState, useEdgesState, addEdge, Connection, Edge, Node, reconnectEdge, useReactFlow, ReactFlowProvider } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
@@ -9,7 +11,6 @@ import { WorkspacesPanel } from '../core/WorkspacesPanel';
 import { Table, Play, Pause, Save, ZoomIn, ZoomOut, Maximize } from 'lucide-react';
 
 // Use environment variable for API URL
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
 
 import { DLD_PRESETS } from '@/lib/dld-presets';
 

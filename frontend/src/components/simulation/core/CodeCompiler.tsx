@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import React, { useState, useEffect, useRef } from "react";
 import { MonacoEditor } from "@/components/lab/MonacoEditor";
 import { Button } from "@/components/ui/button";
@@ -27,7 +29,6 @@ interface CodeCompilerProps {
     setCustomInput: (val: string) => void;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
 
 export default function CodeCompiler({
     labId,

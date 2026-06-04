@@ -1,4 +1,4 @@
-use axum::{routing::{get, post, put, delete, patch}, Json, Router};
+use axum::{routing::{get, post, put, patch}, Json, Router};
 use sqlx::postgres::PgPoolOptions;
 use std::net::SocketAddr;
 use tower_http::cors::{Any, CorsLayer};
@@ -43,11 +43,11 @@ async fn main() {
         .await
         .expect("Failed to connect to PostgreSQL database");
 
-    info!("Running database migrations...");
-    sqlx::migrate!("./migrations")
-        .run(&pool)
-        .await
-        .expect("Failed to run database migrations");
+    info!("Skipping database migrations (handled manually)...");
+    // sqlx::migrate!("./migrations")
+    //     .run(&pool)
+    //     .await
+    //     .expect("Failed to run database migrations");
 
     let state = AppState {
         db: pool,
@@ -103,6 +103,10 @@ async fn main() {
         .nest("/api/experiments", experiment_router)
         .nest("/api/code", code_router)
         .nest("/api/attendance", attendance_router)
+        .nest("/api/users", routes::users::router())
+        .nest("/api/settings", routes::settings::router())
+        .nest("/api/logs", routes::logs::router())
+        .nest("/api/resources", routes::resources::router())
         .nest("/api/v2/institutions", domains::institutions::routes::router())
         .layer(cors)
         .layer(TraceLayer::new_for_http())

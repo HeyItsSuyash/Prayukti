@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -22,7 +24,6 @@ import {
 } from "lucide-react";
 import axios from "axios";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 type UserRole = "student" | "teacher" | "admin";
 

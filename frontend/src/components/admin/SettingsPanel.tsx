@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -38,7 +40,7 @@ export function SettingsPanel() {
 
     const fetchSettings = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/settings');
+            const res = await fetch(`${API_URL}/api/settings`);
             const data = await res.json();
             const config: Record<string, any> = {};
             data.forEach((s: any) => config[s.key] = s.value);
@@ -53,7 +55,7 @@ export function SettingsPanel() {
     const handleSave = async (key: string, value: any) => {
         setSaving(true);
         try {
-            await fetch('http://localhost:5000/api/settings', {
+            await fetch(`${API_URL}/api/settings`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ key, value })

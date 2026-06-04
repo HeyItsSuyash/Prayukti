@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
@@ -44,7 +46,7 @@ export function ActivityLogView() {
 
     const fetchLogs = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/logs');
+            const res = await fetch(`${API_URL}/api/logs`);
             const data = await res.json();
             setLogs(data);
         } catch (error) {

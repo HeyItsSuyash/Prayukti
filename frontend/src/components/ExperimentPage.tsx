@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import { useState, useEffect } from "react";
 
 import { ArrowLeft, BookOpen, Clock, Code2, PlayCircle, Loader2, Share2, Info } from "lucide-react";
@@ -13,7 +15,6 @@ import CodeCompiler from "@/components/simulation/core/CodeCompiler";
 import { Navbar } from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
 
 export default function ExperimentPage({ id }: { id: string }) {
     const [experiment, setExperiment] = useState<any>(null);

@@ -1,12 +1,13 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader2, ShieldCheck, RefreshCw } from "lucide-react";
 import axios from "axios";
 
-const API_URL = import.meta.env.PUBLIC_API_URL || "http://localhost:5000";
 
 export default function VerifyPage() {
     const [otp, setOtp] = useState("");

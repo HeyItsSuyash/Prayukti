@@ -243,6 +243,16 @@ pub async fn analyze_complexity(
     let judge0_url = "https://ce.judge0.com/submissions/?base64_encoded=false&wait=true";
     let mut results = Vec::new();
 
+    let re_case_type_replace = Regex::new(r#"string\s+case_type\s*=\s*".*?"\s*;"#).unwrap();
+    let re_main_replace = Regex::new(r"int\s+main\s*\(\s*\)\s*\{").unwrap();
+    let re_for_loop1 = Regex::new(r"(?s)for\s*\(\s*int\s+i\s*=\s*0\s*;\s*i\s*<\s*n\s*;\s*i\s*\+\+\s*\)\s*\{[\s\S]*?cin\s*>>\s*arr\[i\][\s\S]*?\}").unwrap();
+    let re_for_loop2 = Regex::new(r"for\s*\(\s*int\s+i\s*=\s*0\s*;\s*i\s*<\s*n\s*;\s*i\s*\+\+\s*\)\s*cin\s*>>\s*arr\[i\]\s*;").unwrap();
+    let re_func = Regex::new(r"void\s+insertionSort\s*\(([^)]+)\)\s*\{").unwrap();
+    let re_inner = Regex::new(r"arr\[j\s*\+\s*1\]\s*=\s*key\s*;").unwrap();
+    let re_metrics = Regex::new(r"__metrics__ (\d+) (\d+)").unwrap();
+    let re_step = Regex::new(r"__step__ \[(.*?)\] (\d+)\s*(\d*)").unwrap();
+    let re_step_lines = Regex::new(r"__step__ .*\n?").unwrap();
+
     for tc in test_cases {
         let size_val: i32 = tc.size.parse().unwrap_or(0);
         let case_type = payload.case_type.clone().unwrap_or_else(|| "average".to_string()).to_lowercase();
@@ -260,19 +270,14 @@ pub async fn analyze_complexity(
 
             // 1. Inject case_type
             if instrumented_code.contains("case_type =") {
-                let re = Regex::new(r#"string\s+case_type\s*=\s*".*?"\s*;"#).unwrap();
-                instrumented_code = re.replace(&instrumented_code, &format!(r#"string case_type = "{}";"#, case_type)).into_owned();
+                instrumented_code = re_case_type_replace.replace(&instrumented_code, &format!(r#"string case_type = "{}";"#, case_type)).into_owned();
             } else {
-                let re = Regex::new(r"int\s+main\s*\(\s*\)\s*\{").unwrap();
-                instrumented_code = re.replace(&instrumented_code, &format!("int main() {{\n    string case_type = \"{}\";", case_type)).into_owned();
+                instrumented_code = re_main_replace.replace(&instrumented_code, &format!("int main() {{\n    string case_type = \"{}\";", case_type)).into_owned();
             }
 
             // 2. Remove redundant input reading loops
-            let re1 = Regex::new(r"(?s)for\s*\(\s*int\s+i\s*=\s*0\s*;\s*i\s*<\s*n\s*;\s*i\s*\+\+\s*\)\s*\{[\s\S]*?cin\s*>>\s*arr\[i\][\s\S]*?\}").unwrap();
-            instrumented_code = re1.replace_all(&instrumented_code, "").into_owned();
-
-            let re2 = Regex::new(r"for\s*\(\s*int\s+i\s*=\s*0\s*;\s*i\s*<\s*n\s*;\s*i\s*\+\+\s*\)\s*cin\s*>>\s*arr\[i\]\s*;").unwrap();
-            instrumented_code = re2.replace_all(&instrumented_code, "").into_owned();
+            instrumented_code = re_for_loop1.replace_all(&instrumented_code, "").into_owned();
+            instrumented_code = re_for_loop2.replace_all(&instrumented_code, "").into_owned();
 
             // 3. Dynamic snapshot injection
             let snapshot_inject = if is_snapshot_needed {
@@ -295,13 +300,11 @@ pub async fn analyze_complexity(
                 ""
             };
 
-            let re_func = Regex::new(r"void\s+insertionSort\s*\(([^)]+)\)\s*\{").unwrap();
             instrumented_code = re_func.replace(
                 &instrumented_code,
                 &format!("void insertionSort($1) {{\n    {}", initial_snapshot)
             ).into_owned();
 
-            let re_inner = Regex::new(r"arr\[j\s*\+\s*1\]\s*=\s*key\s*;").unwrap();
             instrumented_code = re_inner.replace(
                 &instrumented_code,
                 &format!("arr[j + 1] = key;\n    {}", snapshot_inject)
@@ -330,7 +333,6 @@ pub async fn analyze_complexity(
                     // Parse metrics: comparisons and shifts
                     let mut comparisons = 0;
                     let mut shifts = 0;
-                    let re_metrics = Regex::new(r"__metrics__ (\d+) (\d+)").unwrap();
                     if let Some(caps) = re_metrics.captures(&stdout) {
                         comparisons = caps[1].parse().unwrap_or(0);
                         shifts = caps[2].parse().unwrap_or(0);
@@ -338,7 +340,6 @@ pub async fn analyze_complexity(
 
                     // Parse snapshots
                     let mut steps = Vec::new();
-                    let re_step = Regex::new(r"__step__ \[(.*?)\] (\d+)\s*(\d*)").unwrap();
                     for line in stdout.lines() {
                         if line.contains("__step__") {
                             if let Some(caps) = re_step.captures(line) {
@@ -360,7 +361,6 @@ pub async fn analyze_complexity(
 
                     // Clean stdout
                     let stdout_clean = re_metrics.replace_all(&stdout, "").into_owned();
-                    let re_step_lines = Regex::new(r"__step__ .*\n?").unwrap();
                     let stdout_clean = re_step_lines.replace_all(&stdout_clean, "").into_owned().trim().to_string();
 
                     let preview = if !steps.is_empty() {

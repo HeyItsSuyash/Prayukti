@@ -4,9 +4,9 @@ use axum::{
     response::IntoResponse,
     Json,
 };
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use serde_json::json;
-use sqlx::{PgPool, Row};
+use sqlx::Row;
 use tracing::{error, info};
 use uuid::Uuid;
 use chrono::{DateTime, Utc, Datelike, TimeZone};

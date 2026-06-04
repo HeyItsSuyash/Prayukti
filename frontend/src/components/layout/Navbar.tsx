@@ -1,4 +1,6 @@
 "use client";
+
+import { API_URL } from "@/lib/config";
 import React, { useState, useEffect } from "react";
 
 import { Menu, X, Command, ChevronRight, Moon, Sun, LogOut } from "lucide-react";

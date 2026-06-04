@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -50,7 +52,7 @@ export function SubjectManagement() {
     const fetchSubjects = async () => {
         setLoading(true);
         try {
-            let url = 'http://localhost:5000/api/subjects?';
+            let url = `${API_URL}/api/subjects?`;
             if (selectedBranch !== 'all') url += `branch=${selectedBranch}&`;
             if (selectedSemester !== 'all') url += `semester=${selectedSemester}`;
             const res = await fetch(url);
@@ -66,7 +68,7 @@ export function SubjectManagement() {
     const handleCreate = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const res = await fetch('http://localhost:5000/api/subjects', {
+            const res = await fetch(`${API_URL}/api/subjects`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newSubject)
@@ -309,7 +311,7 @@ function SubjectDetail({ subject, onBack }: SubjectDetailProps) {
     const handleCreateExp = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const res = await fetch('http://localhost:5000/api/experiments', {
+            const res = await fetch(`${API_URL}/api/experiments`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...newExp, subject: subject._id })
@@ -488,7 +490,7 @@ function SubjectResourceManager({ experimentId, experimentName }: { experimentId
         if (!newRes.title) return;
         setSaving(true);
         try {
-            await fetch('http://localhost:5000/api/resources', {
+            await fetch(`${API_URL}/api/resources`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...newRes, experiment: experimentId })
@@ -576,7 +578,7 @@ function SubjectResourceManager({ experimentId, experimentName }: { experimentId
                                         {res.type === 'video' ? <Video size={20} className="text-rose-500" /> :
                                          res.type === 'pdf' ? <FileText size={20} className="text-indigo-500" /> :
                                          res.type === 'external' ? <ExternalLink size={20} className="text-amber-500" /> :
-                                         <aIcon size={20} className="text-slate-500" />}
+                                         <BookOpen size={20} className="text-slate-500" />}
                                     </div>
                                     <div className="flex-1">
                                         <h5 className="font-black text-slate-800 leading-tight">{res.title}</h5>

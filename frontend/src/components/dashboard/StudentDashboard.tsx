@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import { useEffect, useState } from "react";
 
 
@@ -46,8 +48,7 @@ export function StudentDashboard() {
 
         const fetchSubjects = async () => {
             try {
-                const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-                const res = await fetch(`${baseUrl}/api/subjects`);
+                                const res = await fetch(`${API_URL}/api/subjects`);
                 if (!res.ok) throw new Error("Failed to synchronize simulation modules");
                 const data = await res.json();
                 setSubjects(data);
@@ -65,9 +66,8 @@ export function StudentDashboard() {
     const handleLogout = async () => {
         try {
             const token = localStorage.getItem('vlab_token');
-            const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-            if (token) {
-                await fetch(`${baseUrl}/api/attendance/logout`, {
+                        if (token) {
+                await fetch(`${API_URL}/api/attendance/logout`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,

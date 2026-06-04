@@ -482,7 +482,7 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                                     <Plus className="w-3 h-3 mr-1" /> Add Router
                                 </Button>
                                 <Button variant={editMode === 'connectNodes' ? 'default' : 'outline'} size="sm" className="h-7 text-xs" onClick={() => { setEditMode(editMode === 'connectNodes' ? 'none' : 'connectNodes'); setConnectSource(null); }}>
-                                    <aIcon className="w-3 h-3 mr-1" /> Connect Routers
+                                    <LinkIcon className="w-3 h-3 mr-1" /> Connect Routers
                                 </Button>
                                 <Button variant={editMode === 'remove' ? 'destructive' : 'outline'} size="sm" className="h-7 text-xs" onClick={() => setEditMode(editMode === 'remove' ? 'none' : 'remove')}>
                                     <Trash2 className="w-3 h-3 mr-1" /> Remove Element
@@ -572,7 +572,7 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                                 <div className="absolute top-4 right-4 bg-white p-3 rounded-lg shadow-md border-l-4 border-amber-500 max-w-xs z-30">
                                     <p className="text-sm font-bold text-slate-800 mb-2">Infinity Demo</p>
                                     <Button variant="destructive" size="sm" className="w-full text-xs h-7" onClick={() => breakLink('L2')}>
-                                        <a2Off className="w-3 h-3 mr-1" /> Disconnect R2-R3
+                                        <Link2Off className="w-3 h-3 mr-1" /> Disconnect R2-R3
                                     </Button>
                                 </div>
                             )}
@@ -642,7 +642,7 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                                     )}
 
                                     <div className="mt-4 p-4 bg-indigo-50/50 border border-indigo-100 rounded-lg text-sm text-indigo-900 shadow-inner">
-                                        <h4 className="font-bold mb-2 flex items-center gap-2"><aIcon className="w-4 h-4" /> Interface Links</h4>
+                                        <h4 className="font-bold mb-2 flex items-center gap-2"><LinkIcon className="w-4 h-4" /> Interface Links</h4>
                                         <div className="space-y-2">
                                             {links.filter(l => l.isActive && (l.source === selectedRouter || l.target === selectedRouter)).map(l => {
                                                 const neighbor = l.source === selectedRouter ? l.target : l.source;

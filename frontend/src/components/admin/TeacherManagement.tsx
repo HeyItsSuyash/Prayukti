@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { 
@@ -81,7 +83,7 @@ export function TeacherManagement() {
 
     const fetchSubjects = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/subjects');
+            const res = await fetch(`${API_URL}/api/subjects`);
             const data = await res.json();
             setSubjects(data);
         } catch (error) {
@@ -92,7 +94,7 @@ export function TeacherManagement() {
     const fetchTeachers = async () => {
         setLoading(true);
         try {
-            const res = await fetch('http://localhost:5000/api/users?role=teacher');
+            const res = await fetch(`${API_URL}/api/users?role=teacher`);
             const data = await res.json();
             setTeachers(data);
         } catch (error) {
@@ -105,7 +107,7 @@ export function TeacherManagement() {
     const handleCreate = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const res = await fetch('http://localhost:5000/api/users', {
+            const res = await fetch(`${API_URL}/api/users`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
@@ -190,7 +192,7 @@ export function TeacherManagement() {
         
         setSendingEmail(true);
         try {
-            const res = await fetch('http://localhost:5000/api/users/send-email', {
+            const res = await fetch(`${API_URL}/api/users/send-email`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

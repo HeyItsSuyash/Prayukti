@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import React, { useState, useEffect, useMemo } from "react";
 import { MonacoEditor } from "@/components/lab/MonacoEditor";
 import { Button } from "@/components/ui/button";
@@ -41,7 +43,6 @@ import {
     Area
 } from "recharts";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
 
 interface DAACompilerProps {
     labId: string;

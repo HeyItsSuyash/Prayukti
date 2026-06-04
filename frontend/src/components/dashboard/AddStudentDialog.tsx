@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -28,8 +30,7 @@ export function AddStudentDialog({ open, onOpenChange, onAddStudent }: AddStuden
 
         // Call API
         try {
-            const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
-            const res = await fetch(`${baseUrl}/api/users`, {
+                        const res = await fetch(`${API_URL}/api/users`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

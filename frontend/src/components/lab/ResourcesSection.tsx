@@ -149,7 +149,7 @@ export function ResourcesSection({ resources, labId }: ResourcesSectionProps) {
                             {selectedType === 'video' && <PlayCircle className="text-red-500" />}
                             {selectedType === 'notes' && <BookOpen className="text-blue-500" />}
                             {selectedType === 'quiz' && <HelpCircle className="text-purple-500" />}
-                            {selectedType === 'reading' && <aIcon className="text-green-500" />}
+                            {selectedType === 'reading' && <LinkIcon className="text-green-500" />}
 
                             {selectedType === 'video' && finalVideoData?.title}
                             {selectedType === 'notes' && resources.notes?.title}

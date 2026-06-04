@@ -1,5 +1,7 @@
 "use client";
 
+import { API_URL } from "@/lib/config";
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -71,8 +73,8 @@ export function ResourceManager() {
         setLoading(true);
         try {
             const [subsRes, expsRes] = await Promise.all([
-                fetch('http://localhost:5000/api/subjects'),
-                fetch('http://localhost:5000/api/experiments')
+                fetch(`${API_URL}/api/subjects`),
+                fetch(`${API_URL}/api/experiments`)
             ]);
             const subs = await subsRes.json();
             const exps = await expsRes.json();
@@ -124,7 +126,7 @@ export function ResourceManager() {
         if (!selectedExp || !newRes.title) return;
         setSaving(true);
         try {
-            await fetch('http://localhost:5000/api/resources', {
+            await fetch(`${API_URL}/api/resources`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...newRes, experiment: selectedExp })
