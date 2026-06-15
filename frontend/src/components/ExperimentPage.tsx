@@ -2,9 +2,9 @@
 
 import { API_URL } from "@/lib/config";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-import { ArrowLeft, BookOpen, Clock, Code2, PlayCircle, Loader2, Share2, Info } from "lucide-react";
+import { ArrowLeft, BookOpen, Clock, Code2, PlayCircle, Loader2, Share2, Info, ClipboardList } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -12,6 +12,7 @@ import SimulationRenderer from "@/components/simulation/SimulationRenderer";
 
 import { ExecutionInsights } from "@/components/simulation/core/ExecutionInsights";
 import CodeCompiler from "@/components/simulation/core/CodeCompiler";
+import LabTest from "@/components/simulation/core/LabTest";
 import { Navbar } from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
@@ -28,6 +29,18 @@ export default function ExperimentPage({ id }: { id: string }) {
     const [compilerError, setCompilerError] = useState<string | null>(null);
     const [customInput, setCustomInput] = useState("");
     const [complexityData, setComplexityData] = useState<any>(null);
+    // Read sessionStorage flag set by "Take Test" button on subject page
+    const [defaultTab, setDefaultTab] = useState("simulation");
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const intent = sessionStorage.getItem("openTab");
+            if (intent) {
+                setDefaultTab(intent);
+                sessionStorage.removeItem("openTab"); // clear after reading
+            }
+        }
+    }, []);
 
     useEffect(() => {
         if (output?.status?.description === "Accepted" && !isCompleted) {
@@ -38,7 +51,10 @@ export default function ExperimentPage({ id }: { id: string }) {
     useEffect(() => {
         const fetchExperiment = async () => {
             try {
-                const res = await fetch(`${API_URL}/api/experiments/${id}`);
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 2000);
+                const res = await fetch(`${API_URL}/api/experiments/${id}`, { signal: controller.signal });
+                clearTimeout(timeoutId);
                 const data = await res.ok ? await res.json() : null;
                 
                 const applyFallback = () => {
@@ -219,10 +235,11 @@ export default function ExperimentPage({ id }: { id: string }) {
     const isProgrammingLab = experiment.compilerEnabled === true || !!experiment.codeTemplate;
 
     if (!isProgrammingLab) {
+        const simLabId = experiment.slug || experiment.id || experiment._id;
         return (
             <div className="flex flex-col h-screen bg-white overflow-hidden">
                 {/* Top Minimal Navigation */}
-                <header className="h-12 bg-white border-b border-black/5 flex items-center justify-between px-4 z-50">
+                <header className="h-12 bg-white border-b border-black/5 flex items-center justify-between px-4 z-50 flex-shrink-0">
                     <div className="flex items-center gap-4">
                         <a href="/dashboard" className="flex items-center gap-2 text-slate-400 hover:text-slate-900 transition-colors group">
                             <div className="p-1.5 rounded-lg group-hover:bg-slate-100 transition-all">
@@ -242,15 +259,33 @@ export default function ExperimentPage({ id }: { id: string }) {
                     </div>
                 </header>
 
-                <main className="flex-1 flex overflow-hidden">
-                    <div className="flex-1 flex flex-col bg-white">
-                        <SimulationRenderer
-                            labId={experiment.slug || experiment.id || experiment._id}
-                            initialCode={experiment.codeTemplate}
-                            language={experiment.language}
-                        />
-                    </div>
-                </main>
+                {/* Tabs: Simulation + Test */}
+                <Tabs defaultValue={defaultTab} key={defaultTab} className="flex-1 flex flex-col overflow-hidden">
+                    <TabsList className="flex-shrink-0 h-10 bg-slate-50 border-b border-slate-200 rounded-none px-4 justify-start gap-1">
+                        <TabsTrigger value="simulation" className="text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg h-7 px-4">
+                            <BookOpen className="w-3 h-3 mr-1.5" /> Simulation
+                        </TabsTrigger>
+                        <TabsTrigger value="test" className="text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-orange-600 data-[state=active]:text-white rounded-lg h-7 px-4">
+                            <ClipboardList className="w-3 h-3 mr-1.5" /> Take Test · 30Q
+                        </TabsTrigger>
+                    </TabsList>
+
+                    <TabsContent value="simulation" className="data-[state=active]:flex flex-col flex-1 overflow-y-auto mt-0 w-full">
+                        <div className="flex-1 flex flex-col bg-white min-h-min w-full">
+                            <SimulationRenderer
+                                labId={simLabId}
+                                initialCode={experiment.codeTemplate}
+                                language={experiment.language}
+                            />
+                        </div>
+                    </TabsContent>
+
+                    <TabsContent value="test" className="data-[state=active]:flex flex-col flex-1 overflow-y-auto mt-0 w-full">
+                        <div className="flex-1 min-h-min w-full">
+                            <LabTest labId={simLabId} labTitle={experiment.title} />
+                        </div>
+                    </TabsContent>
+                </Tabs>
             </div>
         );
     }
