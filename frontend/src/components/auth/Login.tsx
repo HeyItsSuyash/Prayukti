@@ -105,11 +105,9 @@ export default function LoginPage() {
             }
 
             setSuccess(true);
-            setTimeout(() => {
-                if (role === 'teacher') window.location.href = ("/dashboard/teacher");
-                else if (role === 'admin') window.location.href = ("/dashboard/admin");
-                else window.location.href = ("/dashboard");
-            }, 1500);
+                setTimeout(() => {
+                    window.location.href = ("/dashboard");
+                }, 1500);
 
         } catch (err: any) {
             const message = err.response?.data?.message || "Login failed";
@@ -151,9 +149,7 @@ export default function LoginPage() {
                 }
                 setSuccess(true);
                 setTimeout(() => {
-                    if (targetRole === 'teacher') window.location.href = ('/dashboard/teacher');
-                    else if (targetRole === 'admin') window.location.href = ('/dashboard/admin');
-                    else window.location.href = ('/dashboard');
+                    window.location.href = ('/dashboard');
                 }, 1000);
             } else {
                 setError(data.message || 'Test login failed');

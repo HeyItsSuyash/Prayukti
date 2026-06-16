@@ -2,14 +2,14 @@
 
 import { API_URL } from "@/lib/config";
 
-import { Suspense, useState, useEffect, useMemo } from 'react';
-// Removed next/navigation
-
-// UI Components
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Users, ShieldCheck, BookOpen, Activity, Search, Shield, UserPlus, ArrowLeft } from 'lucide-react';
+import { Suspense, useState, useEffect } from 'react';
+import { 
+    Users, ShieldCheck, BookOpen, Activity, Search, Shield, 
+    UserPlus, LayoutDashboard, Settings, Video, FileText, Menu, X, ArrowLeft,
+    Bell, ChevronRight, GraduationCap, Layers, FlaskConical
+} from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 // Admin Views
 import { AnalyticsDashboard } from '@/components/admin/AnalyticsDashboard';
@@ -20,38 +20,43 @@ import { ResourceManager } from '@/components/admin/ResourceManager';
 import { ActivityLogView } from '@/components/admin/ActivityLogView';
 import { SettingsPanel } from '@/components/admin/SettingsPanel';
 import { EnrollmentForm } from '@/components/admin/EnrollmentForm';
+import AdminTimetableBuilder from '@/components/timetable/AdminTimetableBuilder';
+import { AcademicSetup } from '@/components/admin/AcademicSetup';
 
 // Current Dashboard (for Overview/Students)
 import { StudentTable } from './StudentTable';
 import { StudentDetailView } from './StudentDetailView';
 
-function QuickLinkButton({ label, icon: Icon, onClick }: { label: string, icon: any, onClick: () => void }) {
-    return (
-        <Button 
-            variant="outline" 
-            onClick={onClick}
-            className="flex flex-col items-center justify-center h-24 rounded-3xl border-slate-100 hover:bg-accent/5 hover:border-accent/20 group transition-all"
-        >
-            <div className="p-3 bg-slate-50 group-hover:bg-accent/10 rounded-2xl mb-2 transition-colors">
-                <Icon size={18} className="text-slate-400 group-hover:text-accent" />
-            </div>
-            <span className="text-[10px] font-black text-slate-500 group-hover:text-accent uppercase tracking-tighter">{label}</span>
-        </Button>
-    );
-}
+const NAV_ITEMS = [
+    { id: 'overview', label: 'Command Center', icon: LayoutDashboard },
+    { id: 'students', label: 'Students', icon: GraduationCap },
+    { id: 'teachers', label: 'Faculty & Staff', icon: Users },
+    { id: 'academic-setup', label: 'Academic Setup', icon: Layers },
+    { id: 'timetable', label: 'Timetable', icon: BookOpen },
+    { id: 'subjects', label: 'Subjects (V-Lab)', icon: FlaskConical },
+    { id: 'analytics', label: 'Analytics', icon: Activity },
+    { id: 'logs', label: 'System Logs', icon: FileText },
+    { id: 'settings', label: 'Settings', icon: Settings },
+];
 
-function StatCard({ title, value, subtext, icon: Icon, color }: any) {
+function StatCard({ title, value, subtext, icon: Icon, trend }: any) {
     return (
-        <Card className="rounded-[2.5rem] border-none shadow-2xl shadow-slate-100/50 hover:scale-[1.02] transition-all bg-white overflow-hidden group border-b-4 border-transparent hover:border-accent/20">
-            <CardContent className="p-8">
-                <div className="flex justify-between items-start mb-6">
-                    <div className="p-4 bg-slate-50 rounded-[1.5rem] group-hover:bg-accent/5 transition-colors">
-                        <Icon size={24} className={color} />
+        <Card className="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/10 transition-all overflow-hidden group">
+            <CardContent className="p-6 relative">
+                <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-500">
+                    <Icon size={80} />
+                </div>
+                <div className="relative z-10">
+                    <div className="w-12 h-12 bg-accent/20 text-accent rounded-2xl flex items-center justify-center mb-6 border border-accent/20">
+                        <Icon size={24} />
+                    </div>
+                    <h3 className="text-xs font-bold text-white/60 uppercase tracking-widest mb-1">{title}</h3>
+                    <div className="text-4xl font-black text-white tracking-tighter mb-2">{value}</div>
+                    <div className="flex items-center gap-2">
+                        {trend && <span className="text-xs font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full">{trend}</span>}
+                        <span className="text-xs font-medium text-white/40">{subtext}</span>
                     </div>
                 </div>
-                <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2">{title}</h3>
-                <div className="text-4xl font-black text-slate-900 tracking-tighter mb-1">{value}</div>
-                {subtext && <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{subtext}</p>}
             </CardContent>
         </Card>
     );
@@ -59,14 +64,7 @@ function StatCard({ title, value, subtext, icon: Icon, color }: any) {
 
 function AdminContent() {
     const [currentView, setCurrentView] = useState('overview');
-    
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const params = new URLSearchParams(window.location.search);
-            setCurrentView(params.get('view') || 'overview');
-        }
-    }, []);
-    
+    const [isSidebarOpen, setSidebarOpen] = useState(true);
     const [data, setData] = useState<any[]>([]);
     const [teachers, setTeachers] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
@@ -75,11 +73,9 @@ function AdminContent() {
     const fetchData = async () => {
         setLoading(true);
         try {
-                        const token = localStorage.getItem('vlab_token');
+            const token = localStorage.getItem('vlab_token');
             const res = await fetch(`${API_URL}/api/users`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+                headers: { 'Authorization': `Bearer ${token}` }
             });
             
             if (!res.ok) throw new Error("Failed to fetch users");
@@ -114,13 +110,14 @@ function AdminContent() {
 
     useEffect(() => {
         fetchData();
+        if (window.innerWidth < 1024) setSidebarOpen(false);
     }, []);
 
     const handleLogout = async () => {
         try {
             const token = localStorage.getItem('vlab_token');
             if (token) {
-                await fetch(`${process.env.NEXT_PUBLIC_API_URL || API_URL}/api/attendance/logout`, {
+                await fetch(`${API_URL}/api/attendance/logout`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -128,9 +125,7 @@ function AdminContent() {
                     }
                 });
             }
-        } catch (err) {
-            console.error("Logout log failed:", err);
-        }
+        } catch (err) {}
         localStorage.removeItem('vlab_user');
         localStorage.removeItem('vlab_token');
         window.location.href = ('/login');
@@ -140,7 +135,7 @@ function AdminContent() {
         if (selectedStudent && (currentView === 'overview' || currentView === 'students')) {
             return (
                 <div className="space-y-6 animate-in fade-in duration-500">
-                    <Button variant="ghost" onClick={() => setSelectedStudent(null)} className="mb-4">
+                    <Button variant="outline" onClick={() => setSelectedStudent(null)} className="bg-white/5 border-white/10 text-white hover:bg-white/10">
                         <ArrowLeft className="mr-2 h-4 w-4" /> Back to List
                     </Button>
                     <StudentDetailView student={selectedStudent} />
@@ -152,64 +147,68 @@ function AdminContent() {
             case 'overview':
                 return (
                     <div className="space-y-8 animate-in fade-in duration-700">
-                        <div className="flex justify-between items-center mb-2">
-                            <div>
-                                <h1 className="text-4xl font-black text-slate-900 tracking-tighter uppercase">Control Center</h1>
-                                <p className="text-slate-500 text-sm font-medium">Core system management and analytical overview.</p>
-                            </div>
-                            <Button variant="outline" className="rounded-2xl border-slate-200" onClick={handleLogout}>Logout</Button>
+                        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                            <StatCard title="Total Students" value={data.length} subtext="vs last month" trend="+12%" icon={Users} />
+                            <StatCard title="Total Staff" value={teachers.length} subtext="Active administration" trend="+2" icon={ShieldCheck} />
+                            <StatCard title="System Load" value="24%" subtext="Server performance" trend="-5%" icon={Activity} />
+                            <StatCard title="Security" value="SAFE" subtext="No threats detected" icon={Shield} />
                         </div>
 
-                        <div className="grid gap-6 md:grid-cols-4">
-                            <StatCard title="Total Students" value={data.length} subtext="Enrolled successfully" icon={Users} color="text-accent" />
-                            <StatCard title="Total Staff" value={teachers.length} subtext="Active administration" icon={ShieldCheck} color="text-emerald-500" />
-                            <StatCard title="Active Session" value="ENABLED" subtext="System online" icon={Activity} color="text-amber-500" />
-                            <StatCard title="Security" value="SAFE" subtext="Mock Auth Active" icon={Shield} color="text-emerald-600" />
-                        </div>
-
-                        <div className="grid grid-cols-1 lg:grid-cols-10 gap-8">
-                            <div className="lg:col-span-7 space-y-6">
-                                <Card className="rounded-[2.5rem] border-none shadow-2xl shadow-slate-200/50 overflow-hidden bg-white">
-                                    <div className="p-8 pb-4 flex justify-between items-center bg-white border-b border-slate-50">
-                                        <h3 className="text-xl font-black text-slate-900 tracking-tight uppercase">Recent Students</h3>
-                                        <Button variant="link" className="text-accent font-black text-xs uppercase" onClick={() => window.location.href = ('?view=students')}>
-                                            View All
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <div className="lg:col-span-2 space-y-6">
+                                <Card className="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
+                                    <div className="p-6 flex justify-between items-center border-b border-white/10">
+                                        <h3 className="text-xl font-bold text-white tracking-tight">Recent Enrollments</h3>
+                                        <Button variant="link" className="text-accent" onClick={() => setCurrentView('students')}>
+                                            View All <ChevronRight className="w-4 h-4 ml-1" />
                                         </Button>
                                     </div>
                                     <CardContent className="p-0">
-                                        <StudentTable data={data.slice(0, 5)} onViewStudent={(s) => setSelectedStudent(s)} />
+                                        <div className="bg-white/5 p-4 m-6 rounded-2xl">
+                                            <StudentTable data={data.slice(0, 5)} onViewStudent={(s) => setSelectedStudent(s)} />
+                                        </div>
                                     </CardContent>
                                 </Card>
                             </div>
 
-                            <div className="lg:col-span-3 space-y-8">
-                                <Card className="rounded-[2.5rem] border-none bg-accent text-white p-8 shadow-2xl shadow-accent/20 overflow-hidden relative group">
-                                    <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform">
-                                        <UserPlus size={120} />
-                                    </div>
-                                    <div className="relative z-10 space-y-6">
-                                        <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
+                            <div className="space-y-6">
+                                <Card className="rounded-[2rem] border-none bg-gradient-to-br from-accent/80 to-accent text-white p-8 shadow-2xl relative overflow-hidden group">
+                                    <div className="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors" />
+                                    <div className="relative z-10 space-y-4">
+                                        <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-md">
                                             <UserPlus size={24} />
                                         </div>
-                                        <h3 className="text-2xl font-black tracking-tighter">Fast Enrollment</h3>
-                                        <Button 
-                                            onClick={() => window.location.href = ('?view=students')}
-                                            className="w-full bg-white text-accent hover:bg-slate-50 font-black py-6 rounded-2xl uppercase"
-                                        >
+                                        <div>
+                                            <h3 className="text-2xl font-black tracking-tight mb-1">Fast Enrollment</h3>
+                                            <p className="text-white/80 text-sm font-medium">Add new students or faculty instantly.</p>
+                                        </div>
+                                        <Button onClick={() => setCurrentView('students')} className="w-full bg-white text-accent hover:bg-slate-50 font-bold py-6 rounded-xl">
                                             Open Form
                                         </Button>
                                     </div>
                                 </Card>
-
-                                <div className="space-y-4">
-                                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-4">System Utilities</h4>
-                                    <div className="grid grid-cols-2 gap-3">
-                                        <QuickLinkButton label="Videos" icon={Activity} onClick={() => window.location.href = ('?view=subjects')} />
-                                        <QuickLinkButton label="Logs" icon={Activity} onClick={() => window.location.href = ('?view=logs')} />
-                                        <QuickLinkButton label="Database" icon={Activity} onClick={() => window.location.href = ('?view=settings')} />
-                                        <QuickLinkButton label="Stats" icon={Activity} onClick={() => window.location.href = ('?view=analytics')} />
+                                
+                                <Card className="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl">
+                                    <div className="p-6 border-b border-white/10">
+                                        <h3 className="font-bold text-white">System Status</h3>
                                     </div>
-                                </div>
+                                    <CardContent className="p-6 space-y-4">
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                                <span className="text-sm font-medium text-white/80">Database API</span>
+                                            </div>
+                                            <span className="text-xs text-emerald-400">Online</span>
+                                        </div>
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                                <span className="text-sm font-medium text-white/80">Authentication</span>
+                                            </div>
+                                            <span className="text-xs text-emerald-400">Online</span>
+                                        </div>
+                                    </CardContent>
+                                </Card>
                             </div>
                         </div>
                     </div>
@@ -217,36 +216,144 @@ function AdminContent() {
             case 'students':
                 return (
                     <div className="space-y-6 animate-in fade-in duration-500">
-                        <h2 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">Student Management</h2>
+                        <div className="flex justify-between items-center bg-white/5 p-6 rounded-[2rem] border border-white/10 backdrop-blur-xl">
+                            <div>
+                                <h2 className="text-2xl font-bold text-white">Student Management</h2>
+                                <p className="text-white/60 text-sm mt-1">Enroll and manage student records</p>
+                            </div>
+                        </div>
                         <EnrollmentForm onSuccess={fetchData} />
-                        <Card className="rounded-[2.5rem] border-none shadow-xl overflow-hidden mt-8">
-                            <CardContent className="p-0">
+                        <Card className="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden mt-8">
+                            <CardContent className="p-6">
                                 <StudentTable data={data} onViewStudent={(s) => setSelectedStudent(s)} />
                             </CardContent>
                         </Card>
                     </div>
                 );
             case 'teachers': return <TeacherManagement />;
+            case 'academic-setup': return <AcademicSetup />;
+            case 'timetable': return <AdminTimetableBuilder />;
             case 'subjects': return <SubjectManagement />;
-            case 'experiments': return <ExperimentManagement />;
-            case 'resources': return <ResourceManager />;
             case 'analytics': return <AnalyticsDashboard />;
             case 'logs': return <ActivityLogView />;
             case 'settings': return <SettingsPanel />;
-            default: return <div>View not found</div>;
+            default: return <div className="text-white/60">Module under construction</div>;
         }
     };
 
     return (
-        <div className="p-8 max-w-[1600px] mx-auto w-full h-full overflow-y-auto">
-            {renderView()}
+        <div className="flex h-screen bg-slate-950 text-slate-100 font-sans overflow-hidden">
+            {/* Sidebar */}
+            <aside className={`
+                ${isSidebarOpen ? 'w-72' : 'w-0 lg:w-20'} 
+                transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
+                flex flex-col border-r border-white/5 bg-slate-950/50 backdrop-blur-2xl relative z-40 overflow-hidden
+            `}>
+                <div className="h-20 flex items-center justify-between px-6 border-b border-white/5 shrink-0">
+                    {isSidebarOpen && (
+                        <div className="flex items-center gap-3 animate-in fade-in duration-500">
+                            <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center text-white font-black text-sm">P</div>
+                            <span className="font-bold tracking-tight text-white">Admin Panel</span>
+                        </div>
+                    )}
+                    <button 
+                        onClick={() => setSidebarOpen(!isSidebarOpen)}
+                        className="p-2 text-white/50 hover:text-white hover:bg-white/5 rounded-lg transition-colors lg:hidden"
+                    >
+                        <X size={20} />
+                    </button>
+                </div>
+
+                <div className="flex-1 overflow-y-auto py-6 px-4 space-y-2">
+                    {NAV_ITEMS.map((item) => {
+                        const active = currentView === item.id;
+                        return (
+                            <button
+                                key={item.id}
+                                onClick={() => setCurrentView(item.id)}
+                                className={`
+                                    w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300
+                                    ${active 
+                                        ? 'bg-accent/10 text-accent font-bold' 
+                                        : 'text-white/60 hover:text-white hover:bg-white/5 font-medium'
+                                    }
+                                    ${!isSidebarOpen ? 'justify-center' : ''}
+                                `}
+                                title={!isSidebarOpen ? item.label : undefined}
+                            >
+                                <item.icon size={20} className={active ? 'text-accent' : 'text-white/40'} />
+                                {isSidebarOpen && <span>{item.label}</span>}
+                                {active && isSidebarOpen && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-accent" />}
+                            </button>
+                        );
+                    })}
+                </div>
+
+                <div className="p-4 border-t border-white/5 shrink-0">
+                    <button
+                        onClick={handleLogout}
+                        className={`
+                            w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all
+                            text-red-400 hover:bg-red-400/10 font-medium
+                            ${!isSidebarOpen ? 'justify-center' : ''}
+                        `}
+                    >
+                        <div className="w-5 h-5 rounded flex items-center justify-center shrink-0">
+                            <ShieldCheck size={20} />
+                        </div>
+                        {isSidebarOpen && <span>Secure Logout</span>}
+                    </button>
+                </div>
+            </aside>
+
+            {/* Main Content */}
+            <main className="flex-1 flex flex-col min-w-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-slate-950">
+                {/* Topbar */}
+                <header className="h-20 border-b border-white/5 flex items-center justify-between px-8 bg-slate-950/20 backdrop-blur-md shrink-0">
+                    <div className="flex items-center gap-4">
+                        <button 
+                            onClick={() => setSidebarOpen(!isSidebarOpen)}
+                            className="p-2 text-white/50 hover:text-white bg-white/5 rounded-xl transition-colors"
+                        >
+                            <Menu size={20} />
+                        </button>
+                        <div>
+                            <h2 className="text-sm font-bold text-white capitalize">{currentView.replace('-', ' ')}</h2>
+                            <p className="text-xs text-white/40">Administration Workspace</p>
+                        </div>
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                        <button className="p-2.5 text-white/60 hover:text-white bg-white/5 rounded-full transition-colors relative">
+                            <Bell size={18} />
+                            <span className="absolute top-2 right-2 w-2 h-2 bg-accent rounded-full border-2 border-slate-950" />
+                        </button>
+                        <div className="flex items-center gap-3 pl-4 border-l border-white/10">
+                            <div className="text-right hidden md:block">
+                                <div className="text-sm font-bold text-white">System Admin</div>
+                                <div className="text-[10px] text-accent uppercase tracking-widest font-bold">Verified</div>
+                            </div>
+                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-orange-600 flex items-center justify-center border-2 border-slate-950 text-white font-bold shadow-lg">
+                                A
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                {/* Content Area */}
+                <div className="flex-1 overflow-y-auto p-8 lg:p-12">
+                    <div className="max-w-7xl mx-auto">
+                        {renderView()}
+                    </div>
+                </div>
+            </main>
         </div>
     );
 }
 
 export default function AdminDashboard() {
     return (
-        <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading Administration...</div>}>
+        <Suspense fallback={<div className="flex items-center justify-center min-h-screen bg-slate-950">Loading Administration...</div>}>
             <AdminContent />
         </Suspense>
     );

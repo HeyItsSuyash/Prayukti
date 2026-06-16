@@ -20,12 +20,15 @@ import { Badge } from "@/components/ui/badge";
 
 interface Subject {
     _id: string;
-    name: string;
-    code: string;
+    name?: string;
+    title?: string;
+    code?: string;
+    subject_id?: string;
     branch: string;
     semester: number;
-    hasLab: boolean;
+    hasLab?: boolean;
     experimentCount?: number;
+    experimentsCount?: number;
 }
 
 export function SubjectManagement() {
@@ -38,8 +41,8 @@ export function SubjectManagement() {
     
     // New Subject State
     const [newSubject, setNewSubject] = useState({
-        name: '',
-        code: '',
+        title: '',
+        subject_id: '',
         branch: '',
         semester: 1,
         hasLab: true
@@ -71,12 +74,12 @@ export function SubjectManagement() {
             const res = await fetch(`${API_URL}/api/subjects`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newSubject)
+                body: JSON.stringify({ ...newSubject, name: newSubject.title })
             });
             if (res.ok) {
                 fetchSubjects();
                 setIsAdding(false);
-                setNewSubject({ name: '', code: '', branch: '', semester: 1, hasLab: true });
+                setNewSubject({ title: '', subject_id: '', branch: '', semester: 1, hasLab: true });
             }
         } catch (error) {
             console.error("Failed to create subject:", error);
@@ -86,7 +89,7 @@ export function SubjectManagement() {
     const handleDelete = async (id: string) => {
         if (!confirm("Are you sure?")) return;
         try {
-            await fetch(`http://localhost:5000/api/subjects/${id}`, { method: 'DELETE' });
+            await fetch(`${API_URL}/api/subjects/${id}`, { method: 'DELETE' });
             fetchSubjects();
         } catch (error) {
             console.error("Delete failed:", error);
@@ -149,8 +152,8 @@ export function SubjectManagement() {
                                 <Input 
                                     className="rounded-xl border-indigo-200" 
                                     placeholder="e.g. Computer Networks Lab"
-                                    value={newSubject.name}
-                                    onChange={e => setNewSubject({...newSubject, name: e.target.value})}
+                                    value={newSubject.title}
+                                    onChange={e => setNewSubject({...newSubject, title: e.target.value})}
                                     required
                                 />
                             </div>
@@ -159,8 +162,8 @@ export function SubjectManagement() {
                                 <Input 
                                     className="rounded-xl border-indigo-200" 
                                     placeholder="e.g. KCS-453"
-                                    value={newSubject.code}
-                                    onChange={e => setNewSubject({...newSubject, code: e.target.value})}
+                                    value={newSubject.subject_id}
+                                    onChange={e => setNewSubject({...newSubject, subject_id: e.target.value})}
                                     required
                                 />
                             </div>
@@ -204,7 +207,6 @@ export function SubjectManagement() {
                         <TableRow className="hover:bg-transparent">
                             <TableHead className="font-black text-slate-400 uppercase text-[10px] tracking-widest p-6">Subject Information</TableHead>
                             <TableHead className="font-black text-slate-400 uppercase text-[10px] tracking-widest">Branch</TableHead>
-                            <TableHead className="font-black text-slate-400 uppercase text-[10px] tracking-widest text-center">Semester</TableHead>
                             <TableHead className="font-black text-slate-400 uppercase text-[10px] tracking-widest text-center">Experiments</TableHead>
                             <TableHead className="font-black text-slate-400 uppercase text-[10px] tracking-widest">Lab Status</TableHead>
                         </TableRow>
@@ -212,14 +214,14 @@ export function SubjectManagement() {
                     <TableBody>
                         {loading ? (
                             <TableRow>
-                                <TableCell colSpan={5} className="text-center py-20">
+                                <TableCell colSpan={4} className="text-center py-20">
                                     <Loader2 className="animate-spin inline-block mr-2 text-indigo-600" /> 
                                     <span className="font-black text-slate-300 uppercase tracking-widest italic">Syncing Registry...</span>
                                 </TableCell>
                             </TableRow>
                         ) : subjects.length === 0 ? (
                             <TableRow>
-                                <TableCell colSpan={5} className="text-center py-20 bg-slate-50/50 border-2 border-dashed border-slate-100 rounded-[3rem] m-6">
+                                <TableCell colSpan={4} className="text-center py-20 bg-slate-50/50 border-2 border-dashed border-slate-100 rounded-[3rem] m-6">
                                     <BookOpen size={48} className="mx-auto text-slate-200 mb-4" />
                                     <p className="text-slate-400 font-black uppercase tracking-widest italic">No subjects found for current selection</p>
                                 </TableCell>
@@ -236,8 +238,8 @@ export function SubjectManagement() {
                                             <BookOpen className="text-slate-500 w-5 h-5 group-hover:text-indigo-600" />
                                         </div>
                                         <div>
-                                            <p className="font-black text-slate-800 text-lg tracking-tight group-hover:text-indigo-600 transition-colors">{subject.name}</p>
-                                            <p className="text-[10px] font-bold text-slate-400 tracking-wider uppercase">{subject.code}</p>
+                                            <p className="font-black text-slate-800 text-lg tracking-tight group-hover:text-indigo-600 transition-colors">{subject.title || subject.name || 'Unnamed Subject'}</p>
+                                            <p className="text-[10px] font-bold text-slate-400 tracking-wider uppercase">{subject.subject_id || subject.code || 'NO-CODE'}</p>
                                         </div>
                                     </div>
                                 </TableCell>
@@ -247,13 +249,8 @@ export function SubjectManagement() {
                                     </Badge>
                                 </TableCell>
                                 <TableCell className="text-center">
-                                    <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 font-black text-slate-700">
-                                        {subject.semester}
-                                    </div>
-                                </TableCell>
-                                <TableCell className="text-center">
                                     <Badge variant="secondary" className="rounded-xl bg-slate-950 text-white font-black border-none px-4 py-1.5 text-xs">
-                                        {subject.experimentCount || 0}
+                                        {subject.experimentsCount ?? subject.experimentCount ?? 0}
                                     </Badge>
                                 </TableCell>
                                 <TableCell>
@@ -300,7 +297,7 @@ function SubjectDetail({ subject, onBack }: SubjectDetailProps) {
     const fetchExperiments = async () => {
         setLoading(true);
         try {
-            const res = await fetch(`http://localhost:5000/api/experiments?subjectId=${subject._id}`);
+            const res = await fetch(`${API_URL}/api/experiments?subjectId=${subject._id}`);
             const data = await res.json();
             setExperiments(data);
         } finally {
@@ -330,7 +327,7 @@ function SubjectDetail({ subject, onBack }: SubjectDetailProps) {
         e.stopPropagation();
         if (!confirm("Are you sure? All resources linked to this experiment will be orphaned or deleted.")) return;
         try {
-            await fetch(`http://localhost:5000/api/experiments/${id}`, { method: 'DELETE' });
+            await fetch(`${API_URL}/api/experiments/${id}`, { method: 'DELETE' });
             if (id === selectedExpId) setSelectedExpId(null);
             fetchExperiments();
         } catch (error) {
@@ -356,8 +353,8 @@ function SubjectDetail({ subject, onBack }: SubjectDetailProps) {
                             <Badge className="bg-indigo-600 rounded-lg text-[10px] font-black uppercase tracking-[0.2em]">{subject.branch}</Badge>
                             <Badge variant="outline" className="rounded-lg text-[10px] font-black uppercase tracking-[0.2em] border-slate-200">Semester {subject.semester}</Badge>
                         </div>
-                        <h2 className="text-4xl font-black text-slate-900 tracking-tighter">{subject.name}</h2>
-                        <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px] mt-1">{subject.code} • Simulation Registry & Resource Management</p>
+                        <h2 className="text-4xl font-black text-slate-900 tracking-tighter">{subject.title || subject.name || 'Unnamed Subject'}</h2>
+                        <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px] mt-1">{subject.subject_id || subject.code || 'NO-CODE'} • Simulation Registry & Resource Management</p>
                     </div>
                 </div>
             </div>
@@ -478,7 +475,7 @@ function SubjectResourceManager({ experimentId, experimentName }: { experimentId
     const fetchResources = async () => {
         setLoading(true);
         try {
-            const res = await fetch(`http://localhost:5000/api/resources?experimentId=${experimentId}`);
+            const res = await fetch(`${API_URL}/api/resources?experimentId=${experimentId}`);
             const data = await res.json();
             setResources(data);
         } finally {
@@ -504,7 +501,7 @@ function SubjectResourceManager({ experimentId, experimentName }: { experimentId
 
     const handleDelete = async (id: string) => {
         if (!confirm("Delete this asset?")) return;
-        await fetch(`http://localhost:5000/api/resources/${id}`, { method: 'DELETE' });
+        await fetch(`${API_URL}/api/resources/${id}`, { method: 'DELETE' });
         fetchResources();
     };
 
