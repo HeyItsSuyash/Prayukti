@@ -121,6 +121,7 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
                         onClick={toggleDarkMode}
                         className="p-2 rounded-xl text-slate-500 hover:text-primary transition-colors"
                         aria-label="Toggle dark mode"
+                        suppressHydrationWarning
                     >
                         {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                     </button>
@@ -144,12 +145,12 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
                     ) : (
                         <div className="flex items-center gap-3">
                             <a href="/explore">
-                                <Button variant="outline" className="h-10 px-6 rounded-xl font-bold uppercase tracking-widest text-xs">
+                                <Button variant="outline" className="h-10 px-6 rounded-xl font-bold uppercase tracking-widest text-xs" suppressHydrationWarning>
                                     Explore
                                 </Button>
                             </a>
                             <a href="/login">
-                                <Button className="h-10 px-6 rounded-xl font-bold uppercase tracking-widest text-xs shadow-md border border-transparent bg-accent hover:bg-accent/90 text-white">
+                                <Button className="h-10 px-6 rounded-xl font-bold uppercase tracking-widest text-xs shadow-md border border-transparent bg-accent hover:bg-accent/90 text-white" suppressHydrationWarning>
                                     Log In
                                 </Button>
                             </a>

@@ -520,10 +520,7 @@ export default function MPMCSimulator({
     return (
         <div className="bg-gray-50 flex flex-col h-full overflow-hidden">
             <header className="bg-white border-b shadow-sm p-4 shrink-0">
-                <div className="container mx-auto flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                        <h1 className="text-lg font-bold text-[#2e7d32]">{lab.title} Simulator</h1>
-                    </div>
+                <div className="container mx-auto flex items-center justify-end">
                     <div className="flex bg-gray-100 rounded-lg p-1 flex-wrap gap-1">
                         {[
                             { id: "info", label: "Experiment Info", icon: Info },

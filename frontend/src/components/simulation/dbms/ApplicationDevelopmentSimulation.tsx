@@ -365,11 +365,9 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
     function TableIcon({ size, className }: { size: number, className: string }) { return <div className={`border rounded p-0.5 ${className}`} style={{ width: size, height: size, display: 'inline-block' }} ></div> }
 
     return (
-        <div className="flex h-screen flex-col bg-gray-50 font-sans">
+        <div className="flex h-full flex-col bg-gray-50 font-sans">
             <header className="bg-white border-b shadow-sm z-10 p-3 flex justify-between items-center shrink-0">
                 <div className="flex items-center gap-3">
-                    <a href="/dashboard/dbms/2" className="p-2 hover:bg-gray-100 rounded-full"> <ArrowLeft size={18} className="text-gray-600" /> </a>
-                    <h1 className="font-bold text-gray-800">Application Development Simulator</h1>
                 </div>
                 <div className="flex gap-2 bg-gray-100 p-1 rounded-lg items-center">
                     {feedback && <span className="text-xs text-green-600 font-medium px-2">{feedback}</span>}

@@ -54,7 +54,7 @@ pub struct ResendOtpRequest {
 fn is_allowed_domain(email: &str) -> bool {
     let clean = email.to_lowercase();
     let clean = clean.trim();
-    clean.ends_with("@mmmut.ac.in")
+    clean.ends_with("@mmmut.ac.in") || clean.ends_with("@mmut.ac.in")
 }
 
 // Helper to record login attendance session
