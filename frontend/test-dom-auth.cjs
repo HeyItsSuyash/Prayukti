@@ -144,7 +144,7 @@ const path = require('path');
 
     // --- STEP 4: OTP Verification ---
     console.log('Reading OTP from backend file...');
-    const otpFilePath = 'C:/Users/Suyash/Desktop/prayukti-web/otp_test.txt';
+    const otpFilePath = path.join(__dirname, '..', 'otp_test.txt');
     if (!fs.existsSync(otpFilePath)) {
       throw new Error('otp_test.txt not found! Did the backend fail to write the OTP?');
     }

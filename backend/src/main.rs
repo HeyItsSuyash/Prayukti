@@ -33,6 +33,7 @@ async fn main() {
 
     // Load configuration
     let config = Config::from_env();
+    println!("DATABASE_URL = {}", config.database_url);
 
     // Setup database connection pool
     info!("Connecting to PostgreSQL pool...");
