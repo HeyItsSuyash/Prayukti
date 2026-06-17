@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SimulationRenderer from "@/components/simulation/SimulationRenderer";
-import { TheoryPanel } from "@/components/simulation/core/TheoryPanel";
+
 import { ExecutionInsights } from "@/components/simulation/core/ExecutionInsights";
 import CodeCompiler from "@/components/simulation/core/CodeCompiler";
 import { Navbar } from "@/components/layout/Navbar";
@@ -221,24 +221,28 @@ export default function ExperimentPage({ id }: { id: string }) {
     if (!isProgrammingLab) {
         return (
             <div className="flex flex-col h-screen bg-white overflow-hidden">
-                <main className="flex-1 flex overflow-hidden">
-                    <div className="w-1/3 border-r border-black/5 flex flex-col bg-slate-50/50">
-                        <div className="p-4 border-b border-black/5 flex items-center justify-between bg-white z-10">
-                            <div className="flex items-center gap-3">
-                                <a href="/dashboard" className="p-2 hover:bg-black/5 rounded-lg transition-colors text-slate-400">
-                                    <ArrowLeft className="h-4 w-4" />
-                                </a>
-                                <h1 className="font-black uppercase tracking-tighter text-sm truncate max-w-[200px] text-slate-900">
-                                    {experiment.title}
-                                </h1>
+                {/* Top Minimal Navigation */}
+                <header className="h-12 bg-white border-b border-black/5 flex items-center justify-between px-4 z-50">
+                    <div className="flex items-center gap-4">
+                        <a href="/dashboard" className="flex items-center gap-2 text-slate-400 hover:text-slate-900 transition-colors group">
+                            <div className="p-1.5 rounded-lg group-hover:bg-slate-100 transition-all">
+                                <ArrowLeft className="h-3.5 w-3.5" />
                             </div>
-                        </div>
-                        <div className="flex-1 overflow-y-auto p-6">
-                            <div className="prose prose-sm prose-slate max-w-none text-slate-600">
-                                {experiment.theory}
-                            </div>
+                            <span className="text-[10px] font-black uppercase tracking-widest">Dashboard</span>
+                        </a>
+                        <div className="h-3 w-[1px] bg-slate-200" />
+                        <div className="flex items-center gap-2">
+                            <Badge className="bg-blue-600 hover:bg-blue-600 text-[9px] font-black tracking-widest px-1.5 py-0">
+                                EXP {experiment.experimentNumber || "01"}
+                            </Badge>
+                            <h1 className="text-xs font-black text-slate-900 uppercase tracking-tight truncate max-w-[300px]">
+                                {experiment.title}
+                            </h1>
                         </div>
                     </div>
+                </header>
+
+                <main className="flex-1 flex overflow-hidden">
                     <div className="flex-1 flex flex-col bg-white">
                         <SimulationRenderer
                             labId={experiment.slug || experiment.id || experiment._id}
@@ -297,13 +301,8 @@ export default function ExperimentPage({ id }: { id: string }) {
             </div>
 
             <main className="flex-1 flex overflow-hidden">
-                {/* LEFT PANEL: Documentation (25%) */}
-                <div className="w-[25%] border-r border-black/5 bg-white flex flex-col shadow-2xl z-20 overflow-hidden">
-                    <TheoryPanel experiment={experiment} />
-                </div>
-
-                {/* CENTER PANEL: Professional Workbench (50%) */}
-                <div className="w-[50%] flex flex-col bg-[#1e1e1e] relative z-10 shadow-2xl overflow-hidden border-x border-black/10">
+                {/* CENTER PANEL: Professional Workbench (75%) */}
+                <div className="flex-1 flex flex-col bg-[#1e1e1e] relative z-10 shadow-2xl overflow-hidden border-x border-black/10">
                     <CodeCompiler
                         labId={experiment._id}
                         code={code}
