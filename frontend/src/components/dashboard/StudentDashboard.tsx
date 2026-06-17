@@ -22,7 +22,9 @@ import {
     Cpu,
     BookOpen,
     Activity,
-    ShieldAlert
+    ShieldAlert,
+    Sparkles,
+    Video
 } from "lucide-react";
 
 interface Subject {
@@ -223,6 +225,48 @@ export function StudentDashboard() {
 
                     {/* Role Specific Actions (Exams) */}
                     <div className="space-y-8">
+                        {/* Student Specific: Smart Classroom */}
+                        <RoleGuard allowedRoles={["STUDENT"]}>
+                            <div className="border-2 border-indigo-500/20 rounded-[3rem] p-10 bg-indigo-600 text-white relative overflow-hidden group shadow-2xl shadow-indigo-500/20 dark:shadow-none mb-8">
+                                <div className="absolute top-0 right-0 p-32 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-1000"></div>
+                                <div className="relative z-10">
+                                    <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+                                        <Sparkles size={24} className="animate-pulse" />
+                                    </div>
+                                    <h3 className="text-2xl font-black uppercase tracking-tight mb-2">Smart Classroom</h3>
+                                    <p className="text-indigo-100 font-medium mb-8 leading-relaxed max-w-xs">
+                                        Enter the Student-AI-Teacher portal for timetable schedules, doubt solvers, and announcements.
+                                    </p>
+                                    <a href="/classroom">
+                                        <Button className="h-12 px-8 uppercase font-black tracking-widest bg-white text-indigo-600 hover:bg-slate-50 rounded-xl transition-transform active:scale-95 text-xs">
+                                            Enter Smart Classroom
+                                        </Button>
+                                    </a>
+                                </div>
+                            </div>
+                        </RoleGuard>
+
+                        {/* Student Specific: AI Video Tutor */}
+                        <RoleGuard allowedRoles={["STUDENT"]}>
+                            <div className="border-2 border-purple-500/20 rounded-[3rem] p-10 bg-gradient-to-br from-indigo-700 to-purple-800 text-white relative overflow-hidden group shadow-2xl shadow-indigo-500/20 dark:shadow-none mb-8">
+                                <div className="absolute top-0 right-0 p-32 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-1000"></div>
+                                <div className="relative z-10">
+                                    <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+                                        <Video size={24} className="text-purple-200" />
+                                    </div>
+                                    <h3 className="text-2xl font-black uppercase tracking-tight mb-2">AI Video Tutor</h3>
+                                    <p className="text-indigo-100 font-medium mb-8 leading-relaxed max-w-xs">
+                                        Learn topics with simulated dynamic canvas animations, speech narrative audio, and customized quizzes.
+                                    </p>
+                                    <a href="/video-tutor">
+                                        <Button className="h-12 px-8 uppercase font-black tracking-widest bg-white text-indigo-700 hover:bg-slate-50 rounded-xl transition-transform active:scale-95 text-xs">
+                                            Launch Video Tutor
+                                        </Button>
+                                    </a>
+                                </div>
+                            </div>
+                        </RoleGuard>
+
                         {/* Student Specific: Practical Exams */}
                         <RoleGuard allowedRoles={["STUDENT"]}>
                             <div className="border-2 border-accent/20 rounded-[3rem] p-10 bg-accent text-white relative overflow-hidden group shadow-2xl shadow-accent/20 dark:shadow-none">

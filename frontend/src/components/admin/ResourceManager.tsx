@@ -117,7 +117,7 @@ export function ResourceManager() {
     }, [selectedExp]);
 
     const fetchResources = async () => {
-        const res = await fetch(`http://localhost:5000/api/resources?experimentId=${selectedExp}`);
+        const res = await fetch(`${API_URL}/api/resources?experimentId=${selectedExp}`);
         const data = await res.json();
         setResources(data);
     };
@@ -139,7 +139,7 @@ export function ResourceManager() {
     };
 
     const handleDelete = async (id: string) => {
-        await fetch(`http://localhost:5000/api/resources/${id}`, { method: 'DELETE' });
+        await fetch(`${API_URL}/api/resources/${id}`, { method: 'DELETE' });
         fetchResources();
     };
 
