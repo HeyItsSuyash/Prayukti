@@ -1,0 +1,26 @@
+version: "3.9"
+
+# ──────────────────────────────────────────────────────────
+# Development override — only runs Redis & Postgres
+# Use: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+# Your local NestJS process connects to these services.
+# ──────────────────────────────────────────────────────────
+
+services:
+  postgres:
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: prayukti_vlab
+      POSTGRES_USER: prayukti
+      POSTGRES_PASSWORD: prayukti_pass
+
+  redis:
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+
+  # Disable the backend container in dev (run locally instead)
+  backend:
+    profiles:
+      - donotstart
