@@ -126,7 +126,7 @@ export function TeacherManagement() {
         e.preventDefault();
         if (!editingTeacher) return;
         try {
-            const res = await fetch(`http://localhost:5000/api/users/${editingTeacher._id}`, {
+            const res = await fetch(`${API_URL}/api/users/${editingTeacher._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
@@ -165,7 +165,7 @@ export function TeacherManagement() {
     const handleToggleStatus = async (teacher: Teacher) => {
         const newStatus = teacher.status === 'active' ? 'disabled' : 'active';
         try {
-            await fetch(`http://localhost:5000/api/users/${teacher._id}`, {
+            await fetch(`${API_URL}/api/users/${teacher._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: newStatus })
@@ -179,7 +179,7 @@ export function TeacherManagement() {
     const handleDelete = async (id: string) => {
         if (!confirm("Are you sure? This will permanently remove the teacher account.")) return;
         try {
-            await fetch(`http://localhost:5000/api/users/${id}`, { method: 'DELETE' });
+            await fetch(`${API_URL}/api/users/${id}`, { method: 'DELETE' });
             fetchTeachers();
         } catch (error) {
             console.error("Delete failed:", error);
@@ -408,7 +408,7 @@ export function TeacherManagement() {
                                             className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
                                         />
                                         <label htmlFor={`add-${subject._id}`} className="text-xs font-bold text-slate-600 truncate">
-                                            {subject.name}
+                                            {subject.title || subject.name || 'Unnamed Subject'}
                                         </label>
                                     </div>
                                 ))}
@@ -484,7 +484,7 @@ export function TeacherManagement() {
                                             className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
                                         />
                                         <label htmlFor={`edit-${subject._id}`} className="text-xs font-bold text-slate-600 truncate">
-                                            {subject.name}
+                                            {subject.title || subject.name || 'Unnamed Subject'}
                                         </label>
                                     </div>
                                 ))}

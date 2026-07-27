@@ -5,7 +5,7 @@ import { Role } from "./roles";
 const useAuth = () => {
     if (typeof window === "undefined") return { role: "STUDENT" as Role, user: null };
     
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem('vlab_user');
     if (storedUser) {
         try {
             const user = JSON.parse(storedUser);

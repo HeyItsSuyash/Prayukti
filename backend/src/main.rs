@@ -33,21 +33,18 @@ async fn main() {
 
     // Load configuration
     let config = Config::from_env();
+    println!("DATABASE_URL = {}", config.database_url);
 
     // Setup database connection pool
     info!("Connecting to PostgreSQL pool...");
     let pool = PgPoolOptions::new()
         .max_connections(50) // High-concurrency limit
-        .acquire_timeout(std::time::Duration::from_secs(10))
+        .acquire_timeout(std::time::Duration::from_secs(120))
         .connect(&config.database_url)
         .await
         .expect("Failed to connect to PostgreSQL database");
 
-    info!("Skipping database migrations (handled manually)...");
-    // sqlx::migrate!("./migrations")
-    //     .run(&pool)
-    //     .await
-    //     .expect("Failed to run database migrations");
+    info!("Skipping seed scripts because database is already seeded...");
 
     let state = AppState {
         db: pool,
@@ -108,6 +105,17 @@ async fn main() {
         .nest("/api/logs", routes::logs::router())
         .nest("/api/resources", routes::resources::router())
         .nest("/api/v2/institutions", domains::institutions::routes::router())
+        .nest("/api/classroom", routes::classroom::router())
+        .nest("/api/timetable", routes::timetable::router())
+        .nest("/api/schedule", routes::schedule::router())
+        .nest("/api/announcement", routes::announcement::router())
+        .nest("/api/participation", routes::participation::router())
+        .nest("/api/knowledge-base", routes::knowledge_base::router())
+        .nest("/api/ai-tutor", routes::ai_tutor::router())
+        .nest("/api/ai-teacher", routes::ai_teacher::router())
+        .nest("/api/classroom-analytics", routes::analytics::router())
+        .nest("/api/video-tutor", routes::video_tutor::router())
+        .nest("/api/academic-hierarchy", routes::academic_hierarchy::router())
         .layer(cors)
         .layer(TraceLayer::new_for_http())
         .with_state(state);

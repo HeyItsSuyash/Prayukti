@@ -358,6 +358,54 @@ pub async fn seed_subjects(
             "slug": "daa",
             "subject_id": "BCS-408"
         }),
+        json!({
+            "title": "Operating Systems",
+            "description": "Study process scheduling, memory management, deadlock prevention, and concurrency.",
+            "icon": "os",
+            "experiments_count": 0,
+            "slug": "os",
+            "subject_id": "BCS-501"
+        }),
+        json!({
+            "title": "Principles of Data Structures",
+            "description": "Explore basic data structures, linear and non-linear representations, and traversals.",
+            "icon": "pds",
+            "experiments_count": 0,
+            "slug": "pds",
+            "subject_id": "BCS-302"
+        }),
+        json!({
+            "title": "Computer Organization and Architecture",
+            "description": "Understand digital computer design, register transfer language, datapath, and CPU design.",
+            "icon": "coa",
+            "experiments_count": 0,
+            "slug": "coa",
+            "subject_id": "BCS-304"
+        }),
+        json!({
+            "title": "Compiler Design",
+            "description": "Learn compiler phases, parser generator, first/follow sets, and intermediate code generation.",
+            "icon": "cd",
+            "experiments_count": 0,
+            "slug": "cd",
+            "subject_id": "BCS-503"
+        }),
+        json!({
+            "title": "Optimization Techniques",
+            "description": "Master mathematical optimization, search methods, and linear programming algorithms.",
+            "icon": "ot",
+            "experiments_count": 0,
+            "slug": "ot",
+            "subject_id": "BCS-504"
+        }),
+        json!({
+            "title": "Basic Electrical Engineering",
+            "description": "Understand fundamental circuit theorems, KVL/KCL, and series/parallel AC circuits.",
+            "icon": "bee",
+            "experiments_count": 0,
+            "slug": "bee",
+            "subject_id": "BEC-101"
+        }),
     ];
 
     // Transaction to clear and insert

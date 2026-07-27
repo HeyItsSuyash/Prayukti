@@ -54,7 +54,7 @@ pub struct ResendOtpRequest {
 fn is_allowed_domain(email: &str) -> bool {
     let clean = email.to_lowercase();
     let clean = clean.trim();
-    clean.ends_with("@mmmut.ac.in")
+    clean.ends_with("@mmmut.ac.in") || clean.ends_with("@mmut.ac.in")
 }
 
 // Helper to record login attendance session
@@ -131,7 +131,11 @@ pub async fn signup(
 
     let otp = generate_otp();
     info!("TEST OTP: {}", otp);
-    let _ = std::fs::write("C:/Users/Suyash/Desktop/prayukti-web/otp_test.txt", &otp);
+    let otp_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .unwrap()
+        .join("otp_test.txt");
+    let _ = std::fs::write(otp_path, &otp);
     let otp_expiry = chrono::Utc::now() + chrono::Duration::minutes(10);
     
     let hashed_password = match hash(&payload.password, DEFAULT_COST) {

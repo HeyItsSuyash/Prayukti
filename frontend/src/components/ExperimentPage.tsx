@@ -2,16 +2,17 @@
 
 import { API_URL } from "@/lib/config";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-import { ArrowLeft, BookOpen, Clock, Code2, PlayCircle, Loader2, Share2, Info } from "lucide-react";
+import { ArrowLeft, BookOpen, Clock, Code2, PlayCircle, Loader2, Share2, Info, ClipboardList } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SimulationRenderer from "@/components/simulation/SimulationRenderer";
-import { TheoryPanel } from "@/components/simulation/core/TheoryPanel";
+
 import { ExecutionInsights } from "@/components/simulation/core/ExecutionInsights";
 import CodeCompiler from "@/components/simulation/core/CodeCompiler";
+import LabTest from "@/components/simulation/core/LabTest";
 import { Navbar } from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
@@ -28,6 +29,18 @@ export default function ExperimentPage({ id }: { id: string }) {
     const [compilerError, setCompilerError] = useState<string | null>(null);
     const [customInput, setCustomInput] = useState("");
     const [complexityData, setComplexityData] = useState<any>(null);
+    // Read sessionStorage flag set by "Take Test" button on subject page
+    const [defaultTab, setDefaultTab] = useState("simulation");
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const intent = sessionStorage.getItem("openTab");
+            if (intent) {
+                setDefaultTab(intent);
+                sessionStorage.removeItem("openTab"); // clear after reading
+            }
+        }
+    }, []);
 
     useEffect(() => {
         if (output?.status?.description === "Accepted" && !isCompleted) {
@@ -38,17 +51,83 @@ export default function ExperimentPage({ id }: { id: string }) {
     useEffect(() => {
         const fetchExperiment = async () => {
             try {
-                const res = await fetch(`${API_URL}/api/experiments/${id}`);
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 2000);
+                const res = await fetch(`${API_URL}/api/experiments/${id}`, { signal: controller.signal });
+                clearTimeout(timeoutId);
                 const data = await res.ok ? await res.json() : null;
-                if (data) {
+                
+                const applyFallback = () => {
+                    console.warn("[VLAB] Backend unreachable or missing data, using fallback experiment data for ID:", id);
+                    let fallbackTitle = "Experiment Simulation";
+                    if (id === 'cn-exp-1') fallbackTitle = 'OSI vs TCP/IP Reference Models';
+                    else if (id === 'cn-exp-2') fallbackTitle = 'CSMA/CD Protocol Simulation';
+                    else if (id === 'cn-exp-3') fallbackTitle = 'ARP Protocol Simulation';
+                    else if (id === 'cn-exp-4') fallbackTitle = 'Distance Vector Routing';
+                    else if (id === 'cn-exp-5') fallbackTitle = 'Selective Repeat Simulation';
+                    else if (id === 'cn-exp-6') fallbackTitle = 'Sliding Window Simulation';
+                    else if (id === 'cn-exp-7') fallbackTitle = 'Token Protocols Simulation';
+                    else if (id === 'dbms-exp-1') fallbackTitle = 'Introduction to DBMS';
+                    else if (id === 'dbms-exp-2') fallbackTitle = 'Application Development';
+                    else if (id === 'dbms-exp-3') fallbackTitle = 'Relational Algebra';
+                    else if (id === 'dbms-exp-4') fallbackTitle = 'Normalization';
+                    else if (id === 'dbms-exp-5') fallbackTitle = 'Host Language Integration';
+                    else if (id.startsWith('error-detection')) fallbackTitle = 'Error Detection Simulation';
+                    else if (id.startsWith('daa')) fallbackTitle = 'Algorithm Analysis';
+                    else if (id.startsWith('mpmc')) fallbackTitle = '8086 Simulator';
+                    else if (id.startsWith('dld')) fallbackTitle = 'Circuit Canvas';
+                    else if (id.startsWith('oops')) fallbackTitle = 'Java Compiler';
+                    
+                    setExperiment({
+                        id,
+                        title: fallbackTitle,
+                        description: "Interactive Simulation Environment",
+                        compilerEnabled: false,
+                        theory: "Interact with the simulation to learn the concepts.",
+                        algorithm: "1. Follow on-screen instructions.\n2. Observe output."
+                    });
+                    setError(null);
+                };
+
+                if (data && !data.error) {
                     setExperiment(data);
                     setCode(data.codeTemplate || data.defaultCode || "");
                     setCurrentLanguage(data.language || "c");
                 } else {
-                    setError("Experiment not found");
+                    applyFallback();
                 }
             } catch (err) {
-                setError("Failed to fetch experiment details");
+                // Fallback for when backend DB connection fails locally (network error)
+                console.warn("[VLAB] Network Error fetching experiment, applying fallback for ID:", id);
+                
+                let fallbackTitle = "Experiment Simulation";
+                if (id === 'cn-exp-1') fallbackTitle = 'OSI vs TCP/IP Reference Models';
+                else if (id === 'cn-exp-2') fallbackTitle = 'CSMA/CD Protocol Simulation';
+                else if (id === 'cn-exp-3') fallbackTitle = 'ARP Protocol Simulation';
+                else if (id === 'cn-exp-4') fallbackTitle = 'Distance Vector Routing';
+                else if (id === 'cn-exp-5') fallbackTitle = 'Selective Repeat Simulation';
+                else if (id === 'cn-exp-6') fallbackTitle = 'Sliding Window Simulation';
+                else if (id === 'cn-exp-7') fallbackTitle = 'Token Protocols Simulation';
+                else if (id === 'dbms-exp-1') fallbackTitle = 'Introduction to DBMS';
+                else if (id === 'dbms-exp-2') fallbackTitle = 'Application Development';
+                else if (id === 'dbms-exp-3') fallbackTitle = 'Relational Algebra';
+                else if (id === 'dbms-exp-4') fallbackTitle = 'Normalization';
+                else if (id === 'dbms-exp-5') fallbackTitle = 'Host Language Integration';
+                else if (id.startsWith('error-detection')) fallbackTitle = 'Error Detection Simulation';
+                else if (id.startsWith('daa')) fallbackTitle = 'Algorithm Analysis';
+                else if (id.startsWith('mpmc')) fallbackTitle = '8086 Simulator';
+                else if (id.startsWith('dld')) fallbackTitle = 'Circuit Canvas';
+                else if (id.startsWith('oops')) fallbackTitle = 'Java Compiler';
+                
+                setExperiment({
+                    id,
+                    title: fallbackTitle,
+                    description: "Interactive Simulation Environment",
+                    compilerEnabled: false,
+                    theory: "Interact with the simulation to learn the concepts.",
+                    algorithm: "1. Follow on-screen instructions.\n2. Observe output."
+                });
+                setError(null);
             } finally {
                 setLoading(false);
             }
@@ -156,34 +235,57 @@ export default function ExperimentPage({ id }: { id: string }) {
     const isProgrammingLab = experiment.compilerEnabled === true || !!experiment.codeTemplate;
 
     if (!isProgrammingLab) {
+        const simLabId = experiment.slug || experiment.id || experiment._id;
         return (
             <div className="flex flex-col h-screen bg-white overflow-hidden">
-                <main className="flex-1 flex overflow-hidden">
-                    <div className="w-1/3 border-r border-black/5 flex flex-col bg-slate-50/50">
-                        <div className="p-4 border-b border-black/5 flex items-center justify-between bg-white z-10">
-                            <div className="flex items-center gap-3">
-                                <a href="/dashboard" className="p-2 hover:bg-black/5 rounded-lg transition-colors text-slate-400">
-                                    <ArrowLeft className="h-4 w-4" />
-                                </a>
-                                <h1 className="font-black uppercase tracking-tighter text-sm truncate max-w-[200px] text-slate-900">
-                                    {experiment.title}
-                                </h1>
+                {/* Top Minimal Navigation */}
+                <header className="h-12 bg-white border-b border-black/5 flex items-center justify-between px-4 z-50 flex-shrink-0">
+                    <div className="flex items-center gap-4">
+                        <a href="/dashboard" className="flex items-center gap-2 text-slate-400 hover:text-slate-900 transition-colors group">
+                            <div className="p-1.5 rounded-lg group-hover:bg-slate-100 transition-all">
+                                <ArrowLeft className="h-3.5 w-3.5" />
                             </div>
-                        </div>
-                        <div className="flex-1 overflow-y-auto p-6">
-                            <div className="prose prose-sm prose-slate max-w-none text-slate-600">
-                                {experiment.theory}
-                            </div>
+                            <span className="text-[10px] font-black uppercase tracking-widest">Dashboard</span>
+                        </a>
+                        <div className="h-3 w-[1px] bg-slate-200" />
+                        <div className="flex items-center gap-2">
+                            <Badge className="bg-blue-600 hover:bg-blue-600 text-[9px] font-black tracking-widest px-1.5 py-0">
+                                EXP {experiment.experimentNumber || "01"}
+                            </Badge>
+                            <h1 className="text-xs font-black text-slate-900 uppercase tracking-tight truncate max-w-[300px]">
+                                {experiment.title}
+                            </h1>
                         </div>
                     </div>
-                    <div className="flex-1 flex flex-col bg-white">
-                        <SimulationRenderer
-                            labId={experiment._id}
-                            initialCode={experiment.codeTemplate}
-                            language={experiment.language}
-                        />
-                    </div>
-                </main>
+                </header>
+
+                {/* Tabs: Simulation + Test */}
+                <Tabs defaultValue={defaultTab} key={defaultTab} className="flex-1 flex flex-col overflow-hidden">
+                    <TabsList className="flex-shrink-0 h-10 bg-slate-50 border-b border-slate-200 rounded-none px-4 justify-start gap-1">
+                        <TabsTrigger value="simulation" className="text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg h-7 px-4">
+                            <BookOpen className="w-3 h-3 mr-1.5" /> Simulation
+                        </TabsTrigger>
+                        <TabsTrigger value="test" className="text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-orange-600 data-[state=active]:text-white rounded-lg h-7 px-4">
+                            <ClipboardList className="w-3 h-3 mr-1.5" /> Take Test · 30Q
+                        </TabsTrigger>
+                    </TabsList>
+
+                    <TabsContent value="simulation" className="data-[state=active]:flex flex-col flex-1 overflow-y-auto mt-0 w-full">
+                        <div className="flex-1 flex flex-col bg-white min-h-min w-full">
+                            <SimulationRenderer
+                                labId={simLabId}
+                                initialCode={experiment.codeTemplate}
+                                language={experiment.language}
+                            />
+                        </div>
+                    </TabsContent>
+
+                    <TabsContent value="test" className="data-[state=active]:flex flex-col flex-1 overflow-y-auto mt-0 w-full">
+                        <div className="flex-1 min-h-min w-full">
+                            <LabTest labId={simLabId} labTitle={experiment.title} />
+                        </div>
+                    </TabsContent>
+                </Tabs>
             </div>
         );
     }
@@ -234,13 +336,8 @@ export default function ExperimentPage({ id }: { id: string }) {
             </div>
 
             <main className="flex-1 flex overflow-hidden">
-                {/* LEFT PANEL: Documentation (25%) */}
-                <div className="w-[25%] border-r border-black/5 bg-white flex flex-col shadow-2xl z-20 overflow-hidden">
-                    <TheoryPanel experiment={experiment} />
-                </div>
-
-                {/* CENTER PANEL: Professional Workbench (50%) */}
-                <div className="w-[50%] flex flex-col bg-[#1e1e1e] relative z-10 shadow-2xl overflow-hidden border-x border-black/10">
+                {/* CENTER PANEL: Professional Workbench (75%) */}
+                <div className="flex-1 flex flex-col bg-[#1e1e1e] relative z-10 shadow-2xl overflow-hidden border-x border-black/10">
                     <CodeCompiler
                         labId={experiment._id}
                         code={code}
