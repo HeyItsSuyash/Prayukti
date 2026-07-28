@@ -54,7 +54,7 @@ async fn main() {
 
     // Configure CORS
     let cors = CorsLayer::new()
-        .allow_origin(Any)
+        .allow_origin("https://mmut.prayukti.org".parse::<axum::http::HeaderValue>().unwrap())
         .allow_headers(Any)
         .allow_methods(Any);
 

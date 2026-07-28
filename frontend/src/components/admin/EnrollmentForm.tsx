@@ -19,8 +19,10 @@ import { Badge } from "@/components/ui/badge";
 
 interface Subject {
     _id: string;
-    name: string;
-    code: string;
+    name?: string;
+    title?: string;
+    code?: string;
+    subject_id?: string;
     branch: string;
     semester: number;
 }

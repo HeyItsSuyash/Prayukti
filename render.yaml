@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: prayukti-backend
+    env: rust
+    rootDir: backend
+    buildCommand: cargo build --release --bin backend
+    startCommand: ./target/release/backend
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        sync: false # Set this in the Render Dashboard
+      - key: JWT_SECRET
+        sync: false # Set this in the Render Dashboard
+      - key: RUST_LOG
+        value: info

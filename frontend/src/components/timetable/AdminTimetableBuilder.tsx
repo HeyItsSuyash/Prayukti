@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { API_URL } from "@/lib/config";
-import { Plus, Save, Calendar as CalendarIcon, Clock, Users, BookOpen, AlertTriangle, Zap, CheckCircle2, Loader2, RefreshCw } from 'lucide-react';
+import { Plus, Save, Calendar as CalendarIcon, Clock, Users, BookOpen, AlertTriangle, Zap, CheckCircle2, Loader2, RefreshCw, X } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '../ui/dialog';
