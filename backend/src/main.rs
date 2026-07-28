@@ -54,7 +54,7 @@ async fn main() {
 
     // Configure CORS
     let cors = CorsLayer::new()
-        .allow_origin("https://mmut.prayukti.org".parse::<axum::http::HeaderValue>().unwrap())
+        .allow_origin(config.frontend_url.parse::<axum::http::HeaderValue>().expect("Invalid FRONTEND_URL format"))
         .allow_headers(Any)
         .allow_methods(Any);
 

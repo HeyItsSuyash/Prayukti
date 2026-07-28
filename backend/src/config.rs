@@ -10,6 +10,7 @@ pub struct Config {
     pub email_user: String,
     pub email_pass: String,
     pub mock_auth: bool,
+    pub frontend_url: String,
 }
 
 impl Config {
@@ -43,6 +44,8 @@ impl Config {
             .unwrap_or_else(|_| "false".to_string())
             .parse::<bool>()
             .unwrap_or(false);
+        let frontend_url = env::var("FRONTEND_URL")
+            .unwrap_or_else(|_| "https://mmut.prayukti.org".to_string());
 
         Self {
             database_url,
@@ -53,6 +56,7 @@ impl Config {
             email_user,
             email_pass,
             mock_auth,
+            frontend_url,
         }
     }
 }
