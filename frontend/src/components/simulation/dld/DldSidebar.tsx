@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronRight, Zap, Monitor, Cpu } from 'lucide-react';
+
 
 interface DldSidebarProps {
     onAddNode: (type: string, label: string, data?: any) => void;
@@ -31,8 +31,8 @@ export const DldSidebar = ({ onAddNode }: DldSidebarProps) => {
                         onClick={() => toggleCategory('io')}
                         className="w-full flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg text-xs font-semibold text-gray-600 transition-colors"
                     >
-                        {openCategories['io'] ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
-                        <Zap size={14} className="text-yellow-500" />
+                        {openCategories['io'] ? <i className="bx bx-chevron-down"  /> : <i className="bx bx-chevronright"  />}
+                        <i className="bx bx-zap text-yellow-500"  />
                         Input / Output
                     </button>
 
@@ -52,8 +52,8 @@ export const DldSidebar = ({ onAddNode }: DldSidebarProps) => {
                         onClick={() => toggleCategory('gates')}
                         className="w-full flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg text-xs font-semibold text-gray-600 transition-colors"
                     >
-                        {openCategories['gates'] ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
-                        <Cpu size={14} className="text-blue-500" />
+                        {openCategories['gates'] ? <i className="bx bx-chevron-down"  /> : <i className="bx bx-chevronright"  />}
+                        <i className="bx bx-cpu text-blue-500"  />
                         Logic Gates
                     </button>
 
@@ -90,8 +90,8 @@ export const DldSidebar = ({ onAddNode }: DldSidebarProps) => {
                         onClick={() => toggleCategory('msi')}
                         className="w-full flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg text-xs font-semibold text-gray-600 transition-colors"
                     >
-                        {openCategories['msi'] ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
-                        <Monitor size={14} className="text-purple-500" />
+                        {openCategories['msi'] ? <i className="bx bx-chevron-down"  /> : <i className="bx bx-chevronright"  />}
+                        <i className="bx bx-desktop text-purple-500"  />
                         Integrated Circuits
                     </button>
 

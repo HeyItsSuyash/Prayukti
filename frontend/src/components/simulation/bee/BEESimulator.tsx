@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import { Play, Activity, Sparkles, Lightbulb } from "lucide-react";
+
 import {
     LineChart,
     Line,
@@ -109,7 +109,7 @@ export default function BEESimulator({ labId }: { labId: string }) {
                     {isTheorems && (
                         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                             <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <Sparkles className="h-5 w-5 text-amber-500" /> Voltage & Resistor Controls
+                                <i className="bx bx-sparkles h-5 w-5 text-amber-500"  /> Voltage & Resistor Controls
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-slate-50 rounded-xl border border-slate-100">
                                 <div className="space-y-4">
@@ -194,7 +194,7 @@ export default function BEESimulator({ labId }: { labId: string }) {
                     {isRlc && (
                         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                             <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <Activity className="h-5 w-5 text-indigo-500" /> RLC Component Parameters
+                                <i className="bx bx-activity h-5 w-5 text-indigo-500"  /> RLC Component Parameters
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 bg-slate-50 rounded-xl border border-slate-100">
                                 <div>
@@ -241,7 +241,7 @@ export default function BEESimulator({ labId }: { labId: string }) {
                 <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between min-h-[400px]">
                     <div className="space-y-6">
                         <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                            <Lightbulb className="h-5 w-5 text-indigo-500" /> Calculations & Equivalent parameters
+                            <i className="bx bx-bulb h-5 w-5 text-indigo-500"  /> Calculations & Equivalent parameters
                         </h3>
 
                         {isTheorems ? (

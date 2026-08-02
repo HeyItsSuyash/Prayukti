@@ -3,16 +3,7 @@
 
 
 import { Button } from "@/components/ui/button";
-import { 
-    ArrowRight, 
-    Layers, 
-    Network, 
-    Cpu, 
-    Code2, 
-    Database,
-    Globe,
-    Binary
-} from "lucide-react";
+
 import { motion } from "framer-motion";
 
 // ─── Types ────────────────────────────────────────────────────
@@ -39,7 +30,7 @@ const modules: ModuleItem[] = [
             "Simulate complex topologies, packet flows, and protocol behaviors including CSMA/CD and OSI Layer interactions.",
         imageSrc: "/cn-module.jpg.jpg",
         imageAlt: "Computer Networks",
-        icon: <Globe className="w-6 h-6" />,
+        icon: <i className="bx bx-globe w-6 h-6"  />,
         tag: "Topology & Protocol",
     },
     {
@@ -51,7 +42,7 @@ const modules: ModuleItem[] = [
             "Build and test logic circuits, master flip-flops, and visualize gate-level operations with real-time waveform analysis.",
         imageSrc: "/dld-module.jpg.jpg",
         imageAlt: "Digital Logic & Design",
-        icon: <Binary className="w-6 h-6" />,
+        icon: <i className="bx bx-binary w-6 h-6"  />,
         tag: "Circuit Simulation",
     },
     {
@@ -63,7 +54,7 @@ const modules: ModuleItem[] = [
             "Visualize memory allocation, inheritance hierarchies, and polymorphism through interactive code simulation.",
         imageSrc: "/oops-module.jpg.jpg",
         imageAlt: "Object Oriented Programming",
-        icon: <Code2 className="w-6 h-6" />,
+        icon: <i className="bx bx-code2 w-6 h-6"  />,
         tag: "Code Logic",
     },
     {
@@ -75,7 +66,7 @@ const modules: ModuleItem[] = [
             "Design schemas, normalize tables, and execute complex SQL queries in a high-fidelity visual database environment.",
         imageSrc: "/dbms-module.jpg.jpg",
         imageAlt: "Database Management System",
-        icon: <Database className="w-6 h-6" />,
+        icon: <i className="bx bx-database w-6 h-6"  />,
         tag: "Relational Design",
     },
 ];
@@ -132,7 +123,7 @@ function ModuleCard({ mod, index }: { mod: ModuleItem, index: number }) {
             <div className="relative z-10 mt-10 pt-8 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between group/btn">
                 <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary dark:text-slate-400 group-hover:text-accent transition-colors">Launch Module</span>
                 <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary dark:text-white group-hover:bg-accent group-hover:text-white group-hover:translate-x-1 transition-all">
-                    <ArrowRight size={16} />
+                    <i className="bx bx-right-arrow-alt"  />
                 </div>
             </div>
         </motion.div>
@@ -173,7 +164,7 @@ export function AcademicModulesSection() {
                     >
                         Explore All Subjects
                         <div className="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all">
-                            <ArrowRight size={14} />
+                            <i className="bx bx-right-arrow-alt"  />
                         </div>
                     </a>
                 </div>

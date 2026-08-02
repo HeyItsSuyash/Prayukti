@@ -4,7 +4,7 @@ import { API_URL } from "@/lib/config";
 
 import { useState, useEffect, useRef } from "react";
 
-import { ArrowLeft, BookOpen, Clock, Code2, PlayCircle, Loader2, Share2, Info, ClipboardList } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -208,7 +208,7 @@ export default function ExperimentPage({ id }: { id: string }) {
     if (loading) {
         return (
             <div className="flex flex-col min-h-screen items-center justify-center bg-white">
-                <Loader2 className="h-10 w-10 animate-spin text-blue-600 mb-4" />
+                <i className="bx bx-loader2 h-10 w-10 animate-spin text-blue-600 mb-4"  />
                 <p className="text-sm font-black uppercase tracking-[0.2em] text-gray-400">Initializing Lab Environment...</p>
             </div>
         );
@@ -218,7 +218,7 @@ export default function ExperimentPage({ id }: { id: string }) {
         return (
             <div className="flex flex-col min-h-screen items-center justify-center bg-white p-4 text-center">
                 <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mb-6">
-                    <Info className="h-10 w-10 text-red-500" />
+                    <i className="bx bx-info h-10 w-10 text-red-500"  />
                 </div>
                 <h1 className="text-3xl font-black uppercase tracking-tighter mb-2 text-slate-900">Experiment Not Found</h1>
                 <p className="text-slate-500 max-w-md mb-8">The experiment you are looking for might have been moved or deleted.</p>
@@ -243,7 +243,7 @@ export default function ExperimentPage({ id }: { id: string }) {
                     <div className="flex items-center gap-4">
                         <a href="/dashboard" className="flex items-center gap-2 text-slate-400 hover:text-slate-900 transition-colors group">
                             <div className="p-1.5 rounded-lg group-hover:bg-slate-100 transition-all">
-                                <ArrowLeft className="h-3.5 w-3.5" />
+                                <i className="bx bx-arrowleft h-3.5 w-3.5"  />
                             </div>
                             <span className="text-[10px] font-black uppercase tracking-widest">Dashboard</span>
                         </a>
@@ -263,10 +263,10 @@ export default function ExperimentPage({ id }: { id: string }) {
                 <Tabs defaultValue={defaultTab} key={defaultTab} className="flex-1 flex flex-col overflow-hidden">
                     <TabsList className="flex-shrink-0 h-10 bg-slate-50 border-b border-slate-200 rounded-none px-4 justify-start gap-1">
                         <TabsTrigger value="simulation" className="text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg h-7 px-4">
-                            <BookOpen className="w-3 h-3 mr-1.5" /> Simulation
+                            <i className="bx bx-bookopen w-3 h-3 mr-1.5"  /> Simulation
                         </TabsTrigger>
                         <TabsTrigger value="test" className="text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-orange-600 data-[state=active]:text-white rounded-lg h-7 px-4">
-                            <ClipboardList className="w-3 h-3 mr-1.5" /> Take Test · 30Q
+                            <i className="bx bx-clipboardlist w-3 h-3 mr-1.5"  /> Take Test · 30Q
                         </TabsTrigger>
                     </TabsList>
 
@@ -297,7 +297,7 @@ export default function ExperimentPage({ id }: { id: string }) {
                 <div className="flex items-center gap-4">
                     <a href="/dashboard" className="flex items-center gap-2 text-slate-400 hover:text-slate-900 transition-colors group">
                         <div className="p-1.5 rounded-lg group-hover:bg-slate-100 transition-all">
-                            <ArrowLeft className="h-3.5 w-3.5" />
+                            <i className="bx bx-arrowleft h-3.5 w-3.5"  />
                         </div>
                         <span className="text-[10px] font-black uppercase tracking-widest">Dashboard</span>
                     </a>
@@ -321,7 +321,7 @@ export default function ExperimentPage({ id }: { id: string }) {
                         disabled={isRunning}
                         className="bg-blue-600 hover:bg-blue-700 text-white h-8 px-4 font-black text-[10px] uppercase tracking-widest transition-all rounded-lg shadow-lg shadow-blue-500/20"
                     >
-                        {isRunning ? <Loader2 className="h-3 w-3 animate-spin mr-2" /> : <PlayCircle className="h-3 w-3 mr-2" />}
+                        {isRunning ? <i className="bx bx-loader2 h-3 w-3 animate-spin mr-2"  /> : <i className="bx bx-play-circle h-3 w-3 mr-2"  />}
                         {isRunning ? 'Compiling' : 'Run Experiment'}
                     </Button>
                 </div>

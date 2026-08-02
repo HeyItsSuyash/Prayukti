@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Loader2 } from "lucide-react";
+
 
 export interface Teacher {
     id: string;
@@ -149,7 +149,7 @@ export function AddTeacherDialog({ open, onOpenChange, onAddTeacher }: AddTeache
                     </div>
                     <DialogFooter>
                         <Button type="submit" disabled={loading}>
-                            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                            {loading && <i className="bx bx-loader2 mr-2 h-4 w-4 animate-spin"  />}
                             {loading ? "Adding..." : "Add Teacher"}
                         </Button>
                     </DialogFooter>

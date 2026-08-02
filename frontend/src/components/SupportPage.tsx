@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, Send, MessageSquare, AlertCircle } from "lucide-react";
+
 import { motion } from "framer-motion";
 
 export default function SupportPage() {
@@ -54,7 +54,7 @@ export default function SupportPage() {
                         <div className="bg-slate-50 dark:bg-slate-900/50 p-10 rounded-[2.5rem] border-2 border-slate-100 dark:border-slate-800 shadow-2xl shadow-slate-200/50 dark:shadow-none">
                             <div className="flex items-center gap-4 mb-8">
                                 <div className="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center">
-                                    <MessageSquare size={24} />
+                                    <i className="bx bx-messagesquare"  />
                                 </div>
                                 <div>
                                     <h3 className="text-2xl font-black text-primary dark:text-white uppercase tracking-tight">Raise a Ticket</h3>
@@ -77,7 +77,7 @@ export default function SupportPage() {
                                 </div>
 
                                 <Button className="w-full h-16 bg-accent hover:bg-accent/90 text-white rounded-xl font-black uppercase tracking-widest text-sm shadow-xl shadow-accent/20 border-0 group active:scale-[0.98] transition-all">
-                                    Submit Ticket <Send size={18} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                    Submit Ticket <i className="bx bx-send ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"  />
                                 </Button>
                             </form>
                         </div>

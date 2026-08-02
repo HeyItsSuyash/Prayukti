@@ -1,18 +1,18 @@
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import ExplorePage from '@/components/ExplorePage';
+import React from 'react';
+import { PremiumNavbar } from '@/components/layout/PremiumNavbar';
+import { PremiumFooter } from '@/components/layout/PremiumFooter';
+import { ComingSoon } from '@/components/ui/ComingSoon';
 
-export const metadata = {
-  title: 'Explore Labs | Prayukti x MMMUT',
-  description: 'Browse and filter all virtual experiments by branch, semester, and difficulty. Start practising right in your browser.',
-};
+export default function ExplorePage() {
+    return (
+        <main className="min-h-screen bg-[#FAFAFA] flex flex-col font-sans">
+            <PremiumNavbar pathname="/explore" />
+            
+            <div className="flex-grow pt-24">
+                <ComingSoon title="Explore" />
+            </div>
 
-export default function Page() {
-  return (
-    <>
-      <Navbar pathname="/explore" />
-      <ExplorePage />
-      <Footer />
-    </>
-  );
+            <PremiumFooter />
+        </main>
+    );
 }

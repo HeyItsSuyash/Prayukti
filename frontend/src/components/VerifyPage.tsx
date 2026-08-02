@@ -5,7 +5,7 @@ import { API_URL } from "@/lib/config";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Loader2, ShieldCheck, RefreshCw } from "lucide-react";
+
 import axios from "axios";
 
 
@@ -84,27 +84,27 @@ export default function VerifyPage() {
     if (!isMounted) return null;
 
     return (
-        <div className="flex-1 flex items-center justify-center p-4 py-12 bg-slate-50 font-sans selection:bg-orange-100 min-h-screen">
-            <div className="bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-slate-100 max-w-md w-full text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-50 text-accent rounded-2xl mb-6">
-                    <ShieldCheck size={32} />
+        <div className="flex-1 flex items-center justify-center p-4 py-12 bg-[#021D24] font-sans selection:bg-[#14D98F]/30 min-h-screen">
+            <div className="bg-[#03252E] p-8 md:p-12 rounded-none border border-[#14D98F]/20 shadow-2xl max-w-md w-full text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#084738] text-[#14D98F] rounded-none mb-6 border border-[#14D98F]/30">
+                    <i className="bx bx-shieldcheck"  />
                 </div>
 
-                <h1 className="text-3xl font-black text-primary tracking-tight mb-2">Verify OTP</h1>
-                <p className="text-slate-500 font-medium mb-8">
+                <h1 className="text-3xl font-black text-white tracking-tight mb-2">Verify OTP</h1>
+                <p className="text-slate-300 font-medium mb-8">
                     We've sent a 6-digit code to <br />
-                    <span className="text-primary font-bold">{email}</span>
+                    <span className="text-[#14D98F] font-bold">{email}</span>
                 </p>
 
                 {error && (
-                    <div className="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 text-xs font-bold rounded-xl flex items-center gap-2">
-                        <RefreshCw className="w-4 h-4" /> {error}
+                    <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-bold rounded-none flex items-center gap-2 text-left">
+                        <i className="bx bx-error-circle w-4 h-4 text-lg"  /> {error}
                     </div>
                 )}
 
                 {success && (
-                    <div className="mb-6 p-4 bg-green-50 border border-green-100 text-green-600 text-xs font-bold rounded-xl flex items-center gap-2">
-                        <ShieldCheck className="w-4 h-4" /> {success}
+                    <div className="mb-6 p-4 bg-[#14D98F]/10 border border-[#14D98F]/30 text-[#14D98F] text-xs font-bold rounded-none flex items-center gap-2 text-left">
+                        <i className="bx bx-shield-check w-4 h-4 text-lg"  /> {success}
                     </div>
                 )}
 
@@ -113,17 +113,17 @@ export default function VerifyPage() {
                         type="text"
                         maxLength={6}
                         placeholder="· · · · · ·"
-                        className="h-20 text-center text-4xl font-black tracking-[1em] rounded-2xl bg-slate-50 border-transparent focus:border-accent focus:bg-white transition-all text-primary"
+                        className="h-20 text-center text-4xl font-black tracking-[1em] rounded-none bg-[#021D24] border border-[#14D98F]/20 focus:border-[#14D98F] focus:bg-[#021D24] transition-all text-white placeholder:text-slate-700 outline-none focus-visible:ring-0"
                         value={otp}
                         onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
                         required
                     />
 
                     <Button
-                        className="w-full h-14 text-lg font-bold bg-primary hover:bg-black text-white rounded-xl shadow-xl transition-all active:scale-[0.98]"
+                        className="w-full h-14 text-lg font-bold bg-[#14D98F] hover:bg-[#14D98F]/90 text-[#021D24] rounded-none transition-all active:scale-[0.98]"
                         disabled={loading}
                     >
-                        {loading ? <Loader2 className="animate-spin" /> : "VERIFY ACCOUNT"}
+                        {loading ? <i className="bx bx-loader2 animate-spin"  /> : "VERIFY ACCOUNT"}
                     </Button>
                 </form>
 
@@ -131,9 +131,9 @@ export default function VerifyPage() {
                     <button
                         onClick={handleResend}
                         disabled={resending}
-                        className="text-slate-500 text-sm font-bold flex items-center justify-center gap-2 mx-auto hover:text-orange-600 transition-colors"
+                        className="text-slate-400 text-sm font-bold flex items-center justify-center gap-2 mx-auto hover:text-[#14D98F] transition-colors"
                     >
-                        {resending ? <Loader2 className="animate-spin w-4 h-4" /> : <RefreshCw size={16} />}
+                        {resending ? <i className="bx bx-loader2 animate-spin w-4 h-4"  /> : <i className="bx bx-refreshcw"  />}
                         RESEND OTP
                     </button>
                 </div>

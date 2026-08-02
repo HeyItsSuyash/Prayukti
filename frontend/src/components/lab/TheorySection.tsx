@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp, FileText, Download, BookOpen } from "lucide-react";
+
 import { motion, AnimatePresence } from "framer-motion";
 
 interface TheorySectionProps {
@@ -26,7 +26,7 @@ export function TheorySection({ content }: TheorySectionProps) {
             >
                 <div className="flex items-center gap-3">
                     <div className="bg-blue-100 p-2 rounded-lg text-blue-700">
-                        <BookOpen className="w-6 h-6" />
+                        <i className="bx bx-bookopen w-6 h-6"  />
                     </div>
                     <div>
                         <h2 className="text-xl font-black uppercase tracking-tight text-slate-900">Theory & Concepts</h2>
@@ -44,11 +44,11 @@ export function TheorySection({ content }: TheorySectionProps) {
                             handleDownload();
                         }}
                     >
-                        <Download size={16} />
+                        <i className="bx bx-download"  />
                         <span className="text-xs font-bold uppercase tracking-wider">Download PDF</span>
                     </Button>
                     <div className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
-                        <ChevronDown className="w-5 h-5 text-slate-400" />
+                        <i className="bx bx-chevron-down w-5 h-5 text-slate-400"  />
                     </div>
                 </div>
             </div>

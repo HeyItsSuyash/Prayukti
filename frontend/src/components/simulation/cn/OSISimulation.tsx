@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Info, Play, RefreshCw, CheckCircle2, XCircle } from "lucide-react";
+
 
 interface Layer {
     id: number;
@@ -132,7 +132,7 @@ export default function OSISimulation() {
                                     disabled={animating}
                                     className="bg-blue-600 hover:bg-blue-700 shadow-md"
                                 >
-                                    {animating ? <RefreshCw className="mr-2 h-4 w-4 animate-spin" /> : <Play className="mr-2 h-4 w-4" />}
+                                    {animating ? <i className="bx bx-refreshcw mr-2 h-4 w-4 animate-spin"  /> : <i className="bx bx-play mr-2 h-4 w-4"  />}
                                     {animating ? "Animating..." : "Start Packet Flow"}
                                 </Button>
                             </div>
@@ -202,7 +202,7 @@ export default function OSISimulation() {
                                                 <p className="opacity-90">OSI Layer {selectedLayer.id}</p>
                                             </div>
                                             <div className="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
-                                                <Info className="h-6 w-6" />
+                                                <i className="bx bx-info h-6 w-6"  />
                                             </div>
                                         </div>
                                     </div>
@@ -215,7 +215,7 @@ export default function OSISimulation() {
                                             <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                                 {selectedLayer.functions.map((fn, i) => (
                                                     <li key={i} className="bg-gray-50 p-3 rounded-lg text-gray-700 text-sm border border-gray-100 flex items-center gap-2">
-                                                        <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0" />
+                                                        <i className="bx bx-check-circle h-4 w-4 text-green-500 shrink-0"  />
                                                         {fn}
                                                     </li>
                                                 ))}
@@ -244,7 +244,7 @@ export default function OSISimulation() {
                             ) : (
                                 <div className="h-full flex flex-col items-center justify-center text-center p-12 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
                                     <div className="bg-blue-100 p-4 rounded-full mb-4">
-                                        <Info className="h-8 w-8 text-blue-600" />
+                                        <i className="bx bx-info h-8 w-8 text-blue-600"  />
                                     </div>
                                     <h3 className="font-bold text-gray-800 text-lg">No Layer Selected</h3>
                                     <p className="text-gray-500 max-w-xs mt-2">
@@ -286,8 +286,8 @@ export default function OSISimulation() {
                                                 <div className="flex items-center gap-3">
                                                     <span className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-xs shrink-0">{String.fromCharCode(65 + oIdx)}</span>
                                                     {option}
-                                                    {quizSubmitted && oIdx === q.answer && <CheckCircle2 className="ml-auto h-5 w-5 text-green-500" />}
-                                                    {quizSubmitted && quizAnswers[qIdx] === oIdx && oIdx !== q.answer && <XCircle className="ml-auto h-5 w-5 text-red-500" />}
+                                                    {quizSubmitted && oIdx === q.answer && <i className="bx bx-check-circle ml-auto h-5 w-5 text-green-500"  />}
+                                                    {quizSubmitted && quizAnswers[qIdx] === oIdx && oIdx !== q.answer && <i className="bx bx-xcircle ml-auto h-5 w-5 text-red-500"  />}
                                                 </div>
                                             </button>
                                         ))}

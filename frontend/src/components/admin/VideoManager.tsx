@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 // import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { PlayCircle, Save, Trash2, CheckCircle, Video } from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
 // import { toast } from "sonner"; // Removed due to missing dependency
 
@@ -168,7 +168,7 @@ export function VideoManager() {
                                     size="sm"
                                     className="bg-black hover:bg-gray-800 text-white"
                                 >
-                                    {saving === exp.id ? "Saving..." : <Save className="h-4 w-4" />}
+                                    {saving === exp.id ? "Saving..." : <i className="bx bx-save h-4 w-4"  />}
                                 </Button>
                                 {videoData[exp.id] && (
                                     <Button
@@ -176,7 +176,7 @@ export function VideoManager() {
                                         variant="destructive"
                                         size="sm"
                                     >
-                                        <Trash2 className="h-4 w-4" />
+                                        <i className="bx bx-trash2 h-4 w-4"  />
                                     </Button>
                                 )}
                             </div>

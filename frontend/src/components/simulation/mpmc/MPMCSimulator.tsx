@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Play, SkipForward, RotateCcw, HelpCircle, CheckCircle2, Info, BookOpen, ListChecks, FileText, ClipboardCopy, Download, Beaker } from "lucide-react";
+
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Intel8085 } from "@/lib/mpmc/8085-cpu";
 import { Assembler } from "@/lib/mpmc/assembler";
@@ -568,7 +568,7 @@ export default function MPMCSimulator({
                             <Card className="border-green-100 shadow-sm">
                                 <CardHeader className="bg-green-50/50">
                                     <CardTitle className="flex items-center gap-2 text-[#2e7d32]">
-                                        <Beaker className="h-5 w-5" /> Aim
+                                        <i className="bx bx-beaker h-5 w-5"  /> Aim
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent className="pt-4">
@@ -579,7 +579,7 @@ export default function MPMCSimulator({
                             <Card className="border-blue-100 shadow-sm">
                                 <CardHeader className="bg-blue-50/50">
                                     <CardTitle className="flex items-center gap-2 text-blue-700">
-                                        <BookOpen className="h-5 w-5" /> Theory
+                                        <i className="bx bx-bookopen h-5 w-5"  /> Theory
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent className="pt-4">
@@ -590,7 +590,7 @@ export default function MPMCSimulator({
                             <Card className="border-orange-100 shadow-sm">
                                 <CardHeader className="bg-orange-50/50">
                                     <CardTitle className="flex items-center gap-2 text-orange-700">
-                                        <ListChecks className="h-5 w-5" /> Algorithm
+                                        <i className="bx bx-listchecks h-5 w-5"  /> Algorithm
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent className="pt-4">
@@ -607,7 +607,7 @@ export default function MPMCSimulator({
                             <Card className="border-purple-100 shadow-sm">
                                 <CardHeader className="bg-purple-50/50">
                                     <CardTitle className="flex items-center gap-2 text-purple-700">
-                                        <FileText className="h-5 w-5" /> Procedure
+                                        <i className="bx bx-file h-5 w-5"  /> Procedure
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent className="pt-4">
@@ -630,7 +630,7 @@ export default function MPMCSimulator({
 
                         <div className="flex justify-center pt-4 pb-12">
                             <Button onClick={() => setActiveTab("simulation")} className="bg-[#2e7d32] hover:bg-[#1b5e20] px-8">
-                                Go to Simulation <Play className="ml-2 h-4 w-4" />
+                                Go to Simulation <i className="bx bx-play ml-2 h-4 w-4"  />
                             </Button>
                         </div>
                     </div>
@@ -643,7 +643,7 @@ export default function MPMCSimulator({
                             <Card className="h-fit border-[#2e7d32]/20 overflow-hidden shadow-md">
                                 <CardHeader className="bg-[#2e7d32]/5 py-3 flex flex-row items-center justify-between">
                                     <CardTitle className="text-xs font-bold flex items-center gap-2">
-                                        <Play className="h-3.5 w-3.5 text-[#2e7d32]" /> Assembly Editor
+                                        <i className="bx bx-play h-3.5 w-3.5 text-[#2e7d32]"  /> Assembly Editor
                                     </CardTitle>
                                     <div className="flex items-center gap-2">
                                         {/* Show Save button only in exam mode, but not readonly */}
@@ -679,13 +679,13 @@ export default function MPMCSimulator({
                                     <div className="p-4 bg-gray-50 border-t space-y-4">
                                         <div className="flex gap-2">
                                             <Button onClick={handleStep} disabled={cpu.isHalted || isRunning} size="sm" className="flex-1 bg-[#2e7d32] hover:bg-[#1b5e20] text-xs h-9">
-                                                <SkipForward className="h-3.5 w-3.5 mr-1" /> Step
+                                                <i className="bx bx-skipforward h-3.5 w-3.5 mr-1"  /> Step
                                             </Button>
                                             <Button onClick={handleRun} disabled={cpu.isHalted || isRunning} size="sm" className="flex-1 bg-blue-600 hover:bg-blue-700 text-xs h-9">
-                                                <Play className="h-3.5 w-3.5 mr-1" /> Run
+                                                <i className="bx bx-play h-3.5 w-3.5 mr-1"  /> Run
                                             </Button>
                                             <Button onClick={reset} variant="outline" size="sm" className="flex-1 text-xs h-9">
-                                                <RotateCcw className="h-3.5 w-3.5 mr-1" /> Reset
+                                                <i className="bx bx-rotateccw h-3.5 w-3.5 mr-1"  /> Reset
                                             </Button>
                                         </div>
                                     </div>
@@ -719,7 +719,7 @@ export default function MPMCSimulator({
                             <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm flex items-center justify-between">
                                 <div className="flex items-center gap-4">
                                     <div className="p-2 bg-green-100 rounded-full">
-                                        <Info className="h-5 w-5 text-[#2e7d32]" />
+                                        <i className="bx bx-info h-5 w-5 text-[#2e7d32]"  />
                                     </div>
                                     <div>
                                         <p className="text-xs font-bold text-gray-800">Hardware Simulation Mode</p>
@@ -756,10 +756,10 @@ export default function MPMCSimulator({
                                         navigator.clipboard.writeText(headers + rows);
                                         setFeedback("Observation table copied to clipboard!");
                                     }}>
-                                        <ClipboardCopy className="h-4 w-4 mr-2" /> Copy
+                                        <i className="bx bx-clipboardcopy h-4 w-4 mr-2"  /> Copy
                                     </Button>
                                     <Button variant="outline" size="sm" className="hidden sm:flex">
-                                        <Download className="h-4 w-4 mr-2" /> Export CSV
+                                        <i className="bx bx-download h-4 w-4 mr-2"  /> Export CSV
                                     </Button>
                                 </div>
                             </CardHeader>
@@ -814,7 +814,7 @@ export default function MPMCSimulator({
                                     <div className="flex justify-between items-center mb-2">
                                         <span className="text-xs font-bold text-[#2e7d32] uppercase tracking-wider">Question {vivaIndex + 1} of {vivaQuestions.length}</span>
                                         <div className="flex items-center text-xs text-gray-500">
-                                            <HelpCircle className="h-3 w-3 mr-1" /> Help available
+                                            <i className="bx bx-help-circle h-3 w-3 mr-1"  /> Help available
                                         </div>
                                     </div>
                                     <CardTitle className="text-lg text-gray-800">{vivaQuestions[vivaIndex]?.q}</CardTitle>
@@ -837,11 +837,11 @@ export default function MPMCSimulator({
                                 <div className="mb-6 flex justify-center">
                                     {score > 1 ? (
                                         <div className="bg-green-100 p-4 rounded-full">
-                                            <CheckCircle2 className="h-16 w-16 text-green-600" />
+                                            <i className="bx bx-check-circle h-16 w-16 text-green-600"  />
                                         </div>
                                     ) : (
                                         <div className="bg-orange-100 p-4 rounded-full">
-                                            <CheckCircle2 className="h-16 w-16 text-orange-600" />
+                                            <i className="bx bx-check-circle h-16 w-16 text-orange-600"  />
                                         </div>
                                     )}
                                 </div>

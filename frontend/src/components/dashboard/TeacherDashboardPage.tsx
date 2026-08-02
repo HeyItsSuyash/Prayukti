@@ -6,7 +6,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MOCK_TEACHER_DATA, StudentMetric } from '@/data/mock-teacher-data';
-import { Users, BookOpen, AlertCircle, TrendingUp, Search, LogOut, Sparkles } from 'lucide-react';
+
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { StudentTable } from './StudentTable';
 import { StudentDetailView } from './StudentDetailView';
@@ -166,7 +166,7 @@ export default function TeacherDashboard() {
                         </div>
                         <div className="flex items-center gap-4">
                             <div className="relative w-[250px] hidden md:block">
-                                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                                <i className="bx bx-search absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground"  />
                                 <Input
                                     type="search"
                                     placeholder="Search Student..."
@@ -186,15 +186,15 @@ export default function TeacherDashboard() {
                                 </SelectContent>
                             </Select>
                             <Button variant="outline" className="hidden border-accent/20 text-accent hover:bg-accent/5 hover:text-accent md:flex" onClick={() => window.location.href = ('/dashboard/teacher/exams')}>
-                                <BookOpen className="w-4 h-4 mr-2" />
+                                <i className="bx bx-bookopen w-4 h-4 mr-2"  />
                                 Manage Exams
                             </Button>
                             <Button variant="outline" className="hidden border-indigo-100 text-indigo-600 hover:bg-indigo-50/50 md:flex" onClick={() => window.location.href = ('/classroom')}>
-                                <Sparkles className="w-4 h-4 mr-2 text-indigo-500 animate-pulse" />
+                                <i className="bx bx-sparkles w-4 h-4 mr-2 text-indigo-500 animate-pulse"  />
                                 Smart Classroom
                             </Button>
                             <Button variant="ghost" size="icon" onClick={handleLogout} className="text-red-600 hover:text-red-700 hover:bg-red-50" title="Logout">
-                                <LogOut className="h-5 w-5" />
+                                <i className="bx bx-logout h-5 w-5"  />
                             </Button>
                         </div>
                     </header>
@@ -237,7 +237,7 @@ export default function TeacherDashboard() {
                         <div className="border border-indigo-100/50 rounded-2xl p-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex flex-col md:flex-row justify-between items-center gap-4 shadow-md">
                             <div>
                                 <h3 className="text-lg font-bold flex items-center gap-2">
-                                    <Sparkles className="w-5 h-5 text-indigo-200 animate-pulse" />
+                                    <i className="bx bx-sparkles w-5 h-5 text-indigo-200 animate-pulse"  />
                                     Smart Classroom Portal
                                 </h3>
                                 <p className="text-indigo-100 text-sm mt-1">

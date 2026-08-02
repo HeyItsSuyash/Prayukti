@@ -1,7 +1,7 @@
 "use client";
 
 
-import { ArrowRight, PlayCircle } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 export function Hero() {
@@ -33,12 +33,12 @@ export function Hero() {
                         <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                             <a href="/labs">
                                 <Button size="lg" className="h-14 px-8 text-base rounded-full btn-gradient btn-interaction">
-                                    Explore Labs <ArrowRight className="ml-2 w-5 h-5" />
+                                    Explore Labs <i className="bx bx-right-arrow-alt ml-2 w-5 h-5"  />
                                 </Button>
                             </a>
                             <a href="/demo">
                                 <Button variant="outline" size="lg" className="h-14 px-8 text-base rounded-full border-2 hover:bg-slate-50">
-                                    <PlayCircle className="mr-2 w-5 h-5" /> Watch Demo
+                                    <i className="bx bx-play-circle mr-2 w-5 h-5"  /> Watch Demo
                                 </Button>
                             </a>
                         </div>

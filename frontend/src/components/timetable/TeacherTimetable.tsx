@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Clock, BookOpen, BarChart } from 'lucide-react';
+
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 
 export default function TeacherTimetable() {
@@ -19,7 +19,7 @@ export default function TeacherTimetable() {
               <p className="text-sm text-neutral-400">Total Subjects</p>
               <p className="text-2xl font-bold mt-1">3</p>
             </div>
-            <BookOpen className="w-8 h-8 text-blue-400 opacity-50" />
+            <i className="bx bx-bookopen w-8 h-8 text-blue-400 opacity-50"  />
           </CardContent>
         </Card>
         <Card className="bg-neutral-900 border-neutral-800">
@@ -28,7 +28,7 @@ export default function TeacherTimetable() {
               <p className="text-sm text-neutral-400">Weekly Hours</p>
               <p className="text-2xl font-bold mt-1">16</p>
             </div>
-            <Clock className="w-8 h-8 text-emerald-400 opacity-50" />
+            <i className="bx bx-clock w-8 h-8 text-emerald-400 opacity-50"  />
           </CardContent>
         </Card>
         <Card className="bg-neutral-900 border-neutral-800">
@@ -37,7 +37,7 @@ export default function TeacherTimetable() {
               <p className="text-sm text-neutral-400">Lab Hours</p>
               <p className="text-2xl font-bold mt-1">6</p>
             </div>
-            <BarChart className="w-8 h-8 text-purple-400 opacity-50" />
+            <i className="bx bx-barchart w-8 h-8 text-purple-400 opacity-50"  />
           </CardContent>
         </Card>
       </div>
@@ -46,7 +46,7 @@ export default function TeacherTimetable() {
         <Card className="bg-neutral-900 border-neutral-800">
           <CardHeader>
             <CardTitle className="text-lg flex items-center text-neutral-200">
-              <Calendar className="w-5 h-5 mr-2 text-blue-400" /> Today's Schedule
+              <i className="bx bx-calendar w-5 h-5 mr-2 text-blue-400"  /> Today's Schedule
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">

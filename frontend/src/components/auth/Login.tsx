@@ -6,22 +6,6 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
 
-import {
-    Loader2,
-    GraduationCap,
-    School,
-    ShieldCheck,
-    User,
-    Lock,
-    Mail,
-    ArrowRight,
-    ChevronLeft,
-    Eye,
-    EyeOff,
-    Quote,
-    AlertCircle,
-    CheckCircle2
-} from "lucide-react";
 import axios from "axios";
 
 
@@ -164,41 +148,41 @@ export default function LoginPage() {
     if (!mounted) {
         return (
             <div className="h-screen flex bg-white font-sans items-center justify-center">
-                <Loader2 className="animate-spin text-accent w-10 h-10" />
+                <i className="bx bx-loader2 animate-spin text-primary w-10 h-10"  />
             </div>
         );
     }
 
     return (
-        <div className="h-screen flex bg-white font-sans selection:bg-orange-100 overflow-hidden">
+        <div className="h-screen flex bg-background font-sans selection:bg-primary/20 overflow-hidden">
             {/* Left Sidebar - Carousel */}
-            <div className="hidden lg:flex lg:w-1/2 relative bg-primary overflow-hidden items-stretch">
+            <div className="hidden lg:flex lg:w-1/2 relative bg-secondary overflow-hidden items-stretch">
                 {/* Background Image with Overlay */}
                 <div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-1000"
                     style={{ backgroundImage: `url('/muj_auth_sidebar_bg_1778010617249.png')` }}
                 />
-                <div className="absolute inset-0 bg-primary/80" />
+                <div className="absolute inset-0 bg-secondary/80" />
 
                 {/* Sidebar Content */}
                 <div className="relative z-10 flex flex-col justify-between w-full p-12">
                     <div className="flex items-center justify-between">
                         <a href="/" className="flex items-center gap-3 group">
-                            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary transform group-hover:scale-105 transition-all duration-500 shadow-xl overflow-hidden border-2 border-white/20">
+                            <div className="w-16 h-16 flex items-center justify-center transform group-hover:scale-105 transition-all duration-500">
                                 <img
-                                    src="http://www.mmmut.ac.in/images/largelogo.jpg"
-                                    alt="MMMUT Logo"
-                                    className="w-full h-full object-cover"
+                                    src="/prayukti 2.0/logo/logo_blue.png"
+                                    alt="Prayukti Logo"
+                                    className="w-full h-full object-contain"
                                 />
                             </div>
                             <div className="flex flex-col">
-                                <span className="text-2xl font-black text-white tracking-tight leading-none">Prayukti <span className="text-accent">x MMMUT</span></span>
-                                <span className="text-[10px] font-bold text-white/60 tracking-wider uppercase mt-1">Virtual Lab System</span>
+                                <span className="text-3xl font-bold text-white tracking-tight leading-none">Prayukti</span>
+                                <span className="text-xs font-medium text-white/80 mt-1">Virtual Lab System</span>
                             </div>
                         </a>
 
-                        <a href="/" className="flex items-center gap-2 text-white/80 hover:text-white font-bold text-sm bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-xl transition-all border border-white/10">
-                            Back to website <ArrowRight size={16} />
+                        <a href="/" className="flex items-center gap-2 text-white/80 hover:text-white font-medium text-sm bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-sm transition-all border border-white/10 hover:bg-white/20">
+                            Back to website <i className="bx bx-right-arrow-alt"  />
                         </a>
                     </div>
 
@@ -212,30 +196,30 @@ export default function LoginPage() {
                             >
                                 <div className="space-y-6">
                                     <div className="space-y-2">
-                                        <span className="text-accent font-black uppercase tracking-[0.3em] text-[10px] bg-accent/10 px-3 py-1 rounded-xl border border-accent/20">{slide.tag}</span>
-                                        <h2 className="text-5xl font-black text-white leading-tight">
+                                        <span className="text-primary-foreground font-semibold text-xs bg-primary/20 px-3 py-1 rounded-full border border-primary/30">{slide.tag}</span>
+                                        <h2 className="text-4xl font-bold text-white leading-tight">
                                             {slide.title}
                                         </h2>
                                     </div>
 
                                     {slide.testimonial ? (
-                                        <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-[2rem] space-y-4 max-w-lg shadow-2xl relative">
-                                            <Quote className="absolute -top-4 -left-4 text-accent w-10 h-10 opacity-50" />
-                                            <p className="text-white/90 text-xl font-medium leading-relaxed">
+                                        <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-md space-y-4 max-w-lg shadow-sm relative">
+                                            <i className="bx bxs-quote-alt-left absolute -top-4 -left-4 text-primary-foreground w-10 h-10 opacity-50"  />
+                                            <p className="text-white/90 text-lg font-medium leading-relaxed">
                                                 "{slide.testimonial.text}"
                                             </p>
                                             <div className="flex items-center gap-3 pt-2">
-                                                <div className="w-10 h-10 bg-accent/20 rounded-xl flex items-center justify-center text-accent">
-                                                    <User size={20} />
+                                                <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center text-primary-foreground">
+                                                    <i className="bx bx-user"  />
                                                 </div>
                                                 <div>
-                                                    <div className="text-white font-bold text-sm">{slide.testimonial.author}</div>
-                                                    <div className="text-white/40 text-xs font-black uppercase tracking-widest">{slide.testimonial.position}</div>
+                                                    <div className="text-white font-semibold text-sm">{slide.testimonial.author}</div>
+                                                    <div className="text-white/60 text-xs font-medium">{slide.testimonial.position}</div>
                                                 </div>
                                             </div>
                                         </div>
                                     ) : (
-                                        <p className="text-white/70 max-w-md font-medium text-lg leading-relaxed">
+                                        <p className="text-white/80 max-w-md font-medium text-lg leading-relaxed">
                                             {slide.description}
                                         </p>
                                     )}
@@ -250,13 +234,13 @@ export default function LoginPage() {
                                 <button
                                     key={idx}
                                     onClick={() => setCurrentSlide(idx)}
-                                    className={`h-1.5 rounded-xl transition-all duration-500 ${idx === currentSlide ? "w-12 bg-accent shadow-[0_0_15px_rgba(243,111,33,0.5)]" : "w-4 bg-white/20 hover:bg-white/40"
+                                    className={`h-1.5 rounded-full transition-all duration-500 ${idx === currentSlide ? "w-8 bg-primary shadow-sm" : "w-2 bg-white/20 hover:bg-white/40"
                                         }`}
                                 />
                             ))}
                         </div>
 
-                        <div className="flex items-center gap-6 text-white/40 text-[10px] font-black uppercase tracking-widest">
+                        <div className="flex items-center gap-3 text-white/60 text-xs font-medium">
                             <span>&copy; 2025 Madan Mohan Malaviya University of Technology</span>
                             <span>•</span>
                             <span>Gorakhpur, UP</span>
@@ -267,29 +251,28 @@ export default function LoginPage() {
 
             {/* Right Side - Form Container */}
             <div className="w-full lg:w-1/2 flex flex-col items-center justify-center p-8 md:p-12 lg:p-20">
-                <div className="max-w-md w-full space-y-10">
+                <div className="max-w-md w-full space-y-8">
                     {/* Header */}
-                    <div className="space-y-4">
-                        <a href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-primary font-bold text-xs uppercase tracking-widest transition-colors mb-4">
-                            <ChevronLeft size={16} /> Back
+                    <div className="space-y-2">
+                        <a href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground font-medium text-sm transition-colors mb-4">
+                            <i className="bx bx-chevron-left"  /> Back
                         </a>
-                        <h1 className="text-4xl font-black text-primary tracking-tight">Sign in to your account</h1>
-
+                        <h1 className="text-3xl font-bold text-foreground tracking-tight">Sign in to your account</h1>
                     </div>
 
                     {/* Role Selection */}
-                    <div className="flex p-1.5 bg-slate-100 rounded-2xl gap-1">
+                    <div className="flex p-1.5 bg-muted rounded-md gap-1">
                         {(['student', 'teacher', 'admin'] as UserRole[]).map((r) => (
                             <button
                                 key={r}
                                 onClick={() => setRole(r)}
-                                className={`flex-1 py-3.5 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all ${role === r
-                                    ? 'bg-white text-primary shadow-lg ring-1 ring-black/5'
-                                    : 'text-slate-400 hover:text-slate-600 hover:bg-slate-200/50'
+                                className={`flex-1 py-2.5 text-sm font-medium capitalize rounded-sm transition-all ${role === r
+                                    ? 'bg-background text-foreground shadow-sm'
+                                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                                     }`}
                             >
                                 <div className="flex items-center justify-center gap-2">
-                                    {r === 'student' ? <GraduationCap size={14} /> : r === 'teacher' ? <School size={14} /> : <ShieldCheck size={14} />}
+                                    {r === 'student' ? <i className="bx bxs-graduation"  /> : r === 'teacher' ? <i className="bx bx-school"  /> : <i className="bx bx-shieldcheck"  />}
                                     {r}
                                 </div>
                             </button>
@@ -298,83 +281,83 @@ export default function LoginPage() {
 
                     {success ? (
                         <div className="text-center py-12 space-y-6 animate-in fade-in zoom-in duration-500">
-                            <div className="w-24 h-24 bg-green-50 text-green-600 rounded-3xl flex items-center justify-center mx-auto shadow-xl shadow-green-100 transform rotate-12">
-                                <CheckCircle2 size={48} />
+                            <div className="w-20 h-20 bg-success/10 text-success rounded-full flex items-center justify-center mx-auto shadow-sm">
+                                <i className="bx bx-check-circle"  />
                             </div>
                             <div className="space-y-2">
-                                <h3 className="text-3xl font-black text-primary tracking-tight">Access Granted</h3>
-                                <p className="text-slate-500 font-medium">Secure session initialized. Redirecting...</p>
+                                <h3 className="text-2xl font-bold text-foreground tracking-tight">Access Granted</h3>
+                                <p className="text-muted-foreground font-medium">Secure session initialized. Redirecting...</p>
                             </div>
                         </div>
                     ) : (
-                        <form onSubmit={handleLogin} className="space-y-6">
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">University Email</label>
+                        <form onSubmit={handleLogin} className="space-y-5">
+                            <div className="space-y-1.5">
+                                <label className="text-sm font-medium text-foreground">University Email</label>
                                 <div className="relative group">
                                     <input
                                         type="email"
                                         required
                                         placeholder="name@mmmut.ac.in"
-                                        className="w-full px-5 py-4 bg-slate-50 border-2 border-transparent focus:border-accent focus:bg-white rounded-2xl outline-none transition-all text-slate-700 font-bold pl-12 group-hover:bg-slate-100"
+                                        className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary rounded-sm outline-none transition-all text-foreground text-sm pl-11 shadow-sm"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                     />
-                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 group-focus-within:text-accent transition-colors" />
+                                    <i className="bx bx-envelope absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors"  />
                                 </div>
                             </div>
 
-                            <div className="space-y-2">
-                                <div className="flex justify-between items-end pr-1">
-                                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Password</label>
-                                    <button type="button" className="text-[10px] font-black text-accent uppercase tracking-widest hover:underline">Forgot password?</button>
+                            <div className="space-y-1.5">
+                                <div className="flex justify-between items-center">
+                                    <label className="text-sm font-medium text-foreground">Password</label>
+                                    <button type="button" className="text-sm font-medium text-primary hover:underline">Forgot password?</button>
                                 </div>
                                 <div className="relative group">
                                     <input
                                         type={showPassword ? "text" : "password"}
                                         required
                                         placeholder="••••••••"
-                                        className="w-full px-5 py-4 bg-slate-50 border-2 border-transparent focus:border-accent focus:bg-white rounded-2xl outline-none transition-all text-slate-700 font-bold pl-12 group-hover:bg-slate-100"
+                                        className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary rounded-sm outline-none transition-all text-foreground text-sm pl-11 shadow-sm"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
-                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 group-focus-within:text-accent transition-colors" />
+                                    <i className="bx bx-lock absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors"  />
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-accent transition-colors"
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
                                     >
-                                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                        {showPassword ? <i className="bx bx-eyeoff"  /> : <i className="bx bx-eye"  />}
                                     </button>
                                 </div>
                             </div>
 
                             {error && (
-                                <div className="p-4 bg-red-50 border-2 border-red-100 text-red-600 text-[10px] font-black rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-1">
-                                    <AlertCircle className="w-5 h-5 shrink-0" />
-                                    {error.toUpperCase()}
+                                <div className="p-3 bg-destructive/10 border border-destructive/20 text-destructive text-sm font-medium rounded-sm flex items-center gap-2 animate-in fade-in slide-in-from-top-1">
+                                    <i className="bx bx-alertcircle w-4 h-4 shrink-0"  />
+                                    {error}
                                 </div>
                             )}
 
-                            <div className="space-y-4">
+                            <div className="space-y-4 pt-2">
                                 <Button
                                     type="submit"
                                     disabled={loading}
-                                    className="w-full py-8 text-lg font-black tracking-widest rounded-2xl shadow-xl shadow-accent/20 bg-accent hover:bg-accent/90 text-white transition-all active:scale-[0.98] border-0"
+                                    className="w-full py-6 text-base font-semibold rounded-sm shadow-sm transition-all"
                                 >
-                                    {loading ? <Loader2 className="animate-spin" /> : "SIGN IN"}
+                                    {loading ? <i className="bx bx-loader2 animate-spin w-5 h-5"  /> : "Sign In"}
                                 </Button>
 
-                                <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                                    Don't have an account? <a href="/register" className="text-accent hover:underline">Register Now</a>
+                                <p className="text-center text-sm font-medium text-muted-foreground">
+                                    Don't have an account? <a href="/register" className="text-primary hover:underline font-semibold">Register Now</a>
                                 </p>
                             </div>
 
                             <div className="relative py-4">
                                 <div className="absolute inset-0 flex items-center">
-                                    <div className="w-full border-t border-slate-100"></div>
+                                    <div className="w-full border-t border-border"></div>
                                 </div>
-                                <div className="relative flex justify-center text-[10px] font-black uppercase tracking-[0.2em]">
-                                    <span className="bg-white px-4 text-slate-400">Quick Dev Access</span>
+                                <div className="relative flex justify-center text-xs font-medium text-muted-foreground">
+                                    <span className="bg-background px-4">Quick Dev Access</span>
                                 </div>
                             </div>
 
@@ -382,10 +365,10 @@ export default function LoginPage() {
                                 <Button
                                     type="button"
                                     variant="outline"
-                                    className="h-14 rounded-2xl font-bold gap-3 border-2 border-slate-100 hover:bg-slate-50 transition-all text-slate-500 uppercase tracking-widest text-[10px]"
+                                    className="h-12 rounded-sm font-medium gap-2 text-muted-foreground hover:text-foreground"
                                     onClick={() => handleTestLogin(role)}
                                 >
-                                    <CheckCircle2 size={18} className="text-green-500" />
+                                    <i className="bx bx-check-circle text-success"  />
                                     Bypass Authentication ({role})
                                 </Button>
                             </div>

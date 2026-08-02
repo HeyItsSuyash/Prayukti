@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { PlayCircle, BookOpen, HelpCircle, Link as LinkIcon, ExternalLink, Download } from "lucide-react";
+
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -35,7 +35,7 @@ export function ResourcesSection({ resources, labId }: ResourcesSectionProps) {
     if (!resources) {
         return (
             <div className="p-6 text-center text-gray-500 bg-gray-50 rounded-lg border border-dashed border-gray-300">
-                <BookOpen className="mx-auto h-12 w-12 text-gray-400 mb-2" />
+                <i className="bx bx-bookopen mx-auto h-12 w-12 text-gray-400 mb-2"  />
                 <p>No specific resources available for this experiment yet.</p>
             </div>
         );
@@ -146,9 +146,9 @@ export function ResourcesSection({ resources, labId }: ResourcesSectionProps) {
                 <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
                     <DialogHeader>
                         <DialogTitle className="text-2xl flex items-center gap-2">
-                            {selectedType === 'video' && <PlayCircle className="text-red-500" />}
-                            {selectedType === 'notes' && <BookOpen className="text-blue-500" />}
-                            {selectedType === 'quiz' && <HelpCircle className="text-purple-500" />}
+                            {selectedType === 'video' && <i className="bx bx-play-circle text-red-500"  />}
+                            {selectedType === 'notes' && <i className="bx bx-bookopen text-blue-500"  />}
+                            {selectedType === 'quiz' && <i className="bx bx-help-circle text-purple-500"  />}
                             {selectedType === 'reading' && <LinkIcon className="text-green-500" />}
 
                             {selectedType === 'video' && finalVideoData?.title}
@@ -201,7 +201,7 @@ export function ResourcesSection({ resources, labId }: ResourcesSectionProps) {
                                             className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-sm transition-all group"
                                         >
                                             <span className="font-medium text-gray-700 group-hover:text-blue-600">{link.text}</span>
-                                            <ExternalLink size={16} className="text-gray-400 group-hover:text-blue-500" />
+                                            <i className="bx bx-externallink text-gray-400 group-hover:text-blue-500"  />
                                         </a>
                                     ))}
                                 </div>

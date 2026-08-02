@@ -13,7 +13,7 @@ import {
     SelectTrigger, 
     SelectValue 
 } from "@/components/ui/select";
-import { Plus, Trash2, Edit, BookOpen, Loader2, Check, Search, FlaskConical, ChevronLeft, Video, FileText, ExternalLink, Link as LinkIcon, ChevronRight, Save } from 'lucide-react';
+
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -193,7 +193,7 @@ export function SubjectManagement() {
                             </div>
                             <div className="flex items-end md:col-span-2">
                                 <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 py-6 rounded-xl font-bold">
-                                    <Plus className="mr-2" /> Register Subject
+                                    <i className="bx bx-plus mr-2"  /> Register Subject
                                 </Button>
                             </div>
                         </form>
@@ -215,14 +215,14 @@ export function SubjectManagement() {
                         {loading ? (
                             <TableRow>
                                 <TableCell colSpan={4} className="text-center py-20">
-                                    <Loader2 className="animate-spin inline-block mr-2 text-indigo-600" /> 
+                                    <i className="bx bx-loader2 animate-spin inline-block mr-2 text-indigo-600"  /> 
                                     <span className="font-black text-slate-300 uppercase tracking-widest italic">Syncing Registry...</span>
                                 </TableCell>
                             </TableRow>
                         ) : subjects.length === 0 ? (
                             <TableRow>
                                 <TableCell colSpan={4} className="text-center py-20 bg-slate-50/50 border-2 border-dashed border-slate-100 rounded-[3rem] m-6">
-                                    <BookOpen size={48} className="mx-auto text-slate-200 mb-4" />
+                                    <i className="bx bx-bookopen mx-auto text-slate-200 mb-4"  />
                                     <p className="text-slate-400 font-black uppercase tracking-widest italic">No subjects found for current selection</p>
                                 </TableCell>
                             </TableRow>
@@ -235,7 +235,7 @@ export function SubjectManagement() {
                                 <TableCell className="p-6">
                                     <div className="flex items-center gap-4">
                                         <div className="bg-slate-100 p-3 rounded-2xl group-hover:bg-white transition-colors">
-                                            <BookOpen className="text-slate-500 w-5 h-5 group-hover:text-indigo-600" />
+                                            <i className="bx bx-bookopen text-slate-500 w-5 h-5 group-hover:text-indigo-600"  />
                                         </div>
                                         <div>
                                             <p className="font-black text-slate-800 text-lg tracking-tight group-hover:text-indigo-600 transition-colors">{subject.title || subject.name || 'Unnamed Subject'}</p>
@@ -346,7 +346,7 @@ function SubjectDetail({ subject, onBack }: SubjectDetailProps) {
                         onClick={onBack}
                         className="rounded-2xl border-slate-100 bg-white shadow-xl shadow-slate-100 hover:scale-110 transition-all w-14 h-14"
                     >
-                        <ChevronLeft size={24} />
+                        <i className="bx bx-chevron-left"  />
                     </Button>
                     <div>
                         <div className="flex items-center gap-3 mb-2">
@@ -368,7 +368,7 @@ function SubjectDetail({ subject, onBack }: SubjectDetailProps) {
                         <div className="flex items-center gap-2">
                             <Badge variant="secondary" className="rounded-lg bg-slate-950 text-white font-black">{experiments.length}</Badge>
                             <Button size="icon" variant="ghost" className="h-8 w-8 rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100 hover:bg-indigo-100" onClick={() => setIsAddingExp(!isAddingExp)}>
-                                <Plus size={16} />
+                                <i className="bx bx-plus"  />
                             </Button>
                         </div>
                     </div>
@@ -391,7 +391,7 @@ function SubjectDetail({ subject, onBack }: SubjectDetailProps) {
     
                     {loading ? (
                         <div className="py-12 text-center bg-white rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-100/50">
-                            <Loader2 className="animate-spin inline-block text-indigo-600 mb-2" />
+                            <i className="bx bx-loader2 animate-spin inline-block text-indigo-600 mb-2"  />
                             <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">Accessing Files...</p>
                         </div>
                     ) : experiments.map((exp) => (
@@ -409,7 +409,7 @@ function SubjectDetail({ subject, onBack }: SubjectDetailProps) {
                                     <div className={`p-3 rounded-2xl ${
                                         selectedExpId === exp._id ? 'bg-indigo-500' : 'bg-slate-50 group-hover:bg-white'
                                     }`}>
-                                        <FlaskConical size={20} className={selectedExpId === exp._id ? 'text-white' : 'text-slate-500'} />
+                                        <i className="bx bx-flask selectedExpId === exp._id ? 'text-white' : 'text-slate-500'"  />
                                     </div>
                                     <div className="flex items-center gap-1">
                                         <Badge className={`rounded-full text-[8px] font-black uppercase tracking-widest ${
@@ -423,7 +423,7 @@ function SubjectDetail({ subject, onBack }: SubjectDetailProps) {
                                             className={`h-7 w-7 rounded-lg ${selectedExpId === exp._id ? 'hover:bg-indigo-500 text-white/50 hover:text-white' : 'text-slate-300 hover:text-red-500'}`}
                                             onClick={(e) => handleDeleteExp(exp._id, e)}
                                         >
-                                            <Trash2 size={12} />
+                                            <i className="bx bx-trash2"  />
                                         </Button>
                                     </div>
                                 </div>
@@ -445,7 +445,7 @@ function SubjectDetail({ subject, onBack }: SubjectDetailProps) {
                     ) : (
                         <Card className="h-full min-h-[400px] rounded-[3rem] border-2 border-dashed border-slate-100 bg-slate-50/50 flex flex-col items-center justify-center p-12 text-center">
                             <div className="bg-white p-6 rounded-full shadow-2xl shadow-indigo-100 mb-6">
-                                <ChevronRight size={32} className="text-slate-200" />
+                                <i className="bx bx-chevronright text-slate-200"  />
                             </div>
                             <h4 className="text-xl font-black text-slate-300 uppercase tracking-tight italic mb-2">Select a simulation terminal</h4>
                             <p className="text-xs font-bold text-slate-400 max-w-[240px]">Select an experiment from the left menu to manage its interactive resources and learning assets.</p>
@@ -552,7 +552,7 @@ function SubjectResourceManager({ experimentId, experimentName }: { experimentId
                         disabled={saving || !newRes.title}
                         className="md:col-span-2 bg-indigo-600 hover:bg-indigo-700 h-14 rounded-2xl font-black uppercase tracking-widest mt-2"
                     >
-                        {saving ? <Loader2 className="animate-spin" /> : <><Plus className="mr-2" size={18} /> Deploy Asset</>}
+                        {saving ? <i className="bx bx-loader2 animate-spin"  /> : <><i className="bx bx-plus mr-2"  /> Deploy Asset</>}
                     </Button>
                 </div>
 
@@ -561,7 +561,7 @@ function SubjectResourceManager({ experimentId, experimentName }: { experimentId
                     <h4 className="font-black text-slate-800 uppercase tracking-widest text-xs ml-2">Deployed Assets</h4>
                     {loading ? (
                         <div className="py-12 text-center">
-                            <Loader2 className="animate-spin inline-block text-indigo-600" />
+                            <i className="bx bx-loader2 animate-spin inline-block text-indigo-600"  />
                         </div>
                     ) : resources.length === 0 ? (
                         <div className="py-12 text-center bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-100">
@@ -572,10 +572,10 @@ function SubjectResourceManager({ experimentId, experimentName }: { experimentId
                             {resources.map((res) => (
                                 <div key={res._id} className="flex items-center gap-4 p-4 bg-white border border-slate-100 rounded-2xl hover:border-indigo-100 hover:bg-indigo-50/10 transition-all group">
                                     <div className="bg-slate-100 p-3 rounded-xl group-hover:bg-white transition-colors">
-                                        {res.type === 'video' ? <Video size={20} className="text-rose-500" /> :
-                                         res.type === 'pdf' ? <FileText size={20} className="text-indigo-500" /> :
-                                         res.type === 'external' ? <ExternalLink size={20} className="text-amber-500" /> :
-                                         <BookOpen size={20} className="text-slate-500" />}
+                                        {res.type === 'video' ? <i className="bx bx-video text-rose-500"  /> :
+                                         res.type === 'pdf' ? <i className="bx bx-file text-indigo-500"  /> :
+                                         res.type === 'external' ? <i className="bx bx-externallink text-amber-500"  /> :
+                                         <i className="bx bx-bookopen text-slate-500"  />}
                                     </div>
                                     <div className="flex-1">
                                         <h5 className="font-black text-slate-800 leading-tight">{res.title}</h5>
@@ -587,7 +587,7 @@ function SubjectResourceManager({ experimentId, experimentName }: { experimentId
                                         className="h-10 w-10 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-xl"
                                         onClick={() => handleDelete(res._id)}
                                     >
-                                        <Trash2 size={16} />
+                                        <i className="bx bx-trash2"  />
                                     </Button>
                                 </div>
                             ))}

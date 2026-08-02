@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { X, Table, Grid3X3, ArrowRightLeft } from "lucide-react";
+
 import { TableData } from "@/lib/table-generator";
 
 interface WorkspacesPanelProps {
@@ -237,23 +237,23 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                         onClick={() => setActiveTab('truth')}
                         className={`px-4 py-3 text-xs font-bold flex items-center gap-2 ${activeTab === 'truth' ? 'bg-white text-[#d32f2f]' : 'hover:bg-[#b71c1c]'}`}
                     >
-                        <Table size={14} /> Truth Table
+                        <i className="bx bx-table"  /> Truth Table
                     </button>
                     <button
                         onClick={() => setActiveTab('kmap')}
                         className={`px-4 py-3 text-xs font-bold flex items-center gap-2 ${activeTab === 'kmap' ? 'bg-white text-[#d32f2f]' : 'hover:bg-[#b71c1c]'}`}
                     >
-                        <Grid3X3 size={14} /> K-Map
+                        <i className="bx bx-grid3x3"  /> K-Map
                     </button>
                     <button
                         onClick={() => setActiveTab('excitation')}
                         className={`px-4 py-3 text-xs font-bold flex items-center gap-2 ${activeTab === 'excitation' ? 'bg-white text-[#d32f2f]' : 'hover:bg-[#b71c1c]'}`}
                     >
-                        <ArrowRightLeft size={14} /> Excitation Table
+                        <i className="bx bx-arrowrightleft"  /> Excitation Table
                     </button>
                 </div>
                 <button onClick={onClose} className="hover:bg-[#b71c1c] rounded p-2 mr-2">
-                    <X size={16} />
+                    <i className="bx bx-x"  />
                 </button>
             </div>
 

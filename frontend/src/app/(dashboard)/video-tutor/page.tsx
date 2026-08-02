@@ -9,21 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-    Sparkles, 
-    Video, 
-    History, 
-    Bookmark, 
-    LineChart, 
-    Loader2, 
-    BookOpen,
-    Play, 
-    Cpu, 
-    Flame,
-    CheckCircle2,
-    XCircle,
-    UserCheck
-} from "lucide-react";
+
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from "recharts";
 
 export default function VideoTutorDashboard() {
@@ -170,7 +156,7 @@ export default function VideoTutorDashboard() {
                                 : "text-slate-400 hover:text-slate-700"
                         }`}
                     >
-                        <Sparkles size={14} className="mr-2" /> Ask Professor
+                        <i className="bx bx-sparkles mr-2"  /> Ask Professor
                     </Button>
                     <Button 
                         variant="ghost" 
@@ -181,7 +167,7 @@ export default function VideoTutorDashboard() {
                                 : "text-slate-400 hover:text-slate-700"
                         }`}
                     >
-                        <Video size={14} className="mr-2" /> Generated Lessons
+                        <i className="bx bx-video mr-2"  /> Generated Lessons
                     </Button>
                     <Button 
                         variant="ghost" 
@@ -192,7 +178,7 @@ export default function VideoTutorDashboard() {
                                 : "text-slate-400 hover:text-slate-700"
                         }`}
                     >
-                        <Bookmark size={14} className="mr-2" /> Bookmarks
+                        <i className="bx bx-bookmark mr-2"  /> Bookmarks
                     </Button>
                     <Button 
                         variant="ghost" 
@@ -203,7 +189,7 @@ export default function VideoTutorDashboard() {
                                 : "text-slate-400 hover:text-slate-700"
                         }`}
                     >
-                        <History size={14} className="mr-2" /> History
+                        <i className="bx bx-history mr-2"  /> History
                     </Button>
                     <Button 
                         variant="ghost" 
@@ -214,7 +200,7 @@ export default function VideoTutorDashboard() {
                                 : "text-slate-400 hover:text-slate-700"
                         }`}
                     >
-                        <LineChart size={14} className="mr-2" /> Tutor Analytics
+                        <i className="bx bx-linechart mr-2"  /> Tutor Analytics
                     </Button>
                 </div>
 
@@ -223,7 +209,7 @@ export default function VideoTutorDashboard() {
                     // Loader screen for compilation pipeline
                     <Card className="rounded-[3rem] border-2 bg-white dark:bg-slate-900 p-12 flex flex-col items-center justify-center text-center shadow-2xl relative overflow-hidden min-h-[400px]">
                         <div className="absolute top-0 right-0 p-32 bg-indigo-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-                        <Loader2 className="w-16 h-16 text-indigo-600 animate-spin mb-6" />
+                        <i className="bx bx-loader2 w-16 h-16 text-indigo-600 animate-spin mb-6"  />
                         <h3 className="text-2xl font-black uppercase tracking-tight text-slate-900 dark:text-white">
                             Rendering AI Video Lesson
                         </h3>
@@ -243,7 +229,7 @@ export default function VideoTutorDashboard() {
                     </Card>
                 ) : loading ? (
                     <div className="flex flex-col items-center justify-center py-32 animate-pulse">
-                        <Loader2 className="w-10 h-10 text-indigo-600 animate-spin mb-4" />
+                        <i className="bx bx-loader2 w-10 h-10 text-indigo-600 animate-spin mb-4"  />
                         <p className="text-slate-400 font-black uppercase tracking-widest text-[9px]">Loading Tutor logs...</p>
                     </div>
                 ) : (
@@ -254,7 +240,7 @@ export default function VideoTutorDashboard() {
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                                 <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8 lg:col-span-2">
                                     <div className="flex items-center gap-2 border-b pb-4 mb-6 border-slate-100 dark:border-slate-800">
-                                        <Sparkles className="text-indigo-600 dark:text-indigo-400" size={18} />
+                                        <i className="bx bx-sparkles text-indigo-600 dark:text-indigo-400"  />
                                         <h3 className="font-black text-sm uppercase tracking-tight">Configure Video Prompt</h3>
                                     </div>
 
@@ -338,7 +324,7 @@ export default function VideoTutorDashboard() {
                                             type="submit"
                                             className="w-full h-12 bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-black font-black uppercase tracking-widest text-xs rounded-xl flex items-center justify-center gap-2"
                                         >
-                                            <Sparkles size={16} className="animate-pulse" />
+                                            <i className="bx bx-sparkles animate-pulse"  />
                                             Compile AI Video Lesson
                                         </Button>
                                     </form>
@@ -437,7 +423,7 @@ export default function VideoTutorDashboard() {
                                                     size="sm" 
                                                     className="rounded-xl font-extrabold uppercase text-[10px] tracking-wider bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-black"
                                                 >
-                                                    <Play size={10} className="mr-1 fill-current" /> Watch Lesson
+                                                    <i className="bx bx-play mr-1 fill-current"  /> Watch Lesson
                                                 </Button>
                                             </div>
                                         </Card>
@@ -461,7 +447,7 @@ export default function VideoTutorDashboard() {
                                                     <span className="text-[9px] font-black uppercase tracking-wider bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md text-slate-500">
                                                         {l.mode.replace("_", " ")}
                                                     </span>
-                                                    <Bookmark size={14} className="text-indigo-500 fill-current" />
+                                                    <i className="bx bx-bookmark text-indigo-500 fill-current"  />
                                                 </div>
 
                                                 <h3 className="font-extrabold text-base text-slate-900 dark:text-white">
@@ -479,7 +465,7 @@ export default function VideoTutorDashboard() {
                                                     size="sm" 
                                                     className="rounded-xl font-extrabold uppercase text-[10px] tracking-wider bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-black"
                                                 >
-                                                    <Play size={10} className="mr-1 fill-current" /> Watch Lesson
+                                                    <i className="bx bx-play mr-1 fill-current"  /> Watch Lesson
                                                 </Button>
                                             </div>
                                         </Card>
@@ -506,7 +492,7 @@ export default function VideoTutorDashboard() {
                                             <div key={i} className="flex justify-between items-center p-4 bg-slate-50 dark:bg-slate-800/20 border border-slate-100 dark:border-slate-800 rounded-2xl text-xs font-semibold">
                                                 <div className="flex items-center gap-4">
                                                     <div className="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-500 flex items-center justify-center shrink-0">
-                                                        <Video size={14} />
+                                                        <i className="bx bx-video"  />
                                                     </div>
                                                     <div>
                                                         <h4 className="font-bold text-slate-800 dark:text-slate-200">{h.topic}</h4>
@@ -559,21 +545,21 @@ export default function VideoTutorDashboard() {
                                 <div className="lg:col-span-2 space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                         <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900 p-6 text-center space-y-2">
-                                            <Flame className="w-8 h-8 text-orange-500 mx-auto animate-pulse" />
+                                            <i className="bx bx-flame w-8 h-8 text-orange-500 mx-auto animate-pulse"  />
                                             <h4 className="font-black text-[10px] text-slate-400 uppercase tracking-widest">Active Streak</h4>
                                             <p className="text-2xl font-black text-slate-800 dark:text-white">
                                                 {analytics ? analytics.learningStreakDays : 3} Days
                                             </p>
                                         </Card>
                                         <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900 p-6 text-center space-y-2">
-                                            <Cpu className="w-8 h-8 text-indigo-500 mx-auto" />
+                                            <i className="bx bx-cpu w-8 h-8 text-indigo-500 mx-auto"  />
                                             <h4 className="font-black text-[10px] text-slate-400 uppercase tracking-widest">Mastery Ratio</h4>
                                             <p className="text-2xl font-black text-slate-800 dark:text-white">
                                                 {analytics ? analytics.strongTopicsCount : 2} / {analytics ? (analytics.strongTopicsCount + analytics.weakTopicsCount) : 4}
                                             </p>
                                         </Card>
                                         <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900 p-6 text-center space-y-2">
-                                            <BookOpen className="w-8 h-8 text-emerald-500 mx-auto" />
+                                            <i className="bx bx-bookopen w-8 h-8 text-emerald-500 mx-auto"  />
                                             <h4 className="font-black text-[10px] text-slate-400 uppercase tracking-widest">Watch Time</h4>
                                             <p className="text-2xl font-black text-slate-800 dark:text-white">
                                                 {analytics ? (analytics.watchTimeSeconds / 60).toFixed(1) : "12.5"} Min
@@ -587,7 +573,7 @@ export default function VideoTutorDashboard() {
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div className="space-y-3">
                                                 <span className="text-[10px] font-black uppercase text-green-500 tracking-wider flex items-center gap-1.5">
-                                                    <CheckCircle2 size={12} /> Confirmed Strengths
+                                                    <i className="bx bx-check-circle"  /> Confirmed Strengths
                                                 </span>
                                                 <div className="flex flex-wrap gap-2">
                                                     {analytics && analytics.strongTopics.length > 0 ? (
@@ -604,7 +590,7 @@ export default function VideoTutorDashboard() {
 
                                             <div className="space-y-3">
                                                 <span className="text-[10px] font-black uppercase text-red-500 tracking-wider flex items-center gap-1.5">
-                                                    <XCircle size={12} /> Focus Required (Weak Areas)
+                                                    <i className="bx bx-xcircle"  /> Focus Required (Weak Areas)
                                                 </span>
                                                 <div className="flex flex-wrap gap-2">
                                                     {analytics && analytics.weakTopics.length > 0 ? (

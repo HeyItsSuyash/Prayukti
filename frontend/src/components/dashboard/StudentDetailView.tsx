@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { AlertCircle, Mail, Download, BrainCircuit, Clock, Send, AlertTriangle, Bell, Loader2, TrendingUp } from 'lucide-react';
+
 import { differenceInDays, parseISO } from 'date-fns';
 
 interface StudentDetailViewProps {
@@ -122,7 +122,7 @@ export function StudentDetailView({ student }: StudentDetailViewProps) {
                 </div>
                 <div className="flex gap-2">
                     <Button variant="outline" onClick={handleExport}>
-                        <Download className="mr-2 h-4 w-4" /> Export
+                        <i className="bx bx-download mr-2 h-4 w-4"  /> Export
                     </Button>
                 </div>
             </div>
@@ -137,7 +137,7 @@ export function StudentDetailView({ student }: StudentDetailViewProps) {
                     onClick={() => handleSendEmail('inactive')}
                     disabled={!!emailLoading}
                 >
-                    {emailLoading === 'inactive' ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <AlertTriangle className="mr-2 h-4 w-4" />}
+                    {emailLoading === 'inactive' ? <i className="bx bx-loader2 mr-2 h-4 w-4 animate-spin"  /> : <i className="bx bx-alerttriangle mr-2 h-4 w-4"  />}
                     Send Inactive Alert
                 </Button>
 
@@ -148,7 +148,7 @@ export function StudentDetailView({ student }: StudentDetailViewProps) {
                     onClick={() => handleSendEmail('performance')}
                     disabled={!!emailLoading}
                 >
-                    {emailLoading === 'performance' ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <TrendingUp className="mr-2 h-4 w-4" />}
+                    {emailLoading === 'performance' ? <i className="bx bx-loader2 mr-2 h-4 w-4 animate-spin"  /> : <i className="bx bx-trendingup mr-2 h-4 w-4"  />}
                     Send Performance Alert
                 </Button>
 
@@ -158,7 +158,7 @@ export function StudentDetailView({ student }: StudentDetailViewProps) {
                     onClick={() => handleSendEmail('manual')}
                     disabled={!!emailLoading}
                 >
-                    {emailLoading === 'manual' ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Bell className="mr-2 h-4 w-4" />}
+                    {emailLoading === 'manual' ? <i className="bx bx-loader2 mr-2 h-4 w-4 animate-spin"  /> : <i className="bx bx-bell mr-2 h-4 w-4"  />}
                     Send Manual Reminder
                 </Button>
             </div>
@@ -166,7 +166,7 @@ export function StudentDetailView({ student }: StudentDetailViewProps) {
             {/* Alerts Section */}
             {isInactive && (
                 <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-md flex items-start gap-3">
-                    <Clock className="text-red-600 h-5 w-5 mt-0.5" />
+                    <i className="bx bx-clock text-red-600 h-5 w-5 mt-0.5"  />
                     <div>
                         <h4 className="font-bold text-red-800">Inactive Alert</h4>
                         <p className="text-sm text-red-700">Has not accessed the lab for {daysInactive} days. Immediate follow-up recommended.</p>
@@ -178,7 +178,7 @@ export function StudentDetailView({ student }: StudentDetailViewProps) {
             {(student.weakAreas || []).length > 0 && (
                 <div className="bg-indigo-50 border border-indigo-200 p-4 rounded-md">
                     <div className="flex items-center gap-2 mb-2">
-                        <BrainCircuit className="text-indigo-600 h-5 w-5" />
+                        <i className="bx bx-braincircuit text-indigo-600 h-5 w-5"  />
                         <h4 className="font-bold text-indigo-800">Smart Recommendations</h4>
                     </div>
                     <p className="text-sm text-indigo-700 mb-2">Based on quiz performance, this student struggles with:</p>

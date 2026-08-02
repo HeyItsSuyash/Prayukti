@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Play, Pause, RotateCcw, Activity, AlignVerticalSpaceAround, GitGraph, Table } from "lucide-react";
+
 
 export default function DAASimulator({ labId }: { labId: string }) {
     const isSorting = labId.includes("exp-1") || labId.includes("exp-2") || labId.includes("exp-3");
@@ -149,18 +149,18 @@ export default function DAASimulator({ labId }: { labId: string }) {
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                         <div className="flex justify-between items-center">
                             <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                {isSorting && <AlignVerticalSpaceAround className="h-5 w-5 text-indigo-500" />}
-                                {isGraph && <GitGraph className="h-5 w-5 text-indigo-500" />}
-                                {isDp && <Table className="h-5 w-5 text-indigo-500" />}
+                                {isSorting && <i className="bx bx-alignverticalspacearound h-5 w-5 text-indigo-500"  />}
+                                {isGraph && <i className="bx bx-gitgraph h-5 w-5 text-indigo-500"  />}
+                                {isDp && <i className="bx bx-table h-5 w-5 text-indigo-500"  />}
                                 {isSorting ? "Sorting Bars Animation" : isGraph ? "Graph State Visualization" : "LCS Dynamic Programming Grid"}
                             </h3>
                             <div className="flex gap-2">
                                 <Button onClick={runDAASimulator} disabled={isSortingActive} className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs">
-                                    <Play className="mr-1 h-3.5 w-3.5" /> Start Visualization
+                                    <i className="bx bx-play mr-1 h-3.5 w-3.5"  /> Start Visualization
                                 </Button>
                                 {isSorting && (
                                     <Button onClick={generateNewArray} variant="outline" className="text-xs font-bold">
-                                        <RotateCcw className="mr-1 h-3.5 w-3.5" /> Reset Array
+                                        <i className="bx bx-rotateccw mr-1 h-3.5 w-3.5"  /> Reset Array
                                     </Button>
                                 )}
                             </div>
@@ -246,7 +246,7 @@ export default function DAASimulator({ labId }: { labId: string }) {
                 {/* VISUAL LOGGER */}
                 <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[480px]">
                     <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                        <Activity className="h-5 w-5 text-emerald-500" /> Execution Console Logs
+                        <i className="bx bx-activity h-5 w-5 text-emerald-500"  /> Execution Console Logs
                     </h3>
                     <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                         {isGraph ? (

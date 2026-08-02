@@ -4,7 +4,7 @@ import { API_URL } from "@/lib/config";
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Play, RotateCcw } from "lucide-react";
+
 
 export default function OOPSCompiler({ initialData }: { initialData?: { code?: string, output?: string } }) {
     const defaultCode = `public class Main {
@@ -21,7 +21,7 @@ export default function OOPSCompiler({ initialData }: { initialData?: { code?: s
         setOutput("Compiling and Running...");
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'}/api/v1/oopj/run`, {
+            const response = await fetch(`${API_URL}/api/v1/oopj/run`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ code })
@@ -68,10 +68,10 @@ export default function OOPSCompiler({ initialData }: { initialData?: { code?: s
                 <div className="text-sm text-gray-400">Main.java</div>
                 <div className="flex gap-2">
                     <Button variant="ghost" size="sm" onClick={() => setCode("")} className="text-gray-400 hover:text-white">
-                        <RotateCcw className="h-4 w-4 mr-2" /> Reset
+                        <i className="bx bx-rotateccw h-4 w-4 mr-2"  /> Reset
                     </Button>
                     <Button size="sm" onClick={runCode} disabled={isRunning} className="bg-green-600 hover:bg-green-700">
-                        <Play className="h-4 w-4 mr-2" /> Run
+                        <i className="bx bx-play h-4 w-4 mr-2"  /> Run
                     </Button>
                 </div>
             </div>

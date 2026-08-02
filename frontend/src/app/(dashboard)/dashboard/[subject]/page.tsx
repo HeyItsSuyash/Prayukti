@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { ArrowLeft, Loader2, BookOpen, PlayCircle, ClipboardList, Clock, BarChart } from "lucide-react";
+import { PremiumNavbar } from "@/components/layout/PremiumNavbar";
+import { PremiumFooter } from "@/components/layout/PremiumFooter";
+
 import { API_URL } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 
@@ -204,31 +204,36 @@ export default function SubjectDashboardPage() {
     const subjectTitle = subject?.title || subjectSlug?.toUpperCase() || "Lab";
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans">
-            <Navbar />
+        <div className="min-h-screen bg-slate-50 font-sans">
+            <PremiumNavbar pathname={`/dashboard/${subjectSlug}`} />
 
-            <main className="container mx-auto px-4 pt-28 pb-20 max-w-7xl">
-                <Button
-                    variant="ghost"
-                    onClick={() => window.location.href = "/dashboard"}
-                    className="flex items-center gap-2 mb-6 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-500 font-bold uppercase tracking-widest text-[10px]"
-                >
-                    <ArrowLeft size={16} /> Back to Dashboard
-                </Button>
+            <div className="bg-[#021D24] text-white pt-28 pb-20 px-4">
+                <main className="container mx-auto max-w-7xl">
+                    <Button
+                        variant="ghost"
+                        onClick={() => window.location.href = "/dashboard"}
+                        className="flex items-center gap-2 mb-6 hover:bg-white/10 text-white/70 font-bold uppercase tracking-widest text-[10px]"
+                    >
+                        <i className="bx bx-arrow-left"  /> Back to Dashboard
+                    </Button>
 
-                <div className="flex items-center gap-4 mb-8 animate-in fade-in slide-in-from-left duration-500">
-                    <div className="w-16 h-16 bg-white rounded-2xl shadow-sm border border-slate-100 flex items-center justify-center text-blue-600">
-                        <BookOpen className="w-8 h-8" />
+                    <div className="flex items-center gap-4 animate-in fade-in slide-in-from-left duration-500">
+                        <div className="w-16 h-16 bg-[#059669]/10 rounded-sm shadow-sm border border-[#059669]/20 flex items-center justify-center text-[#14D98F]">
+                            <i className="bx bx-book-open w-8 h-8"  />
+                        </div>
+                        <div>
+                            <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-none">
+                                {subjectTitle} <span className="text-[#14D98F]">Lab</span>
+                            </h1>
+                            <p className="text-white/60 font-medium mt-2 text-lg">
+                                {subject?.description || `Explore and practice experiments for ${subjectTitle}.`}
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-slate-900 dark:text-white">
-                            {subjectTitle} <span className="text-blue-600 italic">Lab</span>
-                        </h1>
-                        <p className="text-slate-500 font-medium mt-1">
-                            {subject?.description || `Explore and practice experiments for ${subjectTitle}.`}
-                        </p>
-                    </div>
-                </div>
+                </main>
+            </div>
+            
+            <main className="container mx-auto px-4 pt-12 pb-20 max-w-7xl">
 
                 {/* Filters */}
                 <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white p-4 rounded-xl shadow-sm border border-slate-100 mb-8">
@@ -236,7 +241,7 @@ export default function SubjectDashboardPage() {
                         <input
                             type="text"
                             placeholder="Search experiments..."
-                            className="w-full pl-4 pr-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-400 text-sm"
+                            className="w-full pl-4 pr-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#059669]/20 focus:border-[#059669] text-sm"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
@@ -263,7 +268,7 @@ export default function SubjectDashboardPage() {
 
                 {loading ? (
                     <div className="flex justify-center py-20">
-                        <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
+                        <i className="bx bx-loader2 w-10 h-10 animate-spin text-[#059669]"  />
                     </div>
                 ) : filteredExperiments.length === 0 ? (
                     <div className="text-center py-20 bg-white rounded-xl border border-dashed border-slate-300">
@@ -273,7 +278,7 @@ export default function SubjectDashboardPage() {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {filteredExperiments.map((exp) => (
-                            <div key={exp.id} className="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden flex flex-col group">
+                            <div key={exp.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:border-[#059669]/30 transition-all duration-300 hover:-translate-y-1 overflow-hidden flex flex-col group">
                                 <div className="p-6 flex-1">
                                     <div className="flex justify-between items-start mb-4">
                                         <span className={`px-2 py-1 rounded text-xs font-bold uppercase tracking-wider ${
@@ -283,10 +288,10 @@ export default function SubjectDashboardPage() {
                                         }`}>
                                             {exp.difficulty}
                                         </span>
-                                        <BarChart className="w-4 h-4 text-slate-400" />
+                                        <i className="bx bx-barchart w-4 h-4 text-slate-400"  />
                                     </div>
 
-                                    <h3 className="text-lg font-bold text-slate-900 mb-2 leading-tight group-hover:text-blue-600 transition-colors">
+                                    <h3 className="text-lg font-bold text-slate-900 mb-2 leading-tight group-hover:text-[#059669] transition-colors">
                                         {exp.title}
                                     </h3>
 
@@ -296,7 +301,7 @@ export default function SubjectDashboardPage() {
 
                                     <div className="flex items-center gap-4 text-xs text-slate-400 font-medium">
                                         <span className="flex items-center gap-1">
-                                            <Clock className="w-3 h-3" /> {exp.duration || "45 mins"}
+                                            <i className="bx bx-clock w-3 h-3"  /> {exp.duration || "45 mins"}
                                         </span>
                                         <span>•</span>
                                         <span>30 Test Questions</span>
@@ -305,8 +310,8 @@ export default function SubjectDashboardPage() {
 
                                 <div className="p-4 bg-slate-50 border-t border-slate-100 space-y-2">
                                     <a href={exp.href} className="w-full block">
-                                        <Button className="w-full gap-2 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                                            Start Experiment <PlayCircle className="w-4 h-4" />
+                                        <Button className="w-full gap-2 bg-slate-900 text-white group-hover:bg-[#059669] transition-all rounded-xl h-11">
+                                            Start Experiment <i className="bx bx-play-circle text-lg"  />
                                         </Button>
                                     </a>
                                     {/* Take Test — opens experiment page and auto-switches to test tab */}
@@ -318,9 +323,9 @@ export default function SubjectDashboardPage() {
                                     }}>
                                         <Button
                                             variant="outline"
-                                            className="w-full gap-2 border-orange-200 text-orange-600 hover:bg-orange-50 hover:border-orange-400 text-xs font-black uppercase tracking-wider transition-all"
+                                            className="w-full gap-2 border-orange-200 text-orange-600 hover:bg-orange-50 hover:border-orange-400 text-xs font-black uppercase tracking-wider transition-all rounded-xl h-11"
                                         >
-                                            <ClipboardList className="w-3.5 h-3.5" /> Take Test · 30Q
+                                            <i className="bx bx-clipboard text-lg"  /> Take Test · 30Q
                                         </Button>
                                     </a>
                                 </div>
@@ -330,7 +335,7 @@ export default function SubjectDashboardPage() {
                 )}
             </main>
 
-            <Footer />
+            <PremiumFooter />
         </div>
     );
 }

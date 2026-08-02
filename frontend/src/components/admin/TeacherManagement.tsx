@@ -10,20 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { 
-    Search, 
-    UserPlus, 
-    Mail, 
-    ShieldCheck, 
-    ShieldAlert, 
-    Trash2, 
-    Edit, 
-    MoreVertical,
-    CheckCircle2,
-    XCircle,
-    Loader2,
-    Filter
-} from 'lucide-react';
+
 import { 
     Dialog, 
     DialogContent, 
@@ -232,7 +219,7 @@ export function TeacherManagement() {
                 </div>
                 <div className="flex gap-3">
                     <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                        <i className="bx bx-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"  />
                         <Input 
                             placeholder="Search faculty..." 
                             className="pl-10 w-64 rounded-xl border-slate-100 shadow-sm"
@@ -244,7 +231,7 @@ export function TeacherManagement() {
                         setFormData({ fullName: '', email: '', password: '', employeeId: '', assignedSubjects: [], role: 'teacher' });
                         setIsAddDialogOpen(true);
                     }} className="bg-indigo-600 hover:bg-indigo-700 font-bold rounded-xl px-6">
-                        <UserPlus className="mr-2 h-4 w-4" /> ADD FACULTY
+                        <i className="bx bx-userplus mr-2 h-4 w-4"  /> ADD FACULTY
                     </Button>
                 </div>
             </div>
@@ -265,7 +252,7 @@ export function TeacherManagement() {
                             {loading ? (
                                 <TableRow>
                                     <TableCell colSpan={5} className="py-20 text-center">
-                                        <Loader2 className="animate-spin inline-block mr-2 text-indigo-600" />
+                                        <i className="bx bx-loader2 animate-spin inline-block mr-2 text-indigo-600"  />
                                         <span className="font-black text-slate-400 uppercase tracking-widest">Accessing Faculty Directory...</span>
                                     </TableCell>
                                 </TableRow>
@@ -314,11 +301,11 @@ export function TeacherManagement() {
                                     <TableCell className="text-right pr-8">
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
-                                                <Button variant="ghost" size="icon" className="rounded-xl"><MoreVertical size={20} className="text-slate-400" /></Button>
+                                                <Button variant="ghost" size="icon" className="rounded-xl"><i className="bx bx-morevertical text-slate-400"  /></Button>
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent align="end" className="rounded-2xl border-slate-100 shadow-xl p-2 min-w-[180px]">
                                                 <DropdownMenuItem className="rounded-xl font-bold text-xs py-3" onClick={() => startEditing(teacher)}>
-                                                    <Edit size={16} className="mr-2 text-blue-500" /> Edit Details
+                                                    <i className="bx bx-edit mr-2 text-blue-500"  /> Edit Details
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem className="rounded-xl font-bold text-xs py-3" onClick={() => handleToggleStatus(teacher)}>
                                                     {teacher.status === 'active' ? 'Disable Account' : 'Enable Account'}
@@ -327,11 +314,11 @@ export function TeacherManagement() {
                                                     setSelectedTeacherForEmail(teacher);
                                                     setIsEmailDialogOpen(true);
                                                 }}>
-                                                    <Mail size={16} className="mr-2 text-indigo-500" /> Send Mail
+                                                    <i className="bx bx-envelope mr-2 text-indigo-500"  /> Send Mail
                                                 </DropdownMenuItem>
                                                 <div className="h-px bg-slate-100 my-1" />
                                                 <DropdownMenuItem className="rounded-xl font-bold text-xs py-3 text-red-600" onClick={() => handleDelete(teacher._id)}>
-                                                    <Trash2 size={16} className="mr-2" /> Terminate Record
+                                                    <i className="bx bx-trash2 mr-2"  /> Terminate Record
                                                 </DropdownMenuItem>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
@@ -533,9 +520,9 @@ export function TeacherManagement() {
                             className="w-full bg-indigo-600 hover:bg-indigo-700 font-black rounded-xl py-6 mt-4"
                         >
                             {sendingEmail ? (
-                                <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> DISPATCHING...</>
+                                <><i className="bx bx-loader2 mr-2 h-4 w-4 animate-spin"  /> DISPATCHING...</>
                             ) : (
-                                <><Mail className="mr-2 h-4 w-4" /> SEND SECURE MAIL</>
+                                <><i className="bx bx-envelope mr-2 h-4 w-4"  /> SEND SECURE MAIL</>
                             )}
                         </Button>
                     </form>

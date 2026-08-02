@@ -9,18 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-    Sparkles, 
-    MessageSquare, 
-    Send, 
-    BookOpen, 
-    HelpCircle, 
-    CheckCircle2, 
-    XCircle,
-    Copy,
-    Loader2,
-    RefreshCw
-} from "lucide-react";
+
 import ReactMarkdown from "react-markdown";
 
 interface Message {
@@ -269,7 +258,7 @@ export default function AiTutorPage() {
                                 : "text-slate-400 hover:text-slate-700"
                         }`}
                     >
-                        <MessageSquare size={14} className="mr-2" /> Ask Doubts
+                        <i className="bx bx-messagesquare mr-2"  /> Ask Doubts
                     </Button>
                     <Button 
                         variant="ghost" 
@@ -280,7 +269,7 @@ export default function AiTutorPage() {
                                 : "text-slate-400 hover:text-slate-700"
                         }`}
                     >
-                        <HelpCircle size={14} className="mr-2" /> Take Quiz
+                        <i className="bx bx-help-circle mr-2"  /> Take Quiz
                     </Button>
                     <Button 
                         variant="ghost" 
@@ -291,7 +280,7 @@ export default function AiTutorPage() {
                                 : "text-slate-400 hover:text-slate-700"
                         }`}
                     >
-                        <BookOpen size={14} className="mr-2" /> Flashcards
+                        <i className="bx bx-bookopen mr-2"  /> Flashcards
                     </Button>
                     <Button 
                         variant="ghost" 
@@ -302,13 +291,13 @@ export default function AiTutorPage() {
                                 : "text-slate-400 hover:text-slate-700"
                         }`}
                     >
-                        <Sparkles size={14} className="mr-2" /> Study Guides
+                        <i className="bx bx-sparkles mr-2"  /> Study Guides
                     </Button>
                 </div>
 
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-32 animate-pulse">
-                        <Loader2 className="w-10 h-10 text-indigo-600 animate-spin mb-4" />
+                        <i className="bx bx-loader2 w-10 h-10 text-indigo-600 animate-spin mb-4"  />
                         <p className="text-slate-400 font-black uppercase tracking-widest text-[9px]">Binding AI engine parameters...</p>
                     </div>
                 ) : (
@@ -340,7 +329,7 @@ export default function AiTutorPage() {
                                     {chatLoading && (
                                         <div className="flex justify-start">
                                             <div className="bg-white border dark:bg-slate-900 dark:border-slate-800 border-slate-200 px-4 py-3 rounded-2xl rounded-bl-none shadow-sm flex items-center gap-2">
-                                                <Loader2 className="w-4 h-4 animate-spin text-slate-400" />
+                                                <i className="bx bx-loader2 w-4 h-4 animate-spin text-slate-400"  />
                                                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Tutor compiling answer...</span>
                                             </div>
                                         </div>
@@ -362,7 +351,7 @@ export default function AiTutorPage() {
                                         disabled={!chatMsg.trim() || chatLoading}
                                         className="w-12 h-12 bg-slate-900 text-white dark:bg-white dark:text-slate-900 rounded-xl shrink-0 hover:bg-black"
                                     >
-                                        <Send size={16} />
+                                        <i className="bx bx-send"  />
                                     </Button>
                                 </div>
                             </Card>
@@ -377,13 +366,13 @@ export default function AiTutorPage() {
                                         <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">5 generated multiple-choice questions</p>
                                     </div>
                                     <Button size="sm" onClick={handleLoadQuiz} disabled={quizLoading} variant="outline" className="h-9 rounded-xl font-bold text-xs">
-                                        <RefreshCw size={12} className="mr-1.5" /> Re-Generate Quiz
+                                        <i className="bx bx-refreshcw mr-1.5"  /> Re-Generate Quiz
                                     </Button>
                                 </div>
 
                                 {quizLoading ? (
                                     <div className="flex flex-col items-center justify-center py-20 animate-pulse">
-                                        <Loader2 className="w-8 h-8 text-indigo-600 animate-spin mb-3" />
+                                        <i className="bx bx-loader2 w-8 h-8 text-indigo-600 animate-spin mb-3"  />
                                         <p className="text-slate-400 font-bold uppercase tracking-widest text-[9px]">Generating quiz dataset...</p>
                                     </div>
                                 ) : quizQuestions.length > 0 ? (
@@ -427,8 +416,8 @@ export default function AiTutorPage() {
                                                     {quizSubmitted && (
                                                         <div className="mt-3 p-3 bg-indigo-50/30 dark:bg-slate-900 border dark:border-slate-800 rounded-xl flex gap-2 items-start text-xs font-medium text-slate-600 dark:text-slate-400">
                                                             {quizAnswers[q.id] === q.correctOption 
-                                                                ? <CheckCircle2 size={16} className="text-green-500 shrink-0" />
-                                                                : <XCircle size={16} className="text-red-500 shrink-0" />
+                                                                ? <i className="bx bx-check-circle text-green-500 shrink-0"  />
+                                                                : <i className="bx bx-xcircle text-red-500 shrink-0"  />
                                                             }
                                                             <div>
                                                                 <span className="font-extrabold block text-slate-800 dark:text-slate-200 mb-0.5">
@@ -466,13 +455,13 @@ export default function AiTutorPage() {
                                         <h3 className="font-extrabold text-lg uppercase tracking-tight">AI Generated <span className="text-indigo-600 dark:text-indigo-400 italic">Flashcards</span></h3>
                                     </div>
                                     <Button size="sm" onClick={handleLoadFlashcards} disabled={flashLoading} variant="outline" className="h-9 rounded-xl font-bold text-xs">
-                                        <RefreshCw size={12} className="mr-1.5" /> Re-Generate Cards
+                                        <i className="bx bx-refreshcw mr-1.5"  /> Re-Generate Cards
                                     </Button>
                                 </div>
 
                                 {flashLoading ? (
                                     <div className="flex flex-col items-center justify-center py-20 animate-pulse">
-                                        <Loader2 className="w-8 h-8 text-indigo-600 animate-spin mb-3" />
+                                        <i className="bx bx-loader2 w-8 h-8 text-indigo-600 animate-spin mb-3"  />
                                         <p className="text-slate-400 font-bold uppercase tracking-widest text-[9px]">Assembling flashcards...</p>
                                     </div>
                                 ) : flashcards.length > 0 ? (
@@ -534,17 +523,17 @@ export default function AiTutorPage() {
                                     </div>
                                     <div className="flex gap-2">
                                         <Button size="sm" onClick={handleCopyNotes} variant="outline" className="h-9 rounded-xl font-bold text-xs">
-                                            <Copy size={12} className="mr-1.5" /> Copy Notes
+                                            <i className="bx bx-copy mr-1.5"  /> Copy Notes
                                         </Button>
                                         <Button size="sm" onClick={handleLoadNotes} disabled={notesLoading} variant="outline" className="h-9 rounded-xl font-bold text-xs">
-                                            <RefreshCw size={12} className="mr-1.5" /> Re-Generate
+                                            <i className="bx bx-refreshcw mr-1.5"  /> Re-Generate
                                         </Button>
                                     </div>
                                 </div>
 
                                 {notesLoading ? (
                                     <div className="flex flex-col items-center justify-center py-20 animate-pulse">
-                                        <Loader2 className="w-8 h-8 text-indigo-600 animate-spin mb-3" />
+                                        <i className="bx bx-loader2 w-8 h-8 text-indigo-600 animate-spin mb-3"  />
                                         <p className="text-slate-400 font-bold uppercase tracking-widest text-[9px]">Compiling notes markdown...</p>
                                     </div>
                                 ) : notesText ? (

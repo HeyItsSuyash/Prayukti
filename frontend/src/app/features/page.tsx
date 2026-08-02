@@ -1,18 +1,18 @@
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import FeaturesPage from '@/components/FeaturesPage';
+import React from 'react';
+import { PremiumNavbar } from '@/components/layout/PremiumNavbar';
+import { PremiumFooter } from '@/components/layout/PremiumFooter';
+import { ComingSoon } from '@/components/ui/ComingSoon';
 
-export const metadata = {
-  title: 'Features | Prayukti x MMMUT',
-  description: 'Explore the powerful features of Prayukti vLAB — syllabus-mapped experiments, real-time simulations, integrated code editor, and more.',
-};
+export default function FeaturesPage() {
+    return (
+        <main className="min-h-screen bg-[#FAFAFA] flex flex-col font-sans">
+            <PremiumNavbar pathname="/features" />
+            
+            <div className="flex-grow pt-24">
+                <ComingSoon title="Features" />
+            </div>
 
-export default function Page() {
-  return (
-    <>
-      <Navbar pathname="/features" />
-      <FeaturesPage />
-      <Footer />
-    </>
-  );
+            <PremiumFooter />
+        </main>
+    );
 }

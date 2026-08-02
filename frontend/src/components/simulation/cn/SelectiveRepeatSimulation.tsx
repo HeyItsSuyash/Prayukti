@@ -1,10 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import {
-    Play, Pause, RotateCcw, Monitor, Zap, Server,
-    Send, CheckCircle2, XCircle, Info, Activity, Laptop
-} from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -363,10 +360,10 @@ export default function SelectiveRepeatSimulation() {
                                 {/* Left Side: Simulation Controls */}
                                 <div className="flex items-center gap-4">
                                     <Button onClick={() => setIsRunning(!isRunning)} className={`h-11 px-8 rounded-xl text-xs font-black uppercase tracking-[0.15em] ${isRunning ? "bg-amber-500 hover:bg-amber-600 shadow-amber-200" : "bg-blue-600 hover:bg-blue-700 shadow-blue-200"} text-white transition-all shadow-lg active:scale-95`}>
-                                        {isRunning ? <Pause className="mr-2 h-4 w-4" /> : <Play className="mr-2 h-4 w-4" />} {isRunning ? "Pause" : "Start Simulation"}
+                                        {isRunning ? <i className="bx bx-pause mr-2 h-4 w-4"  /> : <i className="bx bx-play mr-2 h-4 w-4"  />} {isRunning ? "Pause" : "Start Simulation"}
                                     </Button>
                                     <Button onClick={reset} variant="outline" className="h-11 px-6 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 border-slate-200 hover:bg-slate-50 active:scale-95 transition-all">
-                                        <RotateCcw className="h-4 w-4 mr-2" /> Reset
+                                        <i className="bx bx-rotateccw h-4 w-4 mr-2"  /> Reset
                                     </Button>
 
                                     <div className="h-10 w-px bg-slate-200 mx-2" />
@@ -496,7 +493,7 @@ export default function SelectiveRepeatSimulation() {
                             {/* SENDER PANEL */}
                             <div className="w-[30%] bg-white rounded-3xl border border-blue-100 shadow-lg p-5 flex flex-col relative">
                                 <div className="flex items-center gap-3 mb-4">
-                                    <div className="p-3 bg-blue-100 text-blue-700 rounded-2xl"><Laptop size={28} /></div>
+                                    <div className="p-3 bg-blue-100 text-blue-700 rounded-2xl"><i className="bx bx-laptop"  /></div>
                                     <div>
                                         <h2 className="text-sm font-black text-blue-900 uppercase tracking-widest">Sender Client</h2>
                                         <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Base: {senderBase} | Win: {windowSize}</p>
@@ -550,7 +547,7 @@ export default function SelectiveRepeatSimulation() {
                                      ${isLost ? 'bg-rose-100 border-rose-500 text-rose-700 animate-pulse' :
                                                     isData ? 'bg-blue-600 border-blue-700 text-white' :
                                                         'bg-emerald-500 border-emerald-600 text-white'}`}>
-                                                {isData ? <Send className="w-3 h-3" /> : <CheckCircle2 className="w-3 h-3" />}
+                                                {isData ? <i className="bx bx-send w-3 h-3"  /> : <i className="bx bx-check-circle w-3 h-3"  />}
                                                 <span className="text-[9px] font-bold uppercase">{isData ? `F${p.seq}` : `A${p.seq}`}</span>
                                             </div>
                                         </div>
@@ -562,7 +559,7 @@ export default function SelectiveRepeatSimulation() {
                                     <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 z-30 flex justify-center pointer-events-none">
                                         <div className="bg-blue-900/90 text-white p-4 rounded-2xl shadow-2xl border border-blue-500/50 backdrop-blur-sm max-w-sm w-full animate-in fade-in zoom-in duration-200">
                                             <h4 className="text-[10px] uppercase font-bold tracking-widest text-blue-300 mb-1 flex items-center gap-2">
-                                                <Info size={12} /> Education Analysis
+                                                <i className="bx bx-info"  /> Education Analysis
                                             </h4>
                                             <p className="text-sm font-medium leading-tight">{stepMessage}</p>
                                         </div>
@@ -577,7 +574,7 @@ export default function SelectiveRepeatSimulation() {
                                         <h2 className="text-sm font-black text-emerald-900 uppercase tracking-widest">Receiver Server</h2>
                                         <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Base: {receiverBase} | Buf: {windowSize}</p>
                                     </div>
-                                    <div className="p-3 bg-emerald-100 text-emerald-700 rounded-2xl"><Server size={28} /></div>
+                                    <div className="p-3 bg-emerald-100 text-emerald-700 rounded-2xl"><i className="bx bx-server"  /></div>
                                 </div>
 
                                 <div className="flex flex-wrap gap-2 mt-2 content-start justify-end flex-1 relative p-1 overflow-y-auto custom-scrollbar">
@@ -608,7 +605,7 @@ export default function SelectiveRepeatSimulation() {
                             {/* Stats */}
                             <div className="w-[40%] bg-slate-900 rounded-3xl p-5 flex flex-col justify-center text-white shadow-md">
                                 <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-widest mb-4 flex items-center gap-2 border-b border-slate-700 pb-2">
-                                    <Activity size={14} className="text-emerald-400" /> Real-Time Statistics
+                                    <i className="bx bx-activity text-emerald-400"  /> Real-Time Statistics
                                 </h4>
                                 <div className="flex gap-4 items-center">
                                     <div className="flex-1 text-center border-r border-slate-700"><p className="text-[9px] uppercase font-bold text-blue-400">Total Sent</p><p className="text-2xl font-mono font-black">{totalSent}</p></div>
@@ -625,7 +622,7 @@ export default function SelectiveRepeatSimulation() {
                             {/* Event Log Pipeline */}
                             <div className="w-[60%] bg-white rounded-3xl border border-slate-200 shadow-sm p-4 flex flex-col">
                                 <h3 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 border-b pb-2 flex items-center gap-2">
-                                    <Info size={14} className="text-blue-500" /> Event Console
+                                    <i className="bx bx-info text-blue-500"  /> Event Console
                                 </h3>
                                 <div className="flex-1 overflow-y-auto space-y-1.5 pr-2 custom-scrollbar text-xs font-mono">
                                     {log.map((entry, idx) => (
@@ -664,7 +661,7 @@ export default function SelectiveRepeatSimulation() {
                             <div className="bg-white rounded-[2.5rem] border-2 border-slate-100 shadow-xl overflow-hidden flex flex-col">
                                 <div className="bg-slate-50 px-8 py-6 border-b border-slate-100 flex items-center justify-between">
                                     <h3 className="text-sm font-black text-slate-700 uppercase tracking-[0.2em] flex items-center gap-3">
-                                        <XCircle className="text-rose-500" size={18} /> Detailed Loss Log
+                                        <i className="bx bx-xcircle text-rose-500"  /> Detailed Loss Log
                                     </h3>
                                     <Badge variant="outline" className="text-[9px] font-black uppercase tracking-tighter text-rose-500">{lossLog.length} Drops</Badge>
                                 </div>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import { ArrowLeft, BookOpen, Calculator, Database, FileText, Layers, Play, Settings, Table, Terminal, Activity, Info, Code, Plus, Trash2, Eye } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 // --- Types ---
@@ -311,7 +311,7 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                 return (
                     <div className="space-y-6">
                         <div className="bg-white p-4 rounded-lg shadow-sm border">
-                            <h3 className="font-bold mb-3 flex items-center gap-2"><Settings size={18} className="text-blue-600" /> Logical & SQL Operators</h3>
+                            <h3 className="font-bold mb-3 flex items-center gap-2"><i className="bx bx-settings text-blue-600"  /> Logical & SQL Operators</h3>
                             <div className="flex flex-wrap gap-2 mb-4">
                                 <Button size="sm" variant={mod1Filter === "ALL" ? "default" : "outline"} onClick={() => { setMod1Filter("ALL"); setSqlQuery("SELECT * FROM STUDENT"); }}>SELECT *</Button>
                                 <Button size="sm" variant={mod1Filter === "CSE" ? "default" : "outline"} onClick={() => { setMod1Filter("CSE"); setSqlQuery("SELECT * FROM STUDENT WHERE Dept = 'CSE'"); }}>Dept='CSE'</Button>
@@ -352,7 +352,7 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                 return (
                     <div className="space-y-6">
                         <div className="bg-white p-4 rounded-lg shadow-sm border">
-                            <h3 className="font-bold mb-3 flex items-center gap-2"><Calculator size={18} className="text-orange-600" /> SQL Functions</h3>
+                            <h3 className="font-bold mb-3 flex items-center gap-2"><i className="bx bx-calculator text-orange-600"  /> SQL Functions</h3>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium mb-2">Aggregate Functions</label>
@@ -383,7 +383,7 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                 return (
                     <div className="space-y-6">
                         <div className="bg-white p-4 rounded-lg shadow-sm border">
-                            <h3 className="font-bold mb-3 flex items-center gap-2"><Layers size={18} className="text-purple-600" /> Relational Algebra</h3>
+                            <h3 className="font-bold mb-3 flex items-center gap-2"><i className="bx bx-layers text-purple-600"  /> Relational Algebra</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="border p-4 rounded hover:border-purple-300 cursor-pointer transition-all" onClick={() => { setMod3Selection({ type: 'DEPT', value: 'CSE' }); setSqlQuery("SELECT * FROM STUDENT WHERE Dept='CSE'"); }}>
                                     <h4 className="font-mono font-bold text-purple-700 mb-2">Selection (σ)</h4>
@@ -422,7 +422,7 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                 return (
                     <div className="space-y-6">
                         <div className="bg-white p-4 rounded-lg shadow-sm border">
-                            <h3 className="font-bold mb-3 flex items-center gap-2"><Table size={18} className="text-green-600" /> Joins Visualizer</h3>
+                            <h3 className="font-bold mb-3 flex items-center gap-2"><i className="bx bx-table text-green-600"  /> Joins Visualizer</h3>
 
                             <div className="flex flex-col gap-6">
                                 {/* Source Tables */}
@@ -484,7 +484,7 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                 return (
                     <div className="space-y-6">
                         <div className="bg-white p-4 rounded-lg shadow-sm border">
-                            <h3 className="font-bold mb-3 flex items-center gap-2"><Terminal size={18} className="text-indigo-600" /> Subqueries</h3>
+                            <h3 className="font-bold mb-3 flex items-center gap-2"><i className="bx bx-terminal text-indigo-600"  /> Subqueries</h3>
                             <div className="flex items-center gap-2 mb-4 p-2 bg-gray-50 rounded">
                                 <span className="text-sm font-bold">Cutoff Score:</span>
                                 <input type="number" value={cutoff} onChange={(e) => { setCutoff(e.target.value); setSqlQuery(`SELECT * FROM STUDENT WHERE Marks > ${e.target.value}`); }} className="w-20 p-1 border rounded text-xs" />
@@ -518,7 +518,7 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                 return (
                     <div className="space-y-6">
                         <div className="bg-white p-4 rounded-lg shadow-sm border">
-                            <h3 className="font-bold mb-3 flex items-center gap-2"><FileText size={18} className="text-teal-600" /> PL/SQL</h3>
+                            <h3 className="font-bold mb-3 flex items-center gap-2"><i className="bx bx-file text-teal-600"  /> PL/SQL</h3>
                             <textarea
                                 value={plsqlCode}
                                 onChange={(e) => setPlsqlCode(e.target.value)}
@@ -533,7 +533,7 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                 return (
                     <div className="space-y-6">
                         <div className="bg-white p-4 rounded-lg shadow-sm border">
-                            <h3 className="font-bold mb-3 flex items-center gap-2"><Activity size={18} className="text-red-600" /> Transaction Control</h3>
+                            <h3 className="font-bold mb-3 flex items-center gap-2"><i className="bx bx-activity text-red-600"  /> Transaction Control</h3>
                             <div className="flex gap-4 items-center">
                                 <Button size="sm" disabled={mod7TxStatus === "ACTIVE"} onClick={() => { setMod7TxStatus("ACTIVE"); setMod7Logs(p => [...p, "BEGIN TRANSACTION"]); }}>Start</Button>
                                 <Button size="sm" variant="destructive" disabled={mod7TxStatus !== "ACTIVE"} onClick={() => { setMod7TxStatus("IDLE"); setMod7Logs(p => [...p, "ROLLBACK"]); }}>Rollback</Button>
@@ -549,7 +549,7 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                 return (
                     <div className="space-y-6">
                         <div className="bg-white p-4 rounded-lg shadow-sm border">
-                            <h3 className="font-bold mb-3 flex items-center gap-2"><BookOpen size={18} className="text-pink-600" /> Advanced Concepts</h3>
+                            <h3 className="font-bold mb-3 flex items-center gap-2"><i className="bx bx-bookopen text-pink-600"  /> Advanced Concepts</h3>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {/* Helper Panel */}
@@ -580,7 +580,7 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
 
                                 {/* Object Browser */}
                                 <div className="border border-gray-200 rounded-lg p-4 bg-white shadow-inner h-full">
-                                    <h4 className="text-xs font-bold uppercase text-gray-500 mb-3 flex items-center gap-2"><Database size={14} /> Schema Browser</h4>
+                                    <h4 className="text-xs font-bold uppercase text-gray-500 mb-3 flex items-center gap-2"><i className="bx bx-database"  /> Schema Browser</h4>
 
                                     {/* Views List */}
                                     {createdViews.length > 0 && (
@@ -594,7 +594,7 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                                                             setSqlQuery(`SELECT * FROM ${view.name}`);
                                                             addLog(`Displaying Content of View: ${view.name}`);
                                                             alert(`View '${view.name}' Content:\n\n` + students.filter(s => s.marks > view.cutoff).map(s => `${s.name} (${s.marks})`).join("\n"));
-                                                        }}> <Eye size={12} /> </Button>
+                                                        }}> <i className="bx bx-eye"  /> </Button>
                                                     </div>
                                                 ))}
                                             </div>
@@ -626,7 +626,7 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                 return (
                     <div className="space-y-6">
                         <div className="bg-white p-4 rounded-lg shadow-sm border">
-                            <h3 className="font-bold mb-3 flex items-center gap-2"><Table size={18} className="text-gray-600" /> Data Entry</h3>
+                            <h3 className="font-bold mb-3 flex items-center gap-2"><i className="bx bx-table text-gray-600"  /> Data Entry</h3>
                             <div className="max-w-md bg-gray-50 p-6 rounded border space-y-3">
                                 <div><label className="text-xs font-bold text-gray-500">Roll No</label><input disabled={readonly} type="number" value={formRollNo} onChange={(e) => setFormRollNo(e.target.value)} className="w-full border rounded p-2 text-sm" placeholder="106" /></div>
                                 <div><label className="text-xs font-bold text-gray-500">Name</label><input disabled={readonly} type="text" value={formName} onChange={(e) => setFormName(e.target.value)} className="w-full border rounded p-2 text-sm" placeholder="Name" /></div>
@@ -685,7 +685,7 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                 <aside className="w-96 bg-[#1e1e1e] border-l border-gray-700 flex flex-col shrink-0">
                     <div className="h-1/2 flex flex-col border-b border-gray-700">
                         <div className="p-3 bg-[#252526] border-b border-gray-700 flex items-center justify-between">
-                            <div className="flex items-center gap-2"> <Code size={14} className="text-green-400" /> <span className="text-xs font-mono font-bold text-gray-300">Live Query Editor</span> </div>
+                            <div className="flex items-center gap-2"> <i className="bx bx-code text-green-400"  /> <span className="text-xs font-mono font-bold text-gray-300">Live Query Editor</span> </div>
                         </div>
                         <div className="flex-1 bg-[#1e1e1e] p-3">
                             <textarea
@@ -699,13 +699,13 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                         </div>
                         {!readonly && (
                             <div className="bg-[#2d2d2d] p-2 flex justify-end">
-                                <Button size="sm" onClick={executeConsoleQuery} className="bg-green-700 hover:bg-green-800 text-white text-xs h-7"> <Play size={12} className="mr-1" /> Execute </Button>
+                                <Button size="sm" onClick={executeConsoleQuery} className="bg-green-700 hover:bg-green-800 text-white text-xs h-7"> <i className="bx bx-play mr-1"  /> Execute </Button>
                             </div>
                         )}
                     </div>
 
                     <div className="h-1/2 flex flex-col border-t-2 border-gray-800 text-gray-300 font-mono text-xs">
-                        <div className="p-2 bg-[#252526] border-b border-black flex items-center gap-2"> <Terminal size={14} /> <span className="font-mono font-bold text-[10px] text-gray-400 uppercase">Activity Log</span> </div>
+                        <div className="p-2 bg-[#252526] border-b border-black flex items-center gap-2"> <i className="bx bx-terminal"  /> <span className="font-mono font-bold text-[10px] text-gray-400 uppercase">Activity Log</span> </div>
                         <div className="flex-1 overflow-y-auto p-3 space-y-2 font-mono text-[10px]">
                             {logs.map((log, i) => <div key={i} className="text-gray-400 border-l border-orange-500 pl-2 leading-tight"><span className="text-gray-300">{log}</span></div>)}
                         </div>

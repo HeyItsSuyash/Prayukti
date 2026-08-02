@@ -1,18 +1,18 @@
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import ContactPage from '@/components/ContactPage';
+import React from 'react';
+import { PremiumNavbar } from '@/components/layout/PremiumNavbar';
+import { PremiumFooter } from '@/components/layout/PremiumFooter';
+import { ComingSoon } from '@/components/ui/ComingSoon';
 
-export const metadata = {
-  title: 'Contact Us | Prayukti x MMMUT',
-  description: 'Get in touch with the Prayukti team for support, suggestions, or university integration requests.',
-};
+export default function ContactPage() {
+    return (
+        <main className="min-h-screen bg-[#FAFAFA] flex flex-col font-sans">
+            <PremiumNavbar pathname="/contact" />
+            
+            <div className="flex-grow pt-24">
+                <ComingSoon title="Contact Us" />
+            </div>
 
-export default function Page() {
-  return (
-    <>
-      <Navbar pathname="/contact" />
-      <ContactPage />
-      <Footer />
-    </>
-  );
+            <PremiumFooter />
+        </main>
+    );
 }

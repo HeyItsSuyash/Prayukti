@@ -1,133 +1,194 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Bot, X, Send, MessageSquare, Sparkles, User, Minimize2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import ReactMarkdown from "react-markdown";
+import { Send } from "lucide-react";
+import { usePathname } from "next/navigation";
+
+type Message = {
+    role: "assistant" | "user";
+    content: string;
+};
 
 export function AssistantBot() {
+    const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
-    const [messages, setMessages] = useState([
-        { role: "assistant", content: "Welcome to Prayukti Virtual Lab! I'm your academic assistant. How can I help you with your simulations today?" }
+    const [messages, setMessages] = useState<Message[]>([
+        { role: "assistant", content: "Welcome to Prayukti vLAB! I'm your AI assistant. How can I help you today?" }
     ]);
     const [input, setInput] = useState("");
+    const [isTyping, setIsTyping] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (scrollRef.current) {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
-    }, [messages]);
+    }, [messages, isTyping]);
 
-    const handleSend = () => {
-        if (!input.trim()) return;
-        const newMessages = [...messages, { role: "user", content: input }];
-        setMessages(newMessages);
+    const handleSend = async () => {
+        if (!input.trim() || isTyping) return;
+        const userMsg = input.trim();
+
+        setMessages(prev => [...prev, { role: "user", content: userMsg }]);
         setInput("");
+        setIsTyping(true);
 
-        // Simple mock response
-        setTimeout(() => {
-            setMessages(prev => [...prev, { 
-                role: "assistant", 
-                content: "I'm currently in 'Navigation Mode'. You can ask me to find specific labs like 'Computer Networks' or 'DBMS', or I can help you with the login process." 
-            }]);
-        }, 1000);
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: userMsg, subject: "General Lab Assistant" }),
+            });
+
+            const data = await response.json();
+
+            if (data.response) {
+                setMessages(prev => [...prev, { role: "assistant", content: data.response }]);
+            } else {
+                setMessages(prev => [...prev, { role: "assistant", content: "Sorry, I encountered an error while processing your request." }]);
+            }
+        } catch (error) {
+            console.error("Chat API Error:", error);
+            setMessages(prev => [...prev, { role: "assistant", content: "Sorry, I'm having trouble connecting to the server right now." }]);
+        } finally {
+            setIsTyping(false);
+        }
     };
 
+    if (pathname === '/login' || pathname === '/register' || pathname === '/verify') return null;
+
     return (
-        <div className="fixed bottom-10 left-10 z-50">
+        <>
+            {/* Sidebar Drawer */}
             <AnimatePresence>
                 {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9, y: 20, transformOrigin: "bottom left" }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                        className="mb-6 w-[380px] bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl border-2 border-slate-100 dark:border-slate-800 overflow-hidden flex flex-col"
-                    >
-                        {/* Header */}
-                        <div className="bg-primary p-6 flex items-center justify-between text-white">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-2xl bg-accent flex items-center justify-center text-white shadow-lg">
-                                    <Bot size={20} />
-                                </div>
-                                <div>
-                                    <h3 className="text-sm font-black uppercase tracking-widest">Prayukti Assistant</h3>
-                                    <div className="flex items-center gap-1.5">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                                        <span className="text-[10px] font-bold text-white/60 uppercase tracking-widest">Online & Ready</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button 
-                                onClick={() => setIsOpen(false)}
-                                className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all"
-                            >
-                                <Minimize2 size={18} />
-                            </button>
-                        </div>
+                    <>
+                        {/* Backdrop */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsOpen(false)}
+                            className="fixed inset-0 bg-[#021D24]/60 backdrop-blur-sm z-[100]"
+                        />
 
-                        {/* Chat Body */}
-                        <div 
-                            ref={scrollRef}
-                            className="h-[400px] overflow-y-auto p-6 space-y-6 bg-slate-50/50 dark:bg-slate-950/50"
+                        {/* Panel */}
+                        <motion.div
+                            initial={{ x: "100%" }}
+                            animate={{ x: 0 }}
+                            exit={{ x: "100%" }}
+                            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+                            className="fixed inset-y-0 right-0 w-full md:w-[400px] bg-white shadow-2xl z-[101] flex flex-col"
                         >
-                            {messages.map((msg, i) => (
-                                <motion.div
-                                    initial={{ opacity: 0, x: msg.role === 'user' ? 20 : -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    key={i}
-                                    className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                                >
-                                    <div className={`max-w-[80%] p-4 rounded-2xl text-sm font-medium leading-relaxed ${
-                                        msg.role === 'user' 
-                                            ? 'bg-accent text-white rounded-tr-none shadow-lg' 
-                                            : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-tl-none border border-slate-100 dark:border-slate-700'
-                                    }`}>
-                                        {msg.content}
+                            {/* Header */}
+                            <div className="bg-[#021D24] p-6 flex items-center justify-between text-white border-b border-white/10">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-12 h-12 flex items-center justify-center">
+                                        <img src="/prayukti 2.0/illustrations/ai_chatbot.png" alt="AI Chatbot" className="w-full h-full object-contain scale-[1.45]" />
                                     </div>
-                                </motion.div>
-                            ))}
-                        </div>
-
-                        {/* Input Area */}
-                        <div className="p-6 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
-                            <div className="relative group">
-                                <input
-                                    type="text"
-                                    value={input}
-                                    onChange={(e) => setInput(e.target.value)}
-                                    onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                                    placeholder="Type your message..."
-                                    className="w-full h-14 pl-6 pr-16 rounded-2xl bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-accent outline-none transition-all text-sm font-bold placeholder:text-slate-400"
-                                />
+                                    <div>
+                                        <h3 className="text-sm font-bold tracking-wide">Prayukti AI</h3>
+                                    </div>
+                                </div>
                                 <button
-                                    onClick={handleSend}
-                                    className="absolute right-3 top-3 w-8 h-8 bg-primary text-white rounded-xl flex items-center justify-center hover:bg-accent transition-all"
+                                    onClick={() => setIsOpen(false)}
+                                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all"
                                 >
-                                    <Send size={14} />
+                                    <i className="bx bx-x text-xl" />
                                 </button>
                             </div>
-                            <p className="text-[9px] text-center text-slate-400 mt-4 font-black uppercase tracking-[0.2em]">Prayukti AI Model v1.0.2</p>
-                        </div>
-                    </motion.div>
+
+                            {/* Chat Body */}
+                            <div
+                                ref={scrollRef}
+                                className="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50"
+                            >
+                                {messages.map((msg, i) => (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        key={i}
+                                        className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                                    >
+                                        {msg.role === 'assistant' && (
+                                            <div className="w-12 h-12 flex-shrink-0 mt-1">
+                                                <img src="/prayukti 2.0/illustrations/ai_chatbot.png" alt="Bot" className="w-full h-full object-contain scale-[1.45]" />
+                                            </div>
+                                        )}
+                                        <div className={`max-w-[75%] p-4 text-sm font-medium leading-relaxed ${msg.role === 'user'
+                                            ? 'bg-primary text-white rounded-2xl rounded-tr-sm shadow-md'
+                                            : 'bg-white text-slate-700 rounded-2xl rounded-tl-sm border border-slate-200 shadow-sm'
+                                            }`}>
+                                            {msg.role === 'assistant' ? (
+                                                <div className="prose prose-sm prose-slate max-w-none prose-p:mb-2 prose-p:last:mb-0">
+                                                    <ReactMarkdown>
+                                                        {msg.content}
+                                                    </ReactMarkdown>
+                                                </div>
+                                            ) : (
+                                                msg.content
+                                            )}
+                                        </div>
+                                    </motion.div>
+                                ))}
+                                {isTyping && (
+                                    <div className="flex justify-start gap-3">
+                                        <div className="w-12 h-12 flex-shrink-0 mt-1">
+                                            <img src="/prayukti 2.0/illustrations/ai_chatbot.png" alt="Bot" className="w-full h-full object-contain scale-[1.45]" />
+                                        </div>
+                                        <div className="bg-white border border-slate-200 px-4 py-3 rounded-2xl rounded-tl-sm shadow-sm flex items-center gap-1.5 h-10 mt-1">
+                                            <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                                            <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                                            <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce"></div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Input Area */}
+                            <div className="p-6 bg-white border-t border-slate-100">
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        value={input}
+                                        onChange={(e) => setInput(e.target.value)}
+                                        onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                                        placeholder="Ask me anything..."
+                                        className="w-full h-12 pl-4 pr-12 rounded-xl bg-slate-100 border-2 border-transparent focus:border-primary/50 focus:bg-white outline-none transition-all text-sm text-slate-700 placeholder:text-slate-400"
+                                    />
+                                    <button
+                                        onClick={handleSend}
+                                        disabled={!input.trim() || isTyping}
+                                        className="absolute right-2 top-2 w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        <Send size={14} />
+                                    </button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </>
                 )}
             </AnimatePresence>
 
-            <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setIsOpen(!isOpen)}
-                className={`w-16 h-16 rounded-[2rem] flex items-center justify-center shadow-2xl transition-all duration-500 border-0 ${
-                    isOpen ? 'bg-primary text-white rotate-90' : 'bg-white dark:bg-slate-900 text-accent hover:bg-accent hover:text-white'
-                }`}
-            >
-                {isOpen ? <X size={28} /> : (
-                    <div className="relative">
-                        <MessageSquare size={28} />
-                        <span className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
-                    </div>
-                )}
-            </motion.button>
-        </div>
+            {/* Floating Button */}
+            {!isOpen && (
+                <div className="fixed bottom-2 right-2 z-50 flex items-center gap-3">
+                    <motion.button
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setIsOpen(true)}
+                        className="w-[117px] h-[117px] flex items-center justify-center transition-all duration-300 relative focus:outline-none focus-visible:outline-none outline-none filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] hover:drop-shadow-[0_15px_25px_rgba(0,0,0,0.2)]"
+                    >
+                        <img
+                            src="/prayukti 2.0/illustrations/ai_chatbot.png"
+                            alt="Chat"
+                            className="w-full h-full object-contain scale-[1.1] drop-shadow-lg"
+                        />
+                    </motion.button>
+                </div>
+            )}
+        </>
     );
 }

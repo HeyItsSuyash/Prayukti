@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, Rocket, Globe2 } from "lucide-react";
+
 
 const universities = [
     {
@@ -57,7 +57,7 @@ export function UniversityAlignment() {
                     className="max-w-4xl mx-auto text-center mb-20"
                 >
                     <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 px-4 py-2 rounded-full border border-blue-100 dark:border-blue-800 mb-6">
-                        <Globe2 className="w-4 h-4 text-blue-600" />
+                        <i className="bx bx-globe w-4 h-4 text-blue-600"  />
                         <span className="text-[10px] font-black uppercase tracking-widest text-blue-600">Nationwide Expansion</span>
                     </div>
 
@@ -94,7 +94,7 @@ export function UniversityAlignment() {
                         >
                             {uni.isSupported && (
                                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-lg flex items-center gap-1.5 z-10 whitespace-nowrap">
-                                    <CheckCircle2 className="w-3 h-3" />
+                                    <i className="bx bx-check-circle w-3 h-3"  />
                                     Currently Supported
                                 </div>
                             )}

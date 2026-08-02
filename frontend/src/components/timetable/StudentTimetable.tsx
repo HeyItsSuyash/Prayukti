@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Bot, Beaker } from 'lucide-react';
+
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 
 export default function StudentTimetable() {
@@ -19,7 +19,7 @@ export default function StudentTimetable() {
       <Card className="bg-neutral-900 border-neutral-800">
         <CardHeader>
           <CardTitle className="text-lg flex items-center text-neutral-200">
-            <Calendar className="w-5 h-5 mr-2 text-emerald-400" /> Today
+            <i className="bx bx-calendar w-5 h-5 mr-2 text-emerald-400"  /> Today
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -35,11 +35,11 @@ export default function StudentTimetable() {
               </div>
               <div className="flex gap-2 ml-[80px] md:ml-0">
                 <button className="flex items-center px-3 py-1.5 text-xs font-medium rounded border border-blue-500/50 text-blue-400 hover:bg-blue-500/10 transition-colors">
-                  <Bot className="w-3 h-3 mr-1.5" /> Ask AI Tutor
+                  <i className="bx bx-bot w-3 h-3 mr-1.5"  /> Ask AI Tutor
                 </button>
                 {item.isLab && (
                   <button className="flex items-center px-3 py-1.5 text-xs font-medium rounded border border-purple-500/50 text-purple-400 hover:bg-purple-500/10 transition-colors">
-                    <Beaker className="w-3 h-3 mr-1.5" /> Open Virtual Lab
+                    <i className="bx bx-beaker w-3 h-3 mr-1.5"  /> Open Virtual Lab
                   </button>
                 )}
               </div>

@@ -1,25 +1,25 @@
 "use client";
 
-import { Monitor, Zap, Users, Trophy } from "lucide-react";
+
 
 const features = [
     {
-        icon: <Monitor className="w-8 h-8 text-primary" />,
+        icon: <i className="bx bx-desktop w-8 h-8 text-primary"  />,
         title: "Interactive Simulations",
         description: "Experience hands-on learning with our high-fidelity virtual apparatus and real-time feedback systems.",
     },
     {
-        icon: <Zap className="w-8 h-8 text-amber-500" />,
+        icon: <i className="bx bx-zap w-8 h-8 text-amber-500"  />,
         title: "Real-time Results",
         description: "Get instant analysis and validation of your experimental data with our advanced calculation engine.",
     },
     {
-        icon: <Users className="w-8 h-8 text-green-500" />,
+        icon: <i className="bx bx-group w-8 h-8 text-green-500"  />,
         title: "Student Friendly",
         description: "Designed with an intuitive interface that simplifies complex procedures without compromising academic rigor.",
     },
     {
-        icon: <Trophy className="w-8 h-8 text-indigo-500" />,
+        icon: <i className="bx bx-trophy w-8 h-8 text-indigo-500"  />,
         title: "Evaluated Learning",
         description: "Track your progress with integrated quizzes and automated performance assessment tools.",
     },

@@ -5,17 +5,7 @@ import ClassroomLayout from "@/components/classroom/ClassroomLayout";
 import { API_URL } from "@/lib/config";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { 
-    Calendar, 
-    Clock, 
-    ArrowRight, 
-    AlertCircle, 
-    Sparkles, 
-    Activity, 
-    Megaphone,
-    BookOpen,
-    Loader2
-} from "lucide-react";
+
 
 export default function ClassroomDashboard() {
     const [data, setData] = useState<any>(null);
@@ -78,12 +68,12 @@ export default function ClassroomDashboard() {
 
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-32 animate-pulse">
-                        <Loader2 className="w-10 h-10 text-indigo-600 animate-spin mb-4" />
+                        <i className="bx bx-loader2 w-10 h-10 text-indigo-600 animate-spin mb-4"  />
                         <p className="text-slate-400 font-black uppercase tracking-widest text-[9px]">Synchronizing classroom variables...</p>
                     </div>
                 ) : error ? (
                     <div className="flex items-center gap-3 p-6 bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 rounded-3xl text-red-600 dark:text-red-400">
-                        <AlertCircle className="shrink-0" size={24} />
+                        <i className="bx bx-alertcircle shrink-0"  />
                         <p className="font-semibold text-sm">{error}</p>
                     </div>
                 ) : (
@@ -92,7 +82,7 @@ export default function ClassroomDashboard() {
                         <div className="border border-indigo-100/50 dark:border-indigo-900/30 rounded-3xl p-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex flex-col md:flex-row justify-between items-center gap-4 shadow-md mb-6">
                             <div>
                                 <div className="flex items-center gap-2">
-                                    <Sparkles size={14} className="text-indigo-200 animate-pulse" />
+                                    <i className="bx bx-sparkles text-indigo-200 animate-pulse"  />
                                     <span className="text-[9px] font-black uppercase tracking-wider text-indigo-200">New Feature Active</span>
                                 </div>
                                 <h3 className="text-lg font-black uppercase tracking-tight mt-1">
@@ -118,7 +108,7 @@ export default function ClassroomDashboard() {
                                             <div className="flex justify-between items-start mb-4">
                                                 <span className="text-xs font-black uppercase tracking-widest text-slate-400">Total Enrolled</span>
                                                 <div className="p-2 bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 rounded-xl">
-                                                    <BookOpen size={18} />
+                                                    <i className="bx bx-bookopen"  />
                                                 </div>
                                             </div>
                                             <h2 className="text-4xl font-black">{data.totalStudents}</h2>
@@ -131,7 +121,7 @@ export default function ClassroomDashboard() {
                                             <div className="flex justify-between items-start mb-4">
                                                 <span className="text-xs font-black uppercase tracking-widest text-slate-400">Active Today</span>
                                                 <div className="p-2 bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded-xl">
-                                                    <Activity size={18} />
+                                                    <i className="bx bx-activity"  />
                                                 </div>
                                             </div>
                                             <h2 className="text-4xl font-black">{data.activeStudentsToday}</h2>
@@ -144,7 +134,7 @@ export default function ClassroomDashboard() {
                                             <div className="flex justify-between items-start mb-4">
                                                 <span className="text-xs font-black uppercase tracking-widest text-slate-400">Today's Classes</span>
                                                 <div className="p-2 bg-blue-500/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-xl">
-                                                    <Calendar size={18} />
+                                                    <i className="bx bx-calendar"  />
                                                 </div>
                                             </div>
                                             <h2 className="text-4xl font-black">{data.classesToday?.length || 0}</h2>
@@ -159,7 +149,7 @@ export default function ClassroomDashboard() {
                                             <div className="flex justify-between items-start mb-4">
                                                 <span className="text-xs font-black uppercase tracking-widest text-slate-400">Attendance Index</span>
                                                 <div className="p-2 bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 rounded-xl">
-                                                    <Calendar size={18} />
+                                                    <i className="bx bx-calendar"  />
                                                 </div>
                                             </div>
                                             <h2 className="text-4xl font-black text-indigo-600 dark:text-indigo-400">{data.attendanceRate || "80.0%"}</h2>
@@ -172,7 +162,7 @@ export default function ClassroomDashboard() {
                                             <div className="flex justify-between items-start mb-4">
                                                 <span className="text-xs font-black uppercase tracking-widest text-slate-400">Engagement Score</span>
                                                 <div className="p-2 bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded-xl">
-                                                    <Activity size={18} />
+                                                    <i className="bx bx-activity"  />
                                                 </div>
                                             </div>
                                             <h2 className="text-4xl font-black text-emerald-600 dark:text-emerald-400">{data.engagementScore || 75} <span className="text-xs text-slate-400">/ 100</span></h2>
@@ -185,7 +175,7 @@ export default function ClassroomDashboard() {
                                             <div className="flex justify-between items-start mb-4">
                                                 <span className="text-xs font-black uppercase tracking-widest text-slate-400">Pending Exams</span>
                                                 <div className="p-2 bg-amber-500/10 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 rounded-xl">
-                                                    <AlertCircle size={18} />
+                                                    <i className="bx bx-alertcircle"  />
                                                 </div>
                                             </div>
                                             <h2 className="text-4xl font-black text-amber-600 dark:text-amber-400">{data.pendingExams || 0}</h2>
@@ -208,7 +198,7 @@ export default function ClassroomDashboard() {
                                     </div>
                                     <a href="/classroom/timetable">
                                         <Button variant="ghost" size="sm" className="font-extrabold uppercase text-[10px] tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5 hover:bg-indigo-50 dark:hover:bg-indigo-950/30">
-                                            Weekly Timetable <ArrowRight size={12} />
+                                            Weekly Timetable <i className="bx bx-right-arrow-alt"  />
                                         </Button>
                                     </a>
                                 </div>
@@ -220,7 +210,7 @@ export default function ClassroomDashboard() {
                                                 <div key={c.id} className="flex justify-between items-center p-4 bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 rounded-2xl hover:border-slate-300 dark:hover:border-slate-700 transition-colors">
                                                     <div className="flex items-center gap-4">
                                                         <div className="w-12 h-12 bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 rounded-2xl flex items-center justify-center">
-                                                            <Clock size={20} />
+                                                            <i className="bx bx-clock"  />
                                                         </div>
                                                         <div>
                                                             <h4 className="font-bold text-sm text-slate-800 dark:text-slate-100">{c.className}</h4>
@@ -244,7 +234,7 @@ export default function ClassroomDashboard() {
                                         })
                                     ) : (
                                         <div className="flex flex-col items-center justify-center py-16 text-center">
-                                            <Calendar className="w-12 h-12 text-slate-300 mb-3" />
+                                            <i className="bx bx-calendar w-12 h-12 text-slate-300 mb-3"  />
                                             <h4 className="font-black text-slate-400 dark:text-slate-500 uppercase text-xs tracking-wider">No Classes Scheduled Today</h4>
                                             <p className="text-xs text-slate-400 max-w-xs mt-2 font-medium">Check the timetable section for upcoming scheduled slots this week.</p>
                                         </div>
@@ -261,7 +251,7 @@ export default function ClassroomDashboard() {
                                     </div>
                                     <a href="/classroom/announcements">
                                         <Button variant="ghost" size="sm" className="font-extrabold uppercase text-[10px] tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5 hover:bg-indigo-50 dark:hover:bg-indigo-950/30">
-                                            Announcement Feed <ArrowRight size={12} />
+                                            Announcement Feed <i className="bx bx-right-arrow-alt"  />
                                         </Button>
                                     </a>
                                 </div>
@@ -272,7 +262,7 @@ export default function ClassroomDashboard() {
                                                 <div className="flex items-start gap-3 justify-between">
                                                     <div className="flex gap-3">
                                                         <div className="w-10 h-10 bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center shrink-0">
-                                                            <Megaphone size={16} />
+                                                            <i className="bx bx-megaphone"  />
                                                         </div>
                                                         <div>
                                                             <h4 className="font-bold text-sm text-slate-800 dark:text-slate-100">{a.title}</h4>
@@ -289,7 +279,7 @@ export default function ClassroomDashboard() {
                                         ))
                                     ) : (
                                         <div className="flex flex-col items-center justify-center py-16 text-center">
-                                            <Megaphone className="w-12 h-12 text-slate-300 mb-3" />
+                                            <i className="bx bx-megaphone w-12 h-12 text-slate-300 mb-3"  />
                                             <h4 className="font-black text-slate-400 dark:text-slate-500 uppercase text-xs tracking-wider">No Recent Announcements</h4>
                                             <p className="text-xs text-slate-400 max-w-xs mt-2 font-medium">Announcements posted by your subject teachers will be compiled here.</p>
                                         </div>

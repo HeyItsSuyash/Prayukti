@@ -7,7 +7,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowUpDown, Search, Eye } from "lucide-react";
+
 import { StudentMetric, PerformanceLevel } from '@/data/mock-teacher-data';
 
 interface StudentTableProps {
@@ -52,22 +52,22 @@ export function StudentTable({ data, onViewStudent }: StudentTableProps) {
                             <TableHead className="w-[100px]">Roll No</TableHead>
                             <TableHead>
                                 <Button variant="ghost" onClick={() => handleSort('name')}>
-                                    Name <ArrowUpDown className="ml-2 h-4 w-4" />
+                                    Name <i className="bx bx-arrowupdown ml-2 h-4 w-4"  />
                                 </Button>
                             </TableHead>
                             <TableHead className="text-center">
                                 <Button variant="ghost" onClick={() => handleSort('practicalsCompleted')}>
-                                    Completion <ArrowUpDown className="ml-2 h-4 w-4" />
+                                    Completion <i className="bx bx-arrowupdown ml-2 h-4 w-4"  />
                                 </Button>
                             </TableHead>
                             <TableHead className="text-center">
                                 <Button variant="ghost" onClick={() => handleSort('quizScoreAvg')}>
-                                    Avg Score <ArrowUpDown className="ml-2 h-4 w-4" />
+                                    Avg Score <i className="bx bx-arrowupdown ml-2 h-4 w-4"  />
                                 </Button>
                             </TableHead>
                             <TableHead className="text-center">
                                 <Button variant="ghost" onClick={() => handleSort('avgAttempts')}>
-                                    Avg Attempts <ArrowUpDown className="ml-2 h-4 w-4" />
+                                    Avg Attempts <i className="bx bx-arrowupdown ml-2 h-4 w-4"  />
                                 </Button>
                             </TableHead>
                             <TableHead className="text-center">Status</TableHead>
@@ -102,7 +102,7 @@ export function StudentTable({ data, onViewStudent }: StudentTableProps) {
                                     </TableCell>
                                     <TableCell className="text-right">
                                         <Button variant="outline" size="sm" onClick={() => onViewStudent(student)}>
-                                            <Eye className="h-4 w-4 mr-1" /> View
+                                            <i className="bx bx-eye h-4 w-4 mr-1"  /> View
                                         </Button>
                                     </TableCell>
                                 </TableRow>

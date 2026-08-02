@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CheckCircle, XCircle, Award, Calendar, User, BookOpen } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 interface VerifyCertificatePageProps {
@@ -40,9 +40,9 @@ export default function VerifyCertificatePage({ certificateId }: VerifyCertifica
                 <div className={`p-8 text-center ${isValid ? 'bg-primary' : 'bg-red-600'} text-white`}>
                     <div className="flex justify-center mb-4">
                         {isValid ? (
-                            <CheckCircle className="w-16 h-16" />
+                            <i className="bx bx-check-circle w-16 h-16"  />
                         ) : (
-                            <XCircle className="w-16 h-16" />
+                            <i className="bx bx-xcircle w-16 h-16"  />
                         )}
                     </div>
                     <h1 className="text-3xl font-black uppercase tracking-tight">
@@ -57,7 +57,7 @@ export default function VerifyCertificatePage({ certificateId }: VerifyCertifica
                 <div className="p-8 space-y-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <User className="w-6 h-6 text-accent mt-1" />
+                            <i className="bx bx-user w-6 h-6 text-accent mt-1"  />
                             <div>
                                 <p className="text-xs font-bold uppercase text-slate-400 tracking-wider">Student Name</p>
                                 <p className="text-lg font-bold text-slate-800">{studentName}</p>
@@ -65,7 +65,7 @@ export default function VerifyCertificatePage({ certificateId }: VerifyCertifica
                         </div>
 
                         <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <BookOpen className="w-6 h-6 text-accent mt-1" />
+                            <i className="bx bx-bookopen w-6 h-6 text-accent mt-1"  />
                             <div>
                                 <p className="text-xs font-bold uppercase text-slate-400 tracking-wider">Course/Subject</p>
                                 <p className="text-lg font-bold text-slate-800">{subject}</p>
@@ -73,7 +73,7 @@ export default function VerifyCertificatePage({ certificateId }: VerifyCertifica
                         </div>
 
                         <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <Calendar className="w-6 h-6 text-accent mt-1" />
+                            <i className="bx bx-calendar w-6 h-6 text-accent mt-1"  />
                             <div>
                                 <p className="text-xs font-bold uppercase text-slate-400 tracking-wider">Issue Date</p>
                                 <p className="text-lg font-bold text-slate-800">{formattedDate}</p>
@@ -81,7 +81,7 @@ export default function VerifyCertificatePage({ certificateId }: VerifyCertifica
                         </div>
 
                         <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-                            <Award className="w-6 h-6 text-accent mt-1" />
+                            <i className="bx bx-award w-6 h-6 text-accent mt-1"  />
                             <div>
                                 <p className="text-xs font-bold uppercase text-slate-400 tracking-wider">Certificate ID</p>
                                 <p className="text-sm font-mono font-bold text-accent">{certificateId}</p>

@@ -13,7 +13,7 @@ import {
     SelectTrigger, 
     SelectValue 
 } from "@/components/ui/select";
-import { Plus, Trash2, BookPlus, Loader2, CheckCircle2 } from 'lucide-react';
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -117,7 +117,7 @@ export function EnrollmentForm({ onSuccess }: { onSuccess: () => void }) {
         return (
             <div className="flex flex-col items-center justify-center p-12 text-center space-y-4">
                 <div className="bg-green-100 p-4 rounded-full">
-                    <CheckCircle2 className="text-green-600 w-12 h-12" />
+                    <i className="bx bx-check-circle text-green-600 w-12 h-12"  />
                 </div>
                 <h3 className="text-2xl font-black text-slate-800">Enrollment Successful!</h3>
                 <p className="text-slate-500">Student has been registered and subjects assigned.</p>
@@ -217,7 +217,7 @@ export function EnrollmentForm({ onSuccess }: { onSuccess: () => void }) {
                         <h4 className="font-black text-slate-800 uppercase tracking-tighter">Subject Assignment</h4>
                         <p className="text-xs text-slate-500">Suggested based on Branch & Semester</p>
                     </div>
-                    {loading && <Loader2 className="animate-spin text-indigo-600" size={20} />}
+                    {loading && <i className="bx bx-loader2 animate-spin text-indigo-600"  />}
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -243,7 +243,7 @@ export function EnrollmentForm({ onSuccess }: { onSuccess: () => void }) {
                     
                     {availableSubjects.length === 0 && !loading && (
                         <div className="col-span-2 p-8 border-2 border-dashed border-slate-200 rounded-3xl flex flex-col items-center justify-center text-slate-400">
-                            <BookPlus className="mb-2 opacity-50" />
+                            <i className="bx bx-bookplus mb-2 opacity-50"  />
                             <p className="text-sm font-bold">No standard subjects found for this criteria.</p>
                             <p className="text-xs">Use the manual assignment option below.</p>
                         </div>
@@ -261,7 +261,7 @@ export function EnrollmentForm({ onSuccess }: { onSuccess: () => void }) {
                             onChange={e => setManualSubject(e.target.value)}
                         />
                         <Button type="button" variant="outline" className="rounded-xl border-slate-200">
-                            <Plus className="w-4 h-4 mr-2" /> Add
+                            <i className="bx bx-plus w-4 h-4 mr-2"  /> Add
                         </Button>
                     </div>
                 </div>
@@ -272,7 +272,7 @@ export function EnrollmentForm({ onSuccess }: { onSuccess: () => void }) {
                 disabled={submitting}
                 className="w-full py-8 text-lg font-black tracking-widest rounded-2xl bg-indigo-600 hover:bg-indigo-700 shadow-xl shadow-indigo-200 shadow-xl transition-all active:scale-[0.98]"
             >
-                {submitting ? <Loader2 className="animate-spin" /> : "COMPLETE ENROLLMENT"}
+                {submitting ? <i className="bx bx-loader2 animate-spin"  /> : "COMPLETE ENROLLMENT"}
             </Button>
         </form>
     );

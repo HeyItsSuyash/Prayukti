@@ -5,7 +5,7 @@ import { API_URL } from "@/lib/config";
 import React, { useState, useEffect, useRef } from "react";
 import { MonacoEditor } from "@/components/lab/MonacoEditor";
 import { Button } from "@/components/ui/button";
-import { Play, RotateCcw, Loader2, ChevronRight, Download, Save, Copy, Settings2, Moon, Sun, Keyboard } from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
 import { LabConsole } from "./LabConsole";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -104,13 +104,13 @@ export default function CodeCompiler({
                             onClick={() => setTheme("vs-dark")}
                             className={`p-1.5 transition-colors ${theme === 'vs-dark' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-slate-300'}`}
                         >
-                            <Moon className="h-3 w-3" />
+                            <i className="bx bx-moon h-3 w-3"  />
                         </button>
                         <button
                             onClick={() => setTheme("light")}
                             className={`p-1.5 transition-colors ${theme === 'light' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-slate-300'}`}
                         >
-                            <Sun className="h-3 w-3" />
+                            <i className="bx bx-sun h-3 w-3"  />
                         </button>
                     </div>
 
@@ -125,19 +125,19 @@ export default function CodeCompiler({
                         onClick={handleSave}
                         className={`p-2 rounded-lg transition-all ${saveStatus === 'saved' ? 'bg-green-600 text-white' : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'}`}
                     >
-                        {saveStatus === 'saving' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />}
+                        {saveStatus === 'saving' ? <i className="bx bx-loader2 h-3.5 w-3.5 animate-spin"  /> : <i className="bx bx-save h-3.5 w-3.5"  />}
                     </button>
                     <button
                         onClick={handleDownload}
                         className="p-2 rounded-lg bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
                     >
-                        <Download className="h-3.5 w-3.5" />
+                        <i className="bx bx-download h-3.5 w-3.5"  />
                     </button>
                     <button
                         onClick={handleCopy}
                         className="p-2 rounded-lg bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
                     >
-                        <Copy className="h-3.5 w-3.5" />
+                        <i className="bx bx-copy h-3.5 w-3.5"  />
                     </button>
 
                     <div className="h-4 w-[1px] bg-white/10 mx-1" />
@@ -168,7 +168,7 @@ export default function CodeCompiler({
                 <div className="h-2/5 flex border-t border-black/40">
                     <div className="w-1/3 bg-[#252526] border-r border-white/5 flex flex-col pt-3 px-4">
                         <div className="flex items-center gap-2 text-blue-400 mb-3">
-                            <Keyboard className="h-3.5 w-3.5" />
+                            <i className="bx bx-keyboard h-3.5 w-3.5"  />
                             <span className="text-[10px] font-black uppercase tracking-widest">Custom Input</span>
                         </div>
                         <textarea
@@ -185,7 +185,7 @@ export default function CodeCompiler({
                                 onClick={handleReset}
                                 className="text-slate-500 hover:text-white text-[9px] font-black uppercase tracking-widest h-6 px-1"
                             >
-                                <RotateCcw className="h-3 w-3 mr-1" /> Reset Code
+                                <i className="bx bx-rotateccw h-3 w-3 mr-1"  /> Reset Code
                             </Button>
                             <Button
                                 variant="link"

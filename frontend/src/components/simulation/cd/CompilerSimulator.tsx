@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Play, RotateCcw, Table as TableIcon, Network, FileCode, CheckCircle } from "lucide-react";
+
 
 export default function CompilerSimulator({ labId }: { labId: string }) {
     const isFirstFollow = labId.includes("exp-1") || labId.includes("exp-2");
@@ -106,7 +106,7 @@ export default function CompilerSimulator({ labId }: { labId: string }) {
                     {/* INPUT SECTION */}
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                         <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                            <FileCode className="h-5 w-5 text-indigo-500" /> Compiler Inputs
+                            <i className="bx bx-filecode h-5 w-5 text-indigo-500"  /> Compiler Inputs
                         </h3>
 
                         {isFirstFollow || isLeftRecursion ? (
@@ -153,7 +153,7 @@ export default function CompilerSimulator({ labId }: { labId: string }) {
 
                         <div className="flex gap-2">
                             <Button onClick={runCompilerSimulation} className="bg-blue-600 hover:bg-blue-700 text-white font-bold">
-                                <Play className="mr-2 h-4 w-4" /> Run Compilation Phase
+                                <i className="bx bx-play mr-2 h-4 w-4"  /> Run Compilation Phase
                             </Button>
                         </div>
                     </div>
@@ -162,7 +162,7 @@ export default function CompilerSimulator({ labId }: { labId: string }) {
                     {isParseTree && outputs.length > 0 && (
                         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
                             <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <Network className="h-5 w-5 text-indigo-500" /> Syntax Derivation parse tree
+                                <i className="bx bx-network h-5 w-5 text-indigo-500"  /> Syntax Derivation parse tree
                             </h3>
                             <div className="border border-slate-200 rounded-2xl p-6 bg-slate-50 flex flex-col items-center justify-center min-h-[200px]">
                                 <div className="flex flex-col items-center gap-6">
@@ -191,7 +191,7 @@ export default function CompilerSimulator({ labId }: { labId: string }) {
                     {isNfa && outputs.length > 0 && (
                         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
                             <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <Network className="h-5 w-5 text-indigo-500" /> Thompson NFA state machine graph
+                                <i className="bx bx-network h-5 w-5 text-indigo-500"  /> Thompson NFA state machine graph
                             </h3>
                             <div className="border border-slate-200 rounded-2xl p-6 bg-slate-50 flex items-center justify-around min-h-[160px] overflow-x-auto">
                                 <div className="h-12 w-12 rounded-full border-2 border-slate-600 bg-white flex items-center justify-center font-bold text-xs">q0</div>
@@ -238,7 +238,7 @@ export default function CompilerSimulator({ labId }: { labId: string }) {
                 {/* OUTPUT TERMINAL LOGS */}
                 <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[500px]">
                     <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                        <CheckCircle className="h-5 w-5 text-emerald-500" /> Compiler Outputs
+                        <i className="bx bx-check-circle h-5 w-5 text-emerald-500"  /> Compiler Outputs
                     </h3>
                     <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                         {outputs.length > 0 ? (

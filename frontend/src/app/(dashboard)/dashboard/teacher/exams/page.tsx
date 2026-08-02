@@ -8,16 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { 
-    ArrowLeft, 
-    BookOpen, 
-    Calendar, 
-    Clock, 
-    Plus, 
-    Users,
-    Trash2,
-    Eye
-} from "lucide-react";
+
 
 export default function TeacherExamsPage() {
     const [user, setUser] = useState<any>(null);
@@ -70,7 +61,7 @@ export default function TeacherExamsPage() {
                             onClick={() => window.location.href = "/dashboard"}
                             className="flex items-center gap-2 mb-4 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest text-[10px]"
                         >
-                            <ArrowLeft size={16} /> Back to Dashboard
+                            <i className="bx bx-arrowleft"  /> Back to Dashboard
                         </Button>
                         <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-slate-900 dark:text-white leading-none">
                             Manage <span className="text-accent italic">Exams</span>
@@ -83,7 +74,7 @@ export default function TeacherExamsPage() {
                     <Button 
                         className="bg-accent text-white hover:bg-accent/90 px-6 h-12 rounded-xl uppercase font-black tracking-widest text-xs flex items-center gap-2"
                     >
-                        <Plus size={16} /> Schedule New Exam
+                        <i className="bx bx-plus"  /> Schedule New Exam
                     </Button>
                 </div>
 
@@ -128,17 +119,17 @@ export default function TeacherExamsPage() {
                                             </TableCell>
                                             <TableCell className="text-slate-900 dark:text-white font-bold text-sm">
                                                 <span className="flex items-center gap-1">
-                                                    <Users size={14} className="text-slate-400" />
+                                                    <i className="bx bx-group text-slate-400"  />
                                                     {exam.submissions} / {exam.enrolledStudents}
                                                 </span>
                                             </TableCell>
                                             <TableCell className="pr-8 text-right">
                                                 <div className="flex items-center justify-end gap-2">
                                                     <Button size="icon" variant="ghost" className="text-blue-600 hover:text-blue-700 hover:bg-blue-50">
-                                                        <Eye size={16} />
+                                                        <i className="bx bx-eye"  />
                                                     </Button>
                                                     <Button size="icon" variant="ghost" onClick={() => deleteExam(exam.id)} className="text-red-600 hover:text-red-700 hover:bg-red-50">
-                                                        <Trash2 size={16} />
+                                                        <i className="bx bx-trash2"  />
                                                     </Button>
                                                 </div>
                                             </TableCell>

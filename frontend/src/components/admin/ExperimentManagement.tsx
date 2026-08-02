@@ -11,20 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 // Removed next/navigation
-import { 
-    Plus, 
-    Search, 
-    Edit, 
-    Trash2, 
-    FlaskConical, 
-    Link as LinkIcon, 
-    FileText, 
-    Play,
-    Loader2,
-    ChevronRight,
-    ArrowLeft,
-    Filter
-} from 'lucide-react';
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
@@ -136,7 +123,7 @@ export function ExperimentManagement() {
                 <div className="flex gap-3">
                     <Select value={selectedSubject} onValueChange={setSelectedSubject}>
                         <SelectTrigger className="w-[240px] rounded-xl border-slate-100 shadow-sm bg-white font-bold h-12">
-                            <Filter size={18} className="mr-2 text-indigo-600" />
+                            <i className="bx bx-filter mr-2 text-indigo-600"  />
                             <SelectValue placeholder="All Subjects" />
                         </SelectTrigger>
                         <SelectContent className="rounded-2xl border-slate-100">
@@ -147,7 +134,7 @@ export function ExperimentManagement() {
                         </SelectContent>
                     </Select>
                     <Button onClick={() => setIsAddOpen(true)} className="bg-indigo-600 hover:bg-indigo-700 font-bold rounded-xl px-6 h-12">
-                        <Plus className="mr-2 h-5 w-5" /> NEW EXPERIMENT
+                        <i className="bx bx-plus mr-2 h-5 w-5"  /> NEW EXPERIMENT
                     </Button>
                 </div>
             </div>
@@ -155,12 +142,12 @@ export function ExperimentManagement() {
             <div className="space-y-12">
                 {loading ? (
                     <div className="py-20 text-center">
-                        <Loader2 className="animate-spin inline-block mr-2 text-indigo-600" />
+                        <i className="bx bx-loader2 animate-spin inline-block mr-2 text-indigo-600"  />
                         <span className="font-black text-slate-400 uppercase tracking-widest italic">Syncing Registry...</span>
                     </div>
                 ) : experiments.length === 0 ? (
                     <div className="py-20 text-center bg-white rounded-[3rem] border-2 border-dashed border-slate-100">
-                        <FlaskConical size={48} className="mx-auto text-slate-200 mb-4" />
+                        <i className="bx bx-flask mx-auto text-slate-200 mb-4"  />
                         <p className="text-slate-400 font-black uppercase tracking-widest italic">No experiments found in the registry</p>
                     </div>
                 ) : (
@@ -190,11 +177,11 @@ export function ExperimentManagement() {
                                         <div className="p-8 space-y-4">
                                             <div className="flex justify-between items-start">
                                                 <div className={`p-4 rounded-[1.5rem] ${exp.type === 'learning' ? 'bg-amber-100/50' : 'bg-indigo-100/50'}`}>
-                                                    {exp.type === 'learning' ? <FileText className="text-amber-600" /> : <FlaskConical className="text-indigo-600" />}
+                                                    {exp.type === 'learning' ? <i className="bx bx-file text-amber-600"  /> : <i className="bx bx-flask text-indigo-600"  />}
                                                 </div>
                                                 <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                    <Button variant="ghost" size="icon" className="rounded-xl"><Edit size={16} className="text-slate-400" /></Button>
-                                                    <Button variant="ghost" size="icon" className="rounded-xl" onClick={() => handleDelete(exp._id)}><Trash2 size={16} className="text-red-400" /></Button>
+                                                    <Button variant="ghost" size="icon" className="rounded-xl"><i className="bx bx-edit text-slate-400"  /></Button>
+                                                    <Button variant="ghost" size="icon" className="rounded-xl" onClick={() => handleDelete(exp._id)}><i className="bx bx-trash2 text-red-400"  /></Button>
                                                 </div>
                                             </div>
                                             <div>
@@ -220,7 +207,7 @@ export function ExperimentManagement() {
                                                 onClick={() => handleManageResources(exp._id)}
                                                 className="w-full rounded-2xl border-slate-100 font-black text-xs h-12 uppercase group-hover:bg-slate-900 group-hover:text-white transition-all"
                                             >
-                                                Manage Resources <ChevronRight size={14} className="ml-2" />
+                                                Manage Resources <i className="bx bx-chevronright ml-2"  />
                                             </Button>
                                         </div>
                                     </Card>

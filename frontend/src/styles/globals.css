@@ -2,73 +2,102 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   PRAYUKTI DESIGN SYSTEM — BRAND TOKEN LAYER
+   Reference: Dashboard screenshot — "Clean Academic Blue"
+   Primary: #4B6EF5 (vivid blue)  Secondary: #1B2A6B (deep navy)
+   ============================================================ */
 
 @layer base {
   :root {
-    --background: 214 32% 97%;
-    --foreground: 215 28% 17%;
+    --background: 0 0% 100%; /* White */
+    --foreground: 222.2 84% 4.9%;
+
+    /* Emerald Green / Teal from lander.png */
+    --primary: 160 84% 39%; /* #10b981 approx */
+    --primary-foreground: 210 40% 98%;
+
+    /* Dark Teal Backgrounds */
+    --accent: 193 89% 7%; /* #021d24 approx */
+    --accent-foreground: 222.2 47.4% 11.2%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 28% 17%;
+    --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 28% 17%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 216 70% 15%; /* Navy Blue #0B1F3F */
-    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 210 61% 16%; /* Deep Blue #102A43 */
-    --secondary-foreground: 0 0% 100%;
-
-    --muted: 214 32% 91%;
-    --muted-foreground: 215 16% 47%;
-
-    --accent: 22 90% 54%; /* Orange #F36F21 */
-    --accent-foreground: 0 0% 100%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 22 90% 54%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 160 84% 39%;
 
-    --radius: 0.625rem; /* 10px - Medium */
-    --radius-sm: 0.375rem; /* 6px - Small */
-    --radius-lg: 1rem; /* 16px - Large */
+    /* Sharp corners */
+    --radius: 0px; 
 
-    --shadow-default: 0px 4px 20px rgba(0, 0, 0, 0.08);
-    --shadow-hover: 0px 8px 30px rgba(0, 0, 0, 0.12);
+    /* ─── Radius Scale (Sharp corners per instructions) ─── */
+    --radius-xs:  0px;
+    --radius-sm:  0px;
+    --radius:     0px;
+    --radius-lg:  0px;
+    --radius-xl:  0px;
+    --radius-2xl: 0px;
+
+    /* ─── Shadow Scale ─── */
+    --shadow-xs:  0 1px 2px  rgba(0,0,0,0.02);
+    --shadow-sm:  0 4px 12px rgba(0,0,0,0.03);
+    --shadow-md:  0 8px 24px rgba(0,0,0,0.04);
+    --shadow-lg:  0 16px 48px rgba(0,0,0,0.06);
+    --shadow-xl:  0 24px 64px rgba(0,0,0,0.08);
+    --shadow-primary: 0 8px 32px rgba(75,110,245,0.25);
+
+    /* ─── Sidebar ─── */
+    --sidebar-from:        203 72% 10%;
+    --sidebar-to:          203 72% 14%;
+    --sidebar-text:        215 25% 75%;
+    --sidebar-text-active: 0 0% 100%;
+    --sidebar-active-bg:   255 100% 100% / 0.10;
+
+    /* ─── Layout ─── */
+    --nav-height: 80px;
   }
 
   .dark {
-    --background: 217 70% 15%;
-    --foreground: 216 33% 97%;
+    --background:         203 72% 10%;    /* #071D2B */
+    --foreground:         216 33% 97%;
 
-    --card: 210 61% 16%;
-    --card-foreground: 216 33% 97%;
+    --card:               203 72% 13%;
+    --card-foreground:    216 33% 97%;
 
-    --popover: 210 61% 16%;
+    --popover:            203 72% 13%;
     --popover-foreground: 216 33% 97%;
 
-    --primary: 217 70% 15%;
+    --primary:            228 89% 63%;    /* #4B6EF5 */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 61% 16%;
+    --secondary:          203 72% 16%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 61% 16%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --accent:             157 83% 46%;    /* #14D98F */
+    --accent-foreground:  0 0% 100%;
 
-    --accent: 22 90% 54%;
-    --accent-foreground: 0 0% 100%;
+    --muted:              203 72% 16%;
+    --muted-foreground:   220 9% 65%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive:        0 63% 35%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 215 28% 17%;
-    --input: 215 28% 17%;
-    --ring: 22 90% 54%;
+    --border:             203 72% 20%;
+    --input:              203 72% 20%;
+    --ring:               228 89% 63%;
   }
 }
 
@@ -78,98 +107,83 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02","cv03","cv04","cv11";
   }
 }
 
+/* ─── Loader ─── */
 .loader {
   width: 48px;
   height: 48px;
-  border: 5px solid #FFF;
-  border-bottom-color: #d32f2f;
+  border: 5px solid hsl(var(--border));
+  border-bottom-color: hsl(var(--primary));
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;
-  animation: rotation 1s linear infinite;
+  animation: prayukti-spin 1s linear infinite;
 }
 
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
+@keyframes prayukti-spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
+/* ─── Blob animation (landing page blobs) ─── */
 .animate-blob {
-  animation: blob 7s infinite;
+  animation: blob 7s infinite ease;
 }
 
 @keyframes blob {
-  0% {
-    transform: translate(0px, 0px) scale(1);
-  }
-
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-
-  100% {
-    transform: translate(0px, 0px) scale(1);
-  }
+  0%   { transform: translate(0px, 0px) scale(1); }
+  33%  { transform: translate(30px, -50px) scale(1.1); }
+  66%  { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
 }
 
-.animation-delay-2000 {
-  animation-delay: 2s;
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+
+/* ─── Glassmorphism ─── */
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
 }
 
-.animation-delay-4000 {
-  animation-delay: 4s;
+.dark .glass {
+  background: rgba(13, 21, 38, 0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.btn-interaction {
-  @apply transition-all duration-500 transform active:scale-95 hover:scale-105 hover:-translate-y-1 active:shadow-inner;
+/* ─── Interactive utilities ─── */
+.card-hover {
+  @apply transition-all duration-200 hover:shadow-md hover:-translate-y-0.5;
 }
 
-.btn-gradient {
-  @apply bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-white hover:to-white hover:text-blue-600 text-white shadow-xl shadow-blue-500/20 hover:shadow-blue-500/40 border border-transparent hover:border-blue-100;
+.btn-press {
+  @apply active:scale-[0.97] transition-transform duration-100;
 }
 
-.card-interaction {
-  @apply transition-all duration-300 shadow-sm hover:shadow-2xl hover:-translate-y-2 hover:border-primary/30 border border-transparent;
-}
-
+/* ─── Link underline slide ─── */
 .link-animate {
-  @apply relative cursor-pointer font-bold;
+  @apply relative cursor-pointer;
 }
 
 .link-animate::after {
   content: '';
-  @apply absolute bottom-0 left-0 w-full h-0.5 bg-accent transform scale-x-0 transition-transform duration-300 origin-left;
+  @apply absolute bottom-0 left-0 w-full h-px bg-primary transform scale-x-0
+         transition-transform duration-300 origin-left;
 }
 
 .link-animate:hover::after {
   @apply scale-x-100;
 }
 
+/* ─── Section soft background ─── */
 .section-shade-soft {
-  @apply bg-slate-50/50 dark:bg-slate-900/20;
-}
-
-.glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.dark .glass {
-  background: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
+  @apply bg-muted/50 dark:bg-muted/20;
+}

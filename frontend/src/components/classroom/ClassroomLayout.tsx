@@ -8,14 +8,10 @@ import {
     Calendar, 
     Megaphone, 
     Sparkles, 
+    Video, 
     Bot, 
     BarChart3, 
-    BookOpen, 
-    ArrowLeft, 
-    Menu, 
-    X,
-    User,
-    Video
+    BookOpen 
 } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
@@ -115,7 +111,7 @@ export default function ClassroomLayout({ children }: ClassroomLayoutProps) {
                 <aside className="hidden md:flex w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md fixed top-20 bottom-0 left-0 p-6 z-20 overflow-y-auto">
                     <div className="mb-8 flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-                            <Sparkles size={20} className="animate-pulse" />
+                            <i className="bx bx-sparkles animate-pulse"  />
                         </div>
                         <div>
                             <h3 className="font-extrabold text-sm uppercase tracking-wider text-slate-800 dark:text-slate-200">Smart Classroom</h3>
@@ -144,7 +140,7 @@ export default function ClassroomLayout({ children }: ClassroomLayoutProps) {
 
                     <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700">
-                            <User size={18} />
+                            <i className="bx bx-user"  />
                         </div>
                         <div className="truncate">
                             <p className="text-xs font-bold truncate text-slate-800 dark:text-slate-200">{user.fullName}</p>
@@ -160,7 +156,7 @@ export default function ClassroomLayout({ children }: ClassroomLayoutProps) {
                         className="w-14 h-14 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-950 shadow-2xl hover:scale-105 active:scale-95 transition-transform"
                         onClick={() => setIsMobileOpen(true)}
                     >
-                        <Menu size={24} />
+                        <i className="bx bx-menu"  />
                     </Button>
                 </div>
 
@@ -187,14 +183,14 @@ export default function ClassroomLayout({ children }: ClassroomLayoutProps) {
                                     <div className="flex items-center justify-between mb-8">
                                         <div className="flex items-center gap-3">
                                             <div className="w-10 h-10 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-                                                <Sparkles size={20} />
+                                                <i className="bx bx-sparkles"  />
                                             </div>
                                             <div>
                                                 <h3 className="font-extrabold text-sm uppercase tracking-wider text-slate-800 dark:text-slate-200">Smart Classroom</h3>
                                             </div>
                                         </div>
                                         <Button variant="ghost" size="icon" onClick={() => setIsMobileOpen(false)} className="rounded-full">
-                                            <X size={20} />
+                                            <i className="bx bx-x"  />
                                         </Button>
                                     </div>
 
@@ -225,7 +221,7 @@ export default function ClassroomLayout({ children }: ClassroomLayoutProps) {
 
                                 <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center gap-3">
                                     <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700">
-                                        <User size={18} />
+                                        <i className="bx bx-user"  />
                                     </div>
                                     <div>
                                         <p className="text-xs font-bold text-slate-800 dark:text-slate-200">{user.fullName}</p>
@@ -241,7 +237,7 @@ export default function ClassroomLayout({ children }: ClassroomLayoutProps) {
                 <main className="flex-1 md:ml-72 p-6 md:p-10 max-w-7xl mx-auto w-full overflow-x-hidden">
                     <div className="mb-6">
                         <a href="/dashboard" className="text-xs font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-2 group mb-4 hover:underline">
-                            <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" />
+                            <i className="bx bx-arrowleft group-hover:-translate-x-1 transition-transform"  />
                             Back to Virtual Lab Hub
                         </a>
                     </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { API_URL } from "@/lib/config";
-import { Plus, Save, Calendar as CalendarIcon, Clock, Users, BookOpen, AlertTriangle, Zap, CheckCircle2, Loader2, RefreshCw, X } from 'lucide-react';
+
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '../ui/dialog';
@@ -184,13 +184,13 @@ export default function AdminTimetableBuilder() {
               ${isGenerating ? 'bg-slate-800 text-slate-500' : 'bg-gradient-to-r from-accent to-orange-500 hover:from-accent/90 hover:to-orange-500/90 text-white shadow-accent/20'}`}
           >
             {isGenerating ? (
-              <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Generating...</>
+              <><i className="bx bx-loader2 w-4 h-4 mr-2 animate-spin"  /> Generating...</>
             ) : (
-              <><Zap className="w-4 h-4 mr-2" /> Auto-Generate</>
+              <><i className="bx bx-zap w-4 h-4 mr-2"  /> Auto-Generate</>
             )}
           </Button>
           <Button className="bg-white/10 hover:bg-white/20 text-white font-bold py-6 px-6 rounded-xl uppercase tracking-widest text-xs border border-white/10 transition-colors">
-            <Save className="w-4 h-4 mr-2" /> Publish
+            <i className="bx bx-save w-4 h-4 mr-2"  /> Publish
           </Button>
         </div>
       </div>
@@ -201,29 +201,29 @@ export default function AdminTimetableBuilder() {
           <Card className="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
             <CardHeader className="border-b border-white/10 pb-4">
               <CardTitle className="text-sm font-bold flex items-center text-white uppercase tracking-widest">
-                <AlertTriangle className="w-4 h-4 mr-2 text-accent" /> Status
+                <i className="bx bx-alerttriangle w-4 h-4 mr-2 text-accent"  /> Status
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6">
               {isGenerating ? (
                 <div className="space-y-4">
                   <div className={`flex items-center gap-3 ${generationStep >= 1 ? 'text-white' : 'text-white/30'}`}>
-                    {generationStep > 1 ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <RefreshCw className="w-4 h-4 animate-spin text-accent" />}
+                    {generationStep > 1 ? <i className="bx bx-check-circle w-4 h-4 text-emerald-400"  /> : <i className="bx bx-refreshcw w-4 h-4 animate-spin text-accent"  />}
                     <span className="text-xs font-bold uppercase tracking-widest">Analyzing Constraints</span>
                   </div>
                   <div className={`flex items-center gap-3 ${generationStep >= 2 ? 'text-white' : 'text-white/30'}`}>
-                    {generationStep > 2 ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : (generationStep === 2 ? <RefreshCw className="w-4 h-4 animate-spin text-accent" /> : <div className="w-4 h-4 rounded-full border-2 border-white/20" />)}
+                    {generationStep > 2 ? <i className="bx bx-check-circle w-4 h-4 text-emerald-400"  /> : (generationStep === 2 ? <i className="bx bx-refreshcw w-4 h-4 animate-spin text-accent"  /> : <div className="w-4 h-4 rounded-full border-2 border-white/20" />)}
                     <span className="text-xs font-bold uppercase tracking-widest">Mapping Faculty</span>
                   </div>
                   <div className={`flex items-center gap-3 ${generationStep >= 3 ? 'text-white' : 'text-white/30'}`}>
-                    {generationStep > 3 ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : (generationStep === 3 ? <RefreshCw className="w-4 h-4 animate-spin text-accent" /> : <div className="w-4 h-4 rounded-full border-2 border-white/20" />)}
+                    {generationStep > 3 ? <i className="bx bx-check-circle w-4 h-4 text-emerald-400"  /> : (generationStep === 3 ? <i className="bx bx-refreshcw w-4 h-4 animate-spin text-accent"  /> : <div className="w-4 h-4 rounded-full border-2 border-white/20" />)}
                     <span className="text-xs font-bold uppercase tracking-widest">Optimizing Schedule</span>
                   </div>
                 </div>
               ) : slots.length > 0 ? (
                 <div className="flex flex-col items-center text-center space-y-3">
                   <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center">
-                    <CheckCircle2 size={32} />
+                    <i className="bx bx-check-circle"  />
                   </div>
                   <div>
                     <h3 className="font-bold text-white mb-1">Generated & Loaded</h3>
@@ -241,7 +241,7 @@ export default function AdminTimetableBuilder() {
           <Card className="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl">
             <CardHeader className="border-b border-white/10 pb-4 flex flex-row justify-between items-center">
               <CardTitle className="text-sm font-bold flex items-center text-white uppercase tracking-widest">
-                <BookOpen className="w-4 h-4 mr-2 text-blue-400" /> Subjects
+                <i className="bx bx-bookopen w-4 h-4 mr-2 text-blue-400"  /> Subjects
               </CardTitle>
               <span className="text-xs font-black bg-white/10 px-2 py-1 rounded text-white/60">
                 {selectedBranch} S{selectedSemester}
@@ -249,7 +249,7 @@ export default function AdminTimetableBuilder() {
             </CardHeader>
             <CardContent className="pt-6 space-y-3 max-h-[400px] overflow-y-auto pr-2">
               {isLoadingData ? (
-                <div className="flex justify-center p-4"><Loader2 className="animate-spin text-accent" /></div>
+                <div className="flex justify-center p-4"><i className="bx bx-loader2 animate-spin text-accent"  /></div>
               ) : dbSubjects.length === 0 ? (
                 <div className="text-center text-xs text-white/40 italic p-4">No subjects found for this semester.</div>
               ) : (
@@ -295,7 +295,7 @@ export default function AdminTimetableBuilder() {
                   times.map(time => (
                     <div key={time} className="grid grid-cols-6 border-b border-white/5 last:border-0 hover:bg-white/[0.02] transition-colors">
                       <div className="p-4 text-center text-xs font-bold text-white/40 border-r border-white/5 flex items-center justify-center">
-                        <Clock className="w-3 h-3 mr-1"/> {time}
+                        <i className="bx bx-clock w-3 h-3 mr-1"  /> {time}
                       </div>
                       {days.map(day => {
                         const slot = slots.find(s => s.day === day && s.time === time);
@@ -321,12 +321,12 @@ export default function AdminTimetableBuilder() {
                                   className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 p-1 bg-red-500/80 hover:bg-red-500 text-white rounded-full transition-opacity"
                                   onClick={(e) => handleRemoveSlot(day, time, e)}
                                 >
-                                  <X className="w-3 h-3" />
+                                  <i className="bx bx-x w-3 h-3"  />
                                 </button>
                               </div>
                             ) : (
                               <div className="w-full h-full rounded-xl flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-white/5 border border-white/10 hover:border-accent/50 group">
-                                <Plus className="w-5 h-5 text-accent/50 group-hover:text-accent group-hover:scale-125 transition-transform" />
+                                <i className="bx bx-plus w-5 h-5 text-accent/50 group-hover:text-accent group-hover:scale-125 transition-transform"  />
                               </div>
                             )}
                           </div>

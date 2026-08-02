@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { X, Search } from "lucide-react";
+
 
 interface OpcodeGuideProps {
     onClose: () => void;
@@ -58,12 +58,12 @@ export const OpcodeGuide: React.FC<OpcodeGuideProps> = ({ onClose }) => {
                 <div className="p-4 border-b border-slate-800 flex justify-between items-center bg-black/40">
                     <h2 className="text-slate-300 font-bold tracking-widest uppercase text-sm">8085 Opcode Reference</h2>
                     <button onClick={onClose} className="p-1 hover:bg-slate-800 rounded transition-colors text-slate-500">
-                        <X className="h-5 w-5" />
+                        <i className="bx bx-x h-5 w-5"  />
                     </button>
                 </div>
 
                 <div className="p-4 bg-black/20 flex items-center gap-3">
-                    <Search className="h-4 w-4 text-slate-600" />
+                    <i className="bx bx-search h-4 w-4 text-slate-600"  />
                     <input
                         type="text"
                         placeholder="Search mnemonic or hex (e.g. MVI, 3E)..."

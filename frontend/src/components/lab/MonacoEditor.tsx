@@ -2,7 +2,7 @@
 
 import React from "react";
 import Editor, { OnChange } from "@monaco-editor/react";
-import { Loader2 } from "lucide-react";
+
 
 interface MonacoEditorProps {
     value: string;
@@ -31,7 +31,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = ({
                 onChange={onChange}
                 loading={
                     <div className="flex flex-col items-center justify-center p-20 text-slate-400">
-                        <Loader2 className="w-8 h-8 animate-spin mb-3 text-blue-500" />
+                        <i className="bx bx-loader2 w-8 h-8 animate-spin mb-3 text-blue-500"  />
                         <span className="text-[10px] font-black uppercase tracking-widest">
                             Loading IDE...
                         </span>

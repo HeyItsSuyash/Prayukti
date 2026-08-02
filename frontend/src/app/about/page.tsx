@@ -1,18 +1,18 @@
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
-import AboutPage from '@/components/AboutPage';
+import React from 'react';
+import { PremiumNavbar } from '@/components/layout/PremiumNavbar';
+import { PremiumFooter } from '@/components/layout/PremiumFooter';
+import { ComingSoon } from '@/components/ui/ComingSoon';
 
-export const metadata = {
-  title: 'About | Prayukti x MMMUT',
-  description: 'Learn about Prayukti — the virtual laboratory platform built for MMMUT engineering students.',
-};
+export default function AboutPage() {
+    return (
+        <main className="min-h-screen bg-[#FAFAFA] flex flex-col font-sans">
+            <PremiumNavbar pathname="/about" />
+            
+            <div className="flex-grow pt-24">
+                <ComingSoon title="About Us" />
+            </div>
 
-export default function Page() {
-  return (
-    <>
-      <Navbar pathname="/about" />
-      <AboutPage />
-      <Footer />
-    </>
-  );
+            <PremiumFooter />
+        </main>
+    );
 }

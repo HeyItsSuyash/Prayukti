@@ -1,11 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import {
-    Activity, Play, Pause, RotateCcw, Monitor, Zap,
-    ArrowRightLeft, Layers, Send, CheckCircle2, AlertTriangle,
-    Clock, RefreshCw, BarChart3, HelpCircle, XCircle
-} from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 
@@ -282,7 +278,7 @@ export default function SlidingWindowSimulation() {
                             <div className="bg-white/80 backdrop-blur-xl p-8 rounded-[3rem] border border-white shadow-2xl space-y-10">
                                 <div>
                                     <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2">
-                                        <Layers className="h-4 w-4 text-blue-500" />
+                                        <i className="bx bx-layers h-4 w-4 text-blue-500"  />
                                         Configuration
                                     </h3>
                                     <div className="space-y-4">
@@ -332,11 +328,11 @@ export default function SlidingWindowSimulation() {
                                         className={`w-full rounded-3xl h-14 text-xs font-black uppercase tracking-widest ${isRunning ? "bg-rose-500 hover:bg-rose-600" : "bg-blue-600 hover:bg-blue-700"} shadow-xl transition-all hover:scale-[1.02]`}
                                         onClick={() => setIsRunning(!isRunning)}
                                     >
-                                        {isRunning ? <Pause className="mr-2 h-5 w-5" /> : <Play className="mr-2 h-5 w-5" />}
+                                        {isRunning ? <i className="bx bx-pause mr-2 h-5 w-5"  /> : <i className="bx bx-play mr-2 h-5 w-5"  />}
                                         {isRunning ? "Halt Lab" : "Initiate Lab"}
                                     </Button>
                                     <Button variant="ghost" className="w-full rounded-3xl text-slate-400" onClick={reset}>
-                                        <RotateCcw className="mr-2 h-4 w-4" /> Reset System
+                                        <i className="bx bx-rotateccw mr-2 h-4 w-4"  /> Reset System
                                     </Button>
                                 </div>
                             </div>
@@ -379,14 +375,14 @@ export default function SlidingWindowSimulation() {
                                     disabled={!isRunning}
                                     className="absolute top-8 right-8 bg-rose-50 text-rose-600 border border-rose-100 hover:bg-rose-100 rounded-2xl text-[9px] font-black uppercase px-4"
                                 >
-                                    <Zap className="h-3 w-3 mr-1" /> Inject Packet Loss
+                                    <i className="bx bx-zap h-3 w-3 mr-1"  /> Inject Packet Loss
                                 </Button>
 
                                 {/* Sender Area */}
                                 <div className="space-y-6">
                                     <div className="flex items-center justify-between px-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="p-3 bg-blue-100 rounded-2xl text-blue-600"><Monitor /></div>
+                                            <div className="p-3 bg-blue-100 rounded-2xl text-blue-600"><i className="bx bx-desktop"  /></div>
                                             <div>
                                                 <h4 className="text-xs font-black text-slate-800">Sender Node</h4>
                                                 <p className="text-[9px] text-slate-400 font-bold uppercase">Window: {senderBase} - {senderBase + (protocol === "sw" ? 0 : windowSize - 1)}</p>
@@ -440,17 +436,17 @@ export default function SlidingWindowSimulation() {
                                                 px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-lg border-2
                                                 ${p.type === 'data' ? 'bg-white border-blue-500 text-blue-700' : 'bg-emerald-600 border-emerald-400 text-white'}
                                             `}>
-                                                {p.type === 'data' ? <Send className="h-3 w-3" /> : <CheckCircle2 className="h-3 w-3" />}
+                                                {p.type === 'data' ? <i className="bx bx-send h-3 w-3"  /> : <i className="bx bx-check-circle h-3 w-3"  />}
                                                 <span className="text-[10px] font-black">{p.type === 'data' ? `DP-${p.seq}` : `ACK-${p.seq}`}</span>
                                             </div>
-                                            {p.status === 'error' && <Zap className="h-4 w-4 text-rose-500 animate-ping" />}
+                                            {p.status === 'error' && <i className="bx bx-zap h-4 w-4 text-rose-500 animate-ping"  />}
                                         </div>
                                     ))}
 
                                     {/* Channel Decoration */}
                                     <div className="absolute inset-x-0 bottom-4 flex justify-around opacity-30 select-none pointer-events-none">
-                                        <ArrowRightLeft className="text-slate-300 h-12 w-12" />
-                                        <ArrowRightLeft className="text-slate-300 h-12 w-12 rotate-180" />
+                                        <i className="bx bx-arrowrightleft text-slate-300 h-12 w-12"  />
+                                        <i className="bx bx-arrowrightleft text-slate-300 h-12 w-12 rotate-180"  />
                                     </div>
                                 </div>
 
@@ -476,7 +472,7 @@ export default function SlidingWindowSimulation() {
                                                 <h4 className="text-xs font-black text-slate-800">Receiver Node</h4>
                                                 <p className="text-[9px] text-slate-400 font-bold uppercase">Expected: {receiverExpected}</p>
                                             </div>
-                                            <div className="p-3 bg-emerald-100 rounded-2xl text-emerald-600"><Monitor /></div>
+                                            <div className="p-3 bg-emerald-100 rounded-2xl text-emerald-600"><i className="bx bx-desktop"  /></div>
                                         </div>
                                     </div>
                                 </div>
@@ -485,14 +481,14 @@ export default function SlidingWindowSimulation() {
                             {/* Console Log */}
                             <div className="bg-white rounded-[2rem] p-6 border border-slate-200 h-40 overflow-hidden flex flex-col gap-3">
                                 <h5 className="text-[9px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                                    <Activity className="h-3 w-3 text-slate-400" />
+                                    <i className="bx bx-activity h-3 w-3 text-slate-400"  />
                                     Protocol Log
                                 </h5>
                                 <div className="space-y-1.5 overflow-y-auto pr-2">
                                     {log.map((entry, i) => (
                                         <div key={i} className={`text-[10px] font-bold flex items-center gap-2 animate-in slide-in-from-left-2 transition-all duration-300 ${entry.type === 'error' ? 'text-rose-600' : entry.type === 'success' ? 'text-emerald-600' : 'text-slate-600'
                                             }`}>
-                                            {entry.type === 'error' ? <XCircle className="h-3 w-3" /> : entry.type === 'success' ? <CheckCircle2 className="h-3 w-3" /> : <Clock className="h-3 w-3" />}
+                                            {entry.type === 'error' ? <i className="bx bx-xcircle h-3 w-3"  /> : entry.type === 'success' ? <i className="bx bx-check-circle h-3 w-3"  /> : <i className="bx bx-clock h-3 w-3"  />}
                                             {entry.msg}
                                         </div>
                                     ))}
@@ -511,21 +507,21 @@ export default function SlidingWindowSimulation() {
                                     name: "Stop & Wait ARQ",
                                     logic: "Simple half-duplex. Send 1 packet. Wait for ACK. If timeout, resend 1. Efficiency: Link Utilization Is Low.",
                                     complexity: "Low",
-                                    icon: <RefreshCw />,
+                                    icon: <i className="bx bx-refreshcw"  />,
                                     color: "blue"
                                 },
                                 {
                                     name: "Go-Back-N (GBN)",
                                     logic: "Full-duplex windowing. Send N packets. Uses Cumulative ACKs. If packet <i>i</i> fails, ALL packets from <i>i</i> to <i>i+window</i> are resent.",
                                     complexity: "Medium",
-                                    icon: <RotateCcw />,
+                                    icon: <i className="bx bx-rotateccw"  />,
                                     color: "indigo"
                                 },
                                 {
                                     name: "Selective Repeat (SR)",
                                     logic: "Most efficient. Only lost packets are resent. Requires receiver-side buffering and sorting. Uses individual ACKs.",
                                     complexity: "High",
-                                    icon: <CheckCircle2 />,
+                                    icon: <i className="bx bx-check-circle"  />,
                                     color: "emerald"
                                 }
                             ].map((p, i) => (
@@ -549,7 +545,7 @@ export default function SlidingWindowSimulation() {
                     <div className="p-8 max-w-3xl mx-auto">
                         <div className="bg-white rounded-[3.5rem] border border-slate-200 shadow-2xl overflow-hidden">
                             <div className="bg-blue-600 p-12 text-white relative">
-                                <div className="absolute top-0 right-0 p-10 opacity-20"><HelpCircle size={100} /></div>
+                                <div className="absolute top-0 right-0 p-10 opacity-20"><i className="bx bx-help-circle"  /></div>
                                 <h2 className="text-4xl font-black tracking-tighter mb-4 italic">Theory Challenge</h2>
                                 <p className="text-blue-100 font-bold opacity-80 uppercase tracking-widest text-xs">Verify your knowledge of Sliding Window mechanisms.</p>
                             </div>
@@ -578,7 +574,7 @@ export default function SlidingWindowSimulation() {
                                                 >
                                                     {opt}
                                                     {showResults && oIdx === q.correct && (
-                                                        <CheckCircle2 className="inline ml-2 h-4 w-4 text-emerald-500" />
+                                                        <i className="bx bx-check-circle inline ml-2 h-4 w-4 text-emerald-500"  />
                                                     )}
                                                 </button>
                                             ))}
@@ -636,7 +632,7 @@ export default function SlidingWindowSimulation() {
                     <span className="text-slate-500">Flow Control Simulation Phase 1.0</span>
                 </div>
                 <div className="text-slate-600 flex items-center gap-2">
-                    <Layers className="h-4 w-4" />
+                    <i className="bx bx-layers h-4 w-4"  />
                     Layer 2 Reliability Lab
                 </div>
             </div>

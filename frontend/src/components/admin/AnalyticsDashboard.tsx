@@ -16,7 +16,7 @@ import {
     PieChart,
     Pie
 } from 'recharts';
-import { Loader2, Activity, TrendingUp, Users, BookOpen } from 'lucide-react';
+
 
 const COLORS = ['#4f46e5', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
 
@@ -48,7 +48,7 @@ export function AnalyticsDashboard() {
     if (loading) {
         return (
             <div className="flex items-center justify-center p-20">
-                <Loader2 className="animate-spin text-indigo-600 w-8 h-8" />
+                <i className="bx bx-loader2 animate-spin text-indigo-600 w-8 h-8"  />
             </div>
         );
     }
@@ -60,7 +60,7 @@ export function AnalyticsDashboard() {
                     <CardContent className="p-6">
                         <div className="flex items-center gap-4">
                             <div className="bg-indigo-100 p-3 rounded-2xl">
-                                <Activity className="text-indigo-600 w-6 h-6" />
+                                <i className="bx bx-activity text-indigo-600 w-6 h-6"  />
                             </div>
                             <div>
                                 <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Enrollment Velocity</p>
@@ -77,7 +77,7 @@ export function AnalyticsDashboard() {
                 <Card className="rounded-[2.5rem] border-slate-100 shadow-xl shadow-slate-100 overflow-hidden">
                     <CardHeader>
                         <CardTitle className="text-xl font-black text-slate-800 flex items-center gap-2 uppercase tracking-tight">
-                            <BookOpen size={20} className="text-indigo-600" />
+                            <i className="bx bx-bookopen text-indigo-600"  />
                             Most Used Experiments
                         </CardTitle>
                         <CardDescription>Simulations launched in the last 30 days</CardDescription>
@@ -114,7 +114,7 @@ export function AnalyticsDashboard() {
                 <Card className="rounded-[2.5rem] border-slate-100 shadow-xl shadow-slate-100 overflow-hidden">
                     <CardHeader>
                         <CardTitle className="text-xl font-black text-slate-800 flex items-center gap-2 uppercase tracking-tight">
-                            <TrendingUp size={20} className="text-emerald-500" />
+                            <i className="bx bx-trendingup text-emerald-500"  />
                             Weekly Engagement
                         </CardTitle>
                         <CardDescription>Active student sessions per day</CardDescription>

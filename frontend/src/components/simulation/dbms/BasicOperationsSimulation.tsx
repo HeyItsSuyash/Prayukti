@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import { ArrowLeft, Database, Table as TableIcon, Trash2, Terminal, Play, Plus, Edit } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 type DBType = "MySQL" | "Oracle" | "PostgreSQL" | "MS-Access";
@@ -234,7 +234,7 @@ export default function BasicOperationsSimulation({ mode = "LEARNING", initialDa
                         </Button>
                     )}
                     {!readonly && (
-                        <Button variant="outline" size="sm" onClick={handleReset} className="text-red-500 hover:text-red-600 hover:bg-red-50"> <Trash2 size={14} className="mr-1" /> Reset </Button>
+                        <Button variant="outline" size="sm" onClick={handleReset} className="text-red-500 hover:text-red-600 hover:bg-red-50"> <i className="bx bx-trash2 mr-1"  /> Reset </Button>
                     )}
                 </div>
             </header>
@@ -243,7 +243,7 @@ export default function BasicOperationsSimulation({ mode = "LEARNING", initialDa
                 <main className="flex-1 bg-gray-50 p-6 overflow-auto relative bg-dots-pattern">
                     {!database ? (
                         <div className="h-full flex flex-col items-center justify-center text-gray-400 gap-4">
-                            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg mb-4"> <Database size={48} className="text-[#f57f17]" /> </div>
+                            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg mb-4"> <i className="bx bx-database text-[#f57f17]"  /> </div>
                             <h2 className="text-xl font-semibold text-gray-600">No Database Active</h2>
                             <div className="flex gap-4">
                                 <select
@@ -266,9 +266,9 @@ export default function BasicOperationsSimulation({ mode = "LEARNING", initialDa
                         <div className="max-w-4xl mx-auto space-y-8">
                             <div className="bg-white rounded-xl border-t-4 border-blue-500 shadow-lg overflow-hidden">
                                 <div className="p-4 bg-blue-50 border-b border-blue-100 flex justify-between items-center">
-                                    <div className="flex items-center gap-2"> <Database className="text-blue-600" size={20} /> <span className="font-bold text-lg text-blue-900">{database.name}</span> </div>
+                                    <div className="flex items-center gap-2"> <i className="bx bx-database text-blue-600"  /> <span className="font-bold text-lg text-blue-900">{database.name}</span> </div>
                                     {!readonly && (
-                                        <Button size="sm" onClick={() => setShowCreateTableModal(true)} className="bg-white text-blue-600 border border-blue-200 hover:bg-blue-50"> <Plus size={14} className="mr-1" /> Create Table </Button>
+                                        <Button size="sm" onClick={() => setShowCreateTableModal(true)} className="bg-white text-blue-600 border border-blue-200 hover:bg-blue-50"> <i className="bx bx-plus mr-1"  /> Create Table </Button>
                                     )}
                                 </div>
                                 <div className="p-6 bg-gray-50/50 min-h-[200px]">
@@ -278,7 +278,7 @@ export default function BasicOperationsSimulation({ mode = "LEARNING", initialDa
                                                 <div key={tIdx} className="bg-white rounded border shadow-sm">
                                                     <div className="px-4 py-2 border-b bg-gray-50 flex justify-between items-center">
                                                         <div className="flex items-center gap-2 font-mono text-sm font-bold text-gray-700"> <TableIcon size={14} /> {table.name} </div>
-                                                        <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => { setActiveTableIndex(tIdx); setEditingRecordIndex(null); setRecordInput({}); setShowInsertModal(true); }}> <Plus size={14} className="text-green-600" /> </Button>
+                                                        <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => { setActiveTableIndex(tIdx); setEditingRecordIndex(null); setRecordInput({}); setShowInsertModal(true); }}> <i className="bx bx-plus text-green-600"  /> </Button>
                                                     </div>
                                                     <div className="overflow-x-auto">
                                                         <table className="w-full text-xs">
@@ -294,8 +294,8 @@ export default function BasicOperationsSimulation({ mode = "LEARNING", initialDa
                                                                         {table.columns.map(c => <td key={c.name} className="px-3 py-2 border-r last:border-r-0 text-gray-700">{rec[c.name] || "NULL"}</td>)}
                                                                         {!readonly && (
                                                                             <td className="px-3 py-2 text-right flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                                                <button onClick={() => handleEditRecordStart(tIdx, rIdx, rec)} className="p-1 hover:bg-gray-200 rounded text-blue-600"><Edit size={12} /></button>
-                                                                                <button onClick={() => handleDeleteRecord(tIdx, rIdx)} className="p-1 hover:bg-red-100 rounded text-red-600"><Trash2 size={12} /></button>
+                                                                                <button onClick={() => handleEditRecordStart(tIdx, rIdx, rec)} className="p-1 hover:bg-gray-200 rounded text-blue-600"><i className="bx bx-edit"  /></button>
+                                                                                <button onClick={() => handleDeleteRecord(tIdx, rIdx)} className="p-1 hover:bg-red-100 rounded text-red-600"><i className="bx bx-trash2"  /></button>
                                                                             </td>
                                                                         )}
                                                                     </tr>
@@ -317,14 +317,14 @@ export default function BasicOperationsSimulation({ mode = "LEARNING", initialDa
                 <aside className="w-96 bg-[#1e1e1e] border-l border-gray-700 flex flex-col shrink-0">
                     <div className="flex-1 flex flex-col border-b border-gray-700">
                         <div className="p-3 bg-[#252526] border-b border-gray-700 flex items-center justify-between">
-                            <div className="flex items-center gap-2"> <Terminal size={14} className="text-green-400" /> <span className="text-xs font-mono font-bold text-gray-300">SQL Console</span> </div>
+                            <div className="flex items-center gap-2"> <i className="bx bx-terminal text-green-400"  /> <span className="text-xs font-mono font-bold text-gray-300">SQL Console</span> </div>
                         </div>
                         <div className="flex-1 bg-[#1e1e1e] p-3">
                             <textarea value={sqlQuery} onChange={(e) => setSqlQuery(e.target.value)} disabled={readonly} placeholder="Type Create/Insert commands here..." className="w-full h-full bg-transparent text-green-400 font-mono text-xs outline-none resize-none placeholder-gray-600" />
                         </div>
                         {!readonly && (
                             <div className="bg-[#2d2d2d] p-2 flex justify-end">
-                                <Button size="sm" onClick={executeSQL} className="bg-green-700 hover:bg-green-800 text-white text-xs h-7"> <Play size={12} className="mr-1" /> Execute </Button>
+                                <Button size="sm" onClick={executeSQL} className="bg-green-700 hover:bg-green-800 text-white text-xs h-7"> <i className="bx bx-play mr-1"  /> Execute </Button>
                             </div>
                         )}
                     </div>

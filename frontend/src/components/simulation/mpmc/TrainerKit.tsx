@@ -2,16 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Intel8085 } from "@/lib/mpmc/8085-cpu";
-import {
-    Activity,
-    Database,
-    Hash,
-    Cpu,
-    ChevronRight,
-    Terminal,
-    HelpCircle,
-    Monitor
-} from "lucide-react";
+
 import { OpcodeGuide } from "./OpcodeGuide";
 
 interface TrainerKitProps {
@@ -320,7 +311,7 @@ export const TrainerKit: React.FC<TrainerKitProps> = ({ cpu, onSync }) => {
                             onClick={() => setShowGuide(true)}
                             className="flex items-center gap-2 px-3 py-1.5 bg-[#222] hover:bg-[#333] border border-[#444] rounded text-slate-400 text-[10px] font-bold transition-all active:scale-95"
                         >
-                            <HelpCircle className="h-3.5 w-3.5" /> OPCODE GUIDE
+                            <i className="bx bx-help-circle h-3.5 w-3.5"  /> OPCODE GUIDE
                         </button>
                         <div className="hidden sm:flex flex-col items-end">
                             <span className="text-[8px] font-black text-slate-700 uppercase tracking-widest">Advanced Microprocessor</span>
@@ -352,7 +343,7 @@ export const TrainerKit: React.FC<TrainerKitProps> = ({ cpu, onSync }) => {
                     <div className="col-span-8 space-y-6">
                         <div className="bg-[#0a0a0a] p-5 rounded-2xl border border-white/5 shadow-xl">
                             <div className="text-[10px] text-slate-700 font-bold uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
-                                <Cpu className="h-3 w-3 text-red-900" /> Internal Processor State
+                                <i className="bx bx-cpu h-3 w-3 text-red-900"  /> Internal Processor State
                             </div>
                             <div className="grid grid-cols-4 gap-4">
                                 {['A', 'B', 'C', 'D', 'E', 'H', 'L'].map(reg => (
@@ -385,7 +376,7 @@ export const TrainerKit: React.FC<TrainerKitProps> = ({ cpu, onSync }) => {
 
                         {/* Status & Feedback */}
                         <div className="bg-black/60 border border-white/5 p-4 rounded-xl flex items-center gap-3 shadow-inner">
-                            <Terminal className="h-4 w-4 text-emerald-900" />
+                            <i className="bx bx-terminal h-4 w-4 text-emerald-900"  />
                             <span className="text-xs text-emerald-500/80 font-mono tracking-tight truncate uppercase">{feedback}</span>
                         </div>
 
@@ -404,7 +395,7 @@ export const TrainerKit: React.FC<TrainerKitProps> = ({ cpu, onSync }) => {
                         {/* Memory Trace Panel */}
                         <div className="bg-[#050505] p-3 rounded border border-[#222]">
                             <div className="text-[10px] text-slate-700 font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
-                                <Hash className="h-3 w-3" /> Memory Peek (PC Range)
+                                <i className="bx bx-hash h-3 w-3"  /> Memory Peek (PC Range)
                             </div>
                             <div className="grid grid-cols-8 gap-1">
                                 {Array.from({ length: 16 }).map((_, i) => {

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { lazy, Suspense } from "react";
-import { Loader2 } from "lucide-react";
+
 
 // CN
 const OSISimulation = lazy(() => import("@/components/simulation/cn/OSISimulation"));
@@ -60,7 +60,7 @@ const DAASimulator = lazy(() => import("@/components/simulation/daa/DAASimulator
 
 const LoadingSpinner = () => (
     <div className="flex h-full w-full items-center justify-center p-8">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <i className="bx bx-loader2 h-8 w-8 animate-spin text-primary"  />
         <span className="ml-2 text-sm text-muted-foreground">Loading Simulation...</span>
     </div>
 );

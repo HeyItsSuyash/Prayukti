@@ -8,18 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-    Bot, 
-    Sparkles, 
-    FileText, 
-    ListChecks, 
-    Sliders, 
-    BarChart3, 
-    Copy, 
-    Loader2, 
-    AlertCircle,
-    CheckCircle2
-} from "lucide-react";
+
 import ReactMarkdown from "react-markdown";
 
 export default function AiTeachingAssistantPage() {
@@ -187,7 +176,7 @@ export default function AiTeachingAssistantPage() {
 
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-32 animate-pulse">
-                        <Loader2 className="w-10 h-10 text-indigo-600 animate-spin mb-4" />
+                        <i className="bx bx-loader2 w-10 h-10 text-indigo-600 animate-spin mb-4"  />
                         <p className="text-slate-400 font-black uppercase tracking-widest text-[9px]">Binding copilot engine...</p>
                     </div>
                 ) : (
@@ -197,7 +186,7 @@ export default function AiTeachingAssistantPage() {
                         <div className="space-y-6 lg:col-span-1">
                             <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900 shadow-sm p-6 space-y-4">
                                 <div className="flex items-center gap-2 border-b pb-3 border-slate-100 dark:border-slate-800">
-                                    <Bot className="text-indigo-600 dark:text-indigo-400" size={18} />
+                                    <i className="bx bx-bot text-indigo-600 dark:text-indigo-400"  />
                                     <h3 className="font-black text-sm uppercase tracking-tight">AI Materials Generator</h3>
                                 </div>
 
@@ -265,7 +254,7 @@ export default function AiTeachingAssistantPage() {
                                         disabled={genLoading}
                                         className="w-full h-11 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-black font-black uppercase tracking-widest text-[9px]"
                                     >
-                                        {genLoading ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : "Run AI Compile"}
+                                        {genLoading ? <i className="bx bx-loader2 w-4 h-4 animate-spin mx-auto"  /> : "Run AI Compile"}
                                     </Button>
                                 </form>
                             </Card>
@@ -274,7 +263,7 @@ export default function AiTeachingAssistantPage() {
                             {perfSummary && (
                                 <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900 shadow-sm p-6 space-y-4">
                                     <div className="flex items-center gap-2 border-b pb-3 border-slate-100 dark:border-slate-800">
-                                        <BarChart3 className="text-emerald-500" size={18} />
+                                        <i className="bx bx-barchart3 text-emerald-500"  />
                                         <h3 className="font-black text-sm uppercase tracking-tight">Class diagnostics</h3>
                                     </div>
                                     <div className="space-y-3">
@@ -306,7 +295,7 @@ export default function AiTeachingAssistantPage() {
                                             <h3 className="font-black text-lg uppercase tracking-tight">Generated Materials</h3>
                                         </div>
                                         <Button size="sm" onClick={handleCopy} variant="outline" className="h-9 rounded-xl font-bold text-xs">
-                                            <Copy size={12} className="mr-1.5" /> Copy Outline
+                                            <i className="bx bx-copy mr-1.5"  /> Copy Outline
                                         </Button>
                                     </div>
                                     <div className="p-6 bg-slate-50 dark:bg-slate-800/20 border border-slate-100 dark:border-slate-800 rounded-3xl markdown-content prose dark:prose-invert max-w-none text-xs leading-relaxed text-slate-700 dark:text-slate-300 whitespace-pre-line">
@@ -328,7 +317,7 @@ export default function AiTeachingAssistantPage() {
                                 <CardContent className="p-0">
                                     {statsLoading ? (
                                         <div className="flex flex-col items-center justify-center py-12 animate-pulse">
-                                            <Loader2 className="w-6 h-6 text-indigo-600 animate-spin mb-2" />
+                                            <i className="bx bx-loader2 w-6 h-6 text-indigo-600 animate-spin mb-2"  />
                                             <p className="text-slate-400 font-bold uppercase tracking-widest text-[8px]">Analyzing failed attempts...</p>
                                         </div>
                                     ) : diffAnalysis.length > 0 ? (

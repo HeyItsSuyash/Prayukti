@@ -2,10 +2,7 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { 
-    Play, Pause, RefreshCw, Plus, Trash2, ArrowRight, ArrowLeftRight, GitFork, 
-    Network, ArrowDown, Database, Code
-} from "lucide-react";
+
 
 export default function PDSSimulator({ labId }: { labId: string }) {
     const isStack = labId.includes("exp-1");
@@ -180,7 +177,7 @@ export default function PDSSimulator({ labId }: { labId: string }) {
                     <div className="xl:col-span-2 space-y-6">
                         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                             <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <Database className="h-5 w-5 text-indigo-500" /> 
+                                <i className="bx bx-database h-5 w-5 text-indigo-500"  /> 
                                 {isStack ? "LIFO Stack Visualizer" : "FIFO Queue Visualizer"}
                             </h3>
 
@@ -265,7 +262,7 @@ export default function PDSSimulator({ labId }: { labId: string }) {
                     {/* Console Logs */}
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[450px]">
                         <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <Code className="h-5 w-5 text-indigo-500" /> Structure Output Logs
+                            <i className="bx bx-code h-5 w-5 text-indigo-500"  /> Structure Output Logs
                         </h3>
                         <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {logs.map((log, index) => <div key={index}>{log}</div>)}
@@ -280,7 +277,7 @@ export default function PDSSimulator({ labId }: { labId: string }) {
                     <div className="xl:col-span-2 space-y-6">
                         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                             <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <Database className="h-5 w-5 text-indigo-500" /> 
+                                <i className="bx bx-database h-5 w-5 text-indigo-500"  /> 
                                 {labId.includes("exp-4") ? "Singly Linked List chain" : "Doubly Linked List node links"}
                             </h3>
 
@@ -313,16 +310,16 @@ export default function PDSSimulator({ labId }: { labId: string }) {
                                             <div className="px-3 py-2 flex flex-col justify-center gap-1 bg-slate-50 border-l">
                                                 <div className="text-[8px] text-slate-400 font-mono font-bold">ADDR: 0x{item.id.toString(16).slice(-4).toUpperCase()}</div>
                                                 <Button onClick={() => deleteNode(item.id, item.value)} variant="ghost" className="h-5 w-5 p-0 text-red-500 hover:bg-red-50 rounded">
-                                                    <Trash2 className="h-3 w-3" />
+                                                    <i className="bx bx-trash2 h-3 w-3"  />
                                                 </Button>
                                             </div>
                                         </div>
 
                                         {idx < list.length - 1 && (
                                             labId.includes("exp-4") ? (
-                                                <ArrowRight className="text-slate-400 shrink-0" />
+                                                <i className="bx bx-right-arrow-alt text-slate-400 shrink-0"  />
                                             ) : (
-                                                <ArrowLeftRight className="text-slate-400 shrink-0" />
+                                                <i className="bx bx-arrowleftright text-slate-400 shrink-0"  />
                                             )
                                         )}
                                     </React.Fragment>
@@ -330,7 +327,7 @@ export default function PDSSimulator({ labId }: { labId: string }) {
 
                                 {list.length > 0 && (
                                     <>
-                                        <ArrowRight className="text-slate-400 shrink-0" />
+                                        <i className="bx bx-right-arrow-alt text-slate-400 shrink-0"  />
                                         <div className="px-3 py-2 border-2 border-dashed border-slate-300 text-slate-400 font-black text-xs rounded-xl bg-white shadow-sm shrink-0">NULL</div>
                                     </>
                                 )}
@@ -344,7 +341,7 @@ export default function PDSSimulator({ labId }: { labId: string }) {
 
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[400px]">
                         <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <Code className="h-5 w-5 text-indigo-500" /> Traversal Output Logs
+                            <i className="bx bx-code h-5 w-5 text-indigo-500"  /> Traversal Output Logs
                         </h3>
                         <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {logs.map((log, index) => <div key={index}>{log}</div>)}
@@ -359,7 +356,7 @@ export default function PDSSimulator({ labId }: { labId: string }) {
                     <div className="xl:col-span-2 space-y-6">
                         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                             <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <GitFork className="h-5 w-5 text-indigo-500" /> 
+                                <i className="bx bx-gitfork h-5 w-5 text-indigo-500"  /> 
                                 {labId.includes("exp-6") ? "Binary Search Tree (BST) Nodes" : "Self-Balancing AVL tree nodes"}
                             </h3>
 
@@ -422,7 +419,7 @@ export default function PDSSimulator({ labId }: { labId: string }) {
 
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[400px]">
                         <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <Code className="h-5 w-5 text-indigo-500" /> BST Insertion Trace
+                            <i className="bx bx-code h-5 w-5 text-indigo-500"  /> BST Insertion Trace
                         </h3>
                         <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {logs.map((log, index) => <div key={index}>{log}</div>)}
@@ -438,7 +435,7 @@ export default function PDSSimulator({ labId }: { labId: string }) {
                         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                             <div className="flex justify-between items-center">
                                 <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                    <Network className="h-5 w-5 text-indigo-500" /> Graph Adjacency & Traversals (BFS / DFS / Shortest Path)
+                                    <i className="bx bx-network h-5 w-5 text-indigo-500"  /> Graph Adjacency & Traversals (BFS / DFS / Shortest Path)
                                 </h3>
                                 <div className="flex gap-2">
                                     <Button onClick={() => runTraversal("BFS")} className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs">Run BFS</Button>
@@ -470,7 +467,7 @@ export default function PDSSimulator({ labId }: { labId: string }) {
 
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[350px]">
                         <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <Code className="h-5 w-5 text-indigo-500" /> Traversal Sequence Log
+                            <i className="bx bx-code h-5 w-5 text-indigo-500"  /> Traversal Sequence Log
                         </h3>
                         <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {logs.map((log, index) => <div key={index}>{log}</div>)}

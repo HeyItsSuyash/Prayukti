@@ -22,8 +22,7 @@ export function RiskBadge() {
                 const user = JSON.parse(userJson);
                 const userId = user.id || user._id;
 
-                const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001'}/api/attendance/student/${userId}`, {
+                const response = await axios.get(`${API_URL}/api/attendance/student/${userId}`, {
                     headers: { Authorization: `Bearer ${localStorage.getItem('vlab_token')}` }
                 });
 

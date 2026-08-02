@@ -7,18 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 // Removed next/navigation
-import { 
-    Plus, 
-    Video, 
-    FileText, 
-    File, 
-    Link as LinkIcon, 
-    ExternalLink,
-    Save,
-    Trash2,
-    Loader2,
-    ChevronRight
-} from 'lucide-react';
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -180,7 +169,7 @@ export function ResourceManager() {
             {!selectedExp ? (
                 <Card className="rounded-[4rem] border-dashed border-2 border-slate-100 p-20 text-center bg-slate-50/50">
                     <CardContent>
-                        <File size={48} className="mx-auto text-slate-200 mb-4" />
+                        <i className="bx bx-file mx-auto text-slate-200 mb-4"  />
                         <h4 className="text-xl font-black text-slate-300 uppercase italic">Select an experiment to manage its resources</h4>
                     </CardContent>
                 </Card>
@@ -243,7 +232,7 @@ export function ResourceManager() {
                                 disabled={saving}
                                 className="w-full bg-indigo-600 hover:bg-indigo-700 font-black rounded-xl py-6 mt-4 uppercase"
                             >
-                                {saving ? <Loader2 className="animate-spin" /> : <Save className="mr-2" size={18} />}
+                                {saving ? <i className="bx bx-loader2 animate-spin"  /> : <i className="bx bx-save mr-2"  />}
                                 Commital to Vault
                             </Button>
                         </CardContent>
@@ -264,10 +253,10 @@ export function ResourceManager() {
                                         res.type === 'external' ? 'bg-emerald-50 text-emerald-600' :
                                         'bg-indigo-50 text-indigo-600'
                                     }`}>
-                                        {res.type === 'video' ? <Video size={24} /> :
-                                         res.type === 'pdf' ? <FileText size={24} /> :
-                                         res.type === 'external' ? <ExternalLink size={24} /> :
-                                         <File size={24} />}
+                                        {res.type === 'video' ? <i className="bx bx-video"  /> :
+                                         res.type === 'pdf' ? <i className="bx bx-file"  /> :
+                                         res.type === 'external' ? <i className="bx bx-externallink"  /> :
+                                         <i className="bx bx-file"  />}
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <h4 className="font-black text-slate-800 tracking-tight truncate">{res.title}</h4>
@@ -278,11 +267,11 @@ export function ResourceManager() {
                                     <div className="flex gap-2 pr-6 opacity-0 group-hover:opacity-100 transition-opacity">
                                         {res.url && (
                                             <Button variant="ghost" size="icon" asChild className="rounded-xl">
-                                                <a href={res.url} target="_blank" rel="noopener noreferrer"><ExternalLink size={18} className="text-slate-400" /></a>
+                                                <a href={res.url} target="_blank" rel="noopener noreferrer"><i className="bx bx-externallink text-slate-400"  /></a>
                                             </Button>
                                         )}
                                         <Button variant="ghost" size="icon" className="rounded-xl text-red-400" onClick={() => handleDelete(res._id)}>
-                                            <Trash2 size={18} />
+                                            <i className="bx bx-trash2"  />
                                         </Button>
                                     </div>
                                 </CardContent>

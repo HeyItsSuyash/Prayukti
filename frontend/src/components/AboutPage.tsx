@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, ArrowRight, Target, Eye, Rocket, Info, AlertTriangle, Sparkles } from "lucide-react";
+
 
 export default function AboutPage() {
     const fadeIn = {
@@ -33,7 +33,7 @@ export default function AboutPage() {
                             transition={{ duration: 0.5 }}
                             className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 text-accent dark:text-blue-400 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-blue-100 dark:border-blue-800/50 mb-8"
                         >
-                            <Info className="w-4 h-4" />
+                            <i className="bx bx-info w-4 h-4"  />
                             About Prayukti x MMMUT
                         </motion.div>
 
@@ -99,7 +99,7 @@ export default function AboutPage() {
                                 className="bg-slate-50 dark:bg-primary/50 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 relative group"
                             >
                                 <div className="absolute -top-6 -left-6 w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-2xl flex items-center justify-center text-red-600 border-2 border-white dark:border-slate-800 shadow-xl">
-                                    <AlertTriangle className="w-8 h-8" />
+                                    <i className="bx bx-alerttriangle w-8 h-8"  />
                                 </div>
                                 <h3 className="text-2xl font-bold mb-8 text-primary dark:text-white">Traditional Lab Challenges</h3>
                                 <ul className="space-y-6">
@@ -126,7 +126,7 @@ export default function AboutPage() {
                                 className="bg-accent p-10 rounded-[2.5rem] border border-accent shadow-2xl shadow-accent/20 relative group text-white"
                             >
                                 <div className="absolute -top-6 -right-6 w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-accent border-2 border-accent shadow-xl">
-                                    <Sparkles className="w-8 h-8" />
+                                    <i className="bx bx-sparkles w-8 h-8"  />
                                 </div>
                                 <h3 className="text-2xl font-bold mb-8">Prayukti Solution</h3>
                                 <ul className="space-y-6">
@@ -136,7 +136,7 @@ export default function AboutPage() {
                                         { title: "Viva-Focused Modules", desc: "Integrated Q&A and AI-ready modules to prepare you for actual examination viva-voce." }
                                     ].map((item, i) => (
                                         <li key={i} className="flex gap-4">
-                                            <CheckCircle2 className="w-5 h-5 text-blue-200 mt-1 flex-shrink-0" />
+                                            <i className="bx bx-check-circle w-5 h-5 text-blue-200 mt-1 flex-shrink-0"  />
                                             <div>
                                                 <p className="font-bold text-white">{item.title}</p>
                                                 <p className="text-blue-100/80 text-sm">{item.desc}</p>
@@ -157,7 +157,7 @@ export default function AboutPage() {
                                 {...fadeIn}
                                 className="inline-flex items-center justify-center w-20 h-20 bg-indigo-50 dark:bg-indigo-900/30 rounded-3xl mb-8"
                             >
-                                <Target className="w-10 h-10 text-accent dark:text-indigo-400" />
+                                <i className="bx bx-target w-10 h-10 text-accent dark:text-indigo-400"  />
                             </motion.div>
                             <motion.h2
                                 {...fadeIn}
@@ -192,9 +192,9 @@ export default function AboutPage() {
 
                                 <div className="space-y-8">
                                     {[
-                                        { icon: <Rocket className="w-6 h-6" />, title: "Nationwide Expansion", desc: "Scaling our platform to support the curriculum of multiple premium universities across India." },
-                                        { icon: <Eye className="w-6 h-6" />, title: "AI-Based Viva System", desc: "Implementing intelligent systems to simulate real viva-voce examinations with adaptive feedback." },
-                                        { icon: <Info className="w-6 h-6" />, title: "Collaborative Labs", desc: "Introducing multiplayer-style collaborative lab sessions where students can experiment together." }
+                                        { icon: <i className="bx bx-rocket w-6 h-6"  />, title: "Nationwide Expansion", desc: "Scaling our platform to support the curriculum of multiple premium universities across India." },
+                                        { icon: <i className="bx bx-eye w-6 h-6"  />, title: "AI-Based Viva System", desc: "Implementing intelligent systems to simulate real viva-voce examinations with adaptive feedback." },
+                                        { icon: <i className="bx bx-info w-6 h-6"  />, title: "Collaborative Labs", desc: "Introducing multiplayer-style collaborative lab sessions where students can experiment together." }
                                     ].map((item, i) => (
                                         <div key={i} className="flex gap-6 items-start">
                                             <div className="w-12 h-12 rounded-2xl bg-slate-50 dark:bg-primary border border-slate-100 dark:border-slate-800 flex items-center justify-center flex-shrink-0 text-accent dark:text-blue-400">
@@ -269,7 +269,7 @@ export default function AboutPage() {
                                 >
                                     <a href="/login">
                                         <Button size="lg" className="h-16 px-12 text-xl rounded-xl bg-accent hover:bg-accent/90 text-white w-full sm:w-auto">
-                                            Start Practicing <ArrowRight className="ml-3 w-6 h-6" />
+                                            Start Practicing <i className="bx bx-right-arrow-alt ml-3 w-6 h-6"  />
                                         </Button>
                                     </a>
                                     <a href="/labs">

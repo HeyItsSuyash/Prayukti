@@ -3,12 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import {
-    Mail, MapPin, Github, Linkedin, Twitter, Instagram,
-    Send, ChevronDown, MessageCircle, X, CheckCircle2,
-    ArrowRight, Bot, FlaskConical, Lightbulb, HelpCircle,
-    User, AtSign, GraduationCap, Tag, FileText, Plus, Minus
-} from "lucide-react";
+
 
 // ─── Static Data ──────────────────────────────────────────────
 const SUPPORT_CATEGORIES = [
@@ -23,7 +18,7 @@ const SUPPORT_CATEGORIES = [
 
 const CONTACT_INFO = [
     {
-        icon: <Mail className="w-5 h-5" />,
+        icon: <i className="bx bx-envelope w-5 h-5"  />,
         label: "Email Us",
         value: "patron@mmmut.ac.in",
         href: "mailto:patron@mmmut.ac.in",
@@ -31,7 +26,7 @@ const CONTACT_INFO = [
         bg: "bg-blue-50 dark:bg-blue-950",
     },
     {
-        icon: <MapPin className="w-5 h-5" />,
+        icon: <i className="bx bx-map-pin w-5 h-5"  />,
         label: "Located At",
         value: "MMMUT, Gorakhpur, UP, India",
         href: "https://maps.google.com/?q=Madan+Mohan+Malaviya+University+of+Technology",
@@ -39,7 +34,7 @@ const CONTACT_INFO = [
         bg: "bg-indigo-50 dark:bg-indigo-950",
     },
     {
-        icon: <Github className="w-5 h-5" />,
+        icon: <i className="bxl-github w-5 h-5"  />,
         label: "GitHub",
         value: "github.com/mmmut-prayukti",
         href: "https://github.com",
@@ -47,7 +42,7 @@ const CONTACT_INFO = [
         bg: "bg-slate-100 dark:bg-slate-800",
     },
     {
-        icon: <Linkedin className="w-5 h-5" />,
+        icon: <i className="bxl-linkedin w-5 h-5"  />,
         label: "LinkedIn",
         value: "linkedin.com/school/mmmut-gorakhpur",
         href: "https://linkedin.com",
@@ -57,17 +52,17 @@ const CONTACT_INFO = [
 ];
 
 const SOCIAL_LINKS = [
-    { icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn", href: "https://linkedin.com", color: "hover:bg-sky-100 dark:hover:bg-sky-900/40 hover:text-sky-600" },
-    { icon: <Github className="w-5 h-5" />, label: "GitHub", href: "https://github.com", color: "hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-primary dark:hover:text-white" },
-    { icon: <Twitter className="w-5 h-5" />, label: "Twitter", href: "https://twitter.com", color: "hover:bg-blue-100 dark:hover:bg-blue-900/40 hover:text-accent" },
-    { icon: <Instagram className="w-5 h-5" />, label: "Instagram", href: "https://instagram.com", color: "hover:bg-pink-100 dark:hover:bg-pink-900/40 hover:text-pink-500" },
+    { icon: <i className="bxl-linkedin w-5 h-5"  />, label: "LinkedIn", href: "https://linkedin.com", color: "hover:bg-sky-100 dark:hover:bg-sky-900/40 hover:text-sky-600" },
+    { icon: <i className="bxl-github w-5 h-5"  />, label: "GitHub", href: "https://github.com", color: "hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-primary dark:hover:text-white" },
+    { icon: <i className="bxl-twitter w-5 h-5"  />, label: "Twitter", href: "https://twitter.com", color: "hover:bg-blue-100 dark:hover:bg-blue-900/40 hover:text-accent" },
+    { icon: <i className="bxl-instagram w-5 h-5"  />, label: "Instagram", href: "https://instagram.com", color: "hover:bg-pink-100 dark:hover:bg-pink-900/40 hover:text-pink-500" },
 ];
 
 const CHATBOT_OPTIONS = [
-    { icon: <FlaskConical className="w-4 h-4" />, label: "Ask about syllabus" },
-    { icon: <HelpCircle className="w-4 h-4" />, label: "Report a technical issue" },
-    { icon: <Lightbulb className="w-4 h-4" />, label: "Request university integration" },
-    { icon: <MessageCircle className="w-4 h-4" />, label: "General inquiry" },
+    { icon: <i className="bx bx-flask w-4 h-4"  />, label: "Ask about syllabus" },
+    { icon: <i className="bx bx-help-circle w-4 h-4"  />, label: "Report a technical issue" },
+    { icon: <i className="bx bx-bulb w-4 h-4"  />, label: "Request university integration" },
+    { icon: <i className="bx bx-message-rounded w-4 h-4"  />, label: "General inquiry" },
 ];
 
 const CONTACT_FAQS = [
@@ -123,7 +118,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
                 <div className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300
                     ${open ? "bg-accent text-white rotate-0" : "bg-slate-100 dark:bg-slate-800 text-slate-500 rotate-0"}`}
                 >
-                    {open ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
+                    {open ? <i className="bx bx-minus w-3.5 h-3.5"  /> : <i className="bx bx-plus w-3.5 h-3.5"  />}
                 </div>
             </div>
             <AnimatePresence initial={false}>
@@ -160,11 +155,11 @@ function ChatbotWidget() {
                 <AnimatePresence mode="wait">
                     {open ? (
                         <motion.span key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                            <X className="w-6 h-6" />
+                            <i className="bx bx-x w-6 h-6"  />
                         </motion.span>
                     ) : (
                         <motion.span key="bot" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                            <Bot className="w-6 h-6" />
+                            <i className="bx bx-bot w-6 h-6"  />
                         </motion.span>
                     )}
                 </AnimatePresence>
@@ -184,7 +179,7 @@ function ChatbotWidget() {
                         <div className="p-5 bg-gradient-to-r from-accent to-indigo-700 text-white">
                             <div className="flex items-center gap-3">
                                 <div className="w-9 h-9 rounded-2xl bg-white/20 flex items-center justify-center">
-                                    <Bot className="w-5 h-5" />
+                                    <i className="bx bx-bot w-5 h-5"  />
                                 </div>
                                 <div>
                                     <p className="font-bold text-sm">Prayukti Assistant</p>
@@ -286,7 +281,7 @@ export default function ContactPage() {
                             initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}
                             className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 text-accent dark:text-blue-400 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-blue-100 dark:border-blue-800/50 mb-8"
                         >
-                            <Mail className="w-4 h-4" /> Get In Touch
+                            <i className="bx bx-envelope w-4 h-4"  /> Get In Touch
                         </motion.div>
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}
@@ -332,7 +327,7 @@ export default function ContactPage() {
                                                 <div className="relative">
                                                     <div className="absolute inset-0 rounded-full bg-green-400/20 blur-2xl" />
                                                     <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center shadow-2xl shadow-green-400/30">
-                                                        <CheckCircle2 className="w-12 h-12 text-white" />
+                                                        <i className="bx bx-check-circle w-12 h-12 text-white"  />
                                                     </div>
                                                 </div>
                                                 <div>
@@ -367,7 +362,7 @@ export default function ContactPage() {
                                                 <div className="grid sm:grid-cols-2 gap-5">
                                                     <div className="space-y-2 group">
                                                         <label className="flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-slate-500 group-focus-within:text-accent transition-colors">
-                                                            <User className="w-3.5 h-3.5" /> Full Name <span className="text-accent">*</span>
+                                                            <i className="bx bx-user w-3.5 h-3.5"  /> Full Name <span className="text-accent">*</span>
                                                         </label>
                                                         <div className="relative">
                                                             <div className="absolute -inset-0.5 bg-gradient-to-r from-accent to-accent rounded-xl blur opacity-0 group-focus-within:opacity-20 transition duration-500" />
@@ -380,7 +375,7 @@ export default function ContactPage() {
                                                     </div>
                                                     <div className="space-y-2 group">
                                                         <label className="flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-slate-500 group-focus-within:text-accent transition-colors">
-                                                            <AtSign className="w-3.5 h-3.5" /> Email Address <span className="text-accent">*</span>
+                                                            <i className="bx bx-at w-3.5 h-3.5"  /> Email Address <span className="text-accent">*</span>
                                                         </label>
                                                         <div className="relative">
                                                             <div className="absolute -inset-0.5 bg-gradient-to-r from-accent to-accent rounded-xl blur opacity-0 group-focus-within:opacity-20 transition duration-500" />
@@ -397,7 +392,7 @@ export default function ContactPage() {
                                                 <div className="grid sm:grid-cols-2 gap-5">
                                                     <div className="space-y-2 group">
                                                         <label className="flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-slate-500 group-focus-within:text-accent transition-colors">
-                                                            <GraduationCap className="w-3.5 h-3.5" /> University / College <span className="normal-case text-slate-400 font-normal">(optional)</span>
+                                                            <i className="bx bxs-graduation w-3.5 h-3.5"  /> University / College <span className="normal-case text-slate-400 font-normal">(optional)</span>
                                                         </label>
                                                         <div className="relative">
                                                             <div className="absolute -inset-0.5 bg-gradient-to-r from-accent to-accent rounded-xl blur opacity-0 group-focus-within:opacity-20 transition duration-500" />
@@ -410,7 +405,7 @@ export default function ContactPage() {
                                                     </div>
                                                     <div className="space-y-2 group">
                                                         <label className="flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-slate-500 group-focus-within:text-accent transition-colors">
-                                                            <Tag className="w-3.5 h-3.5" /> Support Category <span className="text-accent">*</span>
+                                                            <i className="bx bx-tag w-3.5 h-3.5"  /> Support Category <span className="text-accent">*</span>
                                                         </label>
                                                         <div className="relative">
                                                             <div className="absolute -inset-0.5 bg-gradient-to-r from-accent to-accent rounded-xl blur opacity-0 group-focus-within:opacity-20 transition duration-500" />
@@ -422,7 +417,7 @@ export default function ContactPage() {
                                                                     <option key={cat} value={cat === "Select a category..." ? "" : cat} disabled={cat === "Select a category..."}>{cat}</option>
                                                                 ))}
                                                             </select>
-                                                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                                                            <i className="bx bx-chevron-down absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"  />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -430,7 +425,7 @@ export default function ContactPage() {
                                                 {/* Message */}
                                                 <div className="space-y-2 group">
                                                     <label className="flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-slate-500 group-focus-within:text-accent transition-colors">
-                                                        <FileText className="w-3.5 h-3.5" /> Message <span className="text-accent">*</span>
+                                                        <i className="bx bx-file w-3.5 h-3.5"  /> Message <span className="text-accent">*</span>
                                                     </label>
                                                     <div className="relative">
                                                         <div className="absolute -inset-0.5 bg-gradient-to-r from-accent to-accent rounded-xl blur opacity-0 group-focus-within:opacity-20 transition duration-500" />
@@ -451,7 +446,7 @@ export default function ContactPage() {
                                                             className="sr-only peer"
                                                         />
                                                         <div className="w-5 h-5 rounded-md border-2 border-slate-300 dark:border-slate-600 peer-checked:bg-gradient-to-br peer-checked:from-accent peer-checked:to-accent peer-checked:border-accent transition-all flex items-center justify-center shadow-sm">
-                                                            {formState.requestUniversity && <CheckCircle2 className="w-3.5 h-3.5 text-white" />}
+                                                            {formState.requestUniversity && <i className="bx bx-check-circle w-3.5 h-3.5 text-white"  />}
                                                         </div>
                                                     </div>
                                                     <div>
@@ -471,7 +466,7 @@ export default function ContactPage() {
                                                         {loading ? (
                                                             <><span className="w-5 h-5 rounded-full border-2 border-white border-b-blue-300 animate-spin" />Sending your message...</>
                                                         ) : (
-                                                            <><Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />Send Message <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></>
+                                                            <><i className="bx bx-send w-5 h-5 group-hover:translate-x-1 transition-transform"  />Send Message <i className="bx bx-right-arrow-alt w-4 h-4 group-hover:translate-x-1 transition-transform"  /></>
                                                         )}
                                                     </button>
                                                     <p className="text-center text-xs text-slate-400 dark:text-slate-500 font-medium">
@@ -502,7 +497,7 @@ export default function ContactPage() {
                                                 <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">{item.label}</p>
                                                 <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 truncate">{item.value}</p>
                                             </div>
-                                            <ArrowRight className="w-4 h-4 text-slate-300 dark:text-slate-600 ml-auto flex-shrink-0 group-hover:text-accent group-hover:translate-x-1 transition-all" />
+                                            <i className="bx bx-right-arrow-alt w-4 h-4 text-slate-300 dark:text-slate-600 ml-auto flex-shrink-0 group-hover:text-accent group-hover:translate-x-1 transition-all"  />
                                         </a>
                                     ))}
                                 </motion.div>
@@ -562,7 +557,7 @@ export default function ContactPage() {
                             <motion.div {...fadeUp(0.05)} className="space-y-3">
                                 <div className="flex items-center gap-2 mb-4">
                                     <div className="w-8 h-8 rounded-xl bg-indigo-100 dark:bg-indigo-950 flex items-center justify-center">
-                                        <HelpCircle className="w-4 h-4 text-accent dark:text-indigo-400" />
+                                        <i className="bx bx-help-circle w-4 h-4 text-accent dark:text-indigo-400"  />
                                     </div>
                                     <h3 className="font-bold text-slate-700 dark:text-slate-200">Frequently Asked Questions</h3>
                                 </div>
@@ -575,7 +570,7 @@ export default function ContactPage() {
                             <motion.div {...fadeUp(0.1)} className="space-y-3">
                                 <div className="flex items-center gap-2 mb-4">
                                     <div className="w-8 h-8 rounded-xl bg-blue-100 dark:bg-blue-950 flex items-center justify-center">
-                                        <MapPin className="w-4 h-4 text-accent dark:text-blue-400" />
+                                        <i className="bx bx-map-pin w-4 h-4 text-accent dark:text-blue-400"  />
                                     </div>
                                     <h3 className="font-bold text-slate-700 dark:text-slate-200">Located At — MMMUT, Gorakhpur</h3>
                                 </div>
@@ -598,12 +593,12 @@ export default function ContactPage() {
                                     target="_blank" rel="noopener noreferrer"
                                     className="flex items-center gap-3 p-4 bg-blue-50 dark:bg-blue-950/30 rounded-2xl border border-blue-100 dark:border-blue-900 hover:bg-blue-100 dark:hover:bg-blue-950/50 transition-colors group"
                                 >
-                                    <MapPin className="w-5 h-5 text-accent flex-shrink-0" />
+                                    <i className="bx bx-map-pin w-5 h-5 text-accent flex-shrink-0"  />
                                     <div className="text-sm">
                                         <p className="font-bold text-slate-700 dark:text-slate-200 group-hover:text-accent dark:group-hover:text-blue-400 transition-colors">Open in Google Maps</p>
                                         <p className="text-xs text-slate-400">Gorakhpur, Uttar Pradesh, India</p>
                                     </div>
-                                    <ArrowRight className="w-4 h-4 text-blue-400 ml-auto group-hover:translate-x-1 transition-transform" />
+                                    <i className="bx bx-right-arrow-alt w-4 h-4 text-blue-400 ml-auto group-hover:translate-x-1 transition-transform"  />
                                 </a>
                             </motion.div>
                         </div>

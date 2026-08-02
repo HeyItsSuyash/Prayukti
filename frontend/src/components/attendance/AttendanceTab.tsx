@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from 'axios';
-import { Loader2, Download, CheckCircle2 } from 'lucide-react';
+
 
 export default function AttendanceTab() {
     const [analytics, setAnalytics] = useState<any>(null);
@@ -20,7 +20,7 @@ export default function AttendanceTab() {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
+            const API_BASE = API_URL;
             const [aRes, alRes] = await Promise.all([
                 axios.get(`${API_BASE}/api/attendance/analytics?range=daily`, {
                     headers: { Authorization: `Bearer ${localStorage.getItem('vlab_token')}` }
@@ -45,7 +45,7 @@ export default function AttendanceTab() {
 
     const resolveAlert = async (id: string) => {
         try {
-            const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
+            const API_BASE = API_URL;
             await axios.patch(`${API_BASE}/api/attendance/alerts/${id}/resolve`, {}, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('vlab_token')}` }
             });
@@ -57,7 +57,7 @@ export default function AttendanceTab() {
 
     const downloadReport = async () => {
         try {
-            const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
+            const API_BASE = API_URL;
             const response = await axios.get(`${API_BASE}/api/attendance/report?month=${selectedMonth}`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('vlab_token')}` }
             });
@@ -99,7 +99,7 @@ export default function AttendanceTab() {
     if (loading && !analytics) {
         return (
             <div className="flex items-center justify-center p-20">
-                <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+                <i className="bx bx-loader2 h-8 w-8 animate-spin text-blue-600"  />
             </div>
         );
     }
@@ -178,7 +178,7 @@ export default function AttendanceTab() {
                                                 onClick={() => resolveAlert(alert._id)}
                                                 className="text-green-600 hover:text-green-700 hover:bg-green-50"
                                             >
-                                                <CheckCircle2 className="h-4 w-4 mr-1" />
+                                                <i className="bx bx-check-circle h-4 w-4 mr-1"  />
                                                 Resolve
                                             </Button>
                                         </TableCell>
@@ -209,7 +209,7 @@ export default function AttendanceTab() {
                             onClick={downloadReport}
                             className="bg-white text-slate-900 hover:bg-slate-100 h-12 px-8 rounded-xl font-black uppercase tracking-widest text-xs shrink-0"
                         >
-                            <Download className="h-4 w-4 mr-2" />
+                            <i className="bx bx-download h-4 w-4 mr-2"  />
                             Download CSV
                         </Button>
                     </div>

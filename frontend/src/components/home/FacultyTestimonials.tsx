@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Quote, ChevronLeft, ChevronRight, User } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 const faculty = [
@@ -82,7 +82,7 @@ export function FacultyTestimonials() {
                         >
                             {/* Photo Placeholder */}
                             <div className="w-48 h-48 md:w-64 md:h-64 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center relative group shrink-0 overflow-hidden border-2 border-slate-100 dark:border-slate-800">
-                                <User className="w-20 h-20 text-slate-300 group-hover:scale-110 transition-transform duration-500" />
+                                <i className="bx bx-user w-20 h-20 text-slate-300 group-hover:scale-110 transition-transform duration-500"  />
                                 <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
                                 <div className="absolute bottom-4 left-4 right-4 h-1 bg-accent/30 rounded-full overflow-hidden">
                                     <motion.div 
@@ -96,7 +96,7 @@ export function FacultyTestimonials() {
 
                             {/* Content */}
                             <div className="flex-1 space-y-6">
-                                <Quote className="w-12 h-12 text-accent/20" />
+                                <i className="bx bxs-quote-alt-left w-12 h-12 text-accent/20"  />
                                 <p className="text-xl md:text-2xl text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
                                     "{faculty[index].message}"
                                 </p>
@@ -123,7 +123,7 @@ export function FacultyTestimonials() {
                             onClick={prev}
                             className="w-12 h-12 rounded-xl border-2 border-slate-200 dark:border-slate-800 hover:bg-accent hover:border-accent hover:text-white transition-all"
                         >
-                            <ChevronLeft />
+                            <i className="bx bx-chevron-left"  />
                         </Button>
                         <Button
                             variant="outline"
@@ -131,7 +131,7 @@ export function FacultyTestimonials() {
                             onClick={next}
                             className="w-12 h-12 rounded-xl border-2 border-slate-200 dark:border-slate-800 hover:bg-accent hover:border-accent hover:text-white transition-all"
                         >
-                            <ChevronRight />
+                            <i className="bx bx-chevronright"  />
                         </Button>
                     </div>
 

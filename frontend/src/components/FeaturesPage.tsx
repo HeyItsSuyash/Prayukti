@@ -1,13 +1,7 @@
 "use client";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-    BookOpen, Cpu, Terminal, MessageSquare,
-    Download, BarChart, Award, Filter,
-    Globe, Smartphone, Rocket, Command,
-    ChevronRight, Brain, Zap, ShieldCheck,
-    CheckCircle2, XCircle
-} from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 // Removed Navbar and Footer imports
@@ -118,7 +112,7 @@ export default function FeaturesPage() {
                                 <div className="absolute inset-0 bg-grid-slate-200 dark:bg-grid-slate-700/50 [mask-image:radial-gradient(ellipse_at_center,black,transparent)]"></div>
                                 <div className="relative w-48 h-48 border-4 border-accent/30 rounded-full flex items-center justify-center animate-spin-slow">
                                     <div className="w-32 h-32 border-4 border-accent/30 rounded-full flex items-center justify-center">
-                                        <Cpu className="w-12 h-12 text-accent animate-pulse" />
+                                        <i className="bx bx-cpu w-12 h-12 text-accent animate-pulse"  />
                                     </div>
                                 </div>
                                 <div className="absolute bottom-6 left-6 right-6 h-20 bg-white/20 dark:bg-black/20 backdrop-blur-md rounded-2xl border border-white/30 dark:border-white/10 p-4">
@@ -179,7 +173,7 @@ export default function FeaturesPage() {
                         <div className="bg-white dark:bg-primary p-12 space-y-8">
                             <div className="flex items-center gap-4">
                                 <div className="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-slate-400">
-                                    <XCircle className="w-8 h-8" />
+                                    <i className="bx bx-xcircle w-8 h-8"  />
                                 </div>
                                 <h3 className="text-2xl font-black text-slate-400 uppercase">Traditional Labs</h3>
                             </div>
@@ -200,11 +194,11 @@ export default function FeaturesPage() {
 
                         <div className="bg-accent p-12 space-y-8 relative overflow-hidden">
                             <div className="absolute top-0 right-0 p-8 opacity-10">
-                                <Rocket className="w-64 h-64 text-white" />
+                                <i className="bx bx-rocket w-64 h-64 text-white"  />
                             </div>
                             <div className="flex items-center gap-4 relative z-10">
                                 <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white">
-                                    <CheckCircle2 className="w-8 h-8" />
+                                    <i className="bx bx-check-circle w-8 h-8"  />
                                 </div>
                                 <h3 className="text-2xl font-black text-white uppercase">Prayukti x MMMUT Virtual LAB</h3>
                             </div>
@@ -236,7 +230,7 @@ export default function FeaturesPage() {
                 >
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0%,transparent_70%)]"></div>
                     <div className="relative z-10 max-w-3xl mx-auto space-y-8">
-                        <Brain className="w-16 h-16 mx-auto opacity-80" />
+                        <i className="bx bx-brain w-16 h-16 mx-auto opacity-80"  />
                         <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4">
                             Ready to Transform <br />Your Learning?
                         </h2>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
+
 import { useState, useEffect } from "react";
 
 const guidance = [
@@ -84,7 +84,7 @@ export function MissionVisionSection() {
                     {/* Vision / Guidance Section (Carousel) */}
                     <div className="lg:col-span-7 bg-slate-50 dark:bg-slate-900 rounded-[3rem] p-12 md:p-20 relative overflow-hidden shadow-inner">
                         <div className="absolute top-10 left-10 text-slate-200 dark:text-slate-800">
-                            <Quote size={80} fill="currentColor" stroke="none" />
+                            <i className="bx bxs-quote-alt-left" fill="currentColor" stroke="none" />
                         </div>
                         
                         <div className="relative z-10 min-h-[400px] flex flex-col justify-center">

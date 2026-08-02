@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowLeft, ArrowRight, Info, Layers, LayoutList, RefreshCw, Table, Network, Share2, Database } from 'lucide-react';
+
 import { Button } from "@/components/ui/button";
 
 
@@ -42,7 +42,7 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
     const renderUNF = () => (
         <div className="space-y-6 animate-in fade-in duration-500">
             <div className="bg-red-50 border border-red-200 p-4 rounded-lg">
-                <h3 className="font-bold text-red-800 mb-2 flex items-center gap-2"><Table size={18} /> Unnormalized Form (UNF)</h3>
+                <h3 className="font-bold text-red-800 mb-2 flex items-center gap-2"><i className="bx bx-table"  /> Unnormalized Form (UNF)</h3>
                 <p className="text-sm text-red-700 mb-4">
                     <strong>Context:</strong> IT Consultants assigned to Projects, using specific Skills.
                     <br />
@@ -100,7 +100,7 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
             {!readonly && (
                 <div className="flex justify-end">
                     <Button onClick={() => { setStep(1); addLog("Applied 1NF: Flattened repeating groups."); }} className="bg-[#f57f17] hover:bg-orange-700">
-                        Next: Normalize to 1NF <ArrowRight size={16} className="ml-2" />
+                        Next: Normalize to 1NF <i className="bx bx-right-arrow-alt ml-2"  />
                     </Button>
                 </div>
             )}
@@ -124,7 +124,7 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
         return (
             <div className="space-y-6 animate-in fade-in duration-500">
                 <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
-                    <h3 className="font-bold text-blue-800 mb-2 flex items-center gap-2"><LayoutList size={18} /> First Normal Form (1NF)</h3>
+                    <h3 className="font-bold text-blue-800 mb-2 flex items-center gap-2"><i className="bx bx-layoutlist"  /> First Normal Form (1NF)</h3>
                     <p className="text-sm text-blue-700 mb-4">
                         <strong>Status:</strong> Atomic Values.
                         <br />
@@ -177,9 +177,9 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
 
                 {!readonly && (
                     <div className="flex justify-between">
-                        <Button variant="outline" onClick={() => setStep(0)}><ArrowLeft size={16} className="mr-2" /> Back</Button>
+                        <Button variant="outline" onClick={() => setStep(0)}><i className="bx bx-arrowleft mr-2"  /> Back</Button>
                         <Button onClick={() => { setStep(2); addLog("Applied 2NF: Extracted Employee & Project Tables."); }} className="bg-[#f57f17] hover:bg-orange-700">
-                            Decompose to 2NF <ArrowRight size={16} className="ml-2" />
+                            Decompose to 2NF <i className="bx bx-right-arrow-alt ml-2"  />
                         </Button>
                     </div>
                 )}
@@ -191,7 +191,7 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
     const render2NF = () => (
         <div className="space-y-6 animate-in fade-in duration-500">
             <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
-                <h3 className="font-bold text-green-800 mb-2 flex items-center gap-2"><Layers size={18} /> Second Normal Form (2NF)</h3>
+                <h3 className="font-bold text-green-800 mb-2 flex items-center gap-2"><i className="bx bx-layers"  /> Second Normal Form (2NF)</h3>
                 <p className="text-sm text-green-700 mb-4">
                     Partial dependencies removed. Logic remains consistent: Alice is still Employee 101, Project P1 is App.
                 </p>
@@ -248,9 +248,9 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
 
             {!readonly && (
                 <div className="flex justify-between">
-                    <Button variant="outline" onClick={() => setStep(1)}><ArrowLeft size={16} className="mr-2" /> Back</Button>
+                    <Button variant="outline" onClick={() => setStep(1)}><i className="bx bx-arrowleft mr-2"  /> Back</Button>
                     <Button onClick={() => { setStep(3); addLog("Applied 3NF: Extracted Role Location."); }} className="bg-[#f57f17] hover:bg-orange-700">
-                        Decompose to 3NF <ArrowRight size={16} className="ml-2" />
+                        Decompose to 3NF <i className="bx bx-right-arrow-alt ml-2"  />
                     </Button>
                 </div>
             )}
@@ -261,7 +261,7 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
     const render3NF = () => (
         <div className="space-y-6 animate-in fade-in duration-500">
             <div className="bg-pink-50 border border-pink-200 p-4 rounded-lg">
-                <h3 className="font-bold text-pink-800 mb-2 flex items-center gap-2"><Network size={18} /> Third Normal Form (3NF)</h3>
+                <h3 className="font-bold text-pink-800 mb-2 flex items-center gap-2"><i className="bx bx-network"  /> Third Normal Form (3NF)</h3>
                 <p className="text-sm text-pink-700 mb-4">
                     Transitive dependencies removed. Data integrity improved.
                 </p>
@@ -308,9 +308,9 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
 
             {!readonly && (
                 <div className="flex justify-between">
-                    <Button variant="outline" onClick={() => setStep(2)}><ArrowLeft size={16} className="mr-2" /> Back</Button>
+                    <Button variant="outline" onClick={() => setStep(2)}><i className="bx bx-arrowleft mr-2"  /> Back</Button>
                     <Button onClick={() => { setStep(4); addLog("Applied 4NF: Separated Phones from Assignments."); }} className="bg-[#f57f17] hover:bg-orange-700">
-                        Decompose to 4NF <ArrowRight size={16} className="ml-2" />
+                        Decompose to 4NF <i className="bx bx-right-arrow-alt ml-2"  />
                     </Button>
                 </div>
             )}
@@ -321,7 +321,7 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
     const render4NF = () => (
         <div className="space-y-6 animate-in fade-in duration-500">
             <div className="bg-teal-50 border border-teal-200 p-4 rounded-lg">
-                <h3 className="font-bold text-teal-800 mb-2 flex items-center gap-2"><Network size={18} /> Fourth Normal Form (4NF)</h3>
+                <h3 className="font-bold text-teal-800 mb-2 flex items-center gap-2"><i className="bx bx-network"  /> Fourth Normal Form (4NF)</h3>
                 <p className="text-sm text-teal-700 mb-4">
                     MVDs Removed.
                     We have `Emp_Phone` and `Project_Allocation` separated.
@@ -374,9 +374,9 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
 
             {!readonly && (
                 <div className="flex justify-between">
-                    <Button variant="outline" onClick={() => setStep(3)}><ArrowLeft size={16} className="mr-2" /> Back</Button>
+                    <Button variant="outline" onClick={() => setStep(3)}><i className="bx bx-arrowleft mr-2"  /> Back</Button>
                     <Button onClick={() => { setStep(5); addLog("Applying 5NF: Decomposing Ternary Relationship."); }} className="bg-[#f57f17] hover:bg-orange-700">
-                        Decompose to 5NF <ArrowRight size={16} className="ml-2" />
+                        Decompose to 5NF <i className="bx bx-right-arrow-alt ml-2"  />
                     </Button>
                 </div>
             )}
@@ -387,7 +387,7 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
     const render5NF = () => (
         <div className="space-y-6 animate-in fade-in duration-500">
             <div className="bg-indigo-50 border border-indigo-200 p-4 rounded-lg">
-                <h3 className="font-bold text-indigo-800 mb-2 flex items-center gap-2"><Share2 size={18} /> Fifth Normal Form (5NF)</h3>
+                <h3 className="font-bold text-indigo-800 mb-2 flex items-center gap-2"><i className="bx bx-share2"  /> Fifth Normal Form (5NF)</h3>
                 <p className="text-sm text-indigo-700 mb-4">
                     <strong>Logic:</strong> We assume validity of the ternary rule (If Emp knows Skill, and Proj needs Skill, and Emp on Proj -&gt; Emp uses Skill on Proj).
                     <br />
@@ -442,14 +442,14 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
                 <p className="text-gray-400 mb-6">Same table context maintained from 1NF to 5NF.</p>
                 {!readonly && (
                     <Button onClick={() => { setStep(0); setLogs(["Reset Experiment."]); }} variant="outline" className="text-black border-white hover:bg-gray-100">
-                        <RefreshCw size={16} className="mr-2" /> Restart Experiment
+                        <i className="bx bx-refreshcw mr-2"  /> Restart Experiment
                     </Button>
                 )}
             </div>
 
             {!readonly && (
                 <div className="flex justify-start">
-                    <Button variant="outline" onClick={() => setStep(4)}><ArrowLeft size={16} className="mr-2" /> Back</Button>
+                    <Button variant="outline" onClick={() => setStep(4)}><i className="bx bx-arrowleft mr-2"  /> Back</Button>
                 </div>
             )}
         </div>
@@ -470,7 +470,7 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
                         </Button>
                     )}
                     <Button variant="ghost" size="sm" onClick={() => setShowTheory(!showTheory)} className={showTheory ? "bg-blue-50 text-blue-600" : ""}>
-                        <Info size={16} className="mr-2" /> Concepts
+                        <i className="bx bx-info mr-2"  /> Concepts
                     </Button>
                 </div>
             </header>
@@ -509,7 +509,7 @@ export default function NormalizationSimulation({ mode = "LEARNING", initialData
                 {/* Sidebar Log */}
                 <aside className="w-80 bg-white border-l flex flex-col shrink-0">
                     <div className="p-4 border-b bg-gray-50 font-bold text-gray-700 flex items-center gap-2">
-                        <LayoutList size={16} /> Activity Log
+                        <i className="bx bx-layoutlist"  /> Activity Log
                     </div>
                     <div className="flex-1 overflow-y-auto p-4 space-y-3">
                         {logs.map((log, i) => (

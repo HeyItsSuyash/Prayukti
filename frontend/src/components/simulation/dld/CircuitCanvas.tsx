@@ -8,7 +8,7 @@ import '@xyflow/react/dist/style.css';
 import { evaluateCircuit } from '@/lib/circuit-engine';
 import { generateTruthTable, TableData } from '@/lib/table-generator';
 import { WorkspacesPanel } from '../core/WorkspacesPanel';
-import { Table, Play, Pause, Save, ZoomIn, ZoomOut, Maximize } from 'lucide-react';
+
 
 // Use environment variable for API URL
 
@@ -483,7 +483,7 @@ export default function CircuitCanvas({
                     className={`px-4 py-2 rounded-full text-xs font-bold border shadow-sm flex items-center gap-2 transition-all ${generating ? 'bg-green-500 text-white border-green-600' : 'bg-gray-200 text-gray-600'}`}
                     onClick={() => setGenerating(!generating)}
                 >
-                    {generating ? <Pause size={14} fill="currentColor" /> : <Play size={14} fill="currentColor" />}
+                    {generating ? <i className="bx bx-pause" fill="currentColor" /> : <i className="bx bx-play" fill="currentColor" />}
                     {generating ? 'SIMULATING' : 'PAUSED'}
                 </button>
 
@@ -491,12 +491,12 @@ export default function CircuitCanvas({
                     className="px-4 py-2 bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 rounded-full text-xs font-bold shadow-sm flex items-center gap-2"
                     onClick={handleWorkspacesOpen}
                 >
-                    <Table size={14} /> Truth Table
+                    <i className="bx bx-table"  /> Truth Table
                 </button>
 
                 {!readonly && (
                     <button className="px-4 py-2 bg-black hover:bg-gray-800 text-white rounded-full text-xs font-bold shadow-lg flex items-center gap-2" onClick={saveCircuit}>
-                        <Save size={14} /> Save
+                        <i className="bx bx-save"  /> Save
                     </button>
                 )}
             </div>

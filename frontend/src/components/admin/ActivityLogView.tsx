@@ -4,17 +4,7 @@ import { API_URL } from "@/lib/config";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { 
-    Clock, 
-    User, 
-    Tag, 
-    FileText, 
-    CheckCircle2, 
-    PlusCircle,
-    Trash2,
-    Settings,
-    Loader2
-} from 'lucide-react';
+
 import { formatDistanceToNow } from 'date-fns';
 
 interface Log {
@@ -28,11 +18,11 @@ interface Log {
 
 const getActionIcon = (action: string) => {
     switch (action) {
-        case 'CREATE_SUBJECT': return <PlusCircle className="text-indigo-600" size={16} />;
-        case 'ENROLL_STUDENT': return <User className="text-emerald-600" size={16} />;
-        case 'DELETE_STUDENT': return <Trash2 className="text-red-600" size={16} />;
-        case 'SYSTEM_CONFIG': return <Settings className="text-slate-600" size={16} />;
-        default: return <FileText className="text-slate-400" size={16} />;
+        case 'CREATE_SUBJECT': return <i className="bx bx-pluscircle text-indigo-600"  />;
+        case 'ENROLL_STUDENT': return <i className="bx bx-user text-emerald-600"  />;
+        case 'DELETE_STUDENT': return <i className="bx bx-trash2 text-red-600"  />;
+        case 'SYSTEM_CONFIG': return <i className="bx bx-settings text-slate-600"  />;
+        default: return <i className="bx bx-file text-slate-400"  />;
     }
 };
 
@@ -72,7 +62,7 @@ export function ActivityLogView() {
             <CardContent className="p-0">
                 {loading ? (
                     <div className="flex flex-col items-center justify-center p-20 text-slate-400">
-                        <Loader2 className="animate-spin mb-4" />
+                        <i className="bx bx-loader2 animate-spin mb-4"  />
                         <p className="font-bold text-sm">Accessing audit server...</p>
                     </div>
                 ) : logs.length === 0 ? (
@@ -92,7 +82,7 @@ export function ActivityLogView() {
                                             {log.action.replace(/_/g, ' ')}
                                         </p>
                                         <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-widest whitespace-nowrap bg-white px-3 py-1 rounded-full border border-slate-100">
-                                            <Clock size={10} />
+                                            <i className="bx bx-clock"  />
                                             {formatDistanceToNow(new Date(log.timestamp), { addSuffix: true })}
                                         </div>
                                     </div>
@@ -101,7 +91,7 @@ export function ActivityLogView() {
                                     </p>
                                     <div className="flex items-center gap-3 mt-3">
                                         <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg">
-                                            <User size={10} />
+                                            <i className="bx bx-user"  />
                                             {log.userName}
                                         </div>
                                         <div className="text-[10px] font-black uppercase tracking-widest text-slate-400">

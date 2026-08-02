@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Code, Database, Play, RefreshCw, Terminal, Power, Edit3 } from 'lucide-react';
+
 import { Button } from "@/components/ui/button";
 
 
@@ -407,7 +407,7 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
                 <div className="w-7/12 flex flex-col border-r border-gray-200 bg-white">
                     <div className="p-2 bg-gray-100 border-b border-gray-200 flex justify-between items-center px-4">
                         <div className="flex items-center gap-2 text-sm">
-                            <Code size={16} className="text-blue-600" />
+                            <i className="bx bx-code text-blue-600"  />
                             <span className="font-mono text-gray-700 font-bold">Code Editor</span>
                             <span className="text-xs text-gray-600 bg-white border px-2 py-0.5 rounded">Editable</span>
                         </div>
@@ -420,7 +420,7 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
                                         onClick={reset}
                                         className="text-gray-600 hover:text-gray-900 border-gray-300"
                                     >
-                                        <RefreshCw size={14} className="mr-1" /> Reset
+                                        <i className="bx bx-refreshcw mr-1"  /> Reset
                                     </Button>
                                     <Button
                                         size="sm"
@@ -428,7 +428,7 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
                                         onClick={nextStep}
                                         className="bg-green-600 hover:bg-green-700 text-white shadow-sm font-bold"
                                     >
-                                        <Play size={14} className="mr-1 fill-current" /> {step === 0 ? "Run Program" : "Next Step"}
+                                        <i className="bx bx-play mr-1 fill-current"  /> {step === 0 ? "Run Program" : "Next Step"}
                                     </Button>
                                 </>
                             )}
@@ -459,7 +459,7 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
                     {/* Console */}
                     <div className="h-48 bg-white border-t border-gray-200 flex flex-col">
                         <div className="p-1 px-3 bg-gray-100 text-xs text-gray-600 flex items-center gap-2 border-b border-gray-200">
-                            <Terminal size={12} /> Console Output
+                            <i className="bx bx-terminal"  /> Console Output
                         </div>
                         <div className="flex-1 p-3 font-mono text-sm overflow-y-auto space-y-1 bg-black text-gray-300">
                             {consoleOutput.length === 0 && <span className="text-gray-600 italic">// Output will appear here...</span>}
@@ -476,9 +476,9 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
                 {/* Right Panel: Database & Status */}
                 <div className="w-5/12 flex flex-col bg-gray-50 border-l border-gray-200">
                     <div className="p-4 border-b border-gray-200 bg-white flex justify-between items-center shadow-sm z-10">
-                        <h3 className="flex items-center gap-2 font-bold text-gray-800"><Database size={18} className="text-orange-500" /> Database Server</h3>
+                        <h3 className="flex items-center gap-2 font-bold text-gray-800"><i className="bx bx-database text-orange-500"  /> Database Server</h3>
                         <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold transition-all ${isConnected ? "bg-green-100 text-green-700 border border-green-300 shadow-sm" : "bg-red-100 text-red-700 border border-red-300"}`}>
-                            <Power size={12} /> {isConnected ? "CONNECTED" : "OFFLINE"}
+                            <i className="bx bx-power"  /> {isConnected ? "CONNECTED" : "OFFLINE"}
                         </div>
                     </div>
 
@@ -516,7 +516,7 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
 
                         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-xs text-blue-800 space-y-2">
                             <div className="flex items-center gap-2 font-bold text-blue-600 uppercase tracking-wider mb-2">
-                                <Edit3 size={14} /> Interactive Instructions
+                                <i className="bx bx-edit3"  /> Interactive Instructions
                             </div>
                             <p>1. Select <strong>Language</strong> (Java/Python/Cpp) and <strong>Template</strong> (Insert/Update...).</p>
                             <p>2. <strong>Edit the SQL</strong> inside the Code Editor. You can change strings inside <code>" "</code>.</p>

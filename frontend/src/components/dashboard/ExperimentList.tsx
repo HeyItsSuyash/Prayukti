@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { Search, Filter, PlayCircle, Clock, BarChart } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 interface Experiment {
@@ -34,7 +34,7 @@ export function ExperimentList({ subject, experiments }: ExperimentListProps) {
             {/* Header Controls */}
             <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white p-4 rounded-xl shadow-sm border border-slate-100">
                 <div className="relative w-full md:w-96">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                    <i className="bx bx-search absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400"  />
                     <input
                         type="text"
                         placeholder="Search experiments..."
@@ -93,7 +93,7 @@ export function ExperimentList({ subject, experiments }: ExperimentListProps) {
                                     {exp.difficulty}
                                 </span>
                                 <div className="text-slate-400">
-                                    <BarChart className="w-4 h-4" />
+                                    <i className="bx bx-barchart w-4 h-4"  />
                                 </div>
                             </div>
 
@@ -107,7 +107,7 @@ export function ExperimentList({ subject, experiments }: ExperimentListProps) {
 
                             <div className="flex items-center gap-4 text-xs text-slate-400 font-medium">
                                 <span className="flex items-center gap-1">
-                                    <Clock className="w-3 h-3" /> {exp.duration || "45 mins"}
+                                    <i className="bx bx-clock w-3 h-3"  /> {exp.duration || "45 mins"}
                                 </span>
                                 <span>•</span>
                                 <span>1.2k attempts</span>
@@ -117,7 +117,7 @@ export function ExperimentList({ subject, experiments }: ExperimentListProps) {
                         <div className="p-4 bg-slate-50 border-t border-slate-100">
                             <a href={exp.href} className="w-full">
                                 <Button className="w-full gap-2 group-hover:bg-primary group-hover:text-primary-foreground">
-                                    Start Experiment <PlayCircle className="w-4 h-4" />
+                                    Start Experiment <i className="bx bx-play-circle w-4 h-4"  />
                                 </Button>
                             </a>
                         </div>
@@ -127,7 +127,7 @@ export function ExperimentList({ subject, experiments }: ExperimentListProps) {
 
             {filteredExperiments.length === 0 && (
                 <div className="text-center py-20 bg-slate-50 rounded-xl border border-dashed border-slate-300">
-                    <Filter className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+                    <i className="bx bx-filter w-12 h-12 text-slate-300 mx-auto mb-4"  />
                     <h3 className="text-lg font-bold text-slate-500">No experiments found</h3>
                     <p className="text-slate-400">Try adjusting your filters or search query.</p>
                 </div>

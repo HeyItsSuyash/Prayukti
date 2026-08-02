@@ -3,41 +3,35 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import {
-    Search, Filter, ArrowRight, TrendingUp, Flame,
-    BookOpen, FlaskConical, Star, ChevronDown,
-    Monitor, Zap, Signal, Settings, Construction,
-    Database, Globe, Binary, Code2, ShieldCheck,
-    Lock
-} from "lucide-react";
+
 import { getLabs } from "@/lib/labs/registry";
 
 // ─── Static Data ─────────────────────────────────────────────
 const BRANCHES = [
-    { name: "Computer Science Engineering", icon: <Monitor className="w-8 h-8" />, code: "CSE", subjects: 4, practicals: 17, color: "from-accent to-accent" },
-    { name: "Electrical Engineering", icon: <Zap className="w-8 h-8" />, code: "EE", subjects: 3, practicals: 12, color: "from-yellow-500 to-orange-500", comingSoon: true },
-    { name: "Electronics & Comm.", icon: <Signal className="w-8 h-8" />, code: "ECE", subjects: 3, practicals: 14, color: "from-purple-500 to-violet-600", comingSoon: true },
-    { name: "Mechanical Engineering", icon: <Settings className="w-8 h-8" />, code: "ME", subjects: 3, practicals: 10, color: "from-slate-500 to-slate-700", comingSoon: true },
-    { name: "Civil Engineering", icon: <Construction className="w-8 h-8" />, code: "CE", subjects: 2, practicals: 8, color: "from-green-500 to-emerald-600", comingSoon: true },
+    { name: "Computer Science Engineering", icon: <i className="bx bx-desktop w-8 h-8"  />, code: "CSE", subjects: 4, practicals: 17, color: "from-accent to-accent" },
+    { name: "Electrical Engineering", icon: <i className="bx bx-zap w-8 h-8"  />, code: "EE", subjects: 3, practicals: 12, color: "from-yellow-500 to-orange-500", comingSoon: true },
+    { name: "Electronics & Comm.", icon: <i className="bx bx-signal w-8 h-8"  />, code: "ECE", subjects: 3, practicals: 14, color: "from-purple-500 to-violet-600", comingSoon: true },
+    { name: "Mechanical Engineering", icon: <i className="bx bx-settings w-8 h-8"  />, code: "ME", subjects: 3, practicals: 10, color: "from-slate-500 to-slate-700", comingSoon: true },
+    { name: "Civil Engineering", icon: <i className="bx bx-construction w-8 h-8"  />, code: "CE", subjects: 2, practicals: 8, color: "from-green-500 to-emerald-600", comingSoon: true },
 ];
 
 const SUBJECTS = [
-    { name: "Database Management System", code: "DBMS", semester: "5th Semester", experiments: 5, icon: <Database className="w-8 h-8" />, difficulty: "Intermediate", href: "/dashboard/dbms", color: "blue" },
-    { name: "Computer Networks", code: "CN", semester: "5th Semester", experiments: 5, icon: <Globe className="w-8 h-8" />, difficulty: "Intermediate", href: "/dashboard/cn", color: "indigo" },
-    { name: "Digital Logic & Design", code: "DLD", semester: "3rd Semester", experiments: 4, icon: <Binary className="w-8 h-8" />, difficulty: "Beginner", href: "/dashboard/dld", color: "purple" },
-    { name: "Object Oriented Programming", code: "OOPS", semester: "4th Semester", experiments: 4, icon: <Code2 className="w-8 h-8" />, difficulty: "Beginner", href: "/dashboard/oops", color: "violet" },
+    { name: "Database Management System", code: "DBMS", semester: "5th Semester", experiments: 5, icon: <i className="bx bx-database w-8 h-8"  />, difficulty: "Intermediate", href: "/dashboard/dbms", color: "blue" },
+    { name: "Computer Networks", code: "CN", semester: "5th Semester", experiments: 5, icon: <i className="bx bx-globe w-8 h-8"  />, difficulty: "Intermediate", href: "/dashboard/cn", color: "indigo" },
+    { name: "Digital Logic & Design", code: "DLD", semester: "3rd Semester", experiments: 4, icon: <i className="bx bx-binary w-8 h-8"  />, difficulty: "Beginner", href: "/dashboard/dld", color: "purple" },
+    { name: "Object Oriented Programming", code: "OOPS", semester: "4th Semester", experiments: 4, icon: <i className="bx bx-code2 w-8 h-8"  />, difficulty: "Beginner", href: "/dashboard/oops", color: "violet" },
 ];
 
 const SEMESTERS = ["All Semesters", "1st Semester", "2nd Semester", "3rd Semester", "4th Semester", "5th Semester", "6th Semester", "7th Semester", "8th Semester"];
 const DIFFICULTIES = ["All Levels", "Beginner", "Intermediate", "Advanced"];
 
 const TRENDING = [
-    { title: "Study and Verification of Logic Gates", subject: "DLD", difficulty: "Easy", practices: "2.1k", href: "/dashboard/dld/dld-exp-1", icon: <Binary className="w-6 h-6" /> },
-    { title: "OSI vs TCP/IP Reference Models", subject: "CN", difficulty: "Easy", practices: "1.8k", href: "/dashboard/cn/cn-exp-1", icon: <Globe className="w-6 h-6" /> },
-    { title: "Introduction to DBMS", subject: "DBMS", difficulty: "Easy", practices: "1.6k", href: "/dashboard/dbms/dbms-exp-1", icon: <Database className="w-6 h-6" /> },
-    { title: "Introduction to Classes and Objects", subject: "OOPS", difficulty: "Easy", practices: "1.3k", href: "/dashboard/oops/oops-exp-1", icon: <Code2 className="w-6 h-6" /> },
-    { title: "CSMA/CD Protocol Study", subject: "CN", difficulty: "Medium", practices: "980", href: "/dashboard/cn/cn-exp-2", icon: <Globe className="w-6 h-6" /> },
-    { title: "Database Application Development", subject: "DBMS", difficulty: "Medium", practices: "850", href: "/dashboard/dbms/dbms-exp-2", icon: <Database className="w-6 h-6" /> },
+    { title: "Study and Verification of Logic Gates", subject: "DLD", difficulty: "Easy", practices: "2.1k", href: "/dashboard/dld/dld-exp-1", icon: <i className="bx bx-binary w-6 h-6"  /> },
+    { title: "OSI vs TCP/IP Reference Models", subject: "CN", difficulty: "Easy", practices: "1.8k", href: "/dashboard/cn/cn-exp-1", icon: <i className="bx bx-globe w-6 h-6"  /> },
+    { title: "Introduction to DBMS", subject: "DBMS", difficulty: "Easy", practices: "1.6k", href: "/dashboard/dbms/dbms-exp-1", icon: <i className="bx bx-database w-6 h-6"  /> },
+    { title: "Introduction to Classes and Objects", subject: "OOPS", difficulty: "Easy", practices: "1.3k", href: "/dashboard/oops/oops-exp-1", icon: <i className="bx bx-code2 w-6 h-6"  /> },
+    { title: "CSMA/CD Protocol Study", subject: "CN", difficulty: "Medium", practices: "980", href: "/dashboard/cn/cn-exp-2", icon: <i className="bx bx-globe w-6 h-6"  /> },
+    { title: "Database Application Development", subject: "DBMS", difficulty: "Medium", practices: "850", href: "/dashboard/dbms/dbms-exp-2", icon: <i className="bx bx-database w-6 h-6"  /> },
 ];
 
 const difficultyColor: Record<string, string> = {
@@ -105,7 +99,7 @@ export default function ExplorePage() {
                             transition={{ duration: 0.5 }}
                             className="inline-flex items-center gap-2 bg-indigo-50 dark:bg-indigo-900/30 text-accent dark:text-indigo-400 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest border border-indigo-100 dark:border-indigo-800/50 mb-8"
                         >
-                            <FlaskConical className="w-4 h-4" />
+                            <i className="bx bx-flask w-4 h-4"  />
                             {allLabs.length} Experiments Available
                         </motion.div>
 
@@ -159,7 +153,7 @@ export default function ExplorePage() {
                             {/* Search */}
                             <div className="relative flex-1 min-w-0 group">
                                 <div className="absolute -inset-0.5 bg-gradient-to-r from-accent to-accent rounded-xl blur opacity-0 group-focus-within:opacity-20 transition duration-500" />
-                                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-accent w-5 h-5 transition-colors z-10" />
+                                <i className="bx bx-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-accent w-5 h-5 transition-colors z-10"  />
                                 <input
                                     type="text"
                                     value={search}
@@ -180,8 +174,8 @@ export default function ExplorePage() {
                                     <option value="AKTU">AKTU, Lucknow (Coming Soon)</option>
                                     <option value="NIT">NIT Allahabad (Coming Soon)</option>
                                 </select>
-                                <ShieldCheck className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600 pointer-events-none" />
-                                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                                <i className="bx bx-shieldcheck absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600 pointer-events-none"  />
+                                <i className="bx bx-chevron-down absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"  />
                             </div>
 
                             {/* Semester */}
@@ -193,7 +187,7 @@ export default function ExplorePage() {
                                 >
                                     {SEMESTERS.map((s) => <option key={s}>{s}</option>)}
                                 </select>
-                                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                                <i className="bx bx-chevron-down absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"  />
                             </div>
 
                             {/* Difficulty */}
@@ -205,12 +199,12 @@ export default function ExplorePage() {
                                 >
                                     {DIFFICULTIES.map((d) => <option key={d}>{d}</option>)}
                                 </select>
-                                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                                <i className="bx bx-chevron-down absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"  />
                             </div>
 
                             {/* Filter Icon (visual) */}
                             <div className="hidden md:flex items-center justify-center w-13 h-13 bg-accent text-white rounded-xl px-4 py-3.5 shadow-md shadow-accent/20">
-                                <Filter className="w-5 h-5" />
+                                <i className="bx bx-filter w-5 h-5"  />
                             </div>
                         </div>
                     </div>
@@ -240,8 +234,8 @@ export default function ExplorePage() {
                                             {branch.name}
                                         </h3>
                                         <div className="flex gap-4 text-sm text-slate-500 dark:text-slate-400 mb-6">
-                                            <span className="flex items-center gap-1"><BookOpen className="w-4 h-4" /> {branch.subjects} Subjects</span>
-                                            <span className="flex items-center gap-1"><FlaskConical className="w-4 h-4" /> {branch.practicals} Practicals</span>
+                                            <span className="flex items-center gap-1"><i className="bx bx-bookopen w-4 h-4"  /> {branch.subjects} Subjects</span>
+                                            <span className="flex items-center gap-1"><i className="bx bx-flask w-4 h-4"  /> {branch.practicals} Practicals</span>
                                         </div>
                                         {branch.comingSoon ? (
                                             <Button disabled className="rounded-full h-9 px-5 text-sm font-bold opacity-50">
@@ -250,7 +244,7 @@ export default function ExplorePage() {
                                         ) : (
                                             <a href="/explore#subjects">
                                                 <Button className="rounded-full h-9 px-5 text-sm font-bold bg-accent hover:bg-accent/90 text-white">
-                                                    Explore Branch <ArrowRight className="ml-2 w-4 h-4" />
+                                                    Explore Branch <i className="bx bx-right-arrow-alt ml-2 w-4 h-4"  />
                                                 </Button>
                                             </a>
                                         )}
@@ -271,7 +265,7 @@ export default function ExplorePage() {
 
                         {filteredSubjects.length === 0 ? (
                             <div className="text-center py-20 text-slate-400 dark:text-slate-600">
-                                <FlaskConical className="w-12 h-12 mx-auto mb-4 opacity-30" />
+                                <i className="bx bx-flask w-12 h-12 mx-auto mb-4 opacity-30"  />
                                 <p className="text-lg font-semibold">No subjects match your filters.</p>
                                 <button onClick={() => { setSearch(""); setSemester("All Semesters"); setDifficulty("All Levels"); }} className="mt-4 text-accent font-bold underline">Reset filters</button>
                             </div>
@@ -292,11 +286,11 @@ export default function ExplorePage() {
                                             <p className="text-xs text-slate-400 dark:text-slate-500 mb-4">{subject.semester}</p>
                                             <div className="mt-auto flex items-center justify-between">
                                                 <span className="text-sm text-slate-500 font-semibold flex items-center gap-1.5">
-                                                    <FlaskConical className="w-4 h-4" /> {subject.experiments} Experiments
+                                                    <i className="bx bx-flask w-4 h-4"  /> {subject.experiments} Experiments
                                                 </span>
                                                 <a href={subject.href}>
                                                     <Button size="sm" className="rounded-full h-8 px-4 text-xs font-bold bg-accent hover:bg-accent/90 text-white">
-                                                        Start <ArrowRight className="ml-1.5 w-3 h-3" />
+                                                        Start <i className="bx bx-right-arrow-alt ml-1.5 w-3 h-3"  />
                                                     </Button>
                                                 </a>
                                             </div>
@@ -315,7 +309,7 @@ export default function ExplorePage() {
                             <div>
                                 <span className="text-accent dark:text-purple-400 font-bold uppercase tracking-[0.2em] text-xs mb-2 block">Most Practiced</span>
                                 <h2 className="text-3xl md:text-4xl font-black text-primary dark:text-white tracking-tight flex items-center gap-3">
-                                    Trending Labs <Flame className="w-7 h-7 text-orange-500" />
+                                    Trending Labs <i className="bx bx-flame w-7 h-7 text-orange-500"  />
                                 </h2>
                             </div>
                             <a href="/dashboard/dld" className="text-sm font-bold text-accent dark:text-blue-400 underline underline-offset-4 hover:text-accent transition-colors">
@@ -336,7 +330,7 @@ export default function ExplorePage() {
                                                     </span>
                                                 </div>
                                                 <div className="flex items-center gap-1 text-xs text-orange-500 font-black bg-orange-50 dark:bg-orange-950/30 px-2 py-1 rounded-full border border-orange-200 dark:border-orange-900">
-                                                    <TrendingUp className="w-3.5 h-3.5" />
+                                                    <i className="bx bx-trendingup w-3.5 h-3.5"  />
                                                     Trending
                                                 </div>
                                             </div>
@@ -347,11 +341,11 @@ export default function ExplorePage() {
 
                                             <div className="mt-auto flex items-center justify-between text-xs text-slate-400">
                                                 <span className="flex items-center gap-1 font-semibold">
-                                                    <BookOpen className="w-4 h-4" />
+                                                    <i className="bx bx-bookopen w-4 h-4"  />
                                                     {item.subject}
                                                 </span>
                                                 <span className="flex items-center gap-1 font-semibold">
-                                                    <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
+                                                    <i className="bx bx-star w-3.5 h-3.5 text-yellow-400 fill-yellow-400"  />
                                                     {item.practices} practices
                                                 </span>
                                             </div>
@@ -379,7 +373,7 @@ export default function ExplorePage() {
                                 <motion.div {...fadeUp(0.2)} className="flex flex-col sm:flex-row gap-4 justify-center">
                                     <a href="/login">
                                         <Button size="lg" className="h-14 px-10 text-lg rounded-full bg-accent hover:bg-accent/90 text-white shadow-xl shadow-accent/30 border-0 w-full sm:w-auto">
-                                            Start Practicing <ArrowRight className="ml-2 w-5 h-5" />
+                                            Start Practicing <i className="bx bx-right-arrow-alt ml-2 w-5 h-5"  />
                                         </Button>
                                     </a>
                                     <a href="/dashboard/dld">

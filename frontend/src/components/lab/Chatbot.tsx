@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { X, Send, MessageSquare, Bot, User, ChevronRight, Loader2 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import ReactMarkdown from 'react-markdown';
@@ -145,7 +145,7 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
             <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white">
-                  <Bot size={20} />
+                  <i className="bx bx-bot"  />
                 </div>
                 <div>
                   <h3 className="font-bold text-black text-sm">Lab Assistant</h3>
@@ -156,7 +156,7 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
                 </div>
               </div>
               <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="hover:bg-slate-200 rounded-full">
-                <X size={20} />
+                <i className="bx bx-x"  />
               </Button>
             </div>
 
@@ -198,7 +198,7 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
               {isTyping && (
                 <div className="flex justify-start">
                   <div className="bg-white border border-slate-200 px-4 py-3 rounded-2xl rounded-bl-none shadow-sm">
-                    <Loader2 className="w-4 h-4 animate-spin text-slate-400" />
+                    <i className="bx bx-loader2 w-4 h-4 animate-spin text-slate-400"  />
                   </div>
                 </div>
               )}
@@ -222,7 +222,7 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim() || isTyping}
                 >
-                  <Send size={16} />
+                  <i className="bx bx-send"  />
                 </Button>
               </div>
               <div className="mt-2 text-center">

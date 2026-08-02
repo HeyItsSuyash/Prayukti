@@ -6,16 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { 
-    ArrowLeft, 
-    BookOpen, 
-    Calendar, 
-    Clock, 
-    AlertCircle, 
-    Award, 
-    Play, 
-    CheckCircle2
-} from "lucide-react";
+
 
 export default function StudentExamsPage() {
     const [user, setUser] = useState<any>(null);
@@ -83,7 +74,7 @@ export default function StudentExamsPage() {
                         onClick={() => window.location.href = "/dashboard"}
                         className="flex items-center gap-2 mb-4 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest text-[10px]"
                     >
-                        <ArrowLeft size={16} /> Back to Dashboard
+                        <i className="bx bx-arrowleft"  /> Back to Dashboard
                     </Button>
                     <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-slate-900 dark:text-white leading-none">
                         Exam <span className="text-accent italic">Portal</span>
@@ -121,8 +112,8 @@ export default function StudentExamsPage() {
                                             </p>
                                             
                                             <div className="flex flex-wrap items-center gap-4 text-xs font-bold text-slate-400 dark:text-slate-500 pt-2">
-                                                <span className="flex items-center gap-1"><Clock size={14} /> {exam.duration}</span>
-                                                <span className="flex items-center gap-1"><Calendar size={14} /> {exam.timeWindow}</span>
+                                                <span className="flex items-center gap-1"><i className="bx bx-clock"  /> {exam.duration}</span>
+                                                <span className="flex items-center gap-1"><i className="bx bx-calendar"  /> {exam.timeWindow}</span>
                                             </div>
                                         </div>
 
@@ -131,7 +122,7 @@ export default function StudentExamsPage() {
                                                 ? "bg-accent hover:bg-accent/90 text-white" 
                                                 : "bg-slate-200 text-slate-500 cursor-not-allowed"
                                         }`}>
-                                            <Play size={12} className="mr-2" /> Start Exam
+                                            <i className="bx bx-play mr-2"  /> Start Exam
                                         </Button>
                                     </div>
                                 </CardContent>
@@ -152,7 +143,7 @@ export default function StudentExamsPage() {
 
                                     <div className="text-right shrink-0">
                                         <div className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-1 justify-end">
-                                            <Award size={14} className="text-accent" />
+                                            <i className="bx bx-award text-accent"  />
                                             {exam.score}
                                         </div>
                                         <span className="text-[9px] font-black uppercase tracking-wider text-emerald-500">Graded</span>

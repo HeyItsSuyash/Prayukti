@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calendar, Clock, AlertTriangle, Plus, Sparkles, Loader2, ArrowRight } from "lucide-react";
+
 
 interface TimetableEntry {
     _id: string;
@@ -186,7 +186,7 @@ export default function TimetablePage() {
                                 onClick={handleAiOptimize}
                                 className="h-12 px-6 rounded-2xl bg-indigo-600 text-white hover:bg-indigo-700 font-black uppercase tracking-widest text-[10px] flex items-center gap-2"
                             >
-                                <Sparkles size={14} className="animate-pulse" />
+                                <i className="bx bx-sparkles animate-pulse"  />
                                 AI Schedule Assistant
                             </Button>
                         )}
@@ -195,7 +195,7 @@ export default function TimetablePage() {
                             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
                                 <DialogTrigger asChild>
                                     <Button className="h-12 px-6 rounded-2xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-black font-black uppercase tracking-widest text-[10px] flex items-center gap-2">
-                                        <Plus size={14} /> Add Timetable Slot
+                                        <i className="bx bx-plus"  /> Add Timetable Slot
                                     </Button>
                                 </DialogTrigger>
                                 <DialogContent className="rounded-3xl border-2 max-w-md bg-white dark:bg-slate-900">
@@ -282,7 +282,7 @@ export default function TimetablePage() {
 
                                         {error && (
                                             <div className="flex items-center gap-2 p-3 bg-red-50 text-red-600 border border-red-100 rounded-2xl text-xs font-bold">
-                                                <AlertTriangle size={14} className="shrink-0" />
+                                                <i className="bx bx-alerttriangle shrink-0"  />
                                                 <span>{error}</span>
                                             </div>
                                         )}
@@ -292,7 +292,7 @@ export default function TimetablePage() {
                                             disabled={submitLoading}
                                             className="w-full h-12 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-black font-black uppercase tracking-widest text-[10px]"
                                         >
-                                            {submitLoading ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : "Publish Slot"}
+                                            {submitLoading ? <i className="bx bx-loader2 w-4 h-4 animate-spin mx-auto"  /> : "Publish Slot"}
                                         </Button>
                                     </form>
                                 </DialogContent>
@@ -303,7 +303,7 @@ export default function TimetablePage() {
 
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-32 animate-pulse">
-                        <Loader2 className="w-10 h-10 text-indigo-600 animate-spin mb-4" />
+                        <i className="bx bx-loader2 w-10 h-10 text-indigo-600 animate-spin mb-4"  />
                         <p className="text-slate-400 font-black uppercase tracking-widest text-[9px]">Synchronizing schedules...</p>
                     </div>
                 ) : (
@@ -330,7 +330,7 @@ export default function TimetablePage() {
                                                                     )}
                                                                 </div>
                                                                 <div className="flex items-center gap-2 text-slate-400 font-semibold text-xs mb-3">
-                                                                    <Clock size={12} />
+                                                                    <i className="bx bx-clock"  />
                                                                     <span>{entry.startTime} - {entry.endTime}</span>
                                                                 </div>
                                                             </div>
@@ -372,7 +372,7 @@ export default function TimetablePage() {
                 <DialogContent className="rounded-[2rem] border-2 max-w-2xl bg-white dark:bg-slate-900 overflow-y-auto max-h-[80vh] p-8">
                     <DialogHeader>
                         <DialogTitle className="text-2xl font-black uppercase italic tracking-tight flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
-                            <Sparkles size={20} className="animate-pulse" />
+                            <i className="bx bx-sparkles animate-pulse"  />
                             AI Classroom Scheduler
                         </DialogTitle>
                     </DialogHeader>

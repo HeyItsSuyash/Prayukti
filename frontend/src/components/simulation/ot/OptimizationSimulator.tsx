@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Play, Grid, Table as TableIcon, Percent, BookOpen } from "lucide-react";
+
 
 export default function OptimizationSimulator({ labId }: { labId: string }) {
     const isSearchMethod = labId.includes("exp-1") || labId.includes("exp-2");
@@ -102,7 +102,7 @@ export default function OptimizationSimulator({ labId }: { labId: string }) {
                     {/* INPUT CARD */}
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                         <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                            <BookOpen className="h-5 w-5 text-indigo-500" /> Equations & Constraints Configuration
+                            <i className="bx bx-bookopen h-5 w-5 text-indigo-500"  /> Equations & Constraints Configuration
                         </h3>
 
                         {isSearchMethod ? (
@@ -217,7 +217,7 @@ export default function OptimizationSimulator({ labId }: { labId: string }) {
                     {isTransportation && allocations.length > 0 && (
                         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
                             <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <Grid className="h-5 w-5 text-indigo-500" /> NW-Corner Allocations Matrix
+                                <i className="bx bx-grid h-5 w-5 text-indigo-500"  /> NW-Corner Allocations Matrix
                             </h3>
                             <div className="overflow-x-auto">
                                 <table className="w-full text-center border text-xs">
@@ -251,7 +251,7 @@ export default function OptimizationSimulator({ labId }: { labId: string }) {
                 {/* OUTPUT TERMINAL LOGS */}
                 <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[480px]">
                     <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                        <Percent className="h-5 w-5 text-emerald-500" /> Convergence & Step Logs
+                        <i className="bx bx-percent h-5 w-5 text-emerald-500"  /> Convergence & Step Logs
                     </h3>
                     <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                         {logs.length > 0 ? (

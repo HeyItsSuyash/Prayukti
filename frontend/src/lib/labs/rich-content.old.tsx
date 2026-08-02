@@ -1,5 +1,5 @@
 import React from 'react';
-import { Database, Table, Columns, LayoutList, Server, Network, ShieldCheck, Activity, Cpu } from "lucide-react";
+
 
 export interface QuizQuestion {
     id: number;
@@ -65,28 +65,28 @@ export const LAB_CONTENT: Record<string, LabContent> = {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
                             <div className="flex items-center gap-2 mb-2 text-blue-700">
-                                <Database size={20} />
+                                <i className="bx bx-database"  />
                                 <h4 className="font-bold">Database</h4>
                             </div>
                             <p className="text-sm text-gray-600">An organized collection of structured information, or data, typically stored electronically in a computer system.</p>
                         </div>
                         <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
                             <div className="flex items-center gap-2 mb-2 text-green-700">
-                                <Table size={20} />
+                                <i className="bx bx-table"  />
                                 <h4 className="font-bold">Table (Relation)</h4>
                             </div>
                             <p className="text-sm text-gray-600">A collection of related data held in a table format within a database. It consists of columns and rows.</p>
                         </div>
                         <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
                             <div className="flex items-center gap-2 mb-2 text-purple-700">
-                                <Columns size={20} />
+                                <i className="bx bx-columns"  />
                                 <h4 className="font-bold">Attribute (Column)</h4>
                             </div>
                             <p className="text-sm text-gray-600">A specific characteristic or property of a table. Example: `Name`, `Age` in a Student table.</p>
                         </div>
                         <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
                             <div className="flex items-center gap-2 mb-2 text-orange-700">
-                                <LayoutList size={20} />
+                                <i className="bx bx-layoutlist"  />
                                 <h4 className="font-bold">Tuple (Row/Record)</h4>
                             </div>
                             <p className="text-sm text-gray-600">A single entry in a table representing a set of related data. Example: `(1, "John", 20)`.</p>

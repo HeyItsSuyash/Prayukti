@@ -3,11 +3,7 @@
 import { API_URL } from "@/lib/config";
 
 import { Suspense, useState, useEffect } from 'react';
-import { 
-    Users, ShieldCheck, BookOpen, Activity, Search, Shield, 
-    UserPlus, LayoutDashboard, Settings, Video, FileText, Menu, X, ArrowLeft,
-    Bell, ChevronRight, GraduationCap, Layers, FlaskConical
-} from 'lucide-react';
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -28,15 +24,15 @@ import { StudentTable } from './StudentTable';
 import { StudentDetailView } from './StudentDetailView';
 
 const NAV_ITEMS = [
-    { id: 'overview', label: 'Command Center', icon: LayoutDashboard },
-    { id: 'students', label: 'Students', icon: GraduationCap },
-    { id: 'teachers', label: 'Faculty & Staff', icon: Users },
-    { id: 'academic-setup', label: 'Academic Setup', icon: Layers },
-    { id: 'timetable', label: 'Timetable', icon: BookOpen },
-    { id: 'subjects', label: 'Subjects (V-Lab)', icon: FlaskConical },
-    { id: 'analytics', label: 'Analytics', icon: Activity },
-    { id: 'logs', label: 'System Logs', icon: FileText },
-    { id: 'settings', label: 'Settings', icon: Settings },
+    { id: 'overview', label: 'Command Center', icon: 'bx bx-layout' },
+    { id: 'students', label: 'Students', icon: 'bx bxs-graduation' },
+    { id: 'teachers', label: 'Faculty & Staff', icon: 'bx bx-user' },
+    { id: 'academic-setup', label: 'Academic Setup', icon: 'bx bx-layer' },
+    { id: 'timetable', label: 'Timetable', icon: 'bx bx-book-open' },
+    { id: 'subjects', label: 'Subjects (V-Lab)', icon: 'bx bx-flask' },
+    { id: 'analytics', label: 'Analytics', icon: 'bx bx-pulse' },
+    { id: 'logs', label: 'System Logs', icon: 'bx bx-file' },
+    { id: 'settings', label: 'Settings', icon: 'bx bx-cog' },
 ];
 
 function StatCard({ title, value, subtext, icon: Icon, trend }: any) {
@@ -44,11 +40,11 @@ function StatCard({ title, value, subtext, icon: Icon, trend }: any) {
         <Card className="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/10 transition-all overflow-hidden group">
             <CardContent className="p-6 relative">
                 <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-500">
-                    <Icon size={80} />
+                    <i className={`${Icon} text-[80px]`} />
                 </div>
                 <div className="relative z-10">
                     <div className="w-12 h-12 bg-accent/20 text-accent rounded-2xl flex items-center justify-center mb-6 border border-accent/20">
-                        <Icon size={24} />
+                        <i className={`${Icon} text-2xl`} />
                     </div>
                     <h3 className="text-xs font-bold text-white/60 uppercase tracking-widest mb-1">{title}</h3>
                     <div className="text-4xl font-black text-white tracking-tighter mb-2">{value}</div>
@@ -136,7 +132,7 @@ function AdminContent() {
             return (
                 <div className="space-y-6 animate-in fade-in duration-500">
                     <Button variant="outline" onClick={() => setSelectedStudent(null)} className="bg-white/5 border-white/10 text-white hover:bg-white/10">
-                        <ArrowLeft className="mr-2 h-4 w-4" /> Back to List
+                        <i className="bx bx-arrowleft mr-2 h-4 w-4"  /> Back to List
                     </Button>
                     <StudentDetailView student={selectedStudent} />
                 </div>
@@ -160,7 +156,7 @@ function AdminContent() {
                                     <div className="p-6 flex justify-between items-center border-b border-white/10">
                                         <h3 className="text-xl font-bold text-white tracking-tight">Recent Enrollments</h3>
                                         <Button variant="link" className="text-accent" onClick={() => setCurrentView('students')}>
-                                            View All <ChevronRight className="w-4 h-4 ml-1" />
+                                            View All <i className="bx bx-chevronright w-4 h-4 ml-1"  />
                                         </Button>
                                     </div>
                                     <CardContent className="p-0">
@@ -176,7 +172,7 @@ function AdminContent() {
                                     <div className="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors" />
                                     <div className="relative z-10 space-y-4">
                                         <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-md">
-                                            <UserPlus size={24} />
+                                            <i className="bx bx-userplus"  />
                                         </div>
                                         <div>
                                             <h3 className="text-2xl font-black tracking-tight mb-1">Fast Enrollment</h3>
@@ -260,7 +256,7 @@ function AdminContent() {
                         onClick={() => setSidebarOpen(!isSidebarOpen)}
                         className="p-2 text-white/50 hover:text-white hover:bg-white/5 rounded-lg transition-colors lg:hidden"
                     >
-                        <X size={20} />
+                        <i className="bx bx-x"  />
                     </button>
                 </div>
 
@@ -281,7 +277,7 @@ function AdminContent() {
                                 `}
                                 title={!isSidebarOpen ? item.label : undefined}
                             >
-                                <item.icon size={20} className={active ? 'text-accent' : 'text-white/40'} />
+                                <i className={`${item.icon} text-xl ${active ? 'text-accent' : 'text-white/40'}`} />
                                 {isSidebarOpen && <span>{item.label}</span>}
                                 {active && isSidebarOpen && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-accent" />}
                             </button>
@@ -299,7 +295,7 @@ function AdminContent() {
                         `}
                     >
                         <div className="w-5 h-5 rounded flex items-center justify-center shrink-0">
-                            <ShieldCheck size={20} />
+                            <i className="bx bx-shieldcheck"  />
                         </div>
                         {isSidebarOpen && <span>Secure Logout</span>}
                     </button>
@@ -315,7 +311,7 @@ function AdminContent() {
                             onClick={() => setSidebarOpen(!isSidebarOpen)}
                             className="p-2 text-white/50 hover:text-white bg-white/5 rounded-xl transition-colors"
                         >
-                            <Menu size={20} />
+                            <i className="bx bx-menu"  />
                         </button>
                         <div>
                             <h2 className="text-sm font-bold text-white capitalize">{currentView.replace('-', ' ')}</h2>
@@ -325,7 +321,7 @@ function AdminContent() {
 
                     <div className="flex items-center gap-4">
                         <button className="p-2.5 text-white/60 hover:text-white bg-white/5 rounded-full transition-colors relative">
-                            <Bell size={18} />
+                            <i className="bx bx-bell"  />
                             <span className="absolute top-2 right-2 w-2 h-2 bg-accent rounded-full border-2 border-slate-950" />
                         </button>
                         <div className="flex items-center gap-3 pl-4 border-l border-white/10">

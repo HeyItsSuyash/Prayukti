@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { BookOpen, Info, Clock, Layers, Zap, Globe } from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
 
 interface TheoryPanelProps {
@@ -14,7 +14,7 @@ export const TheoryPanel: React.FC<TheoryPanelProps> = ({ experiment }) => {
             {/* Concept Overview */}
             <section className="space-y-4">
                 <div className="flex items-center gap-2 text-blue-600">
-                    <BookOpen className="h-4 w-4" />
+                    <i className="bx bx-bookopen h-4 w-4"  />
                     <h2 className="text-[10px] font-black uppercase tracking-[0.2em]">Concept Overview</h2>
                 </div>
                 <div className="prose prose-sm prose-slate max-w-none">
@@ -28,7 +28,7 @@ export const TheoryPanel: React.FC<TheoryPanelProps> = ({ experiment }) => {
             {/* Procedural Logic / Algorithm */}
             <section className="space-y-4">
                 <div className="flex items-center gap-2 text-blue-600">
-                    <Layers className="h-4 w-4" />
+                    <i className="bx bx-layers h-4 w-4"  />
                     <h2 className="text-[10px] font-black uppercase tracking-[0.2em]">Procedural Logic</h2>
                 </div>
                 <div className="space-y-3">
@@ -52,7 +52,7 @@ export const TheoryPanel: React.FC<TheoryPanelProps> = ({ experiment }) => {
             {/* Complexity Analysis */}
             <section className="space-y-4">
                 <div className="flex items-center gap-2 text-blue-600">
-                    <Zap className="h-4 w-4" />
+                    <i className="bx bx-zap h-4 w-4"  />
                     <h2 className="text-[10px] font-black uppercase tracking-[0.2em]">Complexity Analysis</h2>
                 </div>
                 <div className="space-y-2">
@@ -82,7 +82,7 @@ export const TheoryPanel: React.FC<TheoryPanelProps> = ({ experiment }) => {
             {/* Real-world Applications */}
             <section className="space-y-4">
                 <div className="flex items-center gap-2 text-blue-600">
-                    <Globe className="h-4 w-4" />
+                    <i className="bx bx-globe h-4 w-4"  />
                     <h2 className="text-[10px] font-black uppercase tracking-[0.2em]">Real-world Applications</h2>
                 </div>
                 <div className="bg-blue-600/5 border border-blue-600/10 rounded-2xl p-4 text-slate-700 text-xs leading-relaxed italic">
@@ -94,7 +94,7 @@ export const TheoryPanel: React.FC<TheoryPanelProps> = ({ experiment }) => {
             {experiment.dryRun && (
                 <section className="space-y-4">
                     <div className="flex items-center gap-2 text-blue-600">
-                        <Clock className="h-4 w-4" />
+                        <i className="bx bx-clock h-4 w-4"  />
                         <h2 className="text-[10px] font-black uppercase tracking-[0.2em]">Dry Run Trace</h2>
                     </div>
                     <div className="overflow-hidden border border-slate-200 rounded-xl bg-white shadow-sm font-mono text-[10px]">

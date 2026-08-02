@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ArrowRight } from "lucide-react";
+
 import { motion, AnimatePresence } from "framer-motion";
 
 
@@ -66,7 +66,7 @@ export function FAQ() {
                                                 transition={{ duration: 0.2 }}
                                                 className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${openIndex === index ? 'bg-accent text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-400'}`}
                                             >
-                                                <ChevronDown className="w-5 h-5" />
+                                                <i className="bx bx-chevron-down w-5 h-5"  />
                                             </motion.div>
                                         </span>
                                         <span className="text-lg font-bold text-slate-900 dark:text-slate-100 leading-tight">{faq.question}</span>
@@ -96,11 +96,11 @@ export function FAQ() {
                         <p className="text-slate-500 dark:text-slate-400 font-medium text-sm">
                             Not what you're looking for? Try our detailed{" "}
                             <a href="/faq" className="text-accent font-bold hover:underline inline-flex items-center gap-1 group">
-                                FAQ Section <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                                FAQ Section <i className="bx bx-right-arrow-alt group-hover:translate-x-1 transition-transform"  />
                             </a>
                             {" "}or contact{" "}
                             <a href="/support" className="text-accent font-bold hover:underline inline-flex items-center gap-1 group">
-                                Support <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                                Support <i className="bx bx-right-arrow-alt group-hover:translate-x-1 transition-transform"  />
                             </a>
                         </p>
                     </div>

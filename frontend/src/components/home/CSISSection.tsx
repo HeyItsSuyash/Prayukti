@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Twitter, Linkedin, Globe, Command } from "lucide-react";
+import { Twitter, Linkedin, Globe } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 export function CSISSection() {
@@ -15,7 +16,7 @@ export function CSISSection() {
                     
                     <div className="lg:w-1/2 space-y-8">
                         <div className="inline-flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-2 rounded-xl backdrop-blur-md">
-                            <Command className="w-5 h-5 text-accent" />
+                            <i className="bx bx-command w-5 h-5 text-accent"  />
                             <span className="text-[10px] font-black text-white uppercase tracking-[0.3em]">Developer Unit</span>
                         </div>
                         
@@ -35,7 +36,7 @@ export function CSISSection() {
                         <div className="flex flex-wrap gap-6">
                             <a href="https://csis-mmmut.org" target="_blank" rel="noopener noreferrer">
                                 <Button className="h-14 px-8 rounded-xl bg-white text-primary hover:bg-slate-200 border-0 font-black uppercase tracking-widest text-[10px] gap-2 group">
-                                    Visit Official Site <ExternalLink size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                    Visit Official Site <i className="bx bx-externallink group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"  />
                                 </Button>
                             </a>
                             

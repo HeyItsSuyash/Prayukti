@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Save, Plus, GraduationCap, Users, BookOpen, Clock, AlertTriangle, Building, Layers } from 'lucide-react';
+
 
 export function AcademicSetup() {
   const [activeTab, setActiveTab] = useState('hierarchy');
@@ -17,7 +17,7 @@ export function AcademicSetup() {
         <div>
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 bg-accent/20 rounded-xl flex items-center justify-center text-accent">
-              <Layers size={20} />
+              <i className="bx bx-layers"  />
             </div>
             <h1 className="text-3xl font-black text-white tracking-tight uppercase">Academic Setup</h1>
           </div>
@@ -25,7 +25,7 @@ export function AcademicSetup() {
         </div>
         <div className="flex gap-4">
           <Button className="bg-white/10 hover:bg-white/20 text-white font-bold py-6 px-6 rounded-xl uppercase tracking-widest text-xs border border-white/10 transition-colors">
-            <Save className="w-4 h-4 mr-2" /> Save Configuration
+            <i className="bx bx-save w-4 h-4 mr-2"  /> Save Configuration
           </Button>
         </div>
       </div>
@@ -54,9 +54,9 @@ export function AcademicSetup() {
           <Card className="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl">
             <CardHeader className="border-b border-white/10 pb-4 flex flex-row justify-between items-center">
               <CardTitle className="text-sm font-bold flex items-center text-white uppercase tracking-widest">
-                <Building className="w-4 h-4 mr-2 text-accent" /> Branches
+                <i className="bx bx-building w-4 h-4 mr-2 text-accent"  /> Branches
               </CardTitle>
-              <Button size="icon" variant="ghost" className="h-8 w-8 text-white/50 hover:text-white bg-white/5 rounded-lg"><Plus size={16} /></Button>
+              <Button size="icon" variant="ghost" className="h-8 w-8 text-white/50 hover:text-white bg-white/5 rounded-lg"><i className="bx bx-plus"  /></Button>
             </CardHeader>
             <CardContent className="pt-6 space-y-3">
               <div className="p-4 bg-white/5 rounded-xl border border-white/5 text-white font-bold">Computer Science (CSE)</div>
@@ -67,9 +67,9 @@ export function AcademicSetup() {
           <Card className="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl">
             <CardHeader className="border-b border-white/10 pb-4 flex flex-row justify-between items-center">
               <CardTitle className="text-sm font-bold flex items-center text-white uppercase tracking-widest">
-                <Clock className="w-4 h-4 mr-2 text-blue-400" /> Semesters
+                <i className="bx bx-clock w-4 h-4 mr-2 text-blue-400"  /> Semesters
               </CardTitle>
-              <Button size="icon" variant="ghost" className="h-8 w-8 text-white/50 hover:text-white bg-white/5 rounded-lg"><Plus size={16} /></Button>
+              <Button size="icon" variant="ghost" className="h-8 w-8 text-white/50 hover:text-white bg-white/5 rounded-lg"><i className="bx bx-plus"  /></Button>
             </CardHeader>
             <CardContent className="pt-6 space-y-3">
               <div className="p-4 bg-white/5 rounded-xl border border-white/5 text-white font-bold flex justify-between">
@@ -86,9 +86,9 @@ export function AcademicSetup() {
           <Card className="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl">
             <CardHeader className="border-b border-white/10 pb-4 flex flex-row justify-between items-center">
               <CardTitle className="text-sm font-bold flex items-center text-white uppercase tracking-widest">
-                <Users className="w-4 h-4 mr-2 text-orange-400" /> Sections
+                <i className="bx bx-group w-4 h-4 mr-2 text-orange-400"  /> Sections
               </CardTitle>
-              <Button size="icon" variant="ghost" className="h-8 w-8 text-white/50 hover:text-white bg-white/5 rounded-lg"><Plus size={16} /></Button>
+              <Button size="icon" variant="ghost" className="h-8 w-8 text-white/50 hover:text-white bg-white/5 rounded-lg"><i className="bx bx-plus"  /></Button>
             </CardHeader>
             <CardContent className="pt-6 space-y-3">
               <div className="p-4 bg-white/5 rounded-xl border border-white/5 text-white font-bold flex justify-between items-center">
@@ -111,7 +111,7 @@ export function AcademicSetup() {
               Assign Faculty to Subjects
             </CardTitle>
             <Button className="bg-accent text-white hover:bg-accent/80 rounded-xl font-bold">
-              <Plus className="w-4 h-4 mr-2" /> New Assignment
+              <i className="bx bx-plus w-4 h-4 mr-2"  /> New Assignment
             </Button>
           </CardHeader>
           <CardContent className="pt-6 space-y-4">

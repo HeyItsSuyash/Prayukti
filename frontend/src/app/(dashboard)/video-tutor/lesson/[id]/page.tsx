@@ -11,21 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { 
-    Play, 
-    Pause, 
-    Bookmark, 
-    Send, 
-    Loader2, 
-    BookOpen,
-    HelpCircle,
-    CheckCircle2,
-    XCircle,
-    Clock,
-    Sparkles,
-    AlertTriangle,
-    RotateCcw
-} from "lucide-react";
+
 import ReactMarkdown from "react-markdown";
 
 export default function LessonPlayerPage({ params }: { params: Promise<{ id: string }> }) {
@@ -325,7 +311,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
         return (
             <VideoTutorLayout>
                 <div className="flex flex-col items-center justify-center py-40 animate-pulse">
-                    <Loader2 className="w-12 h-12 text-indigo-600 animate-spin mb-4" />
+                    <i className="bx bx-loader2 w-12 h-12 text-indigo-600 animate-spin mb-4"  />
                     <p className="text-slate-400 font-black uppercase tracking-widest text-[10px]">Loading Lesson Data...</p>
                 </div>
             </VideoTutorLayout>
@@ -364,7 +350,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
                                 isSaved ? "border-indigo-500 text-indigo-500 fill-current bg-indigo-500/10" : ""
                             }`}
                         >
-                            <Bookmark size={14} className="mr-2" />
+                            <i className="bx bx-bookmark mr-2"  />
                             {isSaved ? "Saved" : "Save Lesson"}
                         </Button>
                     </div>
@@ -393,7 +379,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
                                         // Doubt Interruption Layout overrides normal slides
                                         <div className="space-y-4 text-xs animate-in zoom-in-95 duration-300">
                                             <div className="flex items-center gap-1.5 text-amber-500 font-extrabold uppercase text-[9px] tracking-wider">
-                                                <AlertTriangle size={12} /> Student Interrupt
+                                                <i className="bx bx-alerttriangle"  /> Student Interrupt
                                             </div>
                                             <h4 className="font-extrabold text-slate-100">Doubt: &quot;{doubtQuery}&quot;</h4>
                                             <p className="leading-relaxed font-semibold text-slate-300">{interruptData.response}</p>
@@ -435,7 +421,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
                                     onClick={togglePlay}
                                     className="text-white hover:bg-slate-800 rounded-full w-9 h-9"
                                 >
-                                    {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+                                    {isPlaying ? <i className="bx bx-pause"  /> : <i className="bx bx-play"  />}
                                 </Button>
 
                                 {/* Playback Seek Bar */}
@@ -481,7 +467,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
                         {/* Doubt interruption form */}
                         <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900 p-6 shadow-sm">
                             <div className="flex items-center gap-2 border-b pb-3 mb-4 border-slate-100 dark:border-slate-800">
-                                <HelpCircle className="text-indigo-600 dark:text-indigo-400" size={18} />
+                                <i className="bx bx-help-circle text-indigo-600 dark:text-indigo-400"  />
                                 <h3 className="font-black text-sm uppercase tracking-tight">Ask doubts in Real-time</h3>
                             </div>
 
@@ -515,7 +501,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
                                         disabled={interruptLoading || !doubtQuery.trim()}
                                         className="w-full h-11 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-black font-black uppercase tracking-widest text-[9px] flex items-center gap-2"
                                     >
-                                        {interruptLoading ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : "Submit Interruption"}
+                                        {interruptLoading ? <i className="bx bx-loader2 w-4 h-4 animate-spin mx-auto"  /> : "Submit Interruption"}
                                     </Button>
                                 </form>
                             )}
@@ -525,12 +511,12 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
                         <Card className="rounded-[2rem] border-2 bg-white dark:bg-slate-900 p-6 shadow-sm">
                             <div className="flex items-center justify-between border-b pb-3 mb-4 border-slate-100 dark:border-slate-800">
                                 <div className="flex items-center gap-2">
-                                    <Sparkles className="text-indigo-600 dark:text-indigo-400" size={18} />
+                                    <i className="bx bx-sparkles text-indigo-600 dark:text-indigo-400"  />
                                     <h3 className="font-black text-sm uppercase tracking-tight">Practice Quiz</h3>
                                 </div>
                                 {quizSubmitted && (
                                     <Button size="icon" variant="ghost" onClick={resetQuiz} className="w-8 h-8 rounded-full">
-                                        <RotateCcw size={12} />
+                                        <i className="bx bx-rotateccw"  />
                                     </Button>
                                 )}
                             </div>
@@ -602,7 +588,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
                 {/* Downloadable markdown summaries */}
                 <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 p-8 shadow-sm">
                     <div className="flex items-center gap-2 border-b pb-4 mb-6 border-slate-100 dark:border-slate-800">
-                        <BookOpen className="text-indigo-600 dark:text-indigo-400" size={20} />
+                        <i className="bx bx-bookopen text-indigo-600 dark:text-indigo-400"  />
                         <h3 className="font-black text-base uppercase tracking-tight">AI Generated Study Notes</h3>
                     </div>
 

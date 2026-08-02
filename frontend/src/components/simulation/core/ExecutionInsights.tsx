@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Activity, Database, History, TrendingUp, BarChart3, Info } from "lucide-react";
+
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 interface ExecutionInsightsProps {
@@ -16,7 +16,7 @@ export const ExecutionInsights: React.FC<ExecutionInsightsProps> = ({ output, is
         <div className="w-1/4 border-l border-black/5 flex flex-col bg-slate-50/50">
             <div className="p-4 border-b border-black/5 bg-white/80 backdrop-blur-md">
                 <div className="flex items-center gap-2 text-blue-600">
-                    <Activity className="h-4 w-4" />
+                    <i className="bx bx-activity h-4 w-4"  />
                     <h2 className="text-[10px] font-black uppercase tracking-[0.2em]">Execution Insights</h2>
                 </div>
             </div>
@@ -25,7 +25,7 @@ export const ExecutionInsights: React.FC<ExecutionInsightsProps> = ({ output, is
                 {/* State Monitoring */}
                 <section className="space-y-3">
                     <h3 className="text-[9px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                        <Database className="h-3 w-3" /> Variable State
+                        <i className="bx bx-database h-3 w-3"  /> Variable State
                     </h3>
                     <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm min-h-[100px] flex flex-col items-center justify-center text-center">
                         {isRunning ? (
@@ -48,7 +48,7 @@ export const ExecutionInsights: React.FC<ExecutionInsightsProps> = ({ output, is
                             </div>
                         ) : (
                             <>
-                                <TrendingUp className="h-8 w-8 text-slate-200 mb-2" />
+                                <i className="bx bx-trendingup h-8 w-8 text-slate-200 mb-2"  />
                                 <p className="text-[10px] font-bold text-slate-400 px-4">
                                     Run code to see variable trace and memory movements.
                                 </p>
@@ -60,7 +60,7 @@ export const ExecutionInsights: React.FC<ExecutionInsightsProps> = ({ output, is
                 {/* Complexity Analysis */}
                 <section className="space-y-3">
                     <h3 className="text-[9px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                        <BarChart3 className="h-3 w-3" /> Complexity Growth
+                        <i className="bx bx-barchart3 h-3 w-3"  /> Complexity Growth
                     </h3>
                     <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
                         {complexityData ? (
@@ -95,7 +95,7 @@ export const ExecutionInsights: React.FC<ExecutionInsightsProps> = ({ output, is
                         ) : (
                             <div className="text-center py-4 space-y-3">
                                 <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center mx-auto">
-                                    <Info className="h-5 w-5 text-blue-400" />
+                                    <i className="bx bx-info h-5 w-5 text-blue-400"  />
                                 </div>
                                 <p className="text-[10px] font-bold text-slate-400 px-2 leading-relaxed">
                                     Measure how your code performs with different output sizes.
@@ -115,7 +115,7 @@ export const ExecutionInsights: React.FC<ExecutionInsightsProps> = ({ output, is
                 {/* Timeline */}
                 <section className="space-y-3">
                     <h3 className="text-[9px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                        <History className="h-3 w-3" /> Execution Timeline
+                        <i className="bx bx-history h-3 w-3"  /> Execution Timeline
                     </h3>
                     <div className="space-y-4 pl-2 border-l border-slate-200 ml-1.5">
                         <div className="relative">

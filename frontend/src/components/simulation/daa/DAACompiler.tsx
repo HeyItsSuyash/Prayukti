@@ -5,26 +5,7 @@ import { API_URL } from "@/lib/config";
 import React, { useState, useEffect, useMemo } from "react";
 import { MonacoEditor } from "@/components/lab/MonacoEditor";
 import { Button } from "@/components/ui/button";
-import {
-    Play,
-    Pause,
-    SkipBack,
-    SkipForward,
-    RotateCcw,
-    Loader2,
-    BarChart3,
-    Table as TableIcon,
-    Zap,
-    Settings2,
-    CheckCircle2,
-    Info,
-    History,
-    TrendingUp,
-    Timer,
-    Plus,
-    X,
-    Maximize2
-} from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
 import { LabConsole } from "../core/LabConsole";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -293,7 +274,7 @@ int main() {
             <div className="w-80 border-r border-white/10 flex flex-col bg-[#111112]">
                 <div className="p-6 border-b border-white/10 bg-gradient-to-br from-blue-600/10 to-purple-600/10">
                     <div className="flex items-center gap-2 mb-2">
-                        <Zap className="h-5 w-5 text-blue-400 fill-blue-400/20" />
+                        <i className="bx bx-zap h-5 w-5 text-blue-400 fill-blue-400/20"  />
                         <h2 className="text-sm font-black uppercase tracking-[0.2em]">DAA Analyzer</h2>
                     </div>
                     <p className="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-6 leading-relaxed">
@@ -306,10 +287,10 @@ int main() {
                         className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-black uppercase tracking-widest rounded-xl shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all active:scale-95 group mb-4"
                     >
                         {isRunning ? (
-                            <Loader2 className="h-5 w-5 animate-spin" />
+                            <i className="bx bx-loader2 h-5 w-5 animate-spin"  />
                         ) : (
                             <>
-                                <Play className="h-4 w-4 mr-2 fill-current" />
+                                <i className="bx bx-play h-4 w-4 mr-2 fill-current"  />
                                 Run Analysis
                             </>
                         )}
@@ -359,7 +340,7 @@ int main() {
                         <div className="flex items-center justify-between">
                             <h3 className="text-[10px] font-black uppercase tracking-widest text-gray-500">Input Sizes (N)</h3>
                             <button onClick={addInputSize} className="p-1 hover:bg-white/5 rounded text-blue-400 transition-colors">
-                                <Plus className="h-3 w-3" />
+                                <i className="bx bx-plus h-3 w-3"  />
                             </button>
                         </div>
                         <div className="flex flex-wrap gap-2">
@@ -367,7 +348,7 @@ int main() {
                                 <Badge key={size} variant="outline" className="bg-white/5 border-white/10 text-[10px] py-1 pl-2 pr-1 font-mono hover:bg-white/10 transition-colors group">
                                     {size}
                                     <button onClick={() => removeInputSize(size)} className="ml-1 p-0.5 opacity-0 group-hover:opacity-100 hover:bg-red-500/20 hover:text-red-400 rounded transition-all">
-                                        <X className="h-2 w-2" />
+                                        <i className="bx bx-x h-2 w-2"  />
                                     </button>
                                 </Badge>
                             ))}
@@ -384,7 +365,7 @@ int main() {
                             >
                                 <div className="p-4 rounded-xl bg-gradient-to-br from-green-500/10 to-emerald-500/5 border border-green-500/20">
                                     <div className="flex items-center gap-2 mb-2 text-green-400">
-                                        <History className="h-3.5 w-3.5" />
+                                        <i className="bx bx-history h-3.5 w-3.5"  />
                                         <span className="text-[10px] font-black uppercase tracking-widest">Complexity Insight</span>
                                     </div>
                                     <div className="text-2xl font-black text-green-100 tracking-tighter mb-1">
@@ -418,7 +399,7 @@ int main() {
 
                     {!results.length && !isRunning && (
                         <div className="p-8 text-center space-y-4 border-2 border-dashed border-white/5 rounded-2xl opacity-50">
-                            <BarChart3 className="h-8 w-8 mx-auto text-gray-600" />
+                            <i className="bx bx-barchart3 h-8 w-8 mx-auto text-gray-600"  />
                             <p className="text-[10px] text-gray-500 font-bold uppercase tracking-wider leading-relaxed">
                                 Run analysis to generate growth metrics and complexity graphs.
                             </p>
@@ -433,10 +414,10 @@ int main() {
                     <div className="px-6 h-14 border-b border-white/10 flex items-center justify-between bg-[#111112]/80 backdrop-blur-md z-10">
                         <TabsList className="bg-white/5 border border-white/5 p-1 h-9 space-x-1 rounded-lg">
                             <TabsTrigger value="editor" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white text-[10px] font-black uppercase tracking-widest px-4 h-full rounded-md transition-all">
-                                <Plus className="h-3 w-3 mr-2 hidden sm:inline" /> Code Editor
+                                <i className="bx bx-plus h-3 w-3 mr-2 hidden sm:inline"  /> Code Editor
                             </TabsTrigger>
                             <TabsTrigger value="analysis" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white text-[10px] font-black uppercase tracking-widest px-4 h-full rounded-md transition-all">
-                                <TrendingUp className="h-3 w-3 mr-2 hidden sm:inline" /> Complexity Lab
+                                <i className="bx bx-trendingup h-3 w-3 mr-2 hidden sm:inline"  /> Complexity Lab
                             </TabsTrigger>
                         </TabsList>
 
@@ -459,10 +440,10 @@ int main() {
                                 />
                                 <div className="absolute right-6 bottom-6 flex gap-2 opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
                                     <Button size="icon" className="h-10 w-10 bg-black/40 hover:bg-black/60 backdrop-blur-md border border-white/10 rounded-full">
-                                        <Settings2 className="h-4 w-4" />
+                                        <i className="bx bx-settings2 h-4 w-4"  />
                                     </Button>
                                     <Button onClick={() => setCode(defaultInsertionSortCode)} size="icon" className="h-10 w-10 bg-black/40 hover:bg-black/60 backdrop-blur-md border border-white/10 rounded-full">
-                                        <RotateCcw className="h-4 w-4" />
+                                        <i className="bx bx-rotateccw h-4 w-4"  />
                                     </Button>
                                 </div>
                             </div>
@@ -473,7 +454,7 @@ int main() {
                                 <div className="h-full flex flex-col items-center justify-center space-y-6">
                                     <div className="relative">
                                         <div className="h-24 w-24 rounded-full border-4 border-blue-600/10 border-t-blue-600 animate-spin" />
-                                        <Zap className="h-10 w-10 text-blue-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fill-current animate-pulse" />
+                                        <i className="bx bx-zap h-10 w-10 text-blue-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fill-current animate-pulse"  />
                                     </div>
                                     <div className="text-center">
                                         <h3 className="text-xl font-black uppercase tracking-[0.2em] text-white">Execution in Progress</h3>
@@ -489,14 +470,14 @@ int main() {
                                             <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-4 ">Complexity Conclusion</h4>
                                             <div className="text-3xl font-black text-blue-400 tracking-tighter">{estimatedComplexity}</div>
                                             <div className="flex items-center gap-2 mt-4 text-[10px] text-blue-500/70 font-bold uppercase">
-                                                <TrendingUp className="h-3 w-3" /> Growth Rate: {estimatedComplexity === "O(N)" ? "Linear" : "Quadratic"}
+                                                <i className="bx bx-trendingup h-3 w-3"  /> Growth Rate: {estimatedComplexity === "O(N)" ? "Linear" : "Quadratic"}
                                             </div>
                                         </div>
                                         <div className="p-6 rounded-2xl bg-[#111112] border border-white/5">
                                             <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-4">Max Dataset Tested</h4>
                                             <div className="text-3xl font-black text-white tracking-tighter">{Math.max(...results.map(r => r.inputSize))} <span className="text-lg text-gray-600">items</span></div>
                                             <div className="flex items-center gap-2 mt-4 text-[10px] text-gray-500 font-bold uppercase">
-                                                <CheckCircle2 className="h-3 w-3 text-green-500" /> Stable Execution
+                                                <i className="bx bx-check-circle h-3 w-3 text-green-500"  /> Stable Execution
                                             </div>
                                         </div>
                                         <div className="p-6 rounded-2xl bg-[#111112] border border-white/5">
@@ -505,7 +486,7 @@ int main() {
                                                 {(results.reduce((a, b) => a + b.time, 0) / results.length).toFixed(4)}s
                                             </div>
                                             <div className="flex items-center gap-2 mt-4 text-[10px] text-gray-500 font-bold uppercase">
-                                                <Timer className="h-3 w-3" /> Latency Optimized
+                                                <i className="bx bx-timer h-3 w-3"  /> Latency Optimized
                                             </div>
                                         </div>
                                     </div>
@@ -514,7 +495,7 @@ int main() {
                                     {results.length > 0 && results[0].dataset_preview && results[0].dataset_preview.length > 0 && (
                                         <div className="p-6 rounded-2xl bg-[#111112] border border-white/5">
                                             <div className="flex items-center gap-2 mb-4">
-                                                <Info className="h-4 w-4 text-blue-400" />
+                                                <i className="bx bx-info h-4 w-4 text-blue-400"  />
                                                 <h3 className="text-[10px] font-black uppercase tracking-widest text-gray-400">Initial Dataset Preview</h3>
                                             </div>
                                             <div className="flex flex-wrap gap-2">
@@ -548,20 +529,20 @@ int main() {
                                                         onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
                                                         disabled={currentStep === 0}
                                                     >
-                                                        <SkipBack className="h-4 w-4" />
+                                                        <i className="bx bx-skipback h-4 w-4"  />
                                                     </Button>
                                                     <Button
                                                         size="icon" variant="ghost" className="h-12 w-12 rounded-xl bg-blue-600 hover:bg-blue-500 text-white shadow-xl shadow-blue-600/20 active:scale-95 transition-all"
                                                         onClick={() => setIsPlaybackRunning(!isPlaybackRunning)}
                                                     >
-                                                        {isPlaybackRunning ? <Pause className="h-5 w-5 fill-current" /> : <Play className="h-5 w-5 fill-current ml-0.5" />}
+                                                        {isPlaybackRunning ? <i className="bx bx-pause h-5 w-5 fill-current"  /> : <i className="bx bx-play h-5 w-5 fill-current ml-0.5"  />}
                                                     </Button>
                                                     <Button
                                                         size="icon" variant="ghost" className="h-10 w-10 rounded-xl hover:bg-white/10 active:scale-95"
                                                         onClick={() => setCurrentStep(Math.min(vizSteps.length - 1, currentStep + 1))}
                                                         disabled={currentStep === vizSteps.length - 1}
                                                     >
-                                                        <SkipForward className="h-4 w-4" />
+                                                        <i className="bx bx-skipforward h-4 w-4"  />
                                                     </Button>
                                                     <div className="w-px h-6 bg-white/10 mx-1" />
                                                     <Button
@@ -769,7 +750,7 @@ int main() {
                                                 <h3 className="text-xl font-black uppercase tracking-tighter">Raw Analysis Data</h3>
                                             </div>
                                             <Button size="icon" variant="ghost" className="rounded-full bg-white/5 border border-white/5">
-                                                <Maximize2 className="h-4 w-4 text-gray-400" />
+                                                <i className="bx bx-maximize2 h-4 w-4 text-gray-400"  />
                                             </Button>
                                         </div>
                                         <div className="overflow-x-auto">
@@ -809,7 +790,7 @@ int main() {
                             ) : (
                                 <div className="h-full flex flex-col items-center justify-center space-y-6 text-center max-w-sm mx-auto">
                                     <div className="w-20 h-20 rounded-full bg-blue-600/10 flex items-center justify-center">
-                                        <BarChart3 className="h-10 w-10 text-blue-600 opacity-50" />
+                                        <i className="bx bx-barchart3 h-10 w-10 text-blue-600 opacity-50"  />
                                     </div>
                                     <div>
                                         <h3 className="text-xl font-black uppercase tracking-tighter">No Analysis Context</h3>
@@ -838,7 +819,7 @@ int main() {
                             className="bg-blue-600/90 backdrop-blur-md p-4 rounded-2xl shadow-2xl border border-blue-400/30 max-w-xs pointer-events-auto"
                         >
                             <div className="flex items-start gap-3">
-                                <Info className="h-5 w-5 text-white shrink-0 mt-0.5" />
+                                <i className="bx bx-info h-5 w-5 text-white shrink-0 mt-0.5"  />
                                 <div>
                                     <h5 className="font-black text-xs uppercase tracking-wider text-white">Lab Tip</h5>
                                     <p className="text-[10px] text-blue-100 font-bold leading-relaxed mt-1">

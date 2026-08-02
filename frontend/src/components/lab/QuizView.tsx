@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, XCircle, RefreshCcw, ArrowRight } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { QuizQuestion } from "@/lib/labs/rich-content";
@@ -75,7 +75,7 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
                 </div>
 
                 <Button onClick={handleRetry} className="gap-2">
-                    <RefreshCcw size={16} /> Retry Quiz
+                    <i className="bx bx-refreshccw"  /> Retry Quiz
                 </Button>
             </div>
         );
@@ -109,10 +109,10 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
                         if (isAnswered) {
                             if (index === currentQuestion.correctAnswer) {
                                 borderColor = "border-green-500 bg-green-50";
-                                icon = <CheckCircle2 className="text-green-600" size={20} />;
+                                icon = <i className="bx bx-check-circle text-green-600"  />;
                             } else if (index === selectedOption) {
                                 borderColor = "border-red-500 bg-red-50";
-                                icon = <XCircle className="text-red-600" size={20} />;
+                                icon = <i className="bx bx-xcircle text-red-600"  />;
                             } else {
                                 borderColor = "border-gray-100 opacity-50";
                             }
@@ -161,7 +161,7 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
                     </Button>
                 ) : (
                     <Button onClick={handleNext} className="w-full sm:w-auto gap-2">
-                        {currentIndex < questions.length - 1 ? "Next Question" : "View Results"} <ArrowRight size={16} />
+                        {currentIndex < questions.length - 1 ? "Next Question" : "View Results"} <i className="bx bx-right-arrow-alt"  />
                     </Button>
                 )}
             </CardFooter>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Command } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 export function PlatformPreview() {
@@ -63,7 +63,7 @@ export function PlatformPreview() {
                                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.05)_0%,transparent_70%)] group-hover:bg-blue-500/5 transition-colors duration-500"></div>
                                     <div className="flex gap-4 items-center">
                                         <div className="w-16 h-16 bg-blue-600/10 rounded-2xl flex items-center justify-center text-blue-600 border border-blue-600/30 animate-bounce">
-                                            <Command className="w-8 h-8" />
+                                            <i className="bx bx-command w-8 h-8"  />
                                         </div>
                                         <div className="h-0.5 w-12 bg-blue-200 dark:bg-blue-800"></div>
                                         <div className="w-16 h-14 bg-slate-200/50 dark:bg-slate-800 rounded-lg border border-slate-300 dark:border-slate-700"></div>

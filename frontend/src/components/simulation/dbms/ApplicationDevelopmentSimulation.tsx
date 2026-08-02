@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import { ArrowLeft, Box, ShoppingCart, CreditCard, Plus, ArrowRight, CheckCircle2, AlertCircle, Terminal, Play, FileText, Trash2, Edit } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 type AppMode = "Store" | "Vendor" | "Finance";
@@ -347,8 +347,8 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
                                         <tr key={i} className="hover:bg-blue-50/50 group">
                                             {table.columns.map((col: string) => <td key={col} className="px-3 py-2 text-gray-600 truncate max-w-[100px]">{row[col]}</td>)}
                                             <td className="px-3 py-2 text-right flex justify-end gap-1 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <button onClick={() => startEdit(table.name, row)} className="p-1 hover:bg-gray-200 rounded text-blue-600"><Edit size={12} /></button>
-                                                <button onClick={() => deleteRecord(table.name, row.id)} className="p-1 hover:bg-red-100 rounded text-red-600"><Trash2 size={12} /></button>
+                                                <button onClick={() => startEdit(table.name, row)} className="p-1 hover:bg-gray-200 rounded text-blue-600"><i className="bx bx-edit"  /></button>
+                                                <button onClick={() => deleteRecord(table.name, row.id)} className="p-1 hover:bg-red-100 rounded text-red-600"><i className="bx bx-trash2"  /></button>
                                             </td>
                                         </tr>
                                     ))}
@@ -395,9 +395,9 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
                     <div className="bg-white p-4 rounded-xl border shadow-sm flex items-center justify-between">
                         <div>
                             <h2 className="font-bold text-gray-800 flex items-center gap-2">
-                                {appMode === "Store" && <ShoppingCart className="text-orange-500" />}
-                                {appMode === "Vendor" && <Box className="text-blue-500" />}
-                                {appMode === "Finance" && <CreditCard className="text-green-500" />}
+                                {appMode === "Store" && <i className="bx bx-shoppingcart text-orange-500"  />}
+                                {appMode === "Vendor" && <i className="bx bx-box text-blue-500"  />}
+                                {appMode === "Finance" && <i className="bx bx-creditcard text-green-500"  />}
                                 {appMode} Management Dashboard
                             </h2>
                             <p className="text-xs text-gray-500 mt-1">Select an action or use icons in tables to Edit/Delete.</p>
@@ -405,23 +405,23 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
                         <div className="flex gap-3">
                             {!readonly && appMode === "Store" && (
                                 <>
-                                    <Button onClick={() => setActiveAction("addProduct")} className="bg-[#d32f2f] hover:bg-[#b71c1c] text-white"> <Plus size={16} className="mr-1" /> Add Product </Button>
-                                    <Button onClick={() => setActiveAction("addCustomer")} className="bg-[#f57f17] hover:bg-[#e65100] text-white"> <Plus size={16} className="mr-1" /> Add Customer </Button>
-                                    <Button onClick={() => setActiveAction("purchase")} variant="outline" className="border-orange-500 text-orange-600 hover:bg-orange-50"> <ShoppingCart size={16} className="mr-1" /> Add Sale </Button>
+                                    <Button onClick={() => setActiveAction("addProduct")} className="bg-[#d32f2f] hover:bg-[#b71c1c] text-white"> <i className="bx bx-plus mr-1"  /> Add Product </Button>
+                                    <Button onClick={() => setActiveAction("addCustomer")} className="bg-[#f57f17] hover:bg-[#e65100] text-white"> <i className="bx bx-plus mr-1"  /> Add Customer </Button>
+                                    <Button onClick={() => setActiveAction("purchase")} variant="outline" className="border-orange-500 text-orange-600 hover:bg-orange-50"> <i className="bx bx-shoppingcart mr-1"  /> Add Sale </Button>
                                 </>
                             )}
                             {!readonly && appMode === "Vendor" && (
                                 <>
-                                    <Button onClick={() => setActiveAction("addVendor")} className="bg-[#d32f2f] hover:bg-[#b71c1c] text-white"> <Plus size={16} className="mr-1" /> New Vendor </Button>
-                                    <Button onClick={() => setActiveAction("createPO")} variant="outline" className="border-blue-500 text-blue-600 hover:bg-blue-50"> <ArrowRight size={16} className="mr-1" /> Create PO </Button>
-                                    <Button onClick={() => setActiveAction("addDelivery")} className="bg-purple-600 hover:bg-purple-700 text-white"> <Plus size={16} className="mr-1" /> Add Delivery </Button>
+                                    <Button onClick={() => setActiveAction("addVendor")} className="bg-[#d32f2f] hover:bg-[#b71c1c] text-white"> <i className="bx bx-plus mr-1"  /> New Vendor </Button>
+                                    <Button onClick={() => setActiveAction("createPO")} variant="outline" className="border-blue-500 text-blue-600 hover:bg-blue-50"> <i className="bx bx-right-arrow-alt mr-1"  /> Create PO </Button>
+                                    <Button onClick={() => setActiveAction("addDelivery")} className="bg-purple-600 hover:bg-purple-700 text-white"> <i className="bx bx-plus mr-1"  /> Add Delivery </Button>
                                 </>
                             )}
                             {!readonly && appMode === "Finance" && (
                                 <>
-                                    <Button onClick={() => setActiveAction("addAccount")} className="bg-blue-600 hover:bg-blue-700 text-white"> <Plus size={16} className="mr-1" /> Add Account </Button>
-                                    <Button onClick={() => setActiveAction("transaction")} className="bg-green-600 hover:bg-green-700 text-white"> <Plus size={16} className="mr-1" /> Record Transaction </Button>
-                                    <Button onClick={() => setActiveAction("addLedger")} variant="outline" className="border-gray-500 text-gray-700 hover:bg-gray-100"> <FileText size={16} className="mr-1" /> Add Ledger </Button>
+                                    <Button onClick={() => setActiveAction("addAccount")} className="bg-blue-600 hover:bg-blue-700 text-white"> <i className="bx bx-plus mr-1"  /> Add Account </Button>
+                                    <Button onClick={() => setActiveAction("transaction")} className="bg-green-600 hover:bg-green-700 text-white"> <i className="bx bx-plus mr-1"  /> Record Transaction </Button>
+                                    <Button onClick={() => setActiveAction("addLedger")} variant="outline" className="border-gray-500 text-gray-700 hover:bg-gray-100"> <i className="bx bx-file mr-1"  /> Add Ledger </Button>
                                 </>
                             )}
                         </div>
@@ -561,14 +561,14 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
                     {/* Top: SQL Console */}
                     <div className="flex-1 flex flex-col border-b border-gray-700">
                         <div className="p-3 bg-[#252526] border-b border-gray-700 flex items-center justify-between">
-                            <div className="flex items-center gap-2"> <Terminal size={14} className="text-green-400" /> <span className="text-xs font-mono font-bold text-gray-300">SQL Console</span> </div>
+                            <div className="flex items-center gap-2"> <i className="bx bx-terminal text-green-400"  /> <span className="text-xs font-mono font-bold text-gray-300">SQL Console</span> </div>
                         </div>
                         <div className="flex-1 bg-[#1e1e1e] p-3">
                             <textarea disabled={readonly} value={sqlQuery} onChange={(e) => setSqlQuery(e.target.value)} placeholder="> query..." className="w-full h-full bg-transparent text-green-400 font-mono text-xs outline-none resize-none placeholder-gray-600" />
                         </div>
                         {!readonly && (
                             <div className="bg-[#2d2d2d] p-2 flex justify-end">
-                                <Button size="sm" onClick={executeSQL} className="bg-green-700 hover:bg-green-800 text-white text-xs h-7"> <Play size={12} className="mr-1" /> Execute </Button>
+                                <Button size="sm" onClick={executeSQL} className="bg-green-700 hover:bg-green-800 text-white text-xs h-7"> <i className="bx bx-play mr-1"  /> Execute </Button>
                             </div>
                         )}
                     </div>

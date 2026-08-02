@@ -6,21 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { 
-    Settings, 
-    Mail, 
-    Shield, 
-    Clock, 
-    Database, 
-    Lock, 
-    UserCheck,
-    RefreshCw,
-    Save,
-    CheckCircle2,
-    HardDrive,
-    Terminal,
-    Loader2
-} from 'lucide-react';
+
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 
@@ -80,7 +66,7 @@ export function SettingsPanel() {
                 <Card className="rounded-[2.5rem] border-none shadow-xl shadow-slate-100 bg-white overflow-hidden">
                     <CardHeader className="bg-slate-900 text-white p-8">
                         <div className="flex items-center gap-3">
-                            <Shield className="text-indigo-400" />
+                            <i className="bx bx-shield text-indigo-400"  />
                             <CardTitle className="text-xl font-black uppercase tracking-tighter">Security Protocols</CardTitle>
                         </div>
                     </CardHeader>
@@ -115,7 +101,7 @@ export function SettingsPanel() {
                 <Card className="rounded-[2.5rem] border-none shadow-xl shadow-slate-100 bg-white overflow-hidden">
                     <CardHeader className="bg-indigo-600 text-white p-8">
                         <div className="flex items-center gap-3">
-                            <Mail className="text-white" />
+                            <i className="bx bx-envelope text-white"  />
                             <CardTitle className="text-xl font-black uppercase tracking-tighter">Communications Hub</CardTitle>
                         </div>
                     </CardHeader>
@@ -141,7 +127,7 @@ export function SettingsPanel() {
                 <Card className="rounded-[2.5rem] border-none shadow-xl shadow-slate-100 bg-white overflow-hidden">
                     <CardHeader className="bg-slate-50 p-8 border-b border-slate-100">
                         <div className="flex items-center gap-3">
-                            <Clock className="text-slate-400" />
+                            <i className="bx bx-clock text-slate-400"  />
                             <CardTitle className="text-xl font-black uppercase tracking-tighter text-slate-800">Laboratory Config</CardTitle>
                         </div>
                     </CardHeader>
@@ -163,7 +149,7 @@ export function SettingsPanel() {
                 <Card className="rounded-[2.5rem] border-none shadow-xl shadow-slate-100 bg-white overflow-hidden flex flex-col justify-between">
                     <div className="p-8 border-b border-slate-50">
                          <div className="flex items-center gap-3 mb-4">
-                            <Database className="text-amber-500" />
+                            <i className="bx bx-database text-amber-500"  />
                             <CardTitle className="text-xl font-black uppercase tracking-tighter text-slate-800">System Utilities</CardTitle>
                         </div>
                         <p className="text-xs text-slate-400 font-medium">Backup snapshots and system log rotation.</p>

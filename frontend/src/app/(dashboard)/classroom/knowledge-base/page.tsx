@@ -9,17 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-    BookOpen, 
-    Search, 
-    HelpCircle, 
-    CheckCircle, 
-    Clock, 
-    Send, 
-    Loader2, 
-    AlertCircle,
-    Sparkles
-} from "lucide-react";
+
 
 interface KbItem {
     _id: string;
@@ -225,7 +215,7 @@ export default function KnowledgeBasePage() {
                     <div className="space-y-6 lg:col-span-1">
                         <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900 shadow-sm p-6">
                             <div className="flex items-center gap-2 border-b pb-3 mb-4 border-slate-100 dark:border-slate-800">
-                                <HelpCircle className="text-indigo-600 dark:text-indigo-400" size={18} />
+                                <i className="bx bx-help-circle text-indigo-600 dark:text-indigo-400"  />
                                 <h3 className="font-black text-sm uppercase tracking-tight">Ask the Knowledge Base</h3>
                             </div>
 
@@ -246,7 +236,7 @@ export default function KnowledgeBasePage() {
                                     disabled={askLoading}
                                     className="w-full h-11 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 hover:bg-black font-black uppercase tracking-widest text-[9px] flex items-center gap-2"
                                 >
-                                    {askLoading ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : "Query Database"}
+                                    {askLoading ? <i className="bx bx-loader2 w-4 h-4 animate-spin mx-auto"  /> : "Query Database"}
                                 </Button>
                             </form>
                         </Card>
@@ -266,7 +256,7 @@ export default function KnowledgeBasePage() {
                                 </div>
                                 {askResult.status === "pending_review" && (
                                     <div className="flex gap-1.5 items-start text-[10px] text-amber-600 dark:text-amber-400 font-bold">
-                                        <Clock size={12} className="shrink-0 mt-0.5" />
+                                        <i className="bx bx-clock shrink-0 mt-0.5"  />
                                         <span>AI confidence score is low. Question routed to subject teacher pending manual answers.</span>
                                     </div>
                                 )}
@@ -286,7 +276,7 @@ export default function KnowledgeBasePage() {
                                 </div>
 
                                 <div className="relative w-full md:w-64">
-                                    <Search className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
+                                    <i className="bx bx-search absolute left-3 top-2.5 w-4 h-4 text-slate-400"  />
                                     <Input 
                                         placeholder="Search Q&As..."
                                         value={searchQuery}
@@ -298,7 +288,7 @@ export default function KnowledgeBasePage() {
 
                             {loading ? (
                                 <div className="flex flex-col items-center justify-center py-12 animate-pulse">
-                                    <Loader2 className="w-6 h-6 text-indigo-600 animate-spin mb-2" />
+                                    <i className="bx bx-loader2 w-6 h-6 text-indigo-600 animate-spin mb-2"  />
                                     <p className="text-slate-400 font-bold uppercase tracking-widest text-[8px]">Loading dataset...</p>
                                 </div>
                             ) : filteredApproved.length > 0 ? (
@@ -331,7 +321,7 @@ export default function KnowledgeBasePage() {
                         {isTeacher && (
                             <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8 border-amber-500/20">
                                 <div className="flex items-center gap-2 border-b pb-4 mb-6 border-slate-100 dark:border-slate-800">
-                                    <Clock className="text-amber-500" size={18} />
+                                    <i className="bx bx-clock text-amber-500"  />
                                     <h3 className="font-black text-lg uppercase tracking-tight">Pending Teacher Reviews</h3>
                                 </div>
 
@@ -354,7 +344,7 @@ export default function KnowledgeBasePage() {
                                                         disabled={reviewLoading[item._id] || !answers[item._id]?.trim()}
                                                         className="h-9 rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-extrabold uppercase text-[9px] tracking-wider"
                                                     >
-                                                        {reviewLoading[item._id] ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : "Approve & Cache Answer"}
+                                                        {reviewLoading[item._id] ? <i className="bx bx-loader2 w-3.5 h-3.5 animate-spin"  /> : "Approve & Cache Answer"}
                                                     </Button>
                                                 </div>
                                             </div>

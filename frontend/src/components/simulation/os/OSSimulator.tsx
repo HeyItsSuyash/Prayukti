@@ -2,10 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { 
-    Play, Pause, RefreshCw, Plus, Trash2, 
-    Layers, Cpu, LayoutList, ShieldAlert, Activity
-} from "lucide-react";
+
 
 interface Process {
     id: string;
@@ -427,10 +424,10 @@ export default function OSSimulator({ labId }: { labId: string }) {
                         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                             <div className="flex justify-between items-center">
                                 <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                    <Cpu className="h-5 w-5 text-blue-500" /> Process Control Panel
+                                    <i className="bx bx-cpu h-5 w-5 text-blue-500"  /> Process Control Panel
                                 </h3>
                                 <Button onClick={runSchedulingSimulation} className="bg-blue-600 hover:bg-blue-700 text-white font-bold">
-                                    <Play className="mr-2 h-4 w-4" /> Compute Schedule
+                                    <i className="bx bx-play mr-2 h-4 w-4"  /> Compute Schedule
                                 </Button>
                             </div>
 
@@ -459,12 +456,12 @@ export default function OSSimulator({ labId }: { labId: string }) {
                                     </div>
                                 ) : (
                                     <div className="flex items-end">
-                                        <Button onClick={addProcess} className="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs"><Plus className="mr-1 h-3.5 w-3.5" /> Add</Button>
+                                        <Button onClick={addProcess} className="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs"><i className="bx bx-plus mr-1 h-3.5 w-3.5"  /> Add</Button>
                                     </div>
                                 )}
                                 {(labId.includes("exp-3") || labId.includes("exp-4")) && (
                                     <div className="col-span-2 md:col-span-4 flex justify-end">
-                                        <Button onClick={addProcess} className="bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs"><Plus className="mr-1 h-3.5 w-3.5" /> Add Process</Button>
+                                        <Button onClick={addProcess} className="bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs"><i className="bx bx-plus mr-1 h-3.5 w-3.5"  /> Add Process</Button>
                                     </div>
                                 )}
                             </div>
@@ -503,7 +500,7 @@ export default function OSSimulator({ labId }: { labId: string }) {
                                                 )}
                                                 <td className="px-4 py-3 text-right">
                                                     <Button onClick={() => deleteProcess(p.id)} variant="ghost" className="h-8 w-8 p-0 text-red-500 hover:text-red-600 hover:bg-red-50">
-                                                        <Trash2 className="h-4 w-4" />
+                                                        <i className="bx bx-trash2 h-4 w-4"  />
                                                     </Button>
                                                 </td>
                                             </tr>
@@ -517,7 +514,7 @@ export default function OSSimulator({ labId }: { labId: string }) {
                         {ganttChart.length > 0 && (
                             <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
                                 <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                    <Activity className="h-5 w-5 text-indigo-500" /> Gantt Chart Execution Timeline
+                                    <i className="bx bx-activity h-5 w-5 text-indigo-500"  /> Gantt Chart Execution Timeline
                                 </h3>
                                 <div className="flex border border-slate-200 rounded-xl overflow-hidden shadow-sm">
                                     {ganttChart.map((item, idx) => {
@@ -543,7 +540,7 @@ export default function OSSimulator({ labId }: { labId: string }) {
 
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                         <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                            <LayoutList className="h-5 w-5 text-indigo-500" /> Performance Analysis
+                            <i className="bx bx-layoutlist h-5 w-5 text-indigo-500"  /> Performance Analysis
                         </h3>
                         <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-4 text-sm">
                             <div>
@@ -575,7 +572,7 @@ export default function OSSimulator({ labId }: { labId: string }) {
                     <div className="lg:col-span-2 space-y-6">
                         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                             <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <Layers className="h-5 w-5 text-blue-500" /> Memory Layout Blocks
+                                <i className="bx bx-layers h-5 w-5 text-blue-500"  /> Memory Layout Blocks
                             </h3>
 
                             <div className="flex gap-4 items-end bg-slate-50 p-4 rounded-xl border border-slate-100">
@@ -625,7 +622,7 @@ export default function OSSimulator({ labId }: { labId: string }) {
                     {/* Execution Logs */}
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[500px]">
                         <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <Activity className="h-5 w-5 text-indigo-500" /> Allocation Console logs
+                            <i className="bx bx-activity h-5 w-5 text-indigo-500"  /> Allocation Console logs
                         </h3>
                         <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {log.length > 0 ? (
@@ -645,7 +642,7 @@ export default function OSSimulator({ labId }: { labId: string }) {
                         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                             <div className="flex justify-between items-center">
                                 <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                    <Layers className="h-5 w-5 text-blue-500" /> Resource Allocation Matrix (Need = Max - Allocation)
+                                    <i className="bx bx-layers h-5 w-5 text-blue-500"  /> Resource Allocation Matrix (Need = Max - Allocation)
                                 </h3>
                                 <Button onClick={runBankers} className="bg-blue-600 hover:bg-blue-700 text-white font-bold">
                                     Check System Safety
@@ -683,7 +680,7 @@ export default function OSSimulator({ labId }: { labId: string }) {
 
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[400px]">
                         <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <Activity className="h-5 w-5 text-indigo-500" /> Banker's Safety Output
+                            <i className="bx bx-activity h-5 w-5 text-indigo-500"  /> Banker's Safety Output
                         </h3>
                         <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {log.map((item, idx) => <div key={idx}>{item}</div>)}
@@ -699,7 +696,7 @@ export default function OSSimulator({ labId }: { labId: string }) {
                         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                             <div className="flex justify-between items-center">
                                 <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                    <ShieldAlert className="h-5 w-5 text-rose-500" /> Resource Allocation Graph Cycle Detection
+                                    <i className="bx bx-shieldalert h-5 w-5 text-rose-500"  /> Resource Allocation Graph Cycle Detection
                                 </h3>
                                 <Button onClick={detectDeadlock} className="bg-rose-600 hover:bg-rose-700 text-white font-bold">
                                     Run Cycle Detection
@@ -732,7 +729,7 @@ export default function OSSimulator({ labId }: { labId: string }) {
 
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[350px]">
                         <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <Activity className="h-5 w-5 text-indigo-500" /> Analysis Log
+                            <i className="bx bx-activity h-5 w-5 text-indigo-500"  /> Analysis Log
                         </h3>
                         <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {log.map((item, idx) => <div key={idx}>{item}</div>)}
@@ -747,7 +744,7 @@ export default function OSSimulator({ labId }: { labId: string }) {
                     <div className="xl:col-span-2 space-y-6">
                         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
                             <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <Activity className="h-5 w-5 text-blue-500" /> Mutex Lock & Shared Buffer Simulator
+                                <i className="bx bx-activity h-5 w-5 text-blue-500"  /> Mutex Lock & Shared Buffer Simulator
                             </h3>
 
                             <div className="flex justify-center gap-4">
@@ -775,7 +772,7 @@ export default function OSSimulator({ labId }: { labId: string }) {
 
                     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[400px]">
                         <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <Activity className="h-5 w-5 text-indigo-500" /> Synchronization Logs
+                            <i className="bx bx-activity h-5 w-5 text-indigo-500"  /> Synchronization Logs
                         </h3>
                         <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {syncLog.map((item, idx) => <div key={idx}>{item}</div>)}

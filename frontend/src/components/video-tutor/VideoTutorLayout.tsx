@@ -3,19 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-    LayoutDashboard, 
-    Video, 
-    History, 
-    Bookmark, 
-    Sparkles, 
-    LineChart, 
-    HelpCircle, 
-    ArrowLeft, 
-    Menu, 
-    X,
-    User
-} from "lucide-react";
+
 import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 
@@ -63,7 +51,7 @@ export default function VideoTutorLayout({ children }: VideoTutorLayoutProps) {
                 <aside className="hidden md:flex w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md fixed top-20 bottom-0 left-0 p-6 z-20 overflow-y-auto">
                     <div className="mb-8 flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-                            <Video size={20} className="animate-pulse" />
+                            <i className="bx bx-video animate-pulse"  />
                         </div>
                         <div>
                             <h3 className="font-extrabold text-sm uppercase tracking-wider text-slate-800 dark:text-slate-200">AI Video Tutor</h3>
@@ -92,7 +80,7 @@ export default function VideoTutorLayout({ children }: VideoTutorLayoutProps) {
 
                     <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700">
-                            <User size={18} />
+                            <i className="bx bx-user"  />
                         </div>
                         <div className="truncate">
                             <p className="text-xs font-bold truncate text-slate-800 dark:text-slate-200">{user.fullName}</p>
@@ -108,7 +96,7 @@ export default function VideoTutorLayout({ children }: VideoTutorLayoutProps) {
                         className="w-14 h-14 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-950 shadow-2xl hover:scale-105 active:scale-95 transition-transform"
                         onClick={() => setIsMobileOpen(true)}
                     >
-                        <Menu size={24} />
+                        <i className="bx bx-menu"  />
                     </Button>
                 </div>
 
@@ -135,14 +123,14 @@ export default function VideoTutorLayout({ children }: VideoTutorLayoutProps) {
                                     <div className="flex items-center justify-between mb-8">
                                         <div className="flex items-center gap-3">
                                             <div className="w-10 h-10 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-                                                <Video size={20} />
+                                                <i className="bx bx-video"  />
                                             </div>
                                             <div>
                                                 <h3 className="font-extrabold text-sm uppercase tracking-wider text-slate-800 dark:text-slate-200">AI Video Tutor</h3>
                                             </div>
                                         </div>
                                         <Button variant="ghost" size="icon" onClick={() => setIsMobileOpen(false)} className="rounded-full">
-                                            <X size={20} />
+                                            <i className="bx bx-x"  />
                                         </Button>
                                     </div>
 
@@ -173,7 +161,7 @@ export default function VideoTutorLayout({ children }: VideoTutorLayoutProps) {
 
                                 <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center gap-3">
                                     <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700">
-                                        <User size={18} />
+                                        <i className="bx bx-user"  />
                                     </div>
                                     <div>
                                         <p className="text-xs font-bold text-slate-800 dark:text-slate-200">{user.fullName}</p>
@@ -189,7 +177,7 @@ export default function VideoTutorLayout({ children }: VideoTutorLayoutProps) {
                 <main className="flex-1 md:ml-72 p-6 md:p-10 max-w-7xl mx-auto w-full overflow-x-hidden">
                     <div className="mb-6">
                         <a href="/classroom" className="text-xs font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-2 group mb-4 hover:underline">
-                            <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" />
+                            <i className="bx bx-arrowleft group-hover:-translate-x-1 transition-transform"  />
                             Back to Smart Classroom
                         </a>
                     </div>
