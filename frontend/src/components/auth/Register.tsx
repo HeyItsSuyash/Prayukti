@@ -215,7 +215,8 @@ export default function RegisterPage() {
             setStep(step + 1);
         } catch (e: any) {
             if (e instanceof z.ZodError || e.name === "ZodError") {
-                const message = e.errors?.[0]?.message || e.issues?.[0]?.message || "Validation failed";
+                const zodError = e as any;
+                const message = zodError.errors?.[0]?.message || zodError.issues?.[0]?.message || "Validation failed";
                 setError(message);
             } else {
                 setError(e.message || "An unexpected error occurred");

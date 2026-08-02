@@ -31,7 +31,8 @@ export default function LoginPage() {
             loginSchema.parse({ email, password });
         } catch (e: any) {
             if (e instanceof z.ZodError) {
-                showToast('error', e.errors[0].message);
+                const zodError = e as any;
+                showToast('error', zodError.errors[0].message);
                 setLoading(false);
                 return;
             }

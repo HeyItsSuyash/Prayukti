@@ -144,10 +144,10 @@ function AdminContent() {
                 return (
                     <div className="space-y-8 animate-in fade-in duration-700">
                         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                            <StatCard title="Total Students" value={data.length} subtext="vs last month" trend="+12%" icon={Users} />
-                            <StatCard title="Total Staff" value={teachers.length} subtext="Active administration" trend="+2" icon={ShieldCheck} />
-                            <StatCard title="System Load" value="24%" subtext="Server performance" trend="-5%" icon={Activity} />
-                            <StatCard title="Security" value="SAFE" subtext="No threats detected" icon={Shield} />
+                            <StatCard title="Total Students" value={data.length} subtext="vs last month" trend="+12%" icon="bx bxs-group" />
+                            <StatCard title="Total Staff" value={teachers.length} subtext="Active administration" trend="+2" icon="bx bx-check-shield" />
+                            <StatCard title="System Load" value="24%" subtext="Server performance" trend="-5%" icon="bx bx-pulse" />
+                            <StatCard title="Security" value="SAFE" subtext="No threats detected" icon="bx bx-shield" />
                         </div>
 
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
