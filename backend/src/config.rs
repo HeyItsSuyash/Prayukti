@@ -5,11 +5,12 @@ pub struct Config {
     pub database_url: String,
     pub jwt_secret: String,
     pub port: u16,
-    pub email_host: String,
-    pub email_port: u16,
-    pub email_user: String,
-    pub email_pass: String,
-    pub mock_auth: bool,
+    pub brevo_api_key: String,
+    pub email_from_name: String,
+    pub email_from_address: String,
+    pub otp_expiry_minutes: i64,
+    pub otp_length: usize,
+    pub otp_max_attempts: i32,
     pub frontend_url: String,
 }
 
@@ -33,17 +34,15 @@ impl Config {
             .unwrap_or_else(|_| "5000".to_string())
             .parse::<u16>()
             .expect("PORT must be a valid port number");
-        let email_host = env::var("EMAIL_HOST").unwrap_or_else(|_| "smtp.gmail.com".to_string());
-        let email_port = env::var("EMAIL_PORT")
-            .unwrap_or_else(|_| "587".to_string())
-            .parse::<u16>()
-            .unwrap_or(587);
-        let email_user = env::var("EMAIL_USER").unwrap_or_default();
-        let email_pass = env::var("EMAIL_PASS").unwrap_or_default();
-        let mock_auth = env::var("MOCK_AUTH")
-            .unwrap_or_else(|_| "false".to_string())
-            .parse::<bool>()
-            .unwrap_or(false);
+            
+        let brevo_api_key = env::var("BREVO_API_KEY").unwrap_or_default();
+        let email_from_name = env::var("EMAIL_FROM_NAME").unwrap_or_else(|_| "Prayukti vLAB".to_string());
+        let email_from_address = env::var("EMAIL_FROM_ADDRESS").unwrap_or_else(|_| "noreply@prayukti.org".to_string());
+        
+        let otp_expiry_minutes = env::var("OTP_EXPIRY_MINUTES").unwrap_or_else(|_| "5".to_string()).parse::<i64>().unwrap_or(5);
+        let otp_length = env::var("OTP_LENGTH").unwrap_or_else(|_| "6".to_string()).parse::<usize>().unwrap_or(6);
+        let otp_max_attempts = env::var("OTP_MAX_ATTEMPTS").unwrap_or_else(|_| "5".to_string()).parse::<i32>().unwrap_or(5);
+        
         let frontend_url = env::var("FRONTEND_URL")
             .unwrap_or_else(|_| "https://mmut.prayukti.org".to_string());
 
@@ -51,11 +50,12 @@ impl Config {
             database_url,
             jwt_secret,
             port,
-            email_host,
-            email_port,
-            email_user,
-            email_pass,
-            mock_auth,
+            brevo_api_key,
+            email_from_name,
+            email_from_address,
+            otp_expiry_minutes,
+            otp_length,
+            otp_max_attempts,
             frontend_url,
         }
     }

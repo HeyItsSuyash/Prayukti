@@ -44,6 +44,14 @@ async fn main() {
         .await
         .expect("Failed to connect to PostgreSQL database");
 
+    info!("Running OTP security migration...");
+    sqlx::query("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_hash VARCHAR;").execute(&pool).await.expect("Migration failed (otp_hash)");
+    sqlx::query("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_attempts INT DEFAULT 0 NOT NULL;").execute(&pool).await.expect("Migration failed (otp_attempts)");
+    sqlx::query("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_resends INT DEFAULT 0 NOT NULL;").execute(&pool).await.expect("Migration failed (otp_resends)");
+    sqlx::query("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_last_resent_at TIMESTAMP WITH TIME ZONE;").execute(&pool).await.expect("Migration failed (otp_last_resent_at)");
+    sqlx::query("ALTER TABLE users DROP COLUMN IF EXISTS otp;").execute(&pool).await.expect("Migration failed (drop otp)");
+    info!("OTP security migration complete.");
+
     info!("Skipping seed scripts because database is already seeded...");
 
     let state = AppState {
@@ -52,9 +60,13 @@ async fn main() {
         session_time_map: std::sync::Arc::new(tokio::sync::Mutex::new(std::collections::HashMap::new())),
     };
 
-    // Configure CORS
+    // Configure CORS — allow localhost and production origin
     let cors = CorsLayer::new()
-        .allow_origin(config.frontend_url.parse::<axum::http::HeaderValue>().expect("Invalid FRONTEND_URL format"))
+        .allow_origin([
+            "http://localhost:3000".parse::<axum::http::HeaderValue>().unwrap(),
+            "http://localhost:3001".parse::<axum::http::HeaderValue>().unwrap(),
+            "https://mmmut.prayukti.org".parse::<axum::http::HeaderValue>().unwrap(),
+        ])
         .allow_headers(Any)
         .allow_methods(Any);
 
@@ -64,7 +76,8 @@ async fn main() {
         .route("/verify-otp", post(routes::auth::verify_otp))
         .route("/login", post(routes::auth::signin))
         .route("/signin", post(routes::auth::signin))
-        .route("/resend-otp", post(routes::auth::resend_otp));
+        .route("/resend-otp", post(routes::auth::resend_otp))
+        .route("/logout", post(routes::auth::logout));
 
     let subject_router = Router::new()
         .route("/", get(routes::subject::get_subjects).post(routes::subject::create_subject))
@@ -93,6 +106,8 @@ async fn main() {
         .route("/log-lab", post(routes::attendance::log_lab));
 
     // Build routes
+    let rate_limit_state = std::sync::Arc::new(tokio::sync::Mutex::new(std::collections::HashMap::new()));
+
     let app = Router::new()
         .route("/", get(health_check))
         .nest("/api/auth", auth_router)
@@ -116,6 +131,9 @@ async fn main() {
         .nest("/api/classroom-analytics", routes::analytics::router())
         .nest("/api/video-tutor", routes::video_tutor::router())
         .nest("/api/academic-hierarchy", routes::academic_hierarchy::router())
+        .nest("/api/public-metrics", routes::public_metrics::router())
+        .layer(axum::middleware::from_fn_with_state(rate_limit_state, middleware::security::rate_limiter))
+        .layer(axum::middleware::from_fn(middleware::security::security_headers))
         .layer(cors)
         .layer(TraceLayer::new_for_http())
         .with_state(state);

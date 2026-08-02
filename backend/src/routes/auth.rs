@@ -15,7 +15,7 @@ use uuid::Uuid;
 use crate::models::user::{User, UserResponse};
 use crate::state::AppState;
 use crate::utils::generate_otp;
-use crate::services::email::send_email;
+use crate::services::email::EmailService;
 use crate::middleware::auth::generate_jwt;
 
 #[derive(Debug, Deserialize)]
@@ -130,13 +130,18 @@ pub async fn signup(
     };
 
     let otp = generate_otp();
-    info!("TEST OTP: {}", otp);
-    let otp_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-        .parent()
-        .unwrap()
-        .join("otp_test.txt");
-    let _ = std::fs::write(otp_path, &otp);
-    let otp_expiry = chrono::Utc::now() + chrono::Duration::minutes(10);
+    let otp_expiry = chrono::Utc::now() + chrono::Duration::minutes(state.config.otp_expiry_minutes);
+    
+    let otp_hash = match hash(&otp, DEFAULT_COST) {
+        Ok(h) => h,
+        Err(e) => {
+            error!("[AUTH] OTP hashing failed: {:?}", e);
+            return (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({ "message": "Server error during registration" })),
+            );
+        }
+    };
     
     let hashed_password = match hash(&payload.password, DEFAULT_COST) {
         Ok(h) => h,
@@ -156,14 +161,14 @@ pub async fn signup(
         let update_res = sqlx::query(
             r#"
             UPDATE users
-            SET full_name = $1, roll_no = $2, password = $3, otp = $4, otp_expiry = $5, role = $6
+            SET full_name = $1, roll_no = $2, password = $3, otp_hash = $4, otp_expiry = $5, role = $6, otp_attempts = 0
             WHERE id = $7
             "#
         )
         .bind(&payload.full_name)
         .bind(&payload.roll_no)
         .bind(&hashed_password)
-        .bind(&otp)
+        .bind(&otp_hash)
         .bind(otp_expiry)
         .bind(&role)
         .bind(user.id)
@@ -182,8 +187,8 @@ pub async fn signup(
         let new_id = Uuid::new_v4();
         let insert_res = sqlx::query(
             r#"
-            INSERT INTO users (id, full_name, roll_no, email, password, role, otp, otp_expiry, is_verified, enrollment_no, branch, year, semester)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, FALSE, $9, $10, $11, $12)
+            INSERT INTO users (id, full_name, roll_no, email, password, role, otp_hash, otp_expiry, otp_attempts, is_verified, enrollment_no, branch, year, semester)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 0, FALSE, $9, $10, $11, $12)
             "#
         )
         .bind(new_id)
@@ -192,7 +197,7 @@ pub async fn signup(
         .bind(&email)
         .bind(&hashed_password)
         .bind(&role)
-        .bind(&otp)
+        .bind(&otp_hash)
         .bind(otp_expiry)
         .bind(&payload.enrollment_no)
         .bind(&payload.branch)
@@ -210,15 +215,10 @@ pub async fn signup(
         }
     }
 
-    // Send verification email
-    let email_html = format!(
-        "<h3>Welcome to Prayukti vLAB!</h3><p>Your OTP is: <strong>{}</strong></p><p>It will expire in 10 minutes.</p>",
-        otp
-    );
     let email_state = state.config.clone();
     let email_to = email.clone();
     tokio::spawn(async move {
-        if let Err(e) = send_email(&email_to, "Your OTP for Prayukti vLAB", &email_html, &email_state).await {
+        if let Err(e) = EmailService::send_otp_email(&email_to, &otp, &email_state).await {
             error!("[AUTH] Signup email delivery failed: {}", e);
         }
     });
@@ -233,7 +233,7 @@ pub async fn verify_otp(
     State(state): State<AppState>,
     ConnectInfo(addr): ConnectInfo<SocketAddr>,
     Json(payload): Json<VerifyOtpRequest>,
-) -> impl IntoResponse {
+) -> axum::response::Response {
     let email = payload.email.trim().to_lowercase();
     info!("[AUTH] OTP verification attempt: {}", email);
 
@@ -250,14 +250,14 @@ pub async fn verify_otp(
             return (
                 StatusCode::NOT_FOUND,
                 Json(json!({ "message": "User not registered" })),
-            );
+            ).into_response();
         }
         Err(e) => {
             error!("[AUTH] OTP verification DB lookup failed: {:?}", e);
             return (
                 StatusCode::INTERNAL_SERVER_ERROR,
                 Json(json!({ "message": "Server error during verification" })),
-            );
+            ).into_response();
         }
     };
 
@@ -265,24 +265,41 @@ pub async fn verify_otp(
         return (
             StatusCode::BAD_REQUEST,
             Json(json!({ "message": "User already verified" })),
-        );
+        ).into_response();
     }
 
-    let is_otp_valid = user.otp.as_deref() == Some(&payload.otp);
+    if user.otp_attempts >= state.config.otp_max_attempts {
+        return (
+            StatusCode::FORBIDDEN,
+            Json(json!({ "message": "Too many failed attempts. Please request a new OTP." })),
+        ).into_response();
+    }
+
+    let is_otp_valid = match user.otp_hash {
+        Some(ref hash_val) => verify(&payload.otp, hash_val).unwrap_or(false),
+        None => false,
+    };
+    
     let is_not_expired = user.otp_expiry.map(|exp| exp > chrono::Utc::now()).unwrap_or(false);
 
     if !is_otp_valid || !is_not_expired {
+        // Increment attempt counter
+        let _ = sqlx::query("UPDATE users SET otp_attempts = otp_attempts + 1 WHERE id = $1")
+            .bind(user.id)
+            .execute(&state.db)
+            .await;
+            
         return (
             StatusCode::BAD_REQUEST,
             Json(json!({ "message": "Invalid or expired OTP" })),
-        );
+        ).into_response();
     }
 
     // Set verified, clear OTP
     let update_res = sqlx::query(
         r#"
         UPDATE users
-        SET is_verified = TRUE, otp = NULL, otp_expiry = NULL
+        SET is_verified = TRUE, otp_hash = NULL, otp_expiry = NULL
         WHERE id = $1
         "#
     )
@@ -295,7 +312,7 @@ pub async fn verify_otp(
         return (
             StatusCode::INTERNAL_SERVER_ERROR,
             Json(json!({ "message": "Server error during verification" })),
-        );
+        ).into_response();
     }
 
     user.is_verified = true;
@@ -324,83 +341,40 @@ pub async fn verify_otp(
             return (
                 StatusCode::INTERNAL_SERVER_ERROR,
                 Json(json!({ "message": "Failed to finalize login response" })),
-            );
+            ).into_response();
         }
     };
 
     let user_resp: UserResponse = user.into();
 
-    (
-        StatusCode::OK,
-        Json(json!({
-            "message": "Account verified successfully",
-            "token": token,
-            "user": user_resp
-        })),
-    )
+    use axum::http::header::{SET_COOKIE, HeaderValue};
+
+    let cookie_val = format!(
+        "vlab_access_token={}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=86400",
+        token
+    );
+
+    let mut response = (StatusCode::OK, Json(json!({
+        "message": "Account verified successfully",
+        "user": user_resp
+    }))).into_response();
+
+    if let Ok(hv) = HeaderValue::from_str(&cookie_val) {
+        response.headers_mut().insert(SET_COOKIE, hv);
+    }
+
+    response
 }
 
 pub async fn signin(
     State(state): State<AppState>,
     ConnectInfo(addr): ConnectInfo<SocketAddr>,
     Json(payload): Json<LoginRequest>,
-) -> impl IntoResponse {
+) -> axum::response::Response {
     let email = payload.email.trim().to_lowercase();
     info!("[AUTH] Login attempt: {}", email);
 
-    // Mock Auth Bypass
-    if state.config.mock_auth {
-        if is_allowed_domain(&email) {
-            info!("[AUTH] MOCK LOGIN SUCCESS for: {}", email);
-            let mock_id = format!("mock_user_id_{}", chrono::Utc::now().timestamp());
-            let mock_role = if email.contains("admin") {
-                "admin"
-            } else if email.contains("teacher") {
-                "teacher"
-            } else {
-                "student"
-            };
-
-            let mock_log_id = format!("mock_log_{}", chrono::Utc::now().timestamp());
-
-            let token = match generate_jwt(
-                &mock_id,
-                &email,
-                mock_role,
-                Some(&mock_log_id),
-                &state.config.jwt_secret,
-            ) {
-                Ok(t) => t,
-                Err(e) => {
-                    error!("[AUTH] Mock JWT issuance failed: {:?}", e);
-                    return (
-                        StatusCode::INTERNAL_SERVER_ERROR,
-                        Json(json!({ "message": "Failed to finalize login response" })),
-                    );
-                }
-            };
-
-            return (
-                StatusCode::OK,
-                Json(json!({
-                    "message": "Login successful",
-                    "token": token,
-                    "user": {
-                        "id": mock_id,
-                        "fullName": format!("Mock User ({})", mock_role),
-                        "rollNo": "MOCK12345",
-                        "email": email,
-                        "role": mock_role
-                    }
-                })),
-            );
-        } else {
-            return (
-                StatusCode::UNAUTHORIZED,
-                Json(json!({ "message": "Mock Auth: Only @mmmut.ac.in emails allowed for bypass" })),
-            );
-        }
-    }
+    // Normal DB login flow
 
     // Normal DB login flow
     let user_res = sqlx::query_as::<_, User>(
@@ -416,14 +390,14 @@ pub async fn signin(
             return (
                 StatusCode::NOT_FOUND,
                 Json(json!({ "message": "User not registered" })),
-            );
+            ).into_response();
         }
         Err(e) => {
             error!("[AUTH] Signin DB lookup failed: {:?}", e);
             return (
                 StatusCode::INTERNAL_SERVER_ERROR,
                 Json(json!({ "message": "Server error during login" })),
-            );
+            ).into_response();
         }
     };
 
@@ -433,14 +407,14 @@ pub async fn signin(
         return (
             StatusCode::BAD_REQUEST,
             Json(json!({ "message": "Invalid password" })),
-        );
+        ).into_response();
     }
 
     if !user.is_verified {
         return (
             StatusCode::FORBIDDEN,
             Json(json!({ "message": "Please verify your email first" })),
-        );
+        ).into_response();
     }
 
     // Log the user's login attendance session
@@ -467,20 +441,29 @@ pub async fn signin(
             return (
                 StatusCode::INTERNAL_SERVER_ERROR,
                 Json(json!({ "message": "Failed to finalize login response" })),
-            );
+            ).into_response();
         }
     };
 
     let user_resp: UserResponse = user.into();
 
-    (
-        StatusCode::OK,
-        Json(json!({
-            "message": "Login successful",
-            "token": token,
-            "user": user_resp
-        })),
-    )
+    use axum::http::header::{SET_COOKIE, HeaderValue};
+
+    let cookie_val = format!(
+        "vlab_access_token={}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=86400",
+        token
+    );
+
+    let mut response = (StatusCode::OK, Json(json!({
+        "message": "Login successful",
+        "user": user_resp
+    }))).into_response();
+
+    if let Ok(hv) = HeaderValue::from_str(&cookie_val) {
+        response.headers_mut().insert(SET_COOKIE, hv);
+    }
+
+    response
 }
 
 pub async fn resend_otp(
@@ -521,17 +504,46 @@ pub async fn resend_otp(
         );
     }
 
+    // Rate limiting: 1 minute cooldown
+    if let Some(last_resent) = user.otp_last_resent_at {
+        if chrono::Utc::now() < last_resent + chrono::Duration::minutes(1) {
+            return (
+                StatusCode::TOO_MANY_REQUESTS,
+                Json(json!({ "message": "Please wait a minute before requesting another OTP" })),
+            );
+        }
+    }
+
+    // Limit to 2 resends
+    if user.otp_resends >= 2 {
+        return (
+            StatusCode::TOO_MANY_REQUESTS,
+            Json(json!({ "message": "Maximum tries limit reached, kindly try again tomorrow." })),
+        );
+    }
+
     let otp = generate_otp();
-    let otp_expiry = chrono::Utc::now() + chrono::Duration::minutes(10);
+    let otp_expiry = chrono::Utc::now() + chrono::Duration::minutes(state.config.otp_expiry_minutes);
+    
+    let otp_hash = match hash(&otp, DEFAULT_COST) {
+        Ok(h) => h,
+        Err(e) => {
+            error!("[AUTH] OTP hashing failed: {:?}", e);
+            return (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({ "message": "Server error" })),
+            );
+        }
+    };
 
     let update_res = sqlx::query(
         r#"
         UPDATE users
-        SET otp = $1, otp_expiry = $2
+        SET otp_hash = $1, otp_expiry = $2, otp_attempts = 0, otp_resends = otp_resends + 1, otp_last_resent_at = CURRENT_TIMESTAMP
         WHERE id = $3
         "#
     )
-    .bind(&otp)
+    .bind(&otp_hash)
     .bind(otp_expiry)
     .bind(user.id)
     .execute(&state.db)
@@ -545,15 +557,10 @@ pub async fn resend_otp(
         );
     }
 
-    // Send verification email
-    let email_html = format!(
-        "<h3>New OTP is: <strong>{}</strong></h3><p>It will expire in 10 minutes.</p>",
-        otp
-    );
     let email_state = state.config.clone();
     let email_to = email.clone();
     tokio::spawn(async move {
-        if let Err(e) = send_email(&email_to, "New OTP for Prayukti vLAB", &email_html, &email_state).await {
+        if let Err(e) = EmailService::send_otp_email(&email_to, &otp, &email_state).await {
             error!("[AUTH] Resend OTP email delivery failed: {}", e);
         }
     });
@@ -562,4 +569,21 @@ pub async fn resend_otp(
         StatusCode::OK,
         Json(json!({ "message": "OTP resent successfully" })),
     )
+}
+
+pub async fn logout() -> impl IntoResponse {
+    use axum::http::header::{SET_COOKIE, HeaderValue};
+    use axum::response::Response;
+
+    let cookie_val = "vlab_access_token=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0";
+
+    let mut response = Json(json!({
+        "message": "Logged out successfully"
+    })).into_response();
+
+    if let Ok(hv) = HeaderValue::from_str(cookie_val) {
+        response.headers_mut().insert(SET_COOKIE, hv);
+    }
+
+    (StatusCode::OK, response)
 }

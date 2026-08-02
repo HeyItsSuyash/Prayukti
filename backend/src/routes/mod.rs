@@ -21,3 +21,4 @@ pub mod ai_teacher;
 pub mod analytics;
 pub mod video_tutor;
 pub mod academic_hierarchy;
+pub mod public_metrics;

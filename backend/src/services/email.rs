@@ -1,104 +1,98 @@
-use lettre::{transport::smtp::authentication::Credentials, Message, SmtpTransport, Transport};
-use lettre::transport::smtp::extension::ClientId;
-use crate::config::Config;
+use reqwest::Client;
+use serde_json::json;
 use tracing::{error, info};
+use chrono::Datelike;
+use crate::config::Config;
 
-pub async fn send_email(
-    to: &str,
-    subject: &str,
-    body_html: &str,
-    config: &Config,
-) -> Result<(), String> {
-    info!("Sending email to: {}", to);
-    if config.email_user.is_empty() || config.email_pass.is_empty() {
-        info!("No SMTP credentials. Logging email output to console:\nTo: {}\nSubject: {}\nBody: {}", to, subject, body_html);
-        return Ok(());
-    }
+pub struct EmailService;
 
-    let email = Message::builder()
-        .from(format!("Prayukti vLAB <{}>", config.email_user).parse().unwrap())
-        .to(to.parse().map_err(|e| format!("Invalid recipient: {:?}", e))?)
-        .subject(subject)
-        .header(lettre::message::header::ContentType::TEXT_HTML)
-        .body(body_html.to_string())
-        .map_err(|e| format!("Email construction failed: {:?}", e))?;
+impl EmailService {
+    pub async fn send_email(
+        to: &str,
+        subject: &str,
+        body_html: &str,
+        body_text: Option<&str>,
+        config: &Config,
+    ) -> Result<(), String> {
+        info!("Sending email via Brevo to: {}", to);
+        if config.brevo_api_key.is_empty() {
+            info!("No BREVO_API_KEY found. Logging email output to console:\nTo: {}\nSubject: {}\nBody: {}", to, subject, body_html);
+            return Ok(());
+        }
 
-    let creds = Credentials::new(config.email_user.clone(), config.email_pass.clone());
+        let client = Client::new();
+        let payload = json!({
+            "sender": {
+                "name": config.email_from_name,
+                "email": config.email_from_address
+            },
+            "to": [
+                {
+                    "email": to
+                }
+            ],
+            "subject": subject,
+            "htmlContent": body_html,
+            "textContent": body_text.unwrap_or("Please view this email in an HTML-compatible client.")
+        });
 
-    let host = config.email_host.clone();
-    let port = config.email_port;
+        let res = client
+            .post("https://api.brevo.com/v3/smtp/email")
+            .header("api-key", &config.brevo_api_key)
+            .header("Content-Type", "application/json")
+            .header("Accept", "application/json")
+            .json(&payload)
+            .send()
+            .await;
 
-    let to_str = to.to_string();
-
-    tokio::task::spawn_blocking(move || {
-        // Use starttls_relay for port 587 (STARTTLS), or relay for port 465 (SSL/TLS)
-        let mailer_result = if port == 465 {
-            SmtpTransport::relay(&host)
-                .map(|b| b.credentials(creds).build())
-        } else {
-            SmtpTransport::starttls_relay(&host)
-                .map(|b| b.port(port).credentials(creds).hello_name(ClientId::Domain(host.clone())).build())
-        };
-
-        let mailer = match mailer_result {
-            Ok(m) => m,
-            Err(e) => {
-                error!("[EMAIL] Failed to build SMTP transport for {}: {:?}", host, e);
-                return Err(format!("SMTP transport build failed: {:?}", e));
+        match res {
+            Ok(response) => {
+                if response.status().is_success() {
+                    info!("[EMAIL] Email sent successfully to {}", to);
+                    Ok(())
+                } else {
+                    let err_text = response.text().await.unwrap_or_default();
+                    error!("[EMAIL] Brevo API error sending to {}: {}", to, err_text);
+                    Err(format!("Brevo API error: {}", err_text))
+                }
             }
-        };
-
-        match mailer.send(&email) {
-            Ok(_) => {
-                info!("[EMAIL] Email sent successfully to {}", to_str);
-                Ok(())
-            }
             Err(e) => {
-                error!("[EMAIL] SMTP send failed to {}: {:?}", to_str, e);
-                Err(format!("Could not send email: {:?}", e))
+                error!("[EMAIL] HTTP request failed when sending to {}: {:?}", to, e);
+                Err(format!("HTTP request failed: {:?}", e))
             }
         }
-    })
-    .await
-    .map_err(|e| format!("Task join failed: {:?}", e))?
-}
+    }
 
-#[allow(dead_code)]
-pub async fn send_welcome_email(
-    to: &str,
-    full_name: &str,
-    password_plain: &str,
-    config: &Config,
-) -> Result<(), String> {
-    let subject = "Welcome to Prayukti vLAB";
-    let html = format!(
-        r#"<div style="font-family: sans-serif; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px;">
-            <h2 style="color: #4f46e5;">Welcome, {}!</h2>
-            <p>Your account has been created successfully.</p>
-            <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 20px 0;">
-                <p><strong>Login Details:</strong></p>
-                <p>Email: {}</p>
-                <p>Password: {}</p>
+    pub async fn send_otp_email(to: &str, otp: &str, config: &Config) -> Result<(), String> {
+        let subject = "Your Verification Code - Prayukti vLAB";
+        let html = format!(
+            r#"
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #14D98F; border-radius: 12px; background-color: #021D24;">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h2 style="color: #ffffff; margin: 0;">Prayukti <span style="color: #14D98F; font-weight: 300;">vLAB</span></h2>
+                </div>
+                <h3 style="color: #ffffff; font-size: 20px; margin-bottom: 15px;">Verify your email address</h3>
+                <p style="color: #94a3b8; font-size: 16px; line-height: 1.5; margin-bottom: 25px;">
+                    Please use the verification code below to complete your sign in. This code will expire in {} minutes.
+                </p>
+                <div style="background-color: #084738; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 25px; border: 1px dashed #14D98F;">
+                    <span style="font-size: 32px; font-weight: bold; letter-spacing: 5px; color: #14D98F;">{}</span>
+                </div>
+                <p style="color: #64748b; font-size: 14px; line-height: 1.5;">
+                    If you didn't request this code, you can safely ignore this email. Someone else might have typed your email address by mistake.
+                </p>
+                <hr style="border: none; border-top: 1px solid #084738; margin: 30px 0;" />
+                <p style="color: #475569; font-size: 12px; text-align: center;">
+                    &copy; {} Prayukti vLAB. All rights reserved.
+                </p>
             </div>
-            <p>Please login and change your password for security.</p>
-            <a href="http://localhost:3000/login" style="display: inline-block; padding: 10px 20px; background: #4f46e5; color: white; text-decoration: none; border-radius: 6px;">Login Now</a>
-        </div>"#,
-        full_name, to, password_plain
-    );
-    send_email(to, subject, &html, config).await
-}
-
-#[allow(dead_code)]
-pub async fn send_announcement(
-    to: &str,
-    title: &str,
-    content: &str,
-    config: &Config,
-) -> Result<(), String> {
-    let subject = format!("Announcement: {}", title);
-    let html = format!(
-        r#"<div style="font-family: sans-serif;"><h3>{}</h3><p>{}</p></div>"#,
-        title, content
-    );
-    send_email(to, &subject, &html, config).await
+            "#,
+            config.otp_expiry_minutes,
+            otp,
+            chrono::Utc::now().year()
+        );
+        let text = format!("Your Prayukti vLAB verification code is: {}. It expires in {} minutes.", otp, config.otp_expiry_minutes);
+        
+        Self::send_email(to, subject, &html, Some(&text), config).await
+    }
 }

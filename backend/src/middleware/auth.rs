@@ -57,32 +57,47 @@ where
     async fn from_request_parts(parts: &mut Parts, state: &S) -> Result<Self, Self::Rejection> {
         let app_state = AppState::from_ref(state);
 
-        // 1. Try Authorization header
-        let auth_header = parts
-            .headers
-            .get(axum::http::header::AUTHORIZATION)
-            .and_then(|value| value.to_str().ok());
+        use axum_extra::extract::CookieJar;
 
-        let token = match auth_header {
-            Some(auth_data) => {
-                if auth_data.starts_with("Bearer ") {
-                    auth_data.trim_start_matches("Bearer ")
-                } else {
-                    auth_data
-                }
-            }
-            None => {
-                warn!("Authorization header missing or invalid");
+        // Try extracting from Cookie Jar
+        let cookies = match CookieJar::from_request_parts(parts, state).await {
+            Ok(c) => c,
+            Err(_) => {
                 return Err((
                     axum::http::StatusCode::UNAUTHORIZED,
-                    axum::Json(serde_json::json!({ "message": "Not authorized, token missing" })),
-                ));
+                    axum::Json(serde_json::json!({ "message": "Missing cookies" })),
+                ))
+            }
+        };
+
+        let token = match cookies.get("vlab_access_token") {
+            Some(cookie) => cookie.value().to_string(),
+            None => {
+                // Fallback to Authorization header if allowed (useful for non-browser clients)
+                let auth_header = parts
+                    .headers
+                    .get(axum::http::header::AUTHORIZATION)
+                    .and_then(|value| value.to_str().ok());
+
+                if let Some(auth_data) = auth_header {
+                    if auth_data.starts_with("Bearer ") {
+                        auth_data.trim_start_matches("Bearer ").to_string()
+                    } else {
+                        auth_data.to_string()
+                    }
+                } else {
+                    warn!("Access token cookie and Authorization header missing");
+                    return Err((
+                        axum::http::StatusCode::UNAUTHORIZED,
+                        axum::Json(serde_json::json!({ "message": "Not authorized, token missing" })),
+                    ));
+                }
             }
         };
 
         // 2. Decode & Validate Token
         match decode::<Claims>(
-            token,
+            &token,
             &DecodingKey::from_secret(app_state.config.jwt_secret.as_bytes()),
             &Validation::default(),
         ) {

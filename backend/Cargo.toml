@@ -24,3 +24,4 @@ dotenvy = "0.15.7"
 async-trait = "0.1.81"
 rand = "0.8.5"
 regex = "1.10.5"
+axum-extra = { version = "0.9.3", features = ["cookie"] }
