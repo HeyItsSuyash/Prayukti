@@ -3,6 +3,17 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
+import { 
+    BookOpen, 
+    Cpu, 
+    Terminal, 
+    MessageSquare, 
+    Download, 
+    BarChart, 
+    Award, 
+    Globe, 
+    Smartphone 
+} from "lucide-react";
 
 // Removed Navbar and Footer imports
 import { FeatureCard } from "@/components/features/FeatureCard";
