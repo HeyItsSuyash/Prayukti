@@ -23,6 +23,7 @@ import {
     AreaChart,
     Area
 } from "recharts";
+import { Table as TableIcon } from "lucide-react";
 
 
 interface DAACompilerProps {

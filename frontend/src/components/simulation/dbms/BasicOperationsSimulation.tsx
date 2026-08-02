@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 
-
 import { Button } from "@/components/ui/button";
+import { Table as TableIcon } from "lucide-react";
 
 type DBType = "MySQL" | "Oracle" | "PostgreSQL" | "MS-Access";
 

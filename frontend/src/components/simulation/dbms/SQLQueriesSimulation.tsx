@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 
 import { Button } from "@/components/ui/button";
+import { Settings, Calculator, Layers, Table, Terminal, FileText, Activity, BookOpen } from "lucide-react";
 
 // --- Types ---
 type ModuleId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;

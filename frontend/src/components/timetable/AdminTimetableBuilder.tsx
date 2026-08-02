@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
+import { CalendarIcon } from 'lucide-react';
 
 export default function AdminTimetableBuilder() {
   const [selectedBranch, setSelectedBranch] = useState("CSE");

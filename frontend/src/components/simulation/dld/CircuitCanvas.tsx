@@ -483,7 +483,7 @@ export default function CircuitCanvas({
                     className={`px-4 py-2 rounded-full text-xs font-bold border shadow-sm flex items-center gap-2 transition-all ${generating ? 'bg-green-500 text-white border-green-600' : 'bg-gray-200 text-gray-600'}`}
                     onClick={() => setGenerating(!generating)}
                 >
-                    {generating ? <i className="bx bx-pause" fill="currentColor" /> : <i className="bx bx-play" fill="currentColor" />}
+                    {generating ? <i className="bx bx-pause" /> : <i className="bx bx-play" />}
                     {generating ? 'SIMULATING' : 'PAUSED'}
                 </button>
 
