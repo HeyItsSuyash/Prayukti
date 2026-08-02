@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Table as TableIcon } from "lucide-react";
 
 
 export default function CompilerSimulator({ labId }: { labId: string }) {

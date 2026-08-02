@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AttendanceTab from '@/components/attendance/AttendanceTab';
+import { Users, BookOpen, AlertCircle, TrendingUp } from "lucide-react";
 
 // --- Sub-components ---
 

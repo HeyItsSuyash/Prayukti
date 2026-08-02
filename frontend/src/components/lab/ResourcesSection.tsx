@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { LabResources } from "@/lib/labs/rich-content";
 import { QuizView } from "./QuizView";
 import { motion } from "framer-motion";
+import { PlayCircle, BookOpen, HelpCircle, Link as LinkIcon } from "lucide-react";
 
 interface ResourcesSectionProps {
     resources?: LabResources;
