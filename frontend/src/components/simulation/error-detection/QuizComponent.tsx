@@ -35,8 +35,8 @@ export default function QuizComponent() {
             <CardContent>
                 <div className="space-y-6">
                     {quizQuestions.map((q, qImg) => (
-                        <div key={qImg} className="border p-4 rounded-lg bg-white shadow-sm">
-                            <p className="font-medium mb-3 text-gray-800">{qImg + 1}. {q.question}</p>
+                        <div key={qImg} className="border p-4 rounded bg-card shadow-sm">
+                            <p className="font-medium mb-3 text-foreground">{qImg + 1}. {q.question}</p>
                             <div className="space-y-2">
                                 {q.options.map((opt, optIdx) => (
                                     <div key={optIdx} className="flex items-center space-x-2">
@@ -50,7 +50,7 @@ export default function QuizComponent() {
                                             className="h-4 w-4 text-primary focus:ring-primary border-gray-300"
                                         />
                                         <label htmlFor={`q${qImg}-opt${optIdx}`} className={`text-sm ${showResults && q.answer === optIdx ? "text-green-700 font-bold" :
-                                                showResults && userAnswers[qImg] === optIdx && userAnswers[qImg] !== q.answer ? "text-red-600 line-through" : "text-gray-700"
+                                                showResults && userAnswers[qImg] === optIdx && userAnswers[qImg] !== q.answer ? "text-red-600 line-through" : "text-foreground/80"
                                             }`}>
                                             {opt}
                                             {showResults && q.answer === optIdx && " (Correct Answer)"}
@@ -67,7 +67,7 @@ export default function QuizComponent() {
                             <Button onClick={handleQuizSubmit} className=" px-8">Submit Answers</Button>
                         ) : (
                             <div className="flex items-center gap-4">
-                                <div className="text-xl font-bold bg-gray-100 px-4 py-2 rounded">
+                                <div className="text-xl font-bold bg-muted px-4 py-2 rounded">
                                     Your Score: <span className={quizScore! > quizQuestions.length / 2 ? "text-green-600" : "text-red-600"}>{quizScore}</span> / {quizQuestions.length}
                                 </div>
                                 <Button variant="outline" onClick={resetQuiz}>Retake Quiz</Button>

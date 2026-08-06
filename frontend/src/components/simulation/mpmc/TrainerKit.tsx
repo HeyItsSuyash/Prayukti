@@ -302,7 +302,7 @@ export const TrainerKit: React.FC<TrainerKitProps> = ({ cpu, onSync }) => {
                 <div className="flex justify-between items-start border-b border-[#222] pb-4">
                     <div className="flex flex-col">
                         <div className="flex items-center gap-3">
-                            <h2 className="text-xl font-bold text-slate-400 tracking-tighter">MP-8085 / VLAB-T01</h2>
+                            <h2 className="text-xl font-bold text-muted-foreground/80 tracking-tighter">MP-8085 / VLAB-T01</h2>
                             {isFocused && (
                                 <div className="flex items-center gap-1 bg-[#2e7d32]/20 px-2 py-0.5 rounded border border-[#2e7d32]/30">
                                     <div className="w-1.5 h-1.5 rounded-full bg-[#39ff14] animate-pulse" />
@@ -312,19 +312,19 @@ export const TrainerKit: React.FC<TrainerKitProps> = ({ cpu, onSync }) => {
                         </div>
                         <div className="flex items-center gap-2 mt-1">
                             <div className={`w-2 h-2 rounded-full ${isRunning ? "bg-red-500 animate-pulse shadow-[0_0_8px_#f00]" : "bg-red-900"}`} />
-                            <span className="text-[9px] font-black text-slate-700 uppercase tracking-widest">{isRunning ? "RUNNING" : "READY"}</span>
+                            <span className="text-[9px] font-black text-foreground/80 uppercase tracking-widest">{isRunning ? "RUNNING" : "READY"}</span>
                         </div>
                     </div>
                     <div className="flex gap-4">
                         <button
                             onClick={() => setShowGuide(true)}
-                            className="flex items-center gap-2 px-3 py-1.5 bg-[#222] hover:bg-[#333] border border-[#444] rounded text-slate-400 text-[10px] font-bold transition-all active:scale-95"
+                            className="flex items-center gap-2 px-3 py-1.5 bg-[#222] hover:bg-[#333] border border-[#444] rounded text-muted-foreground/80 text-[10px] font-bold transition-all active:scale-95"
                         >
                             <HelpCircle className="h-3.5 w-3.5" /> OPCODE GUIDE
                         </button>
                         <div className="hidden sm:flex flex-col items-end">
-                            <span className="text-[8px] font-black text-slate-700 uppercase tracking-widest">Advanced Microprocessor</span>
-                            <span className="text-[8px] font-black text-slate-800 uppercase tracking-widest">Training Environment</span>
+                            <span className="text-[8px] font-black text-foreground/80 uppercase tracking-widest">Advanced Microprocessor</span>
+                            <span className="text-[8px] font-black text-foreground uppercase tracking-widest">Training Environment</span>
                         </div>
                     </div>
                 </div>
@@ -332,16 +332,16 @@ export const TrainerKit: React.FC<TrainerKitProps> = ({ cpu, onSync }) => {
                 {showGuide && <OpcodeGuide onClose={() => setShowGuide(false)} />}
 
                 {/* Display Console */}
-                <div className="bg-[#050505] p-8 rounded-2xl border-b-8 border-r-8 border-black/40 mb-8 shadow-2xl flex justify-center gap-16 overflow-hidden relative">
+                <div className="bg-[#050505] p-8 rounded border-b-8 border-r-8 border-black/40 mb-8 shadow-2xl flex justify-center gap-16 overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-red-500/5 to-transparent pointer-events-none" />
                     {/* Address LED */}
                     <div className="space-y-3 z-10">
-                        <div className="text-[11px] text-slate-700 font-black uppercase tracking-[0.2em] text-center">Address / Register</div>
+                        <div className="text-[11px] text-foreground/80 font-black uppercase tracking-[0.2em] text-center">Address / Register</div>
                         <HexDisplay value={displayAddressHex} length={displayAddressHex.length} size="lg" />
                     </div>
                     {/* Data LED */}
                     <div className="space-y-3 z-10">
-                        <div className="text-[11px] text-slate-800 font-black uppercase tracking-[0.2em] text-center">Data / Value</div>
+                        <div className="text-[11px] text-foreground font-black uppercase tracking-[0.2em] text-center">Data / Value</div>
                         <HexDisplay value={displayAddressHex.length > 4 ? displayDataHex.slice(-4) : displayDataHex} length={2} size="lg" />
                     </div>
                 </div>
@@ -350,9 +350,15 @@ export const TrainerKit: React.FC<TrainerKitProps> = ({ cpu, onSync }) => {
                 <div className="grid grid-cols-12 gap-6">
                     {/* Left: Registers and Flags */}
                     <div className="col-span-8 space-y-6">
+<<<<<<< Updated upstream
                         <div className="bg-[#0a0a0a] p-5 rounded-2xl border border-white/5 shadow-xl">
                             <div className="text-[10px] text-slate-700 font-bold uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
                                 <Cpu className="h-3 w-3 text-red-900" /> Internal Processor State
+=======
+                        <div className="bg-[#0a0a0a] p-5 rounded border border-white/5 shadow-xl">
+                            <div className="text-[10px] text-foreground/80 font-bold uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
+                                <i className="bx bx-cpu h-3 w-3 text-red-900"  /> Internal Processor State
+>>>>>>> Stashed changes
                             </div>
                             <div className="grid grid-cols-4 gap-4">
                                 {['A', 'B', 'C', 'D', 'E', 'H', 'L'].map(reg => (
@@ -375,7 +381,7 @@ export const TrainerKit: React.FC<TrainerKitProps> = ({ cpu, onSync }) => {
                                     <RegisterPair label="SP" h={cpu.registers.SP >> 8} l={cpu.registers.SP & 0xFF} activeH={selectedRegister === "SP"} activeL={selectedRegister === "SP"} />
                                 </div>
 
-                                <div className="flex bg-black/40 p-3 rounded-xl border border-white/5 gap-6 items-center px-6">
+                                <div className="flex bg-black/40 p-3 rounded border border-white/5 gap-6 items-center px-6">
                                     {Object.entries(cpu.flags).map(([f, v]) => (
                                         <FlagLED key={f} label={f} status={v} />
                                     ))}
@@ -384,8 +390,13 @@ export const TrainerKit: React.FC<TrainerKitProps> = ({ cpu, onSync }) => {
                         </div>
 
                         {/* Status & Feedback */}
+<<<<<<< Updated upstream
                         <div className="bg-black/60 border border-white/5 p-4 rounded-xl flex items-center gap-3 shadow-inner">
                             <Terminal className="h-4 w-4 text-emerald-900" />
+=======
+                        <div className="bg-black/60 border border-white/5 p-4 rounded flex items-center gap-3 shadow-inner">
+                            <i className="bx bx-terminal h-4 w-4 text-emerald-900"  />
+>>>>>>> Stashed changes
                             <span className="text-xs text-emerald-500/80 font-mono tracking-tight truncate uppercase">{feedback}</span>
                         </div>
 
@@ -403,8 +414,13 @@ export const TrainerKit: React.FC<TrainerKitProps> = ({ cpu, onSync }) => {
 
                         {/* Memory Trace Panel */}
                         <div className="bg-[#050505] p-3 rounded border border-[#222]">
+<<<<<<< Updated upstream
                             <div className="text-[10px] text-slate-700 font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
                                 <Hash className="h-3 w-3" /> Memory Peek (PC Range)
+=======
+                            <div className="text-[10px] text-foreground/80 font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
+                                <i className="bx bx-hash h-3 w-3"  /> Memory Peek (PC Range)
+>>>>>>> Stashed changes
                             </div>
                             <div className="grid grid-cols-8 gap-1">
                                 {Array.from({ length: 16 }).map((_, i) => {
@@ -413,8 +429,8 @@ export const TrainerKit: React.FC<TrainerKitProps> = ({ cpu, onSync }) => {
                                     const isPC = addr === cpu.registers.PC;
                                     return (
                                         <div key={addr} className={`flex flex-col items-center p-1 rounded border ${isPC ? "bg-red-900/40 border-red-500/50" : "bg-black border-[#111]"}`}>
-                                            <span className="text-[7px] text-slate-800 font-bold">{addr.toString(16).toUpperCase().padStart(4, "0")}</span>
-                                            <span className={`text-[11px] font-bold ${isPC ? "text-red-500" : "text-slate-600"}`}>{val.toString(16).toUpperCase().padStart(2, "0")}</span>
+                                            <span className="text-[7px] text-foreground font-bold">{addr.toString(16).toUpperCase().padStart(4, "0")}</span>
+                                            <span className={`text-[11px] font-bold ${isPC ? "text-red-500" : "text-muted-foreground"}`}>{val.toString(16).toUpperCase().padStart(2, "0")}</span>
                                         </div>
                                     );
                                 })}
@@ -442,7 +458,7 @@ export const TrainerKit: React.FC<TrainerKitProps> = ({ cpu, onSync }) => {
                             <button onClick={(e) => { e.stopPropagation(); handleKeyDown({ key: 'ENTER', preventDefault: () => { } } as any); }} className="h-10 bg-[#444] hover:bg-[#555] text-white rounded font-bold text-xs">NEXT</button>
                             <button onClick={(e) => { e.stopPropagation(); handleKeyDown({ key: 'M', preventDefault: () => { } } as any); }} className="h-10 bg-[#444] hover:bg-[#555] text-white rounded font-bold text-xs">EXM MEM</button>
                             <button onClick={(e) => { e.stopPropagation(); handleKeyDown({ key: 'G', preventDefault: () => { } } as any); }} className="h-10 bg-[#cc3333] hover:bg-[#dd4444] text-white rounded font-bold text-xs">EXEC</button>
-                            <button onClick={(e) => { e.stopPropagation(); handleKeyDown({ key: 'ESCAPE', preventDefault: () => { } } as any); }} className="h-10 bg-[#222] hover:bg-[#333] text-gray-400 rounded font-bold text-xs">RESET</button>
+                            <button onClick={(e) => { e.stopPropagation(); handleKeyDown({ key: 'ESCAPE', preventDefault: () => { } } as any); }} className="h-10 bg-[#222] hover:bg-[#333] text-muted-foreground/80 rounded font-bold text-xs">RESET</button>
                         </div>
                     </div>
                 </div>
@@ -502,7 +518,7 @@ const SevenSegment = ({ val, active = true, size = "md" }: { val: string, active
 const HexDisplay = ({ value, length = 2, size = "md", active = true }: { value: number | string, length?: number, size?: "sm" | "md" | "lg", active?: boolean }) => {
     const str = (typeof value === "number" ? value.toString(16) : value).toUpperCase().padStart(length, "0");
     return (
-        <div className="flex gap-1.5 items-center justify-center p-2 bg-black/80 rounded-lg border border-white/5 shadow-inner">
+        <div className="flex gap-1.5 items-center justify-center p-2 bg-black/80 rounded border border-white/5 shadow-inner">
             {str.split("").map((char, i) => (
                 <SevenSegment key={i} val={char} size={size} active={active} />
             ))}
@@ -511,15 +527,15 @@ const HexDisplay = ({ value, length = 2, size = "md", active = true }: { value: 
 };
 
 const StatBox = ({ label, val, active }: { label: string, val: number, active: boolean }) => (
-    <div className={`p-2 rounded-xl border border-white/5 transition-all bg-black/40 ${active ? "shadow-[inset_0_0_15px_rgba(239,68,68,0.1)] border-red-500/20" : ""}`}>
-        <div className="text-[9px] text-slate-500 font-bold mb-2 uppercase tracking-tight text-center">{label}</div>
+    <div className={`p-2 rounded border border-white/5 transition-all bg-black/40 ${active ? "shadow-[inset_0_0_15px_rgba(239,68,68,0.1)] border-red-500/20" : ""}`}>
+        <div className="text-[9px] text-muted-foreground font-bold mb-2 uppercase tracking-tight text-center">{label}</div>
         <HexDisplay value={val} length={2} active={active} />
     </div>
 );
 
 const RegisterPair = ({ label, h, l, activeH, activeL }: { label: string, h: number, l: number, activeH: boolean, activeL: boolean }) => (
     <div className="space-y-2">
-        <div className="text-[10px] text-slate-400 font-black text-center">{label}</div>
+        <div className="text-[10px] text-muted-foreground/80 font-black text-center">{label}</div>
         <div className="grid grid-cols-2 gap-2">
             <StatBox label={label[0]} val={h} active={activeH} />
             <StatBox label={label[1]} val={l} active={activeL} />
@@ -530,14 +546,14 @@ const RegisterPair = ({ label, h, l, activeH, activeL }: { label: string, h: num
 const FlagLED = ({ label, status }: { label: string, status: boolean }) => (
     <div className="flex flex-col items-center gap-1">
         <div className={`w-3 h-3 rounded-full border-2 border-black/50 transition-all ${status ? "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]" : "bg-red-950/30"}`} />
-        <span className={`text-[9px] font-bold ${status ? "text-red-400" : "text-slate-600"}`}>{label}</span>
+        <span className={`text-[9px] font-bold ${status ? "text-red-400" : "text-muted-foreground"}`}>{label}</span>
     </div>
 );
 
 const KeyHelp = ({ k, k2, t, desc }: { k: string, k2?: string, t: string, desc?: string }) => (
     <div className="flex flex-col items-center bg-black/40 p-1.5 rounded border border-white/5 shadow-sm">
-        <span className="text-[9px] text-slate-400 font-black tracking-widest">{k}{k2 ? ` / ${k2}` : ''}</span>
-        <span className="text-[7px] text-slate-600 font-bold uppercase mt-0.5">{t}</span>
-        {desc && <span className="text-[6px] text-slate-800 font-medium">{desc}</span>}
+        <span className="text-[9px] text-muted-foreground/80 font-black tracking-widest">{k}{k2 ? ` / ${k2}` : ''}</span>
+        <span className="text-[7px] text-muted-foreground font-bold uppercase mt-0.5">{t}</span>
+        {desc && <span className="text-[6px] text-foreground font-medium">{desc}</span>}
     </div>
 );

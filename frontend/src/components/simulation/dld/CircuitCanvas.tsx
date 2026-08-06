@@ -475,12 +475,12 @@ export default function CircuitCanvas({
     }, [nodes, edges]);
 
     return (
-        <div className="h-full w-full bg-gray-100 flex flex-col relative overflow-hidden">
+        <div className="h-full w-full bg-muted flex flex-col relative overflow-hidden">
 
             {/* Top Bar - Minimal */}
             <div className="absolute top-4 right-4 z-20 flex gap-2">
                 <button
-                    className={`px-4 py-2 rounded-full text-xs font-bold border shadow-sm flex items-center gap-2 transition-all ${generating ? 'bg-green-500 text-white border-green-600' : 'bg-gray-200 text-gray-600'}`}
+                    className={`px-4 py-2 rounded-full text-xs font-bold border shadow-sm flex items-center gap-2 transition-all ${generating ? 'bg-green-500 text-white border-green-600' : 'bg-muted text-muted-foreground'}`}
                     onClick={() => setGenerating(!generating)}
                 >
                     {generating ? <Pause size={14} fill="currentColor" /> : <Play size={14} fill="currentColor" />}
@@ -488,7 +488,7 @@ export default function CircuitCanvas({
                 </button>
 
                 <button
-                    className="px-4 py-2 bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 rounded-full text-xs font-bold shadow-sm flex items-center gap-2"
+                    className="px-4 py-2 bg-card hover:bg-muted/50 text-foreground/80 border border-border rounded-full text-xs font-bold shadow-sm flex items-center gap-2"
                     onClick={handleWorkspacesOpen}
                 >
                     <Table size={14} /> Truth Table
@@ -535,15 +535,15 @@ export default function CircuitCanvas({
                     snapToGrid
                     snapGrid={[10, 10]}
                     defaultEdgeOptions={{ type: 'signal', animated: false, style: { strokeWidth: 2 } }}
-                    className="bg-gray-50 bg-opacity-50"
+                    className="bg-muted/50 bg-opacity-50"
                 >
-                    <Controls className="!bg-white !border-gray-200 !shadow-lg !rounded-lg !m-4" />
+                    <Controls className="!bg-card !border-border !shadow-lg !rounded !m-4" />
                     <Background
                         color="#cbd5e1"
                         variant={BackgroundVariant.Lines}
                         gap={20}
                         size={1}
-                        className="bg-gray-50/50"
+                        className="bg-muted/50/50"
                     />
                 </ReactFlow>
             </div>

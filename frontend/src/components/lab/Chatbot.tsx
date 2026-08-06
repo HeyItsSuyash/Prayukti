@@ -111,21 +111,21 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
-              className="bg-white px-4 py-3 rounded-2xl rounded-tr-none shadow-xl border-2 border-slate-100 max-w-[200px]"
+              className="bg-card px-4 py-3 rounded rounded-tr-none shadow-xl border-2 border-border max-w-[200px]"
             >
-              <p className="text-sm font-bold text-black">Hi, how can I help you Today!</p>
+              <p className="text-sm font-bold text-foreground">Hi, how can I help you Today!</p>
             </motion.div>
 
             {/* Robot Icon */}
-            <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center shadow-2xl border-4 border-white transition-transform group-hover:scale-110 relative overflow-hidden">
+            <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-2xl border-4 border-background transition-transform group-hover:scale-110 relative overflow-hidden">
               {/* Simple CSS Robot Face Placeholder since we don't have the image asset */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-slate-900 to-slate-800"></div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary to-primary/80"></div>
               <div className="relative z-10 flex flex-col items-center mt-1">
                 <div className="flex gap-2 mb-1">
                   <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
                   <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
                 </div>
-                <div className="w-6 h-1 bg-white rounded-full"></div>
+                <div className="w-6 h-1 bg-primary-foreground rounded-full"></div>
               </div>
             </div>
           </motion.div>
@@ -139,29 +139,39 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "100%", opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white shadow-2xl z-50 border-l border-slate-200 flex flex-col"
+            className="fixed top-0 right-0 h-full w-full md:w-[400px] bg-background shadow-2xl z-50 border-l border-border flex flex-col"
           >
             {/* Header */}
-            <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+            <div className="p-4 border-b border-border flex items-center justify-between bg-muted/50">
               <div className="flex items-center gap-3">
+<<<<<<< Updated upstream
                 <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white">
                   <Bot size={20} />
+=======
+                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground">
+                  <i className="bx bx-bot"  />
+>>>>>>> Stashed changes
                 </div>
                 <div>
-                  <h3 className="font-bold text-black text-sm">Lab Assistant</h3>
+                  <h3 className="font-bold text-foreground text-sm">Lab Assistant</h3>
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    <span className="text-xs text-slate-500 font-medium">{subject} Module</span>
+                    <span className="w-2 h-2 bg-success rounded-full animate-pulse"></span>
+                    <span className="text-xs text-muted-foreground font-medium">{subject} Module</span>
                   </div>
                 </div>
               </div>
+<<<<<<< Updated upstream
               <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="hover:bg-slate-200 rounded-full">
                 <X size={20} />
+=======
+              <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="hover:bg-muted rounded-full">
+                <i className="bx bx-x"  />
+>>>>>>> Stashed changes
               </Button>
             </div>
 
             {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/50 scroll-smooth">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-muted/30 scroll-smooth">
               {messages.map((msg) => (
                 <motion.div
                   key={msg.id}
@@ -170,20 +180,20 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
                   className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[85%] p-3 rounded-2xl text-sm font-medium leading-relaxed ${msg.role === "user"
-                      ? "bg-black text-white rounded-br-none"
-                      : "bg-white border border-slate-200 text-slate-800 rounded-bl-none shadow-sm"
+                    className={`max-w-[85%] p-3 rounded text-sm font-medium leading-relaxed ${msg.role === "user"
+                      ? "bg-primary text-primary-foreground rounded-br-none"
+                      : "bg-card border border-border text-foreground rounded-bl-none shadow-sm"
                       }`}
                   >
                     {msg.role === "bot" ? (
                       <ReactMarkdown
                         components={{
                           p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-                          strong: ({ children }) => <strong className="font-bold text-black underline decoration-blue-500/30 decoration-2 underline-offset-2">{children}</strong>,
+                          strong: ({ children }) => <strong className="font-bold text-foreground underline decoration-primary/30 decoration-2 underline-offset-2">{children}</strong>,
                           ul: ({ children }) => <ul className="list-disc ml-4 mb-2 space-y-1">{children}</ul>,
                           ol: ({ children }) => <ol className="list-decimal ml-4 mb-2 space-y-1">{children}</ol>,
                           li: ({ children }) => <li className="mb-0">{children}</li>,
-                          h1: ({ children }) => <h1 className="text-base font-bold mb-2 border-b border-slate-100 pb-1">{children}</h1>,
+                          h1: ({ children }) => <h1 className="text-base font-bold mb-2 border-b border-border pb-1">{children}</h1>,
                           h2: ({ children }) => <h2 className="text-sm font-bold mb-1">{children}</h2>,
                         }}
                       >
@@ -197,8 +207,13 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
               ))}
               {isTyping && (
                 <div className="flex justify-start">
+<<<<<<< Updated upstream
                   <div className="bg-white border border-slate-200 px-4 py-3 rounded-2xl rounded-bl-none shadow-sm">
                     <Loader2 className="w-4 h-4 animate-spin text-slate-400" />
+=======
+                  <div className="bg-card border border-border px-4 py-3 rounded rounded-bl-none shadow-sm">
+                    <i className="bx bx-loader2 w-4 h-4 animate-spin text-muted-foreground"  />
+>>>>>>> Stashed changes
                   </div>
                 </div>
               )}
@@ -206,7 +221,7 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
             </div>
 
             {/* Input Area */}
-            <div className="p-4 bg-white border-t border-slate-100">
+            <div className="p-4 bg-background border-t border-border">
               <div className="relative flex items-center">
                 <input
                   type="text"
@@ -214,11 +229,11 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
                   placeholder="Ask a question..."
-                  className="w-full pl-4 pr-12 py-3 bg-slate-50 border-2 border-slate-100 rounded-xl focus:outline-none focus:border-black transition-colors font-medium text-sm"
+                  className="w-full pl-4 pr-12 py-3 bg-muted/50 border-2 border-border rounded focus:outline-none focus:border-primary transition-colors font-medium text-sm text-foreground"
                 />
                 <Button
                   size="icon"
-                  className="absolute right-1 top-1 bottom-1 w-9 h-9 rounded-lg bg-black text-white hover:bg-slate-800"
+                  className="absolute right-1 top-1 bottom-1 w-9 h-9 rounded bg-primary text-primary-foreground hover:bg-primary/90 btn-press"
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim() || isTyping}
                 >
@@ -226,7 +241,7 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
                 </Button>
               </div>
               <div className="mt-2 text-center">
-                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">AI Powered Assistant</p>
+                <p className="text-[10px] text-muted-foreground/80 font-bold uppercase tracking-widest">AI Powered Assistant</p>
               </div>
             </div>
           </motion.div>

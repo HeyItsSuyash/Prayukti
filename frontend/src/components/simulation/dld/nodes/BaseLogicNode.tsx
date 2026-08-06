@@ -23,10 +23,10 @@ export const LogicSymbolWrapper = ({
     const { setNodes } = useReactFlow();
 
     return (
-        <div className={`relative ${width} ${height} bg-white border-2 flex flex-col items-center justify-center shadow-sm transition-all ${selected ? 'border-orange-500 shadow-orange-200' : 'border-black'}`}>
-            <div className="absolute top-0 w-full bg-gray-50 border-b border-black/10 py-1">
+        <div className={`relative ${width} ${height} bg-card border-2 flex flex-col items-center justify-center shadow-sm transition-all ${selected ? 'border-orange-500 shadow-orange-200' : 'border-black'}`}>
+            <div className="absolute top-0 w-full bg-muted/50 border-b border-black/10 py-1">
                 <input
-                    className="w-full text-center text-[10px] uppercase font-bold tracking-widest text-gray-500 bg-transparent outline-none cursor-text hover:text-black hover:bg-white/50 transition-colors"
+                    className="w-full text-center text-[10px] uppercase font-bold tracking-widest text-muted-foreground bg-transparent outline-none cursor-text hover:text-foreground hover:bg-card/50 transition-colors"
                     value={label}
                     onChange={(evt) => {
                         setNodes((nds) => nds.map((n) => {

@@ -345,22 +345,22 @@ export default function ARPSimulation({ labId }: { labId: string }) {
     };
 
     return (
-        <div className="flex flex-col h-[700px] bg-slate-50 font-sans rounded-xl overflow-hidden border">
+        <div className="flex flex-col h-[700px] bg-muted/50 font-sans rounded overflow-hidden border">
             {/* Top Toolbar */}
-            <div className="bg-white border-b p-4 flex justify-between items-center shadow-sm z-10">
+            <div className="bg-card border-b p-4 flex justify-between items-center shadow-sm z-10">
                 <div className="flex items-center gap-3">
-                    <Network className="text-blue-600" />
-                    <h2 className="text-xl font-black uppercase tracking-tight text-slate-800">ARP Sandbox</h2>
+                    <Network className="text-primary" />
+                    <h2 className="text-xl font-black uppercase tracking-tight text-foreground">ARP Sandbox</h2>
 
-                    <div className="ml-6 flex items-center bg-slate-100 p-1 rounded-lg">
+                    <div className="ml-6 flex items-center bg-muted p-1 rounded">
                         <button
-                            className={`px-4 py-1.5 text-sm font-semibold rounded-md transition-all ${activeTab === 'simulation' ? 'bg-white shadow-sm text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
+                            className={`px-4 py-1.5 text-sm font-semibold rounded-md transition-all ${activeTab === 'simulation' ? 'bg-card shadow-sm text-primary' : 'text-muted-foreground hover:text-foreground/80'}`}
                             onClick={() => setActiveTab('simulation')}
                         >
                             Simulation
                         </button>
                         <button
-                            className={`px-4 py-1.5 text-sm font-semibold rounded-md transition-all ${activeTab === 'observation' ? 'bg-white shadow-sm text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
+                            className={`px-4 py-1.5 text-sm font-semibold rounded-md transition-all ${activeTab === 'observation' ? 'bg-card shadow-sm text-primary' : 'text-muted-foreground hover:text-foreground/80'}`}
                             onClick={() => setActiveTab('observation')}
                         >
                             Observation
@@ -368,13 +368,13 @@ export default function ARPSimulation({ labId }: { labId: string }) {
                     </div>
                 </div>
                 <div className="flex gap-2 items-center">
-                    <span className="text-sm font-semibold text-slate-600 mr-2">Quick Ping:</span>
+                    <span className="text-sm font-semibold text-muted-foreground mr-2">Quick Ping:</span>
                     {PC_NODES.filter(id => id !== selectedSourceId).map(id => (
                         <Button key={id} variant="outline" size="sm" onClick={() => initiatePing(NODES[id].ip)} disabled={isAnimating}>
                             {NODES[id].name}
                         </Button>
                     ))}
-                    <div className="w-px h-6 bg-slate-200 mx-2"></div>
+                    <div className="w-px h-6 bg-muted mx-2"></div>
                     <Button variant="destructive" size="sm" onClick={handleReset} disabled={isAnimating}>
                         <RotateCcw className="w-4 h-4 mr-2" /> Reset
                     </Button>
@@ -384,16 +384,16 @@ export default function ARPSimulation({ labId }: { labId: string }) {
             {activeTab === 'simulation' ? (
                 <div className="flex flex-1 overflow-hidden">
                     {/* Left Panel: Sender & Controls */}
-                    <div className="w-80 bg-white border-r flex flex-col z-10 shadow-md">
-                        <div className="p-4 border-b bg-slate-50">
+                    <div className="w-80 bg-card border-r flex flex-col z-10 shadow-md">
+                        <div className="p-4 border-b bg-muted/50">
                             <div className="flex items-center justify-between mb-3">
                                 <div className="flex items-center gap-2">
-                                    <Server className="text-blue-600 w-5 h-5" />
-                                    <h3 className="font-bold text-slate-800">Source Device</h3>
+                                    <Server className="text-primary w-5 h-5" />
+                                    <h3 className="font-bold text-foreground">Source Device</h3>
                                 </div>
                             </div>
                             <select
-                                className="w-full p-2 mb-3 border rounded-md text-sm font-semibold text-slate-700 bg-white focus:ring-2 focus:ring-blue-500 outline-none"
+                                className="w-full p-2 mb-3 border rounded-md text-sm font-semibold text-foreground/80 bg-card focus:ring-2 focus:ring-blue-500 outline-none"
                                 value={selectedSourceId}
                                 disabled={isAnimating}
                                 onChange={(e) => {
@@ -405,7 +405,7 @@ export default function ARPSimulation({ labId }: { labId: string }) {
                                     <option key={id} value={id}>{NODES[id].name} ({NODES[id].ip})</option>
                                 ))}
                             </select>
-                            <div className="text-xs font-mono text-slate-600 bg-white p-2 border rounded">
+                            <div className="text-xs font-mono text-muted-foreground bg-card p-2 border rounded">
                                 <div>IP:  {activeNode.ip}</div>
                                 <div>MAC: {activeNode.mac}</div>
                             </div>
@@ -436,9 +436,9 @@ export default function ARPSimulation({ labId }: { labId: string }) {
                         </div>
 
                         {/* ARP Cache */}
-                        <div className="flex flex-col min-h-[30%] bg-slate-50">
-                            <div className="px-3 py-2 border-b flex justify-between items-center bg-white">
-                                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1">
+                        <div className="flex flex-col min-h-[30%] bg-muted/50">
+                            <div className="px-3 py-2 border-b flex justify-between items-center bg-card">
+                                <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1">
                                     <Database className="w-3 h-3" /> ARP Cache ({activeNode.name})
                                 </h4>
                                 <Button variant="ghost" size="icon" className="h-6 w-6" disabled={isAnimating} onClick={() => {
@@ -451,9 +451,9 @@ export default function ARPSimulation({ labId }: { labId: string }) {
                             </div>
                             <div className="p-2 overflow-y-auto flex-1">
                                 {activeArpTable.length === 0 ? (
-                                    <div className="text-xs text-slate-400 italic text-center mt-4">Table is empty</div>
+                                    <div className="text-xs text-muted-foreground/80 italic text-center mt-4">Table is empty</div>
                                 ) : (
-                                    <table className="w-full text-left text-xs text-slate-700">
+                                    <table className="w-full text-left text-xs text-foreground/80">
                                         <thead>
                                             <tr className="border-b">
                                                 <th className="pb-1 font-semibold">IP Address</th>
@@ -475,35 +475,35 @@ export default function ARPSimulation({ labId }: { labId: string }) {
                     </div>
 
                     {/* Right Panel: Visualization area */}
-                    <div className="flex-1 relative bg-slate-100/50 flex flex-col items-center justify-center p-8 overflow-hidden">
+                    <div className="flex-1 relative bg-muted/50 flex flex-col items-center justify-center p-8 overflow-hidden">
 
                         {/* The topology */}
-                        <div className="relative w-full max-w-2xl h-96 flex items-center justify-between border-2 border-dashed border-slate-300 rounded-2xl bg-white/50 p-8 shadow-inner">
+                        <div className="relative w-full max-w-2xl h-96 flex items-center justify-between border-2 border-dashed border-slate-300 rounded bg-card/50 p-8 shadow-inner">
 
                             {/* PC-1 Node (Left) */}
-                            <div id="pc1" className={`relative z-10 flex flex-col items-center p-4 bg-white border-2 shadow-lg rounded-xl transition-all ${selectedSourceId === 'pc1' ? 'border-blue-500 ring-4 ring-blue-100' : 'border-slate-200'}`}>
-                                <Server className={`w-12 h-12 mb-2 ${selectedSourceId === 'pc1' ? 'text-blue-600' : 'text-slate-500'}`} />
+                            <div id="pc1" className={`relative z-10 flex flex-col items-center p-4 bg-card border-2 shadow-lg rounded transition-all ${selectedSourceId === 'pc1' ? 'border-blue-500 ring-4 ring-blue-100' : 'border-border'}`}>
+                                <Server className={`w-12 h-12 mb-2 ${selectedSourceId === 'pc1' ? 'text-primary' : 'text-muted-foreground'}`} />
                                 <Badge variant={selectedSourceId === 'pc1' ? "default" : "secondary"} className="mb-1">PC-1</Badge>
-                                <span className="font-mono text-[10px] text-slate-500">{NODES.pc1.ip}</span>
+                                <span className="font-mono text-[10px] text-muted-foreground">{NODES.pc1.ip}</span>
                             </div>
 
                             {/* Switch Node (Center) */}
-                            <div id="switch1" className="relative z-10 flex flex-col items-center p-6 bg-slate-800 border-4 border-slate-600 shadow-xl rounded-xl">
+                            <div id="switch1" className="relative z-10 flex flex-col items-center p-6 bg-slate-800 border-4 border-slate-600 shadow-xl rounded">
                                 <Activity className="w-10 h-10 text-emerald-400 mb-2" />
                                 <span className="text-white font-bold tracking-widest text-sm uppercase">Switch</span>
                             </div>
 
                             {/* Receivers (Right) */}
                             <div className="relative z-10 flex flex-col gap-12">
-                                <div id="pc2" className={`flex flex-col items-center p-4 bg-white border-2 shadow-lg rounded-xl transition-all ${selectedSourceId === 'pc2' ? 'border-blue-500 ring-4 ring-blue-100' : 'border-slate-200'}`}>
-                                    <Server className={`w-8 h-8 mb-2 ${selectedSourceId === 'pc2' ? 'text-blue-600' : 'text-slate-500'}`} />
+                                <div id="pc2" className={`flex flex-col items-center p-4 bg-card border-2 shadow-lg rounded transition-all ${selectedSourceId === 'pc2' ? 'border-blue-500 ring-4 ring-blue-100' : 'border-border'}`}>
+                                    <Server className={`w-8 h-8 mb-2 ${selectedSourceId === 'pc2' ? 'text-primary' : 'text-muted-foreground'}`} />
                                     <Badge variant={selectedSourceId === 'pc2' ? "default" : "secondary"} className="mb-1">PC-2</Badge>
-                                    <span className="font-mono text-[10px] text-slate-500">{NODES.pc2.ip}</span>
+                                    <span className="font-mono text-[10px] text-muted-foreground">{NODES.pc2.ip}</span>
                                 </div>
-                                <div id="pc3" className={`flex flex-col items-center p-4 bg-white border-2 shadow-lg rounded-xl transition-all ${selectedSourceId === 'pc3' ? 'border-blue-500 ring-4 ring-blue-100' : 'border-slate-200'}`}>
-                                    <Server className={`w-8 h-8 mb-2 ${selectedSourceId === 'pc3' ? 'text-blue-600' : 'text-slate-500'}`} />
+                                <div id="pc3" className={`flex flex-col items-center p-4 bg-card border-2 shadow-lg rounded transition-all ${selectedSourceId === 'pc3' ? 'border-blue-500 ring-4 ring-blue-100' : 'border-border'}`}>
+                                    <Server className={`w-8 h-8 mb-2 ${selectedSourceId === 'pc3' ? 'text-primary' : 'text-muted-foreground'}`} />
                                     <Badge variant={selectedSourceId === 'pc3' ? "default" : "secondary"} className="mb-1">PC-3</Badge>
-                                    <span className="font-mono text-[10px] text-slate-500">{NODES.pc3.ip}</span>
+                                    <span className="font-mono text-[10px] text-muted-foreground">{NODES.pc3.ip}</span>
                                 </div>
                             </div>
 
@@ -549,26 +549,26 @@ export default function ARPSimulation({ labId }: { labId: string }) {
                         </div>
 
                         {/* Stats Dashboard */}
-                        <div className="absolute bottom-6 left-6 right-6 bg-white border shadow-sm p-4 rounded-xl flex justify-around">
+                        <div className="absolute bottom-6 left-6 right-6 bg-card border shadow-sm p-4 rounded flex justify-around">
                             <div className="text-center">
-                                <div className="text-3xl font-black text-slate-800">{stats.requestsSent}</div>
-                                <div className="text-xs font-bold uppercase tracking-wider text-slate-400">ARP Requests Sent</div>
+                                <div className="text-3xl font-black text-foreground">{stats.requestsSent}</div>
+                                <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground/80">ARP Requests Sent</div>
                             </div>
-                            <div className="w-px bg-slate-200"></div>
+                            <div className="w-px bg-muted"></div>
                             <div className="text-center">
-                                <div className="text-3xl font-black text-slate-800">{stats.repliesReceived}</div>
-                                <div className="text-xs font-bold uppercase tracking-wider text-slate-400">ARP Replies Received</div>
+                                <div className="text-3xl font-black text-foreground">{stats.repliesReceived}</div>
+                                <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground/80">ARP Replies Received</div>
                             </div>
-                            <div className="w-px bg-slate-200"></div>
+                            <div className="w-px bg-muted"></div>
                             <div className="text-center">
-                                <div className="text-3xl font-black text-slate-800">
+                                <div className="text-3xl font-black text-foreground">
                                     {Object.values(arpTables).reduce((acc, curr) => acc + curr.length, 0)}
                                 </div>
-                                <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Total Cache Pointers</div>
+                                <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground/80">Total Cache Pointers</div>
                             </div>
-                            <div className="w-px bg-slate-200"></div>
+                            <div className="w-px bg-muted"></div>
                             <div className="text-center">
-                                <div className="text-3xl font-black text-blue-600">{stats.pingSuccesses}</div>
+                                <div className="text-3xl font-black text-primary">{stats.pingSuccesses}</div>
                                 <div className="text-xs font-bold uppercase tracking-wider text-blue-400">Ping Successes</div>
                             </div>
                         </div>
@@ -576,12 +576,12 @@ export default function ARPSimulation({ labId }: { labId: string }) {
                     </div>
                 </div>
             ) : (
-                <div className="flex-1 overflow-y-auto bg-slate-50 p-8">
+                <div className="flex-1 overflow-y-auto bg-muted/50 p-8">
                     <div className="max-w-5xl mx-auto">
                         <div className="flex items-center justify-between mb-8">
                             <div>
-                                <h3 className="text-2xl font-black text-slate-800 tracking-tight">Simulation Observations</h3>
-                                <p className="text-slate-500 mt-2">A real-time log of events triggered during your ARP simulation.</p>
+                                <h3 className="text-2xl font-black text-foreground tracking-tight">Simulation Observations</h3>
+                                <p className="text-muted-foreground mt-2">A real-time log of events triggered during your ARP simulation.</p>
                             </div>
                             <Badge variant="outline" className="px-4 py-1 text-sm">
                                 Total Events: {observationEvents.length}
@@ -589,28 +589,28 @@ export default function ARPSimulation({ labId }: { labId: string }) {
                         </div>
 
                         {observationEvents.length === 0 ? (
-                            <div className="flex flex-col items-center justify-center p-16 bg-white border border-dashed rounded-xl shadow-sm">
+                            <div className="flex flex-col items-center justify-center p-16 bg-card border border-dashed rounded shadow-sm">
                                 <Activity className="w-12 h-12 text-slate-300 mb-4" />
-                                <h4 className="text-lg font-bold text-slate-700">No events recorded yet</h4>
-                                <p className="text-slate-500">Run some ping commands in the simulation to see observations here.</p>
+                                <h4 className="text-lg font-bold text-foreground/80">No events recorded yet</h4>
+                                <p className="text-muted-foreground">Run some ping commands in the simulation to see observations here.</p>
                             </div>
                         ) : (
-                            <div className="bg-white border rounded-xl shadow-sm overflow-hidden">
+                            <div className="bg-card border rounded shadow-sm overflow-hidden">
                                 <table className="w-full text-left">
-                                    <thead className="bg-slate-100">
+                                    <thead className="bg-muted">
                                         <tr>
-                                            <th className="p-4 font-bold text-slate-700 w-24">Step</th>
-                                            <th className="p-4 font-bold text-slate-700 w-32">Time</th>
-                                            <th className="p-4 font-bold text-slate-700">Action performed</th>
-                                            <th className="p-4 font-bold text-slate-700">Resulting observed state</th>
+                                            <th className="p-4 font-bold text-foreground/80 w-24">Step</th>
+                                            <th className="p-4 font-bold text-foreground/80 w-32">Time</th>
+                                            <th className="p-4 font-bold text-foreground/80">Action performed</th>
+                                            <th className="p-4 font-bold text-foreground/80">Resulting observed state</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y text-slate-600">
+                                    <tbody className="divide-y text-muted-foreground">
                                         {observationEvents.map((evt, idx) => (
-                                            <tr key={idx} className="hover:bg-slate-50 transition-colors">
-                                                <td className="p-4 font-mono font-bold text-blue-600">{evt.step}</td>
-                                                <td className="p-4 font-mono text-xs text-slate-400">{evt.time}</td>
-                                                <td className="p-4 font-medium text-slate-800">{evt.action}</td>
+                                            <tr key={idx} className="hover:bg-muted/50 transition-colors">
+                                                <td className="p-4 font-mono font-bold text-primary">{evt.step}</td>
+                                                <td className="p-4 font-mono text-xs text-muted-foreground/80">{evt.time}</td>
+                                                <td className="p-4 font-medium text-foreground">{evt.action}</td>
                                                 <td className="p-4">{evt.result}</td>
                                             </tr>
                                         ))}

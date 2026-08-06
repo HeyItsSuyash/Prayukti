@@ -65,10 +65,15 @@ export default function OOPSCompiler({ initialData }: { initialData?: { code?: s
     return (
         <div className="flex flex-col h-full bg-gray-900 text-white font-mono">
             <div className="flex items-center justify-between p-4 bg-gray-800 border-b border-gray-700">
-                <div className="text-sm text-gray-400">Main.java</div>
+                <div className="text-sm text-muted-foreground/80">Main.java</div>
                 <div className="flex gap-2">
+<<<<<<< Updated upstream
                     <Button variant="ghost" size="sm" onClick={() => setCode("")} className="text-gray-400 hover:text-white">
                         <RotateCcw className="h-4 w-4 mr-2" /> Reset
+=======
+                    <Button variant="ghost" size="sm" onClick={() => setCode("")} className="text-muted-foreground/80 hover:text-white">
+                        <i className="bx bx-rotateccw h-4 w-4 mr-2"  /> Reset
+>>>>>>> Stashed changes
                     </Button>
                     <Button size="sm" onClick={runCode} disabled={isRunning} className="bg-green-600 hover:bg-green-700">
                         <Play className="h-4 w-4 mr-2" /> Run
@@ -83,7 +88,7 @@ export default function OOPSCompiler({ initialData }: { initialData?: { code?: s
                     spellCheck={false}
                 />
                 <div className="border-l border-gray-700 bg-black p-4 flex flex-col">
-                    <div className="text-xs uppercase tracking-wider text-gray-500 mb-2">Console Output</div>
+                    <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Console Output</div>
                     <pre className="flex-1 text-green-400 font-mono text-sm whitespace-pre-wrap">
                         {output}
                     </pre>

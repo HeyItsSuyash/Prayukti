@@ -60,7 +60,7 @@ export const SimpleLogicGateNode = memo(({ id, data, selected, symbol, svgPath, 
                 </svg>
             ) : (
                 // Fallback for missing path (should not happen if updated correctly)
-                <div className={`w-full h-full border-2 bg-white flex items-center justify-center font-bold ${selected ? 'border-orange-500' : 'border-black'}`}>
+                <div className={`w-full h-full border-2 bg-card flex items-center justify-center font-bold ${selected ? 'border-orange-500' : 'border-black'}`}>
                     {symbol}
                 </div>
             )}
@@ -90,7 +90,7 @@ export const SimpleLogicGateNode = memo(({ id, data, selected, symbol, svgPath, 
 
             {/* Editable Label */}
             <input
-                className={`absolute -top-5 left-1/2 -translate-x-1/2 bg-transparent text-center text-[10px] font-bold text-gray-500 uppercase tracking-wider outline-none w-20 hover:text-black focus:text-black transition-colors ${selected ? 'opacity-100' : 'opacity-0 group-hover/node:opacity-100'}`}
+                className={`absolute -top-5 left-1/2 -translate-x-1/2 bg-transparent text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider outline-none w-20 hover:text-foreground focus:text-foreground transition-colors ${selected ? 'opacity-100' : 'opacity-0 group-hover/node:opacity-100'}`}
                 value={(data.label as string) || label}
                 onChange={(evt) => {
                     setNodes((nds) => nds.map((n) => {

@@ -61,21 +61,26 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
                     animate={{ scale: 1, opacity: 1 }}
                     className="relative"
                 >
-                    <div className="absolute inset-0 bg-blue-100 rounded-full blur-xl opacity-50"></div>
-                    <div className="relative bg-white p-6 rounded-full shadow-lg border-4 border-blue-100">
-                        <span className="text-4xl font-bold text-blue-600">{score} / {questions.length}</span>
+                    <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl opacity-50"></div>
+                    <div className="relative bg-card p-6 rounded-full shadow-lg border-4 border-primary/20">
+                        <span className="text-4xl font-bold text-primary">{score} / {questions.length}</span>
                     </div>
                 </motion.div>
 
                 <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Quiz Completed!</h3>
-                    <p className="text-gray-500">
+                    <h3 className="text-2xl font-bold text-foreground mb-2">Quiz Completed!</h3>
+                    <p className="text-muted-foreground">
                         {score === questions.length ? "Perfect Score! You mastered this topic." : "Good effort! Review the material and try again."}
                     </p>
                 </div>
 
+<<<<<<< Updated upstream
                 <Button onClick={handleRetry} className="gap-2">
                     <RefreshCcw size={16} /> Retry Quiz
+=======
+                <Button onClick={handleRetry} className="gap-2 btn-press">
+                    <i className="bx bx-refreshccw"  /> Retry Quiz
+>>>>>>> Stashed changes
                 </Button>
             </div>
         );
@@ -84,13 +89,13 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
     return (
         <Card className="w-full border-0 shadow-none">
             <CardHeader>
-                <div className="flex justify-between items-center text-sm text-gray-500 mb-2">
+                <div className="flex justify-between items-center text-sm text-muted-foreground mb-2">
                     <span>Question {currentIndex + 1} of {questions.length}</span>
                     <span>Score: {score}</span>
                 </div>
-                <div className="relative w-full h-1 bg-gray-100 rounded-full overflow-hidden">
+                <div className="relative w-full h-1 bg-muted rounded-full overflow-hidden">
                     <motion.div
-                        className="absolute h-full bg-blue-600 rounded-full"
+                        className="absolute h-full bg-primary rounded-full"
                         initial={{ width: 0 }}
                         animate={{ width: `${((currentIndex + 1) / questions.length) * 100}%` }}
                     />
@@ -102,23 +107,31 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
             <CardContent className="space-y-3">
                 <AnimatePresence mode="wait">
                     {currentQuestion.options.map((option, index) => {
-                        let borderColor = "border-gray-200 hover:border-blue-300";
-                        let bgColor = "bg-white hover:bg-gray-50";
+                        let borderColor = "border-border hover:border-primary/50";
+                        let bgColor = "bg-card hover:bg-muted/50";
                         let icon = null;
 
                         if (isAnswered) {
                             if (index === currentQuestion.correctAnswer) {
+<<<<<<< Updated upstream
                                 borderColor = "border-green-500 bg-green-50";
                                 icon = <CheckCircle2 className="text-green-600" size={20} />;
                             } else if (index === selectedOption) {
                                 borderColor = "border-red-500 bg-red-50";
                                 icon = <XCircle className="text-red-600" size={20} />;
+=======
+                                borderColor = "border-success bg-success/10";
+                                icon = <i className="bx bx-check-circle text-success"  />;
+                            } else if (index === selectedOption) {
+                                borderColor = "border-destructive bg-destructive/10";
+                                icon = <i className="bx bx-xcircle text-destructive"  />;
+>>>>>>> Stashed changes
                             } else {
-                                borderColor = "border-gray-100 opacity-50";
+                                borderColor = "border-border/50 opacity-50";
                             }
                         } else if (selectedOption === index) {
-                            borderColor = "border-blue-500 ring-1 ring-blue-500";
-                            bgColor = "bg-blue-50";
+                            borderColor = "border-primary ring-1 ring-primary";
+                            bgColor = "bg-primary/10";
                         }
 
                         return (
@@ -129,11 +142,11 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
                                 transition={{ delay: index * 0.1 }}
                                 onClick={() => handleOptionSelect(index)}
                                 className={`
-                                    relative flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all duration-200
+                                    relative flex items-center p-4 rounded border-2 cursor-pointer transition-all duration-200 card-hover
                                     ${borderColor} ${bgColor}
                                 `}
                             >
-                                <span className="flex-grow font-medium text-gray-700">{option}</span>
+                                <span className="flex-grow font-medium text-foreground/90">{option}</span>
                                 {icon}
                             </motion.div>
                         );
@@ -144,7 +157,7 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
                     <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
-                        className="mt-4 p-3 bg-blue-50 rounded-lg text-sm text-blue-800 border border-blue-100"
+                        className="mt-4 p-3 bg-primary/10 rounded text-sm text-primary border border-primary/20"
                     >
                         <strong>Explanation:</strong> {currentQuestion.explanation}
                     </motion.div>
@@ -155,13 +168,18 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
                     <Button
                         onClick={handleSubmit}
                         disabled={selectedOption === null}
-                        className="w-full sm:w-auto"
+                        className="w-full sm:w-auto btn-press"
                     >
                         Check Answer
                     </Button>
                 ) : (
+<<<<<<< Updated upstream
                     <Button onClick={handleNext} className="w-full sm:w-auto gap-2">
                         {currentIndex < questions.length - 1 ? "Next Question" : "View Results"} <ArrowRight size={16} />
+=======
+                    <Button onClick={handleNext} className="w-full sm:w-auto gap-2 btn-press">
+                        {currentIndex < questions.length - 1 ? "Next Question" : "View Results"} <i className="bx bx-right-arrow-alt"  />
+>>>>>>> Stashed changes
                     </Button>
                 )}
             </CardFooter>

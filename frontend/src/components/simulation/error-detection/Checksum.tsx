@@ -94,12 +94,12 @@ export default function Checksum() {
 
                     {result && (
                         <div className="mt-4 space-y-3 font-mono text-sm">
-                            <div className="bg-gray-50 border rounded p-3">
-                                <p className="font-bold text-gray-700">Calculation Steps:</p>
+                            <div className="bg-muted/50 border rounded p-3">
+                                <p className="font-bold text-foreground/80">Calculation Steps:</p>
                                 <div className="ml-4 mt-2 space-y-1">
                                     <p>1. Divide data into 8-bit segments:</p>
-                                    <div className="flex gap-2 flex-wrap text-blue-600">
-                                        {result.segments.map((s, i) => <span key={i} className="bg-blue-50 px-1 border border-blue-200">{s}</span>)}
+                                    <div className="flex gap-2 flex-wrap text-primary">
+                                        {result.segments.map((s, i) => <span key={i} className="bg-primary/10 px-1 border border-blue-200">{s}</span>)}
                                     </div>
                                     <div className="border-t my-2 w-32"></div>
                                     <p>2. Sum (Decimal): {result.initialSum}</p>
@@ -124,14 +124,14 @@ export default function Checksum() {
                         <div className="flex flex-col gap-2">
                             <label className="text-sm font-medium">Transmitted Frame:</label>
                             <div className="flex items-stretch gap-2">
-                                <div className="flex-grow flex flex-col items-center p-3 rounded-md bg-gray-50 border border-gray-200">
-                                    <span className="text-xs font-semibold text-gray-500 mb-1">Data Segments</span>
+                                <div className="flex-grow flex flex-col items-center p-3 rounded-md bg-muted/50 border border-border">
+                                    <span className="text-xs font-semibold text-muted-foreground mb-1">Data Segments</span>
                                     <span className={`font-mono text-xl tracking-widest break-all ${isCorrupted ? "text-red-500 font-bold" : ""}`}>
                                         {transmittedCodeword.slice(0, -8)}
                                     </span>
                                 </div>
-                                <div className="flex-none flex flex-col items-center p-3 rounded-md bg-blue-50 border border-blue-200 min-w-[100px]">
-                                    <span className="text-xs font-bold text-blue-600 mb-1">Checksum</span>
+                                <div className="flex-none flex flex-col items-center p-3 rounded-md bg-primary/10 border border-blue-200 min-w-[100px]">
+                                    <span className="text-xs font-bold text-primary mb-1">Checksum</span>
                                     <span className={`font-mono text-xl font-bold ${isCorrupted ? "text-red-600" : "text-blue-700"}`}>
                                         {transmittedCodeword.slice(-8)}
                                     </span>
@@ -166,8 +166,8 @@ export default function Checksum() {
                         )}
 
                         {receiverStatus && !receiverStatus.includes("REJECTED") && (
-                            <div className="mt-4 p-3 bg-gray-50 border rounded text-xs text-gray-600">
-                                <p className="font-semibold text-gray-800 mb-1">ℹ️ Algorithm Capability:</p>
+                            <div className="mt-4 p-3 bg-muted/50 border rounded text-xs text-muted-foreground">
+                                <p className="font-semibold text-foreground mb-1">ℹ️ Algorithm Capability:</p>
                                 <p><strong>Method:</strong> Checksum is an <em>Error Detection</em> technique.</p>
                                 <p><strong>Correction Strategy:</strong> If the checksum check fails, the receiver <strong>discards the frame</strong> and requests <strong>retransmission</strong>.</p>
                             </div>

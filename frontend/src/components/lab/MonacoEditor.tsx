@@ -22,7 +22,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = ({
     fontSize = 14
 }) => {
     return (
-        <div className="w-full h-full min-h-[400px] rounded-2xl overflow-hidden border border-slate-800 bg-[#1e1e1e] shadow-2xl">
+        <div className="w-full h-full min-h-[400px] rounded overflow-hidden border border-slate-800 bg-[#1e1e1e] shadow-2xl">
             <Editor
                 height={height}
                 language={language.toLowerCase()}
@@ -31,7 +31,11 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = ({
                 onChange={onChange}
                 loading={
                     <div className="flex flex-col items-center justify-center p-20 text-slate-400">
+<<<<<<< Updated upstream
                         <Loader2 className="w-8 h-8 animate-spin mb-3 text-blue-500" />
+=======
+                        <i className="bx bx-loader2 w-8 h-8 animate-spin mb-3 text-primary"  />
+>>>>>>> Stashed changes
                         <span className="text-[10px] font-black uppercase tracking-widest">
                             Loading IDE...
                         </span>

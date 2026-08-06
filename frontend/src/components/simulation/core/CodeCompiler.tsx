@@ -84,31 +84,31 @@ export default function CodeCompiler({
     };
 
     return (
-        <div className="flex flex-col h-full bg-[#1e1e1e] border-x border-black/10 overflow-hidden">
+        <div className="flex flex-col h-full bg-zinc-950 border-x border-border/20 overflow-hidden">
             {/* Professional Lab Header */}
-            <div className="bg-[#252526] border-b border-black/20 p-2 flex items-center justify-between z-10">
+            <div className="bg-zinc-900 border-b border-border/40 p-2 flex items-center justify-between z-10">
                 <div className="flex items-center gap-1">
                     <select
                         value={currentLanguage}
                         onChange={(e) => setLanguage(e.target.value)}
-                        className="bg-black/40 text-blue-400 border border-white/5 rounded-lg px-3 py-1.5 text-[10px] font-black uppercase tracking-widest outline-none hover:bg-black/60 transition-all cursor-pointer mr-2 shadow-inner"
+                        className="bg-black/40 text-blue-400 border border-white/5 rounded px-3 py-1.5 text-[10px] font-black uppercase tracking-widest outline-none hover:bg-black/60 transition-all cursor-pointer mr-2 shadow-inner"
                     >
-                        <option value="c" className="bg-[#252526]">C</option>
-                        <option value="cpp" className="bg-[#252526]">C++</option>
-                        <option value="python" className="bg-[#252526]">Python</option>
-                        <option value="java" className="bg-[#252526]">Java</option>
+                        <option value="c" className="bg-zinc-900">C</option>
+                        <option value="cpp" className="bg-zinc-900">C++</option>
+                        <option value="python" className="bg-zinc-900">Python</option>
+                        <option value="java" className="bg-zinc-900">Java</option>
                     </select>
 
-                    <div className="flex border border-white/5 rounded-lg overflow-hidden mr-2 bg-black/20">
+                    <div className="flex border border-white/5 rounded overflow-hidden mr-2 bg-black/20">
                         <button
                             onClick={() => setTheme("vs-dark")}
-                            className={`p-1.5 transition-colors ${theme === 'vs-dark' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-slate-300'}`}
+                            className={`p-1.5 transition-colors btn-press ${theme === 'vs-dark' ? 'bg-primary text-white' : 'text-slate-500 hover:text-slate-300'}`}
                         >
                             <Moon className="h-3 w-3" />
                         </button>
                         <button
                             onClick={() => setTheme("light")}
-                            className={`p-1.5 transition-colors ${theme === 'light' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-slate-300'}`}
+                            className={`p-1.5 transition-colors btn-press ${theme === 'light' ? 'bg-primary text-white' : 'text-slate-500 hover:text-slate-300'}`}
                         >
                             <Sun className="h-3 w-3" />
                         </button>
@@ -123,30 +123,30 @@ export default function CodeCompiler({
                 <div className="flex items-center gap-2">
                     <button
                         onClick={handleSave}
-                        className={`p-2 rounded-lg transition-all ${saveStatus === 'saved' ? 'bg-green-600 text-white' : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'}`}
+                        className={`p-2 rounded transition-all btn-press ${saveStatus === 'saved' ? 'bg-green-600 text-white' : 'bg-card/5 text-slate-400 hover:text-white hover:bg-card/10'}`}
                     >
                         {saveStatus === 'saving' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />}
                     </button>
                     <button
                         onClick={handleDownload}
-                        className="p-2 rounded-lg bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+                        className="p-2 rounded bg-card/5 text-slate-400 hover:text-white hover:bg-card/10 transition-all btn-press"
                     >
                         <Download className="h-3.5 w-3.5" />
                     </button>
                     <button
                         onClick={handleCopy}
-                        className="p-2 rounded-lg bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+                        className="p-2 rounded bg-card/5 text-slate-400 hover:text-white hover:bg-card/10 transition-all btn-press"
                     >
                         <Copy className="h-3.5 w-3.5" />
                     </button>
 
-                    <div className="h-4 w-[1px] bg-white/10 mx-1" />
+                    <div className="h-4 w-[1px] bg-card/10 mx-1" />
 
                     <Button
                         variant="outline"
                         size="sm"
                         onClick={() => setIsChallengeMode(!isChallengeMode)}
-                        className={`h-8 px-3 text-[10px] font-black uppercase tracking-widest transition-all ${isChallengeMode ? 'bg-orange-500/20 text-orange-500 border-orange-500/40 hover:bg-orange-500/30' : 'bg-slate-500/10 text-slate-500 border-white/5 hover:bg-white/10 hover:text-white'}`}
+                        className={`h-8 px-3 text-[10px] font-black uppercase tracking-widest transition-all ${isChallengeMode ? 'bg-orange-500/20 text-orange-500 border-orange-500/40 hover:bg-orange-500/30' : 'bg-slate-500/10 text-slate-500 border-white/5 hover:bg-card/10 hover:text-white'}`}
                     >
                         {isChallengeMode ? 'Challenge Mode ON' : 'Challenge Mode'}
                     </Button>
@@ -165,8 +165,8 @@ export default function CodeCompiler({
                 </div>
 
                 {/* Bottom Workbench Area */}
-                <div className="h-2/5 flex border-t border-black/40">
-                    <div className="w-1/3 bg-[#252526] border-r border-white/5 flex flex-col pt-3 px-4">
+                <div className="h-2/5 flex border-t border-border/40">
+                    <div className="w-1/3 bg-zinc-900 border-r border-border/40 flex flex-col pt-3 px-4">
                         <div className="flex items-center gap-2 text-blue-400 mb-3">
                             <Keyboard className="h-3.5 w-3.5" />
                             <span className="text-[10px] font-black uppercase tracking-widest">Custom Input</span>
@@ -176,7 +176,7 @@ export default function CodeCompiler({
                             value={customInput}
                             onChange={(e) => setCustomInput(e.target.value)}
                             placeholder={isChallengeMode ? "Hidden Inputs are enabled..." : "Type test data here..."}
-                            className="flex-1 w-full bg-black/30 border border-white/5 rounded-xl p-3 text-xs font-mono text-slate-300 outline-none focus:border-blue-500/50 transition-all resize-none shadow-inner"
+                            className="flex-1 w-full bg-black/30 border border-white/5 rounded p-3 text-xs font-mono text-slate-300 outline-none focus:border-blue-500/50 transition-all resize-none shadow-inner"
                         />
                         <div className="py-3 flex items-center justify-between gap-2">
                             <Button
@@ -191,7 +191,7 @@ export default function CodeCompiler({
                                 variant="link"
                                 size="sm"
                                 onClick={() => inputRef.current?.focus()}
-                                className="text-blue-500 hover:text-blue-400 text-[9px] font-black uppercase tracking-widest h-6 px-1"
+                                className="text-primary hover:text-blue-400 text-[9px] font-black uppercase tracking-widest h-6 px-1"
                             >
                                 Try Different Input
                             </Button>

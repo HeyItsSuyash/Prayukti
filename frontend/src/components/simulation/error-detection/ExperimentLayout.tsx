@@ -102,19 +102,19 @@ export default function ExperimentLayout({ children }: ExperimentLayoutProps) {
                             <CardContent className="space-y-4">
                                 <section>
                                     <h3 className="font-semibold text-lg">1. Parity Check</h3>
-                                    <p className="text-gray-700">The simplest error detection scheme. It appends a single bit (parity bit) to the data block purely to make the total number of 1s either even (Even Parity) or odd (Odd Parity). It can detect single-bit errors but cannot correct them or detect 2-bit errors.</p>
+                                    <p className="text-foreground/80">The simplest error detection scheme. It appends a single bit (parity bit) to the data block purely to make the total number of 1s either even (Even Parity) or odd (Odd Parity). It can detect single-bit errors but cannot correct them or detect 2-bit errors.</p>
                                 </section>
                                 <section>
                                     <h3 className="font-semibold text-lg">2. Checksum</h3>
-                                    <p className="text-gray-700">Used widely in network protocols like IP, TCP, and UDP. It divides data into segments, performs 1s complement addition, and the complement of the result is stored as the checksum. The receiver repeats the addition; if the result is all 0s (in 1s complement logic, result should be all 1s before complementing), the data is valid.</p>
+                                    <p className="text-foreground/80">Used widely in network protocols like IP, TCP, and UDP. It divides data into segments, performs 1s complement addition, and the complement of the result is stored as the checksum. The receiver repeats the addition; if the result is all 0s (in 1s complement logic, result should be all 1s before complementing), the data is valid.</p>
                                 </section>
                                 <section>
                                     <h3 className="font-semibold text-lg">3. CRC (Cyclic Redundancy Check)</h3>
-                                    <p className="text-gray-700">A robust error detection method based on binary division. A generator polynomial is used to divide the data. The remainder is appended to the data. The receiver divides the received data by the same polynomial; if the remainder is zero, the data is accepted.</p>
+                                    <p className="text-foreground/80">A robust error detection method based on binary division. A generator polynomial is used to divide the data. The remainder is appended to the data. The receiver divides the received data by the same polynomial; if the remainder is zero, the data is accepted.</p>
                                 </section>
                                 <section>
                                     <h3 className="font-semibold text-lg">4. Hamming Code</h3>
-                                    <p className="text-gray-700">A linear error-correcting code. It uses redundant bits placed at positions corresponding to powers of 2 (1, 2, 4, 8...). It can detect and correct single-bit errors by calculating syndrome bits.</p>
+                                    <p className="text-foreground/80">A linear error-correcting code. It uses redundant bits placed at positions corresponding to powers of 2 (1, 2, 4, 8...). It can detect and correct single-bit errors by calculating syndrome bits.</p>
                                 </section>
                             </CardContent>
                         </Card>
@@ -146,7 +146,7 @@ export default function ExperimentLayout({ children }: ExperimentLayoutProps) {
                             <CardContent>
                                 <div className="space-y-6">
                                     {quizQuestions.map((q, qImg) => (
-                                        <div key={qImg} className="border p-4 rounded-lg">
+                                        <div key={qImg} className="border p-4 rounded">
                                             <p className="font-medium mb-3">{qImg + 1}. {q.question}</p>
                                             <div className="space-y-2">
                                                 {q.options.map((opt, optIdx) => (

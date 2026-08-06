@@ -80,19 +80,19 @@ export default function CRC() {
 
                     {result && (
                         <div className="mt-6 space-y-4">
-                            <div className="p-4 bg-gray-50 border rounded font-mono text-sm overflow-x-auto">
-                                <h4 className="font-bold mb-2 text-gray-700">Division Process (Step-by-Step)</h4>
+                            <div className="p-4 bg-muted/50 border rounded font-mono text-sm overflow-x-auto">
+                                <h4 className="font-bold mb-2 text-foreground/80">Division Process (Step-by-Step)</h4>
 
                                 <div className="flex flex-col items-start leading-relaxed">
                                     <div className="flex">
-                                        <span className="mr-2 text-gray-500">{divisor}</span>
+                                        <span className="mr-2 text-muted-foreground">{divisor}</span>
                                         <div className="flex flex-col">
                                             <span className="border-b border-black mb-1">{result.quotient}</span>
                                             <span>{result.appendedData}</span>
                                         </div>
                                     </div>
 
-                                    <pre className="mt-2 font-mono whitespace-pre text-xs md:text-sm text-gray-800">
+                                    <pre className="mt-2 font-mono whitespace-pre text-xs md:text-sm text-foreground">
                                         {(() => {
                                             const indent = (n: number) => " ".repeat(n);
                                             let viz = "";
@@ -112,7 +112,7 @@ export default function CRC() {
                                 </div>
                             </div>
 
-                            <div className="p-3 bg-blue-50 border border-blue-100 rounded text-sm">
+                            <div className="p-3 bg-primary/10 border border-primary/20 rounded text-sm">
                                 <p><strong>Remainder (CRC):</strong> {result.remainder}</p>
                                 <p><strong>Final Codeword (Data + CRC):</strong> {result.codeword}</p>
                             </div>
@@ -133,14 +133,14 @@ export default function CRC() {
                         <div className="flex flex-col gap-2">
                             <label className="text-sm font-medium">Transmitted Frame:</label>
                             <div className="flex items-stretch gap-2">
-                                <div className="flex-grow flex flex-col items-center p-3 rounded-md bg-gray-50 border border-gray-200">
-                                    <span className="text-xs font-semibold text-gray-500 mb-1">Data Bits</span>
+                                <div className="flex-grow flex flex-col items-center p-3 rounded-md bg-muted/50 border border-border">
+                                    <span className="text-xs font-semibold text-muted-foreground mb-1">Data Bits</span>
                                     <span className={`font-mono text-xl tracking-widest ${isCorrupted ? "text-red-500 font-bold" : ""}`}>
                                         {transmittedCodeword.slice(0, transmittedCodeword.length - (divisor.length - 1))}
                                     </span>
                                 </div>
-                                <div className="flex-none flex flex-col items-center p-3 rounded-md bg-blue-50 border border-blue-200 min-w-[100px]">
-                                    <span className="text-xs font-bold text-blue-600 mb-1">CRC (Remainder)</span>
+                                <div className="flex-none flex flex-col items-center p-3 rounded-md bg-primary/10 border border-blue-200 min-w-[100px]">
+                                    <span className="text-xs font-bold text-primary mb-1">CRC (Remainder)</span>
                                     <span className={`font-mono text-xl font-bold ${isCorrupted ? "text-red-600" : "text-blue-700"}`}>
                                         {transmittedCodeword.slice(-(divisor.length - 1))}
                                     </span>
@@ -175,8 +175,8 @@ export default function CRC() {
                         )}
 
                         {receiverStatus && !receiverStatus.includes("Error") && (
-                            <div className="mt-4 p-3 bg-gray-50 border rounded text-xs text-gray-600">
-                                <p className="font-semibold text-gray-800 mb-1">ℹ️ Algorithm Capability:</p>
+                            <div className="mt-4 p-3 bg-muted/50 border rounded text-xs text-muted-foreground">
+                                <p className="font-semibold text-foreground mb-1">ℹ️ Algorithm Capability:</p>
                                 <p><strong>Method:</strong> CRC (Cyclic Redundancy Check) is an <em>Error Detection</em> technique.</p>
                                 <p><strong>Correction Strategy:</strong> If an error is found, the standard procedure is to <strong>discard the frame</strong> and request <strong>retransmission</strong> (ARQ Protocol).</p>
                             </div>

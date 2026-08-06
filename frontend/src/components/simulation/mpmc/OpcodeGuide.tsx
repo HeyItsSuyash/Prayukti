@@ -54,28 +54,37 @@ export const OpcodeGuide: React.FC<OpcodeGuideProps> = ({ onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-            <div className="bg-[#1a1a1a] border-2 border-slate-800 w-full max-w-2xl rounded-lg shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div className="bg-[#1a1a1a] border-2 border-slate-800 w-full max-w-2xl rounded shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
                 <div className="p-4 border-b border-slate-800 flex justify-between items-center bg-black/40">
                     <h2 className="text-slate-300 font-bold tracking-widest uppercase text-sm">8085 Opcode Reference</h2>
+<<<<<<< Updated upstream
                     <button onClick={onClose} className="p-1 hover:bg-slate-800 rounded transition-colors text-slate-500">
                         <X className="h-5 w-5" />
+=======
+                    <button onClick={onClose} className="p-1 hover:bg-slate-800 rounded transition-colors text-muted-foreground">
+                        <i className="bx bx-x h-5 w-5"  />
+>>>>>>> Stashed changes
                     </button>
                 </div>
 
                 <div className="p-4 bg-black/20 flex items-center gap-3">
+<<<<<<< Updated upstream
                     <Search className="h-4 w-4 text-slate-600" />
+=======
+                    <i className="bx bx-search h-4 w-4 text-muted-foreground"  />
+>>>>>>> Stashed changes
                     <input
                         type="text"
                         placeholder="Search mnemonic or hex (e.g. MVI, 3E)..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="bg-transparent border-none focus:ring-0 text-slate-300 placeholder:text-slate-700 w-full text-sm"
+                        className="bg-transparent border-none focus:ring-0 text-slate-300 placeholder:text-foreground/80 w-full text-sm"
                     />
                 </div>
 
                 <div className="flex-1 overflow-auto p-4 custom-scrollbar">
                     <table className="w-full text-xs text-left">
-                        <thead className="text-[10px] text-slate-600 font-black uppercase tracking-widest border-b border-slate-800">
+                        <thead className="text-[10px] text-muted-foreground font-black uppercase tracking-widest border-b border-slate-800">
                             <tr>
                                 <th className="pb-2">Hex</th>
                                 <th className="pb-2">Mnemonic</th>
@@ -83,7 +92,7 @@ export const OpcodeGuide: React.FC<OpcodeGuideProps> = ({ onClose }) => {
                                 <th className="pb-2">Description</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-800/10 text-slate-400">
+                        <tbody className="divide-y divide-slate-800/10 text-muted-foreground/80">
                             {filtered.map((o, i) => (
                                 <tr key={i} className="hover:bg-slate-800/20 transition-colors group">
                                     <td className="py-2.5 font-mono text-red-500 font-bold group-hover:text-red-400">{o.hex}H</td>
@@ -95,11 +104,11 @@ export const OpcodeGuide: React.FC<OpcodeGuideProps> = ({ onClose }) => {
                         </tbody>
                     </table>
                     {filtered.length === 0 && (
-                        <div className="text-center py-20 text-slate-700 italic text-sm">No matches found for "{search}"</div>
+                        <div className="text-center py-20 text-foreground/80 italic text-sm">No matches found for "{search}"</div>
                     )}
                 </div>
 
-                <div className="p-3 bg-black/40 border-t border-slate-800 text-[9px] text-center text-slate-600 font-bold uppercase tracking-[0.3em]">
+                <div className="p-3 bg-black/40 border-t border-slate-800 text-[9px] text-center text-muted-foreground font-bold uppercase tracking-[0.3em]">
                     Intel 8085 Instruction Set Reference v1.0
                 </div>
             </div>

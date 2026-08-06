@@ -18,19 +18,24 @@ export function TheorySection({ content }: TheorySectionProps) {
     };
 
     return (
-        <section className="bg-white rounded-xl border-2 border-black/5 shadow-sm overflow-hidden">
+        <section className="bg-card rounded border-2 border-border shadow-sm overflow-hidden">
             {/* Header / Toggle */}
             <div
-                className="flex items-center justify-between p-6 bg-slate-50 border-b border-black/5 cursor-pointer hover:bg-slate-100 transition-colors"
+                className="flex items-center justify-between p-6 bg-muted/50 border-b border-border cursor-pointer hover:bg-muted transition-colors"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <div className="flex items-center gap-3">
+<<<<<<< Updated upstream
                     <div className="bg-blue-100 p-2 rounded-lg text-blue-700">
                         <BookOpen className="w-6 h-6" />
+=======
+                    <div className="bg-primary/20 p-2 rounded text-primary">
+                        <i className="bx bx-bookopen w-6 h-6"  />
+>>>>>>> Stashed changes
                     </div>
                     <div>
-                        <h2 className="text-xl font-black uppercase tracking-tight text-slate-900">Theory & Concepts</h2>
-                        <p className="text-xs text-slate-500 font-medium">Click to {isOpen ? 'collapse' : 'expand'} detailed explanation</p>
+                        <h2 className="text-xl font-black uppercase tracking-tight text-foreground">Theory & Concepts</h2>
+                        <p className="text-xs text-muted-foreground font-medium">Click to {isOpen ? 'collapse' : 'expand'} detailed explanation</p>
                     </div>
                 </div>
 
@@ -38,7 +43,7 @@ export function TheorySection({ content }: TheorySectionProps) {
                     <Button
                         variant="ghost"
                         size="sm"
-                        className="hidden md:flex gap-2 text-slate-600 hover:text-blue-700 hover:bg-blue-50"
+                        className="hidden md:flex gap-2 text-muted-foreground hover:text-primary hover:bg-primary/10 btn-press"
                         onClick={(e) => {
                             e.stopPropagation();
                             handleDownload();
@@ -48,7 +53,11 @@ export function TheorySection({ content }: TheorySectionProps) {
                         <span className="text-xs font-bold uppercase tracking-wider">Download PDF</span>
                     </Button>
                     <div className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+<<<<<<< Updated upstream
                         <ChevronDown className="w-5 h-5 text-slate-400" />
+=======
+                        <i className="bx bx-chevron-down w-5 h-5 text-muted-foreground/80"  />
+>>>>>>> Stashed changes
                     </div>
                 </div>
             </div>
@@ -63,7 +72,7 @@ export function TheorySection({ content }: TheorySectionProps) {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
                         <div className="p-8 max-h-[800px] overflow-y-auto custom-scrollbar">
-                            <div className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:uppercase prose-p:text-gray-600 prose-strong:text-black prose-li:text-gray-600 prose-ul:list-disc prose-ol:list-decimal">
+                            <div className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:uppercase prose-p:text-muted-foreground prose-strong:text-foreground prose-li:text-muted-foreground prose-ul:list-disc prose-ol:list-decimal">
                                 {content}
                             </div>
                         </div>
