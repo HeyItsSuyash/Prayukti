@@ -63,11 +63,11 @@ export default function OOPSCompiler({ initialData }: { initialData?: { code?: s
     }, [code, output]);
 
     return (
-        <div className="flex flex-col h-full bg-gray-900 text-white font-mono">
-            <div className="flex items-center justify-between p-4 bg-gray-800 border-b border-gray-700">
-                <div className="text-sm text-gray-400">Main.java</div>
+        <div className="flex flex-col h-full bg-card text-white font-mono">
+            <div className="flex items-center justify-between p-4 bg-card border-b border-border">
+                <div className="text-sm text-muted-foreground">Main.java</div>
                 <div className="flex gap-2">
-                    <Button variant="ghost" size="sm" onClick={() => setCode("")} className="text-gray-400 hover:text-white">
+                    <Button variant="ghost" size="sm" onClick={() => setCode("")} className="text-muted-foreground hover:text-white">
                         <i className="bx bx-rotateccw h-4 w-4 mr-2"  /> Reset
                     </Button>
                     <Button size="sm" onClick={runCode} disabled={isRunning} className="bg-green-600 hover:bg-green-700">
@@ -79,11 +79,11 @@ export default function OOPSCompiler({ initialData }: { initialData?: { code?: s
                 <textarea
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
-                    className="p-4 bg-gray-900 text-gray-300 resize-none focus:outline-none font-mono text-sm leading-6"
+                    className="p-4 bg-card text-muted-foreground resize-none focus:outline-none font-mono text-sm leading-6"
                     spellCheck={false}
                 />
-                <div className="border-l border-gray-700 bg-black p-4 flex flex-col">
-                    <div className="text-xs uppercase tracking-wider text-gray-500 mb-2">Console Output</div>
+                <div className="border-l border-border bg-black p-4 flex flex-col">
+                    <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Console Output</div>
                     <pre className="flex-1 text-green-400 font-mono text-sm whitespace-pre-wrap">
                         {output}
                     </pre>

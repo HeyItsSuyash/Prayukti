@@ -475,12 +475,12 @@ export default function CircuitCanvas({
     }, [nodes, edges]);
 
     return (
-        <div className="h-full w-full bg-gray-100 flex flex-col relative overflow-hidden">
+        <div className="h-full w-full bg-card flex flex-col relative overflow-hidden">
 
             {/* Top Bar - Minimal */}
             <div className="absolute top-4 right-4 z-20 flex gap-2">
                 <button
-                    className={`px-4 py-2 rounded-full text-xs font-bold border shadow-sm flex items-center gap-2 transition-all ${generating ? 'bg-green-500 text-white border-green-600' : 'bg-gray-200 text-gray-600'}`}
+                    className={`px-4 py-2 rounded-none-full text-xs font-bold border shadow-none-none flex items-center gap-2 transition-all ${generating ? 'bg-green-500 text-white border-green-600' : 'bg-card text-muted-foreground'}`}
                     onClick={() => setGenerating(!generating)}
                 >
                     {generating ? <i className="bx bx-pause" /> : <i className="bx bx-play" />}
@@ -488,14 +488,14 @@ export default function CircuitCanvas({
                 </button>
 
                 <button
-                    className="px-4 py-2 bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 rounded-full text-xs font-bold shadow-sm flex items-center gap-2"
+                    className="px-4 py-2 bg-card hover:bg-card text-muted-foreground border border-border rounded-none-full text-xs font-bold shadow-none-none flex items-center gap-2"
                     onClick={handleWorkspacesOpen}
                 >
                     <i className="bx bx-table"  /> Truth Table
                 </button>
 
                 {!readonly && (
-                    <button className="px-4 py-2 bg-black hover:bg-gray-800 text-white rounded-full text-xs font-bold shadow-lg flex items-center gap-2" onClick={saveCircuit}>
+                    <button className="px-4 py-2 bg-black hover:bg-card text-white rounded-none-full text-xs font-bold shadow-none-none flex items-center gap-2" onClick={saveCircuit}>
                         <i className="bx bx-save"  /> Save
                     </button>
                 )}
@@ -535,15 +535,15 @@ export default function CircuitCanvas({
                     snapToGrid
                     snapGrid={[10, 10]}
                     defaultEdgeOptions={{ type: 'signal', animated: false, style: { strokeWidth: 2 } }}
-                    className="bg-gray-50 bg-opacity-50"
+                    className="bg-card bg-opacity-50"
                 >
-                    <Controls className="!bg-white !border-gray-200 !shadow-lg !rounded-lg !m-4" />
+                    <Controls className="!bg-card !border-border !shadow-none-none !rounded-none-none !m-4" />
                     <Background
                         color="#cbd5e1"
                         variant={BackgroundVariant.Lines}
                         gap={20}
                         size={1}
-                        className="bg-gray-50/50"
+                        className="bg-card/50"
                     />
                 </ReactFlow>
             </div>

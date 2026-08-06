@@ -43,7 +43,7 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
         if (!data || !selectedKMapOutput) return null;
         const numInputs = data.inputNames.length;
         if (numInputs < 2 || numInputs > 4) {
-            return <div className="p-4 text-center text-gray-500">K-Map only supported for 2, 3, or 4 inputs.</div>;
+            return <div className="p-4 text-center text-muted-foreground">K-Map only supported for 2, 3, or 4 inputs.</div>;
         }
 
         // Gray Codes
@@ -91,7 +91,7 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                     <select
                         value={selectedKMapOutput}
                         onChange={(e) => setSelectedKMapOutput(e.target.value)}
-                        className="text-xs border rounded px-1"
+                        className="text-xs border rounded-none px-1"
                     >
                         {data.outputNames.map(o => (
                             <option key={o} value={o}>{o}</option>
@@ -99,7 +99,7 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                     </select>
                 </div>
 
-                <div className="relative border-2 border-gray-800 rounded bg-white">
+                <div className="relative border-2 border-border rounded-none bg-card">
                     {/* Top Left Label */}
                     <div className="absolute -top-6 -left-6 text-xs font-bold font-mono">
                         {numInputs === 2 ? `${data.inputNames[0]}\\${data.inputNames[1]}` :
@@ -108,10 +108,10 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                     </div>
 
                     {/* Column Labels */}
-                    <div className="flex border-b border-gray-800">
+                    <div className="flex border-b border-border">
                         <div className="w-8"></div> {/* Corner spacer */}
                         {colLabels.map(l => (
-                            <div key={l} className="w-10 text-center text-xs font-mono font-bold bg-gray-100 py-1 border-l border-gray-300">
+                            <div key={l} className="w-10 text-center text-xs font-mono font-bold bg-card py-1 border-l border-border">
                                 {l}
                             </div>
                         ))}
@@ -121,7 +121,7 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                     {rowLabels.map((rLabel, rIdx) => (
                         <div key={rLabel} className="flex">
                             {/* Row Label */}
-                            <div className="w-8 flex items-center justify-center text-xs font-mono font-bold bg-gray-100 border-r border-gray-300 border-t border-gray-200">
+                            <div className="w-8 flex items-center justify-center text-xs font-mono font-bold bg-card border-r border-border border-t border-border">
                                 {rLabel}
                             </div>
 
@@ -129,7 +129,7 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                             {mapIndices[rIdx] && mapIndices[rIdx].map((dataIndex, cIdx) => {
                                 const val = data.rows[dataIndex]?.outputs?.[selectedKMapOutput];
                                 return (
-                                    <div key={cIdx} className={`w-10 h-10 flex items-center justify-center border-l border-t border-gray-200 font-bold ${val ? 'text-[#d32f2f] bg-red-50' : 'text-gray-400'}`}>
+                                    <div key={cIdx} className={`w-10 h-10 flex items-center justify-center border-l border-t border-border font-bold ${val ? 'text-[#d32f2f] bg-red-50' : 'text-muted-foreground'}`}>
                                         {val}
                                     </div>
                                 );
@@ -178,7 +178,7 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                         <select
                             value={presentStateInput}
                             onChange={(e) => setPresentStateInput(e.target.value)}
-                            className="w-full border rounded p-1"
+                            className="w-full border rounded-none p-1"
                         >
                             {data.inputNames.map(n => <option key={n} value={n}>{n}</option>)}
                         </select>
@@ -188,7 +188,7 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                         <select
                             value={nextStateOutput}
                             onChange={(e) => setNextStateOutput(e.target.value)}
-                            className="w-full border rounded p-1"
+                            className="w-full border rounded-none p-1"
                         >
                             {data.outputNames.map(n => <option key={n} value={n}>{n}</option>)}
                         </select>
@@ -204,24 +204,24 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                     </thead>
                     <tbody>
                         <tr className="border-b">
-                            <td className="p-2 font-bold bg-gray-50">0 &rarr; 0</td>
+                            <td className="p-2 font-bold bg-card">0 &rarr; 0</td>
                             <td className="p-2 text-left px-4">{transitions['0->0'].join(' OR ') || '-'}</td>
                         </tr>
                         <tr className="border-b">
-                            <td className="p-2 font-bold bg-gray-50">0 &rarr; 1</td>
+                            <td className="p-2 font-bold bg-card">0 &rarr; 1</td>
                             <td className="p-2 text-left px-4">{transitions['0->1'].join(' OR ') || '-'}</td>
                         </tr>
                         <tr className="border-b">
-                            <td className="p-2 font-bold bg-gray-50">1 &rarr; 0</td>
+                            <td className="p-2 font-bold bg-card">1 &rarr; 0</td>
                             <td className="p-2 text-left px-4">{transitions['1->0'].join(' OR ') || '-'}</td>
                         </tr>
                         <tr>
-                            <td className="p-2 font-bold bg-gray-50">1 &rarr; 1</td>
+                            <td className="p-2 font-bold bg-card">1 &rarr; 1</td>
                             <td className="p-2 text-left px-4">{transitions['1->1'].join(' OR ') || '-'}</td>
                         </tr>
                     </tbody>
                 </table>
-                <p className="text-[10px] text-gray-500 italic">
+                <p className="text-[10px] text-muted-foreground italic">
                     * Shows input combinations required to achieve specific state transitions.
                 </p>
             </div>
@@ -229,61 +229,61 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
     };
 
     return (
-        <div className="absolute top-12 right-4 w-[450px] h-[550px] bg-white border shadow-xl rounded-lg flex flex-col z-20 overflow-hidden">
+        <div className="absolute top-12 right-4 w-[450px] h-[550px] bg-card border shadow-none-none rounded-none-none flex flex-col z-20 overflow-hidden">
             {/* Header */}
-            <div className="bg-[#d32f2f] text-white flex justify-between items-center shadow-md z-10">
+            <div className="bg-[#d32f2f] text-white flex justify-between items-center shadow-none-none z-10">
                 <div className="flex">
                     <button
                         onClick={() => setActiveTab('truth')}
-                        className={`px-4 py-3 text-xs font-bold flex items-center gap-2 ${activeTab === 'truth' ? 'bg-white text-[#d32f2f]' : 'hover:bg-[#b71c1c]'}`}
+                        className={`px-4 py-3 text-xs font-bold flex items-center gap-2 ${activeTab === 'truth' ? 'bg-card text-[#d32f2f]' : 'hover:bg-[#b71c1c]'}`}
                     >
                         <i className="bx bx-table"  /> Truth Table
                     </button>
                     <button
                         onClick={() => setActiveTab('kmap')}
-                        className={`px-4 py-3 text-xs font-bold flex items-center gap-2 ${activeTab === 'kmap' ? 'bg-white text-[#d32f2f]' : 'hover:bg-[#b71c1c]'}`}
+                        className={`px-4 py-3 text-xs font-bold flex items-center gap-2 ${activeTab === 'kmap' ? 'bg-card text-[#d32f2f]' : 'hover:bg-[#b71c1c]'}`}
                     >
                         <i className="bx bx-grid3x3"  /> K-Map
                     </button>
                     <button
                         onClick={() => setActiveTab('excitation')}
-                        className={`px-4 py-3 text-xs font-bold flex items-center gap-2 ${activeTab === 'excitation' ? 'bg-white text-[#d32f2f]' : 'hover:bg-[#b71c1c]'}`}
+                        className={`px-4 py-3 text-xs font-bold flex items-center gap-2 ${activeTab === 'excitation' ? 'bg-card text-[#d32f2f]' : 'hover:bg-[#b71c1c]'}`}
                     >
                         <i className="bx bx-arrowrightleft"  /> Excitation Table
                     </button>
                 </div>
-                <button onClick={onClose} className="hover:bg-[#b71c1c] rounded p-2 mr-2">
+                <button onClick={onClose} className="hover:bg-[#b71c1c] rounded-none p-2 mr-2">
                     <i className="bx bx-x"  />
                 </button>
             </div>
 
             {/* Content */}
-            <div className="flex-1 overflow-auto p-4 bg-gray-50">
+            <div className="flex-1 overflow-auto p-4 bg-card">
                 {loading && (
-                    <div className="flex flex-col items-center justify-center h-full text-gray-500 space-y-2">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-500"></div>
+                    <div className="flex flex-col items-center justify-center h-full text-muted-foreground space-y-2">
+                        <div className="animate-spin rounded-none-full h-8 w-8 border-b-2 border-red-500"></div>
                         <span className="text-xs">Analyzing Circuit Logic...</span>
                     </div>
                 )}
 
                 {!loading && !data && (
-                    <div className="text-center py-10 text-gray-500 text-sm">
+                    <div className="text-center py-10 text-muted-foreground text-sm">
                         No inputs/outputs detected. Add nodes to simulation.
                     </div>
                 )}
 
                 {!loading && data && (
-                    <div className="bg-white p-4 rounded shadow-sm border min-h-full">
+                    <div className="bg-card p-4 rounded-none shadow-none-none border min-h-full">
 
                         {/* Truth Table View */}
                         {activeTab === 'truth' && (
                             <div className="overflow-x-auto">
-                                <h3 className="text-xs font-bold text-gray-400 uppercase mb-3 text-center">System Truth Table</h3>
+                                <h3 className="text-xs font-bold text-muted-foreground uppercase mb-3 text-center">System Truth Table</h3>
                                 <table className="w-full text-xs text-center">
-                                    <thead className="bg-gray-100 text-gray-700">
+                                    <thead className="bg-card text-muted-foreground">
                                         <tr>
                                             {data.inputNames.map((name) => (
-                                                <th key={name} className="px-2 py-2 border-b-2 border-r border-gray-200">{name}</th>
+                                                <th key={name} className="px-2 py-2 border-b-2 border-r border-border">{name}</th>
                                             ))}
                                             {data.outputNames.map((name) => (
                                                 <th key={name} className="px-2 py-2 border-b-2 border-l-2 border-red-100 text-red-600 font-bold bg-red-50">{name}</th>
@@ -292,12 +292,12 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                                     </thead>
                                     <tbody className="divide-y">
                                         {data.rows.map((row, i) => (
-                                            <tr key={i} className="hover:bg-gray-50">
+                                            <tr key={i} className="hover:bg-card">
                                                 {data.inputNames.map((name) => (
-                                                    <td key={name} className="px-2 py-1 border-r text-gray-600">{row.inputs[name]}</td>
+                                                    <td key={name} className="px-2 py-1 border-r text-muted-foreground">{row.inputs[name]}</td>
                                                 ))}
                                                 {data.outputNames.map((name) => (
-                                                    <td key={name} className="px-2 py-1 font-bold text-gray-900 border-l border-red-50 bg-red-50/30">{row.outputs[name]}</td>
+                                                    <td key={name} className="px-2 py-1 font-bold text-muted-foreground border-l border-red-50 bg-red-50/30">{row.outputs[name]}</td>
                                                 ))}
                                             </tr>
                                         ))}

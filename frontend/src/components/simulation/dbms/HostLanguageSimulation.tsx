@@ -360,9 +360,9 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
     };
 
     return (
-        <div className="flex h-full flex-col bg-gray-50 text-gray-900 font-sans overflow-hidden">
+        <div className="flex h-full flex-col bg-card text-muted-foreground font-sans overflow-hidden">
             {/* Header */}
-            <header className="bg-white border-b border-gray-200 p-3 flex justify-end items-center shrink-0 shadow-sm">
+            <header className="bg-card border-b border-border p-3 flex justify-end items-center shrink-0 shadow-none-none">
                 <div className="flex items-center gap-4">
                     {feedback && <span className="text-xs text-green-600 font-medium">{feedback}</span>}
                     {isExam && !readonly && (
@@ -370,24 +370,24 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
                             window.parent.postMessage({ type: 'SAVE_EXAM_STATE', payload: { type: 'DBMS_HOST_LANG', lang, op, step, students, code, consoleOutput } }, '*');
                             setFeedback("Progress saved successfully!");
                             setTimeout(() => setFeedback(""), 3000);
-                        }} size="sm" variant="outline" className="h-8 text-xs text-blue-600 border-blue-600/20 hover:bg-blue-50">
+                        }} size="sm" variant="outline" className="h-8 text-xs text-primary border-primary/20 hover:bg-blue-50">
                             SAVE PROGRESS
                         </Button>
                     )}
-                    <div className="flex items-center gap-2 bg-gray-100 rounded px-3 py-1.5 border border-gray-200">
-                        <span className="text-xs text-gray-500 font-medium">LANGUAGE</span>
+                    <div className="flex items-center gap-2 bg-card rounded-none px-3 py-1.5 border border-border">
+                        <span className="text-xs text-muted-foreground font-medium">LANGUAGE</span>
                         <select
                             value={lang}
                             onChange={(e) => setLang(e.target.value as Lang)}
-                            className="bg-transparent text-sm font-bold text-blue-600 focus:outline-none cursor-pointer"
+                            className="bg-transparent text-sm font-bold text-primary focus:outline-none cursor-pointer"
                         >
                             <option value="java">Java (JDBC)</option>
                             <option value="python">Python (DB-API)</option>
                             <option value="cpp">C++ (ODBC)</option>
                         </select>
                     </div>
-                    <div className="flex items-center gap-2 bg-gray-100 rounded px-3 py-1.5 border border-gray-200">
-                        <span className="text-xs text-gray-500 font-medium">TEMPLATE</span>
+                    <div className="flex items-center gap-2 bg-card rounded-none px-3 py-1.5 border border-border">
+                        <span className="text-xs text-muted-foreground font-medium">TEMPLATE</span>
                         <select
                             value={op}
                             onChange={(e) => setOp(e.target.value as Op)}
@@ -404,12 +404,12 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
 
             <div className="flex flex-1 overflow-hidden">
                 {/* Left Panel: Editable IDE */}
-                <div className="w-7/12 flex flex-col border-r border-gray-200 bg-white">
-                    <div className="p-2 bg-gray-100 border-b border-gray-200 flex justify-between items-center px-4">
+                <div className="w-7/12 flex flex-col border-r border-border bg-card">
+                    <div className="p-2 bg-card border-b border-border flex justify-between items-center px-4">
                         <div className="flex items-center gap-2 text-sm">
-                            <i className="bx bx-code text-blue-600"  />
-                            <span className="font-mono text-gray-700 font-bold">Code Editor</span>
-                            <span className="text-xs text-gray-600 bg-white border px-2 py-0.5 rounded">Editable</span>
+                            <i className="bx bx-code text-primary"  />
+                            <span className="font-mono text-muted-foreground font-bold">Code Editor</span>
+                            <span className="text-xs text-muted-foreground bg-card border px-2 py-0.5 rounded-none">Editable</span>
                         </div>
                         <div className="flex gap-2">
                             {!readonly && (
@@ -418,7 +418,7 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
                                         size="sm"
                                         variant="outline"
                                         onClick={reset}
-                                        className="text-gray-600 hover:text-gray-900 border-gray-300"
+                                        className="text-muted-foreground hover:text-muted-foreground border-border"
                                     >
                                         <i className="bx bx-refreshcw mr-1"  /> Reset
                                     </Button>
@@ -426,7 +426,7 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
                                         size="sm"
                                         disabled={step >= 5}
                                         onClick={nextStep}
-                                        className="bg-green-600 hover:bg-green-700 text-white shadow-sm font-bold"
+                                        className="bg-green-600 hover:bg-green-700 text-white shadow-none-none font-bold"
                                     >
                                         <i className="bx bx-play mr-1 fill-current"  /> {step === 0 ? "Run Program" : "Next Step"}
                                     </Button>
@@ -435,21 +435,21 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
                         </div>
                     </div>
 
-                    <div className="flex-1 bg-[#1e1e1e] relative overflow-hidden flex flex-col group border-b border-gray-200">
+                    <div className="flex-1 bg-[#1e1e1e] relative overflow-hidden flex flex-col group border-b border-border">
                         {/* Interactive Textarea (Dark Theme for Syntax Feel) */}
                         <textarea
                             value={code}
                             onChange={(e) => setCode(e.target.value)}
                             disabled={readonly}
-                            className={`flex-1 w-full bg-[#1e1e1e] text-gray-200 font-mono text-sm p-4 resize-none outline-none leading-relaxed selection:bg-blue-500/30 ${readonly ? "opacity-75 cursor-not-allowed" : ""}`}
+                            className={`flex-1 w-full bg-[#1e1e1e] text-muted-foreground font-mono text-sm p-4 resize-none outline-none leading-relaxed selection:bg-primary/30 ${readonly ? "opacity-75 cursor-not-allowed" : ""}`}
                             spellCheck="false"
                         />
                         {/* Highlight Overlay Execution Indicator */}
                         {step > 0 && step < 6 && (
-                            <div className="absolute bottom-4 right-4 bg-yellow-900/40 text-yellow-400 border border-yellow-500/50 px-4 py-2 rounded-md text-sm font-mono flex items-center gap-2 shadow-lg backdrop-blur-sm animate-in slide-in-from-bottom-2">
+                            <div className="absolute bottom-4 right-4 bg-yellow-900/40 text-yellow-400 border border-yellow-500/50 px-4 py-2 rounded-none-none text-sm font-mono flex items-center gap-2 shadow-none-none backdrop-blur-sm animate-in slide-in-from-bottom-2">
                                 <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow-500"></span>
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-none-full bg-yellow-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-none-full h-2 w-2 bg-yellow-500"></span>
                                 </span>
                                 Executing Step {step}...
                             </div>
@@ -457,14 +457,14 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
                     </div>
 
                     {/* Console */}
-                    <div className="h-48 bg-white border-t border-gray-200 flex flex-col">
-                        <div className="p-1 px-3 bg-gray-100 text-xs text-gray-600 flex items-center gap-2 border-b border-gray-200">
+                    <div className="h-48 bg-card border-t border-border flex flex-col">
+                        <div className="p-1 px-3 bg-card text-xs text-muted-foreground flex items-center gap-2 border-b border-border">
                             <i className="bx bx-terminal"  /> Console Output
                         </div>
-                        <div className="flex-1 p-3 font-mono text-sm overflow-y-auto space-y-1 bg-black text-gray-300">
-                            {consoleOutput.length === 0 && <span className="text-gray-600 italic">// Output will appear here...</span>}
+                        <div className="flex-1 p-3 font-mono text-sm overflow-y-auto space-y-1 bg-black text-muted-foreground">
+                            {consoleOutput.length === 0 && <span className="text-muted-foreground italic">// Output will appear here...</span>}
                             {consoleOutput.map((l, i) => (
-                                <div key={i} className={`${l.includes("Error") ? "text-red-400" : l.includes("Success") ? "text-green-400" : "text-gray-300"}`}>
+                                <div key={i} className={`${l.includes("Error") ? "text-red-400" : l.includes("Success") ? "text-green-400" : "text-muted-foreground"}`}>
                                     {l}
                                 </div>
                             ))}
@@ -474,53 +474,53 @@ export default function HostLanguageSimulation({ mode = "LEARNING", initialData,
                 </div>
 
                 {/* Right Panel: Database & Status */}
-                <div className="w-5/12 flex flex-col bg-gray-50 border-l border-gray-200">
-                    <div className="p-4 border-b border-gray-200 bg-white flex justify-between items-center shadow-sm z-10">
-                        <h3 className="flex items-center gap-2 font-bold text-gray-800"><i className="bx bx-database text-orange-500"  /> Database Server</h3>
-                        <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold transition-all ${isConnected ? "bg-green-100 text-green-700 border border-green-300 shadow-sm" : "bg-red-100 text-red-700 border border-red-300"}`}>
+                <div className="w-5/12 flex flex-col bg-card border-l border-border">
+                    <div className="p-4 border-b border-border bg-card flex justify-between items-center shadow-none-none z-10">
+                        <h3 className="flex items-center gap-2 font-bold text-muted-foreground"><i className="bx bx-database text-orange-500"  /> Database Server</h3>
+                        <div className={`flex items-center gap-2 px-3 py-1 rounded-none-full text-xs font-bold transition-all ${isConnected ? "bg-green-100 text-green-700 border border-green-300 shadow-none-none" : "bg-red-100 text-red-700 border border-red-300"}`}>
                             <i className="bx bx-power"  /> {isConnected ? "CONNECTED" : "OFFLINE"}
                         </div>
                     </div>
 
                     <div className="flex-1 p-6 space-y-6 overflow-auto bg-dots-pattern">
                         {/* Table Visualization */}
-                        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
-                            <div className="bg-gray-100 p-3 border-b border-gray-200 flex justify-between items-center">
-                                <span className="text-sm font-bold text-gray-700">Table: STUDENT</span>
-                                <span className="text-xs text-gray-600 bg-white px-2 py-0.5 rounded border border-gray-300">{students.length} rows</span>
+                        <div className="bg-card rounded-none-none border border-border overflow-hidden shadow-none-none">
+                            <div className="bg-card p-3 border-b border-border flex justify-between items-center">
+                                <span className="text-sm font-bold text-muted-foreground">Table: STUDENT</span>
+                                <span className="text-xs text-muted-foreground bg-card px-2 py-0.5 rounded-none border border-border">{students.length} rows</span>
                             </div>
-                            <table className="w-full text-sm text-left text-gray-700">
-                                <thead className="bg-gray-50 text-gray-500 uppercase text-xs font-semibold">
+                            <table className="w-full text-sm text-left text-muted-foreground">
+                                <thead className="bg-card text-muted-foreground uppercase text-xs font-semibold">
                                     <tr>
-                                        <th className="px-4 py-3 border-b border-gray-200">RollNo <span className="text-orange-500 ml-1 text-[10px] tracking-wider">PK</span></th>
-                                        <th className="px-4 py-3 border-b border-gray-200">Name</th>
-                                        <th className="px-4 py-3 border-b border-gray-200">Dept</th>
-                                        <th className="px-4 py-3 border-b border-gray-200">Marks</th>
+                                        <th className="px-4 py-3 border-b border-border">RollNo <span className="text-orange-500 ml-1 text-[10px] tracking-wider">PK</span></th>
+                                        <th className="px-4 py-3 border-b border-border">Name</th>
+                                        <th className="px-4 py-3 border-b border-border">Dept</th>
+                                        <th className="px-4 py-3 border-b border-border">Marks</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {students.map((s) => (
-                                        <tr key={s.RollNo} className="border-b border-gray-100 hover:bg-gray-50 transition-colors group">
-                                            <td className="px-4 py-3 font-mono text-orange-600 font-bold border-r border-gray-100">{s.RollNo}</td>
-                                            <td className="px-4 py-3 border-r border-gray-100">{s.Name}</td>
-                                            <td className="px-4 py-3 border-r border-gray-100">{s.Dept}</td>
+                                        <tr key={s.RollNo} className="border-b border-border hover:bg-card transition-colors group">
+                                            <td className="px-4 py-3 font-mono text-orange-600 font-bold border-r border-border">{s.RollNo}</td>
+                                            <td className="px-4 py-3 border-r border-border">{s.Name}</td>
+                                            <td className="px-4 py-3 border-r border-border">{s.Dept}</td>
                                             <td className="px-4 py-3 text-emerald-600 font-medium">{s.Marks}</td>
                                         </tr>
                                     ))}
                                     {students.length === 0 && (
-                                        <tr><td colSpan={4} className="p-8 text-center text-gray-500 italic">Table is empty</td></tr>
+                                        <tr><td colSpan={4} className="p-8 text-center text-muted-foreground italic">Table is empty</td></tr>
                                     )}
                                 </tbody>
                             </table>
                         </div>
 
-                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-xs text-blue-800 space-y-2">
-                            <div className="flex items-center gap-2 font-bold text-blue-600 uppercase tracking-wider mb-2">
+                        <div className="bg-blue-50 border border-primary rounded-none-none p-4 text-xs text-primary space-y-2">
+                            <div className="flex items-center gap-2 font-bold text-primary uppercase tracking-wider mb-2">
                                 <i className="bx bx-edit3"  /> Interactive Instructions
                             </div>
                             <p>1. Select <strong>Language</strong> (Java/Python/Cpp) and <strong>Template</strong> (Insert/Update...).</p>
                             <p>2. <strong>Edit the SQL</strong> inside the Code Editor. You can change strings inside <code>" "</code>.</p>
-                            <p className="font-mono bg-white p-1 rounded inline-block border border-blue-200 text-gray-700">"INSERT INTO Student VALUES(99, 'Test', ...)"</p>
+                            <p className="font-mono bg-card p-1 rounded-none inline-block border border-primary text-muted-foreground">"INSERT INTO Student VALUES(99, 'Test', ...)"</p>
                             <p>3. Click <strong>Run Program</strong> to execute your custom code!</p>
                         </div>
                     </div>

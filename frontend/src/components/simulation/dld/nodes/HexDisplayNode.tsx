@@ -25,7 +25,7 @@ export default function HexDisplayNode({ data, selected }: NodeProps) {
     const activeSegments = SEGMENTS[value] || SEGMENTS[0];
 
     return (
-        <div className={`relative bg-gray-900 border-4 ${selected ? 'border-orange-500' : 'border-gray-800'} w-24 h-32 rounded-lg flex items-center justify-center`}>
+        <div className={`relative bg-card border-4 ${selected ? 'border-orange-500' : 'border-border'} w-24 h-32 rounded-none-none flex items-center justify-center`}>
             {/* Inputs (Bottom) - D0-D3 */}
             <div className="absolute -bottom-2 w-full flex justify-center gap-2">
                 <Handle type="target" position={Position.Bottom} id="d0" className="w-2 h-2 bg-yellow-500" style={{ left: '20%' }} />

@@ -87,46 +87,46 @@ export default function OptimizationSimulator({ labId }: { labId: string }) {
 
     return (
         <div className="flex flex-col h-full bg-[#fafbfe] p-6 space-y-6 overflow-y-auto">
-            <div className="flex justify-between items-center bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <div className="flex justify-between items-center bg-card p-6 rounded-none-none border border-border shadow-none-none">
                 <div>
-                    <h2 className="text-xl font-black text-slate-800 uppercase tracking-tight">Optimization Techniques</h2>
-                    <p className="text-sm text-slate-500 mt-1">Mathematical search models & linear programming</p>
+                    <h2 className="text-xl font-black text-muted-foreground uppercase tracking-tight">Optimization Techniques</h2>
+                    <p className="text-sm text-muted-foreground mt-1">Mathematical search models & linear programming</p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-amber-500 animate-pulse"></span>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-widest bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">Active Lab: {labId}</span>
+                    <span className="h-2.5 w-2.5 rounded-none-full bg-amber-500 animate-pulse"></span>
+                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest bg-card px-3 py-1.5 rounded-none-none border border-border">Active Lab: {labId}</span>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                 <div className="xl:col-span-2 space-y-6">
                     {/* INPUT CARD */}
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
-                        <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                            <i className="bx bx-bookopen h-5 w-5 text-indigo-500"  /> Equations & Constraints Configuration
+                    <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-6">
+                        <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                            <i className="bx bx-bookopen h-5 w-5 text-primary"  /> Equations & Constraints Configuration
                         </h3>
 
                         {isSearchMethod ? (
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div>
-                                    <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Target Function f(x)</label>
-                                    <input value={functionText} onChange={e => setFunctionText(e.target.value)} className="w-full text-sm bg-slate-50 border border-slate-200 rounded-lg p-2 font-mono" />
+                                    <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Target Function f(x)</label>
+                                    <input value={functionText} onChange={e => setFunctionText(e.target.value)} className="w-full text-sm bg-card border border-border rounded-none-none p-2 font-mono" />
                                 </div>
                                 <div>
-                                    <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Lower Limit (a)</label>
-                                    <input value={lowerBound} onChange={e => setLowerBound(e.target.value)} className="w-full text-sm bg-slate-50 border border-slate-200 rounded-lg p-2 font-mono" />
+                                    <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Lower Limit (a)</label>
+                                    <input value={lowerBound} onChange={e => setLowerBound(e.target.value)} className="w-full text-sm bg-card border border-border rounded-none-none p-2 font-mono" />
                                 </div>
                                 <div>
-                                    <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Upper Limit (b)</label>
-                                    <input value={upperBound} onChange={e => setUpperBound(e.target.value)} className="w-full text-sm bg-slate-50 border border-slate-200 rounded-lg p-2 font-mono" />
+                                    <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Upper Limit (b)</label>
+                                    <input value={upperBound} onChange={e => setUpperBound(e.target.value)} className="w-full text-sm bg-card border border-border rounded-none-none p-2 font-mono" />
                                 </div>
                             </div>
                         ) : isSimplex ? (
-                            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-3">
-                                <div className="text-sm font-bold text-slate-700">Objective Function:</div>
-                                <div className="font-mono text-sm text-slate-600 bg-white p-2 rounded border">Maximize Z = 3x1 + 2x2</div>
-                                <div className="text-sm font-bold text-slate-700">Constraints:</div>
-                                <div className="font-mono text-xs text-slate-500 space-y-1">
+                            <div className="bg-card p-4 rounded-none-none border border-border space-y-3">
+                                <div className="text-sm font-bold text-muted-foreground">Objective Function:</div>
+                                <div className="font-mono text-sm text-muted-foreground bg-card p-2 rounded-none border">Maximize Z = 3x1 + 2x2</div>
+                                <div className="text-sm font-bold text-muted-foreground">Constraints:</div>
+                                <div className="font-mono text-xs text-muted-foreground space-y-1">
                                     <div>2x1 + x2 ≤ 18</div>
                                     <div>2x1 + 3x2 ≤ 42</div>
                                     <div>x1, x2 ≥ 0</div>
@@ -134,11 +134,11 @@ export default function OptimizationSimulator({ labId }: { labId: string }) {
                             </div>
                         ) : (
                             <div className="space-y-4">
-                                <div className="text-sm font-bold text-slate-700">Cost coefficients:</div>
+                                <div className="text-sm font-bold text-muted-foreground">Cost coefficients:</div>
                                 <div className="overflow-x-auto">
                                     <table className="w-full text-center border text-xs">
                                         <thead>
-                                            <tr className="bg-slate-100 font-bold text-slate-700">
+                                            <tr className="bg-card font-bold text-muted-foreground">
                                                 <th className="p-2 border">Source/Dest</th>
                                                 <th className="p-2 border">D1</th>
                                                 <th className="p-2 border">D2</th>
@@ -154,13 +154,13 @@ export default function OptimizationSimulator({ labId }: { labId: string }) {
                                                     {row.map((val, cIdx) => (
                                                         <td key={cIdx} className="p-2 border font-mono">{val}</td>
                                                     ))}
-                                                    <td className="p-2 border font-mono font-bold text-slate-700">{supply[rIdx]}</td>
+                                                    <td className="p-2 border font-mono font-bold text-muted-foreground">{supply[rIdx]}</td>
                                                 </tr>
                                             ))}
-                                            <tr className="bg-slate-50">
+                                            <tr className="bg-card">
                                                 <td className="p-2 border font-bold">Demand</td>
                                                 {demand.map((val, idx) => (
-                                                    <td key={idx} className="p-2 border font-mono font-bold text-slate-700">{val}</td>
+                                                    <td key={idx} className="p-2 border font-mono font-bold text-muted-foreground">{val}</td>
                                                 ))}
                                                 <td className="p-2 border font-bold">1000</td>
                                             </tr>
@@ -171,7 +171,7 @@ export default function OptimizationSimulator({ labId }: { labId: string }) {
                         )}
 
                         <div>
-                            <Button onClick={runOptimization} className="bg-blue-600 hover:bg-blue-700 text-white font-bold">
+                            <Button onClick={runOptimization} className="bg-primary hover:bg-primary text-white font-bold">
                                 Compute Optimal Solution
                             </Button>
                         </div>
@@ -179,16 +179,16 @@ export default function OptimizationSimulator({ labId }: { labId: string }) {
 
                     {/* SIMPLEX MATRIX TABLEAU */}
                     {isSimplex && simplexTable.length > 0 && (
-                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
-                            <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <TableIcon className="h-5 w-5 text-indigo-500" /> Simplex Tableau Iteration #1
+                        <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-4">
+                            <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                <TableIcon className="h-5 w-5 text-primary" /> Simplex Tableau Iteration #1
                             </h3>
                             <div className="overflow-x-auto">
                                 <table className="w-full text-center text-sm border">
                                     <thead>
-                                        <tr className="bg-slate-100 font-bold text-slate-700 border-b">
+                                        <tr className="bg-card font-bold text-muted-foreground border-b">
                                             <th className="p-3 border">Basis</th>
-                                            <th className="p-3 border text-blue-600 font-bold">x1 (Pivot Col)</th>
+                                            <th className="p-3 border text-primary font-bold">x1 (Pivot Col)</th>
                                             <th className="p-3 border">x2</th>
                                             <th className="p-3 border">s1</th>
                                             <th className="p-3 border">s2</th>
@@ -196,15 +196,15 @@ export default function OptimizationSimulator({ labId }: { labId: string }) {
                                             <th className="p-3 border">Ratio (RHS/Pivot)</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y font-mono text-slate-600">
+                                    <tbody className="divide-y font-mono text-muted-foreground">
                                         {simplexTable.map((row, idx) => (
                                             <tr key={idx} className={row.basic === "s1" ? "bg-amber-50" : ""}>
-                                                <td className="p-3 border font-bold text-slate-800">{row.basic}</td>
-                                                <td className="p-3 border font-bold text-blue-600">{row.x1}</td>
+                                                <td className="p-3 border font-bold text-muted-foreground">{row.basic}</td>
+                                                <td className="p-3 border font-bold text-primary">{row.x1}</td>
                                                 <td className="p-3 border">{row.x2}</td>
                                                 <td className="p-3 border">{row.s1}</td>
                                                 <td className="p-3 border">{row.s2}</td>
-                                                <td className="p-3 border font-bold text-slate-800">{row.rhs}</td>
+                                                <td className="p-3 border font-bold text-muted-foreground">{row.rhs}</td>
                                                 <td className="p-3 border font-bold text-amber-700">{row.ratio}</td>
                                             </tr>
                                         ))}
@@ -216,14 +216,14 @@ export default function OptimizationSimulator({ labId }: { labId: string }) {
 
                     {/* TRANSPORTATION ALLOCATIONS MATRIX */}
                     {isTransportation && allocations.length > 0 && (
-                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
-                            <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <i className="bx bx-grid h-5 w-5 text-indigo-500"  /> NW-Corner Allocations Matrix
+                        <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-4">
+                            <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                <i className="bx bx-grid h-5 w-5 text-primary"  /> NW-Corner Allocations Matrix
                             </h3>
                             <div className="overflow-x-auto">
                                 <table className="w-full text-center border text-xs">
                                     <thead>
-                                        <tr className="bg-slate-100 font-bold text-slate-700">
+                                        <tr className="bg-card font-bold text-muted-foreground">
                                             <th className="p-2 border">S/D</th>
                                             <th className="p-2 border">D1</th>
                                             <th className="p-2 border">D2</th>
@@ -234,9 +234,9 @@ export default function OptimizationSimulator({ labId }: { labId: string }) {
                                     <tbody>
                                         {allocations.map((row, rIdx) => (
                                             <tr key={rIdx}>
-                                                <td className="p-3 border font-bold bg-slate-50">S{rIdx + 1}</td>
+                                                <td className="p-3 border font-bold bg-card">S{rIdx + 1}</td>
                                                 {row.map((val, cIdx) => (
-                                                    <td key={cIdx} className={`p-3 border font-mono font-bold ${val > 0 ? "bg-emerald-50 text-emerald-700 border-emerald-200" : "text-slate-300"}`}>
+                                                    <td key={cIdx} className={`p-3 border font-mono font-bold ${val > 0 ? "bg-emerald-50 text-emerald-700 border-emerald-200" : "text-muted-foreground"}`}>
                                                         {val > 0 ? `[${val}]` : "-"}
                                                     </td>
                                                 ))}
@@ -250,15 +250,15 @@ export default function OptimizationSimulator({ labId }: { labId: string }) {
                 </div>
 
                 {/* OUTPUT TERMINAL LOGS */}
-                <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[480px]">
-                    <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
+                <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none flex flex-col h-[480px]">
+                    <h3 className="font-bold text-muted-foreground flex items-center gap-2 mb-4">
                         <i className="bx bx-percent h-5 w-5 text-emerald-500"  /> Convergence & Step Logs
                     </h3>
-                    <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
+                    <div className="flex-1 bg-card rounded-none-none p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                         {logs.length > 0 ? (
                             logs.map((log, idx) => <div key={idx} className="animate-in fade-in-50">{log}</div>)
                         ) : (
-                            <div className="text-slate-500 italic">No simplex/Revised Simplex loops run. Click compute to show.</div>
+                            <div className="text-muted-foreground italic">No simplex/Revised Simplex loops run. Click compute to show.</div>
                         )}
                     </div>
                 </div>
