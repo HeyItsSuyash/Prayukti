@@ -31,7 +31,7 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
     });
 
     const handleLogout = () => {
-        localStorage.removeItem('vlab_token');
+        
         localStorage.removeItem('vlab_user');
         window.location.href = '/login';
     };

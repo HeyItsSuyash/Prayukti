@@ -72,7 +72,7 @@ export default function KnowledgeBasePage() {
         if (!selectedSub) return;
         setLoading(true);
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             
             // 1. Fetch approved
             const aRes = await fetch(`${API_URL}/api/knowledge-base?subject_id=${selectedSub}`);
@@ -110,7 +110,7 @@ export default function KnowledgeBasePage() {
         setAskLoading(true);
         setAskResult(null);
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             const res = await fetch(`${API_URL}/api/knowledge-base`, {
                 method: 'POST',
                 headers: {
@@ -148,7 +148,7 @@ export default function KnowledgeBasePage() {
 
         setReviewLoading(prev => ({ ...prev, [id]: true }));
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             const res = await fetch(`${API_URL}/api/knowledge-base/${id}/review`, {
                 method: 'POST',
                 headers: {

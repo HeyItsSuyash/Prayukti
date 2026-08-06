@@ -43,14 +43,10 @@ export default function VerifyPage() {
             const res = await axios.post(`${API_URL}/api/auth/verify-otp`, {
                 email,
                 otp
-            });
+            }, { withCredentials: true });
 
-            // Save token and user so the user is automatically logged in
-            if (res.data.token) {
-                localStorage.setItem("vlab_token", res.data.token);
-            }
+            // User is automatically logged in via httpOnly cookie
             if (res.data.user) {
-                localStorage.setItem("vlab_user", JSON.stringify(res.data.user));
                 localStorage.setItem("studentName", res.data.user.fullName || "");
                 localStorage.setItem("studentRoll", res.data.user.rollNo || "");
             }
@@ -72,7 +68,7 @@ export default function VerifyPage() {
         setError("");
         setSuccess("");
         try {
-            await axios.post(`${API_URL}/api/auth/resend-otp`, { email });
+            await axios.post(`${API_URL}/api/auth/resend-otp`, { email }, { withCredentials: true });
             setSuccess("A new OTP has been sent to your email.");
         } catch (err: any) {
             setError(err.response?.data?.message || "Failed to resend OTP.");

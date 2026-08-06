@@ -69,7 +69,7 @@ function AdminContent() {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             const res = await fetch(`${API_URL}/api/users`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -111,7 +111,7 @@ function AdminContent() {
 
     const handleLogout = async () => {
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             if (token) {
                 await fetch(`${API_URL}/api/attendance/logout`, {
                     method: 'POST',
@@ -123,7 +123,7 @@ function AdminContent() {
             }
         } catch (err) {}
         localStorage.removeItem('vlab_user');
-        localStorage.removeItem('vlab_token');
+        
         window.location.href = ('/login');
     };
 

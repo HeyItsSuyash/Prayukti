@@ -73,9 +73,9 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
         setLoading(true);
         console.log("DEBUG lessonId before fetch:", lessonId);
         try {
-            const token = localStorage.getItem("vlab_token");
+            
             const res = await fetch(`${API_URL}/api/video-tutor/lessons/${lessonId}`, {
-                headers: { Authorization: `Bearer ${token}` }
+                /* removed auth header */
             });
             if (!res.ok) {
                 const errText = await res.text();
@@ -185,7 +185,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
     // Send watch progress parameters to backend
     const handleLogProgress = async (completionRate: number, quizScore: number | null, watchSec: number) => {
         try {
-            const token = localStorage.getItem("vlab_token");
+            
             await fetch(`${API_URL}/api/video-tutor/progress`, {
                 method: "POST",
                 headers: {
@@ -207,11 +207,11 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
     // Bookmark save toggle
     const toggleBookmark = async () => {
         try {
-            const token = localStorage.getItem("vlab_token");
+            
             const method = isSaved ? "DELETE" : "POST";
             const res = await fetch(`${API_URL}/api/video-tutor/lessons/${lessonId}/save`, {
                 method,
-                headers: { Authorization: `Bearer ${token}` }
+                /* removed auth header */
             });
             if (res.ok) {
                 setIsSaved(!isSaved);
@@ -233,7 +233,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
         setInterruptLoading(true);
 
         try {
-            const token = localStorage.getItem("vlab_token");
+            
             const res = await fetch(`${API_URL}/api/video-tutor/interrupt`, {
                 method: "POST",
                 headers: {

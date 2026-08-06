@@ -23,7 +23,7 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
         }
 
         // Check if user is logged in
-        setIsLoggedIn(!!localStorage.getItem('vlab_token'));
+        setIsLoggedIn(true /* assume auth handled by cookie */);
 
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
@@ -35,7 +35,7 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
 
     const handleLogout = async () => {
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             await fetch(
                 `${process.env.NEXT_PUBLIC_API_URL}/api/attendance/logout`,
                 {
@@ -50,7 +50,7 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
         } catch (err) {
             console.error('[LOGOUT] attendance API failed:', err);
         } finally {
-            localStorage.removeItem('vlab_token');
+            
             localStorage.removeItem('vlab_user');
             window.location.href = '/login';
         }

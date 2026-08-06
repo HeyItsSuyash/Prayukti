@@ -64,7 +64,7 @@ export default function AdminTimetableBuilder() {
     setTimeout(() => setGenerationStep(3), 2000); 
 
     try {
-      const token = localStorage.getItem('vlab_token');
+      
       const payload = {
         institution_id: "00000000-0000-0000-0000-000000000000",
         section_ids: ["00000000-0000-0000-0000-000000000000"]

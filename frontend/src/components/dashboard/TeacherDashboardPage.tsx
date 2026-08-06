@@ -50,7 +50,7 @@ export default function TeacherDashboard() {
 
     const loadData = async () => {
         try {
-                        const token = localStorage.getItem('vlab_token');
+                        
             const res = await fetch(`${API_URL}/api/users`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -139,7 +139,7 @@ export default function TeacherDashboard() {
     const handleLogout = async () => {
         try {
             // Log attendance logout before clearing state
-            const token = localStorage.getItem('vlab_token');
+            
             await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/attendance/logout`, {
                 method: 'POST',
                 headers: {
@@ -151,7 +151,7 @@ export default function TeacherDashboard() {
             console.error("Attendance logout failed:", err);
         }
         localStorage.removeItem('vlab_user');
-        localStorage.removeItem('vlab_token');
+        
         window.location.href = ('/login');
     };
 

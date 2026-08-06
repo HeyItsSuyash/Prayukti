@@ -11,6 +11,9 @@ use std::time::{Instant, Duration};
 const RATE_LIMIT: usize = 100; // Requests per minute
 const RATE_LIMIT_WINDOW: u64 = 60; // Seconds
 
+const SENSITIVE_RATE_LIMIT: usize = 5; // 5 requests per minute
+const SENSITIVE_RATE_LIMIT_WINDOW: u64 = 60; // Seconds
+
 type RateLimitState = Arc<Mutex<HashMap<String, (usize, Instant)>>>;
 
 use axum::extract::State;
@@ -41,6 +44,40 @@ pub async fn rate_limiter(
     *count += 1;
 
     if *count > RATE_LIMIT {
+        return Err(StatusCode::TOO_MANY_REQUESTS);
+    }
+
+    drop(map); // Drop lock before next.run()
+
+    Ok(next.run(request).await)
+}
+
+pub async fn sensitive_rate_limiter(
+    State(state): State<RateLimitState>,
+    request: axum::extract::Request,
+    next: Next,
+) -> Result<Response, StatusCode> {
+    let ip = request
+        .headers()
+        .get("x-forwarded-for")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("unknown")
+        .to_string();
+
+    let mut map = state.lock().await;
+    let now = Instant::now();
+    let window = Duration::from_secs(SENSITIVE_RATE_LIMIT_WINDOW);
+
+    let (count, last_reset) = map.entry(ip.clone()).or_insert((0, now));
+
+    if now.duration_since(*last_reset) > window {
+        *count = 0;
+        *last_reset = now;
+    }
+
+    *count += 1;
+
+    if *count > SENSITIVE_RATE_LIMIT {
         return Err(StatusCode::TOO_MANY_REQUESTS);
     }
 

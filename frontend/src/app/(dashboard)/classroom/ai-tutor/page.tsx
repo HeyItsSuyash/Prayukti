@@ -77,7 +77,7 @@ export default function AiTutorPage() {
 
         // Track interaction event
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             // Log event
             await fetch(`${API_URL}/api/participation/event`, {
                 method: 'POST',
@@ -124,7 +124,7 @@ export default function AiTutorPage() {
         setQuizSubmitted(false);
 
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             const res = await fetch(`${API_URL}/api/ai-tutor/quiz`, {
                 method: 'POST',
                 headers: {
@@ -152,7 +152,7 @@ export default function AiTutorPage() {
         setFlipped(false);
 
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             const res = await fetch(`${API_URL}/api/ai-tutor/flashcard`, {
                 method: 'POST',
                 headers: {
@@ -178,7 +178,7 @@ export default function AiTutorPage() {
         setNotesLoading(true);
 
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             const res = await fetch(`${API_URL}/api/ai-tutor/notes`, {
                 method: 'POST',
                 headers: {

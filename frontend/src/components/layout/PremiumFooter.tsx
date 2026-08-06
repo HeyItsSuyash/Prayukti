@@ -30,16 +30,16 @@ export function PremiumFooter() {
                         
                         {/* Socials */}
                         <div className="flex items-center gap-3 pt-2">
-                            <Link href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white transition-all">
+                            <Link href="https://twitter.com/mmmut" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white transition-all">
                                 <i className="bx bxl-twitter"></i>
                             </Link>
-                            <Link href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white transition-all">
+                            <Link href="https://linkedin.com/school/mmmut" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white transition-all">
                                 <i className="bx bxl-linkedin"></i>
                             </Link>
-                            <Link href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white transition-all">
+                            <Link href="https://instagram.com/mmmut" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white transition-all">
                                 <i className="bx bxl-instagram"></i>
                             </Link>
-                            <Link href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white transition-all">
+                            <Link href="https://youtube.com/mmmut" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white transition-all">
                                 <i className="bx bxl-youtube"></i>
                             </Link>
                         </div>
@@ -50,9 +50,9 @@ export function PremiumFooter() {
                         <h4 className="text-white font-semibold mb-6 text-sm">Platform</h4>
                         <ul className="space-y-4">
                             <li><Link href="/labs" className="text-slate-400 hover:text-white transition-colors text-sm">Labs</Link></li>
-                            <li><Link href="/features" className="text-slate-400 hover:text-white transition-colors text-sm">Features</Link></li>
-                            <li><Link href="/pricing" className="text-slate-400 hover:text-white transition-colors text-sm">Pricing</Link></li>
-                            <li><Link href="/updates" className="text-slate-400 hover:text-white transition-colors text-sm">Updates</Link></li>
+                            <li><Link href="/coming-soon?feature=Features" className="text-slate-400 hover:text-white transition-colors text-sm">Features</Link></li>
+                            <li><Link href="/coming-soon?feature=Pricing" className="text-slate-400 hover:text-white transition-colors text-sm">Pricing</Link></li>
+                            <li><Link href="/coming-soon?feature=Updates" className="text-slate-400 hover:text-white transition-colors text-sm">Updates</Link></li>
                         </ul>
                     </div>
 

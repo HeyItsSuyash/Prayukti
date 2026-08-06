@@ -28,7 +28,7 @@ export default function AnalyticsPage() {
 
         const fetchData = async () => {
             try {
-                const token = localStorage.getItem('vlab_token');
+                
                 const parsedUser = JSON.parse(storedUser || "{}");
                 const role = parsedUser.role?.toLowerCase();
 
@@ -83,7 +83,7 @@ export default function AnalyticsPage() {
         setSelectedSub(val);
         setStatsLoading(true);
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             const tRes = await fetch(`${API_URL}/api/classroom-analytics/teacher?subject_id=${val}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });

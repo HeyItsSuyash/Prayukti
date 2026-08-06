@@ -44,6 +44,7 @@ export const metadata: Metadata = {
 };
 
 import { Analytics } from '@vercel/analytics/react';
+import { AxiosConfig } from '@/components/AxiosConfig';
 
 export default function RootLayout({
   children,
@@ -53,6 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
+        <AxiosConfig />
         {children}
         <AssistantBot />
         <Analytics />

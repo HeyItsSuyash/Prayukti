@@ -8,4 +8,4 @@ pub mod knowledge_base;
 pub mod ai_tutor;
 pub mod ai_teacher;
 pub mod video_tutor;
-
+pub mod ai_security;

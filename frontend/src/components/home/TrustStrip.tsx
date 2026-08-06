@@ -44,7 +44,7 @@ export function TrustStrip() {
                                     <i className={feature.icon}></i>
                                 </div>
                                 <div>
-                                    <h3 className="text-sm font-bold text-[#021D24] mb-2">{feature.title}</h3>
+                                    <h2 className="text-sm font-bold text-[#021D24] mb-2">{feature.title}</h2>
                                     <p className="text-sm text-slate-500 leading-relaxed">{feature.description}</p>
                                 </div>
                             </div>

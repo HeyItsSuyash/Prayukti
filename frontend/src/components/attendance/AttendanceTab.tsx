@@ -8,7 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import axios from 'axios';
+import axios from '@/lib/api';
 
 
 export default function AttendanceTab() {
@@ -23,10 +23,10 @@ export default function AttendanceTab() {
             const API_BASE = API_URL;
             const [aRes, alRes] = await Promise.all([
                 axios.get(`${API_BASE}/api/attendance/analytics?range=daily`, {
-                    headers: { Authorization: `Bearer ${localStorage.getItem('vlab_token')}` }
+                    /* removed auth header */
                 }),
                 axios.get(`${API_BASE}/api/attendance/alerts`, {
-                    headers: { Authorization: `Bearer ${localStorage.getItem('vlab_token')}` }
+                    /* removed auth header */
                 })
             ]);
 
@@ -47,7 +47,7 @@ export default function AttendanceTab() {
         try {
             const API_BASE = API_URL;
             await axios.patch(`${API_BASE}/api/attendance/alerts/${id}/resolve`, {}, {
-                headers: { Authorization: `Bearer ${localStorage.getItem('vlab_token')}` }
+                /* removed auth header */
             });
             fetchData();
         } catch (err) {
@@ -59,7 +59,7 @@ export default function AttendanceTab() {
         try {
             const API_BASE = API_URL;
             const response = await axios.get(`${API_BASE}/api/attendance/report?month=${selectedMonth}`, {
-                headers: { Authorization: `Bearer ${localStorage.getItem('vlab_token')}` }
+                /* removed auth header */
             });
             
             const data = response.data;

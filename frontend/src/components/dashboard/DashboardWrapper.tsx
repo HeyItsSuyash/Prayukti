@@ -27,7 +27,7 @@ export default function DashboardPage() {
         } catch (e) {
             console.error("Failed to parse user", e);
             localStorage.removeItem('vlab_user');
-            localStorage.removeItem('vlab_token');
+            
             window.location.href = ('/login');
         } finally {
             setLoading(false);

@@ -77,13 +77,11 @@ export default function LoginPage() {
             const response = await axios.post(`${API_URL}${endpoint}`, {
                 email,
                 password
-            });
+            }, { withCredentials: true });
 
             const { token, user } = response.data;
 
             if (typeof window !== 'undefined') {
-                localStorage.setItem("vlab_token", token);
-                localStorage.setItem("vlab_user", JSON.stringify(user));
                 localStorage.setItem("studentName", user.fullName);
                 localStorage.setItem("studentRoll", user.rollNo || "");
             }
@@ -118,6 +116,7 @@ export default function LoginPage() {
             const response = await fetch(`${API_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
                 body: JSON.stringify({
                     email: testEmail,
                     password: 'password123'
@@ -125,8 +124,6 @@ export default function LoginPage() {
             });
             const data = await response.json();
             if (data.token) {
-                localStorage.setItem('vlab_token', data.token);
-                localStorage.setItem('vlab_user', JSON.stringify(data.user));
                 if (targetRole === 'student') {
                     localStorage.setItem('studentName', data.user?.fullName || '');
                     localStorage.setItem('studentRoll', data.user?.rollNo || '');

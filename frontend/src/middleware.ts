@@ -14,6 +14,21 @@ export function middleware(request: NextRequest) {
   const isLocalhost = hostname.includes('localhost');
   const isWww = subdomain === 'www';
   
+  // Check for protected routes
+  const protectedRoutes = ['/dashboard', '/labs', '/admin', '/educators'];
+  const isProtected = protectedRoutes.some(route => url.pathname.startsWith(route));
+
+  if (isProtected) {
+    const token = request.cookies.get('vlab_access_token')?.value;
+    
+    if (!token) {
+      // Redirect to login if no token is found
+      const loginUrl = new URL('/login', request.url);
+      loginUrl.searchParams.set('callbackUrl', url.pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
   // Attach tenant-id to headers for server components
   if (subdomain && !isWww && (!isLocalhost || subdomain !== 'localhost')) {
     const requestHeaders = new Headers(request.headers);

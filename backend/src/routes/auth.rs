@@ -85,12 +85,31 @@ async fn create_attendance_log(
     Ok(log_id)
 }
 
+fn validate_password(password: &str) -> Result<(), &'static str> {
+    if password.len() < 8 {
+        return Err("Password must be at least 8 characters long");
+    }
+    let has_number = password.chars().any(|c| c.is_ascii_digit());
+    let has_letter = password.chars().any(|c| c.is_ascii_alphabetic());
+    if !has_number || !has_letter {
+        return Err("Password must contain at least one letter and one number");
+    }
+    Ok(())
+}
+
 pub async fn signup(
     State(state): State<AppState>,
     Json(payload): Json<RegisterRequest>,
 ) -> impl IntoResponse {
     let email = payload.email.trim().to_lowercase();
     info!("[AUTH] Registration attempt: {}", email);
+
+    if let Err(msg) = validate_password(&payload.password) {
+        return (
+            StatusCode::BAD_REQUEST,
+            Json(json!({ "message": msg })),
+        );
+    }
 
     if !is_allowed_domain(&email) {
         info!("[AUTH] Domain blocked: {}", email);
@@ -276,7 +295,7 @@ pub async fn verify_otp(
     }
 
     let is_otp_valid = match user.otp_hash {
-        Some(ref hash_val) => verify(&payload.otp, hash_val).unwrap_or(false),
+        Some(ref hash_val) => verify(payload.otp.trim(), hash_val).unwrap_or(false),
         None => false,
     };
     

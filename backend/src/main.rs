@@ -60,16 +60,6 @@ async fn main() {
         session_time_map: std::sync::Arc::new(tokio::sync::Mutex::new(std::collections::HashMap::new())),
     };
 
-    // Configure CORS — allow localhost and production origin
-    let cors = CorsLayer::new()
-        .allow_origin([
-            "http://localhost:3000".parse::<axum::http::HeaderValue>().unwrap(),
-            "http://localhost:3001".parse::<axum::http::HeaderValue>().unwrap(),
-            "https://mmmut.prayukti.org".parse::<axum::http::HeaderValue>().unwrap(),
-        ])
-        .allow_headers(Any)
-        .allow_methods(Any);
-
     let auth_router = Router::new()
         .route("/register", post(routes::auth::signup))
         .route("/signup", post(routes::auth::signup))
@@ -107,15 +97,25 @@ async fn main() {
 
     // Build routes
     let rate_limit_state = std::sync::Arc::new(tokio::sync::Mutex::new(std::collections::HashMap::new()));
+    let sensitive_rate_limit_state = rate_limit_state.clone();
+
+    // Configure CORS — allow frontend_url and localhost only in development
+    let cors = CorsLayer::new()
+        .allow_origin([
+            config.frontend_url.parse::<axum::http::HeaderValue>().unwrap_or_else(|_| "https://mmmut.prayukti.org".parse().unwrap()),
+        ])
+        .allow_credentials(true)
+        .allow_headers(Any)
+        .allow_methods(Any);
 
     let app = Router::new()
         .route("/", get(health_check))
-        .nest("/api/auth", auth_router)
+        .nest("/api/auth", auth_router.layer(axum::middleware::from_fn_with_state(sensitive_rate_limit_state.clone(), middleware::security::sensitive_rate_limiter)))
         .nest("/api/subjects", subject_router)
         .nest("/api/experiments", experiment_router)
         .nest("/api/code", code_router)
         .nest("/api/attendance", attendance_router)
-        .nest("/api/users", routes::users::router())
+        .nest("/api/users", routes::users::router().layer(axum::middleware::from_fn_with_state(sensitive_rate_limit_state.clone(), middleware::security::sensitive_rate_limiter)))
         .nest("/api/settings", routes::settings::router())
         .nest("/api/logs", routes::logs::router())
         .nest("/api/resources", routes::resources::router())
@@ -132,6 +132,7 @@ async fn main() {
         .nest("/api/video-tutor", routes::video_tutor::router())
         .nest("/api/academic-hierarchy", routes::academic_hierarchy::router())
         .nest("/api/public-metrics", routes::public_metrics::router())
+        .nest("/api/chat", routes::chat::router())
         .layer(axum::middleware::from_fn_with_state(rate_limit_state, middleware::security::rate_limiter))
         .layer(axum::middleware::from_fn(middleware::security::security_headers))
         .layer(cors)

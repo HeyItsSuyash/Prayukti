@@ -3,7 +3,7 @@
 import { API_URL } from "@/lib/config";
 
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '@/lib/api';
 import { Badge } from "@/components/ui/badge";
 
 export function RiskBadge() {
@@ -23,7 +23,7 @@ export function RiskBadge() {
                 const userId = user.id || user._id;
 
                 const response = await axios.get(`${API_URL}/api/attendance/student/${userId}`, {
-                    headers: { Authorization: `Bearer ${localStorage.getItem('vlab_token')}` }
+                    /* removed auth header */
                 });
 
                 if (response.data?.risk_summary?.risk_status) {

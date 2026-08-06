@@ -39,7 +39,7 @@ export default function StudentAttendancePage() {
         setLoading(true);
         setError("");
         try {
-            const token = localStorage.getItem("vlab_token");
+            
             const res = await fetch(`${API_URL}/api/attendance/student/${user.id}`, {
                 headers: {
                     "Authorization": `Bearer ${token}`

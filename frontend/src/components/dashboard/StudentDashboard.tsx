@@ -51,7 +51,7 @@ export function StudentDashboard() {
 
     const handleLogout = async () => {
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             if (token) {
                 await fetch(`${API_URL}/api/attendance/logout`, {
                     method: 'POST',
@@ -64,7 +64,7 @@ export function StudentDashboard() {
         } catch (err) {
             console.error('[LOGOUT] attendance API failed:', err);
         } finally {
-            localStorage.removeItem('vlab_token');
+            
             localStorage.removeItem('vlab_user');
             window.location.href = ('/login');
         }

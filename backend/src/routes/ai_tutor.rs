@@ -12,6 +12,7 @@ use uuid::Uuid;
 use crate::state::AppState;
 use crate::middleware::auth::Claims;
 use crate::services::ai_tutor;
+use crate::services::ai_security::AiSecurityService;
 
 #[derive(Debug, Deserialize)]
 pub struct AskDoubtRequest {
@@ -41,6 +42,10 @@ async fn ask_doubt(
         Ok(uid) => uid,
         Err(_) => return (StatusCode::BAD_REQUEST, Json(json!({ "message": "Invalid student ID" }))).into_response(),
     };
+
+    if !AiSecurityService::is_prompt_safe(&payload.message) {
+        return (StatusCode::FORBIDDEN, Json(json!({ "message": "Malicious prompt detected" }))).into_response();
+    }
 
     match ai_tutor::solve_doubt(&state.db, student_id, payload.subject_id, &payload.message).await {
         Ok(res) => (StatusCode::OK, Json(res)).into_response(),

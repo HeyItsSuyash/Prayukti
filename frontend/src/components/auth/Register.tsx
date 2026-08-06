@@ -167,13 +167,9 @@ export default function RegisterPage() {
             const res = await axios.post(`${API_URL}/api/auth/verify-otp`, {
                 email,
                 otp
-            });
+            }, { withCredentials: true });
 
-            if (res.data.token) {
-                localStorage.setItem("vlab_token", res.data.token);
-            }
             if (res.data.user) {
-                localStorage.setItem("vlab_user", JSON.stringify(res.data.user));
                 localStorage.setItem("studentName", res.data.user.fullName || "");
                 localStorage.setItem("studentRoll", res.data.user.rollNo || "");
             }
@@ -194,7 +190,7 @@ export default function RegisterPage() {
         setError("");
         setVerifySuccess("");
         try {
-            await axios.post(`${API_URL}/api/auth/resend-otp`, { email });
+            await axios.post(`${API_URL}/api/auth/resend-otp`, { email }, { withCredentials: true });
             setVerifySuccess("A new OTP has been sent to your email.");
         } catch (err: any) {
             setError(err.response?.data?.message || "Failed to resend OTP.");

@@ -21,7 +21,7 @@ export default function ClassroomDashboard() {
 
         const fetchDashboard = async () => {
             try {
-                const token = localStorage.getItem('vlab_token');
+                
                 const res = await fetch(`${API_URL}/api/classroom/dashboard`, {
                     headers: {
                         'Authorization': `Bearer ${token}`

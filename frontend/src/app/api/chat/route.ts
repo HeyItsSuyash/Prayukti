@@ -1,13 +1,8 @@
 import { NextResponse } from 'next/server';
 
-const GROQ_API_KEY = process.env.GROQ_API_KEY;
-const API_URL = "https://api.groq.com/openai/v1/chat/completions";
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 export async function POST(req: Request) {
-    if (!GROQ_API_KEY) {
-        return NextResponse.json({ error: 'Groq API key not configured' }, { status: 500 });
-    }
-
     try {
         const body = await req.json();
         const { message, subject } = body;
@@ -17,64 +12,34 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Message must be a non-empty string' }, { status: 400 });
         }
 
-        if (message.length > 2000) {
-            return NextResponse.json({ error: 'Message is too long (max 2000 characters)' }, { status: 400 });
-        }
-
-        const subjectContext = subject && typeof subject === 'string' ? subject.trim() : "General";
-
-        // Sanitize input (basic)
-        const sanitizedMessage = message.trim();
-
-        const response = await fetch(API_URL, {
+        const response = await fetch(`${BACKEND_URL}/api/chat`, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${GROQ_API_KEY}`,
                 'Content-Type': 'application/json',
+                // Pass auth token if available (assuming cookie or auth header might be needed eventually, though backend might not strictly require it for this chat route if claims are ignored or checked)
+                // For now, we'll just pass the body.
+                ...(req.headers.get('cookie') ? { 'cookie': req.headers.get('cookie') as string } : {}),
+                ...(req.headers.get('authorization') ? { 'authorization': req.headers.get('authorization') as string } : {})
             },
             body: JSON.stringify({
-                model: "llama-3.3-70b-versatile",
-                messages: [
-                    {
-                        role: "system",
-                        content: `You are a helpful and knowledgeable Lab Assistant for the subject "${subjectContext}". 
-Your goal is to help students understand concepts related to ${subjectContext}. 
-
-Formatting Guidelines:
-- **Structure**: Organize your response into clear sections with descriptive headers if needed.
-- **Highlighting**: Use **bolding** for key terms, definitions, and critical concepts.
-- **Clarity**: Use bullet points or numbered lists for steps, items, or multiple points.
-- **Conciseness**: Keep your answers accurate and easy to understand for engineering students.
-
-If the question is not related to ${subjectContext} or engineering, politely redirect them to the subject matter.`
-                    },
-                    {
-                        role: "user",
-                        content: sanitizedMessage
-                    }
-                ],
-                temperature: 0.7,
-                max_tokens: 1024,
-                top_p: 1,
-                stream: false,
+                message: message.trim(),
+                subject: subject
             }),
         });
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.error('Groq API Error Response:', errorText);
-            throw new Error(`Groq API Error (${response.status})`);
+            console.error('Backend API Error Response:', errorText);
+            throw new Error(`Backend API Error (${response.status})`);
         }
 
         const data = await response.json();
-        const botResponse = data.choices?.[0]?.message?.content || "I'm having trouble processing that right now. Please try again.";
-
-        return NextResponse.json({ response: botResponse.trim() });
+        return NextResponse.json(data);
 
     } catch (error: any) {
         console.error('Chat API Error:', error);
         return NextResponse.json({
-            error: 'Failed to fetch response from AI provider',
+            error: 'Failed to fetch response from backend AI provider',
             details: error.message
         }, { status: 500 });
     }

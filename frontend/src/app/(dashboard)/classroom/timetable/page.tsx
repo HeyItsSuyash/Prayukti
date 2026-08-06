@@ -52,7 +52,7 @@ export default function TimetablePage() {
 
         const fetchData = async () => {
             try {
-                const token = localStorage.getItem('vlab_token');
+                
                 
                 // Fetch timetable
                 const tRes = await fetch(`${API_URL}/api/timetable`, {
@@ -89,7 +89,7 @@ export default function TimetablePage() {
         setError("");
 
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             const res = await fetch(`${API_URL}/api/timetable`, {
                 method: 'POST',
                 headers: {
@@ -127,7 +127,7 @@ export default function TimetablePage() {
         if (!confirm("Are you sure you want to cancel this scheduled slot?")) return;
 
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             const res = await fetch(`${API_URL}/api/timetable/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -144,7 +144,7 @@ export default function TimetablePage() {
     const handleAiOptimize = async () => {
         setLoading(true);
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             const recRes = await fetch(`${API_URL}/api/timetable/ai-optimize`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });

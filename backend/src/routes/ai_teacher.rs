@@ -12,6 +12,7 @@ use uuid::Uuid;
 use crate::state::AppState;
 use crate::middleware::auth::{Claims, require_role};
 use crate::services::ai_teacher;
+use crate::services::ai_security::AiSecurityService;
 
 #[derive(Debug, Deserialize)]
 pub struct LessonPlanRequest {
@@ -63,6 +64,10 @@ async fn get_lesson_plan(
         return err.into_response();
     }
 
+    if !AiSecurityService::is_prompt_safe(&payload.topic) {
+        return (StatusCode::FORBIDDEN, Json(json!({ "message": "Malicious prompt detected" }))).into_response();
+    }
+
     match ai_teacher::generate_lesson_plan(&state.db, payload.subject_id, &payload.topic).await {
         Ok(res) => (StatusCode::OK, Json(res)).into_response(),
         Err(e) => (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "message": e.to_string() }))).into_response(),
@@ -76,6 +81,10 @@ async fn get_assignments(
 ) -> impl IntoResponse {
     if let Err(err) = require_role(&claims, &["teacher", "admin"]) {
         return err.into_response();
+    }
+
+    if !AiSecurityService::is_prompt_safe(&payload.topic) {
+        return (StatusCode::FORBIDDEN, Json(json!({ "message": "Malicious prompt detected" }))).into_response();
     }
 
     match ai_teacher::generate_assignments(&state.db, payload.subject_id, &payload.topic, &payload.difficulty).await {
@@ -108,6 +117,10 @@ async fn get_ppt_outlines(
         return err.into_response();
     }
 
+    if !AiSecurityService::is_prompt_safe(&payload.topic) {
+        return (StatusCode::FORBIDDEN, Json(json!({ "message": "Malicious prompt detected" }))).into_response();
+    }
+
     let _ = state;
     match ai_teacher::generate_ppt_outlines(&payload.topic).await {
         Ok(res) => (StatusCode::OK, Json(res)).into_response(),
@@ -122,6 +135,10 @@ async fn get_question_banks(
 ) -> impl IntoResponse {
     if let Err(err) = require_role(&claims, &["teacher", "admin"]) {
         return err.into_response();
+    }
+
+    if !AiSecurityService::is_prompt_safe(&payload.topic) {
+        return (StatusCode::FORBIDDEN, Json(json!({ "message": "Malicious prompt detected" }))).into_response();
     }
 
     match ai_teacher::generate_question_banks(&state.db, payload.subject_id, &payload.topic).await {

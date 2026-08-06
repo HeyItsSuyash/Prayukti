@@ -76,7 +76,7 @@ export default function AnnouncementsPage() {
 
         const fetchData = async () => {
             try {
-                const token = localStorage.getItem('vlab_token');
+                
                 
                 // Fetch announcements
                 const aRes = await fetch(`${API_URL}/api/announcement`, {
@@ -118,7 +118,7 @@ export default function AnnouncementsPage() {
 
         setSubmitLoading(true);
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             const res = await fetch(`${API_URL}/api/announcement`, {
                 method: 'POST',
                 headers: {
@@ -153,7 +153,7 @@ export default function AnnouncementsPage() {
         if (!text || !text.trim()) return;
 
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             const res = await fetch(`${API_URL}/api/announcement/${annId}/comment`, {
                 method: 'POST',
                 headers: {
@@ -181,7 +181,7 @@ export default function AnnouncementsPage() {
 
     const handleToggleReaction = async (annId: string, reaction: string) => {
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             const res = await fetch(`${API_URL}/api/announcement/${annId}/react`, {
                 method: 'POST',
                 headers: {
@@ -210,7 +210,7 @@ export default function AnnouncementsPage() {
 
     const handleToggleBookmark = async (annId: string) => {
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             const res = await fetch(`${API_URL}/api/announcement/${annId}/bookmark`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -244,7 +244,7 @@ export default function AnnouncementsPage() {
         }
 
         try {
-            const token = localStorage.getItem('vlab_token');
+            
             let url = `${API_URL}/api/announcement/${annId}/${feature}`;
             if (feature === "translate") {
                 url += `?lang=Hindi`;

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import axios from 'axios';
+import axios from '@/lib/api';
 import { API_URL } from '@/lib/config';
 import { z } from 'zod';
 
@@ -43,13 +43,11 @@ export default function LoginPage() {
             const response = await axios.post(`${API_URL}${endpoint}`, {
                 email,
                 password
-            });
+            }, { withCredentials: true });
 
             const { token, user } = response.data;
 
             if (typeof window !== 'undefined') {
-                localStorage.setItem("vlab_token", token);
-                localStorage.setItem("vlab_user", JSON.stringify(user));
                 if (user.role === 'student') {
                     localStorage.setItem("studentName", user.fullName || "");
                     localStorage.setItem("studentRoll", user.rollNo || "");

@@ -47,7 +47,7 @@ export default function VideoTutorDashboard() {
     const fetchAllData = async () => {
         setLoading(true);
         try {
-            const token = localStorage.getItem("vlab_token");
+            
             const headers = { Authorization: `Bearer ${token}` };
 
             // 1. Fetch generated lessons
@@ -96,7 +96,7 @@ export default function VideoTutorDashboard() {
         }, 1200);
 
         try {
-            const token = localStorage.getItem("vlab_token");
+            
             const res = await fetch(`${API_URL}/api/video-tutor/generate`, {
                 method: "POST",
                 headers: {
