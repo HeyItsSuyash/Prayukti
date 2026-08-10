@@ -292,9 +292,9 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
     if (questions.length === 0 && testState !== "instructions") {
       return (
         <div className="flex flex-col items-center justify-center h-full p-10 text-center bg-[#f4f6fb]">
-          <BookOpen className="w-16 h-16 text-slate-300 mb-4" />
-          <h2 className="text-2xl font-black uppercase tracking-tight text-slate-700">Test Not Available</h2>
-          <p className="text-slate-500 mt-2">No test questions found for this lab experiment yet.</p>
+          <BookOpen className="w-16 h-16 text-muted-foreground mb-4" />
+          <h2 className="text-2xl font-black uppercase tracking-tight text-muted-foreground">Test Not Available</h2>
+          <p className="text-muted-foreground mt-2">No test questions found for this lab experiment yet.</p>
         </div>
       );
     }
@@ -305,7 +305,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
     if (testState === "kicked") {
       return (
         <div className="flex flex-col items-center justify-center h-full bg-red-50 text-red-900 p-10 text-center select-none">
-          <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mb-6">
+          <div className="w-24 h-24 bg-red-100 rounded-none-full flex items-center justify-center mb-6">
             <XCircle className="w-14 h-14 text-red-600" />
           </div>
           <h1 className="text-4xl font-bold uppercase tracking-tight mb-3">Removed from Test</h1>
@@ -314,7 +314,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
           </p>
           <button
             onClick={() => { setTestState("instructions"); setTabWarnings(0); }}
-            className="px-8 py-3 bg-red-600 text-white font-bold uppercase tracking-widest rounded-lg hover:bg-red-700 transition-all shadow-md"
+            className="px-8 py-3 bg-red-600 text-white font-bold uppercase tracking-widest rounded-none-none hover:bg-red-700 transition-all shadow-none-none"
           >
             Return to Instructions
           </button>
@@ -327,76 +327,76 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
     // ═══════════════════════════════════════════════════════════════════════════
     if (testState === "instructions") {
       return (
-        <div className="flex flex-col items-center min-h-full bg-[#f4f6fb] text-slate-800 select-none overflow-y-auto pb-12">
+        <div className="flex flex-col items-center min-h-full bg-[#f4f6fb] text-muted-foreground select-none overflow-y-auto pb-12">
           {/* Header Banner */}
           <div className="w-full max-w-4xl mt-8">
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-t-2xl p-8 text-white relative overflow-hidden">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-none-t-2xl p-8 text-white relative overflow-hidden">
               <div className="absolute top-[-20%] right-[-10%] opacity-10">
                 <BookOpen className="w-64 h-64" />
               </div>
               <div className="relative z-10 flex items-start gap-4">
-                <div className="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
+                <div className="bg-card/20 p-3 rounded-none-none backdrop-blur-sm">
                   <BookOpen className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <p className="text-blue-200 font-bold tracking-widest text-xs uppercase mb-1">{getSubjectName(labId)}</p>
+                  <p className="text-primary font-bold tracking-widest text-xs uppercase mb-1">{getSubjectName(labId)}</p>
                   <h1 className="text-4xl font-serif font-bold text-white mb-3">{labTitle}</h1>
-                  <p className="text-blue-100 text-sm">Chapter Test • Online Assessment</p>
+                  <p className="text-primary text-sm">Chapter Test • Online Assessment</p>
                 </div>
               </div>
             </div>
 
             {/* Stats Bar */}
-            <div className="bg-white rounded-b-2xl shadow-sm border border-slate-100 grid grid-cols-4 divide-x divide-slate-100 p-6">
+            <div className="bg-card rounded-none-b-2xl shadow-none-none border border-border grid grid-cols-4 divide-x divide-slate-100 p-6">
               <div className="flex flex-col items-center text-center">
-                <div className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center mb-2">
-                  <BookOpen className="w-5 h-5 text-slate-600" />
+                <div className="w-10 h-10 bg-card rounded-none-full flex items-center justify-center mb-2">
+                  <BookOpen className="w-5 h-5 text-muted-foreground" />
                 </div>
                 <span className="font-bold text-xl">30</span>
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Questions</span>
+                <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest mt-1">Questions</span>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center mb-2">
-                  <Clock className="w-5 h-5 text-slate-600" />
+                <div className="w-10 h-10 bg-card rounded-none-full flex items-center justify-center mb-2">
+                  <Clock className="w-5 h-5 text-muted-foreground" />
                 </div>
                 <span className="font-bold text-xl">30 min</span>
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Duration</span>
+                <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest mt-1">Duration</span>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center mb-2">
+                <div className="w-10 h-10 bg-card rounded-none-full flex items-center justify-center mb-2">
                   <Trophy className="w-5 h-5 text-orange-500" />
                 </div>
                 <span className="font-bold text-xl">30</span>
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Total Marks</span>
+                <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest mt-1">Total Marks</span>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center mb-2">
+                <div className="w-10 h-10 bg-card rounded-none-full flex items-center justify-center mb-2">
                   <CheckSquare className="w-5 h-5 text-green-500" />
                 </div>
                 <span className="font-bold text-xl">12</span>
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Passing Marks</span>
+                <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest mt-1">Passing Marks</span>
               </div>
             </div>
 
             {/* User Card */}
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 mt-6 flex items-center justify-between">
+            <div className="bg-card rounded-none-none shadow-none-none border border-border p-5 mt-6 flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold">
+                <div className="w-12 h-12 bg-primary text-white rounded-none-full flex items-center justify-center text-xl font-bold">
                   {userInitial}
                 </div>
                 <div>
-                  <h3 className="font-serif font-bold text-lg text-slate-800">{userName} <span className="text-slate-500 font-sans text-sm font-normal">(student)</span></h3>
-                  <p className="text-slate-500 text-sm">{userEmail}</p>
+                  <h3 className="font-serif font-bold text-lg text-muted-foreground">{userName} <span className="text-muted-foreground font-sans text-sm font-normal">(student)</span></h3>
+                  <p className="text-muted-foreground text-sm">{userEmail}</p>
                 </div>
               </div>
-              <div className="bg-blue-50 text-blue-600 font-bold text-[10px] px-3 py-1.5 rounded-full uppercase tracking-widest">
+              <div className="bg-blue-50 text-primary font-bold text-[10px] px-3 py-1.5 rounded-none-full uppercase tracking-widest">
                 Student
               </div>
             </div>
 
             {/* Instructions */}
             <div className="mt-8">
-              <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Instructions</h2>
+              <h2 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-6">Instructions</h2>
               <div className="space-y-4">
                 {[
                   "This test contains 30 multiple choice questions.",
@@ -409,10 +409,10 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                   "Review your answers before final submission."
                 ].map((rule, i) => (
                   <div key={i} className="flex items-center gap-4">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold flex-shrink-0">
+                    <div className="w-6 h-6 rounded-none-full bg-primary text-primary flex items-center justify-center text-xs font-bold flex-shrink-0">
                       {i + 1}
                     </div>
-                    <p className="text-slate-700 font-serif text-[15px]">{rule}</p>
+                    <p className="text-muted-foreground font-serif text-[15px]">{rule}</p>
                   </div>
                 ))}
               </div>
@@ -422,7 +422,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
             <button
               onClick={startTest}
               disabled={questions.length === 0}
-              className="w-full mt-10 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-lg transition-all shadow-md active:scale-[0.98] disabled:opacity-50"
+              className="w-full mt-10 py-4 bg-primary hover:bg-primary text-white font-bold rounded-none-none text-lg transition-all shadow-none-none active:scale-[0.98] disabled:opacity-50"
             >
               {questions.length === 0 ? "Loading Questions..." : "START TEST"}
             </button>
@@ -436,10 +436,10 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
     // ═══════════════════════════════════════════════════════════════════════════
     if (testState === "result") {
       return (
-        <div className="overflow-y-auto h-full bg-[#f4f6fb] text-slate-800 p-8 select-none">
+        <div className="overflow-y-auto h-full bg-[#f4f6fb] text-muted-foreground p-8 select-none">
           <div className="max-w-4xl mx-auto">
             {/* Header Banner */}
-            <div className={`rounded-2xl p-8 text-center text-white mb-8 relative overflow-hidden shadow-sm ${isPassed ? 'bg-gradient-to-r from-emerald-500 to-green-600' : 'bg-gradient-to-r from-rose-500 to-red-600'}`}>
+            <div className={`rounded-none-none p-8 text-center text-white mb-8 relative overflow-hidden shadow-none-none ${isPassed ? 'bg-gradient-to-r from-emerald-500 to-green-600' : 'bg-gradient-to-r from-rose-500 to-red-600'}`}>
               <div className="relative z-10">
                 <Layers className="w-12 h-12 mx-auto mb-4 opacity-90" />
                 <h1 className="text-3xl font-serif font-bold mb-2">
@@ -452,110 +452,110 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
             </div>
 
             {/* Main Score Card */}
-            <div className="bg-white rounded-3xl shadow-sm border border-slate-100 p-8 mb-6 relative">
+            <div className="bg-card rounded-none-3xl shadow-none-none border border-border p-8 mb-6 relative">
               <div className="flex justify-between items-start mb-10">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold">
+                  <div className="w-12 h-12 bg-primary text-white rounded-none-full flex items-center justify-center text-xl font-bold">
                     {userInitial}
                   </div>
                   <div>
-                    <h3 className="font-serif font-bold text-lg text-slate-800">{userName} <span className="text-slate-500 font-sans text-sm font-normal">(student)</span></h3>
-                    <p className="text-slate-500 text-sm">{userEmail}</p>
+                    <h3 className="font-serif font-bold text-lg text-muted-foreground">{userName} <span className="text-muted-foreground font-sans text-sm font-normal">(student)</span></h3>
+                    <p className="text-muted-foreground text-sm">{userEmail}</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Test</span>
-                  <p className="font-serif font-bold text-slate-800 text-sm">{labTitle}</p>
+                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Test</span>
+                  <p className="font-serif font-bold text-muted-foreground text-sm">{labTitle}</p>
                 </div>
               </div>
 
               {/* Circle Score */}
               <div className="flex justify-center mb-10">
-                <div className="w-32 h-32 rounded-full border-[12px] border-slate-100 flex flex-col items-center justify-center relative">
+                <div className="w-32 h-32 rounded-none-full border-[12px] border-border flex flex-col items-center justify-center relative">
                   <svg className="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="44" fill="none" stroke={isPassed ? '#10b981' : '#f43f5e'} strokeWidth="12" strokeDasharray={`${score * 2.76} 276`} />
                   </svg>
-                  <span className="text-2xl font-black text-slate-800">{score}%</span>
-                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Score</span>
+                  <span className="text-2xl font-black text-muted-foreground">{score}%</span>
+                  <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">Score</span>
                 </div>
               </div>
 
               {/* Horizontal Bar Chart */}
-              <div className="flex h-12 rounded-lg overflow-hidden mb-2 shadow-inner bg-slate-100">
+              <div className="flex h-12 rounded-none-none overflow-hidden mb-2 shadow-none-none bg-card">
                 <div style={{ width: `${(correctCount / 30) * 100}%` }} className="bg-green-500 h-full transition-all" />
                 <div style={{ width: `${(wrongCount / 30) * 100}%` }} className="bg-red-500 h-full transition-all" />
                 <div style={{ width: `${(skippedCount / 30) * 100}%` }} className="bg-yellow-500 h-full transition-all" />
               </div>
-              <div className="flex justify-between text-xs font-bold text-slate-500 px-1 uppercase tracking-wider">
+              <div className="flex justify-between text-xs font-bold text-muted-foreground px-1 uppercase tracking-wider">
                 <div className="flex-1 text-center border-t-2 border-green-500 pt-2"><span className="text-green-600">{correctCount}</span> Correct</div>
                 <div className="flex-1 text-center border-t-2 border-red-500 pt-2"><span className="text-red-600">{wrongCount}</span> Wrong</div>
                 <div className="flex-1 text-center border-t-2 border-yellow-500 pt-2"><span className="text-yellow-600">{skippedCount}</span> Skipped</div>
-                <div className="flex-1 text-center border-t-2 border-blue-500 pt-2"><span className="text-blue-600">30</span> Total</div>
+                <div className="flex-1 text-center border-t-2 border-primary pt-2"><span className="text-primary">30</span> Total</div>
               </div>
             </div>
 
             {/* 4 Detail Cards */}
             <div className="grid grid-cols-4 gap-4 mb-6">
-              <div className="bg-green-50 border border-green-100 rounded-xl p-4 flex flex-col justify-center items-center">
+              <div className="bg-green-50 border border-green-100 rounded-none-none p-4 flex flex-col justify-center items-center">
                 <div className="flex items-center gap-2 mb-1">
                   <CheckCircle2 className="w-4 h-4 text-green-600" />
                   <span className="text-2xl font-black text-green-800">{correctCount}</span>
                 </div>
                 <span className="text-[10px] font-bold text-green-600 uppercase tracking-widest">Correct</span>
               </div>
-              <div className="bg-red-50 border border-red-100 rounded-xl p-4 flex flex-col justify-center items-center">
+              <div className="bg-red-50 border border-red-100 rounded-none-none p-4 flex flex-col justify-center items-center">
                 <div className="flex items-center gap-2 mb-1">
                   <XCircle className="w-4 h-4 text-red-600" />
                   <span className="text-2xl font-black text-red-800">{wrongCount}</span>
                 </div>
                 <span className="text-[10px] font-bold text-red-600 uppercase tracking-widest">Wrong</span>
               </div>
-              <div className="bg-yellow-50 border border-yellow-100 rounded-xl p-4 flex flex-col justify-center items-center">
+              <div className="bg-yellow-50 border border-yellow-100 rounded-none-none p-4 flex flex-col justify-center items-center">
                 <div className="flex items-center gap-2 mb-1">
                   <AlertTriangle className="w-4 h-4 text-yellow-600" />
                   <span className="text-2xl font-black text-yellow-800">{skippedCount}</span>
                 </div>
                 <span className="text-[10px] font-bold text-yellow-600 uppercase tracking-widest">Skipped</span>
               </div>
-              <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex flex-col justify-center items-center">
+              <div className="bg-blue-50 border border-primary rounded-none-none p-4 flex flex-col justify-center items-center">
                 <div className="flex items-center gap-2 mb-1">
-                  <Clock className="w-4 h-4 text-blue-600" />
-                  <span className="text-xl font-black text-blue-800">{formatTime(timeTaken)}</span>
+                  <Clock className="w-4 h-4 text-primary" />
+                  <span className="text-xl font-black text-primary">{formatTime(timeTaken)}</span>
                 </div>
-                <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Time Taken</span>
+                <span className="text-[10px] font-bold text-primary uppercase tracking-widest">Time Taken</span>
               </div>
             </div>
 
             {/* Final Status Row */}
-            <div className="bg-white border border-slate-100 shadow-sm rounded-xl p-6 mb-8 flex justify-between items-center">
+            <div className="bg-card border border-border shadow-none-none rounded-none-none p-6 mb-8 flex justify-between items-center">
               <div>
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Marks Obtained</span>
-                <div className="text-3xl font-black text-slate-800">{correctCount} <span className="text-lg text-slate-400 font-medium">/ 30</span></div>
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest block mb-1">Marks Obtained</span>
+                <div className="text-3xl font-black text-muted-foreground">{correctCount} <span className="text-lg text-muted-foreground font-medium">/ 30</span></div>
               </div>
               <div className="text-center">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Status</span>
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest block mb-2">Status</span>
                 {isPassed ? (
-                  <span className="bg-green-100 text-green-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">✓ Passed</span>
+                  <span className="bg-green-100 text-green-700 px-4 py-1.5 rounded-none-full text-xs font-bold uppercase tracking-widest">✓ Passed</span>
                 ) : (
-                  <span className="bg-red-100 text-red-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">✗ Failed</span>
+                  <span className="bg-red-100 text-red-700 px-4 py-1.5 rounded-none-full text-xs font-bold uppercase tracking-widest">✗ Failed</span>
                 )}
               </div>
               <div className="text-right">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Passing Marks</span>
-                <div className="text-2xl font-black text-slate-800">{passMarks}</div>
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest block mb-1">Passing Marks</span>
+                <div className="text-2xl font-black text-muted-foreground">{passMarks}</div>
               </div>
             </div>
 
             {/* Bottom Actions */}
             <div className="flex gap-4">
               <button
-                className="flex-1 py-4 border-2 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold rounded-xl transition-all flex items-center justify-center gap-2"
+                className="flex-1 py-4 border-2 border-border text-muted-foreground hover:bg-card font-bold rounded-none-none transition-all flex items-center justify-center gap-2"
               >
                 <BookOpen className="w-5 h-5" /> Review Answers
               </button>
               <button
                 onClick={startTest}
-                className="flex-1 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2 shadow-md"
+                className="flex-1 py-4 bg-primary hover:bg-primary text-white font-bold rounded-none-none transition-all flex items-center justify-center gap-2 shadow-none-none"
               >
                 <LogOut className="w-5 h-5 rotate-180" /> Retake Test
               </button>
@@ -573,36 +573,36 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
     const isFlagged = flaggedAnswers[currentIndex];
     
     return (
-      <div className="flex flex-col h-full bg-[#f4f6fb] text-slate-800 select-none">
+      <div className="flex flex-col h-full bg-[#f4f6fb] text-muted-foreground select-none">
         {/* TOP HEADER */}
-        <header className="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-6 flex-shrink-0 shadow-sm z-10">
+        <header className="bg-card border-b border-border h-16 flex items-center justify-between px-6 flex-shrink-0 shadow-none-none z-10">
           <div className="flex items-center gap-6">
             <button
               onClick={() => setShowQuitConfirm(true)}
-              className="text-red-500 border border-red-200 hover:bg-red-50 text-xs font-bold px-4 py-2 rounded-md uppercase tracking-widest transition-all"
+              className="text-red-500 border border-red-200 hover:bg-red-50 text-xs font-bold px-4 py-2 rounded-none-none uppercase tracking-widest transition-all"
             >
               Quit Test
             </button>
             <div className="flex items-center gap-3">
-              <span className="text-slate-500 text-sm font-bold w-14">Q {currentIndex + 1} / 30</span>
-              <div className="w-48 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                <div className="h-full bg-blue-200" style={{ width: `${((currentIndex + 1) / 30) * 100}%` }} />
+              <span className="text-muted-foreground text-sm font-bold w-14">Q {currentIndex + 1} / 30</span>
+              <div className="w-48 h-1.5 bg-card rounded-none-full overflow-hidden">
+                <div className="h-full bg-primary" style={{ width: `${((currentIndex + 1) / 30) * 100}%` }} />
               </div>
             </div>
           </div>
           
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 bg-slate-100 px-4 py-2 rounded-full font-bold text-sm text-slate-700">
-              <Clock className="w-4 h-4 text-slate-500" />
+            <div className="flex items-center gap-2 bg-card px-4 py-2 rounded-none-full font-bold text-sm text-muted-foreground">
+              <Clock className="w-4 h-4 text-muted-foreground" />
               {formatTime(timeLeft)}
             </div>
-            <div className="flex items-center gap-3 border-l border-slate-200 pl-6">
-              <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+            <div className="flex items-center gap-3 border-l border-border pl-6">
+              <div className="w-8 h-8 bg-primary text-white rounded-none-full flex items-center justify-center text-sm font-bold">
                 {userInitial}
               </div>
               <div className="hidden md:block">
-                <p className="text-xs font-bold text-slate-800">{userName} <span className="text-slate-400 font-normal">(student)</span></p>
-                <p className="text-[10px] text-slate-400 truncate w-32">{userEmail}</p>
+                <p className="text-xs font-bold text-muted-foreground">{userName} <span className="text-muted-foreground font-normal">(student)</span></p>
+                <p className="text-[10px] text-muted-foreground truncate w-32">{userEmail}</p>
               </div>
             </div>
           </div>
@@ -614,24 +614,24 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
             <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col">
               
               {/* Question Card */}
-              <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 mb-6 relative">
+              <div className="bg-card rounded-none-none shadow-none-none border border-border p-8 mb-6 relative">
                 <div className="flex justify-between items-start mb-6">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-sm">
+                    <div className="w-8 h-8 bg-primary text-white rounded-none-full flex items-center justify-center font-bold text-sm shadow-none-none">
                       {currentIndex + 1}
                     </div>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Question <span className="text-slate-300 font-normal ml-1">+1 Mark</span></span>
+                    <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Question <span className="text-muted-foreground font-normal ml-1">+1 Mark</span></span>
                   </div>
                   <button
                     onClick={toggleFlag}
-                    className={`flex items-center gap-2 px-3 py-1.5 border rounded-md text-xs font-bold tracking-widest uppercase transition-all ${
-                      isFlagged ? 'bg-yellow-50 border-yellow-200 text-yellow-600' : 'bg-slate-50 border-slate-200 text-slate-500 hover:bg-slate-100'
+                    className={`flex items-center gap-2 px-3 py-1.5 border rounded-none-none text-xs font-bold tracking-widest uppercase transition-all ${
+                      isFlagged ? 'bg-yellow-50 border-yellow-200 text-yellow-600' : 'bg-card border-border text-muted-foreground hover:bg-card'
                     }`}
                   >
                     <Flag className={`w-3.5 h-3.5 ${isFlagged ? 'fill-yellow-600' : ''}`} /> Flag
                   </button>
                 </div>
-                <h2 className="text-xl font-serif font-bold text-slate-800 leading-relaxed">
+                <h2 className="text-xl font-serif font-bold text-muted-foreground leading-relaxed">
                   {currentQuestion?.question}
                 </h2>
               </div>
@@ -644,18 +644,18 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                     <button
                       key={optIdx}
                       onClick={() => selectOption(optIdx)}
-                      className={`w-full text-left px-6 py-5 rounded-xl border text-[15px] font-serif transition-all flex items-center gap-4 ${
+                      className={`w-full text-left px-6 py-5 rounded-none-none border text-[15px] font-serif transition-all flex items-center gap-4 ${
                         isSelected
-                          ? "bg-blue-50/50 border-blue-400 ring-1 ring-blue-400 shadow-sm"
-                          : "bg-white border-slate-200 hover:border-blue-300 hover:bg-slate-50 shadow-sm"
+                          ? "bg-blue-50/50 border-primary ring-1 ring-blue-400 shadow-none-none"
+                          : "bg-card border-border hover:border-primary hover:bg-card shadow-none-none"
                       }`}
                     >
-                      <span className={`w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold flex-shrink-0 transition-colors ${
-                        isSelected ? "border-blue-600 text-blue-600 bg-blue-100" : "border-slate-300 text-slate-400 bg-slate-50"
+                      <span className={`w-8 h-8 rounded-none-full border flex items-center justify-center text-xs font-bold flex-shrink-0 transition-colors ${
+                        isSelected ? "border-primary text-primary bg-primary" : "border-border text-muted-foreground bg-card"
                       }`}>
                         {["A", "B", "C", "D"][optIdx]}
                       </span>
-                      <span className={`${isSelected ? 'text-blue-900 font-medium' : 'text-slate-700'}`}>{option}</span>
+                      <span className={`${isSelected ? 'text-primary font-medium' : 'text-muted-foreground'}`}>{option}</span>
                     </button>
                   );
                 })}
@@ -664,29 +664,29 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
             </div>
 
             {/* Bottom Footer Navigation */}
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-white border-t border-slate-200 flex items-center justify-between px-8 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.02)]">
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-card border-t border-border flex items-center justify-between px-8 shadow-none-[0_-4px_6px_-1px_rgba(0,0,0,0.02)]">
               <button
                 onClick={() => setCurrentIndex((i) => Math.max(0, i - 1))}
                 disabled={currentIndex === 0}
-                className="flex items-center gap-2 text-orange-500 border border-orange-200 hover:bg-orange-50 px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all disabled:opacity-40 disabled:hover:bg-transparent"
+                className="flex items-center gap-2 text-orange-500 border border-orange-200 hover:bg-orange-50 px-5 py-2 rounded-none-none text-xs font-bold uppercase tracking-widest transition-all disabled:opacity-40 disabled:hover:bg-transparent"
               >
                 <ChevronLeft className="w-4 h-4" /> Prev
               </button>
 
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
                 <span className="text-green-600">{answers.filter(a => a !== null).length}</span> / 30 answered
               </span>
 
               <div className="flex gap-3">
                 <button
                   onClick={clearAnswer}
-                  className="flex items-center gap-2 text-slate-600 border border-slate-200 hover:bg-slate-50 px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all"
+                  className="flex items-center gap-2 text-muted-foreground border border-border hover:bg-card px-5 py-2 rounded-none-none text-xs font-bold uppercase tracking-widest transition-all"
                 >
                   Clear & Next <ChevronRight className="w-4 h-4" />
                 </button>
                 <button
                   onClick={saveAndNext}
-                  className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all shadow-md active:scale-95"
+                  className="flex items-center gap-2 bg-primary hover:bg-primary text-white px-6 py-2 rounded-none-none text-xs font-bold uppercase tracking-widest transition-all shadow-none-none active:scale-95"
                 >
                   Save & Next <ChevronRight className="w-4 h-4" />
                 </button>
@@ -695,9 +695,9 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
           </main>
 
           {/* RIGHT SIDEBAR - QUESTION PALETTE */}
-          <aside className="w-80 bg-white border-l border-slate-200 flex flex-col flex-shrink-0 shadow-[-4px_0_15px_-3px_rgba(0,0,0,0.03)] z-10">
+          <aside className="w-80 bg-card border-l border-border flex flex-col flex-shrink-0 shadow-none-[-4px_0_15px_-3px_rgba(0,0,0,0.03)] z-10">
             <div className="p-6 flex-1 overflow-y-auto">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">Question Palette</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-4">Question Palette</p>
               
               <div className="grid grid-cols-5 gap-2">
                 {questions.map((_, i) => {
@@ -706,19 +706,19 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                     <button
                       key={i}
                       onClick={() => setCurrentIndex(i)}
-                      className={`h-10 text-xs font-bold rounded-md transition-all border flex items-center justify-center relative ${
+                      className={`h-10 text-xs font-bold rounded-none-none transition-all border flex items-center justify-center relative ${
                         status === "current"
-                          ? "bg-blue-600 text-white border-blue-600 shadow-md transform scale-105"
+                          ? "bg-primary text-white border-primary shadow-none-none transform scale-105"
                           : status === "flagged"
                           ? "bg-yellow-50 text-yellow-700 border-yellow-200"
                           : status === "answered"
-                          ? "bg-green-500 text-white border-green-500 shadow-sm"
-                          : "bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:border-slate-300"
+                          ? "bg-green-500 text-white border-green-500 shadow-none-none"
+                          : "bg-card text-muted-foreground border-border hover:bg-card hover:border-border"
                       }`}
                     >
                       {i + 1}
                       {status === "flagged" && (
-                        <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-yellow-400 border border-white rounded-full"></div>
+                        <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-yellow-400 border border-white rounded-none-full"></div>
                       )}
                     </button>
                   );
@@ -729,27 +729,27 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
               <div className="mt-8 space-y-3">
                 {[
                   { color: "bg-green-500", label: "Answered" },
-                  { color: "bg-slate-100 border border-slate-200", label: "Not Answered" },
+                  { color: "bg-card border border-border", label: "Not Answered" },
                   { color: "bg-yellow-100 border border-yellow-300", label: "Flagged" },
-                  { color: "bg-blue-600", label: "Current" },
+                  { color: "bg-primary", label: "Current" },
                 ].map((item) => (
                   <div key={item.label} className="flex items-center gap-3">
-                    <div className={`w-4 h-4 rounded-[4px] ${item.color}`} />
-                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{item.label}</span>
+                    <div className={`w-4 h-4 rounded-none-[4px] ${item.color}`} />
+                    <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{item.label}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Bottom Submit Button */}
-            <div className="p-6 border-t border-slate-100 bg-slate-50/50">
+            <div className="p-6 border-t border-border bg-card/50">
               <button
                 onClick={() => setShowSubmitConfirm(true)}
-                className="w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-md transition-all active:scale-95"
+                className="w-full py-4 bg-primary hover:bg-primary text-white font-bold rounded-none-none flex items-center justify-center gap-2 shadow-none-none transition-all active:scale-95"
               >
                 <CheckCircle2 className="w-5 h-5" /> SUBMIT TEST
               </button>
-              <p className="text-center mt-3 text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+              <p className="text-center mt-3 text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
                 {answers.filter(a => a !== null).length}/30 Answered
               </p>
             </div>
@@ -758,14 +758,14 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
 
         {/* MODALS */}
         {showWarningModal && (
-          <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[999] flex items-center justify-center p-6">
-            <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-2xl border border-orange-100">
+          <div className="fixed inset-0 bg-card/40 backdrop-blur-sm z-[999] flex items-center justify-center p-6">
+            <div className="bg-card rounded-none-none p-8 max-w-md w-full text-center shadow-none-2xl border border-orange-100">
               <AlertTriangle className="w-16 h-16 text-orange-500 mx-auto mb-4" />
-              <h2 className="text-xl font-black uppercase text-slate-800 mb-3">Integrity Warning</h2>
-              <p className="text-slate-600 text-sm mb-6">{warningMessage}</p>
+              <h2 className="text-xl font-black uppercase text-muted-foreground mb-3">Integrity Warning</h2>
+              <p className="text-muted-foreground text-sm mb-6">{warningMessage}</p>
               <button
                 onClick={() => setShowWarningModal(false)}
-                className="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold uppercase tracking-widest rounded-xl transition-all shadow-md"
+                className="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold uppercase tracking-widest rounded-none-none transition-all shadow-none-none"
               >
                 I Understand — Return
               </button>
@@ -774,24 +774,24 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
         )}
 
         {showSubmitConfirm && (
-          <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[999] flex items-center justify-center p-6">
-            <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-2xl">
+          <div className="fixed inset-0 bg-card/40 backdrop-blur-sm z-[999] flex items-center justify-center p-6">
+            <div className="bg-card rounded-none-none p-8 max-w-md w-full text-center shadow-none-2xl">
               <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <h2 className="text-xl font-black uppercase text-slate-800 mb-2">Submit Test?</h2>
-              <p className="text-slate-600 text-sm mb-2">
+              <h2 className="text-xl font-black uppercase text-muted-foreground mb-2">Submit Test?</h2>
+              <p className="text-muted-foreground text-sm mb-2">
                 You have answered {answers.filter((a) => a !== null).length} of {questions.length} questions.
               </p>
               <p className="text-orange-500 text-sm font-bold mb-6 mt-4">⚠️ This action cannot be undone.</p>
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowSubmitConfirm(false)}
-                  className="flex-1 py-3 border border-slate-200 text-slate-600 hover:bg-slate-50 font-bold uppercase tracking-widest rounded-xl transition-all text-xs"
+                  className="flex-1 py-3 border border-border text-muted-foreground hover:bg-card font-bold uppercase tracking-widest rounded-none-none transition-all text-xs"
                 >
                   Review Again
                 </button>
                 <button
                   onClick={submitTest}
-                  className="flex-1 py-3 bg-green-500 hover:bg-green-600 text-white font-bold uppercase tracking-widest rounded-xl transition-all text-xs shadow-md"
+                  className="flex-1 py-3 bg-green-500 hover:bg-green-600 text-white font-bold uppercase tracking-widest rounded-none-none transition-all text-xs shadow-none-none"
                 >
                   Final Submit
                 </button>
@@ -801,23 +801,23 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
         )}
 
         {showQuitConfirm && (
-          <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[999] flex items-center justify-center p-6">
-            <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-2xl">
+          <div className="fixed inset-0 bg-card/40 backdrop-blur-sm z-[999] flex items-center justify-center p-6">
+            <div className="bg-card rounded-none-none p-8 max-w-md w-full text-center shadow-none-2xl">
               <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-              <h2 className="text-xl font-black uppercase mb-2 text-slate-800">Quit Test?</h2>
-              <p className="text-slate-600 text-sm mb-6">
+              <h2 className="text-xl font-black uppercase mb-2 text-muted-foreground">Quit Test?</h2>
+              <p className="text-muted-foreground text-sm mb-6">
                 Your progress will be lost. Are you sure you want to quit this test?
               </p>
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowQuitConfirm(false)}
-                  className="flex-1 py-3 border border-slate-200 text-slate-600 hover:bg-slate-50 font-bold uppercase tracking-widest rounded-xl transition-all text-xs"
+                  className="flex-1 py-3 border border-border text-muted-foreground hover:bg-card font-bold uppercase tracking-widest rounded-none-none transition-all text-xs"
                 >
                   Continue Test
                 </button>
                 <button
                   onClick={quitTest}
-                  className="flex-1 py-3 bg-red-500 hover:bg-red-600 text-white font-bold uppercase tracking-widest rounded-xl transition-all text-xs shadow-md"
+                  className="flex-1 py-3 bg-red-500 hover:bg-red-600 text-white font-bold uppercase tracking-widest rounded-none-none transition-all text-xs shadow-none-none"
                 >
                   Yes, Quit
                 </button>

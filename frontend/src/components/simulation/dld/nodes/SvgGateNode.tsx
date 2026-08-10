@@ -25,7 +25,7 @@ export const SvgGateNode = memo(({ id, data, selected, path, width = 60, height 
                 type="target"
                 position={Position.Left}
                 id={inputs === 1 ? 'a' : String.fromCharCode(97 + i)} // 'a', 'b', etc.
-                className="!bg-gray-400 !w-3 !h-3 hover:!bg-blue-500 !border-none transition-colors"
+                className="!bg-card !w-3 !h-3 hover:!bg-primary !border-none transition-colors"
                 style={{
                     top: inputs === 1 ? '50%' : (i + 1) * handleSpacing,
                     left: -5,
@@ -42,7 +42,7 @@ export const SvgGateNode = memo(({ id, data, selected, path, width = 60, height 
                 width={width}
                 height={height}
                 viewBox={`0 0 ${width} ${height}`}
-                className={`overflow-visible transition-all duration-300 ${selected ? 'drop-shadow-[0_0_8px_rgba(255,165,0,0.8)]' : 'drop-shadow-sm'}`}
+                className={`overflow-visible transition-all duration-300 ${selected ? 'drop-shadow-none-[0_0_8px_rgba(255,165,0,0.8)]' : 'drop-shadow-none-none'}`}
             >
                 <path
                     d={path}
@@ -64,7 +64,7 @@ export const SvgGateNode = memo(({ id, data, selected, path, width = 60, height 
                 type="source"
                 position={Position.Right}
                 id="source"
-                className="!bg-gray-400 !w-3 !h-3 hover:!bg-blue-500 !border-none transition-colors"
+                className="!bg-card !w-3 !h-3 hover:!bg-primary !border-none transition-colors"
                 style={{
                     top: '50%',
                     right: -5,
@@ -74,7 +74,7 @@ export const SvgGateNode = memo(({ id, data, selected, path, width = 60, height 
 
             {/* Label - Editable */}
             <input
-                className={`absolute -top-7 left-1/2 -translate-x-1/2 bg-black/80 text-white text-[10px] px-2 py-0.5 rounded whitespace-nowrap z-50 text-center w-16 outline-none border border-transparent focus:border-orange-500 transition-opacity ${selected ? 'opacity-100' : 'opacity-0 group-hover/node:opacity-100'} pointer-events-auto`}
+                className={`absolute -top-7 left-1/2 -translate-x-1/2 bg-black/80 text-white text-[10px] px-2 py-0.5 rounded-none whitespace-nowrap z-50 text-center w-16 outline-none border border-transparent focus:border-orange-500 transition-opacity ${selected ? 'opacity-100' : 'opacity-0 group-hover/node:opacity-100'} pointer-events-auto`}
                 value={(data.label as string) || ''}
                 onChange={(evt) => {
                     setNodes((nds) => nds.map((n) => {

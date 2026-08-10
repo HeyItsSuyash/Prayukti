@@ -519,10 +519,10 @@ export default function MPMCSimulator({
     };
 
     return (
-        <div className="bg-gray-50 flex flex-col h-full overflow-hidden">
-            <header className="bg-white border-b shadow-sm p-4 shrink-0">
+        <div className="bg-card flex flex-col h-full overflow-hidden">
+            <header className="bg-card border-b shadow-none-none p-4 shrink-0">
                 <div className="container mx-auto flex items-center justify-end">
-                    <div className="flex bg-gray-100 rounded-lg p-1 flex-wrap gap-1">
+                    <div className="flex bg-card rounded-none-none p-1 flex-wrap gap-1">
                         {[
                             { id: "info", label: "Experiment Info", icon: Info },
                             { id: "simulation", label: "Simulator", icon: Play },
@@ -537,7 +537,7 @@ export default function MPMCSimulator({
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id as any)}
-                                className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-all ${activeTab === tab.id ? "bg-white text-[#2e7d32] shadow-sm" : "text-gray-500 hover:text-gray-700"}`}
+                                className={`flex items-center gap-2 px-3 py-1.5 rounded-none-none text-xs sm:text-sm font-medium transition-all ${activeTab === tab.id ? "bg-card text-[#2e7d32] shadow-none-none" : "text-muted-foreground hover:text-muted-foreground"}`}
                             >
                                 <tab.icon className="h-4 w-4" />
                                 <span className="hidden sm:inline">{tab.label}</span>
@@ -552,12 +552,12 @@ export default function MPMCSimulator({
                 {activeTab === "info" && (
                     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
                         <div className="flex justify-center mb-6">
-                            <div className="bg-white p-1 rounded-xl shadow-sm border flex gap-1">
+                            <div className="bg-card p-1 rounded-none-none shadow-none-none border flex gap-1">
                                 {lab.modes.map((m: string) => (
                                     <button
                                         key={m}
                                         onClick={() => { setMode(m); reset(); }}
-                                        className={`px-6 py-2 rounded-lg text-sm font-bold transition-all ${mode === m ? "bg-[#2e7d32] text-white shadow-md scale-105" : "text-gray-500 hover:bg-gray-50"}`}
+                                        className={`px-6 py-2 rounded-none-none text-sm font-bold transition-all ${mode === m ? "bg-[#2e7d32] text-white shadow-none-none scale-105" : "text-muted-foreground hover:bg-card"}`}
                                     >
                                         {m}
                                     </button>
@@ -566,29 +566,29 @@ export default function MPMCSimulator({
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <Card className="border-green-100 shadow-sm">
+                            <Card className="border-green-100 shadow-none-none">
                                 <CardHeader className="bg-green-50/50">
                                     <CardTitle className="flex items-center gap-2 text-[#2e7d32]">
                                         <i className="bx bx-beaker h-5 w-5"  /> Aim
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent className="pt-4">
-                                    <p className="text-gray-700 leading-relaxed">{lab.content[mode].aim}</p>
+                                    <p className="text-muted-foreground leading-relaxed">{lab.content[mode].aim}</p>
                                 </CardContent>
                             </Card>
 
-                            <Card className="border-blue-100 shadow-sm">
+                            <Card className="border-primary shadow-none-none">
                                 <CardHeader className="bg-blue-50/50">
-                                    <CardTitle className="flex items-center gap-2 text-blue-700">
+                                    <CardTitle className="flex items-center gap-2 text-primary">
                                         <i className="bx bx-bookopen h-5 w-5"  /> Theory
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent className="pt-4">
-                                    <p className="text-sm text-gray-700 leading-relaxed">{lab.content[mode].theory}</p>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">{lab.content[mode].theory}</p>
                                 </CardContent>
                             </Card>
 
-                            <Card className="border-orange-100 shadow-sm">
+                            <Card className="border-orange-100 shadow-none-none">
                                 <CardHeader className="bg-orange-50/50">
                                     <CardTitle className="flex items-center gap-2 text-orange-700">
                                         <i className="bx bx-listchecks h-5 w-5"  /> Algorithm
@@ -597,7 +597,7 @@ export default function MPMCSimulator({
                                 <CardContent className="pt-4">
                                     <ul className="space-y-2">
                                         {lab.content[mode].algorithm.map((s: string, i: number) => (
-                                            <li key={i} className="text-sm text-gray-700 flex gap-3">
+                                            <li key={i} className="text-sm text-muted-foreground flex gap-3">
                                                 <span className="font-bold text-orange-500">{i + 1}.</span> {s}
                                             </li>
                                         ))}
@@ -605,7 +605,7 @@ export default function MPMCSimulator({
                                 </CardContent>
                             </Card>
 
-                            <Card className="border-purple-100 shadow-sm">
+                            <Card className="border-purple-100 shadow-none-none">
                                 <CardHeader className="bg-purple-50/50">
                                     <CardTitle className="flex items-center gap-2 text-purple-700">
                                         <i className="bx bx-file h-5 w-5"  /> Procedure
@@ -620,8 +620,8 @@ export default function MPMCSimulator({
                                             "Watch the 'Registers' and 'Flags' panels for visual highlights during execution.",
                                             "Switch to the 'Observation Table' tab to see recorded trace."
                                         ].map((step, i) => (
-                                            <li key={i} className="text-sm text-gray-700 flex gap-3">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 flex-shrink-0" /> {step}
+                                            <li key={i} className="text-sm text-muted-foreground flex gap-3">
+                                                <div className="w-1.5 h-1.5 rounded-none-full bg-purple-400 mt-1.5 flex-shrink-0" /> {step}
                                             </li>
                                         ))}
                                     </ul>
@@ -641,7 +641,7 @@ export default function MPMCSimulator({
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-in fade-in duration-500 max-w-[1600px] mx-auto pb-12">
                         {/* Assembly Code Panel */}
                         <div className="lg:col-span-4 space-y-4">
-                            <Card className="h-fit border-[#2e7d32]/20 overflow-hidden shadow-md">
+                            <Card className="h-fit border-[#2e7d32]/20 overflow-hidden shadow-none-none">
                                 <CardHeader className="bg-[#2e7d32]/5 py-3 flex flex-row items-center justify-between">
                                     <CardTitle className="text-xs font-bold flex items-center gap-2">
                                         <i className="bx bx-play h-3.5 w-3.5 text-[#2e7d32]"  /> Assembly Editor
@@ -655,7 +655,7 @@ export default function MPMCSimulator({
                                                     payload: { type: 'MPMC', asmCode }
                                                 }, '*');
                                                 setFeedback("Code saved successfully.");
-                                            }} size="sm" variant="outline" className="h-7 text-[10px] text-blue-600 border-blue-600/20 hover:bg-blue-50">
+                                            }} size="sm" variant="outline" className="h-7 text-[10px] text-primary border-primary/20 hover:bg-blue-50">
                                                 SAVE
                                             </Button>
                                         )}
@@ -672,17 +672,17 @@ export default function MPMCSimulator({
                                         onChange={(e) => setAsmCode(e.target.value)}
                                         readOnly={readonly}
                                         placeholder="; Type your 8085 code here\nMVI A, 45H\nMVI B, 38H\nADD B\nSTA 2002H\nHLT"
-                                        className="w-full h-[300px] p-4 font-mono text-sm bg-gray-900 text-green-400 focus:outline-none resize-none"
+                                        className="w-full h-[300px] p-4 font-mono text-sm bg-card text-green-400 focus:outline-none resize-none"
                                     />
-                                    <div className="p-3 bg-gray-800 text-white font-mono text-[11px] min-h-[40px] flex items-center border-t border-gray-700">
+                                    <div className="p-3 bg-card text-white font-mono text-[11px] min-h-[40px] flex items-center border-t border-border">
                                         {feedback}
                                     </div>
-                                    <div className="p-4 bg-gray-50 border-t space-y-4">
+                                    <div className="p-4 bg-card border-t space-y-4">
                                         <div className="flex gap-2">
                                             <Button onClick={handleStep} disabled={cpu.isHalted || isRunning} size="sm" className="flex-1 bg-[#2e7d32] hover:bg-[#1b5e20] text-xs h-9">
                                                 <i className="bx bx-skipforward h-3.5 w-3.5 mr-1"  /> Step
                                             </Button>
-                                            <Button onClick={handleRun} disabled={cpu.isHalted || isRunning} size="sm" className="flex-1 bg-blue-600 hover:bg-blue-700 text-xs h-9">
+                                            <Button onClick={handleRun} disabled={cpu.isHalted || isRunning} size="sm" className="flex-1 bg-primary hover:bg-primary text-xs h-9">
                                                 <i className="bx bx-play h-3.5 w-3.5 mr-1"  /> Run
                                             </Button>
                                             <Button onClick={reset} variant="outline" size="sm" className="flex-1 text-xs h-9">
@@ -693,18 +693,18 @@ export default function MPMCSimulator({
                                 </CardContent>
                             </Card>
 
-                            <Card className="border-blue-200 bg-blue-50/10">
+                            <Card className="border-primary bg-blue-50/10">
                                 <CardHeader className="py-2 px-3 border-b bg-blue-50/30">
-                                    <CardTitle className="text-[10px] font-bold text-blue-800">Local Memory Peek (0000H - 0007H)</CardTitle>
+                                    <CardTitle className="text-[10px] font-bold text-primary">Local Memory Peek (0000H - 0007H)</CardTitle>
                                 </CardHeader>
                                 <CardContent className="p-3">
                                     <div className="flex flex-wrap gap-1 font-mono text-[10px]">
                                         {Array.from({ length: 8 }).map((_, i) => {
                                             const val = memory[i] || 0;
                                             return (
-                                                <div key={i} className="flex flex-col items-center p-1 bg-white border rounded">
-                                                    <span className="text-[7px] text-gray-400">000{i}</span>
-                                                    <span className="text-blue-700 font-bold">{val.toString(16).toUpperCase().padStart(2, "0")}</span>
+                                                <div key={i} className="flex flex-col items-center p-1 bg-card border rounded-none">
+                                                    <span className="text-[7px] text-muted-foreground">000{i}</span>
+                                                    <span className="text-primary font-bold">{val.toString(16).toUpperCase().padStart(2, "0")}</span>
                                                 </div>
                                             );
                                         })}
@@ -717,14 +717,14 @@ export default function MPMCSimulator({
                         <div className="lg:col-span-8 flex flex-col gap-6">
                             <TrainerKit cpu={cpu} onSync={syncCPU} />
 
-                            <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm flex items-center justify-between">
+                            <div className="bg-card p-4 rounded-none-none border border-border shadow-none-none flex items-center justify-between">
                                 <div className="flex items-center gap-4">
-                                    <div className="p-2 bg-green-100 rounded-full">
+                                    <div className="p-2 bg-green-100 rounded-none-full">
                                         <i className="bx bx-info h-5 w-5 text-[#2e7d32]"  />
                                     </div>
                                     <div>
-                                        <p className="text-xs font-bold text-gray-800">Hardware Simulation Mode</p>
-                                        <p className="text-[10px] text-gray-500 font-medium italic">Keypad and Keyboard shortcuts are active. Click to focus Trainer Kit if unresponsive.</p>
+                                        <p className="text-xs font-bold text-muted-foreground">Hardware Simulation Mode</p>
+                                        <p className="text-[10px] text-muted-foreground font-medium italic">Keypad and Keyboard shortcuts are active. Click to focus Trainer Kit if unresponsive.</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-2">
@@ -744,10 +744,10 @@ export default function MPMCSimulator({
 
                 {activeTab === "table" && (
                     <div className="max-w-5xl mx-auto animate-in slide-in-from-bottom-5 duration-500 pb-12">
-                        <Card className="border-gray-200 shadow-lg overflow-hidden">
-                            <CardHeader className="bg-gray-50 border-b flex flex-row items-center justify-between py-4">
+                        <Card className="border-border shadow-none-none overflow-hidden">
+                            <CardHeader className="bg-card border-b flex flex-row items-center justify-between py-4">
                                 <div>
-                                    <CardTitle className="text-lg font-bold text-gray-800">Observation Table</CardTitle>
+                                    <CardTitle className="text-lg font-bold text-muted-foreground">Observation Table</CardTitle>
                                     <CardDescription>Live trace of register states and flags after each instruction</CardDescription>
                                 </div>
                                 <div className="flex gap-2">
@@ -766,7 +766,7 @@ export default function MPMCSimulator({
                             </CardHeader>
                             <CardContent className="p-0 overflow-x-auto">
                                 <table className="w-full text-sm text-left font-mono">
-                                    <thead className="bg-gray-100 text-gray-600 uppercase text-[11px] font-bold">
+                                    <thead className="bg-card text-muted-foreground uppercase text-[11px] font-bold">
                                         <tr>
                                             <th className="px-4 py-3 border-r">Step</th>
                                             <th className="px-4 py-3 border-r min-w-[120px]">Instruction</th>
@@ -779,20 +779,20 @@ export default function MPMCSimulator({
                                     <tbody className="divide-y divide-gray-100">
                                         {history.length > 0 ? history.map((row, i) => (
                                             <tr key={i} className="hover:bg-blue-50/30 transition-colors">
-                                                <td className="px-4 py-3 border-r text-gray-400 text-xs">{row.step}</td>
-                                                <td className="px-4 py-3 border-r font-bold text-blue-800">{row.instruction}</td>
+                                                <td className="px-4 py-3 border-r text-muted-foreground text-xs">{row.step}</td>
+                                                <td className="px-4 py-3 border-r font-bold text-primary">{row.instruction}</td>
                                                 <td className="px-4 py-3 border-r text-center font-bold">{row.A}H</td>
                                                 <td className="px-4 py-3 border-r text-center">{row.H}H</td>
                                                 <td className="px-4 py-3 border-r text-center">{row.L}H</td>
                                                 <td className="px-2 py-3 text-center w-8 text-xs">{row.flags.S ? "1" : "0"}</td>
                                                 <td className="px-2 py-3 text-center w-8 text-xs">{row.flags.Z ? "1" : "0"}</td>
-                                                <td className="px-2 py-3 text-center w-8 text-xs border-x bg-gray-50/50">{row.flags.AC ? "1" : "0"}</td>
+                                                <td className="px-2 py-3 text-center w-8 text-xs border-x bg-card/50">{row.flags.AC ? "1" : "0"}</td>
                                                 <td className="px-2 py-3 text-center w-8 text-xs">{row.flags.P ? "1" : "0"}</td>
                                                 <td className="px-2 py-3 text-center w-8 text-xs text-red-600 font-bold">{row.flags.CY ? "1" : "0"}</td>
                                             </tr>
                                         )) : (
                                             <tr>
-                                                <td colSpan={10} className="px-4 py-12 text-center text-gray-400 italic font-sans text-sm">
+                                                <td colSpan={10} className="px-4 py-12 text-center text-muted-foreground italic font-sans text-sm">
                                                     No execution data yet. Start simulation to generate observations.
                                                 </td>
                                             </tr>
@@ -807,47 +807,47 @@ export default function MPMCSimulator({
                 {activeTab === "viva" && (
                     <div className="max-w-2xl mx-auto py-12 pb-24">
                         {!vivaFinished ? (
-                            <Card className="border-[#2e7d32]/20 shadow-xl overflow-hidden">
-                                <div className="h-2 bg-gray-100">
+                            <Card className="border-[#2e7d32]/20 shadow-none-none overflow-hidden">
+                                <div className="h-2 bg-card">
                                     <div className="h-full bg-[#2e7d32] transition-all" style={{ width: `${((vivaIndex + 1) / vivaQuestions.length) * 100}%` }} />
                                 </div>
-                                <CardHeader className="bg-gray-50">
+                                <CardHeader className="bg-card">
                                     <div className="flex justify-between items-center mb-2">
                                         <span className="text-xs font-bold text-[#2e7d32] uppercase tracking-wider">Question {vivaIndex + 1} of {vivaQuestions.length}</span>
-                                        <div className="flex items-center text-xs text-gray-500">
+                                        <div className="flex items-center text-xs text-muted-foreground">
                                             <i className="bx bx-help-circle h-3 w-3 mr-1"  /> Help available
                                         </div>
                                     </div>
-                                    <CardTitle className="text-lg text-gray-800">{vivaQuestions[vivaIndex]?.q}</CardTitle>
+                                    <CardTitle className="text-lg text-muted-foreground">{vivaQuestions[vivaIndex]?.q}</CardTitle>
                                 </CardHeader>
                                 <CardContent className="p-6 space-y-3">
                                     {vivaQuestions[vivaIndex]?.options.map((opt: string, i: number) => (
                                         <button
                                             key={i}
                                             onClick={() => handleVivaAnswer(i)}
-                                            className="w-full text-left p-4 rounded-xl border border-gray-200 hover:border-[#2e7d32] hover:bg-green-50 transition-all font-medium group flex justify-between items-center"
+                                            className="w-full text-left p-4 rounded-none-none border border-border hover:border-[#2e7d32] hover:bg-green-50 transition-all font-medium group flex justify-between items-center"
                                         >
                                             <span>{opt}</span>
-                                            <div className="w-6 h-6 rounded-full border border-gray-300 group-hover:border-[#2e7d32] transition-colors" />
+                                            <div className="w-6 h-6 rounded-none-full border border-border group-hover:border-[#2e7d32] transition-colors" />
                                         </button>
                                     ))}
                                 </CardContent>
                             </Card>
                         ) : (
-                            <Card className="border-none shadow-2xl overflow-hidden text-center py-12 px-6">
+                            <Card className="border-none shadow-none-2xl overflow-hidden text-center py-12 px-6">
                                 <div className="mb-6 flex justify-center">
                                     {score > 1 ? (
-                                        <div className="bg-green-100 p-4 rounded-full">
+                                        <div className="bg-green-100 p-4 rounded-none-full">
                                             <i className="bx bx-check-circle h-16 w-16 text-green-600"  />
                                         </div>
                                     ) : (
-                                        <div className="bg-orange-100 p-4 rounded-full">
+                                        <div className="bg-orange-100 p-4 rounded-none-full">
                                             <i className="bx bx-check-circle h-16 w-16 text-orange-600"  />
                                         </div>
                                     )}
                                 </div>
-                                <h2 className="text-3xl font-black text-gray-800 mb-2">Quiz Completed!</h2>
-                                <p className="text-gray-500 mb-8">You scored <span className="text-[#2e7d32] font-bold">{score}</span> out of {vivaQuestions.length}</p>
+                                <h2 className="text-3xl font-black text-muted-foreground mb-2">Quiz Completed!</h2>
+                                <p className="text-muted-foreground mb-8">You scored <span className="text-[#2e7d32] font-bold">{score}</span> out of {vivaQuestions.length}</p>
                                 <div className="flex gap-4 justify-center">
                                     <Button onClick={() => { setVivaFinished(false); setVivaIndex(0); setScore(0); }} variant="outline">
                                         Retake Quiz

@@ -119,8 +119,8 @@ export default function CSMASimulation() {
     // Initialize nodes
     useEffect(() => {
         const colors = [
-            "bg-blue-500", "bg-green-500", "bg-purple-500", "bg-orange-500",
-            "bg-indigo-500", "bg-rose-500", "bg-amber-500", "bg-cyan-500"
+            "bg-primary", "bg-green-500", "bg-purple-500", "bg-orange-500",
+            "bg-primary", "bg-rose-500", "bg-amber-500", "bg-cyan-500"
         ];
         const initialNodes: Node[] = Array.from({ length: nodeCount }, (_, i) => ({
             id: i + 1,
@@ -273,16 +273,16 @@ export default function CSMASimulation() {
     };
 
     return (
-        <div className="flex flex-col h-full bg-white overflow-y-auto">
+        <div className="flex flex-col h-full bg-card overflow-y-auto">
             {/* Tabs */}
-            <div className="flex border-b sticky top-0 bg-white z-10">
+            <div className="flex border-b sticky top-0 bg-card z-10">
                 {["Simulation", "Observation", "Quiz"].map((tab) => (
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab.toLowerCase())}
                         className={`px-6 py-3 font-medium transition-colors border-b-2 ${activeTab === tab.toLowerCase()
-                            ? "border-blue-600 text-blue-600 bg-blue-50"
-                            : "border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                            ? "border-primary text-primary bg-blue-50"
+                            : "border-transparent text-muted-foreground hover:text-muted-foreground hover:bg-card"
                             }`}
                     >
                         {tab}
@@ -295,8 +295,8 @@ export default function CSMASimulation() {
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
                         {/* Sidebar Controls */}
                         <div className="lg:col-span-1 space-y-6">
-                            <div className="bg-slate-50/50 backdrop-blur-sm p-5 rounded-[2rem] border border-slate-200/60 space-y-6 shadow-xl shadow-slate-200/20">
-                                <h3 className="font-black text-slate-800 flex items-center gap-2 text-xs uppercase tracking-widest">
+                            <div className="bg-card/50 backdrop-blur-sm p-5 rounded-none-[2rem] border border-border/60 space-y-6 shadow-none-none shadow-none-none-200/20">
+                                <h3 className="font-black text-muted-foreground flex items-center gap-2 text-xs uppercase tracking-widest">
                                     <Activity className="h-4 w-4 text-cyan-600" />
                                     Control Panel
                                 </h3>
@@ -304,8 +304,8 @@ export default function CSMASimulation() {
                                 <div className="space-y-6">
                                     <div className="space-y-3">
                                         <div className="flex justify-between items-center">
-                                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Nodes</label>
-                                            <span className="text-xs font-bold px-2 py-0.5 bg-cyan-100 text-cyan-700 rounded-full">{nodeCount}</span>
+                                            <label className="text-[10px] font-black text-muted-foreground uppercase tracking-wider">Nodes</label>
+                                            <span className="text-xs font-bold px-2 py-0.5 bg-cyan-100 text-cyan-700 rounded-none-full">{nodeCount}</span>
                                         </div>
                                         <Slider
                                             value={[nodeCount]}
@@ -319,8 +319,8 @@ export default function CSMASimulation() {
 
                                     <div className="space-y-3">
                                         <div className="flex justify-between items-center">
-                                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Packet Size</label>
-                                            <span className="text-xs font-bold px-2 py-0.5 bg-indigo-100 text-indigo-700 rounded-full">{packetSize}</span>
+                                            <label className="text-[10px] font-black text-muted-foreground uppercase tracking-wider">Packet Size</label>
+                                            <span className="text-xs font-bold px-2 py-0.5 bg-primary text-primary rounded-none-full">{packetSize}</span>
                                         </div>
                                         <Slider
                                             value={[packetSize]}
@@ -334,8 +334,8 @@ export default function CSMASimulation() {
 
                                     <div className="space-y-3">
                                         <div className="flex justify-between items-center">
-                                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Traffic Load</label>
-                                            <span className="text-xs font-bold px-2 py-0.5 bg-rose-100 text-rose-700 rounded-full">{(transProb * 100).toFixed(1)}%</span>
+                                            <label className="text-[10px] font-black text-muted-foreground uppercase tracking-wider">Traffic Load</label>
+                                            <span className="text-xs font-bold px-2 py-0.5 bg-rose-100 text-rose-700 rounded-none-full">{(transProb * 100).toFixed(1)}%</span>
                                         </div>
                                         <Slider
                                             value={[transProb * 100]}
@@ -347,14 +347,14 @@ export default function CSMASimulation() {
                                     </div>
 
                                     <div className="space-y-3">
-                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Simulation Velocity</label>
-                                        <div className="flex gap-2 p-1 bg-slate-200/50 rounded-xl">
+                                        <label className="text-[10px] font-black text-muted-foreground uppercase tracking-wider">Simulation Velocity</label>
+                                        <div className="flex gap-2 p-1 bg-card/50 rounded-none-none">
                                             {[0.5, 1, 2].map(speed => (
                                                 <Button
                                                     key={speed}
                                                     variant={simSpeed === speed ? "default" : "ghost"}
                                                     size="sm"
-                                                    className={`flex-1 text-[10px] font-bold rounded-lg h-8 ${simSpeed === speed ? "bg-white text-slate-900 shadow-sm hover:bg-white" : "text-slate-500 hover:text-slate-800"}`}
+                                                    className={`flex-1 text-[10px] font-bold rounded-none-none h-8 ${simSpeed === speed ? "bg-card text-muted-foreground shadow-none-none hover:bg-card" : "text-muted-foreground hover:text-muted-foreground"}`}
                                                     onClick={() => setSimSpeed(speed)}
                                                 >
                                                     {speed === 0.5 ? "Slow" : speed === 1 ? "Norm" : "Fast"}
@@ -366,22 +366,22 @@ export default function CSMASimulation() {
 
                                 <div className="pt-4 space-y-3">
                                     <Button
-                                        className={`w-full rounded-2xl h-12 text-sm font-bold shadow-lg transition-all active:scale-95 ${isRunning ? "bg-amber-500 hover:bg-amber-600 shadow-amber-200/50" : "bg-cyan-600 hover:bg-cyan-700 shadow-cyan-200/50"}`}
+                                        className={`w-full rounded-none-none h-12 text-sm font-bold shadow-none-none transition-all active:scale-95 ${isRunning ? "bg-amber-500 hover:bg-amber-600 shadow-none-none-200/50" : "bg-cyan-600 hover:bg-cyan-700 shadow-none-none-200/50"}`}
                                         onClick={() => setIsRunning(!isRunning)}
                                     >
                                         {isRunning ? <Pause className="mr-2 h-4 w-4 fill-current" /> : <Play className="mr-2 h-4 w-4 fill-current" />}
                                         {isRunning ? "Freeze" : "Execute Lab"}
                                     </Button>
-                                    <Button variant="ghost" className="w-full rounded-2xl text-slate-400 hover:text-slate-600 hover:bg-slate-100" onClick={resetSimulation}>
+                                    <Button variant="ghost" className="w-full rounded-none-none text-muted-foreground hover:text-muted-foreground hover:bg-card" onClick={resetSimulation}>
                                         <RotateCcw className="mr-2 h-4 w-4" /> Reset
                                     </Button>
                                 </div>
                             </div>
 
                             {/* Dynamic Stats Glaze */}
-                            <div className="bg-slate-900 text-white p-6 rounded-[2rem] shadow-2xl relative overflow-hidden group">
-                                <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 blur-3xl rounded-full -mr-12 -mt-12 group-hover:bg-cyan-500/20 transition-all duration-500"></div>
-                                <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4">Telemetry</h4>
+                            <div className="bg-card text-white p-6 rounded-none-[2rem] shadow-none-2xl relative overflow-hidden group">
+                                <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 blur-3xl rounded-none-full -mr-12 -mt-12 group-hover:bg-cyan-500/20 transition-all duration-500"></div>
+                                <h4 className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-4">Telemetry</h4>
                                 <div className="grid grid-cols-2 gap-y-4">
                                     <div>
                                         <p className="text-[8px] text-emerald-400/70 font-black uppercase">Success</p>
@@ -393,7 +393,7 @@ export default function CSMASimulation() {
                                     </div>
                                     <div className="col-span-2 pt-2">
                                         <p className="text-[8px] text-cyan-400/70 font-black uppercase mb-1 text-center">Efficiency Score</p>
-                                        <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                        <div className="w-full h-1.5 bg-card rounded-none-full overflow-hidden">
                                             <div className="h-full bg-cyan-500 transition-all duration-500" style={{ width: `${Math.min(stats.throughput, 100)}%` }}></div>
                                         </div>
                                         <p className="text-center text-xs font-bold mt-1 text-cyan-400">{stats.throughput.toFixed(2)}%</p>
@@ -406,7 +406,7 @@ export default function CSMASimulation() {
                         <div className="lg:col-span-4 grid grid-cols-1 xl:grid-cols-4 gap-6">
                             <div className="xl:col-span-3 space-y-6">
                                 {/* The Shared Medium - Improved Aesthetics */}
-                                <div className="bg-slate-950 rounded-[3rem] p-12 min-h-[550px] flex flex-col items-center justify-between relative overflow-hidden shadow-2xl border border-slate-800/80">
+                                <div className="bg-card rounded-none-[3rem] p-12 min-h-[550px] flex flex-col items-center justify-between relative overflow-hidden shadow-none-2xl border border-border/80">
                                     {/* Scanline Effect */}
                                     <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]"></div>
 
@@ -421,9 +421,9 @@ export default function CSMASimulation() {
                                     </div>
 
                                     {/* Shared Bus - Cyber Style */}
-                                    <div className="w-full h-2 bg-slate-800/50 rounded-full relative flex items-center">
+                                    <div className="w-full h-2 bg-card/50 rounded-none-full relative flex items-center">
                                         {/* Bus Glow */}
-                                        <div className="absolute inset-0 blur-md bg-cyan-500/10 rounded-full"></div>
+                                        <div className="absolute inset-0 blur-md bg-cyan-500/10 rounded-none-full"></div>
 
                                         {/* Animation of signals */}
                                         {nodes.map(node => (
@@ -431,8 +431,8 @@ export default function CSMASimulation() {
                                                 <div
                                                     key={`sig-${node.id}`}
                                                     className={`absolute h-8 transition-all duration-100 blur-[2px] ${node.state === "jamming" ? "bg-amber-400 animate-pulse w-full h-1" :
-                                                            node.state === "collision" ? "bg-rose-500 w-full h-1.5 shadow-[0_0_20px_rgba(244,63,94,0.6)]" :
-                                                                node.state === "success" ? "bg-emerald-400/40 w-full h-1" :
+                                                            node.state === "collision" ? "bg-rose-500 w-full h-1.5 shadow-none-[0_0_20px_rgba(244,63,94,0.6)]" :
+                                                                node.state === "success" ? "bg-primary/40 w-full h-1" :
                                                                     "bg-cyan-400/30 h-1"
                                                         }`}
                                                     style={{
@@ -447,13 +447,13 @@ export default function CSMASimulation() {
                                         {/* Collision Visual Effect */}
                                         {channelState === "collision" && (
                                             <div className="absolute inset-0 bg-rose-500/10 flex items-center justify-center">
-                                                <div className="w-[200px] h-[200px] bg-rose-500/20 blur-[100px] rounded-full animate-pulse"></div>
+                                                <div className="w-[200px] h-[200px] bg-rose-500/20 blur-[100px] rounded-none-full animate-pulse"></div>
                                                 <Zap className="h-12 w-12 text-rose-500 animate-bounce absolute" />
                                             </div>
                                         )}
 
                                         {/* Channel State Pulse */}
-                                        <div className={`absolute -inset-1 rounded-full border border-slate-700/50 ${channelState === "busy" ? "border-cyan-500/30 animate-pulse" : ""}`}></div>
+                                        <div className={`absolute -inset-1 rounded-none-full border border-border/50 ${channelState === "busy" ? "border-cyan-500/30 animate-pulse" : ""}`}></div>
                                     </div>
 
                                     {/* Bottom Nodes */}
@@ -465,12 +465,12 @@ export default function CSMASimulation() {
                                 </div>
 
                                 {/* Modern Legend */}
-                                <div className="flex flex-wrap gap-8 justify-center bg-white/50 backdrop-blur-sm p-4 rounded-[2rem] border border-slate-200/60 shadow-sm">
-                                    <LegendItem label="Idle" color="bg-slate-700 shadow-slate-200" />
-                                    <LegendItem label="Listening" color="bg-cyan-400 shadow-cyan-200 animate-pulse" />
-                                    <LegendItem label="Active" color="bg-emerald-400 shadow-emerald-200" />
-                                    <LegendItem label="Conflict" color="bg-rose-500 shadow-rose-200 animate-bounce" />
-                                    <LegendItem label="Recovery" color="bg-amber-400 shadow-amber-200" />
+                                <div className="flex flex-wrap gap-8 justify-center bg-card/50 backdrop-blur-sm p-4 rounded-none-[2rem] border border-border/60 shadow-none-none">
+                                    <LegendItem label="Idle" color="bg-card shadow-none-none-200" />
+                                    <LegendItem label="Listening" color="bg-cyan-400 shadow-none-none-200 animate-pulse" />
+                                    <LegendItem label="Active" color="bg-primary shadow-none-none-200" />
+                                    <LegendItem label="Conflict" color="bg-rose-500 shadow-none-none-200 animate-bounce" />
+                                    <LegendItem label="Recovery" color="bg-amber-400 shadow-none-none-200" />
                                 </div>
                             </div>
 
@@ -486,57 +486,57 @@ export default function CSMASimulation() {
                     <div className="space-y-8 animate-in fade-in duration-500">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {/* Statistics Table */}
-                            <div className="bg-white rounded-2xl border shadow-sm overflow-hidden">
-                                <div className="bg-slate-50 p-4 border-b">
-                                    <h3 className="font-bold text-slate-800 flex items-center gap-2">
+                            <div className="bg-card rounded-none-none border shadow-none-none overflow-hidden">
+                                <div className="bg-card p-4 border-b">
+                                    <h3 className="font-bold text-muted-foreground flex items-center gap-2">
                                         <Activity className="h-4 w-4" /> Detailed Results
                                     </h3>
                                 </div>
                                 <div className="p-6 space-y-4">
                                     <div className="flex justify-between items-center pb-2 border-b">
-                                        <span className="text-gray-500 font-medium">Total Samples (Time)</span>
+                                        <span className="text-muted-foreground font-medium">Total Samples (Time)</span>
                                         <span className="font-bold">{time}</span>
                                     </div>
                                     <div className="flex justify-between items-center pb-2 border-b">
-                                        <span className="text-gray-500 font-medium">Successful Transmissions</span>
+                                        <span className="text-muted-foreground font-medium">Successful Transmissions</span>
                                         <span className="font-bold text-green-600">{stats.successful}</span>
                                     </div>
                                     <div className="flex justify-between items-center pb-2 border-b">
-                                        <span className="text-gray-500 font-medium">Collision Count</span>
+                                        <span className="text-muted-foreground font-medium">Collision Count</span>
                                         <span className="font-bold text-red-600">{stats.collisions}</span>
                                     </div>
                                     <div className="flex justify-between items-center pb-2 border-b">
-                                        <span className="text-gray-500 font-medium">Network Efficiency</span>
+                                        <span className="text-muted-foreground font-medium">Network Efficiency</span>
                                         <span className="font-bold">{(stats.throughput).toFixed(2)}%</span>
                                     </div>
                                     <div className="flex justify-between items-center pb-2">
-                                        <span className="text-gray-500 font-medium">Current Load</span>
+                                        <span className="text-muted-foreground font-medium">Current Load</span>
                                         <span className="font-bold">{(transProb * nodeCount * 100).toFixed(0)}%</span>
                                     </div>
                                 </div>
-                                <div className="p-4 bg-blue-50 text-xs text-blue-700 border-t italic">
+                                <div className="p-4 bg-blue-50 text-xs text-primary border-t italic">
                                     * These values are calculated in real-time based on the current simulation configuration.
                                 </div>
                             </div>
 
                             {/* Graphs Placeholder */}
-                            <div className="bg-white rounded-2xl border shadow-sm p-6 space-y-6">
-                                <h3 className="font-bold text-slate-800">Performance Trends</h3>
+                            <div className="bg-card rounded-none-none border shadow-none-none p-6 space-y-6">
+                                <h3 className="font-bold text-muted-foreground">Performance Trends</h3>
                                 <div className="h-64 flex items-end gap-1 border-b border-l p-2 relative">
                                     {history.map((h, i) => (
                                         <div
                                             key={i}
-                                            className="bg-blue-400 hover:bg-blue-500 transition-all flex-1"
+                                            className="bg-primary hover:bg-primary transition-all flex-1"
                                             style={{ height: `${h.throughput * 2}%`, minWidth: "4px" }}
                                             title={`Time: ${h.t}, TP: ${h.throughput.toFixed(2)}%`}
                                         ></div>
                                     ))}
                                     {history.length === 0 && (
-                                        <div className="absolute inset-0 flex items-center justify-center text-gray-400 text-sm italic">
+                                        <div className="absolute inset-0 flex items-center justify-center text-muted-foreground text-sm italic">
                                             Start simulation to see data trends
                                         </div>
                                     )}
-                                    <div className="absolute top-0 right-0 text-[10px] text-gray-400 uppercase font-bold">Throughput vs Time</div>
+                                    <div className="absolute top-0 right-0 text-[10px] text-muted-foreground uppercase font-bold">Throughput vs Time</div>
                                 </div>
                                 <div className="h-64 flex items-end gap-1 border-b border-l p-2 relative">
                                     {history.map((h, i) => (
@@ -548,11 +548,11 @@ export default function CSMASimulation() {
                                         ></div>
                                     ))}
                                     {history.length === 0 && (
-                                        <div className="absolute inset-0 flex items-center justify-center text-gray-400 text-sm italic">
+                                        <div className="absolute inset-0 flex items-center justify-center text-muted-foreground text-sm italic">
                                             Start simulation to see data trends
                                         </div>
                                     )}
-                                    <div className="absolute top-0 right-0 text-[10px] text-gray-400 uppercase font-bold">Accumulated Collisions</div>
+                                    <div className="absolute top-0 right-0 text-[10px] text-muted-foreground uppercase font-bold">Accumulated Collisions</div>
                                 </div>
                             </div>
                         </div>
@@ -561,25 +561,25 @@ export default function CSMASimulation() {
 
                 {activeTab === "quiz" && (
                     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-                        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-8 rounded-2xl text-white shadow-xl">
+                        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-8 rounded-none-none text-white shadow-none-none">
                             <h3 className="text-2xl font-bold mb-2">CSMA/CD Mastery Quiz</h3>
                             <p className="opacity-90">Validate your understanding of collision detection and backoff logic.</p>
                         </div>
 
                         <div className="space-y-6">
                             {quizQuestions.map((q, qIdx) => (
-                                <div key={qIdx} className="bg-white p-6 rounded-xl border shadow-sm">
-                                    <p className="font-bold text-gray-800 mb-4">{qIdx + 1}. {q.question}</p>
+                                <div key={qIdx} className="bg-card p-6 rounded-none-none border shadow-none-none">
+                                    <p className="font-bold text-muted-foreground mb-4">{qIdx + 1}. {q.question}</p>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                         {q.options.map((option, oIdx) => (
                                             <button
                                                 key={oIdx}
                                                 onClick={() => handleQuizOption(qIdx, oIdx)}
                                                 className={`
-                                                    p-4 text-left rounded-lg text-sm transition-all border-2
+                                                    p-4 text-left rounded-none-none text-sm transition-all border-2
                                                     ${quizAnswers[qIdx] === oIdx
-                                                        ? "border-blue-600 bg-blue-50 text-blue-800 font-medium"
-                                                        : "border-gray-100 hover:border-gray-200 hover:bg-gray-50"
+                                                        ? "border-primary bg-blue-50 text-primary font-medium"
+                                                        : "border-border hover:border-border hover:bg-card"
                                                     }
                                                     ${quizSubmitted && oIdx === q.answer ? "border-green-500 bg-green-50 text-green-800" : ""}
                                                     ${quizSubmitted && quizAnswers[qIdx] === oIdx && oIdx !== q.answer ? "border-red-500 bg-red-50 text-red-800" : ""}
@@ -587,7 +587,7 @@ export default function CSMASimulation() {
                                                 disabled={quizSubmitted}
                                             >
                                                 <div className="flex items-center gap-3">
-                                                    <span className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-xs shrink-0">{String.fromCharCode(65 + oIdx)}</span>
+                                                    <span className="w-6 h-6 rounded-none-full bg-card flex items-center justify-center text-xs shrink-0">{String.fromCharCode(65 + oIdx)}</span>
                                                     {option}
                                                     {quizSubmitted && oIdx === q.answer && <CheckCircle2 className="ml-auto h-5 w-5 text-green-500" />}
                                                     {quizSubmitted && quizAnswers[qIdx] === oIdx && oIdx !== q.answer && <XCircle className="ml-auto h-5 w-5 text-red-500" />}
@@ -603,7 +603,7 @@ export default function CSMASimulation() {
                             {!quizSubmitted ? (
                                 <Button
                                     onClick={() => setQuizSubmitted(true)}
-                                    className="bg-blue-600 hover:bg-blue-700 w-full py-6 text-lg"
+                                    className="bg-primary hover:bg-primary w-full py-6 text-lg"
                                     disabled={quizAnswers.includes(null)}
                                 >
                                     Submit Final Results
@@ -631,39 +631,39 @@ export default function CSMASimulation() {
 function NodeComponent({ node }: { node: Node }) {
     return (
         <div className="flex flex-col items-center gap-4 transition-all duration-300">
-            <div className={`p-4 rounded-2xl shadow-lg border-2 transition-all duration-300 relative ${node.state === "idle" ? "bg-slate-800 border-slate-700" :
+            <div className={`p-4 rounded-none-none shadow-none-none border-2 transition-all duration-300 relative ${node.state === "idle" ? "bg-card border-border" :
                 node.state === "sensing" ? "bg-cyan-900 border-cyan-400 animate-pulse" :
                     node.state === "transmitting" ? "bg-green-900 border-green-400" :
                         node.state === "collision" ? "bg-red-900 border-red-400 animate-bounce" :
                             node.state === "jamming" ? "bg-amber-900 border-amber-400 scale-110" :
-                                node.state === "success" ? "bg-emerald-900 border-emerald-400 scale-110 shadow-[0_0_20px_rgba(16,185,129,0.5)]" :
-                                    "bg-slate-700 border-slate-600 grayscale"
+                                node.state === "success" ? "bg-primary border-emerald-400 scale-110 shadow-none-[0_0_20px_rgba(16,185,129,0.5)]" :
+                                    "bg-card border-border grayscale"
                 }`}>
-                <Monitor className={`h-8 w-8 ${node.state === "idle" ? "text-slate-500" : "text-white"
+                <Monitor className={`h-8 w-8 ${node.state === "idle" ? "text-muted-foreground" : "text-white"
                     }`} />
 
                 {/* Backoff Timer Overlay */}
                 {node.state === "backoff" && (
-                    <div className="absolute inset-0 bg-black/60 rounded-2xl flex flex-col items-center justify-center">
+                    <div className="absolute inset-0 bg-black/60 rounded-none-none flex flex-col items-center justify-center">
                         <Clock className="h-4 w-4 text-amber-400 mb-1" />
                         <span className="text-[10px] text-white font-bold">{node.backoffRemaining}</span>
                     </div>
                 )}
 
                 {/* Status Indicator */}
-                <div className={`absolute -top-2 -right-2 h-4 w-4 rounded-full border-2 border-slate-900 ${node.state === "idle" ? "bg-slate-600" :
+                <div className={`absolute -top-2 -right-2 h-4 w-4 rounded-none-full border-2 border-border ${node.state === "idle" ? "bg-card" :
                     node.state === "sensing" ? "bg-cyan-400" :
                         node.state === "transmitting" ? "bg-green-400" :
                             node.state === "collision" ? "bg-red-500" :
                                 node.state === "jamming" ? "bg-amber-400" :
-                                    node.state === "success" ? "bg-emerald-400" :
+                                    node.state === "success" ? "bg-primary" :
                                         "bg-amber-600"
                     }`}></div>
             </div>
 
             <div className="flex flex-col items-center">
-                <span className="text-slate-400 text-[10px] font-bold uppercase tracking-tighter">PC-{node.id}</span>
-                <span className={`text-[10px] font-black uppercase ${node.state === "idle" ? "text-slate-600" :
+                <span className="text-muted-foreground text-[10px] font-bold uppercase tracking-tighter">PC-{node.id}</span>
+                <span className={`text-[10px] font-black uppercase ${node.state === "idle" ? "text-muted-foreground" :
                     node.state === "sensing" ? "text-cyan-400" :
                         node.state === "transmitting" ? "text-green-400" :
                             node.state === "collision" ? "text-red-500" :
@@ -681,8 +681,8 @@ function NodeComponent({ node }: { node: Node }) {
 function LegendItem({ label, color }: { label: string, color: string }) {
     return (
         <div className="flex items-center gap-2">
-            <div className={`w-3 h-3 rounded-full ${color}`}></div>
-            <span className="text-xs font-bold text-gray-500 uppercase">{label}</span>
+            <div className={`w-3 h-3 rounded-none-full ${color}`}></div>
+            <span className="text-xs font-bold text-muted-foreground uppercase">{label}</span>
         </div>
     );
 }
@@ -699,8 +699,8 @@ function CSMAFlowchart({ activeState }: { activeState: string }) {
     ];
 
     return (
-        <div className="bg-slate-900/40 backdrop-blur-md p-4 rounded-3xl border border-slate-700/50 h-full flex flex-col shadow-2xl overflow-hidden">
-            <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+        <div className="bg-card/40 backdrop-blur-md p-4 rounded-none-3xl border border-border/50 h-full flex flex-col shadow-none-2xl overflow-hidden">
+            <h4 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
                 <Zap className="h-3 w-3 text-cyan-400" />
                 Protocol Pipeline
             </h4>
@@ -715,12 +715,12 @@ function CSMAFlowchart({ activeState }: { activeState: string }) {
                         <React.Fragment key={step.id}>
                             <div className={`
                                 w-32 py-1.5 px-2 text-center transition-all duration-500 relative z-10
-                                ${isActive ? 'scale-105 shadow-[0_0_15px_rgba(34,211,238,0.4)]' : 'scale-100 opacity-40'}
-                                ${isDecision ? 'rotate-45 w-16 h-16 flex items-center justify-center border border-slate-600' :
-                                    isTerminator ? 'rounded-full bg-emerald-500/10 border border-emerald-500/50 text-emerald-400' :
-                                        'rounded-xl border border-slate-700 bg-slate-800/50'}
+                                ${isActive ? 'scale-105 shadow-none-[0_0_15px_rgba(34,211,238,0.4)]' : 'scale-100 opacity-40'}
+                                ${isDecision ? 'rotate-45 w-16 h-16 flex items-center justify-center border border-border' :
+                                    isTerminator ? 'rounded-none-full bg-primary/10 border border-emerald-500/50 text-emerald-400' :
+                                        'rounded-none-none border border-border bg-card/50'}
                                 ${isActive && !isTerminator ? 'border-cyan-400 bg-cyan-400/10 text-cyan-100 font-bold' : ''}
-                                ${isActive && isTerminator ? 'bg-emerald-500 text-white font-bold' : ''}
+                                ${isActive && isTerminator ? 'bg-primary text-white font-bold' : ''}
                             `}>
                                 <div className={`${isDecision ? '-rotate-45' : ''} text-[9px] leading-tight`}>
                                     {step.label}
@@ -728,13 +728,13 @@ function CSMAFlowchart({ activeState }: { activeState: string }) {
 
                                 {isActive && (
                                     <div className="absolute -right-2 -top-1">
-                                        <div className="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></div>
+                                        <div className="w-2 h-2 bg-cyan-400 rounded-none-full animate-ping"></div>
                                     </div>
                                 )}
                             </div>
 
                             {idx < steps.length - 1 && (
-                                <div className="h-2 w-px bg-slate-700 relative">
+                                <div className="h-2 w-px bg-card relative">
                                     <div className={`absolute inset-0 bg-cyan-400 transition-all duration-500 ${isActive ? 'h-full' : 'h-0'}`}></div>
                                 </div>
                             )}
@@ -743,7 +743,7 @@ function CSMAFlowchart({ activeState }: { activeState: string }) {
                 })}
             </div>
 
-            <div className="mt-4 p-2 bg-slate-800/30 border border-slate-700/50 rounded-xl text-[8px] text-slate-500 italic text-center">
+            <div className="mt-4 p-2 bg-card/30 border border-border/50 rounded-none-none text-[8px] text-muted-foreground italic text-center">
                 Node 1 Execution Context
             </div>
         </div>

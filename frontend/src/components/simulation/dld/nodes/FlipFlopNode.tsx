@@ -40,7 +40,7 @@ export default function FlipFlopNode({ id, data, selected }: NodeProps) {
             </div>
 
             {/* State Indicator */}
-            <div className="font-mono bg-black text-white px-2 py-0.5 rounded textxs mt-6">
+            <div className="font-mono bg-black text-white px-2 py-0.5 rounded-none textxs mt-6">
                 Q={qValue}
             </div>
 

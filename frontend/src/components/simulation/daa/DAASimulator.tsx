@@ -132,30 +132,30 @@ export default function DAASimulator({ labId }: { labId: string }) {
 
     return (
         <div className="flex flex-col h-full bg-[#fafbfe] p-6 space-y-6 overflow-y-auto">
-            <div className="flex justify-between items-center bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <div className="flex justify-between items-center bg-card p-6 rounded-none-none border border-border shadow-none-none">
                 <div>
-                    <h2 className="text-xl font-black text-slate-800 uppercase tracking-tight">Design and Analysis of Algorithms</h2>
-                    <p className="text-sm text-slate-500 mt-1">Interactive visualizers for sorting, trees, and graphs</p>
+                    <h2 className="text-xl font-black text-muted-foreground uppercase tracking-tight">Design and Analysis of Algorithms</h2>
+                    <p className="text-sm text-muted-foreground mt-1">Interactive visualizers for sorting, trees, and graphs</p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-blue-500 animate-pulse"></span>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-widest bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">Lab Slot: {labId}</span>
+                    <span className="h-2.5 w-2.5 rounded-none-full bg-primary animate-pulse"></span>
+                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest bg-card px-3 py-1.5 rounded-none-none border border-border">Lab Slot: {labId}</span>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                 <div className="xl:col-span-2 space-y-6">
                     {/* VISUALIZER CONTAINER */}
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
+                    <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-6">
                         <div className="flex justify-between items-center">
-                            <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                {isSorting && <i className="bx bx-alignverticalspacearound h-5 w-5 text-indigo-500"  />}
-                                {isGraph && <i className="bx bx-gitgraph h-5 w-5 text-indigo-500"  />}
-                                {isDp && <i className="bx bx-table h-5 w-5 text-indigo-500"  />}
+                            <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                {isSorting && <i className="bx bx-alignverticalspacearound h-5 w-5 text-primary"  />}
+                                {isGraph && <i className="bx bx-gitgraph h-5 w-5 text-primary"  />}
+                                {isDp && <i className="bx bx-table h-5 w-5 text-primary"  />}
                                 {isSorting ? "Sorting Bars Animation" : isGraph ? "Graph State Visualization" : "LCS Dynamic Programming Grid"}
                             </h3>
                             <div className="flex gap-2">
-                                <Button onClick={runDAASimulator} disabled={isSortingActive} className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs">
+                                <Button onClick={runDAASimulator} disabled={isSortingActive} className="bg-primary hover:bg-primary text-white font-bold text-xs">
                                     <i className="bx bx-play mr-1 h-3.5 w-3.5"  /> Start Visualization
                                 </Button>
                                 {isSorting && (
@@ -168,20 +168,20 @@ export default function DAASimulator({ labId }: { labId: string }) {
 
                         {/* 1. Sorting Visualizer */}
                         {isSorting && (
-                            <div className="flex items-end justify-center gap-2 p-8 bg-slate-50 border border-slate-200 rounded-2xl min-h-[200px]">
+                            <div className="flex items-end justify-center gap-2 p-8 bg-card border border-border rounded-none-none min-h-[200px]">
                                 {array.map((val, idx) => {
                                     const isComparing = compareIdxs.includes(idx);
                                     return (
                                         <div key={idx} className="flex flex-col items-center gap-2 flex-1">
                                             <div 
-                                                className={`w-full text-center text-[10px] font-bold text-white rounded-lg shadow-sm flex items-end justify-center pb-2 transition-all duration-300
+                                                className={`w-full text-center text-[10px] font-bold text-white rounded-none-none shadow-none-none flex items-end justify-center pb-2 transition-all duration-300
                                                     ${isComparing ? "bg-gradient-to-t from-rose-500 to-rose-600 ring-4 ring-rose-200 scale-105" : "bg-gradient-to-t from-blue-500 to-indigo-600"}
                                                 `}
                                                 style={{ height: `${val * 2}px` }}
                                             >
                                                 {val}
                                             </div>
-                                            <div className="text-[10px] text-slate-400 font-bold">[{idx}]</div>
+                                            <div className="text-[10px] text-muted-foreground font-bold">[{idx}]</div>
                                         </div>
                                     );
                                 })}
@@ -190,21 +190,21 @@ export default function DAASimulator({ labId }: { labId: string }) {
 
                         {/* 2. Graph Visualizer */}
                         {isGraph && (
-                            <div className="border border-slate-200 rounded-2xl p-6 bg-slate-50 flex flex-col items-center justify-center min-h-[220px]">
+                            <div className="border border-border rounded-none-none p-6 bg-card flex flex-col items-center justify-center min-h-[220px]">
                                 <div className="flex items-center gap-12 relative font-bold text-xs">
                                     {/* A node */}
-                                    <div className={`h-10 w-10 rounded-full border-2 bg-white flex items-center justify-center shadow-sm`}>A</div>
+                                    <div className={`h-10 w-10 rounded-none-full border-2 bg-card flex items-center justify-center shadow-none-none`}>A</div>
                                     
                                     {/* Middle loop */}
                                     <div className="flex flex-col gap-12">
-                                        <div className={`h-10 w-10 rounded-full border-2 bg-white flex items-center justify-center shadow-sm ${highlightedEdges.includes("A-B") ? "border-emerald-500 ring-2 ring-emerald-100" : ""}`}>B</div>
-                                        <div className={`h-10 w-10 rounded-full border-2 bg-white flex items-center justify-center shadow-sm ${highlightedEdges.includes("A-C") ? "border-emerald-500 ring-2 ring-emerald-100" : ""}`}>C</div>
+                                        <div className={`h-10 w-10 rounded-none-full border-2 bg-card flex items-center justify-center shadow-none-none ${highlightedEdges.includes("A-B") ? "border-emerald-500 ring-2 ring-emerald-100" : ""}`}>B</div>
+                                        <div className={`h-10 w-10 rounded-none-full border-2 bg-card flex items-center justify-center shadow-none-none ${highlightedEdges.includes("A-C") ? "border-emerald-500 ring-2 ring-emerald-100" : ""}`}>C</div>
                                     </div>
                                     
                                     {/* D and E */}
                                     <div className="flex flex-col gap-12">
-                                        <div className={`h-10 w-10 rounded-full border-2 bg-white flex items-center justify-center shadow-sm ${highlightedEdges.includes("C-D") ? "border-emerald-500 ring-2 ring-emerald-100" : ""}`}>D</div>
-                                        <div className={`h-10 w-10 rounded-full border-2 bg-white flex items-center justify-center shadow-sm ${highlightedEdges.includes("D-E") ? "border-emerald-500 ring-2 ring-emerald-100" : ""}`}>E</div>
+                                        <div className={`h-10 w-10 rounded-none-full border-2 bg-card flex items-center justify-center shadow-none-none ${highlightedEdges.includes("C-D") ? "border-emerald-500 ring-2 ring-emerald-100" : ""}`}>D</div>
+                                        <div className={`h-10 w-10 rounded-none-full border-2 bg-card flex items-center justify-center shadow-none-none ${highlightedEdges.includes("D-E") ? "border-emerald-500 ring-2 ring-emerald-100" : ""}`}>E</div>
                                     </div>
                                 </div>
                             </div>
@@ -213,9 +213,9 @@ export default function DAASimulator({ labId }: { labId: string }) {
                         {/* 3. DP Visualizer */}
                         {isDp && lcsMatrix.length > 0 && (
                             <div className="overflow-x-auto">
-                                <table className="w-full text-center border text-xs bg-slate-50">
+                                <table className="w-full text-center border text-xs bg-card">
                                     <thead>
-                                        <tr className="bg-slate-100 font-bold text-slate-700">
+                                        <tr className="bg-card font-bold text-muted-foreground">
                                             <th className="p-2 border">DP</th>
                                             <th className="p-2 border">∅</th>
                                             {lcsString2.split("").map((c, i) => (
@@ -226,11 +226,11 @@ export default function DAASimulator({ labId }: { labId: string }) {
                                     <tbody>
                                         {lcsMatrix.map((row, rIdx) => (
                                             <tr key={rIdx}>
-                                                <td className="p-2 border font-bold bg-slate-100">
+                                                <td className="p-2 border font-bold bg-card">
                                                     {rIdx === 0 ? "∅" : lcsString1[rIdx - 1]}
                                                 </td>
                                                 {row.map((val, cIdx) => (
-                                                    <td key={cIdx} className={`p-2 border font-mono font-bold ${val > 0 ? "bg-emerald-50 text-emerald-700" : "text-slate-400"}`}>
+                                                    <td key={cIdx} className={`p-2 border font-mono font-bold ${val > 0 ? "bg-emerald-50 text-emerald-700" : "text-muted-foreground"}`}>
                                                         {val}
                                                     </td>
                                                 ))}
@@ -244,22 +244,22 @@ export default function DAASimulator({ labId }: { labId: string }) {
                 </div>
 
                 {/* VISUAL LOGGER */}
-                <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[480px]">
-                    <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
+                <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none flex flex-col h-[480px]">
+                    <h3 className="font-bold text-muted-foreground flex items-center gap-2 mb-4">
                         <i className="bx bx-activity h-5 w-5 text-emerald-500"  /> Execution Console Logs
                     </h3>
-                    <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
+                    <div className="flex-1 bg-card rounded-none-none p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                         {isGraph ? (
                             graphLog.length > 0 ? (
                                 graphLog.map((log, idx) => <div key={idx}>{log}</div>)
                             ) : (
-                                <div className="text-slate-500 italic">No nodes traversed yet.</div>
+                                <div className="text-muted-foreground italic">No nodes traversed yet.</div>
                             )
                         ) : (
                             sortLog.length > 0 ? (
                                 sortLog.map((log, idx) => <div key={idx}>{log}</div>)
                             ) : (
-                                <div className="text-slate-500 italic">Logs are currently empty. Click play to simulate.</div>
+                                <div className="text-muted-foreground italic">Logs are currently empty. Click play to simulate.</div>
                             )
                         )}
                     </div>

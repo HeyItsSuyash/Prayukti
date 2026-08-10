@@ -19,19 +19,19 @@ export const LabConsole: React.FC<LabConsoleProps> = ({ output, isRunning, error
                     <TabsList className="bg-transparent h-9 border-none gap-1">
                         <TabsTrigger
                             value="output"
-                            className="data-[state=active]:bg-[#1e1e1e] data-[state=active]:text-blue-400 text-slate-500 text-[10px] font-black uppercase tracking-widest h-7 px-3 rounded-t-lg transition-all"
+                            className="data-[state=active]:bg-[#1e1e1e] data-[state=active]:text-primary text-muted-foreground text-[10px] font-black uppercase tracking-widest h-7 px-3 rounded-none-t-lg transition-all"
                         >
                             <i className="bx bx-terminal h-3 w-3 mr-2"  /> Output
                         </TabsTrigger>
                         <TabsTrigger
                             value="debug"
-                            className="data-[state=active]:bg-[#1e1e1e] data-[state=active]:text-orange-400 text-slate-500 text-[10px] font-black uppercase tracking-widest h-7 px-3 rounded-t-lg transition-all"
+                            className="data-[state=active]:bg-[#1e1e1e] data-[state=active]:text-orange-400 text-muted-foreground text-[10px] font-black uppercase tracking-widest h-7 px-3 rounded-none-t-lg transition-all"
                         >
                             <i className="bx bx-bug h-3 w-3 mr-2"  /> Debug Console
                         </TabsTrigger>
                         <TabsTrigger
                             value="metrics"
-                            className="data-[state=active]:bg-[#1e1e1e] data-[state=active]:text-green-400 text-slate-500 text-[10px] font-black uppercase tracking-widest h-7 px-3 rounded-t-lg transition-all"
+                            className="data-[state=active]:bg-[#1e1e1e] data-[state=active]:text-green-400 text-muted-foreground text-[10px] font-black uppercase tracking-widest h-7 px-3 rounded-none-t-lg transition-all"
                         >
                             <i className="bx bx-barchart3 h-3 w-3 mr-2"  /> Analytics
                         </TabsTrigger>
@@ -50,33 +50,33 @@ export const LabConsole: React.FC<LabConsoleProps> = ({ output, isRunning, error
                 <div className="flex-1 overflow-auto custom-scrollbar bg-[#1e1e1e] font-mono p-4 text-sm leading-relaxed">
                     <TabsContent value="output" className="mt-0 outline-none">
                         {isRunning && (
-                            <div className="flex items-center gap-3 text-blue-400 animate-pulse">
-                                <div className="h-1.5 w-1.5 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
+                            <div className="flex items-center gap-3 text-primary animate-pulse">
+                                <div className="h-1.5 w-1.5 rounded-none-full bg-primary shadow-none-[0_0_10px_rgba(59,130,246,0.5)]" />
                                 <span>Compiler active... Generating output stream</span>
                             </div>
                         )}
 
                         {error && (
-                            <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-red-400 text-xs">
+                            <div className="bg-red-500/10 border border-red-500/20 rounded-none-none p-4 text-red-400 text-xs">
                                 <span className="font-black uppercase tracking-widest block mb-2 text-red-500">Execution Error</span>
                                 <pre className="whitespace-pre-wrap">{error}</pre>
                             </div>
                         )}
 
                         {output?.stdout && (
-                            <pre className="text-slate-300 whitespace-pre-wrap">{output.stdout}</pre>
+                            <pre className="text-muted-foreground whitespace-pre-wrap">{output.stdout}</pre>
                         )}
 
                         {!isRunning && output?.status?.id === 6 && (
-                            <div className="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4 text-orange-400 text-xs mt-4">
+                            <div className="bg-orange-500/10 border border-orange-500/20 rounded-none-none p-4 text-orange-400 text-xs mt-4">
                                 <span className="font-black uppercase tracking-widest block mb-2 text-orange-500">Compilation Failed</span>
-                                <p className="mb-2 text-slate-400">Your code could not be compiled. Please check the syntax and imports.</p>
-                                <p className="text-[10px] text-slate-500">Go to the <span className="text-orange-400 font-bold">Debug Console</span> tab for the full error log.</p>
+                                <p className="mb-2 text-muted-foreground">Your code could not be compiled. Please check the syntax and imports.</p>
+                                <p className="text-[10px] text-muted-foreground">Go to the <span className="text-orange-400 font-bold">Debug Console</span> tab for the full error log.</p>
                             </div>
                         )}
 
                         {!isRunning && !output && !error && (
-                            <div className="h-40 flex flex-col items-center justify-center text-slate-600 space-y-2 opacity-50">
+                            <div className="h-40 flex flex-col items-center justify-center text-muted-foreground space-y-2 opacity-50">
                                 <i className="bx bx-terminal h-8 w-8 stroke-[1px]"  />
                                 <p className="text-[10px] font-black uppercase tracking-[0.2em]">Ready for execution</p>
                             </div>
@@ -91,7 +91,7 @@ export const LabConsole: React.FC<LabConsoleProps> = ({ output, isRunning, error
                                     <pre className="text-yellow-400/80 text-xs whitespace-pre-wrap leading-tight">{output.compile_output}</pre>
                                 </div>
                             ) : (
-                                <p className="text-slate-600 italic text-xs">No compilation issues detected.</p>
+                                <p className="text-muted-foreground italic text-xs">No compilation issues detected.</p>
                             )}
                             {output?.stderr && (
                                 <div className="space-y-2 pt-4 border-t border-white/5">
@@ -104,20 +104,20 @@ export const LabConsole: React.FC<LabConsoleProps> = ({ output, isRunning, error
 
                     <TabsContent value="metrics" className="mt-0 outline-none">
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
-                                <div className="flex items-center gap-2 text-slate-400 mb-2">
+                            <div className="bg-card/5 rounded-none-none p-4 border border-white/5">
+                                <div className="flex items-center gap-2 text-muted-foreground mb-2">
                                     <i className="bx bx-clock h-3 w-3"  />
                                     <span className="text-[9px] font-black uppercase tracking-widest">Execution Time</span>
                                 </div>
-                                <span className="text-xl font-black text-blue-400">{output?.time || "0.000"} <span className="text-[10px] text-slate-500">sec</span></span>
+                                <span className="text-xl font-black text-primary">{output?.time || "0.000"} <span className="text-[10px] text-muted-foreground">sec</span></span>
                             </div>
-                            <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
-                                <div className="flex items-center gap-2 text-slate-400 mb-2">
+                            <div className="bg-card/5 rounded-none-none p-4 border border-white/5">
+                                <div className="flex items-center gap-2 text-muted-foreground mb-2">
                                     <i className="bx bx-cpu h-3 w-3"  />
                                     <span className="text-[9px] font-black uppercase tracking-widest">Peak Memory</span>
                                 </div>
                                 <span className="text-xl font-black text-green-400">
-                                    {output?.memory ? (output.memory / 1024).toFixed(2) : "0.00"} <span className="text-[10px] text-slate-500">MB</span>
+                                    {output?.memory ? (output.memory / 1024).toFixed(2) : "0.00"} <span className="text-[10px] text-muted-foreground">MB</span>
                                 </span>
                             </div>
                         </div>

@@ -27,8 +27,8 @@ export default function MuxNode({ id, data, selected }: NodeProps) {
 
             {/* Select Lines (Bottom) */}
             <div className="absolute bottom-0 w-full flex justify-center gap-4">
-                <div className="relative"><Handle type="target" position={Position.Bottom} id="s0" className="w-2 h-2 bg-blue-500" /><span className="text-[8px] absolute top-[-15px] left-0">S0</span></div>
-                {type === '4:1' && <div className="relative"><Handle type="target" position={Position.Bottom} id="s1" className="w-2 h-2 bg-blue-500" /><span className="text-[8px] absolute top-[-15px] left-0">S1</span></div>}
+                <div className="relative"><Handle type="target" position={Position.Bottom} id="s0" className="w-2 h-2 bg-primary" /><span className="text-[8px] absolute top-[-15px] left-0">S0</span></div>
+                {type === '4:1' && <div className="relative"><Handle type="target" position={Position.Bottom} id="s1" className="w-2 h-2 bg-primary" /><span className="text-[8px] absolute top-[-15px] left-0">S1</span></div>}
             </div>
 
             {/* Output (Right) */}

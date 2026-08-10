@@ -160,14 +160,14 @@ export default function PDSSimulator({ labId }: { labId: string }) {
 
     return (
         <div className="flex flex-col h-full bg-[#fafbfe] p-6 space-y-6 overflow-y-auto">
-            <div className="flex justify-between items-center bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <div className="flex justify-between items-center bg-card p-6 rounded-none-none border border-border shadow-none-none">
                 <div>
-                    <h2 className="text-xl font-black text-slate-800 uppercase tracking-tight">Principles of Data Structures</h2>
-                    <p className="text-sm text-slate-500 mt-1">Interactive Structure & Algorithm Simulator</p>
+                    <h2 className="text-xl font-black text-muted-foreground uppercase tracking-tight">Principles of Data Structures</h2>
+                    <p className="text-sm text-muted-foreground mt-1">Interactive Structure & Algorithm Simulator</p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-indigo-500 animate-pulse"></span>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-widest bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">Lab Slot: {labId}</span>
+                    <span className="h-2.5 w-2.5 rounded-none-full bg-primary animate-pulse"></span>
+                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest bg-card px-3 py-1.5 rounded-none-none border border-border">Lab Slot: {labId}</span>
                 </div>
             </div>
 
@@ -175,33 +175,33 @@ export default function PDSSimulator({ labId }: { labId: string }) {
             {(isStack || isQueue) && (
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                     <div className="xl:col-span-2 space-y-6">
-                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
-                            <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <i className="bx bx-database h-5 w-5 text-indigo-500"  /> 
+                        <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-6">
+                            <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                <i className="bx bx-database h-5 w-5 text-primary"  /> 
                                 {isStack ? "LIFO Stack Visualizer" : "FIFO Queue Visualizer"}
                             </h3>
 
                             {/* Actions panel */}
-                            <div className="flex gap-4 p-4 bg-slate-50 border border-slate-100 rounded-xl items-end">
+                            <div className="flex gap-4 p-4 bg-card border border-border rounded-none-none items-end">
                                 <div className="flex-1">
-                                    <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Input Value</label>
+                                    <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Input Value</label>
                                     <input 
                                         type="number" 
                                         value={inputValue} 
                                         onChange={e => setInputValue(e.target.value)} 
                                         placeholder="e.g. 45" 
-                                        className="w-full text-sm bg-white border border-slate-200 rounded-lg p-2" 
+                                        className="w-full text-sm bg-card border border-border rounded-none-none p-2" 
                                     />
                                 </div>
                                 <div className="flex gap-2">
                                     {isStack ? (
                                         <>
-                                            <Button onClick={pushStack} className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs">Push Node</Button>
+                                            <Button onClick={pushStack} className="bg-primary hover:bg-primary text-white font-bold text-xs">Push Node</Button>
                                             <Button onClick={popStack} className="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs">Pop Node</Button>
                                         </>
                                     ) : (
                                         <>
-                                            <Button onClick={enqueue} className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs">Enqueue</Button>
+                                            <Button onClick={enqueue} className="bg-primary hover:bg-primary text-white font-bold text-xs">Enqueue</Button>
                                             <Button onClick={dequeue} className="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs">Dequeue</Button>
                                         </>
                                     )}
@@ -210,30 +210,30 @@ export default function PDSSimulator({ labId }: { labId: string }) {
 
                             {/* Visualization boxes */}
                             {isStack ? (
-                                <div className="flex flex-col-reverse items-center justify-center p-6 bg-slate-50 border border-slate-200 rounded-2xl min-h-[300px]">
-                                    <div className="border-2 border-slate-400 border-t-0 w-36 flex flex-col justify-end p-2 gap-2 rounded-b-xl min-h-[220px]">
+                                <div className="flex flex-col-reverse items-center justify-center p-6 bg-card border border-border rounded-none-none min-h-[300px]">
+                                    <div className="border-2 border-border border-t-0 w-36 flex flex-col justify-end p-2 gap-2 rounded-none-b-xl min-h-[220px]">
                                         {stack.map((item, idx) => (
                                             <div 
                                                 key={idx} 
-                                                className={`py-3 text-center text-white font-bold rounded-lg shadow-sm text-sm relative animate-in slide-in-from-top-12 duration-300
-                                                    ${idx === stack.length - 1 ? "bg-gradient-to-br from-indigo-500 to-indigo-600 ring-4 ring-indigo-200" : "bg-slate-700"}
+                                                className={`py-3 text-center text-white font-bold rounded-none-none shadow-none-none text-sm relative animate-in slide-in-from-top-12 duration-300
+                                                    ${idx === stack.length - 1 ? "bg-gradient-to-br from-indigo-500 to-indigo-600 ring-4 ring-indigo-200" : "bg-card"}
                                                 `}
                                             >
                                                 {item}
                                                 {idx === stack.length - 1 && (
-                                                    <span className="absolute -left-16 top-1/2 -translate-y-1/2 text-xs font-bold text-indigo-600 flex items-center gap-1">
+                                                    <span className="absolute -left-16 top-1/2 -translate-y-1/2 text-xs font-bold text-primary flex items-center gap-1">
                                                         Top ➔
                                                     </span>
                                                 )}
                                             </div>
                                         ))}
                                         {stack.length === 0 && (
-                                            <div className="text-center text-xs text-slate-400 font-bold italic py-8">Stack Empty</div>
+                                            <div className="text-center text-xs text-muted-foreground font-bold italic py-8">Stack Empty</div>
                                         )}
                                     </div>
                                 </div>
                             ) : (
-                                <div className="flex flex-col items-center justify-center p-6 bg-slate-50 border border-slate-200 rounded-2xl min-h-[200px]">
+                                <div className="flex flex-col items-center justify-center p-6 bg-card border border-border rounded-none-none min-h-[200px]">
                                     <div className="flex gap-2 items-center w-full max-w-md">
                                         {Array.from({ length: queueLimit }).map((_, idx) => {
                                             const item = queue[idx];
@@ -241,12 +241,12 @@ export default function PDSSimulator({ labId }: { labId: string }) {
                                             const isRearNode = idx === queue.length - 1 && queue.length > 0;
                                             return (
                                                 <div key={idx} className="flex-1 flex flex-col items-center gap-2">
-                                                    <div className={`w-full py-4 text-center text-sm font-bold border rounded-lg shadow-sm relative
-                                                        ${item !== undefined ? "bg-slate-700 text-white border-slate-600" : "bg-white text-slate-300 border-dashed border-slate-200"}
+                                                    <div className={`w-full py-4 text-center text-sm font-bold border rounded-none-none shadow-none-none relative
+                                                        ${item !== undefined ? "bg-card text-white border-border" : "bg-card text-muted-foreground border-dashed border-border"}
                                                     `}>
                                                         {item !== undefined ? item : ""}
                                                     </div>
-                                                    <div className="text-[10px] font-black text-slate-400 text-center h-4">
+                                                    <div className="text-[10px] font-black text-muted-foreground text-center h-4">
                                                         {isFrontNode && "Front ⬆"}
                                                         {isRearNode && "Rear ⬆"}
                                                     </div>
@@ -260,11 +260,11 @@ export default function PDSSimulator({ labId }: { labId: string }) {
                     </div>
 
                     {/* Console Logs */}
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[450px]">
-                        <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <i className="bx bx-code h-5 w-5 text-indigo-500"  /> Structure Output Logs
+                    <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none flex flex-col h-[450px]">
+                        <h3 className="font-bold text-muted-foreground flex items-center gap-2 mb-4">
+                            <i className="bx bx-code h-5 w-5 text-primary"  /> Structure Output Logs
                         </h3>
-                        <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
+                        <div className="flex-1 bg-card rounded-none-none p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {logs.map((log, index) => <div key={index}>{log}</div>)}
                         </div>
                     </div>
@@ -275,41 +275,41 @@ export default function PDSSimulator({ labId }: { labId: string }) {
             {isLinkedList && (
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                     <div className="xl:col-span-2 space-y-6">
-                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
-                            <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <i className="bx bx-database h-5 w-5 text-indigo-500"  /> 
+                        <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-6">
+                            <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                <i className="bx bx-database h-5 w-5 text-primary"  /> 
                                 {labId.includes("exp-4") ? "Singly Linked List chain" : "Doubly Linked List node links"}
                             </h3>
 
                             {/* Node Operations */}
-                            <div className="flex gap-4 p-4 bg-slate-50 border border-slate-100 rounded-xl items-end">
+                            <div className="flex gap-4 p-4 bg-card border border-border rounded-none-none items-end">
                                 <div className="flex-1">
-                                    <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Node Value</label>
+                                    <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Node Value</label>
                                     <input 
                                         type="number" 
                                         value={listInput} 
                                         onChange={e => setListInput(e.target.value)} 
                                         placeholder="e.g. 50" 
-                                        className="w-full text-sm bg-white border border-slate-200 rounded-lg p-2" 
+                                        className="w-full text-sm bg-card border border-border rounded-none-none p-2" 
                                     />
                                 </div>
                                 <div className="flex gap-2">
-                                    <Button onClick={() => insertNode("head")} className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs">Insert Head</Button>
-                                    <Button onClick={() => insertNode("tail")} className="bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs">Insert Tail</Button>
+                                    <Button onClick={() => insertNode("head")} className="bg-primary hover:bg-primary text-white font-bold text-xs">Insert Head</Button>
+                                    <Button onClick={() => insertNode("tail")} className="bg-card hover:bg-card text-white font-bold text-xs">Insert Tail</Button>
                                 </div>
                             </div>
 
                             {/* Chains of Nodes */}
-                            <div className="flex flex-wrap items-center gap-4 p-8 bg-slate-50 border border-slate-200 rounded-2xl min-h-[180px] overflow-x-auto">
+                            <div className="flex flex-wrap items-center gap-4 p-8 bg-card border border-border rounded-none-none min-h-[180px] overflow-x-auto">
                                 {list.map((item, idx) => (
                                     <React.Fragment key={item.id}>
-                                        <div className="bg-white border-2 border-slate-200 rounded-xl overflow-hidden flex shadow-sm animate-in zoom-in-70">
+                                        <div className="bg-card border-2 border-border rounded-none-none overflow-hidden flex shadow-none-none animate-in zoom-in-70">
                                             {/* Value Box */}
                                             <div className="px-4 py-3 bg-gradient-to-br from-indigo-500 to-indigo-600 text-white font-black text-sm flex items-center justify-center min-w-[50px]">{item.value}</div>
                                             {/* Actions / Address */}
-                                            <div className="px-3 py-2 flex flex-col justify-center gap-1 bg-slate-50 border-l">
-                                                <div className="text-[8px] text-slate-400 font-mono font-bold">ADDR: 0x{item.id.toString(16).slice(-4).toUpperCase()}</div>
-                                                <Button onClick={() => deleteNode(item.id, item.value)} variant="ghost" className="h-5 w-5 p-0 text-red-500 hover:bg-red-50 rounded">
+                                            <div className="px-3 py-2 flex flex-col justify-center gap-1 bg-card border-l">
+                                                <div className="text-[8px] text-muted-foreground font-mono font-bold">ADDR: 0x{item.id.toString(16).slice(-4).toUpperCase()}</div>
+                                                <Button onClick={() => deleteNode(item.id, item.value)} variant="ghost" className="h-5 w-5 p-0 text-red-500 hover:bg-red-50 rounded-none">
                                                     <i className="bx bx-trash2 h-3 w-3"  />
                                                 </Button>
                                             </div>
@@ -317,9 +317,9 @@ export default function PDSSimulator({ labId }: { labId: string }) {
 
                                         {idx < list.length - 1 && (
                                             labId.includes("exp-4") ? (
-                                                <i className="bx bx-right-arrow-alt text-slate-400 shrink-0"  />
+                                                <i className="bx bx-right-arrow-alt text-muted-foreground shrink-0"  />
                                             ) : (
-                                                <i className="bx bx-arrowleftright text-slate-400 shrink-0"  />
+                                                <i className="bx bx-arrowleftright text-muted-foreground shrink-0"  />
                                             )
                                         )}
                                     </React.Fragment>
@@ -327,23 +327,23 @@ export default function PDSSimulator({ labId }: { labId: string }) {
 
                                 {list.length > 0 && (
                                     <>
-                                        <i className="bx bx-right-arrow-alt text-slate-400 shrink-0"  />
-                                        <div className="px-3 py-2 border-2 border-dashed border-slate-300 text-slate-400 font-black text-xs rounded-xl bg-white shadow-sm shrink-0">NULL</div>
+                                        <i className="bx bx-right-arrow-alt text-muted-foreground shrink-0"  />
+                                        <div className="px-3 py-2 border-2 border-dashed border-border text-muted-foreground font-black text-xs rounded-none-none bg-card shadow-none-none shrink-0">NULL</div>
                                     </>
                                 )}
 
                                 {list.length === 0 && (
-                                    <span className="text-sm text-slate-400 italic font-bold w-full text-center">List is empty</span>
+                                    <span className="text-sm text-muted-foreground italic font-bold w-full text-center">List is empty</span>
                                 )}
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[400px]">
-                        <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <i className="bx bx-code h-5 w-5 text-indigo-500"  /> Traversal Output Logs
+                    <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none flex flex-col h-[400px]">
+                        <h3 className="font-bold text-muted-foreground flex items-center gap-2 mb-4">
+                            <i className="bx bx-code h-5 w-5 text-primary"  /> Traversal Output Logs
                         </h3>
-                        <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
+                        <div className="flex-1 bg-card rounded-none-none p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {logs.map((log, index) => <div key={index}>{log}</div>)}
                         </div>
                     </div>
@@ -354,62 +354,62 @@ export default function PDSSimulator({ labId }: { labId: string }) {
             {isTree && (
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                     <div className="xl:col-span-2 space-y-6">
-                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
-                            <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <i className="bx bx-gitfork h-5 w-5 text-indigo-500"  /> 
+                        <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-6">
+                            <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                <i className="bx bx-gitfork h-5 w-5 text-primary"  /> 
                                 {labId.includes("exp-6") ? "Binary Search Tree (BST) Nodes" : "Self-Balancing AVL tree nodes"}
                             </h3>
 
                             {/* Node Operations */}
-                            <div className="flex gap-4 p-4 bg-slate-50 border border-slate-100 rounded-xl items-end">
+                            <div className="flex gap-4 p-4 bg-card border border-border rounded-none-none items-end">
                                 <div className="flex-1">
-                                    <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Insert Node Value</label>
+                                    <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Insert Node Value</label>
                                     <input 
                                         type="number" 
                                         value={treeInput} 
                                         onChange={e => setTreeInput(e.target.value)} 
                                         placeholder="e.g. 25" 
-                                        className="w-full text-sm bg-white border border-slate-200 rounded-lg p-2" 
+                                        className="w-full text-sm bg-card border border-border rounded-none-none p-2" 
                                     />
                                 </div>
                                 <div className="flex gap-2">
-                                    <Button onClick={insertTree} className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs">Insert Node</Button>
+                                    <Button onClick={insertTree} className="bg-primary hover:bg-primary text-white font-bold text-xs">Insert Node</Button>
                                 </div>
                             </div>
 
                             {/* Simple Visual Node Tree Representation */}
-                            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-8 flex flex-col items-center justify-center min-h-[300px]">
+                            <div className="bg-card border border-border rounded-none-none p-8 flex flex-col items-center justify-center min-h-[300px]">
                                 <div className="flex flex-col items-center gap-8 w-full">
                                     {/* Level 0 Root */}
-                                    <div className="h-10 w-10 bg-slate-800 text-white font-black text-xs rounded-full flex items-center justify-center shadow-md relative">
+                                    <div className="h-10 w-10 bg-card text-white font-black text-xs rounded-none-full flex items-center justify-center shadow-none-none relative">
                                         50
-                                        {labId.includes("exp-7") && <span className="absolute -top-6 text-[8px] bg-slate-200 text-slate-800 px-1 py-0.5 rounded font-black border">BF: 0</span>}
+                                        {labId.includes("exp-7") && <span className="absolute -top-6 text-[8px] bg-card text-muted-foreground px-1 py-0.5 rounded-none font-black border">BF: 0</span>}
                                     </div>
                                     
                                     {/* Level 1 Children */}
                                     <div className="flex justify-around w-full max-w-sm relative">
-                                        <div className="h-10 w-10 bg-slate-700 text-white font-black text-xs rounded-full flex items-center justify-center shadow-md relative">
+                                        <div className="h-10 w-10 bg-card text-white font-black text-xs rounded-none-full flex items-center justify-center shadow-none-none relative">
                                             30
-                                            {labId.includes("exp-7") && <span className="absolute -top-6 text-[8px] bg-slate-200 text-slate-800 px-1 py-0.5 rounded font-black border">BF: 0</span>}
+                                            {labId.includes("exp-7") && <span className="absolute -top-6 text-[8px] bg-card text-muted-foreground px-1 py-0.5 rounded-none font-black border">BF: 0</span>}
                                         </div>
-                                        <div className="h-10 w-10 bg-slate-700 text-white font-black text-xs rounded-full flex items-center justify-center shadow-md relative">
+                                        <div className="h-10 w-10 bg-card text-white font-black text-xs rounded-none-full flex items-center justify-center shadow-none-none relative">
                                             70
-                                            {labId.includes("exp-7") && <span className="absolute -top-6 text-[8px] bg-slate-200 text-slate-800 px-1 py-0.5 rounded font-black border">BF: 0</span>}
+                                            {labId.includes("exp-7") && <span className="absolute -top-6 text-[8px] bg-card text-muted-foreground px-1 py-0.5 rounded-none font-black border">BF: 0</span>}
                                         </div>
                                     </div>
 
                                     {/* Level 2 Children */}
                                     <div className="flex justify-around w-full max-w-md">
                                         <div className="flex justify-around w-[50%]">
-                                            <div className="h-9 w-9 bg-slate-600 text-white font-black text-[10px] rounded-full flex items-center justify-center shadow relative">
+                                            <div className="h-9 w-9 bg-card text-white font-black text-[10px] rounded-none-full flex items-center justify-center shadow-none relative">
                                                 20
                                             </div>
-                                            <div className="h-9 w-9 bg-slate-600 text-white font-black text-[10px] rounded-full flex items-center justify-center shadow relative">
+                                            <div className="h-9 w-9 bg-card text-white font-black text-[10px] rounded-none-full flex items-center justify-center shadow-none relative">
                                                 40
                                             </div>
                                         </div>
                                         <div className="w-[50%] flex justify-center">
-                                            <span className="text-[10px] text-slate-400 font-bold italic">Empty Subtrees</span>
+                                            <span className="text-[10px] text-muted-foreground font-bold italic">Empty Subtrees</span>
                                         </div>
                                     </div>
                                 </div>
@@ -417,11 +417,11 @@ export default function PDSSimulator({ labId }: { labId: string }) {
                         </div>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[400px]">
-                        <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <i className="bx bx-code h-5 w-5 text-indigo-500"  /> BST Insertion Trace
+                    <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none flex flex-col h-[400px]">
+                        <h3 className="font-bold text-muted-foreground flex items-center gap-2 mb-4">
+                            <i className="bx bx-code h-5 w-5 text-primary"  /> BST Insertion Trace
                         </h3>
-                        <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
+                        <div className="flex-1 bg-card rounded-none-none p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {logs.map((log, index) => <div key={index}>{log}</div>)}
                         </div>
                     </div>
@@ -432,32 +432,32 @@ export default function PDSSimulator({ labId }: { labId: string }) {
             {isGraph && (
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                     <div className="xl:col-span-2 space-y-6">
-                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
+                        <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-6">
                             <div className="flex justify-between items-center">
-                                <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                    <i className="bx bx-network h-5 w-5 text-indigo-500"  /> Graph Adjacency & Traversals (BFS / DFS / Shortest Path)
+                                <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                    <i className="bx bx-network h-5 w-5 text-primary"  /> Graph Adjacency & Traversals (BFS / DFS / Shortest Path)
                                 </h3>
                                 <div className="flex gap-2">
-                                    <Button onClick={() => runTraversal("BFS")} className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs">Run BFS</Button>
-                                    <Button onClick={() => runTraversal("DFS")} className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs">Run DFS</Button>
+                                    <Button onClick={() => runTraversal("BFS")} className="bg-primary hover:bg-primary text-white font-bold text-xs">Run BFS</Button>
+                                    <Button onClick={() => runTraversal("DFS")} className="bg-primary hover:bg-primary text-white font-bold text-xs">Run DFS</Button>
                                 </div>
                             </div>
 
                             {/* Node Graph Grid layout */}
-                            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-8 flex flex-col items-center justify-center min-h-[250px]">
+                            <div className="bg-card border border-border rounded-none-none p-8 flex flex-col items-center justify-center min-h-[250px]">
                                 <div className="grid grid-cols-3 gap-16 relative">
-                                    <div className={`h-12 w-12 rounded-full border-2 flex items-center justify-center font-bold text-sm shadow-sm transition-colors duration-300
-                                        ${graphVisited.includes("A") ? "bg-emerald-500 text-white border-emerald-400" : "bg-white text-slate-700 border-slate-200"}
+                                    <div className={`h-12 w-12 rounded-none-full border-2 flex items-center justify-center font-bold text-sm shadow-none-none transition-colors duration-300
+                                        ${graphVisited.includes("A") ? "bg-primary text-white border-emerald-400" : "bg-card text-muted-foreground border-border"}
                                     `}>A</div>
-                                    <div className={`h-12 w-12 rounded-full border-2 flex items-center justify-center font-bold text-sm shadow-sm transition-colors duration-300
-                                        ${graphVisited.includes("B") ? "bg-emerald-500 text-white border-emerald-400" : "bg-white text-slate-700 border-slate-200"}
+                                    <div className={`h-12 w-12 rounded-none-full border-2 flex items-center justify-center font-bold text-sm shadow-none-none transition-colors duration-300
+                                        ${graphVisited.includes("B") ? "bg-primary text-white border-emerald-400" : "bg-card text-muted-foreground border-border"}
                                     `}>B</div>
-                                    <div className={`h-12 w-12 rounded-full border-2 flex items-center justify-center font-bold text-sm shadow-sm transition-colors duration-300
-                                        ${graphVisited.includes("C") ? "bg-emerald-500 text-white border-emerald-400" : "bg-white text-slate-700 border-slate-200"}
+                                    <div className={`h-12 w-12 rounded-none-full border-2 flex items-center justify-center font-bold text-sm shadow-none-none transition-colors duration-300
+                                        ${graphVisited.includes("C") ? "bg-primary text-white border-emerald-400" : "bg-card text-muted-foreground border-border"}
                                     `}>C</div>
                                     <div className="col-span-3 flex justify-center">
-                                        <div className={`h-12 w-12 rounded-full border-2 flex items-center justify-center font-bold text-sm shadow-sm transition-colors duration-300
-                                            ${graphVisited.includes("D") ? "bg-emerald-500 text-white border-emerald-400" : "bg-white text-slate-700 border-slate-200"}
+                                        <div className={`h-12 w-12 rounded-none-full border-2 flex items-center justify-center font-bold text-sm shadow-none-none transition-colors duration-300
+                                            ${graphVisited.includes("D") ? "bg-primary text-white border-emerald-400" : "bg-card text-muted-foreground border-border"}
                                         `}>D</div>
                                     </div>
                                 </div>
@@ -465,11 +465,11 @@ export default function PDSSimulator({ labId }: { labId: string }) {
                         </div>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[350px]">
-                        <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <i className="bx bx-code h-5 w-5 text-indigo-500"  /> Traversal Sequence Log
+                    <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none flex flex-col h-[350px]">
+                        <h3 className="font-bold text-muted-foreground flex items-center gap-2 mb-4">
+                            <i className="bx bx-code h-5 w-5 text-primary"  /> Traversal Sequence Log
                         </h3>
-                        <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
+                        <div className="flex-1 bg-card rounded-none-none p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {logs.map((log, index) => <div key={index}>{log}</div>)}
                         </div>
                     </div>
