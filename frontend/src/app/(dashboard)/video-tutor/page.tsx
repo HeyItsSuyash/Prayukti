@@ -48,22 +48,26 @@ export default function VideoTutorDashboard() {
         setLoading(true);
         try {
             
-            const headers = { Authorization: `Bearer ${token}` };
+            const headers = {};
 
             // 1. Fetch generated lessons
-            const lRes = await fetch(`${API_URL}/api/video-tutor/lessons`, { headers });
+            const lRes = await fetch(`${API_URL}/api/video-tutor/lessons`, {
+                    credentials: "include", headers });
             if (lRes.ok) setLessons(await lRes.json());
 
             // 2. Fetch saved lessons
-            const sRes = await fetch(`${API_URL}/api/video-tutor/saved`, { headers });
+            const sRes = await fetch(`${API_URL}/api/video-tutor/saved`, {
+                    credentials: "include", headers });
             if (sRes.ok) setSavedLessons(await sRes.json());
 
             // 3. Fetch watch history
-            const hRes = await fetch(`${API_URL}/api/video-tutor/history`, { headers });
+            const hRes = await fetch(`${API_URL}/api/video-tutor/history`, {
+                    credentials: "include", headers });
             if (hRes.ok) setWatchHistory(await hRes.json());
 
             // 4. Fetch analytics
-            const aRes = await fetch(`${API_URL}/api/video-tutor/analytics`, { headers });
+            const aRes = await fetch(`${API_URL}/api/video-tutor/analytics`, {
+                    credentials: "include", headers });
             if (aRes.ok) setAnalytics(await aRes.json());
         } catch (e) {
             console.error("Failed to load video tutor data", e);
@@ -98,9 +102,9 @@ export default function VideoTutorDashboard() {
         try {
             
             const res = await fetch(`${API_URL}/api/video-tutor/generate`, {
+                    credentials: "include",
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({ topic, mode, avatar, voice, language })

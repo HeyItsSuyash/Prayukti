@@ -84,7 +84,8 @@ export default function KnowledgeBasePage() {
             const isTeacher = user?.role?.toLowerCase() === "teacher" || user?.role?.toLowerCase() === "admin";
             if (isTeacher) {
                 const pRes = await fetch(`${API_URL}/api/knowledge-base/pending?subject_id=${selectedSub}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    credentials: "include",
+                    headers: {}
                 });
                 if (pRes.ok) {
                     setPendingList(await pRes.json());
@@ -112,9 +113,9 @@ export default function KnowledgeBasePage() {
         try {
             
             const res = await fetch(`${API_URL}/api/knowledge-base`, {
+                    credentials: "include",
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -150,9 +151,9 @@ export default function KnowledgeBasePage() {
         try {
             
             const res = await fetch(`${API_URL}/api/knowledge-base/${id}/review`, {
+                    credentials: "include",
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ teacher_answer: text })

@@ -46,7 +46,8 @@ export default function AnalyticsPage() {
 
                 if (role === "student") {
                     const stRes = await fetch(`${API_URL}/api/classroom-analytics/student`, {
-                        headers: { 'Authorization': `Bearer ${token}` }
+                    credentials: "include",
+                        headers: {}
                     });
                     if (stRes.ok) {
                         setStudentData(await stRes.json());
@@ -54,7 +55,8 @@ export default function AnalyticsPage() {
                 } else if (role === "teacher") {
                     if (firstSubId) {
                         const tRes = await fetch(`${API_URL}/api/classroom-analytics/teacher?subject_id=${firstSubId}`, {
-                            headers: { 'Authorization': `Bearer ${token}` }
+                    credentials: "include",
+                            headers: {}
                         });
                         if (tRes.ok) {
                             setTeacherData(await tRes.json());
@@ -62,7 +64,8 @@ export default function AnalyticsPage() {
                     }
                 } else if (role === "admin") {
                     const adRes = await fetch(`${API_URL}/api/classroom-analytics/institution`, {
-                        headers: { 'Authorization': `Bearer ${token}` }
+                    credentials: "include",
+                        headers: {}
                     });
                     if (adRes.ok) {
                         setAdminData(await adRes.json());
@@ -85,7 +88,8 @@ export default function AnalyticsPage() {
         try {
             
             const tRes = await fetch(`${API_URL}/api/classroom-analytics/teacher?subject_id=${val}`, {
-                headers: { 'Authorization': `Bearer ${token}` }
+                    credentials: "include",
+                headers: {}
             });
             if (tRes.ok) {
                 setTeacherData(await tRes.json());

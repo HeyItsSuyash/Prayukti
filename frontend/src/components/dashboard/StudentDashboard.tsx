@@ -54,9 +54,9 @@ export function StudentDashboard() {
             
             if (token) {
                 await fetch(`${API_URL}/api/attendance/logout`, {
+                    credentials: "include",
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     }
                 });

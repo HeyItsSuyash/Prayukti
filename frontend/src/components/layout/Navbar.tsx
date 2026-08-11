@@ -39,9 +39,9 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
             await fetch(
                 `${process.env.NEXT_PUBLIC_API_URL}/api/attendance/logout`,
                 {
+                    credentials: "include",
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     }
                 }

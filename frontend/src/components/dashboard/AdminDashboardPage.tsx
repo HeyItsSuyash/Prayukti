@@ -71,7 +71,8 @@ function AdminContent() {
         try {
             
             const res = await fetch(`${API_URL}/api/users`, {
-                headers: { 'Authorization': `Bearer ${token}` }
+                    credentials: "include",
+                headers: {}
             });
             
             if (!res.ok) throw new Error("Failed to fetch users");
@@ -114,9 +115,9 @@ function AdminContent() {
             
             if (token) {
                 await fetch(`${API_URL}/api/attendance/logout`, {
+                    credentials: "include",
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     }
                 });

@@ -119,11 +119,11 @@ function ResetPasswordForm() {
                     {/* Middle Text */}
                     <div className="mt-24 max-w-lg">
                         <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                            Create a<br />
-                            new password.
+                            Virtual Labs.<br />
+                            Real Learning.
                         </h1>
                         <p className="text-lg text-white/80 leading-relaxed max-w-md">
-                            Your new password must be different from previous used passwords.
+                            Empowering engineering education through interactive simulations and smart analytics.
                         </p>
                         
                         <div className="w-12 h-1 bg-[#14D98F] mt-8 rounded-full"></div>

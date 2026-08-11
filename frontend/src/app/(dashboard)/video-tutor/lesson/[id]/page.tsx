@@ -75,6 +75,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
         try {
             
             const res = await fetch(`${API_URL}/api/video-tutor/lessons/${lessonId}`, {
+                    credentials: "include",
                 /* removed auth header */
             });
             if (!res.ok) {
@@ -187,9 +188,9 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
         try {
             
             await fetch(`${API_URL}/api/video-tutor/progress`, {
+                    credentials: "include",
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
@@ -210,6 +211,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
             
             const method = isSaved ? "DELETE" : "POST";
             const res = await fetch(`${API_URL}/api/video-tutor/lessons/${lessonId}/save`, {
+                    credentials: "include",
                 method,
                 /* removed auth header */
             });
@@ -235,9 +237,9 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
         try {
             
             const res = await fetch(`${API_URL}/api/video-tutor/interrupt`, {
+                    credentials: "include",
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({

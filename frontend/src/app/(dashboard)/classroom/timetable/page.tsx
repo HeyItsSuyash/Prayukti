@@ -56,7 +56,8 @@ export default function TimetablePage() {
                 
                 // Fetch timetable
                 const tRes = await fetch(`${API_URL}/api/timetable`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    credentials: "include",
+                    headers: {}
                 });
                 if (!tRes.ok) throw new Error("Failed to fetch schedules");
                 const tData = await tRes.json();
@@ -91,9 +92,9 @@ export default function TimetablePage() {
         try {
             
             const res = await fetch(`${API_URL}/api/timetable`, {
+                    credentials: "include",
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -129,8 +130,9 @@ export default function TimetablePage() {
         try {
             
             const res = await fetch(`${API_URL}/api/timetable/${id}`, {
+                    credentials: "include",
                 method: 'DELETE',
-                headers: { 'Authorization': `Bearer ${token}` }
+                headers: {}
             });
 
             if (!res.ok) throw new Error("Failed to delete slot");
@@ -146,10 +148,12 @@ export default function TimetablePage() {
         try {
             
             const recRes = await fetch(`${API_URL}/api/timetable/ai-optimize`, {
-                headers: { 'Authorization': `Bearer ${token}` }
+                    credentials: "include",
+                headers: {}
             });
             const overRes = await fetch(`${API_URL}/api/timetable/overload`, {
-                headers: { 'Authorization': `Bearer ${token}` }
+                    credentials: "include",
+                headers: {}
             });
 
             if (recRes.ok && overRes.ok) {

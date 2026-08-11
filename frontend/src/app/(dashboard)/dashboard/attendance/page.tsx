@@ -41,9 +41,8 @@ export default function StudentAttendancePage() {
         try {
             
             const res = await fetch(`${API_URL}/api/attendance/student/${user.id}`, {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
+                    credentials: "include",
+                headers: {}
             });
             if (!res.ok) {
                 throw new Error("Failed to load attendance logs from server.");

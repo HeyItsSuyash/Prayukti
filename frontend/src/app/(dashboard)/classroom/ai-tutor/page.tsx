@@ -80,9 +80,9 @@ export default function AiTutorPage() {
             
             // Log event
             await fetch(`${API_URL}/api/participation/event`, {
+                    credentials: "include",
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -93,9 +93,9 @@ export default function AiTutorPage() {
 
             // Ask tutor
             const res = await fetch(`${API_URL}/api/ai-tutor/ask`, {
+                    credentials: "include",
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -126,9 +126,9 @@ export default function AiTutorPage() {
         try {
             
             const res = await fetch(`${API_URL}/api/ai-tutor/quiz`, {
+                    credentials: "include",
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ subject_id: selectedSub })
@@ -154,9 +154,9 @@ export default function AiTutorPage() {
         try {
             
             const res = await fetch(`${API_URL}/api/ai-tutor/flashcard`, {
+                    credentials: "include",
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ subject_id: selectedSub })
@@ -180,9 +180,9 @@ export default function AiTutorPage() {
         try {
             
             const res = await fetch(`${API_URL}/api/ai-tutor/notes`, {
+                    credentials: "include",
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ subject_id: selectedSub })

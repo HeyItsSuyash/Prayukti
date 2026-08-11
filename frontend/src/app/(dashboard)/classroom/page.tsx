@@ -23,9 +23,8 @@ export default function ClassroomDashboard() {
             try {
                 
                 const res = await fetch(`${API_URL}/api/classroom/dashboard`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
+                    credentials: "include",
+                    headers: {}
                 });
 
                 if (!res.ok) throw new Error("Failed to load classroom stats");
