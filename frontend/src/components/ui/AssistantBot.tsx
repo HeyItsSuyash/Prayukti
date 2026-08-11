@@ -57,7 +57,7 @@ export function AssistantBot() {
         }
     };
 
-    if (pathname === '/login' || pathname === '/register' || pathname === '/verify') return null;
+    if (pathname === '/login' || pathname === '/register' || pathname === '/verify' || pathname === '/forgot-password' || pathname === '/reset-password') return null;
 
     return (
         <>
@@ -176,6 +176,7 @@ export function AssistantBot() {
             {!isOpen && (
                 <div className="fixed bottom-2 right-2 z-50 flex items-center gap-3">
                     <motion.button
+                        suppressHydrationWarning={true}
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setIsOpen(true)}

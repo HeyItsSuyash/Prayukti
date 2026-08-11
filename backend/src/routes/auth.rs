@@ -606,3 +606,143 @@ pub async fn logout() -> impl IntoResponse {
 
     (StatusCode::OK, response)
 }
+
+#[derive(Debug, Deserialize)]
+pub struct ForgotPasswordRequest {
+    pub email: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct ResetPasswordRequest {
+    pub id: Uuid,
+    pub token: String,
+    pub password: String,
+}
+
+pub async fn forgot_password(
+    State(state): State<AppState>,
+    Json(payload): Json<ForgotPasswordRequest>,
+) -> impl IntoResponse {
+    let email = payload.email.trim().to_lowercase();
+    
+    let user_row: Option<(Uuid,)> = match sqlx::query_as("SELECT id FROM users WHERE email = $1")
+        .bind(&email)
+        .fetch_optional(&state.db)
+        .await
+    {
+        Ok(u) => u,
+        Err(_) => return (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({"message": "Database error"}))),
+    };
+
+    let user_id = match user_row {
+        Some((id,)) => id,
+        None => return (StatusCode::OK, Json(json!({"message": "If an account exists, a reset link will be sent."}))),
+    };
+
+    let count_row: Option<(i64,)> = sqlx::query_as(
+        "SELECT count(*) FROM password_resets WHERE user_id = $1 AND created_at > CURRENT_TIMESTAMP - INTERVAL '7 days'"
+    )
+    .bind(user_id)
+    .fetch_one(&state.db)
+    .await
+    .ok();
+
+    let count = count_row.map(|(c,)| c).unwrap_or(0);
+    if count >= 2 {
+        return (StatusCode::TOO_MANY_REQUESTS, Json(json!({"message": "Rate limit exceeded. You can only request 2 password resets per week."})));
+    }
+
+    let raw_token = Uuid::new_v4().to_string();
+    let token_hash = match hash(&raw_token, DEFAULT_COST) {
+        Ok(h) => h,
+        Err(_) => return (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({"message": "Error generating token"}))),
+    };
+
+    let reset_id = Uuid::new_v4();
+
+    if sqlx::query(
+        "INSERT INTO password_resets (id, user_id, token_hash, expires_at) VALUES ($1, $2, $3, CURRENT_TIMESTAMP + INTERVAL '1 hour')"
+    )
+    .bind(reset_id)
+    .bind(user_id)
+    .bind(&token_hash)
+    .execute(&state.db)
+    .await
+    .is_err() {
+        return (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({"message": "Database error"})));
+    }
+
+    let magic_link = format!("{}/reset-password?id={}&token={}", state.config.frontend_url, reset_id, raw_token);
+
+    let state_clone = state.clone();
+    tokio::spawn(async move {
+        let _ = EmailService::send_password_reset_email(&email, &magic_link, &state_clone.config).await;
+    });
+
+    (StatusCode::OK, Json(json!({"message": "If an account exists, a reset link will be sent."})))
+}
+
+pub async fn reset_password(
+    State(state): State<AppState>,
+    Json(payload): Json<ResetPasswordRequest>,
+) -> impl IntoResponse {
+    if let Err(e) = validate_password(&payload.password) {
+        return (StatusCode::BAD_REQUEST, Json(json!({"message": e})));
+    }
+
+    let row: Option<(Uuid, String, bool)> = match sqlx::query_as(
+        "SELECT user_id, token_hash, used FROM password_resets WHERE id = $1 AND expires_at > CURRENT_TIMESTAMP"
+    )
+    .bind(payload.id)
+    .fetch_optional(&state.db)
+    .await
+    {
+        Ok(r) => r,
+        Err(_) => return (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({"message": "Database error"}))),
+    };
+
+    let (user_id, token_hash, used) = match row {
+        Some(r) => r,
+        None => return (StatusCode::BAD_REQUEST, Json(json!({"message": "Invalid or expired reset link."}))),
+    };
+
+    if used {
+        return (StatusCode::BAD_REQUEST, Json(json!({"message": "This reset link has already been used."})));
+    }
+
+    if !verify(&payload.token, &token_hash).unwrap_or(false) {
+        return (StatusCode::BAD_REQUEST, Json(json!({"message": "Invalid reset link."})));
+    }
+
+    let new_password_hash = match hash(&payload.password, DEFAULT_COST) {
+        Ok(h) => h,
+        Err(_) => return (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({"message": "Error hashing password"}))),
+    };
+
+    let mut tx = match state.db.begin().await {
+        Ok(t) => t,
+        Err(_) => return (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({"message": "Database error"}))),
+    };
+
+    if sqlx::query("UPDATE users SET password_hash = $1 WHERE id = $2")
+        .bind(&new_password_hash)
+        .bind(user_id)
+        .execute(&mut *tx)
+        .await
+        .is_err() {
+        return (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({"message": "Database error"})));
+    }
+
+    if sqlx::query("UPDATE password_resets SET used = TRUE WHERE id = $1")
+        .bind(payload.id)
+        .execute(&mut *tx)
+        .await
+        .is_err() {
+        return (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({"message": "Database error"})));
+    }
+
+    let _ = tx.commit().await;
+
+    (StatusCode::OK, Json(json!({"message": "Password reset successfully."})))
+}
+

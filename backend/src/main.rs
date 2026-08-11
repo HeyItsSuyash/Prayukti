@@ -52,6 +52,19 @@ async fn main() {
     sqlx::query("ALTER TABLE users DROP COLUMN IF EXISTS otp;").execute(&pool).await.expect("Migration failed (drop otp)");
     info!("OTP security migration complete.");
 
+    sqlx::query(r#"
+        CREATE TABLE IF NOT EXISTS password_resets (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            token_hash VARCHAR NOT NULL,
+            expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
+            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+            used BOOLEAN DEFAULT FALSE NOT NULL
+        );
+    "#).execute(&pool).await.expect("Migration failed (create password_resets)");
+    sqlx::query("CREATE INDEX IF NOT EXISTS idx_password_resets_user_id ON password_resets(user_id);").execute(&pool).await.expect("Migration failed (index password_resets)");
+    info!("Password resets migration complete.");
+
     info!("Skipping seed scripts because database is already seeded...");
 
     let state = AppState {
@@ -67,7 +80,9 @@ async fn main() {
         .route("/login", post(routes::auth::signin))
         .route("/signin", post(routes::auth::signin))
         .route("/resend-otp", post(routes::auth::resend_otp))
-        .route("/logout", post(routes::auth::logout));
+        .route("/logout", post(routes::auth::logout))
+        .route("/forgot-password", post(routes::auth::forgot_password))
+        .route("/reset-password", post(routes::auth::reset_password));
 
     let subject_router = Router::new()
         .route("/", get(routes::subject::get_subjects).post(routes::subject::create_subject))
@@ -105,8 +120,19 @@ async fn main() {
             config.frontend_url.parse::<axum::http::HeaderValue>().unwrap_or_else(|_| "https://mmmut.prayukti.org".parse().unwrap()),
         ])
         .allow_credentials(true)
-        .allow_headers(Any)
-        .allow_methods(Any);
+        .allow_headers([
+            axum::http::header::AUTHORIZATION,
+            axum::http::header::ACCEPT,
+            axum::http::header::CONTENT_TYPE,
+        ])
+        .allow_methods([
+            axum::http::Method::GET,
+            axum::http::Method::POST,
+            axum::http::Method::PUT,
+            axum::http::Method::DELETE,
+            axum::http::Method::PATCH,
+            axum::http::Method::OPTIONS,
+        ]);
 
     let app = Router::new()
         .route("/", get(health_check))

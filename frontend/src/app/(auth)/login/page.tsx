@@ -27,15 +27,11 @@ export default function LoginPage() {
         e.preventDefault();
         setLoading(true);
 
-        try {
-            loginSchema.parse({ email, password });
-        } catch (e: any) {
-            if (e instanceof z.ZodError) {
-                const zodError = e as any;
-                showToast('error', zodError.errors[0].message);
-                setLoading(false);
-                return;
-            }
+        const validation = loginSchema.safeParse({ email, password });
+        if (!validation.success) {
+            showToast('error', validation.error?.issues?.[0]?.message || 'Invalid input');
+            setLoading(false);
+            return;
         }
 
         try {
@@ -60,7 +56,19 @@ export default function LoginPage() {
             }, 2000);
 
         } catch (err: any) {
-            const message = err.response?.data?.message || "Login failed, please try again after some time";
+            let message = "Login failed, please try again after some time";
+            
+            if (err.response) {
+                // Server responded with an error (e.g., 400 Invalid password, 404 User not found)
+                message = err.response.data?.message || `Server error (${err.response.status}). Please try again later.`;
+            } else if (err.request) {
+                // Request made but no response received (server down, CORS, network issue)
+                message = "Unable to reach the server. Please check your connection and try again.";
+            } else {
+                // Error in setting up the request
+                message = err.message || "An unexpected error occurred during login.";
+            }
+            
             showToast('error', message);
 
             // Special handling for unverified accounts
@@ -212,7 +220,7 @@ export default function LoginPage() {
                                             </button>
                                         </div>
                                         <div className="flex justify-end pt-1">
-                                            <Link href="/forgot-password" className="text-sm font-medium text-[#059669] hover:text-[#047857] transition-colors">
+                                            <Link href={`/forgot-password${email ? `?email=${encodeURIComponent(email)}` : ''}`} className="text-sm font-medium text-[#059669] hover:text-[#047857] transition-colors">
                                                 Forgot password?
                                             </Link>
                                         </div>

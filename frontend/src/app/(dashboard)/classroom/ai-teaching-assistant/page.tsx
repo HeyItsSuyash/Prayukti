@@ -61,7 +61,7 @@ export default function AiTeachingAssistantPage() {
                 
                 // Class summary
                 const sumRes = await fetch(`${API_URL}/api/ai-teacher/class-summary`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    credentials: 'include'
                 });
                 if (sumRes.ok) {
                     setPerfSummary(await sumRes.json());
@@ -69,7 +69,7 @@ export default function AiTeachingAssistantPage() {
 
                 // Difficulty analytics
                 const diffRes = await fetch(`${API_URL}/api/ai-teacher/topic-difficulty/${selectedSub}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    credentials: 'include'
                 });
                 if (diffRes.ok) {
                     const data = await diffRes.json();
@@ -117,8 +117,8 @@ export default function AiTeachingAssistantPage() {
 
             const res = await fetch(`${API_URL}/api/ai-teacher${endpoint}`, {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(body)

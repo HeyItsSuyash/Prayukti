@@ -95,4 +95,40 @@ impl EmailService {
         
         Self::send_email(to, subject, &html, Some(&text), config).await
     }
+
+    pub async fn send_password_reset_email(to: &str, magic_link: &str, config: &Config) -> Result<(), String> {
+        let subject = "Reset your password - Prayukti vLAB";
+        let html = format!(
+            r#"
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #14D98F; border-radius: 12px; background-color: #021D24;">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h2 style="color: #ffffff; margin: 0;">Prayukti <span style="color: #14D98F; font-weight: 300;">vLAB</span></h2>
+                </div>
+                <h3 style="color: #ffffff; font-size: 20px; margin-bottom: 15px;">Reset Your Password</h3>
+                <p style="color: #94a3b8; font-size: 16px; line-height: 1.5; margin-bottom: 25px;">
+                    You recently requested to reset your password. Click the button below to proceed. This link will expire in 1 hour.
+                </p>
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <a href="{}" style="display: inline-block; padding: 14px 28px; background-color: #059669; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; border: 1px solid #14D98F;">Reset Password</a>
+                </div>
+                <p style="color: #64748b; font-size: 14px; line-height: 1.5; text-align: center;">
+                    Or copy and paste this link into your browser:<br/>
+                    <a href="{}" style="color: #14D98F; word-break: break-all;">{}</a>
+                </p>
+                <p style="color: #64748b; font-size: 14px; line-height: 1.5; margin-top: 25px;">
+                    If you didn't request a password reset, you can safely ignore this email.
+                </p>
+                <hr style="border: none; border-top: 1px solid #084738; margin: 30px 0;" />
+                <p style="color: #475569; font-size: 12px; text-align: center;">
+                    &copy; {} Prayukti vLAB. All rights reserved.
+                </p>
+            </div>
+            "#,
+            magic_link, magic_link, magic_link, chrono::Utc::now().year()
+        );
+        let text = format!("Reset your password using this link: {}. It expires in 1 hour.", magic_link);
+        
+        Self::send_email(to, subject, &html, Some(&text), config).await
+    }
 }
+
