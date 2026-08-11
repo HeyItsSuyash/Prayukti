@@ -112,7 +112,7 @@ function AdminContent() {
 
     const handleLogout = async () => {
         try {
-            
+            const token = true;
             if (token) {
                 await fetch(`${API_URL}/api/attendance/logout`, {
                     credentials: "include",

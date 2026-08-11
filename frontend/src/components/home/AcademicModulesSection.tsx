@@ -75,8 +75,8 @@ const modules: ModuleItem[] = [
 function useAuthNavigate() {
     
     return (labHref: string) => {
-        
-        window.location.href = (token ? labHref : "/login");
+        const isAuthenticated = typeof window !== 'undefined' && !!localStorage.getItem('vlab_user');
+        window.location.href = (isAuthenticated ? labHref : "/login");
     };
 }
 
