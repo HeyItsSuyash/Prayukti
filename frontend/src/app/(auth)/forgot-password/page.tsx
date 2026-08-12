@@ -115,7 +115,7 @@ export default function ForgotPasswordPage() {
             <div className="hidden lg:flex w-1/2 bg-[#084738] relative flex-col justify-between p-12 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img 
-                        src="/prayukti 2.0/illustrations/login_page.png" 
+                        src="/prayukti 2.0/illustrations/laptop_guy.png" 
                         alt="Campus" 
                         className="w-full h-full object-cover opacity-80"
                     />

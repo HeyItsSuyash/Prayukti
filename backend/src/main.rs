@@ -101,10 +101,12 @@ async fn main() {
     let rate_limit_state = std::sync::Arc::new(tokio::sync::Mutex::new(std::collections::HashMap::new()));
     let sensitive_rate_limit_state = rate_limit_state.clone();
 
-    // Configure CORS — allow frontend_url and localhost only in development
+    // Configure CORS
     let cors = CorsLayer::new()
-        .allow_origin([
+        .allow_origin(vec![
             config.frontend_url.parse::<axum::http::HeaderValue>().unwrap_or_else(|_| "https://mmmut.prayukti.org".parse().unwrap()),
+            "http://localhost:3000".parse::<axum::http::HeaderValue>().unwrap(),
+            "http://localhost:3001".parse::<axum::http::HeaderValue>().unwrap(),
         ])
         .allow_credentials(true)
         .allow_headers([
