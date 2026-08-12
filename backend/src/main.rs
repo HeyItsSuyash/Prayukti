@@ -67,7 +67,9 @@ async fn main() {
         .route("/login", post(routes::auth::signin))
         .route("/signin", post(routes::auth::signin))
         .route("/resend-otp", post(routes::auth::resend_otp))
-        .route("/logout", post(routes::auth::logout));
+        .route("/logout", post(routes::auth::logout))
+        .route("/forgot-password", post(routes::auth::forgot_password))
+        .route("/reset-password", post(routes::auth::reset_password));
 
     let subject_router = Router::new()
         .route("/", get(routes::subject::get_subjects).post(routes::subject::create_subject))

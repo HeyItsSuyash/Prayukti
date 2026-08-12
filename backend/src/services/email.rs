@@ -95,4 +95,37 @@ impl EmailService {
         
         Self::send_email(to, subject, &html, Some(&text), config).await
     }
+
+    pub async fn send_password_reset_email(to: &str, otp: &str, config: &Config) -> Result<(), String> {
+        let subject = "Password Reset Request - Prayukti vLAB";
+        let html = format!(
+            r#"
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #14D98F; border-radius: 12px; background-color: #021D24;">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h2 style="color: #ffffff; margin: 0;">Prayukti <span style="color: #14D98F; font-weight: 300;">vLAB</span></h2>
+                </div>
+                <h3 style="color: #ffffff; font-size: 20px; margin-bottom: 15px;">Reset your password</h3>
+                <p style="color: #94a3b8; font-size: 16px; line-height: 1.5; margin-bottom: 25px;">
+                    We received a request to reset your password. Please use the verification code below to set a new password. This code will expire in {} minutes.
+                </p>
+                <div style="background-color: #084738; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 25px; border: 1px dashed #14D98F;">
+                    <span style="font-size: 32px; font-weight: bold; letter-spacing: 5px; color: #14D98F;">{}</span>
+                </div>
+                <p style="color: #64748b; font-size: 14px; line-height: 1.5;">
+                    If you didn't request a password reset, you can safely ignore this email. Your password will remain unchanged.
+                </p>
+                <hr style="border: none; border-top: 1px solid #084738; margin: 30px 0;" />
+                <p style="color: #475569; font-size: 12px; text-align: center;">
+                    &copy; {} Prayukti vLAB. All rights reserved.
+                </p>
+            </div>
+            "#,
+            config.otp_expiry_minutes,
+            otp,
+            chrono::Utc::now().year()
+        );
+        let text = format!("Your Prayukti vLAB password reset code is: {}. It expires in {} minutes.", otp, config.otp_expiry_minutes);
+        
+        Self::send_email(to, subject, &html, Some(&text), config).await
+    }
 }

@@ -51,6 +51,18 @@ pub struct ResendOtpRequest {
     pub email: String,
 }
 
+#[derive(Debug, Deserialize)]
+pub struct ForgotPasswordRequest {
+    pub email: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct ResetPasswordRequest {
+    pub email: String,
+    pub otp: String,
+    pub new_password: String,
+}
+
 fn is_allowed_domain(email: &str) -> bool {
     let clean = email.to_lowercase();
     let clean = clean.trim();
@@ -605,4 +617,186 @@ pub async fn logout() -> impl IntoResponse {
     }
 
     (StatusCode::OK, response)
+}
+
+pub async fn forgot_password(
+    State(state): State<AppState>,
+    Json(payload): Json<ForgotPasswordRequest>,
+) -> impl IntoResponse {
+    let email = payload.email.trim().to_lowercase();
+    info!("[AUTH] Forgot password request: {}", email);
+
+    let user_res = sqlx::query_as::<_, User>(
+        "SELECT * FROM users WHERE email = $1"
+    )
+    .bind(&email)
+    .fetch_optional(&state.db)
+    .await;
+
+    let user = match user_res {
+        Ok(Some(u)) => u,
+        Ok(None) => {
+            // Do not reveal if the user exists or not for security, just return OK
+            return (
+                StatusCode::OK,
+                Json(json!({ "message": "If that email is registered, you will receive a reset OTP shortly." })),
+            );
+        }
+        Err(e) => {
+            error!("[AUTH] Forgot password DB lookup failed: {:?}", e);
+            return (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({ "message": "Server error" })),
+            );
+        }
+    };
+
+    let otp = generate_otp();
+    let otp_expiry = chrono::Utc::now() + chrono::Duration::minutes(state.config.otp_expiry_minutes);
+    
+    let otp_hash = match hash(&otp, DEFAULT_COST) {
+        Ok(h) => h,
+        Err(e) => {
+            error!("[AUTH] OTP hashing failed: {:?}", e);
+            return (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({ "message": "Server error" })),
+            );
+        }
+    };
+
+    let update_res = sqlx::query(
+        r#"
+        UPDATE users
+        SET otp_hash = $1, otp_expiry = $2, otp_attempts = 0, otp_resends = otp_resends + 1, otp_last_resent_at = CURRENT_TIMESTAMP
+        WHERE id = $3
+        "#
+    )
+    .bind(&otp_hash)
+    .bind(otp_expiry)
+    .bind(user.id)
+    .execute(&state.db)
+    .await;
+
+    if let Err(e) = update_res {
+        error!("[AUTH] Forgot password DB update failed: {:?}", e);
+        return (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(json!({ "message": "Server error" })),
+        );
+    }
+
+    let email_state = state.config.clone();
+    let email_to = email.clone();
+    tokio::spawn(async move {
+        if let Err(e) = EmailService::send_password_reset_email(&email_to, &otp, &email_state).await {
+            error!("[AUTH] Forgot password email delivery failed: {}", e);
+        }
+    });
+
+    (
+        StatusCode::OK,
+        Json(json!({ "message": "If that email is registered, you will receive a reset OTP shortly." })),
+    )
+}
+
+pub async fn reset_password(
+    State(state): State<AppState>,
+    Json(payload): Json<ResetPasswordRequest>,
+) -> axum::response::Response {
+    let email = payload.email.trim().to_lowercase();
+    info!("[AUTH] Reset password attempt: {}", email);
+
+    if let Err(msg) = validate_password(&payload.new_password) {
+        return (
+            StatusCode::BAD_REQUEST,
+            Json(json!({ "message": msg })),
+        ).into_response();
+    }
+
+    let user_res = sqlx::query_as::<_, User>(
+        "SELECT * FROM users WHERE email = $1"
+    )
+    .bind(&email)
+    .fetch_optional(&state.db)
+    .await;
+
+    let user = match user_res {
+        Ok(Some(u)) => u,
+        Ok(None) => {
+            return (
+                StatusCode::NOT_FOUND,
+                Json(json!({ "message": "User not registered" })),
+            ).into_response();
+        }
+        Err(e) => {
+            error!("[AUTH] Reset password DB lookup failed: {:?}", e);
+            return (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({ "message": "Server error" })),
+            ).into_response();
+        }
+    };
+
+    if user.otp_attempts >= state.config.otp_max_attempts {
+        return (
+            StatusCode::FORBIDDEN,
+            Json(json!({ "message": "Too many failed attempts. Please request a new OTP." })),
+        ).into_response();
+    }
+
+    let is_otp_valid = match user.otp_hash {
+        Some(ref hash_val) => verify(payload.otp.trim(), hash_val).unwrap_or(false),
+        None => false,
+    };
+    
+    let is_not_expired = user.otp_expiry.map(|exp| exp > chrono::Utc::now()).unwrap_or(false);
+
+    if !is_otp_valid || !is_not_expired {
+        let _ = sqlx::query("UPDATE users SET otp_attempts = otp_attempts + 1 WHERE id = $1")
+            .bind(user.id)
+            .execute(&state.db)
+            .await;
+            
+        return (
+            StatusCode::BAD_REQUEST,
+            Json(json!({ "message": "Invalid or expired OTP" })),
+        ).into_response();
+    }
+
+    let hashed_password = match hash(&payload.new_password, DEFAULT_COST) {
+        Ok(h) => h,
+        Err(e) => {
+            error!("[AUTH] Password hashing failed: {:?}", e);
+            return (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({ "message": "Server error" })),
+            ).into_response();
+        }
+    };
+
+    let update_res = sqlx::query(
+        r#"
+        UPDATE users
+        SET password = $1, otp_hash = NULL, otp_expiry = NULL
+        WHERE id = $2
+        "#
+    )
+    .bind(&hashed_password)
+    .bind(user.id)
+    .execute(&state.db)
+    .await;
+
+    if let Err(e) = update_res {
+        error!("[AUTH] Password reset DB update failed: {:?}", e);
+        return (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(json!({ "message": "Server error" })),
+        ).into_response();
+    }
+
+    (
+        StatusCode::OK,
+        Json(json!({ "message": "Password reset successfully. You can now login with your new password." })),
+    ).into_response()
 }
