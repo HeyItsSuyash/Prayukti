@@ -43,7 +43,8 @@ export default function ForgotPasswordPage() {
             emailSchema.parse({ email });
         } catch (e: any) {
             if (e instanceof z.ZodError) {
-                showToast('error', e.errors[0].message);
+                const zodError = e as any;
+                showToast('error', zodError.errors[0].message);
                 setLoading(false);
                 return;
             }
@@ -69,7 +70,8 @@ export default function ForgotPasswordPage() {
             resetSchema.parse({ otp, password, confirmPassword });
         } catch (e: any) {
             if (e instanceof z.ZodError) {
-                showToast('error', e.errors[0].message);
+                const zodError = e as any;
+                showToast('error', zodError.errors[0].message);
                 setLoading(false);
                 return;
             }
