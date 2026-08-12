@@ -280,7 +280,7 @@ pub async fn verify_otp(
         Ok(None) => {
             return (
                 StatusCode::NOT_FOUND,
-                Json(json!({ "message": "User not registered" })),
+                Json(json!({ "message": "User does not exist in database" })),
             ).into_response();
         }
         Err(e) => {
@@ -420,7 +420,7 @@ pub async fn signin(
         Ok(None) => {
             return (
                 StatusCode::NOT_FOUND,
-                Json(json!({ "message": "User not registered" })),
+                Json(json!({ "message": "User does not exist in database" })),
             ).into_response();
         }
         Err(e) => {
@@ -516,7 +516,7 @@ pub async fn resend_otp(
         Ok(None) => {
             return (
                 StatusCode::NOT_FOUND,
-                Json(json!({ "message": "User not registered" })),
+                Json(json!({ "message": "User does not exist in database" })),
             );
         }
         Err(e) => {
@@ -636,10 +636,9 @@ pub async fn forgot_password(
     let user = match user_res {
         Ok(Some(u)) => u,
         Ok(None) => {
-            // Do not reveal if the user exists or not for security, just return OK
             return (
-                StatusCode::OK,
-                Json(json!({ "message": "If that email is registered, you will receive a reset OTP shortly." })),
+                StatusCode::NOT_FOUND,
+                Json(json!({ "message": "User does not exist in database" })),
             );
         }
         Err(e) => {
