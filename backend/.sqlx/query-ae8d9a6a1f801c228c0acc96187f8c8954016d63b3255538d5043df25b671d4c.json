@@ -1,0 +1,20 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT AVG(COALESCE(es.score, 0))::double precision as avg_score\n        FROM engagement_scores es\n        WHERE es.score_type = 'weekly'\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "avg_score",
+        "type_info": "Float8"
+      }
+    ],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": [
+      null
+    ]
+  },
+  "hash": "ae8d9a6a1f801c228c0acc96187f8c8954016d63b3255538d5043df25b671d4c"
+}

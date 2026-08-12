@@ -1,0 +1,18 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "INSERT INTO lesson_animations (id, lesson_id, animation_type, config_json, sequence_order) VALUES ($1, $2, $3, $4, $5)",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Uuid",
+        "Varchar",
+        "Jsonb",
+        "Int4"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "0f8777e1fa7aef5ffd0c68a131a4518bd3a9686e74437ca2034a373357fc3ccb"
+}

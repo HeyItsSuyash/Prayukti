@@ -1,0 +1,26 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT CAST(EXTRACT(HOUR FROM login_time) AS DOUBLE PRECISION) as hour, COUNT(*) as logs_count\n        FROM attendance_logs\n        WHERE login_time >= CURRENT_DATE - INTERVAL '30 days'\n        GROUP BY 1\n        ORDER BY logs_count DESC\n        LIMIT 3\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "hour",
+        "type_info": "Float8"
+      },
+      {
+        "ordinal": 1,
+        "name": "logs_count",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": [
+      null,
+      null
+    ]
+  },
+  "hash": "f58ccef3f5bcacc03e8cf53021eeb7356f1db27ea2a10b2dfe9892d13fe04d7e"
+}

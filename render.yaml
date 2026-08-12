@@ -14,3 +14,5 @@ services:
         sync: false # Set this in the Render Dashboard
       - key: RUST_LOG
         value: info
+      - key: SQLX_OFFLINE
+        value: "true"

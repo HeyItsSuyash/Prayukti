@@ -1,0 +1,35 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT t.day_of_week, t.start_time, t.end_time\n        FROM timetables t\n        JOIN subjects s ON t.subject_id = s.id\n        WHERE s.branch = $1 AND s.semester = $2\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "day_of_week",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 1,
+        "name": "start_time",
+        "type_info": "Time"
+      },
+      {
+        "ordinal": 2,
+        "name": "end_time",
+        "type_info": "Time"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "c4d4d549ccb848ace8e1d9734b00a2186e7861e995740863c110c6a11d1894e3"
+}

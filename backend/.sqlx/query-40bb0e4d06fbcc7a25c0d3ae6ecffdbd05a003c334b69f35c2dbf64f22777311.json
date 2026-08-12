@@ -1,0 +1,22 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT COUNT(DISTINCT experiment_id) as count FROM experiment_activities WHERE student_id = $1 AND result_generated = TRUE",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "count",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      null
+    ]
+  },
+  "hash": "40bb0e4d06fbcc7a25c0d3ae6ecffdbd05a003c334b69f35c2dbf64f22777311"
+}

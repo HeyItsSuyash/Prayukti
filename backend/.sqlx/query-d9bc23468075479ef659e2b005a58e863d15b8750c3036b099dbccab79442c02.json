@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n                    UPDATE learning_profiles\n                    SET strong_topics = ARRAY(SELECT DISTINCT UNNEST(array_append(strong_topics, $1))),\n                        weak_topics = ARRAY(SELECT DISTINCT val FROM UNNEST(weak_topics) as val WHERE val != $1),\n                        last_updated = CURRENT_TIMESTAMP\n                    WHERE student_id = $2\n                    ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Uuid"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "d9bc23468075479ef659e2b005a58e863d15b8750c3036b099dbccab79442c02"
+}

@@ -1,0 +1,18 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        INSERT INTO ai_conversations (id, user_id, role, subject_id, message, response)\n        VALUES ($1, $2, 'student', $3, $4, $5)\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Uuid",
+        "Uuid",
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "1b03fd51de83161d0a63f760d5b00ad5061b7c23b2e143555f8e016b369423f0"
+}

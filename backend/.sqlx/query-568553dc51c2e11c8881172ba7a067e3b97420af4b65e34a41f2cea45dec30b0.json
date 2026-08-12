@@ -1,0 +1,47 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            SELECT sc.id, sc.class_name, sc.scheduled_time, sc.room_link, u.full_name as teacher_name\n            FROM schedules sc\n            JOIN subjects s ON sc.subject_id = s.id\n            JOIN users u ON sc.teacher_id = u.id\n            WHERE s.branch = $1 AND s.semester = $2 \n              AND sc.scheduled_time >= CURRENT_DATE \n              AND sc.scheduled_time < CURRENT_DATE + INTERVAL '1 day'\n            ORDER BY sc.scheduled_time ASC\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "class_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "scheduled_time",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 3,
+        "name": "room_link",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 4,
+        "name": "teacher_name",
+        "type_info": "Varchar"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "568553dc51c2e11c8881172ba7a067e3b97420af4b65e34a41f2cea45dec30b0"
+}

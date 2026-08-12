@@ -1,0 +1,22 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT COUNT(*) FROM participation_events WHERE student_id = $1 AND timestamp >= NOW() - INTERVAL '7 days'",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "count",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      null
+    ]
+  },
+  "hash": "882ab077d54d8533855e8a6873fe6ba1aec6ae8ba2fd7991aa10933ed7aa7d64"
+}

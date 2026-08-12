@@ -1,0 +1,18 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "INSERT INTO lesson_diagrams (id, lesson_id, diagram_type, mermaid_code, sequence_order) VALUES ($1, $2, $3, $4, $5)",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Uuid",
+        "Varchar",
+        "Text",
+        "Int4"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "895eed1211c3999522d8a4d0b1e30bc471ec547e6978e24f35d75db640ba8717"
+}

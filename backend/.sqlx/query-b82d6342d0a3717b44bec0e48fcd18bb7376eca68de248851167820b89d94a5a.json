@@ -1,0 +1,28 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT question, teacher_answer FROM knowledge_base WHERE subject_id = $1 AND status = 'approved' AND teacher_answer IS NOT NULL LIMIT 2",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "question",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 1,
+        "name": "teacher_answer",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      true
+    ]
+  },
+  "hash": "b82d6342d0a3717b44bec0e48fcd18bb7376eca68de248851167820b89d94a5a"
+}

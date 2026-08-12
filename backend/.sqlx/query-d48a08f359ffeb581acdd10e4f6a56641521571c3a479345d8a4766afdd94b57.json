@@ -1,0 +1,28 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT branch, semester FROM users WHERE id = $1 AND role = 'student'",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "branch",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 1,
+        "name": "semester",
+        "type_info": "Int4"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      true,
+      true
+    ]
+  },
+  "hash": "d48a08f359ffeb581acdd10e4f6a56641521571c3a479345d8a4766afdd94b57"
+}

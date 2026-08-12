@@ -1,0 +1,35 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT score_type, score, date FROM engagement_scores WHERE student_id = $1 AND subject_id = $2 ORDER BY date DESC LIMIT 30",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "score_type",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 1,
+        "name": "score",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 2,
+        "name": "date",
+        "type_info": "Date"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "850714c3e2c15c1e8e9aaf75e1100f01dff9f2c28370dbd704c99104908e0342"
+}

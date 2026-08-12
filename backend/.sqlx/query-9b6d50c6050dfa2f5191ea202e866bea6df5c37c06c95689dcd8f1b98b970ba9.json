@@ -1,0 +1,22 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT COUNT(DISTINCT schedule_id) as count FROM classroom_attendance WHERE student_id = $1 AND status = 'present'",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "count",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      null
+    ]
+  },
+  "hash": "9b6d50c6050dfa2f5191ea202e866bea6df5c37c06c95689dcd8f1b98b970ba9"
+}

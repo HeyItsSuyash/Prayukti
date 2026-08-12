@@ -1,0 +1,46 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            SELECT a.id, a.title, a.content, a.created_at, u.full_name as teacher_name\n            FROM announcements a\n            JOIN users u ON a.teacher_id = u.id\n            JOIN user_assigned_subjects us ON a.subject_id = us.subject_id\n            WHERE us.user_id = $1\n            ORDER BY a.created_at DESC\n            LIMIT 3\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "title",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "content",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 4,
+        "name": "teacher_name",
+        "type_info": "Varchar"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true,
+      false
+    ]
+  },
+  "hash": "43ca441f1bbee2cc78052f66f71d642a5fb142c8e0eaaebbc49da21721565846"
+}

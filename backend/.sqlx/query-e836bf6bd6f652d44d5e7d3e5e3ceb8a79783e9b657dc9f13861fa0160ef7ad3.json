@@ -1,0 +1,44 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT ai.insight_type, ai.message, ai.confidence, u.full_name, u.roll_no\n        FROM ai_insights ai\n        JOIN users u ON ai.student_id = u.id\n        ORDER BY ai.created_at DESC\n        LIMIT 20\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "insight_type",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 1,
+        "name": "message",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "confidence",
+        "type_info": "Float8"
+      },
+      {
+        "ordinal": 3,
+        "name": "full_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 4,
+        "name": "roll_no",
+        "type_info": "Varchar"
+      }
+    ],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  "hash": "e836bf6bd6f652d44d5e7d3e5e3ceb8a79783e9b657dc9f13861fa0160ef7ad3"
+}

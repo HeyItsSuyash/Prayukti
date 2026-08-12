@@ -1,0 +1,40 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT s.class_name, s.scheduled_time,\n               COUNT(ca.id) FILTER (WHERE ca.status = 'present') as present_count,\n               COUNT(ca.id) as total_count\n        FROM schedules s\n        LEFT JOIN classroom_attendance ca ON s.id = ca.schedule_id\n        WHERE s.teacher_id = $1 AND s.scheduled_time < NOW()\n        GROUP BY s.id, s.class_name, s.scheduled_time\n        ORDER BY s.scheduled_time DESC\n        LIMIT 10\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "class_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 1,
+        "name": "scheduled_time",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 2,
+        "name": "present_count",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 3,
+        "name": "total_count",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      null,
+      null
+    ]
+  },
+  "hash": "c7f8b91ed78920600d87535d8ffe75217309ac03d28116520744f71cc97aff8a"
+}

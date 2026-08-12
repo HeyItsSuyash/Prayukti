@@ -1,0 +1,46 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT h.watched_at, l.id, l.topic, l.mode, l.avatar\n        FROM video_watch_history h\n        JOIN video_lessons l ON h.lesson_id = l.id\n        WHERE h.student_id = $1\n        ORDER BY h.watched_at DESC\n        LIMIT 20\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "watched_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 1,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 2,
+        "name": "topic",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "mode",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 4,
+        "name": "avatar",
+        "type_info": "Varchar"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      true,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "a21ef0cac73e16e55dea2aacb6c737bb36b0002c5529b3670f4cd97776223753"
+}

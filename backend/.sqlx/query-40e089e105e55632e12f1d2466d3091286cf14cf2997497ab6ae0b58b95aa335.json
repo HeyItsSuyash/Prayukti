@@ -1,0 +1,26 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT u.branch, AVG(es.score)::double precision as avg_score\n        FROM users u\n        JOIN engagement_scores es ON u.id = es.student_id\n        WHERE u.role = 'student' AND u.branch IS NOT NULL\n        GROUP BY u.branch\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "branch",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 1,
+        "name": "avg_score",
+        "type_info": "Float8"
+      }
+    ],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": [
+      true,
+      null
+    ]
+  },
+  "hash": "40e089e105e55632e12f1d2466d3091286cf14cf2997497ab6ae0b58b95aa335"
+}

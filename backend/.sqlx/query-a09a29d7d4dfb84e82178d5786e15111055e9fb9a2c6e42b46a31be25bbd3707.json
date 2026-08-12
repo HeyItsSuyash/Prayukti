@@ -1,0 +1,22 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT CAST(AVG(quiz_score) AS DOUBLE PRECISION) as \"avg: f64\" FROM student_progress WHERE student_id = $1 AND quiz_score IS NOT NULL",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "avg: f64",
+        "type_info": "Float8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      null
+    ]
+  },
+  "hash": "a09a29d7d4dfb84e82178d5786e15111055e9fb9a2c6e42b46a31be25bbd3707"
+}
