@@ -105,7 +105,11 @@ async fn main() {
             config.frontend_url.parse::<axum::http::HeaderValue>().unwrap_or_else(|_| "https://mmmut.prayukti.org".parse().unwrap()),
         ])
         .allow_credentials(true)
-        .allow_headers(Any)
+        .allow_headers([
+            axum::http::header::AUTHORIZATION,
+            axum::http::header::ACCEPT,
+            axum::http::header::CONTENT_TYPE,
+        ])
         .allow_methods(Any);
 
     let app = Router::new()
