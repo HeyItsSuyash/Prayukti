@@ -56,7 +56,7 @@ export default function TimetablePage() {
                 
                 // Fetch timetable
                 const tRes = await fetch(`${API_URL}/api/timetable`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: { 'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}` }
                 });
                 if (!tRes.ok) throw new Error("Failed to fetch schedules");
                 const tData = await tRes.json();
@@ -93,7 +93,7 @@ export default function TimetablePage() {
             const res = await fetch(`${API_URL}/api/timetable`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -130,7 +130,7 @@ export default function TimetablePage() {
             
             const res = await fetch(`${API_URL}/api/timetable/${id}`, {
                 method: 'DELETE',
-                headers: { 'Authorization': `Bearer ${token}` }
+                headers: { 'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}` }
             });
 
             if (!res.ok) throw new Error("Failed to delete slot");
@@ -146,10 +146,10 @@ export default function TimetablePage() {
         try {
             
             const recRes = await fetch(`${API_URL}/api/timetable/ai-optimize`, {
-                headers: { 'Authorization': `Bearer ${token}` }
+                headers: { 'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}` }
             });
             const overRes = await fetch(`${API_URL}/api/timetable/overload`, {
-                headers: { 'Authorization': `Bearer ${token}` }
+                headers: { 'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}` }
             });
 
             if (recRes.ok && overRes.ok) {

@@ -31,6 +31,7 @@ export default function AnalyticsPage() {
                 
                 const parsedUser = JSON.parse(storedUser || "{}");
                 const role = parsedUser.role?.toLowerCase();
+                const token = localStorage.getItem("token") || "";
 
                 // Fetch subjects
                 const sRes = await fetch(`${API_URL}/api/subjects`);
@@ -46,7 +47,7 @@ export default function AnalyticsPage() {
 
                 if (role === "student") {
                     const stRes = await fetch(`${API_URL}/api/classroom-analytics/student`, {
-                        headers: { 'Authorization': `Bearer ${token}` }
+                        headers: { 'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}` }
                     });
                     if (stRes.ok) {
                         setStudentData(await stRes.json());
@@ -54,7 +55,7 @@ export default function AnalyticsPage() {
                 } else if (role === "teacher") {
                     if (firstSubId) {
                         const tRes = await fetch(`${API_URL}/api/classroom-analytics/teacher?subject_id=${firstSubId}`, {
-                            headers: { 'Authorization': `Bearer ${token}` }
+                            headers: { 'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}` }
                         });
                         if (tRes.ok) {
                             setTeacherData(await tRes.json());
@@ -62,7 +63,7 @@ export default function AnalyticsPage() {
                     }
                 } else if (role === "admin") {
                     const adRes = await fetch(`${API_URL}/api/classroom-analytics/institution`, {
-                        headers: { 'Authorization': `Bearer ${token}` }
+                        headers: { 'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}` }
                     });
                     if (adRes.ok) {
                         setAdminData(await adRes.json());
@@ -83,9 +84,9 @@ export default function AnalyticsPage() {
         setSelectedSub(val);
         setStatsLoading(true);
         try {
-            
+            const token = localStorage.getItem("token") || "";
             const tRes = await fetch(`${API_URL}/api/classroom-analytics/teacher?subject_id=${val}`, {
-                headers: { 'Authorization': `Bearer ${token}` }
+                headers: { 'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}` }
             });
             if (tRes.ok) {
                 setTeacherData(await tRes.json());

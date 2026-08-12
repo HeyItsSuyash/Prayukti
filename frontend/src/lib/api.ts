@@ -1,4 +1,4 @@
-import axios from '@/lib/api';
+import axios from 'axios';
 import { API_URL } from '@/lib/config';
 
 // Create a customized axios instance

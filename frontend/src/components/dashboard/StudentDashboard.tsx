@@ -51,12 +51,12 @@ export function StudentDashboard() {
 
     const handleLogout = async () => {
         try {
-            
+            const token = typeof window !== "undefined" ? localStorage.getItem("token") || "" : "";
             if (token) {
                 await fetch(`${API_URL}/api/attendance/logout`, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
+                        'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`,
                         'Content-Type': 'application/json'
                     }
                 });

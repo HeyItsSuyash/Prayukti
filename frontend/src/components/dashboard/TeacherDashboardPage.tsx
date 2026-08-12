@@ -53,7 +53,7 @@ export default function TeacherDashboard() {
                         
             const res = await fetch(`${API_URL}/api/users`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`
                 }
             });
             if (!res.ok) throw new Error("Failed to fetch users");
@@ -143,7 +143,7 @@ export default function TeacherDashboard() {
             await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/attendance/logout`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`,
                     'Content-Type': 'application/json'
                 }
             });

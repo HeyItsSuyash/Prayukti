@@ -73,9 +73,8 @@ const modules: ModuleItem[] = [
 
 // ─── Auth-aware navigate helper ───────────────────────────────
 function useAuthNavigate() {
-    
     return (labHref: string) => {
-        
+        const token = typeof window !== "undefined" ? localStorage.getItem("token") || "" : "";
         window.location.href = (token ? labHref : "/login");
     };
 }

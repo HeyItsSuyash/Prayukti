@@ -71,7 +71,7 @@ function AdminContent() {
         try {
             
             const res = await fetch(`${API_URL}/api/users`, {
-                headers: { 'Authorization': `Bearer ${token}` }
+                headers: { 'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}` }
             });
             
             if (!res.ok) throw new Error("Failed to fetch users");
@@ -111,12 +111,12 @@ function AdminContent() {
 
     const handleLogout = async () => {
         try {
-            
+            const token = typeof window !== "undefined" ? localStorage.getItem("token") || "" : "";
             if (token) {
                 await fetch(`${API_URL}/api/attendance/logout`, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
+                        'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`,
                         'Content-Type': 'application/json'
                     }
                 });

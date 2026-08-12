@@ -80,7 +80,7 @@ export default function AnnouncementsPage() {
                 
                 // Fetch announcements
                 const aRes = await fetch(`${API_URL}/api/announcement`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: { 'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}` }
                 });
                 if (!aRes.ok) throw new Error("Failed to load announcements");
                 const aData = await aRes.json();
@@ -122,7 +122,7 @@ export default function AnnouncementsPage() {
             const res = await fetch(`${API_URL}/api/announcement`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -157,7 +157,7 @@ export default function AnnouncementsPage() {
             const res = await fetch(`${API_URL}/api/announcement/${annId}/comment`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ content: text })
@@ -185,7 +185,7 @@ export default function AnnouncementsPage() {
             const res = await fetch(`${API_URL}/api/announcement/${annId}/react`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ reaction })
@@ -213,7 +213,7 @@ export default function AnnouncementsPage() {
             
             const res = await fetch(`${API_URL}/api/announcement/${annId}/bookmark`, {
                 method: 'POST',
-                headers: { 'Authorization': `Bearer ${token}` }
+                headers: { 'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}` }
             });
 
             if (res.ok) {
@@ -251,7 +251,7 @@ export default function AnnouncementsPage() {
             }
 
             const res = await fetch(url, {
-                headers: { 'Authorization': `Bearer ${token}` }
+                headers: { 'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}` }
             });
 
             if (res.ok) {

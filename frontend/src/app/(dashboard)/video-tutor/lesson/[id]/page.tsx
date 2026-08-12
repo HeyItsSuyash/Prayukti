@@ -189,7 +189,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
             await fetch(`${API_URL}/api/video-tutor/progress`, {
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
@@ -237,7 +237,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
             const res = await fetch(`${API_URL}/api/video-tutor/interrupt`, {
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({

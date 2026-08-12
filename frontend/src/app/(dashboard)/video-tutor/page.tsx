@@ -48,7 +48,7 @@ export default function VideoTutorDashboard() {
         setLoading(true);
         try {
             
-            const headers = { Authorization: `Bearer ${token}` };
+            const headers = { Authorization: `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}` };
 
             // 1. Fetch generated lessons
             const lRes = await fetch(`${API_URL}/api/video-tutor/lessons`, { headers });
@@ -100,7 +100,7 @@ export default function VideoTutorDashboard() {
             const res = await fetch(`${API_URL}/api/video-tutor/generate`, {
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({ topic, mode, avatar, voice, language })

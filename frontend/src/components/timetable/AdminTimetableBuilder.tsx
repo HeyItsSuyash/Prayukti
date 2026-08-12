@@ -73,7 +73,7 @@ export default function AdminTimetableBuilder() {
       const res = await fetch(`${API_URL}/api/timetable/auto-generate`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)

@@ -42,7 +42,7 @@ export default function StudentAttendancePage() {
             
             const res = await fetch(`${API_URL}/api/attendance/student/${user.id}`, {
                 headers: {
-                    "Authorization": `Bearer ${token}`
+                    "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`
                 }
             });
             if (!res.ok) {

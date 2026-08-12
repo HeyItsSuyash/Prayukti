@@ -41,7 +41,7 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
                 {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
+                        'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`,
                         'Content-Type': 'application/json'
                     }
                 }

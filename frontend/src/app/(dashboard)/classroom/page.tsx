@@ -24,7 +24,7 @@ export default function ClassroomDashboard() {
                 
                 const res = await fetch(`${API_URL}/api/classroom/dashboard`, {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`
                     }
                 });
 
