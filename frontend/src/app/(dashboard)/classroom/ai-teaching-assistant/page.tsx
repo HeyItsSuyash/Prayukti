@@ -57,7 +57,7 @@ export default function AiTeachingAssistantPage() {
         const fetchDiagnostics = async () => {
             setStatsLoading(true);
             try {
-                
+                const token = localStorage.getItem("token") || "";
                 
                 // Class summary
                 const sumRes = await fetch(`${API_URL}/api/ai-teacher/class-summary`, {
@@ -93,7 +93,7 @@ export default function AiTeachingAssistantPage() {
         setGenResult("");
 
         try {
-            
+            const token = localStorage.getItem("token") || "";
             let endpoint = "";
             let body: any = { subject_id: selectedSub };
 
