@@ -110,7 +110,14 @@ async fn main() {
             axum::http::header::ACCEPT,
             axum::http::header::CONTENT_TYPE,
         ])
-        .allow_methods(Any);
+        .allow_methods([
+            axum::http::Method::GET,
+            axum::http::Method::POST,
+            axum::http::Method::PUT,
+            axum::http::Method::PATCH,
+            axum::http::Method::DELETE,
+            axum::http::Method::OPTIONS,
+        ]);
 
     let app = Router::new()
         .route("/", get(health_check))
