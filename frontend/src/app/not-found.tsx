@@ -9,7 +9,7 @@ import { PremiumFooter } from "@/components/layout/PremiumFooter";
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#021D24] font-sans">
+    <div className="flex flex-col min-h-screen bg-background font-sans">
       <PremiumNavbar pathname="/404" />
 
       <main className="flex-1 flex items-center justify-center pt-32 pb-20 relative overflow-hidden">
@@ -29,7 +29,7 @@ export default function NotFound() {
           >
             <div className="flex justify-center mb-8">
               <div className="relative">
-                <h1 className="text-9xl font-black text-white/5 tracking-tighter select-none">
+                <h1 className="text-9xl font-black text-slate-200 dark:text-white/5 tracking-tighter select-none">
                   404
                 </h1>
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -44,7 +44,7 @@ export default function NotFound() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight mb-4"
+              className="text-3xl md:text-4xl font-black text-foreground uppercase tracking-tight mb-4"
             >
               Page Not Found
             </motion.h2>
@@ -53,7 +53,7 @@ export default function NotFound() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-lg text-slate-400 font-medium mb-10 max-w-lg mx-auto leading-relaxed"
+              className="text-lg text-slate-500 dark:text-slate-400 font-medium mb-10 max-w-lg mx-auto leading-relaxed"
             >
               The lab module or page you are looking for has been moved, deleted, or does not exist.
             </motion.p>

@@ -9,9 +9,9 @@ interface ComingSoonProps {
 
 export function ComingSoon({ title }: ComingSoonProps) {
     return (
-        <section className="min-h-[80vh] flex items-center justify-center bg-[#FAFAFA] py-20 px-6">
+        <section className="min-h-[80vh] flex items-center justify-center bg-[#FAFAFA] dark:bg-slate-900 py-20 px-6">
             <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
-                <div className="w-64 h-64 md:w-80 md:h-80 mb-8 relative drop- animate-in zoom-in duration-700">
+                <div className="w-80 h-80 md:w-96 md:h-96 mb-4 relative drop- animate-in zoom-in duration-700">
                     <img 
                         src="/prayukti 2.0/illustrations/laptop_guy.png" 
                         alt="Coming Soon" 
@@ -19,8 +19,8 @@ export function ComingSoon({ title }: ComingSoonProps) {
                     />
                 </div>
                 
-                <h1 className="text-4xl md:text-5xl font-bold text-[#021D24] mb-4 tracking-tight">
-                    <span className="text-[#059669]">{title}</span> is Coming Soon
+                <h1 className="text-4xl md:text-5xl font-bold text-[#021D24] dark:text-white mb-4 tracking-tight">
+                    <span className="text-[#059669]">{title}</span> coming soon
                 </h1>
                 
                 <p className="text-lg md:text-xl text-slate-500 max-w-xl mx-auto mb-10 leading-relaxed font-medium">

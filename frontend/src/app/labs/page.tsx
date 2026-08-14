@@ -10,9 +10,9 @@ export default function LabsPage() {
             
             {/* Hero Section */}
             <section 
-                className="pt-48 pb-32 text-white relative"
+                className="pt-48 pb-32 text-white relative bg-slate-950"
                 style={{ 
-                    backgroundImage: "linear-gradient(to right, rgba(2, 29, 36, 0.9), rgba(5, 150, 105, 0.8)), url('/prayukti 2.0/illustrations/labpic.jpg')", 
+                    backgroundImage: "linear-gradient(to right, rgba(2, 6, 23, 0.85), rgba(5, 46, 35, 0.7)), url('/prayukti 2.0/illustrations/labpic.jpg')", 
                     backgroundSize: 'cover', 
                     backgroundPosition: 'center' 
                 }}

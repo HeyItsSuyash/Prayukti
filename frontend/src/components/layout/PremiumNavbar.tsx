@@ -14,6 +14,7 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
     const { scrollY } = useScroll();
     const [isScrolled, setIsScrolled] = useState(false);
     const [user, setUser] = useState<any>(null);
+    const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
     useEffect(() => {
         const storedUser = localStorage.getItem('vlab_user');
@@ -100,8 +101,8 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
                 {/* CTAs */}
                 <div className="flex items-center gap-4">
                     {user ? (
-                        <div className="relative group cursor-pointer">
-                            <div className="flex items-center gap-3">
+                        <div className="relative">
+                            <div className="flex items-center gap-3 cursor-pointer" onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}>
                                 <div className="hidden md:flex items-center">
                                     <p className="text-sm font-semibold text-white">{user.fullName}</p>
                                 </div>
@@ -109,13 +110,19 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
                                     <img src="/prayukti 2.0/illustrations/avatar.avif" alt="User Avatar" className="w-full h-full object-cover" />
                                 </div>
                             </div>
-                            <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-[0_10px_40px_rgb(0,0,0,0.08)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2 top-full z-50">
-                                <Link href="/profile" className="block px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-[#059669] dark:hover:text-[#059669] transition-colors"><i className="bx bx-user mr-2"></i>Profile</Link>
-                                <Link href="/leaderboards" className="block px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-[#059669] dark:hover:text-[#059669] transition-colors"><i className="bx bx-trophy mr-2"></i>Leaderboards</Link>
-                                <Link href="/settings" className="block px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-[#059669] dark:hover:text-[#059669] transition-colors"><i className="bx bx-cog mr-2"></i>Settings</Link>
-                                <div className="h-px bg-slate-100 dark:bg-slate-800 my-1 mx-2"></div>
-                                <button onClick={handleLogout} className="w-full text-left px-4 py-2.5 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"><i className="bx bx-log-out mr-2"></i>Logout</button>
-                            </div>
+                            
+                            {isProfileMenuOpen && (
+                                <div className="absolute right-0 mt-3 w-56 bg-[#021D24] border border-white/10 rounded-2xl shadow-[0_10px_40px_rgb(0,0,0,0.2)] py-2 top-full z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                                    {/* Top Arrow */}
+                                    <div className="absolute top-0 right-4 -mt-2 w-4 h-4 bg-[#021D24] border-t border-l border-white/10 rotate-45 rounded-tl-sm z-[-1]"></div>
+                                    
+                                    <Link href="/profile" onClick={() => setIsProfileMenuOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-white/80 hover:bg-white/5 hover:text-white transition-colors"><i className="bx bx-user mr-2 text-[#059669]"></i>Profile</Link>
+                                    <Link href="/leaderboards" onClick={() => setIsProfileMenuOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-white/80 hover:bg-white/5 hover:text-white transition-colors"><i className="bx bx-trophy mr-2 text-[#059669]"></i>Leaderboards</Link>
+                                    <Link href="/settings" onClick={() => setIsProfileMenuOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-white/80 hover:bg-white/5 hover:text-white transition-colors"><i className="bx bx-cog mr-2 text-[#059669]"></i>Settings</Link>
+                                    <div className="h-px bg-white/10 my-1 mx-2"></div>
+                                    <button onClick={() => { setIsProfileMenuOpen(false); handleLogout(); }} className="w-full text-left px-4 py-2.5 text-sm font-medium text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors"><i className="bx bx-log-out mr-2"></i>Logout</button>
+                                </div>
+                            )}
                         </div>
                     ) : (
                         <>
