@@ -45,6 +45,7 @@ export const metadata: Metadata = {
 
 import { Analytics } from '@vercel/analytics/react';
 import { AxiosConfig } from '@/components/AxiosConfig';
+import { ThemeController } from '@/components/ThemeController';
 
 export default function RootLayout({
   children,
@@ -58,18 +59,25 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                let isDark = true;
-                const prefs = localStorage.getItem('vlab_settings');
-                if (prefs) {
-                  const parsed = JSON.parse(prefs);
-                  if (parsed.darkMode !== undefined) {
-                    isDark = parsed.darkMode;
-                  }
-                }
-                if (isDark) {
-                  document.documentElement.classList.add('dark');
-                } else {
+                const path = window.location.pathname;
+                const isAuthOrLander = path === '/' || path.startsWith('/login') || path.startsWith('/register') || path.startsWith('/forgot-password') || path.startsWith('/verify');
+                
+                if (isAuthOrLander) {
                   document.documentElement.classList.remove('dark');
+                } else {
+                  let isDark = true;
+                  const prefs = localStorage.getItem('vlab_settings');
+                  if (prefs) {
+                    const parsed = JSON.parse(prefs);
+                    if (parsed.darkMode !== undefined) {
+                      isDark = parsed.darkMode;
+                    }
+                  }
+                  if (isDark) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
                 }
               } catch (e) {}
             `,
@@ -78,6 +86,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
         <AxiosConfig />
+        <ThemeController />
         {children}
         <AssistantBot />
         <Analytics />

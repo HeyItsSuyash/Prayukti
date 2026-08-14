@@ -437,13 +437,13 @@ export default function RegisterPage() {
                                         <SelectTrigger className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-[#059669]/10 focus:border-[#059669]  text-sm text-slate-700 shadow-none">
                                             <SelectValue placeholder="Select Branch" />
                                         </SelectTrigger>
-                                        <SelectContent className="bg-white rounded-xl border border-slate-200 shadow-[0_4px_20px_rgb(0,0,0,0.05)]">
-                                            <SelectItem value="CSE" className="focus:bg-slate-100 focus:text-slate-900">Computer Science & Engineering</SelectItem>
-                                            <SelectItem value="IT" className="focus:bg-slate-100 focus:text-slate-900">Information Technology</SelectItem>
-                                            <SelectItem value="ECE" className="focus:bg-slate-100 focus:text-slate-900">Electronics & Comm. Engineering</SelectItem>
-                                            <SelectItem value="EE" className="focus:bg-slate-100 focus:text-slate-900">Electrical Engineering</SelectItem>
-                                            <SelectItem value="ME" className="focus:bg-slate-100 focus:text-slate-900">Mechanical Engineering</SelectItem>
-                                            <SelectItem value="CE" className="focus:bg-slate-100 focus:text-slate-900">Civil Engineering</SelectItem>
+                                        <SelectContent className="bg-white rounded-xl border border-slate-200 shadow-[0_4px_20px_rgb(0,0,0,0.05)] text-slate-700">
+                                            <SelectItem value="CSE" className="text-slate-700 focus:bg-slate-100 focus:text-slate-900">Computer Science & Engineering</SelectItem>
+                                            <SelectItem value="IT" className="text-slate-700 focus:bg-slate-100 focus:text-slate-900">Information Technology</SelectItem>
+                                            <SelectItem value="ECE" className="text-slate-700 focus:bg-slate-100 focus:text-slate-900">Electronics & Comm. Engineering</SelectItem>
+                                            <SelectItem value="EE" className="text-slate-700 focus:bg-slate-100 focus:text-slate-900">Electrical Engineering</SelectItem>
+                                            <SelectItem value="ME" className="text-slate-700 focus:bg-slate-100 focus:text-slate-900">Mechanical Engineering</SelectItem>
+                                            <SelectItem value="CE" className="text-slate-700 focus:bg-slate-100 focus:text-slate-900">Civil Engineering</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </div>
@@ -459,8 +459,11 @@ export default function RegisterPage() {
                                             <SelectTrigger className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-[#059669]/10 focus:border-[#059669]  text-sm text-slate-700 shadow-none">
                                                 <SelectValue placeholder="Year" />
                                             </SelectTrigger>
-                                            <SelectContent className="bg-white rounded-xl border border-slate-200 shadow-[0_4px_20px_rgb(0,0,0,0.05)]">
-                                                {[1, 2, 3, 4].map(y => <SelectItem key={y} value={y.toString()} className="focus:bg-slate-100 focus:text-slate-900">{y}st Year</SelectItem>)}
+                                            <SelectContent className="bg-white rounded-xl border border-slate-200 shadow-[0_4px_20px_rgb(0,0,0,0.05)] text-slate-700">
+                                                {[1, 2, 3, 4].map(y => {
+                                                    const suffix = y === 1 ? 'st' : y === 2 ? 'nd' : y === 3 ? 'rd' : 'th';
+                                                    return <SelectItem key={y} value={y.toString()} className="text-slate-700 focus:bg-slate-100 focus:text-slate-900">{y}{suffix} Year</SelectItem>
+                                                })}
                                             </SelectContent>
                                         </Select>
                                     </div>
@@ -470,8 +473,8 @@ export default function RegisterPage() {
                                             <SelectTrigger className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-[#059669]/10 focus:border-[#059669]  text-sm text-slate-700 shadow-none">
                                                 <SelectValue placeholder="Semester" />
                                             </SelectTrigger>
-                                            <SelectContent className="bg-white rounded-xl border border-slate-200 shadow-[0_4px_20px_rgb(0,0,0,0.05)]">
-                                                {[1, 2, 3, 4, 5, 6, 7, 8].map(s => <SelectItem key={s} value={s.toString()} className="focus:bg-slate-100 focus:text-slate-900">Sem {s}</SelectItem>)}
+                                            <SelectContent className="bg-white rounded-xl border border-slate-200 shadow-[0_4px_20px_rgb(0,0,0,0.05)] text-slate-700">
+                                                {[1, 2, 3, 4, 5, 6, 7, 8].map(s => <SelectItem key={s} value={s.toString()} className="text-slate-700 focus:bg-slate-100 focus:text-slate-900">Sem {s}</SelectItem>)}
                                             </SelectContent>
                                         </Select>
                                     </div>

@@ -14,7 +14,7 @@ type Message = {
 export function AssistantBot() {
     const pathname = usePathname();
     
-    if (pathname === "/forgot-password") {
+    if (pathname && pathname.includes("/forgot-password")) {
         return null;
     }
 
