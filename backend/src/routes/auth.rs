@@ -382,7 +382,7 @@ pub async fn verify_otp(
 
     let cookie_val = if state.config.frontend_url.starts_with("https") {
         format!(
-            "vlab_access_token={}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=86400",
+            "vlab_access_token={}; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=86400",
             token
         )
     } else {
@@ -490,7 +490,7 @@ pub async fn signin(
 
     let cookie_val = if state.config.frontend_url.starts_with("https") {
         format!(
-            "vlab_access_token={}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=86400",
+            "vlab_access_token={}; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=86400",
             token
         )
     } else {
@@ -623,7 +623,7 @@ pub async fn logout(State(state): State<AppState>) -> impl IntoResponse {
     use axum::response::Response;
 
     let cookie_val = if state.config.frontend_url.starts_with("https") {
-        "vlab_access_token=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0"
+        "vlab_access_token=; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=0"
     } else {
         "vlab_access_token=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0"
     };
