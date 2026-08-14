@@ -37,12 +37,28 @@ async fn main() {
 
     // Setup database connection pool
     info!("Connecting to PostgreSQL pool...");
-    let pool = PgPoolOptions::new()
-        .max_connections(50) // High-concurrency limit
-        .acquire_timeout(std::time::Duration::from_secs(120))
-        .connect(&config.database_url)
-        .await
-        .expect("Failed to connect to PostgreSQL database");
+    let mut pool: Option<sqlx::PgPool> = None;
+    let mut attempts = 0;
+    while attempts < 5 {
+        match PgPoolOptions::new()
+            .max_connections(10)
+            .acquire_timeout(std::time::Duration::from_secs(120))
+            .connect(&config.database_url)
+            .await 
+        {
+            Ok(p) => {
+                pool = Some(p);
+                break;
+            },
+            Err(e) => {
+                attempts += 1;
+                tracing::warn!("Failed to connect to PostgreSQL database (attempt {}/5): {}. Retrying in 3 seconds...", attempts, e);
+                tokio::time::sleep(std::time::Duration::from_secs(3)).await;
+            }
+        }
+    }
+
+    let pool = pool.expect("Failed to connect to PostgreSQL database after 5 attempts");
 
     info!("Running OTP security migration...");
     sqlx::query("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_hash VARCHAR;").execute(&pool).await.expect("Migration failed (otp_hash)");
