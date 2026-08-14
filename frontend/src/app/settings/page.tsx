@@ -162,7 +162,6 @@ export default function SettingsPage() {
                                 </div>
                                 <div className="pt-4 flex justify-start gap-3">
                                     <Button variant="outline" className="border-border text-foreground hover:bg-muted rounded-none">Change Password</Button>
-                                    <Button variant="destructive" className="rounded-none">Delete Account</Button>
                                 </div>
                             </CardContent>
                         </Card>

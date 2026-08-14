@@ -100,7 +100,7 @@ export function StudentDashboard() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-900 font-sans transition-colors">
+        <div className="min-h-screen bg-background font-sans transition-colors">
             <PremiumNavbar pathname="/dashboard" />
 
             <main className="container mx-auto px-4 pt-28 pb-20 max-w-7xl">
