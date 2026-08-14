@@ -107,13 +107,10 @@ export default function ProfilePage() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <Card className="md:col-span-1 border border-border  rounded-none">
                                 <CardContent className="flex flex-col items-center pt-8 pb-6">
-                                    <div className="w-24 h-24 rounded-full bg-primary/10 text-primary flex items-center justify-center text-4xl font-bold border-2 border-primary/20 mb-4 ">
-                                        {userInitial}
+                                    <div className="w-24 h-24 rounded-full border border-border shadow-sm overflow-hidden bg-slate-800 mb-4">
+                                        <img src="/prayukti 2.0/illustrations/avatar.avif" alt="User Avatar" className="w-full h-full object-cover" />
                                     </div>
                                     <h2 className="text-xl font-bold text-foreground text-center mb-1">{user.fullName}</h2>
-                                    <Badge className="bg-primary/10 text-primary hover:bg-primary/20 border-0 uppercase tracking-widest text-[10px] font-bold rounded-none">
-                                        {user.role}
-                                    </Badge>
                                 </CardContent>
                             </Card>
 
