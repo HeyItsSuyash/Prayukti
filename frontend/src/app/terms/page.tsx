@@ -437,7 +437,7 @@ export default function TermsPage() {
                 strong: ({node, ...props}) => <strong className="font-semibold text-slate-900" {...props} />,
                 hr: ({node, ...props}) => <hr className="my-10 border-slate-200" {...props} />,
                 code: ({node, ...props}) => <code className="bg-slate-100 text-[#059669] px-1.5 py-0.5 rounded text-sm font-mono border border-slate-200" {...props} />,
-              
+              }}
             >
               {termsMarkdown}
             </ReactMarkdown>

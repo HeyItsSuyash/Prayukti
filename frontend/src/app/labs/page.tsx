@@ -5,7 +5,7 @@ import { LabsGrid } from '@/components/home/LabsGrid';
 
 export default function LabsPage() {
     return (
-        <main className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col font-sans transition-colors">
+        <main className="min-h-screen bg-background flex flex-col font-sans transition-colors">
             <PremiumNavbar pathname="/labs" />
             
             {/* Hero Section */}

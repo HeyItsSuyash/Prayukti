@@ -44,11 +44,11 @@ export function LabsGrid() {
     const currentLabs = filteredLabs.slice(startIndex, startIndex + itemsPerPage);
 
     return (
-        <section className="pb-24 bg-slate-50 dark:bg-slate-900 relative transition-colors pt-0">
+        <section className="pb-24 bg-background relative transition-colors pt-0">
             <div className="container mx-auto px-6 lg:px-12 max-w-[1400px]">
                 
                 {/* Overlapping Search Bar */}
-                <div className="bg-white dark:bg-slate-800 rounded-none shadow-md p-2 flex items-center mb-12 max-w-2xl mx-auto border border-slate-200 dark:border-slate-700 relative -translate-y-1/2">
+                <div className="bg-card rounded-none shadow-md p-2 flex items-center mb-12 max-w-2xl mx-auto border border-border relative -translate-y-1/2">
                     <i className="bx bx-search text-2xl text-slate-400 dark:text-slate-500 ml-4 mr-2"></i>
                     <input 
                         type="text" 

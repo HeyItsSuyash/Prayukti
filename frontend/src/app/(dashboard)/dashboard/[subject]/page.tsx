@@ -82,7 +82,7 @@ export default function SubjectPage() {
                 }
                 throw new Error("use fallback");
             } catch {
-                const slug = subjectSlug?.toLowerCase();
+                const slug = subjectSlug?.toLowerCase() || "";
                 const fallback = SUBJECT_EXPERIMENTS[slug] || SUBJECT_EXPERIMENTS["cn"];
                 setExperiments(fallback);
             } finally {
@@ -92,7 +92,7 @@ export default function SubjectPage() {
         if (subjectSlug) fetchData();
     }, [subjectSlug]);
 
-    const resolvedTitle = subject?.title || SUBJECT_FULL_NAMES[subjectSlug?.toLowerCase()] || subjectSlug?.toUpperCase() || "Subject";
+    const resolvedTitle = subject?.title || SUBJECT_FULL_NAMES[subjectSlug?.toLowerCase() || ""] || subjectSlug?.toUpperCase() || "Subject";
     
     // Generate image based on title
     const getHeroImage = (slug: string) => {
@@ -102,10 +102,10 @@ export default function SubjectPage() {
         if (slug === 'oops') return '/oops-module.jpg.jpg';
         return '/cn-module.jpg.jpg'; // fallback
     };
-    const bgImage = `url('${getHeroImage(subjectSlug?.toLowerCase())}')`;
+    const bgImage = `url('${getHeroImage(subjectSlug?.toLowerCase() || "")}')`;
 
     return (
-        <div className="min-h-screen bg-slate-50 font-sans">
+        <div className="min-h-screen bg-background font-sans">
             <PremiumNavbar pathname={`/dashboard/${subjectSlug}`} />
 
             {/* Hero Section with BG Image */}
