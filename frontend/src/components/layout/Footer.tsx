@@ -51,9 +51,9 @@ export function Footer() {
                                 { name: "CSIS Society", href: "https://csis-society-mmmut.vercel.app/" }
                             ].map((item) => (
                                 <li key={item.name}>
-                                    <a href={item.href} className="text-slate-300 hover:text-white text-sm transition-all relative py-1 group inline-block font-medium">
+                                    <a href={item.href} className="text-slate-300 hover:text-white text-sm  relative py-1 group inline-block font-medium">
                                         {item.name}
-                                        <span className="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
+                                        <span className="absolute bottom-0 left-0 w-0 h-px bg-primary  duration-300 group-hover:w-full" />
                                     </a>
                                 </li>
                             ))}
@@ -71,9 +71,9 @@ export function Footer() {
                                 { name: "Report a Bug", href: "#" },
                             ].map((item) => (
                                 <li key={item.name}>
-                                    <a href={item.href} className="text-slate-300 hover:text-white text-sm transition-all relative py-1 group inline-block font-medium">
+                                    <a href={item.href} className="text-slate-300 hover:text-white text-sm  relative py-1 group inline-block font-medium">
                                         {item.name}
-                                        <span className="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
+                                        <span className="absolute bottom-0 left-0 w-0 h-px bg-primary  duration-300 group-hover:w-full" />
                                     </a>
                                 </li>
                             ))}

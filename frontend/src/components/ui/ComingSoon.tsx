@@ -11,7 +11,7 @@ export function ComingSoon({ title }: ComingSoonProps) {
     return (
         <section className="min-h-[80vh] flex items-center justify-center bg-[#FAFAFA] py-20 px-6">
             <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
-                <div className="w-64 h-64 md:w-80 md:h-80 mb-8 relative drop-shadow-xl animate-in zoom-in duration-700">
+                <div className="w-64 h-64 md:w-80 md:h-80 mb-8 relative drop- animate-in zoom-in duration-700">
                     <img 
                         src="/prayukti 2.0/illustrations/laptop_guy.png" 
                         alt="Coming Soon" 
@@ -27,7 +27,7 @@ export function ComingSoon({ title }: ComingSoonProps) {
                     We are working continuously around the clock to ship this feature as soon as possible. Please be patient, it's going to be worth the wait!
                 </p>
                 
-                <Link href="/" className="inline-flex items-center justify-center h-12 px-8 bg-[#059669] hover:bg-[#047857] text-white font-semibold rounded-xl transition-all shadow-[0_4px_14px_0_rgba(5,150,105,0.39)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.23)] hover:-translate-y-0.5">
+                <Link href="/" className="inline-flex items-center justify-center h-12 px-8 bg-[#059669] hover:bg-[#047857] text-white font-semibold rounded-xl  shadow-[0_4px_14px_0_rgba(5,150,105,0.39)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.23)] .5">
                     <i className="bx bx-left-arrow-alt text-xl mr-2"></i>
                     Return Home
                 </Link>

@@ -41,3 +41,5 @@ lerna-debug.log*
 Thumbs.db
 .idea/
 .vscode/
+temp_chatbot.tsx
+terms.md

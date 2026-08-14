@@ -78,7 +78,7 @@ export function MetricsStrip() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="bg-[#021D24] rounded-2xl py-12 px-8 flex flex-col md:flex-row items-center justify-around gap-8 shadow-xl"
+                    className="bg-[#021D24] rounded-2xl py-12 px-8 flex flex-col md:flex-row items-center justify-around gap-8 "
                 >
                     {metrics.map((metric, idx) => (
                         <div key={idx} className="flex flex-col items-center text-center">

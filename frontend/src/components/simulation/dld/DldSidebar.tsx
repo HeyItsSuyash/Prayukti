@@ -17,10 +17,10 @@ export const DldSidebar = ({ onAddNode }: DldSidebarProps) => {
     };
 
     return (
-        <div className="absolute left-4 top-4 bottom-4 w-60 bg-white/90 backdrop-blur-md border border-gray-200 shadow-xl rounded-xl overflow-hidden flex flex-col z-50 transition-all select-none">
-            <div className="p-4 border-b border-gray-100 bg-gray-50/50">
-                <h2 className="font-bold text-gray-800 text-sm uppercase tracking-wider">Components</h2>
-                <p className="text-[10px] text-gray-500 mt-1">Drag and drop to canvas</p>
+        <div className="absolute left-4 top-4 bottom-4 w-60 bg-card/90 backdrop-blur-md border border-border shadow-none-none rounded-none-none overflow-hidden flex flex-col z-50  select-none">
+            <div className="p-4 border-b border-border bg-card/50">
+                <h2 className="font-bold text-muted-foreground text-sm uppercase tracking-wider">Components</h2>
+                <p className="text-[10px] text-muted-foreground mt-1">Drag and drop to canvas</p>
             </div>
 
             <div className="flex-1 overflow-y-auto p-2 space-y-2 no-scrollbar">
@@ -29,7 +29,7 @@ export const DldSidebar = ({ onAddNode }: DldSidebarProps) => {
                 <div className="space-y-1">
                     <button
                         onClick={() => toggleCategory('io')}
-                        className="w-full flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg text-xs font-semibold text-gray-600 transition-colors"
+                        className="w-full flex items-center gap-2 p-2 hover:bg-card rounded-none-none text-xs font-semibold text-muted-foreground transition-colors"
                     >
                         {openCategories['io'] ? <i className="bx bx-chevron-down"  /> : <i className="bx bx-chevronright"  />}
                         <i className="bx bx-zap text-yellow-500"  />
@@ -50,10 +50,10 @@ export const DldSidebar = ({ onAddNode }: DldSidebarProps) => {
                 <div className="space-y-1">
                     <button
                         onClick={() => toggleCategory('gates')}
-                        className="w-full flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg text-xs font-semibold text-gray-600 transition-colors"
+                        className="w-full flex items-center gap-2 p-2 hover:bg-card rounded-none-none text-xs font-semibold text-muted-foreground transition-colors"
                     >
                         {openCategories['gates'] ? <i className="bx bx-chevron-down"  /> : <i className="bx bx-chevronright"  />}
-                        <i className="bx bx-cpu text-blue-500"  />
+                        <i className="bx bx-cpu text-primary"  />
                         Logic Gates
                     </button>
 
@@ -88,7 +88,7 @@ export const DldSidebar = ({ onAddNode }: DldSidebarProps) => {
                 <div className="space-y-1">
                     <button
                         onClick={() => toggleCategory('msi')}
-                        className="w-full flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg text-xs font-semibold text-gray-600 transition-colors"
+                        className="w-full flex items-center gap-2 p-2 hover:bg-card rounded-none-none text-xs font-semibold text-muted-foreground transition-colors"
                     >
                         {openCategories['msi'] ? <i className="bx bx-chevron-down"  /> : <i className="bx bx-chevronright"  />}
                         <i className="bx bx-desktop text-purple-500"  />
@@ -132,19 +132,19 @@ const SidebarItem = ({ label, onClick, icon, iconNode, disabled, type, data }: {
             onClick={onClick}
             disabled={disabled}
             className={`
-        w-full flex flex-col items-center justify-center p-3 rounded-lg border border-gray-100 bg-white hover:border-blue-500 hover:shadow-md transition-all group
+        w-full flex flex-col items-center justify-center p-3 rounded-none-none border border-border bg-card hover:border-primary -none  group
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-grab active:cursor-grabbing'}
       `}
         >
             {/* Simple Icon Representation */}
-            <div className="w-8 h-8 mb-2 flex items-center justify-center text-gray-400 group-hover:text-blue-500 transition-colors pointer-events-none">
+            <div className="w-8 h-8 mb-2 flex items-center justify-center text-muted-foreground group-hover:text-primary transition-colors pointer-events-none">
                 {iconNode ? iconNode : (icon ? (
                     <span className="font-mono text-[10px] font-bold uppercase">{icon}</span>
                 ) : (
-                    <div className="w-6 h-4 border-2 border-current rounded-sm"></div>
+                    <div className="w-6 h-4 border-2 border-current rounded-none-sm"></div>
                 ))}
             </div>
-            <span className="text-[10px] font-medium text-gray-600 group-hover:text-gray-900 text-center leading-tight pointer-events-none">{label}</span>
+            <span className="text-[10px] font-medium text-muted-foreground group-hover:text-muted-foreground text-center leading-tight pointer-events-none">{label}</span>
         </button>
     );
 };

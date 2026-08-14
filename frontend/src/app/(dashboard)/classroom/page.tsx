@@ -68,7 +68,7 @@ export default function ClassroomDashboard() {
 
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-32 animate-pulse">
-                        <i className="bx bx-loader2 w-10 h-10 text-indigo-600 animate-spin mb-4"  />
+                        <i className="bx bx-loader2 w-10 h-10 text-[#059669] animate-spin mb-4"  />
                         <p className="text-slate-400 font-black uppercase tracking-widest text-[9px]">Synchronizing classroom variables...</p>
                     </div>
                 ) : error ? (
@@ -79,7 +79,7 @@ export default function ClassroomDashboard() {
                 ) : (
                     <>
                         {/* AI Video Tutor Banner */}
-                        <div className="border border-indigo-100/50 dark:border-indigo-900/30 rounded-3xl p-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex flex-col md:flex-row justify-between items-center gap-4 shadow-md mb-6">
+                        <div className="border border-indigo-100/50 dark:border-indigo-900/30 rounded-3xl p-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex flex-col md:flex-row justify-between items-center gap-4  mb-6">
                             <div>
                                 <div className="flex items-center gap-2">
                                     <i className="bx bx-sparkles text-indigo-200 animate-pulse"  />
@@ -103,7 +103,7 @@ export default function ClassroomDashboard() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {isTeacher ? (
                                 <>
-                                    <Card className="rounded-3xl border-2 hover:border-slate-300 dark:hover:border-slate-700 transition-all bg-white dark:bg-slate-900">
+                                    <Card className="rounded-3xl border-2 hover:border-slate-300 dark:hover:border-slate-700  bg-white dark:bg-slate-900">
                                         <CardContent className="p-6">
                                             <div className="flex justify-between items-start mb-4">
                                                 <span className="text-xs font-black uppercase tracking-widest text-slate-400">Total Enrolled</span>
@@ -116,7 +116,7 @@ export default function ClassroomDashboard() {
                                         </CardContent>
                                     </Card>
 
-                                    <Card className="rounded-3xl border-2 hover:border-slate-300 dark:hover:border-slate-700 transition-all bg-white dark:bg-slate-900">
+                                    <Card className="rounded-3xl border-2 hover:border-slate-300 dark:hover:border-slate-700  bg-white dark:bg-slate-900">
                                         <CardContent className="p-6">
                                             <div className="flex justify-between items-start mb-4">
                                                 <span className="text-xs font-black uppercase tracking-widest text-slate-400">Active Today</span>
@@ -129,7 +129,7 @@ export default function ClassroomDashboard() {
                                         </CardContent>
                                     </Card>
 
-                                    <Card className="rounded-3xl border-2 hover:border-slate-300 dark:hover:border-slate-700 transition-all bg-white dark:bg-slate-900">
+                                    <Card className="rounded-3xl border-2 hover:border-slate-300 dark:hover:border-slate-700  bg-white dark:bg-slate-900">
                                         <CardContent className="p-6">
                                             <div className="flex justify-between items-start mb-4">
                                                 <span className="text-xs font-black uppercase tracking-widest text-slate-400">Today's Classes</span>
@@ -144,7 +144,7 @@ export default function ClassroomDashboard() {
                                 </>
                             ) : (
                                 <>
-                                    <Card className="rounded-3xl border-2 hover:border-slate-300 dark:hover:border-slate-700 transition-all bg-white dark:bg-slate-900">
+                                    <Card className="rounded-3xl border-2 hover:border-slate-300 dark:hover:border-slate-700  bg-white dark:bg-slate-900">
                                         <CardContent className="p-6">
                                             <div className="flex justify-between items-start mb-4">
                                                 <span className="text-xs font-black uppercase tracking-widest text-slate-400">Attendance Index</span>
@@ -157,7 +157,7 @@ export default function ClassroomDashboard() {
                                         </CardContent>
                                     </Card>
 
-                                    <Card className="rounded-3xl border-2 hover:border-slate-300 dark:hover:border-slate-700 transition-all bg-white dark:bg-slate-900">
+                                    <Card className="rounded-3xl border-2 hover:border-slate-300 dark:hover:border-slate-700  bg-white dark:bg-slate-900">
                                         <CardContent className="p-6">
                                             <div className="flex justify-between items-start mb-4">
                                                 <span className="text-xs font-black uppercase tracking-widest text-slate-400">Engagement Score</span>
@@ -170,7 +170,7 @@ export default function ClassroomDashboard() {
                                         </CardContent>
                                     </Card>
 
-                                    <Card className="rounded-3xl border-2 hover:border-slate-300 dark:hover:border-slate-700 transition-all bg-white dark:bg-slate-900">
+                                    <Card className="rounded-3xl border-2 hover:border-slate-300 dark:hover:border-slate-700  bg-white dark:bg-slate-900">
                                         <CardContent className="p-6">
                                             <div className="flex justify-between items-start mb-4">
                                                 <span className="text-xs font-black uppercase tracking-widest text-slate-400">Pending Exams</span>
@@ -190,7 +190,7 @@ export default function ClassroomDashboard() {
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             
                             {/* Today's Schedule Card */}
-                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 overflow-hidden  hover: transition-shadow">
                                 <div className="p-8 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-900/50">
                                     <div>
                                         <h2 className="text-2xl font-black uppercase tracking-tight">Today's <span className="text-indigo-600 dark:text-indigo-400 italic">Classes</span></h2>
@@ -243,7 +243,7 @@ export default function ClassroomDashboard() {
                             </Card>
 
                             {/* Recent Announcements Card */}
-                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 overflow-hidden  hover: transition-shadow">
                                 <div className="p-8 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-900/50">
                                     <div>
                                         <h2 className="text-2xl font-black uppercase tracking-tight">Recent <span className="text-indigo-600 dark:text-indigo-400 italic">Announcements</span></h2>
@@ -258,7 +258,7 @@ export default function ClassroomDashboard() {
                                 <CardContent className="p-8 space-y-4">
                                     {data.announcements && data.announcements.length > 0 ? (
                                         data.announcements.map((a: any) => (
-                                            <div key={a.id} className="p-4 bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 rounded-2xl hover:border-slate-300 dark:hover:border-slate-700 transition-all">
+                                            <div key={a.id} className="p-4 bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 rounded-2xl hover:border-slate-300 dark:hover:border-slate-700 ">
                                                 <div className="flex items-start gap-3 justify-between">
                                                     <div className="flex gap-3">
                                                         <div className="w-10 h-10 bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center shrink-0">

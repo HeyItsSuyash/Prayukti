@@ -50,7 +50,7 @@ export function FAQSection() {
                                 <div 
                                     key={idx} 
                                     className={cn(
-                                        "bg-white shadow-sm transition-all duration-300 border-l-[6px]",
+                                        "bg-white   duration-300 border-l-[6px]",
                                         isOpen ? "border-l-primary border-t border-r border-b border-t-slate-100 border-r-slate-100 border-b-slate-100" : "border-transparent border border-slate-200"
                                     )}
                                 >
@@ -63,7 +63,7 @@ export function FAQSection() {
                                             <span className="font-bold text-[#021D24] text-sm md:text-base">{faq.question}</span>
                                         </div>
                                         <i className={cn(
-                                            "bx text-xl text-[#021D24] transition-transform duration-300",
+                                            "bx text-xl text-[#021D24]  duration-300",
                                             isOpen ? "bx-chevron-up" : "bx-chevron-down"
                                         )}></i>
                                     </button>
@@ -93,7 +93,7 @@ export function FAQSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6 }}
-                            className="bg-[#021D24] p-12 shadow-2xl flex flex-col items-center text-center relative overflow-hidden h-full justify-center"
+                            className="bg-[#021D24] p-12  flex flex-col items-center text-center relative overflow-hidden h-full justify-center"
                         >
                             {/* Decorative Background Elements */}
                             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>

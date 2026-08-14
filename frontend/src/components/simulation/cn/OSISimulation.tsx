@@ -18,16 +18,16 @@ const osiLayers: Layer[] = [
     { id: 6, name: "Presentation", functions: ["Data Encryption", "Data Compression"], protocols: ["JPEG", "MPEG", "ASCII", "SSL"], color: "bg-orange-500", tcpMap: 4 },
     { id: 5, name: "Session", functions: ["Session Management", "Checkpointing"], protocols: ["NetBIOS", "RPC", "SQL"], color: "bg-yellow-500", tcpMap: 4 },
     { id: 4, name: "Transport", functions: ["End-to-End Connection", "Flow Control"], protocols: ["TCP", "UDP"], color: "bg-green-500", tcpMap: 3 },
-    { id: 3, name: "Network", functions: ["Routing", "Logical Addressing"], protocols: ["IP", "ICMP", "ARP", "IGMP"], color: "bg-blue-500", tcpMap: 2 },
-    { id: 2, name: "Data Link", functions: ["Framing", "Error Detection"], protocols: ["Ethernet", "PPP", "Switching"], color: "bg-indigo-500", tcpMap: 1 },
+    { id: 3, name: "Network", functions: ["Routing", "Logical Addressing"], protocols: ["IP", "ICMP", "ARP", "IGMP"], color: "bg-primary", tcpMap: 2 },
+    { id: 2, name: "Data Link", functions: ["Framing", "Error Detection"], protocols: ["Ethernet", "PPP", "Switching"], color: "bg-primary", tcpMap: 1 },
     { id: 1, name: "Physical", functions: ["Bit Transmission", "Physical Topology"], protocols: ["Hubs", "RS-232", "Cables"], color: "bg-purple-500", tcpMap: 1 },
 ];
 
 const tcpLayers: Layer[] = [
     { id: 4, name: "Application", functions: ["User Process", "Network Services"], protocols: ["HTTP", "FTP", "SMTP", "DNS"], color: "bg-red-600" },
     { id: 3, name: "Transport", functions: ["End-to-End Reliability"], protocols: ["TCP", "UDP"], color: "bg-green-600" },
-    { id: 2, name: "Internet", functions: ["Routing", "Addressing"], protocols: ["IP", "ICMP"], color: "bg-blue-600" },
-    { id: 1, name: "Network Access", functions: ["Hardware Interfacing"], protocols: ["Ethernet", "Wi-Fi"], color: "bg-indigo-600" },
+    { id: 2, name: "Internet", functions: ["Routing", "Addressing"], protocols: ["IP", "ICMP"], color: "bg-primary" },
+    { id: 1, name: "Network Access", functions: ["Hardware Interfacing"], protocols: ["Ethernet", "Wi-Fi"], color: "bg-primary" },
 ];
 
 const quizQuestions = [
@@ -100,16 +100,16 @@ export default function OSISimulation() {
     };
 
     return (
-        <div className="flex flex-col h-full bg-white overflow-y-auto">
+        <div className="flex flex-col h-full bg-card overflow-y-auto">
             {/* Tabs */}
-            <div className="flex border-b sticky top-0 bg-white z-10">
+            <div className="flex border-b sticky top-0 bg-card z-10">
                 {["Simulation", "Quiz", "Comparison"].map((tab) => (
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab.toLowerCase())}
                         className={`px-6 py-3 font-medium transition-colors border-b-2 ${activeTab === tab.toLowerCase()
-                            ? "border-blue-600 text-blue-600 bg-blue-50"
-                            : "border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                            ? "border-primary text-primary bg-blue-50"
+                            : "border-transparent text-muted-foreground hover:text-muted-foreground hover:bg-card"
                             }`}
                     >
                         {tab}
@@ -122,15 +122,15 @@ export default function OSISimulation() {
                     <div className="grid grid-cols-1 xl:grid-cols-2 gap-12">
                         {/* Models View */}
                         <div className="space-y-8">
-                            <div className="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-200">
+                            <div className="flex justify-between items-center bg-card p-4 rounded-none-none border border-border">
                                 <div>
-                                    <h3 className="font-bold text-gray-800">Visualizer</h3>
-                                    <p className="text-xs text-gray-500">Click a layer to see details</p>
+                                    <h3 className="font-bold text-muted-foreground">Visualizer</h3>
+                                    <p className="text-xs text-muted-foreground">Click a layer to see details</p>
                                 </div>
                                 <Button
                                     onClick={startAnimation}
                                     disabled={animating}
-                                    className="bg-blue-600 hover:bg-blue-700 shadow-md"
+                                    className="bg-primary hover:bg-primary shadow-none-none"
                                 >
                                     {animating ? <i className="bx bx-refreshcw mr-2 h-4 w-4 animate-spin"  /> : <i className="bx bx-play mr-2 h-4 w-4"  />}
                                     {animating ? "Animating..." : "Start Packet Flow"}
@@ -140,16 +140,16 @@ export default function OSISimulation() {
                             <div className="flex justify-around items-end gap-4 min-h-[500px]">
                                 {/* OSI Model */}
                                 <div className="flex flex-col gap-2 w-full max-w-[200px]">
-                                    <h4 className="text-center font-bold text-gray-600 mb-2 uppercase text-xs tracking-widest">OSI Model</h4>
+                                    <h4 className="text-center font-bold text-muted-foreground mb-2 uppercase text-xs tracking-widest">OSI Model</h4>
                                     {osiLayers.map((layer) => (
                                         <div
                                             key={layer.id}
                                             onClick={() => setSelectedLayer(layer)}
                                             className={`
-                                                relative cursor-pointer transition-all duration-300 transform
-                                                ${layer.color} text-white font-bold p-3 rounded shadow-sm text-center text-sm
-                                                ${selectedLayer?.id === layer.id && selectedLayer?.tcpMap ? "ring-4 ring-blue-300 scale-105 z-10" : "hover:scale-102"}
-                                                ${currentAnimLayer === layer.id ? "ring-4 ring-yellow-400 scale-110 shadow-xl z-20" : ""}
+                                                relative cursor-pointer  duration-300 transform
+                                                ${layer.color} text-white font-bold p-3 rounded-none shadow-none-none text-center text-sm
+                                                ${selectedLayer?.id === layer.id && selectedLayer?.tcpMap ? "ring-4 ring-blue-300 scale-105 z-10" : ""}
+                                                ${currentAnimLayer === layer.id ? "ring-4 ring-yellow-400 scale-110 shadow-none-none z-20" : ""}
                                             `}
                                         >
                                             <span className="absolute left-2 top-2 text-[10px] opacity-70">L{layer.id}</span>
@@ -164,13 +164,13 @@ export default function OSISimulation() {
                                 </div>
 
                                 {/* Arrow / Mapping Indicator (Can be replaced with SVGs for better look) */}
-                                <div className="hidden md:flex flex-col justify-center text-gray-300">
-                                    <div className="h-full border-l-2 border-dashed border-gray-200"></div>
+                                <div className="hidden md:flex flex-col justify-center text-muted-foreground">
+                                    <div className="h-full border-l-2 border-dashed border-border"></div>
                                 </div>
 
                                 {/* TCP/IP Model */}
                                 <div className="flex flex-col gap-0 w-full max-w-[200px]">
-                                    <h4 className="text-center font-bold text-gray-600 mb-2 uppercase text-xs tracking-widest">TCP/IP Model</h4>
+                                    <h4 className="text-center font-bold text-muted-foreground mb-2 uppercase text-xs tracking-widest">TCP/IP Model</h4>
                                     {tcpLayers.map((layer) => {
                                         // Calculate height based on how many OSI layers map to it
                                         const mappingCount = osiLayers.filter(osi => osi.tcpMap === layer.id).length;
@@ -178,7 +178,7 @@ export default function OSISimulation() {
                                             <div
                                                 key={layer.id}
                                                 className={`
-                                                    ${layer.color} text-white font-bold p-3 border-y border-white/20 shadow-sm text-center text-sm flex items-center justify-center
+                                                    ${layer.color} text-white font-bold p-3 border-y border-white/20 shadow-none-none text-center text-sm flex items-center justify-center
                                                     ${selectedLayer?.tcpMap === layer.id ? "ring-4 ring-blue-300 scale-105 z-10" : ""}
                                                 `}
                                                 style={{ height: `${mappingCount * 50}px` }}
@@ -194,27 +194,27 @@ export default function OSISimulation() {
                         {/* Details View */}
                         <div className="space-y-6">
                             {selectedLayer ? (
-                                <div className="bg-white rounded-2xl border shadow-lg overflow-hidden animate-in fade-in slide-in-from-right-4 duration-500">
+                                <div className="bg-card rounded-none-none border shadow-none-none overflow-hidden animate-in fade-in slide-in-from-right-4 duration-500">
                                     <div className={`${selectedLayer.color} p-6 text-white`}>
                                         <div className="flex justify-between items-start">
                                             <div>
                                                 <h3 className="text-2xl font-black uppercase">{selectedLayer.name} Layer</h3>
                                                 <p className="opacity-90">OSI Layer {selectedLayer.id}</p>
                                             </div>
-                                            <div className="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
+                                            <div className="bg-card/20 p-2 rounded-none-none backdrop-blur-sm">
                                                 <i className="bx bx-info h-6 w-6"  />
                                             </div>
                                         </div>
                                     </div>
                                     <div className="p-8 space-y-8">
                                         <div>
-                                            <h4 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                                                <span className="w-2 h-6 bg-blue-600 rounded-full"></span>
+                                            <h4 className="font-bold text-muted-foreground mb-4 flex items-center gap-2">
+                                                <span className="w-2 h-6 bg-primary rounded-none-full"></span>
                                                 Main Functions
                                             </h4>
                                             <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                                 {selectedLayer.functions.map((fn, i) => (
-                                                    <li key={i} className="bg-gray-50 p-3 rounded-lg text-gray-700 text-sm border border-gray-100 flex items-center gap-2">
+                                                    <li key={i} className="bg-card p-3 rounded-none-none text-muted-foreground text-sm border border-border flex items-center gap-2">
                                                         <i className="bx bx-check-circle h-4 w-4 text-green-500 shrink-0"  />
                                                         {fn}
                                                     </li>
@@ -223,31 +223,31 @@ export default function OSISimulation() {
                                         </div>
 
                                         <div>
-                                            <h4 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                                                <span className="w-2 h-6 bg-indigo-600 rounded-full"></span>
+                                            <h4 className="font-bold text-muted-foreground mb-4 flex items-center gap-2">
+                                                <span className="w-2 h-6 bg-primary rounded-none-full"></span>
                                                 Example Protocols
                                             </h4>
                                             <div className="flex flex-wrap gap-2">
                                                 {selectedLayer.protocols.map((proto, i) => (
-                                                    <span key={i} className="px-4 py-2 bg-indigo-50 text-indigo-700 font-bold rounded-full text-xs border border-indigo-100 uppercase tracking-wider">
+                                                    <span key={i} className="px-4 py-2 bg-indigo-50 text-primary font-bold rounded-none-full text-xs border border-primary uppercase tracking-wider">
                                                         {proto}
                                                     </span>
                                                 ))}
                                             </div>
                                         </div>
 
-                                        <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 text-sm text-blue-800 leading-relaxed italic">
+                                        <div className="bg-blue-50 p-4 rounded-none-none border border-primary text-sm text-primary leading-relaxed italic">
                                             Mapped to the <strong>{tcpLayers.find(t => t.id === selectedLayer.tcpMap)?.name}</strong> layer in the TCP/IP model.
                                         </div>
                                     </div>
                                 </div>
                             ) : (
-                                <div className="h-full flex flex-col items-center justify-center text-center p-12 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
-                                    <div className="bg-blue-100 p-4 rounded-full mb-4">
-                                        <i className="bx bx-info h-8 w-8 text-blue-600"  />
+                                <div className="h-full flex flex-col items-center justify-center text-center p-12 bg-card rounded-none-none border-2 border-dashed border-border">
+                                    <div className="bg-primary p-4 rounded-none-full mb-4">
+                                        <i className="bx bx-info h-8 w-8 text-primary"  />
                                     </div>
-                                    <h3 className="font-bold text-gray-800 text-lg">No Layer Selected</h3>
-                                    <p className="text-gray-500 max-w-xs mt-2">
+                                    <h3 className="font-bold text-muted-foreground text-lg">No Layer Selected</h3>
+                                    <p className="text-muted-foreground max-w-xs mt-2">
                                         Click on any OSI layer to explore its functions, protocols, and how it maps to the TCP/IP model.
                                     </p>
                                 </div>
@@ -258,25 +258,25 @@ export default function OSISimulation() {
 
                 {activeTab === "quiz" && (
                     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-8 rounded-2xl text-white shadow-xl">
+                        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-8 rounded-none-none text-white shadow-none-none">
                             <h3 className="text-2xl font-bold mb-2">Knowledge Check</h3>
                             <p className="opacity-90">Test your understanding of the OSI and TCP/IP models.</p>
                         </div>
 
                         <div className="space-y-6">
                             {quizQuestions.map((q, qIdx) => (
-                                <div key={qIdx} className="bg-white p-6 rounded-xl border shadow-sm">
-                                    <p className="font-bold text-gray-800 mb-4">{qIdx + 1}. {q.question}</p>
+                                <div key={qIdx} className="bg-card p-6 rounded-none-none border shadow-none-none">
+                                    <p className="font-bold text-muted-foreground mb-4">{qIdx + 1}. {q.question}</p>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                         {q.options.map((option, oIdx) => (
                                             <button
                                                 key={oIdx}
                                                 onClick={() => handleQuizOption(qIdx, oIdx)}
                                                 className={`
-                                                    p-4 text-left rounded-lg text-sm transition-all border-2
+                                                    p-4 text-left rounded-none-none text-sm  border-2
                                                     ${quizAnswers[qIdx] === oIdx
-                                                        ? "border-blue-600 bg-blue-50 text-blue-800 font-medium"
-                                                        : "border-gray-100 hover:border-gray-200 hover:bg-gray-50"
+                                                        ? "border-primary bg-blue-50 text-primary font-medium"
+                                                        : "border-border hover:border-border hover:bg-card"
                                                     }
                                                     ${quizSubmitted && oIdx === q.answer ? "border-green-500 bg-green-50 text-green-800" : ""}
                                                     ${quizSubmitted && quizAnswers[qIdx] === oIdx && oIdx !== q.answer ? "border-red-500 bg-red-50 text-red-800" : ""}
@@ -284,7 +284,7 @@ export default function OSISimulation() {
                                                 disabled={quizSubmitted}
                                             >
                                                 <div className="flex items-center gap-3">
-                                                    <span className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-xs shrink-0">{String.fromCharCode(65 + oIdx)}</span>
+                                                    <span className="w-6 h-6 rounded-none-full bg-card flex items-center justify-center text-xs shrink-0">{String.fromCharCode(65 + oIdx)}</span>
                                                     {option}
                                                     {quizSubmitted && oIdx === q.answer && <i className="bx bx-check-circle ml-auto h-5 w-5 text-green-500"  />}
                                                     {quizSubmitted && quizAnswers[qIdx] === oIdx && oIdx !== q.answer && <i className="bx bx-xcircle ml-auto h-5 w-5 text-red-500"  />}
@@ -298,7 +298,7 @@ export default function OSISimulation() {
 
                         <div className="flex gap-4 pt-4">
                             {!quizSubmitted ? (
-                                <Button onClick={submitQuiz} className="bg-blue-600 hover:bg-blue-700 w-full py-6 text-lg">
+                                <Button onClick={submitQuiz} className="bg-primary hover:bg-primary w-full py-6 text-lg">
                                     Submit Answers
                                 </Button>
                             ) : (
@@ -312,10 +312,10 @@ export default function OSISimulation() {
 
                 {activeTab === "comparison" && (
                     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <h3 className="text-2xl font-bold text-gray-800 mb-6">OSI vs TCP/IP Comparison</h3>
-                        <div className="overflow-hidden rounded-2xl border shadow-lg bg-white">
+                        <h3 className="text-2xl font-bold text-muted-foreground mb-6">OSI vs TCP/IP Comparison</h3>
+                        <div className="overflow-hidden rounded-none-none border shadow-none-none bg-card">
                             <table className="w-full text-sm text-left">
-                                <thead className="bg-gray-100 text-gray-700 uppercase text-xs font-bold">
+                                <thead className="bg-card text-muted-foreground uppercase text-xs font-bold">
                                     <tr>
                                         <th className="px-6 py-4">Feature</th>
                                         <th className="px-6 py-4">OSI Model</th>
@@ -323,28 +323,28 @@ export default function OSISimulation() {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y">
-                                    <tr className="hover:bg-gray-50 transition-colors">
-                                        <td className="px-6 py-4 font-bold text-gray-800">No. of Layers</td>
+                                    <tr className="hover:bg-card transition-colors">
+                                        <td className="px-6 py-4 font-bold text-muted-foreground">No. of Layers</td>
                                         <td className="px-6 py-4">7 Layers</td>
                                         <td className="px-6 py-4">4 Layers</td>
                                     </tr>
-                                    <tr className="hover:bg-gray-50 transition-colors">
-                                        <td className="px-6 py-4 font-bold text-gray-800">Approach</td>
+                                    <tr className="hover:bg-card transition-colors">
+                                        <td className="px-6 py-4 font-bold text-muted-foreground">Approach</td>
                                         <td className="px-6 py-4">Theoretical / Conceptual</td>
                                         <td className="px-6 py-4">Practical / Protocol-based</td>
                                     </tr>
-                                    <tr className="hover:bg-gray-50 transition-colors">
-                                        <td className="px-6 py-4 font-bold text-gray-800">Session/Presentation</td>
+                                    <tr className="hover:bg-card transition-colors">
+                                        <td className="px-6 py-4 font-bold text-muted-foreground">Session/Presentation</td>
                                         <td className="px-6 py-4">Separate layers</td>
                                         <td className="px-6 py-4">Part of Application layer</td>
                                     </tr>
-                                    <tr className="hover:bg-gray-50 transition-colors">
-                                        <td className="px-6 py-4 font-bold text-gray-800">Data Link/Physical</td>
+                                    <tr className="hover:bg-card transition-colors">
+                                        <td className="px-6 py-4 font-bold text-muted-foreground">Data Link/Physical</td>
                                         <td className="px-6 py-4">Separate layers</td>
                                         <td className="px-6 py-4">Combined as Host-to-Network layer</td>
                                     </tr>
-                                    <tr className="hover:bg-gray-50 transition-colors">
-                                        <td className="px-6 py-4 font-bold text-gray-800">Reliability</td>
+                                    <tr className="hover:bg-card transition-colors">
+                                        <td className="px-6 py-4 font-bold text-muted-foreground">Reliability</td>
                                         <td className="px-6 py-4">Less common in real-world networks</td>
                                         <td className="px-6 py-4">The standard for the Internet</td>
                                     </tr>

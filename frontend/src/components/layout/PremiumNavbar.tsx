@@ -54,8 +54,8 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
     ];
 
     const headerClass = !isLander 
-        ? "fixed top-0 left-0 right-0 z-50 bg-[#021D24]/95 backdrop-blur-md shadow-lg py-4 border-b border-white/5 transition-all duration-300"
-        : cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", isScrolled ? "bg-[#021D24]/95 backdrop-blur-md shadow-lg py-4 border-b border-white/5" : "bg-transparent py-6");
+        ? "fixed top-0 left-0 right-0 z-50 bg-[#021D24]/95 backdrop-blur-md  py-4 border-b border-white/5  duration-300"
+        : cn("fixed top-0 left-0 right-0 z-50  duration-300", isScrolled ? "bg-[#021D24]/95 backdrop-blur-md  py-4 border-b border-white/5" : "bg-transparent py-6");
 
     const textClass = "text-white/80 hover:text-white";
     const activeTextClass = "text-[#14D98F] border-[#14D98F]";
@@ -106,11 +106,11 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
                                     <p className="text-sm font-semibold text-white">{user.fullName}</p>
                                     <p className="text-[11px] font-bold uppercase tracking-wider text-white/60">{user.role}</p>
                                 </div>
-                                <div className="w-10 h-10 rounded-full bg-[#059669]/10 text-[#059669] flex items-center justify-center font-bold text-lg border border-[#059669]/20 shadow-sm">
+                                <div className="w-10 h-10 rounded-full bg-[#059669]/10 text-[#059669] flex items-center justify-center font-bold text-lg border border-[#059669]/20 ">
                                     {user.fullName?.charAt(0) || 'U'}
                                 </div>
                             </div>
-                            <div className="absolute right-0 mt-2 w-56 bg-white border border-slate-100 rounded-2xl shadow-[0_10px_40px_rgb(0,0,0,0.08)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2 top-full">
+                            <div className="absolute right-0 mt-2 w-56 bg-white border border-slate-100 rounded-2xl shadow-[0_10px_40px_rgb(0,0,0,0.08)] opacity-0 invisible group-hover:opacity-100 group-hover:visible  duration-200 py-2 top-full">
                                 <Link href="/profile" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-[#059669] transition-colors"><i className="bx bx-user mr-2"></i>Profile</Link>
                                 <Link href="/leaderboards" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-[#059669] transition-colors"><i className="bx bx-trophy mr-2"></i>Leaderboards</Link>
                                 <Link href="/settings" className="block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-[#059669] transition-colors"><i className="bx bx-cog mr-2"></i>Settings</Link>

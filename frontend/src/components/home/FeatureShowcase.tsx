@@ -46,7 +46,7 @@ function FeatureBlock({ reversed, title, description, benefits, mockup }: Featur
 
                 <Link href="#">
                     <Button variant="outline" className="rounded-full border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/5 group mt-4 h-12 px-6">
-                        Learn More <i className="bx bx-right-arrow-alt ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        Learn More <i className="bx bx-right-arrow-alt ml-2 group-hover:translate-x-1 "></i>
                     </Button>
                 </Link>
             </motion.div>
@@ -79,7 +79,7 @@ export function FeatureShowcase() {
                         "Standardized to university curriculums"
                     ]}
                     mockup={
-                        <div className="aspect-[4/3] rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#0A1929] shadow-2xl overflow-hidden flex flex-col relative group">
+                        <div className="aspect-[4/3] rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#0A1929]  overflow-hidden flex flex-col relative group">
                             <div className="h-10 border-b border-slate-200 dark:border-white/10 flex items-center px-4 gap-2 bg-white dark:bg-white/5">
                                 <div className="w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-600"></div>
                                 <div className="w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-600"></div>
@@ -93,8 +93,8 @@ export function FeatureShowcase() {
                                 {/* Mock Circuit */}
                                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 flex items-center justify-center">
                                     <div className="w-full h-1 bg-primary/40 relative">
-                                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 rounded-lg border-2 border-primary bg-white dark:bg-slate-900 flex items-center justify-center group-hover:scale-110 transition-transform"><i className="bx bx-chip text-2xl text-primary"></i></div>
-                                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full border-2 border-accent bg-white dark:bg-slate-900 flex items-center justify-center group-hover:scale-110 transition-transform"><i className="bx bx-bulb text-2xl text-accent"></i></div>
+                                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 rounded-lg border-2 border-primary bg-white dark:bg-slate-900 flex items-center justify-center group- "><i className="bx bx-chip text-2xl text-primary"></i></div>
+                                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full border-2 border-accent bg-white dark:bg-slate-900 flex items-center justify-center group- "><i className="bx bx-bulb text-2xl text-accent"></i></div>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@ export function FeatureShowcase() {
                         "Integrated terminal output"
                     ]}
                     mockup={
-                        <div className="aspect-[4/3] rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#0A1929] shadow-2xl overflow-hidden flex flex-col relative font-mono text-sm">
+                        <div className="aspect-[4/3] rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#0A1929]  overflow-hidden flex flex-col relative font-mono text-sm">
                             <div className="flex-1 bg-[#1E1E1E] p-4 text-slate-300 flex flex-col">
                                 <div className="flex gap-4 border-b border-white/10 pb-2 mb-4">
                                     <div className="text-primary">main.cpp</div>
@@ -169,7 +169,7 @@ export function FeatureShowcase() {
                         "Institution-level analytics"
                     ]}
                     mockup={
-                        <div className="aspect-[4/3] rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#0A1929] shadow-2xl overflow-hidden p-6 flex flex-col gap-6">
+                        <div className="aspect-[4/3] rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#0A1929]  overflow-hidden p-6 flex flex-col gap-6">
                             <div className="flex items-center justify-between">
                                 <div className="h-6 w-32 bg-slate-200 dark:bg-white/10 rounded-md"></div>
                                 <div className="w-8 h-8 rounded-full bg-slate-200 dark:bg-white/10"></div>

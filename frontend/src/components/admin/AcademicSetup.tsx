@@ -33,16 +33,16 @@ export function AcademicSetup() {
       <div className="flex gap-4 bg-white/5 p-2 rounded-2xl border border-white/10 w-fit">
         <button 
           onClick={() => setActiveTab('hierarchy')}
-          className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${
-            activeTab === 'hierarchy' ? 'bg-accent text-white shadow-lg' : 'text-white/50 hover:text-white hover:bg-white/5'
+          className={`px-6 py-3 rounded-xl font-bold text-sm  ${
+            activeTab === 'hierarchy' ? 'bg-accent text-white ' : 'text-white/50 hover:text-white hover:bg-white/5'
           }`}
         >
           Academic Hierarchy
         </button>
         <button 
           onClick={() => setActiveTab('faculty')}
-          className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${
-            activeTab === 'faculty' ? 'bg-accent text-white shadow-lg' : 'text-white/50 hover:text-white hover:bg-white/5'
+          className={`px-6 py-3 rounded-xl font-bold text-sm  ${
+            activeTab === 'faculty' ? 'bg-accent text-white ' : 'text-white/50 hover:text-white hover:bg-white/5'
           }`}
         >
           Faculty Assignments

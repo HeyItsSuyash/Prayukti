@@ -180,7 +180,7 @@ export default function FeaturesPage() {
                         <p className="text-slate-600 dark:text-slate-400 font-medium">"Virtualization isn't just an alternative, it's an upgrade."</p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-px bg-slate-200 dark:bg-slate-800 rounded-[3rem] overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl">
+                    <div className="grid md:grid-cols-2 gap-px bg-slate-200 dark:bg-slate-800 rounded-[3rem] overflow-hidden border border-slate-200 dark:border-slate-800 ">
                         <div className="bg-white dark:bg-primary p-12 space-y-8">
                             <div className="flex items-center gap-4">
                                 <div className="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-slate-400">
@@ -237,7 +237,7 @@ export default function FeaturesPage() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    className="rounded-[3rem] bg-gradient-to-r from-accent to-indigo-700 p-12 md:p-24 text-center text-white relative overflow-hidden shadow-2xl"
+                    className="rounded-[3rem] bg-gradient-to-r from-accent to-indigo-700 p-12 md:p-24 text-center text-white relative overflow-hidden "
                 >
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0%,transparent_70%)]"></div>
                     <div className="relative z-10 max-w-3xl mx-auto space-y-8">
@@ -250,7 +250,7 @@ export default function FeaturesPage() {
                         </p>
                         <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-8">
                             <a href="/login">
-                                <Button size="lg" className="h-16 px-12 text-lg rounded-xl bg-white text-accent hover:bg-slate-50 border-none font-black uppercase tracking-widest btn-interaction shadow-lg">
+                                <Button size="lg" className="h-16 px-12 text-lg rounded-xl bg-white text-accent hover:bg-slate-50 border-none font-black uppercase tracking-widest btn-interaction ">
                                     Start Practicing Now
                                 </Button>
                             </a>

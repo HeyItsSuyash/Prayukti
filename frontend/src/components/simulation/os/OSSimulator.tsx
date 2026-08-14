@@ -405,14 +405,14 @@ export default function OSSimulator({ labId }: { labId: string }) {
 
     return (
         <div className="flex flex-col h-full bg-[#fafbfe] p-6 space-y-6 overflow-y-auto">
-            <div className="flex justify-between items-center bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <div className="flex justify-between items-center bg-card p-6 rounded-none-none border border-border shadow-none-none">
                 <div>
-                    <h2 className="text-xl font-black text-slate-800 uppercase tracking-tight">Operating Systems Laboratory</h2>
-                    <p className="text-sm text-slate-500 mt-1">Interactive Simulation Dashboard</p>
+                    <h2 className="text-xl font-black text-muted-foreground uppercase tracking-tight">Operating Systems Laboratory</h2>
+                    <p className="text-sm text-muted-foreground mt-1">Interactive Simulation Dashboard</p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-widest bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">Active Lab: {labId}</span>
+                    <span className="h-2.5 w-2.5 rounded-none-full bg-primary animate-pulse"></span>
+                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest bg-card px-3 py-1.5 rounded-none-none border border-border">Active Lab: {labId}</span>
                 </div>
             </div>
 
@@ -421,47 +421,47 @@ export default function OSSimulator({ labId }: { labId: string }) {
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                     <div className="xl:col-span-2 space-y-6">
                         {/* Process Creator & Table */}
-                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
+                        <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-6">
                             <div className="flex justify-between items-center">
-                                <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                    <i className="bx bx-cpu h-5 w-5 text-blue-500"  /> Process Control Panel
+                                <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                    <i className="bx bx-cpu h-5 w-5 text-primary"  /> Process Control Panel
                                 </h3>
-                                <Button onClick={runSchedulingSimulation} className="bg-blue-600 hover:bg-blue-700 text-white font-bold">
+                                <Button onClick={runSchedulingSimulation} className="bg-primary hover:bg-primary text-white font-bold">
                                     <i className="bx bx-play mr-2 h-4 w-4"  /> Compute Schedule
                                 </Button>
                             </div>
 
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-card rounded-none-none border border-border">
                                 <div>
-                                    <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Process ID</label>
-                                    <input value={newId} onChange={e => setNewId(e.target.value)} className="w-full text-sm bg-white border border-slate-200 rounded-lg p-2" />
+                                    <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Process ID</label>
+                                    <input value={newId} onChange={e => setNewId(e.target.value)} className="w-full text-sm bg-card border border-border rounded-none-none p-2" />
                                 </div>
                                 <div>
-                                    <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Arrival Time</label>
-                                    <input type="number" value={newArrival} onChange={e => setNewArrival(Number(e.target.value))} className="w-full text-sm bg-white border border-slate-200 rounded-lg p-2" />
+                                    <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Arrival Time</label>
+                                    <input type="number" value={newArrival} onChange={e => setNewArrival(Number(e.target.value))} className="w-full text-sm bg-card border border-border rounded-none-none p-2" />
                                 </div>
                                 <div>
-                                    <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Burst Time</label>
-                                    <input type="number" value={newBurst} onChange={e => setNewBurst(Number(e.target.value))} className="w-full text-sm bg-white border border-slate-200 rounded-lg p-2" />
+                                    <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Burst Time</label>
+                                    <input type="number" value={newBurst} onChange={e => setNewBurst(Number(e.target.value))} className="w-full text-sm bg-card border border-border rounded-none-none p-2" />
                                 </div>
                                 {labId.includes("exp-3") ? (
                                     <div>
-                                        <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Priority</label>
-                                        <input type="number" value={newPriority} onChange={e => setNewPriority(Number(e.target.value))} className="w-full text-sm bg-white border border-slate-200 rounded-lg p-2" />
+                                        <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Priority</label>
+                                        <input type="number" value={newPriority} onChange={e => setNewPriority(Number(e.target.value))} className="w-full text-sm bg-card border border-border rounded-none-none p-2" />
                                     </div>
                                 ) : labId.includes("exp-4") ? (
                                     <div>
-                                        <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Quantum Size</label>
-                                        <input type="number" value={timeQuantum} onChange={e => setTimeQuantum(Number(e.target.value))} className="w-full text-sm bg-white border border-slate-200 rounded-lg p-2" />
+                                        <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Quantum Size</label>
+                                        <input type="number" value={timeQuantum} onChange={e => setTimeQuantum(Number(e.target.value))} className="w-full text-sm bg-card border border-border rounded-none-none p-2" />
                                     </div>
                                 ) : (
                                     <div className="flex items-end">
-                                        <Button onClick={addProcess} className="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs"><i className="bx bx-plus mr-1 h-3.5 w-3.5"  /> Add</Button>
+                                        <Button onClick={addProcess} className="w-full bg-card hover:bg-card text-white font-bold text-xs"><i className="bx bx-plus mr-1 h-3.5 w-3.5"  /> Add</Button>
                                     </div>
                                 )}
                                 {(labId.includes("exp-3") || labId.includes("exp-4")) && (
                                     <div className="col-span-2 md:col-span-4 flex justify-end">
-                                        <Button onClick={addProcess} className="bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs"><i className="bx bx-plus mr-1 h-3.5 w-3.5"  /> Add Process</Button>
+                                        <Button onClick={addProcess} className="bg-card hover:bg-card text-white font-bold text-xs"><i className="bx bx-plus mr-1 h-3.5 w-3.5"  /> Add Process</Button>
                                     </div>
                                 )}
                             </div>
@@ -469,15 +469,15 @@ export default function OSSimulator({ labId }: { labId: string }) {
                             <div className="overflow-x-auto">
                                 <table className="w-full text-left text-sm">
                                     <thead>
-                                        <tr className="bg-slate-50 text-slate-400 uppercase text-[10px] font-black border-b border-slate-100">
+                                        <tr className="bg-card text-muted-foreground uppercase text-[10px] font-black border-b border-border">
                                             <th className="px-4 py-3">Process ID</th>
                                             <th className="px-4 py-3">Arrival Time</th>
                                             <th className="px-4 py-3">Burst Time</th>
                                             {labId.includes("exp-3") && <th className="px-4 py-3">Priority</th>}
                                             {processes[0]?.completionTime !== undefined && (
                                                 <>
-                                                    <th className="px-4 py-3 text-blue-600">Completion</th>
-                                                    <th className="px-4 py-3 text-indigo-600">Turnaround</th>
+                                                    <th className="px-4 py-3 text-primary">Completion</th>
+                                                    <th className="px-4 py-3 text-primary">Turnaround</th>
                                                     <th className="px-4 py-3 text-emerald-600">Waiting</th>
                                                 </>
                                             )}
@@ -486,15 +486,15 @@ export default function OSSimulator({ labId }: { labId: string }) {
                                     </thead>
                                     <tbody className="divide-y divide-slate-100">
                                         {processes.map(p => (
-                                            <tr key={p.id} className="hover:bg-slate-50 transition-colors">
-                                                <td className="px-4 py-3 font-bold text-slate-800">{p.id}</td>
-                                                <td className="px-4 py-3 text-slate-600">{p.arrivalTime}</td>
-                                                <td className="px-4 py-3 text-slate-600">{p.burstTime}</td>
-                                                {labId.includes("exp-3") && <td className="px-4 py-3 text-slate-600">{p.priority}</td>}
+                                            <tr key={p.id} className="hover:bg-card transition-colors">
+                                                <td className="px-4 py-3 font-bold text-muted-foreground">{p.id}</td>
+                                                <td className="px-4 py-3 text-muted-foreground">{p.arrivalTime}</td>
+                                                <td className="px-4 py-3 text-muted-foreground">{p.burstTime}</td>
+                                                {labId.includes("exp-3") && <td className="px-4 py-3 text-muted-foreground">{p.priority}</td>}
                                                 {p.completionTime !== undefined && (
                                                     <>
-                                                        <td className="px-4 py-3 font-bold text-blue-600">{p.completionTime}</td>
-                                                        <td className="px-4 py-3 font-bold text-indigo-600">{p.turnaroundTime}</td>
+                                                        <td className="px-4 py-3 font-bold text-primary">{p.completionTime}</td>
+                                                        <td className="px-4 py-3 font-bold text-primary">{p.turnaroundTime}</td>
                                                         <td className="px-4 py-3 font-bold text-emerald-600">{p.waitingTime}</td>
                                                     </>
                                                 )}
@@ -512,11 +512,11 @@ export default function OSSimulator({ labId }: { labId: string }) {
 
                         {/* Gantt Chart */}
                         {ganttChart.length > 0 && (
-                            <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
-                                <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                    <i className="bx bx-activity h-5 w-5 text-indigo-500"  /> Gantt Chart Execution Timeline
+                            <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-4">
+                                <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                    <i className="bx bx-activity h-5 w-5 text-primary"  /> Gantt Chart Execution Timeline
                                 </h3>
-                                <div className="flex border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                                <div className="flex border border-border rounded-none-none overflow-hidden shadow-none-none">
                                     {ganttChart.map((item, idx) => {
                                         const totalDuration = ganttChart[ganttChart.length - 1].end;
                                         const widthPct = ((item.end - item.start) / totalDuration) * 100;
@@ -525,7 +525,7 @@ export default function OSSimulator({ labId }: { labId: string }) {
                                                 key={idx} 
                                                 style={{ width: `${widthPct}%` }}
                                                 className={`text-center py-4 text-xs font-bold text-white relative border-r last:border-0 border-white/20
-                                                    ${item.processId === "Idle" ? "bg-slate-400" : "bg-gradient-to-br from-blue-500 to-indigo-600"}
+                                                    ${item.processId === "Idle" ? "bg-card" : "bg-gradient-to-br from-blue-500 to-indigo-600"}
                                                 `}
                                             >
                                                 <div>{item.processId}</div>
@@ -538,14 +538,14 @@ export default function OSSimulator({ labId }: { labId: string }) {
                         )}
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
-                        <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                            <i className="bx bx-layoutlist h-5 w-5 text-indigo-500"  /> Performance Analysis
+                    <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-6">
+                        <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                            <i className="bx bx-layoutlist h-5 w-5 text-primary"  /> Performance Analysis
                         </h3>
-                        <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-4 text-sm">
+                        <div className="bg-card p-4 rounded-none-none border border-border space-y-4 text-sm">
                             <div>
-                                <span className="text-slate-400 block text-xs uppercase font-bold">Average Turnaround Time</span>
-                                <span className="text-2xl font-black text-slate-800">
+                                <span className="text-muted-foreground block text-xs uppercase font-bold">Average Turnaround Time</span>
+                                <span className="text-2xl font-black text-muted-foreground">
                                     {processes[0]?.turnaroundTime !== undefined 
                                         ? (processes.reduce((acc, p) => acc + (p.turnaroundTime || 0), 0) / processes.length).toFixed(2) 
                                         : "0.00"
@@ -553,8 +553,8 @@ export default function OSSimulator({ labId }: { labId: string }) {
                                 </span>
                             </div>
                             <div>
-                                <span className="text-slate-400 block text-xs uppercase font-bold">Average Waiting Time</span>
-                                <span className="text-2xl font-black text-slate-800">
+                                <span className="text-muted-foreground block text-xs uppercase font-bold">Average Waiting Time</span>
+                                <span className="text-2xl font-black text-muted-foreground">
                                     {processes[0]?.waitingTime !== undefined 
                                         ? (processes.reduce((acc, p) => acc + (p.waitingTime || 0), 0) / processes.length).toFixed(2) 
                                         : "0.00"
@@ -570,23 +570,23 @@ export default function OSSimulator({ labId }: { labId: string }) {
             {isMemory && (
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div className="lg:col-span-2 space-y-6">
-                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
-                            <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <i className="bx bx-layers h-5 w-5 text-blue-500"  /> Memory Layout Blocks
+                        <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-6">
+                            <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                <i className="bx bx-layers h-5 w-5 text-primary"  /> Memory Layout Blocks
                             </h3>
 
-                            <div className="flex gap-4 items-end bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div className="flex gap-4 items-end bg-card p-4 rounded-none-none border border-border">
                                 <div className="flex-1">
-                                    <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Process Name</label>
-                                    <input value={requestProcId} onChange={e => setRequestProcId(e.target.value)} className="w-full text-sm bg-white border border-slate-200 rounded-lg p-2" />
+                                    <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Process Name</label>
+                                    <input value={requestProcId} onChange={e => setRequestProcId(e.target.value)} className="w-full text-sm bg-card border border-border rounded-none-none p-2" />
                                 </div>
                                 <div className="flex-1">
-                                    <label className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Requested Size (KB)</label>
-                                    <input type="number" value={requestProcSize} onChange={e => setRequestProcSize(Number(e.target.value))} className="w-full text-sm bg-white border border-slate-200 rounded-lg p-2" />
+                                    <label className="text-[10px] uppercase font-bold text-muted-foreground block mb-1">Requested Size (KB)</label>
+                                    <input type="number" value={requestProcSize} onChange={e => setRequestProcSize(Number(e.target.value))} className="w-full text-sm bg-card border border-border rounded-none-none p-2" />
                                 </div>
                                 <div className="flex gap-2">
-                                    <Button onClick={allocateMemory} className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4">Allocate</Button>
-                                    <Button onClick={resetMemoryBlocks} variant="outline" className="text-xs font-bold border-slate-200">Reset</Button>
+                                    <Button onClick={allocateMemory} className="bg-primary hover:bg-primary text-white font-bold text-xs px-4">Allocate</Button>
+                                    <Button onClick={resetMemoryBlocks} variant="outline" className="text-xs font-bold border-border">Reset</Button>
                                 </div>
                             </div>
 
@@ -595,21 +595,21 @@ export default function OSSimulator({ labId }: { labId: string }) {
                                     const allocatedPct = block.allocatedProcessId ? (block.allocatedSize / block.size) * 100 : 0;
                                     const internalFrag = block.allocatedProcessId ? block.size - block.allocatedSize : 0;
                                     return (
-                                        <div key={block.id} className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50 flex items-center">
-                                            <div className="w-24 bg-slate-200 text-center py-4 font-bold text-sm text-slate-700 uppercase">{block.id} ({block.size}K)</div>
+                                        <div key={block.id} className="border border-border rounded-none-none overflow-hidden bg-card flex items-center">
+                                            <div className="w-24 bg-card text-center py-4 font-bold text-sm text-muted-foreground uppercase">{block.id} ({block.size}K)</div>
                                             <div className="flex-1 px-4 relative h-full flex flex-col justify-center py-2">
                                                 {block.allocatedProcessId ? (
                                                     <div className="space-y-1">
-                                                        <div className="flex justify-between text-xs font-bold text-slate-700">
+                                                        <div className="flex justify-between text-xs font-bold text-muted-foreground">
                                                             <span>Process: {block.allocatedProcessId} ({block.allocatedSize} KB)</span>
                                                             <span className="text-amber-600">Internal Frag: {internalFrag} KB</span>
                                                         </div>
-                                                        <div className="w-full bg-slate-200 rounded-full h-2">
-                                                            <div className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full" style={{ width: `${allocatedPct}%` }}></div>
+                                                        <div className="w-full bg-card rounded-none-full h-2">
+                                                            <div className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-none-full" style={{ width: `${allocatedPct}%` }}></div>
                                                         </div>
                                                     </div>
                                                 ) : (
-                                                    <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">Free Memory Block</span>
+                                                    <span className="text-xs text-muted-foreground font-bold uppercase tracking-wider">Free Memory Block</span>
                                                 )}
                                             </div>
                                         </div>
@@ -620,15 +620,15 @@ export default function OSSimulator({ labId }: { labId: string }) {
                     </div>
 
                     {/* Execution Logs */}
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[500px]">
-                        <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <i className="bx bx-activity h-5 w-5 text-indigo-500"  /> Allocation Console logs
+                    <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none flex flex-col h-[500px]">
+                        <h3 className="font-bold text-muted-foreground flex items-center gap-2 mb-4">
+                            <i className="bx bx-activity h-5 w-5 text-primary"  /> Allocation Console logs
                         </h3>
-                        <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
+                        <div className="flex-1 bg-card rounded-none-none p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {log.length > 0 ? (
                                 log.map((item, idx) => <div key={idx}>{item}</div>)
                             ) : (
-                                <div className="text-slate-500 italic">No allocation events triggered yet.</div>
+                                <div className="text-muted-foreground italic">No allocation events triggered yet.</div>
                             )}
                         </div>
                     </div>
@@ -639,12 +639,12 @@ export default function OSSimulator({ labId }: { labId: string }) {
             {isBankers && (
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                     <div className="xl:col-span-2 space-y-6">
-                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
+                        <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-6">
                             <div className="flex justify-between items-center">
-                                <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                    <i className="bx bx-layers h-5 w-5 text-blue-500"  /> Resource Allocation Matrix (Need = Max - Allocation)
+                                <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                    <i className="bx bx-layers h-5 w-5 text-primary"  /> Resource Allocation Matrix (Need = Max - Allocation)
                                 </h3>
-                                <Button onClick={runBankers} className="bg-blue-600 hover:bg-blue-700 text-white font-bold">
+                                <Button onClick={runBankers} className="bg-primary hover:bg-primary text-white font-bold">
                                     Check System Safety
                                 </Button>
                             </div>
@@ -653,7 +653,7 @@ export default function OSSimulator({ labId }: { labId: string }) {
                                 <div className="overflow-x-auto">
                                     <table className="w-full text-center text-sm">
                                         <thead>
-                                            <tr className="bg-slate-50 text-slate-400 uppercase text-[10px] font-black border-b border-slate-100">
+                                            <tr className="bg-card text-muted-foreground uppercase text-[10px] font-black border-b border-border">
                                                 <th className="px-4 py-2">Process</th>
                                                 <th className="px-4 py-2">Allocation (A, B, C)</th>
                                                 <th className="px-4 py-2">Max (A, B, C)</th>
@@ -662,11 +662,11 @@ export default function OSSimulator({ labId }: { labId: string }) {
                                         </thead>
                                         <tbody className="divide-y divide-slate-100">
                                             {bankersInput.alloc.map((row, pIdx) => (
-                                                <tr key={pIdx} className="hover:bg-slate-50 transition-colors">
-                                                    <td className="px-4 py-3 font-bold text-slate-700">P{pIdx}</td>
-                                                    <td className="px-4 py-3 font-mono text-slate-600">[{row.join(", ")}]</td>
-                                                    <td className="px-4 py-3 font-mono text-slate-600">[{bankersInput.max[pIdx].join(", ")}]</td>
-                                                    <td className="px-4 py-3 font-mono font-bold text-blue-600">
+                                                <tr key={pIdx} className="hover:bg-card transition-colors">
+                                                    <td className="px-4 py-3 font-bold text-muted-foreground">P{pIdx}</td>
+                                                    <td className="px-4 py-3 font-mono text-muted-foreground">[{row.join(", ")}]</td>
+                                                    <td className="px-4 py-3 font-mono text-muted-foreground">[{bankersInput.max[pIdx].join(", ")}]</td>
+                                                    <td className="px-4 py-3 font-mono font-bold text-primary">
                                                         [{bankersInput.max[pIdx].map((val, rIdx) => val - row[rIdx]).join(", ")}]
                                                     </td>
                                                 </tr>
@@ -678,11 +678,11 @@ export default function OSSimulator({ labId }: { labId: string }) {
                         </div>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[400px]">
-                        <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <i className="bx bx-activity h-5 w-5 text-indigo-500"  /> Banker's Safety Output
+                    <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none flex flex-col h-[400px]">
+                        <h3 className="font-bold text-muted-foreground flex items-center gap-2 mb-4">
+                            <i className="bx bx-activity h-5 w-5 text-primary"  /> Banker's Safety Output
                         </h3>
-                        <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
+                        <div className="flex-1 bg-card rounded-none-none p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {log.map((item, idx) => <div key={idx}>{item}</div>)}
                         </div>
                     </div>
@@ -693,9 +693,9 @@ export default function OSSimulator({ labId }: { labId: string }) {
             {isDeadlock && (
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                     <div className="xl:col-span-2 space-y-6">
-                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
+                        <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-6">
                             <div className="flex justify-between items-center">
-                                <h3 className="font-bold text-slate-800 flex items-center gap-2">
+                                <h3 className="font-bold text-muted-foreground flex items-center gap-2">
                                     <i className="bx bx-shieldalert h-5 w-5 text-rose-500"  /> Resource Allocation Graph Cycle Detection
                                 </h3>
                                 <Button onClick={detectDeadlock} className="bg-rose-600 hover:bg-rose-700 text-white font-bold">
@@ -703,35 +703,35 @@ export default function OSSimulator({ labId }: { labId: string }) {
                                 </Button>
                             </div>
 
-                            <div className="border border-slate-200 rounded-2xl p-6 bg-slate-50 flex flex-col items-center justify-center min-h-[250px]">
+                            <div className="border border-border rounded-none-none p-6 bg-card flex flex-col items-center justify-center min-h-[250px]">
                                 <div className="flex items-center gap-12">
                                     {/* Process Nodes */}
                                     <div className="flex flex-col gap-8">
-                                        <div className="h-12 w-12 rounded-full border-2 border-blue-500 bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs shadow-sm">P1</div>
-                                        <div className="h-12 w-12 rounded-full border-2 border-blue-500 bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs shadow-sm">P2</div>
+                                        <div className="h-12 w-12 rounded-none-full border-2 border-primary bg-blue-50 text-primary flex items-center justify-center font-bold text-xs shadow-none-none">P1</div>
+                                        <div className="h-12 w-12 rounded-none-full border-2 border-primary bg-blue-50 text-primary flex items-center justify-center font-bold text-xs shadow-none-none">P2</div>
                                     </div>
 
                                     {/* Directed Paths */}
-                                    <div className="flex flex-col gap-6 font-bold text-xs text-slate-400">
+                                    <div className="flex flex-col gap-6 font-bold text-xs text-muted-foreground">
                                         <div>Allocated ➔</div>
                                         <div>➔ Requesting</div>
                                     </div>
 
                                     {/* Resource Nodes */}
                                     <div className="flex flex-col gap-8">
-                                        <div className="h-12 w-12 rounded-lg border-2 border-emerald-500 bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs shadow-sm">R1</div>
-                                        <div className="h-12 w-12 rounded-lg border-2 border-emerald-500 bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs shadow-sm">R2</div>
+                                        <div className="h-12 w-12 rounded-none-none border-2 border-emerald-500 bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs shadow-none-none">R1</div>
+                                        <div className="h-12 w-12 rounded-none-none border-2 border-emerald-500 bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs shadow-none-none">R2</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[350px]">
-                        <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <i className="bx bx-activity h-5 w-5 text-indigo-500"  /> Analysis Log
+                    <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none flex flex-col h-[350px]">
+                        <h3 className="font-bold text-muted-foreground flex items-center gap-2 mb-4">
+                            <i className="bx bx-activity h-5 w-5 text-primary"  /> Analysis Log
                         </h3>
-                        <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
+                        <div className="flex-1 bg-card rounded-none-none p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {log.map((item, idx) => <div key={idx}>{item}</div>)}
                         </div>
                     </div>
@@ -742,13 +742,13 @@ export default function OSSimulator({ labId }: { labId: string }) {
             {isSync && (
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                     <div className="xl:col-span-2 space-y-6">
-                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
-                            <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <i className="bx bx-activity h-5 w-5 text-blue-500"  /> Mutex Lock & Shared Buffer Simulator
+                        <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-6">
+                            <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                <i className="bx bx-activity h-5 w-5 text-primary"  /> Mutex Lock & Shared Buffer Simulator
                             </h3>
 
                             <div className="flex justify-center gap-4">
-                                <Button onClick={runProducer} className="bg-blue-600 hover:bg-blue-700 text-white font-bold">
+                                <Button onClick={runProducer} className="bg-primary hover:bg-primary text-white font-bold">
                                     Trigger Producer (Produce Item)
                                 </Button>
                                 <Button onClick={runConsumer} className="bg-rose-600 hover:bg-rose-700 text-white font-bold">
@@ -757,24 +757,24 @@ export default function OSSimulator({ labId }: { labId: string }) {
                             </div>
 
                             <div className="space-y-2">
-                                <div className="text-xs uppercase font-bold text-slate-400 mb-2">Buffer States ({buffer.length}/{bufferLimit})</div>
-                                <div className="flex gap-2 p-4 bg-slate-50 border border-slate-200 rounded-xl min-h-[80px] items-center">
+                                <div className="text-xs uppercase font-bold text-muted-foreground mb-2">Buffer States ({buffer.length}/{bufferLimit})</div>
+                                <div className="flex gap-2 p-4 bg-card border border-border rounded-none-none min-h-[80px] items-center">
                                     {buffer.map((item, index) => (
-                                        <div key={index} className="px-4 py-2 bg-gradient-to-br from-blue-500 to-indigo-600 text-white text-xs font-bold rounded-lg shadow-sm animate-in zoom-in-50">
+                                        <div key={index} className="px-4 py-2 bg-gradient-to-br from-blue-500 to-indigo-600 text-white text-xs font-bold rounded-none-none shadow-none-none animate-in zoom-in-50">
                                             {item}
                                         </div>
                                     ))}
-                                    {buffer.length === 0 && <span className="text-xs text-slate-400 italic font-bold">Buffer Empty</span>}
+                                    {buffer.length === 0 && <span className="text-xs text-muted-foreground italic font-bold">Buffer Empty</span>}
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[400px]">
-                        <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
-                            <i className="bx bx-activity h-5 w-5 text-indigo-500"  /> Synchronization Logs
+                    <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none flex flex-col h-[400px]">
+                        <h3 className="font-bold text-muted-foreground flex items-center gap-2 mb-4">
+                            <i className="bx bx-activity h-5 w-5 text-primary"  /> Synchronization Logs
                         </h3>
-                        <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
+                        <div className="flex-1 bg-card rounded-none-none p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                             {syncLog.map((item, idx) => <div key={idx}>{item}</div>)}
                         </div>
                     </div>

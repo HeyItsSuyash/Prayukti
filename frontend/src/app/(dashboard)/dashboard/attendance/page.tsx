@@ -169,14 +169,14 @@ export default function StudentAttendancePage() {
 
                 {loading && !attendanceData ? (
                     <div className="flex flex-col items-center justify-center py-40">
-                        <RefreshCw className="w-12 h-12 text-blue-600 animate-spin mb-4" />
+                        <RefreshCw className="w-12 h-12 text-[#059669] animate-spin mb-4" />
                         <p className="text-slate-400 font-black uppercase tracking-widest text-[10px]">Loading Session Logs...</p>
                     </div>
                 ) : (
                     <>
                         {/* Summary Metrics */}
                         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-10">
-                            <Card className="border-2 rounded-3xl overflow-hidden hover:shadow-lg transition-shadow">
+                            <Card className="border-2 rounded-3xl overflow-hidden hover: transition-shadow">
                                 <CardHeader className="pb-2">
                                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Attendance Rate</span>
                                 </CardHeader>
@@ -191,7 +191,7 @@ export default function StudentAttendancePage() {
                                 </CardContent>
                             </Card>
 
-                            <Card className="border-2 rounded-3xl overflow-hidden hover:shadow-lg transition-shadow">
+                            <Card className="border-2 rounded-3xl overflow-hidden hover: transition-shadow">
                                 <CardHeader className="pb-2">
                                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Avg. Lab Duration</span>
                                 </CardHeader>
@@ -206,7 +206,7 @@ export default function StudentAttendancePage() {
                                 </CardContent>
                             </Card>
 
-                            <Card className="border-2 rounded-3xl overflow-hidden hover:shadow-lg transition-shadow">
+                            <Card className="border-2 rounded-3xl overflow-hidden hover: transition-shadow">
                                 <CardHeader className="pb-2">
                                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Experiments Completed</span>
                                 </CardHeader>
@@ -221,7 +221,7 @@ export default function StudentAttendancePage() {
                                 </CardContent>
                             </Card>
 
-                            <Card className="border-2 rounded-3xl overflow-hidden hover:shadow-lg transition-shadow">
+                            <Card className="border-2 rounded-3xl overflow-hidden hover: transition-shadow">
                                 <CardHeader className="pb-2">
                                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Academic Standing</span>
                                 </CardHeader>
@@ -244,7 +244,7 @@ export default function StudentAttendancePage() {
                         {/* Logs and Activity List */}
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             {/* Attendance Logs Table */}
-                            <Card className="lg:col-span-2 border-2 rounded-[2.5rem] overflow-hidden shadow-sm">
+                            <Card className="lg:col-span-2 border-2 rounded-[2.5rem] overflow-hidden ">
                                 <CardHeader className="p-8 border-b">
                                     <CardTitle className="uppercase font-black tracking-tight text-xl">Recent Access Logs</CardTitle>
                                 </CardHeader>
@@ -298,14 +298,14 @@ export default function StudentAttendancePage() {
                             </Card>
 
                             {/* Experiment Analytics Card */}
-                            <Card className="border-2 rounded-[2.5rem] p-8 shadow-sm">
+                            <Card className="border-2 rounded-[2.5rem] p-8 ">
                                 <h3 className="text-xl font-black uppercase tracking-tight mb-6">Experiment Activities</h3>
                                 <div className="space-y-6">
                                     {attendanceData?.experiment_activity?.length === 0 ? (
                                         <p className="text-slate-400 text-sm font-medium">No recent simulations tracked.</p>
                                     ) : (
                                         attendanceData?.experiment_activity?.map((act: any) => (
-                                            <div key={act._id} className="p-5 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800 hover:shadow-md transition-shadow">
+                                            <div key={act._id} className="p-5 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800 hover: transition-shadow">
                                                 <h4 className="font-bold text-slate-900 dark:text-white text-sm mb-1">{act.experiment_name}</h4>
                                                 <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-wider text-slate-400 mt-3">
                                                     <span>Runs: {act.run_count}</span>

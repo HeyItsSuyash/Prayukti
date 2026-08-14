@@ -314,7 +314,7 @@ export default function RegisterPage() {
                             </button>
                             <div className="flex gap-1.5 pb-2">
                                 {[1, 2, 3, 4].map(i => (
-                                    <div key={i} className={`h-1.5 rounded-full transition-all duration-500 ${step >= i ? "w-6 bg-[#059669]" : "w-2 bg-slate-200"}`} />
+                                    <div key={i} className={`h-1.5 rounded-full  duration-500 ${step >= i ? "w-6 bg-[#059669]" : "w-2 bg-slate-200"}`} />
                                 ))}
                             </div>
                         </div>
@@ -345,7 +345,7 @@ export default function RegisterPage() {
                                         </div>
                                         <Input
                                             placeholder="John Doe"
-                                            className="w-full h-12 pl-11 pr-4 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-[#059669] focus:ring-4 focus:ring-[#059669]/10 outline-none transition-all text-sm text-slate-700 placeholder:text-slate-400"
+                                            className="w-full h-12 pl-11 pr-4 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-[#059669] focus:ring-4 focus:ring-[#059669]/10 outline-none  text-sm text-slate-700 placeholder:text-slate-400"
                                             value={fullName}
                                             onChange={(e) => setFullName(e.target.value)}
                                             required
@@ -362,7 +362,7 @@ export default function RegisterPage() {
                                         <Input
                                             type="email"
                                             placeholder="name@mmmut.ac.in"
-                                            className="w-full h-12 pl-11 pr-4 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-[#059669] focus:ring-4 focus:ring-[#059669]/10 outline-none transition-all text-sm text-slate-700 placeholder:text-slate-400"
+                                            className="w-full h-12 pl-11 pr-4 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-[#059669] focus:ring-4 focus:ring-[#059669]/10 outline-none  text-sm text-slate-700 placeholder:text-slate-400"
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             required
@@ -379,7 +379,7 @@ export default function RegisterPage() {
                                         <Input
                                             type={showPassword ? "text" : "password"}
                                             placeholder="Enter your password"
-                                            className="w-full h-12 pl-11 pr-12 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-[#059669] focus:ring-4 focus:ring-[#059669]/10 outline-none transition-all text-sm text-slate-700 placeholder:text-slate-400"
+                                            className="w-full h-12 pl-11 pr-12 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-[#059669] focus:ring-4 focus:ring-[#059669]/10 outline-none  text-sm text-slate-700 placeholder:text-slate-400"
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
                                             required
@@ -410,7 +410,7 @@ export default function RegisterPage() {
                                                 value={rollNo}
                                                 disabled
                                                 required
-                                                className="w-full h-12 pl-11 pr-4 rounded-xl border border-slate-200 bg-slate-50 text-slate-500 cursor-not-allowed outline-none transition-all text-sm font-medium"
+                                                className="w-full h-12 pl-11 pr-4 rounded-xl border border-slate-200 bg-slate-50 text-slate-500 cursor-not-allowed outline-none  text-sm font-medium"
                                             />
                                         </div>
                                     </div>
@@ -425,7 +425,7 @@ export default function RegisterPage() {
                                                 value={enrollmentNo}
                                                 onChange={e => setEnrollmentNo(e.target.value)}
                                                 required
-                                                className="w-full h-12 pl-11 pr-4 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-[#059669] focus:ring-4 focus:ring-[#059669]/10 outline-none transition-all text-sm text-slate-700 placeholder:text-slate-400"
+                                                className="w-full h-12 pl-11 pr-4 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-[#059669] focus:ring-4 focus:ring-[#059669]/10 outline-none  text-sm text-slate-700 placeholder:text-slate-400"
                                             />
                                         </div>
                                     </div>
@@ -434,7 +434,7 @@ export default function RegisterPage() {
                                 <div className="space-y-1.5">
                                     <Label className="text-sm font-semibold text-slate-700 block text-left">Branch</Label>
                                     <Select onValueChange={v => setBranch(v)}>
-                                        <SelectTrigger className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-[#059669]/10 focus:border-[#059669] transition-all text-sm text-slate-700 shadow-none">
+                                        <SelectTrigger className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-[#059669]/10 focus:border-[#059669]  text-sm text-slate-700 shadow-none">
                                             <SelectValue placeholder="Select Branch" />
                                         </SelectTrigger>
                                         <SelectContent className="bg-white rounded-xl border border-slate-200 shadow-[0_4px_20px_rgb(0,0,0,0.05)]">
@@ -456,7 +456,7 @@ export default function RegisterPage() {
                                     <div className="space-y-1.5">
                                         <Label className="text-sm font-semibold text-slate-700 block text-left">Academic Year</Label>
                                         <Select onValueChange={v => setYear(parseInt(v))}>
-                                            <SelectTrigger className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-[#059669]/10 focus:border-[#059669] transition-all text-sm text-slate-700 shadow-none">
+                                            <SelectTrigger className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-[#059669]/10 focus:border-[#059669]  text-sm text-slate-700 shadow-none">
                                                 <SelectValue placeholder="Year" />
                                             </SelectTrigger>
                                             <SelectContent className="bg-white rounded-xl border border-slate-200 shadow-[0_4px_20px_rgb(0,0,0,0.05)]">
@@ -467,7 +467,7 @@ export default function RegisterPage() {
                                     <div className="space-y-1.5">
                                         <Label className="text-sm font-semibold text-slate-700 block text-left">Semester</Label>
                                         <Select onValueChange={v => setSemester(parseInt(v))}>
-                                            <SelectTrigger className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-[#059669]/10 focus:border-[#059669] transition-all text-sm text-slate-700 shadow-none">
+                                            <SelectTrigger className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-[#059669]/10 focus:border-[#059669]  text-sm text-slate-700 shadow-none">
                                                 <SelectValue placeholder="Semester" />
                                             </SelectTrigger>
                                             <SelectContent className="bg-white rounded-xl border border-slate-200 shadow-[0_4px_20px_rgb(0,0,0,0.05)]">
@@ -488,7 +488,7 @@ export default function RegisterPage() {
                                                 setError("");
                                             }
                                         }}
-                                        className="w-4 h-4 rounded border-slate-300 text-[#059669] focus:ring-[#059669] accent-[#059669] transition-all cursor-pointer"
+                                        className="w-4 h-4 rounded border-slate-300 text-[#059669] focus:ring-[#059669] accent-[#059669]  cursor-pointer"
                                     />
                                     <label htmlFor="terms" className="text-sm font-medium text-slate-500 cursor-pointer">
                                         I agree to the <a href="/terms" className="text-[#059669] hover:text-[#047857] font-semibold">Terms & Conditions</a> for MMMUT Virtual Labs.
@@ -515,7 +515,7 @@ export default function RegisterPage() {
                                         type="text"
                                         maxLength={6}
                                         placeholder="· · · · · ·"
-                                        className="h-16 text-center text-3xl font-black tracking-[0.5em] rounded-xl bg-slate-50 border-transparent focus:border-[#059669] focus:bg-white transition-all text-slate-800 placeholder:text-slate-300 mx-auto max-w-[240px]"
+                                        className="h-16 text-center text-3xl font-black tracking-[0.5em] rounded-xl bg-slate-50 border-transparent focus:border-[#059669] focus:bg-white  text-slate-800 placeholder:text-slate-300 mx-auto max-w-[240px]"
                                         value={otp}
                                         onChange={(e) => {
                                             const val = e.target.value.replace(/\D/g, "");
@@ -543,14 +543,14 @@ export default function RegisterPage() {
                                 <button
                                     type="button"
                                     onClick={nextStep}
-                                    className="w-full h-12 bg-[#059669] hover:bg-[#047857] text-white font-semibold rounded-xl transition-all shadow-[0_4px_14px_0_rgba(5,150,105,0.39)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.23)] hover:-translate-y-0.5 mt-2 flex items-center justify-center disabled:opacity-70 disabled:hover:translate-y-0"
+                                    className="w-full h-12 bg-[#059669] hover:bg-[#047857] text-white font-semibold rounded-xl  shadow-[0_4px_14px_0_rgba(5,150,105,0.39)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.23)] .5 mt-2 flex items-center justify-center disabled:opacity-70 disabled:hover:translate-y-0"
                                 >
                                     Continue <i className="bx bx-right-arrow-alt ml-2 text-xl"  />
                                 </button>
                             ) : step === 3 ? (
                                 <button
                                     type="submit"
-                                    className="w-full h-12 bg-[#059669] hover:bg-[#047857] text-white font-semibold rounded-xl transition-all shadow-[0_4px_14px_0_rgba(5,150,105,0.39)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.23)] hover:-translate-y-0.5 mt-2 flex items-center justify-center disabled:opacity-70 disabled:hover:translate-y-0"
+                                    className="w-full h-12 bg-[#059669] hover:bg-[#047857] text-white font-semibold rounded-xl  shadow-[0_4px_14px_0_rgba(5,150,105,0.39)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.23)] .5 mt-2 flex items-center justify-center disabled:opacity-70 disabled:hover:translate-y-0"
                                     disabled={loading}
                                 >
                                     {loading ? <i className="bx bx-loader-alt bx-spin text-xl"  /> : (
@@ -561,7 +561,7 @@ export default function RegisterPage() {
                                 <button
                                     type="button"
                                     onClick={handleVerify}
-                                    className="w-full h-12 bg-[#059669] hover:bg-[#047857] text-white font-semibold rounded-xl transition-all shadow-[0_4px_14px_0_rgba(5,150,105,0.39)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.23)] hover:-translate-y-0.5 mt-2 flex items-center justify-center disabled:opacity-70 disabled:hover:translate-y-0"
+                                    className="w-full h-12 bg-[#059669] hover:bg-[#047857] text-white font-semibold rounded-xl  shadow-[0_4px_14px_0_rgba(5,150,105,0.39)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.23)] .5 mt-2 flex items-center justify-center disabled:opacity-70 disabled:hover:translate-y-0"
                                     disabled={loading}
                                 >
                                     {loading ? <i className="bx bx-loader-alt bx-spin text-xl"  /> : (

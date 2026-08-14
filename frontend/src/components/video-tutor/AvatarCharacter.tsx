@@ -82,9 +82,9 @@ export default function AvatarCharacter({
     }
 
     // Determine animation translation / rotation classes
-    let bodyClass = "transition-all duration-500 ease-in-out origin-bottom";
-    let headClass = "transition-all duration-500 ease-in-out origin-center";
-    let armClass = "transition-all duration-500 ease-in-out origin-top-left";
+    let bodyClass = " duration-500 ease-in-out origin-bottom";
+    let headClass = " duration-500 ease-in-out origin-center";
+    let armClass = " duration-500 ease-in-out origin-top-left";
 
     if (animation === "nodding") {
         headClass += " animate-bounce";
@@ -105,7 +105,7 @@ export default function AvatarCharacter({
             <div className="relative w-36 h-36 md:w-44 md:h-44 flex items-center justify-center overflow-hidden">
                 <svg
                     viewBox="0 0 100 100"
-                    className="w-full h-full drop-shadow-lg"
+                    className="w-full h-full drop-"
                 >
                     {/* Background Circle */}
                     <circle cx="50" cy="50" r="46" fill="url(#avatar-bg-grad)" />

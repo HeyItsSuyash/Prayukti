@@ -55,12 +55,12 @@ export default function HammingCode() {
 
                     {result && (
                         <div className="mt-4 space-y-3">
-                            <div className="p-3 bg-gray-50 border rounded text-sm">
+                            <div className="p-3 bg-card border rounded-none text-sm">
                                 <p><strong>Encoded Data (with Parity):</strong> <span className="font-mono font-bold text-lg">{result.encoded}</span></p>
-                                <p className="text-xs text-gray-500 mt-1">Number of parity bits (r): {result.r}</p>
+                                <p className="text-xs text-muted-foreground mt-1">Number of parity bits (r): {result.r}</p>
                             </div>
 
-                            <div className="text-sm border rounded p-2">
+                            <div className="text-sm border rounded-none p-2">
                                 <p className="font-semibold mb-2">Parity Calculation Steps:</p>
                                 <ul className="space-y-1">
                                     {result.steps && result.steps.map((step: HammingStep, idx: number) => (
@@ -98,7 +98,7 @@ export default function HammingCode() {
                     <CardContent className="space-y-4">
                         <div className="flex flex-col gap-2">
                             <label className="text-sm font-medium">Received Frame:</label>
-                            <div className="font-mono text-lg bg-gray-100 p-2 rounded tracking-widest text-center">
+                            <div className="font-mono text-lg bg-card p-2 rounded-none tracking-widest text-center">
                                 {transmittedCodeword}
                             </div>
                         </div>
@@ -107,7 +107,7 @@ export default function HammingCode() {
 
                         {receiverResult && (
                             <div className="mt-4 space-y-4">
-                                <div className={`p-4 rounded-md text-center border ${receiverResult.errorPosition === 0 ? "bg-green-50 border-green-200 text-green-700" : "bg-red-50 border-red-200"}`}>
+                                <div className={`p-4 rounded-none-none text-center border ${receiverResult.errorPosition === 0 ? "bg-green-50 border-green-200 text-green-700" : "bg-red-50 border-red-200"}`}>
                                     <h4 className="font-bold text-lg">
                                         {receiverResult.errorPosition === 0
                                             ? "No Error Detected"
@@ -116,9 +116,9 @@ export default function HammingCode() {
                                     </h4>
                                 </div>
 
-                                <div className="border rounded-lg overflow-hidden">
+                                <div className="border rounded-none-none overflow-hidden">
                                     <table className="w-full text-sm text-left">
-                                        <thead className="bg-gray-100 font-semibold">
+                                        <thead className="bg-card font-semibold">
                                             <tr>
                                                 <th className="p-2">Parity Check</th>
                                                 <th className="p-2">Checked Bits (1s count)</th>
@@ -135,7 +135,7 @@ export default function HammingCode() {
                                                     <td className="p-2">{step.status === 'Fail' ? step.pPos : 0}</td>
                                                 </tr>
                                             ))}
-                                            <tr className="bg-gray-50 font-bold border-t">
+                                            <tr className="bg-card font-bold border-t">
                                                 <td colSpan={3} className="p-2 text-right">Sum (Error Position):</td>
                                                 <td className="p-2 text-red-600">{receiverResult.errorPosition}</td>
                                             </tr>
@@ -144,13 +144,13 @@ export default function HammingCode() {
                                 </div>
 
                                 {receiverResult.errorPosition > 0 && (
-                                    <div className="p-3 bg-yellow-50 border border-yellow-200 rounded text-sm space-y-2">
+                                    <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-none text-sm space-y-2">
                                         <p className="font-bold text-yellow-800">Correction Process:</p>
                                         <p>1. The calculated Error Position is <strong>{receiverResult.errorPosition}</strong>.</p>
                                         <p>2. The bit at index {receiverResult.errorPosition} is flipped to correct the data.</p>
                                         <div className="flex items-center gap-2 mt-2">
                                             <span>Corrected Data:</span>
-                                            <span className="font-mono font-bold bg-white px-2 py-1 rounded border border-yellow-300">
+                                            <span className="font-mono font-bold bg-card px-2 py-1 rounded-none border border-yellow-300">
                                                 {receiverResult.corrected}
                                             </span>
                                         </div>
@@ -159,8 +159,8 @@ export default function HammingCode() {
                             </div>
                         )}
                         {receiverResult && (
-                            <div className="mt-4 p-3 bg-gray-50 border rounded text-xs text-gray-600">
-                                <p className="font-semibold text-gray-800 mb-1">ℹ️ Algorithm Capability:</p>
+                            <div className="mt-4 p-3 bg-card border rounded-none text-xs text-muted-foreground">
+                                <p className="font-semibold text-muted-foreground mb-1">ℹ️ Algorithm Capability:</p>
                                 <p><strong>Method:</strong> Hamming Code is an <em>Error Correction</em> technique.</p>
                                 <p><strong>Correction Strategy:</strong> It can <strong>detect</strong> up to 2-bit errors and <strong>correct</strong> single-bit errors automatically using parity checks (Syndrome).</p>
                             </div>

@@ -25,7 +25,7 @@ export default function LabsPage() {
                             <input
                                 type="text"
                                 placeholder="Search for experiments (e.g. NAND Gate, Packet Tracer)..."
-                                className="relative w-full pl-14 pr-6 py-4 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all font-medium shadow-sm group-hover:shadow-md"
+                                className="relative w-full pl-14 pr-6 py-4 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent  font-medium  group-hover:"
                             />
                             <i className="bx bx-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-accent w-6 h-6 transition-colors"  />
                         </div>

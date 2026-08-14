@@ -222,7 +222,7 @@ export function TeacherManagement() {
                         <i className="bx bx-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"  />
                         <Input 
                             placeholder="Search faculty..." 
-                            className="pl-10 w-64 rounded-xl border-slate-100 shadow-sm"
+                            className="pl-10 w-64 rounded-xl border-slate-100 "
                             value={searchQuery}
                             onChange={e => setSearchQuery(e.target.value)}
                         />
@@ -236,7 +236,7 @@ export function TeacherManagement() {
                 </div>
             </div>
 
-            <Card className="rounded-[2.5rem] border-none shadow-xl shadow-slate-100 overflow-hidden bg-white">
+            <Card className="rounded-[2.5rem] border-none  shadow-slate-100 overflow-hidden bg-white">
                 <CardContent className="p-0">
                     <Table>
                         <TableHeader className="bg-slate-50">
@@ -252,7 +252,7 @@ export function TeacherManagement() {
                             {loading ? (
                                 <TableRow>
                                     <TableCell colSpan={5} className="py-20 text-center">
-                                        <i className="bx bx-loader2 animate-spin inline-block mr-2 text-indigo-600"  />
+                                        <i className="bx bx-loader2 animate-spin inline-block mr-2 text-[#059669]"  />
                                         <span className="font-black text-slate-400 uppercase tracking-widest">Accessing Faculty Directory...</span>
                                     </TableCell>
                                 </TableRow>
@@ -303,7 +303,7 @@ export function TeacherManagement() {
                                             <DropdownMenuTrigger asChild>
                                                 <Button variant="ghost" size="icon" className="rounded-xl"><i className="bx bx-morevertical text-slate-400"  /></Button>
                                             </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end" className="rounded-2xl border-slate-100 shadow-xl p-2 min-w-[180px]">
+                                            <DropdownMenuContent align="end" className="rounded-2xl border-slate-100  p-2 min-w-[180px]">
                                                 <DropdownMenuItem className="rounded-xl font-bold text-xs py-3" onClick={() => startEditing(teacher)}>
                                                     <i className="bx bx-edit mr-2 text-blue-500"  /> Edit Details
                                                 </DropdownMenuItem>
@@ -332,7 +332,7 @@ export function TeacherManagement() {
 
             {/* Add Faculty Dialog */}
             <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-                <DialogContent className="rounded-[2.5rem] bg-white border-none shadow-2xl p-0 overflow-hidden max-w-md">
+                <DialogContent className="rounded-[2.5rem] bg-white border-none  p-0 overflow-hidden max-w-md">
                     <div className="bg-slate-900 p-8 text-white">
                         <DialogTitle className="text-2xl font-black uppercase tracking-tighter">Registration Portal</DialogTitle>
                         <DialogDescription className="text-slate-400 font-medium">Create a new faculty account. Credentials will be mailed automatically.</DialogDescription>
@@ -409,7 +409,7 @@ export function TeacherManagement() {
             </Dialog>
             {/* Edit Faculty Dialog */}
             <Dialog open={!!editingTeacher} onOpenChange={(open) => !open && setEditingTeacher(null)}>
-                <DialogContent className="rounded-[2.5rem] bg-white border-none shadow-2xl p-0 overflow-hidden max-w-md">
+                <DialogContent className="rounded-[2.5rem] bg-white border-none  p-0 overflow-hidden max-w-md">
                     <div className="bg-blue-600 p-8 text-white">
                         <DialogTitle className="text-2xl font-black uppercase tracking-tighter">Edit Faculty Account</DialogTitle>
                         <DialogDescription className="text-blue-100 font-medium">Modify existing record and lab permissions.</DialogDescription>
@@ -486,7 +486,7 @@ export function TeacherManagement() {
 
             {/* Individual Email Dialog */}
             <Dialog open={isEmailDialogOpen} onOpenChange={setIsEmailDialogOpen}>
-                <DialogContent className="rounded-[2.5rem] bg-white border-none shadow-2xl p-0 overflow-hidden max-w-md">
+                <DialogContent className="rounded-[2.5rem] bg-white border-none  p-0 overflow-hidden max-w-md">
                     <div className="bg-indigo-600 p-8 text-white">
                         <DialogTitle className="text-2xl font-black uppercase tracking-tighter">Compose Message</DialogTitle>
                         <DialogDescription className="text-indigo-100 font-medium">

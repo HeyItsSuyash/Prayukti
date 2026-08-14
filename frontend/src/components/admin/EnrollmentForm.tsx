@@ -217,7 +217,7 @@ export function EnrollmentForm({ onSuccess }: { onSuccess: () => void }) {
                         <h4 className="font-black text-slate-800 uppercase tracking-tighter">Subject Assignment</h4>
                         <p className="text-xs text-slate-500">Suggested based on Branch & Semester</p>
                     </div>
-                    {loading && <i className="bx bx-loader2 animate-spin text-indigo-600"  />}
+                    {loading && <i className="bx bx-loader2 animate-spin text-[#059669]"  />}
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -225,7 +225,7 @@ export function EnrollmentForm({ onSuccess }: { onSuccess: () => void }) {
                         <div 
                             key={subject._id}
                             onClick={() => toggleSubject(subject._id)}
-                            className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between
+                            className={`p-4 rounded-2xl border-2  cursor-pointer flex items-center justify-between
                                 ${selectedSubjects.includes(subject._id) 
                                     ? 'border-indigo-600 bg-indigo-50/50' 
                                     : 'border-slate-100 bg-white hover:border-slate-200'}`}
@@ -270,7 +270,7 @@ export function EnrollmentForm({ onSuccess }: { onSuccess: () => void }) {
             <Button 
                 type="submit" 
                 disabled={submitting}
-                className="w-full py-8 text-lg font-black tracking-widest rounded-2xl bg-indigo-600 hover:bg-indigo-700 shadow-xl shadow-indigo-200 shadow-xl transition-all active:scale-[0.98]"
+                className="w-full py-8 text-lg font-black tracking-widest rounded-2xl bg-indigo-600 hover:bg-indigo-700  shadow-indigo-200   active:scale-[0.98]"
             >
                 {submitting ? <i className="bx bx-loader2 animate-spin"  /> : "COMPLETE ENROLLMENT"}
             </Button>

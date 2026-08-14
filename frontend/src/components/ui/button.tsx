@@ -8,22 +8,22 @@ import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
     // Base: 8px radius, semibold, normal case, smooth transition
-    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm text-sm font-semibold ring-offset-background transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97]",
+    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm text-sm font-semibold ring-offset-background  duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97]",
     {
         variants: {
             variant: {
                 // Primary — blue CTA
                 default:
-                    "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow-primary border border-transparent",
+                    "bg-primary text-primary-foreground hover:bg-primary/90  hover: border border-transparent",
                 // Destructive — error action
                 destructive:
-                    "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm",
+                    "bg-destructive text-destructive-foreground hover:bg-destructive/90 ",
                 // Outline — blue border, transparent bg
                 outline:
                     "border border-primary text-primary bg-transparent hover:bg-primary/8 hover:text-primary",
                 // Secondary — deep navy bg
                 secondary:
-                    "bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-sm",
+                    "bg-secondary text-secondary-foreground hover:bg-secondary/90 ",
                 // Ghost — subtle bg on hover
                 ghost:
                     "hover:bg-primary/10 hover:text-primary text-foreground",
@@ -32,10 +32,10 @@ const buttonVariants = cva(
                     "text-primary underline-offset-4 hover:underline p-0 h-auto",
                 // Success
                 success:
-                    "bg-success text-success-foreground hover:bg-success/90 shadow-sm",
+                    "bg-success text-success-foreground hover:bg-success/90 ",
                 // Warning
                 warning:
-                    "bg-warning text-warning-foreground hover:bg-warning/90 shadow-sm",
+                    "bg-warning text-warning-foreground hover:bg-warning/90 ",
                 // Muted — secondary action
                 muted:
                     "bg-muted text-muted-foreground hover:bg-muted/80 border border-border",

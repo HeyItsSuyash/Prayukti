@@ -33,7 +33,7 @@ export default function NotFound() {
                   404
                 </h1>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-24 h-24 bg-[#059669]/10 rounded-full flex items-center justify-center shadow-xl border border-[#059669]/20">
+                  <div className="w-24 h-24 bg-[#059669]/10 rounded-full flex items-center justify-center  border border-[#059669]/20">
                     <i className="bx bx-error-circle w-12 h-12 text-[#14D98F] animate-pulse flex items-center justify-center text-5xl"  />
                   </div>
                 </div>
@@ -67,13 +67,13 @@ export default function NotFound() {
               <Button
                 onClick={() => window.history.back()}
                 variant="outline"
-                className="h-14 px-8 text-base rounded-xl font-bold border-white/10 text-slate-300 hover:bg-white/5 hover:text-white gap-2 transition-all"
+                className="h-14 px-8 text-base rounded-xl font-bold border-white/10 text-slate-300 hover:bg-white/5 hover:text-white gap-2 "
               >
                 <i className="bx bx-left-arrow-alt w-5 h-5 flex items-center justify-center text-xl"  /> Go Back
               </Button>
 
               <a href="/">
-                <Button className="h-14 px-8 text-base rounded-xl font-bold bg-[#059669] hover:bg-[#047857] text-white gap-2 w-full sm:w-auto shadow-[0_4px_14px_0_rgba(5,150,105,0.39)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.23)] hover:-translate-y-0.5 transition-all">
+                <Button className="h-14 px-8 text-base rounded-xl font-bold bg-[#059669] hover:bg-[#047857] text-white gap-2 w-full sm:w-auto shadow-[0_4px_14px_0_rgba(5,150,105,0.39)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.23)] .5 ">
                   <i className="bx bx-home w-5 h-5 flex items-center justify-center text-xl"  /> Return to Home
                 </Button>
               </a>

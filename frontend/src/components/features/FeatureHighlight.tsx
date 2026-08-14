@@ -46,7 +46,7 @@ export function FeatureHighlight({ title, description, icon: Icon, imageComponen
             >
                 <div className="relative">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-500/10 blur-[100px] rounded-full -z-10"></div>
-                    <div className="glass dark:glass-dark p-4 rounded-[2.5rem] border border-slate-200/50 dark:border-slate-800/50 shadow-2xl overflow-hidden card-interaction">
+                    <div className="glass dark:glass-dark p-4 rounded-[2.5rem] border border-slate-200/50 dark:border-slate-800/50  overflow-hidden card-interaction">
                         {imageComponent}
                     </div>
                 </div>

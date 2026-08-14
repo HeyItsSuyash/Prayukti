@@ -207,9 +207,9 @@ export default function VideoTutorDashboard() {
                 {/* Main section */}
                 {generating ? (
                     // Loader screen for compilation pipeline
-                    <Card className="rounded-[3rem] border-2 bg-white dark:bg-slate-900 p-12 flex flex-col items-center justify-center text-center shadow-2xl relative overflow-hidden min-h-[400px]">
+                    <Card className="rounded-[3rem] border-2 bg-white dark:bg-slate-900 p-12 flex flex-col items-center justify-center text-center  relative overflow-hidden min-h-[400px]">
                         <div className="absolute top-0 right-0 p-32 bg-indigo-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-                        <i className="bx bx-loader2 w-16 h-16 text-indigo-600 animate-spin mb-6"  />
+                        <i className="bx bx-loader2 w-16 h-16 text-[#059669] animate-spin mb-6"  />
                         <h3 className="text-2xl font-black uppercase tracking-tight text-slate-900 dark:text-white">
                             Rendering AI Video Lesson
                         </h3>
@@ -229,7 +229,7 @@ export default function VideoTutorDashboard() {
                     </Card>
                 ) : loading ? (
                     <div className="flex flex-col items-center justify-center py-32 animate-pulse">
-                        <i className="bx bx-loader2 w-10 h-10 text-indigo-600 animate-spin mb-4"  />
+                        <i className="bx bx-loader2 w-10 h-10 text-[#059669] animate-spin mb-4"  />
                         <p className="text-slate-400 font-black uppercase tracking-widest text-[9px]">Loading Tutor logs...</p>
                     </div>
                 ) : (
@@ -238,7 +238,7 @@ export default function VideoTutorDashboard() {
                         {/* Tab 1: Ask Professor */}
                         {activeTab === "ask" && (
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                                <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8 lg:col-span-2">
+                                <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900  p-6 md:p-8 lg:col-span-2">
                                     <div className="flex items-center gap-2 border-b pb-4 mb-6 border-slate-100 dark:border-slate-800">
                                         <i className="bx bx-sparkles text-indigo-600 dark:text-indigo-400"  />
                                         <h3 className="font-black text-sm uppercase tracking-tight">Configure Video Prompt</h3>
@@ -386,7 +386,7 @@ export default function VideoTutorDashboard() {
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {lessons.length > 0 ? (
                                     lessons.map((l) => (
-                                        <Card key={l._id} className="rounded-3xl border-2 bg-white dark:bg-slate-900 overflow-hidden shadow-sm flex flex-col justify-between group hover:border-indigo-500/50 transition-colors">
+                                        <Card key={l._id} className="rounded-3xl border-2 bg-white dark:bg-slate-900 overflow-hidden  flex flex-col justify-between group hover:border-indigo-500/50 transition-colors">
                                             <div className="p-6 space-y-4">
                                                 <div className="flex justify-between items-center">
                                                     <span className="text-[9px] font-black uppercase tracking-wider bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md text-slate-500">
@@ -441,7 +441,7 @@ export default function VideoTutorDashboard() {
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {savedLessons.length > 0 ? (
                                     savedLessons.map((l) => (
-                                        <Card key={l._id} className="rounded-3xl border-2 bg-white dark:bg-slate-900 overflow-hidden shadow-sm flex flex-col justify-between group hover:border-indigo-500/50 transition-colors">
+                                        <Card key={l._id} className="rounded-3xl border-2 bg-white dark:bg-slate-900 overflow-hidden  flex flex-col justify-between group hover:border-indigo-500/50 transition-colors">
                                             <div className="p-6 space-y-4">
                                                 <div className="flex justify-between items-center">
                                                     <span className="text-[9px] font-black uppercase tracking-wider bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md text-slate-500">
@@ -480,7 +480,7 @@ export default function VideoTutorDashboard() {
 
                         {/* Tab 4: History Logs */}
                         {activeTab === "history" && (
-                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8">
+                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900  p-6 md:p-8">
                                 <div className="border-b pb-4 mb-6 border-slate-100 dark:border-slate-800">
                                     <h3 className="font-black text-lg uppercase tracking-tight">Recent Activity History</h3>
                                     <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">Logs of active video interactions</p>
@@ -523,7 +523,7 @@ export default function VideoTutorDashboard() {
                         {activeTab === "analytics" && (
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                                 {/* Left column: Scores radar chart */}
-                                <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8">
+                                <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900  p-6 md:p-8">
                                     <div className="border-b pb-4 mb-6 border-slate-100 dark:border-slate-800">
                                         <h3 className="font-black text-lg uppercase tracking-tight">AI Skill Mapping</h3>
                                         <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">Radar tracking of target learning quotients</p>

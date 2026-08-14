@@ -406,7 +406,7 @@ export default function AnnouncementsPage() {
 
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-32 animate-pulse">
-                        <Loader2 className="w-10 h-10 text-indigo-600 animate-spin mb-4" />
+                        <Loader2 className="w-10 h-10 text-[#059669] animate-spin mb-4" />
                         <p className="text-slate-400 font-black uppercase tracking-widest text-[9px]">Loading bulletin boards...</p>
                     </div>
                 ) : announcements.length > 0 ? (
@@ -415,7 +415,7 @@ export default function AnnouncementsPage() {
                             const sub = subjects.find(s => s._id === ann.subjectId);
                             const commentsOpen = openComments[ann._id];
                             return (
-                                <Card key={ann._id} className="rounded-[2rem] border-2 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md transition-shadow">
+                                <Card key={ann._id} className="rounded-[2rem] border-2 bg-white dark:bg-slate-900  hover: transition-shadow">
                                     <CardContent className="p-6 md:p-8 space-y-4">
                                         {/* feed Card Header */}
                                         <div className="flex justify-between items-start gap-4">
@@ -585,7 +585,7 @@ export default function AnnouncementsPage() {
 
                     {aiLoading ? (
                         <div className="flex flex-col items-center justify-center py-10 animate-pulse">
-                            <Loader2 className="w-8 h-8 text-indigo-600 animate-spin mb-3" />
+                            <Loader2 className="w-8 h-8 text-[#059669] animate-spin mb-3" />
                             <p className="text-slate-400 font-bold uppercase tracking-widest text-[9px]">Computing variables...</p>
                         </div>
                     ) : (

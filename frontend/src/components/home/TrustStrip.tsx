@@ -35,7 +35,7 @@ export function TrustStrip() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="bg-white rounded-2xl shadow-xl border border-slate-100 p-8 md:p-10"
+                    className="bg-white rounded-2xl  border border-slate-100 p-8 md:p-10"
                 >
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
                         {features.map((feature, idx) => (

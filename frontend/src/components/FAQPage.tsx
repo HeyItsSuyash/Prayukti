@@ -64,9 +64,9 @@ export default function FAQPage() {
                                         setActiveCategory(cat.id);
                                         setOpenIndex(null);
                                     }}
-                                    className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all border-2 ${
+                                    className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px]  border-2 ${
                                         activeCategory === cat.id 
-                                        ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' 
+                                        ? 'bg-primary text-white border-primary  /20' 
                                         : 'bg-white dark:bg-slate-900 text-slate-400 border-slate-100 dark:border-slate-800 hover:border-accent hover:text-accent'
                                     }`}
                                 >
@@ -87,14 +87,14 @@ export default function FAQPage() {
                                     className="space-y-4"
                                 >
                                     {filteredFaqs.map((faq, index) => (
-                                        <div key={index} className="bg-white dark:bg-slate-900 rounded-[2rem] border-2 border-slate-100 dark:border-slate-800 overflow-hidden transition-all hover:border-accent/50 group">
+                                        <div key={index} className="bg-white dark:bg-slate-900 rounded-[2rem] border-2 border-slate-100 dark:border-slate-800 overflow-hidden  hover:border-accent/50 group">
                                             <button
                                                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                                                 className="w-full flex items-center p-8 text-left"
                                             >
                                                 <span className="flex-shrink-0 mr-6">
                                                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${openIndex === index ? 'bg-accent text-white' : 'bg-slate-50 dark:bg-slate-800 text-slate-400'}`}>
-                                                        <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`} />
+                                                        <ChevronDown className={`w-5 h-5  duration-300 ${openIndex === index ? 'rotate-180' : ''}`} />
                                                     </div>
                                                 </span>
                                                 <span className="text-xl font-black text-primary dark:text-white uppercase tracking-tight">{faq.question}</span>

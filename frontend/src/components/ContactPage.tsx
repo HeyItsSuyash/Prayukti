@@ -104,7 +104,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
     const [open, setOpen] = useState(false);
     return (
         <div
-            className={`rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden
+            className={`rounded-2xl border  duration-300 cursor-pointer overflow-hidden
                 ${open
                     ? "border-indigo-200 dark:border-indigo-800 bg-indigo-50/50 dark:bg-indigo-950/20"
                     : "border-slate-100 dark:border-slate-800 bg-white dark:bg-primary hover:border-indigo-200 dark:hover:border-indigo-800"
@@ -115,7 +115,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
                 <p className={`text-sm font-bold leading-snug transition-colors ${open ? "text-indigo-700 dark:text-indigo-400" : "text-slate-800 dark:text-slate-200"}`}>
                     {q}
                 </p>
-                <div className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300
+                <div className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center  duration-300
                     ${open ? "bg-accent text-white rotate-0" : "bg-slate-100 dark:bg-slate-800 text-slate-500 rotate-0"}`}
                 >
                     {open ? <i className="bx bx-minus w-3.5 h-3.5"  /> : <i className="bx bx-plus w-3.5 h-3.5"  />}
@@ -149,7 +149,7 @@ function ChatbotWidget() {
             {/* Toggle Button */}
             <button
                 onClick={() => setOpen(!open)}
-                className="fixed bottom-8 right-8 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-accent to-indigo-700 text-white shadow-2xl shadow-accent/40 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-accent/60 active:scale-95"
+                className="fixed bottom-8 right-8 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-accent to-indigo-700 text-white  shadow-accent/40 flex items-center justify-center  duration-300  /60 "
                 aria-label="Toggle chatbot"
             >
                 <AnimatePresence mode="wait">
@@ -173,7 +173,7 @@ function ChatbotWidget() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{ duration: 0.25 }}
-                        className="fixed bottom-28 right-8 z-50 w-80 bg-white dark:bg-primary rounded-3xl shadow-2xl shadow-primary/20 border border-slate-200/60 dark:border-slate-700/60 overflow-hidden"
+                        className="fixed bottom-28 right-8 z-50 w-80 bg-white dark:bg-primary rounded-3xl  /20 border border-slate-200/60 dark:border-slate-700/60 overflow-hidden"
                     >
                         {/* Header */}
                         <div className="p-5 bg-gradient-to-r from-accent to-indigo-700 text-white">
@@ -224,9 +224,9 @@ function ChatbotWidget() {
                                         <button
                                             key={opt.label}
                                             onClick={() => setSelectedOption(opt.label)}
-                                            className="w-full flex items-center gap-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-200 px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-accent dark:hover:text-blue-400 border border-slate-100 dark:border-slate-700 transition-all duration-200 group"
+                                            className="w-full flex items-center gap-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-200 px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-accent dark:hover:text-blue-400 border border-slate-100 dark:border-slate-700  duration-200 group"
                                         >
-                                            <span className="text-accent group-hover:scale-110 transition-transform">{opt.icon}</span>
+                                            <span className="text-accent group- ">{opt.icon}</span>
                                             {opt.label}
                                         </button>
                                     ))}
@@ -308,7 +308,7 @@ export default function ContactPage() {
 
                             {/* LEFT – Contact Form (3 cols) */}
                             <div className="lg:col-span-3">
-                                <motion.div {...fadeUp()} className="relative bg-white dark:bg-primary border border-slate-100 dark:border-slate-800 rounded-3xl p-8 md:p-10 shadow-xl shadow-slate-100 dark:shadow-none overflow-hidden">
+                                <motion.div {...fadeUp()} className="relative bg-white dark:bg-primary border border-slate-100 dark:border-slate-800 rounded-3xl p-8 md:p-10  shadow-slate-100 dark:shadow-none overflow-hidden">
                                     {/* Decorative accent bar */}
                                     <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-accent via-indigo-500 to-accent rounded-t-3xl" />
                                     {/* Decorative corner glow */}
@@ -326,7 +326,7 @@ export default function ContactPage() {
                                             >
                                                 <div className="relative">
                                                     <div className="absolute inset-0 rounded-full bg-green-400/20 blur-2xl" />
-                                                    <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center shadow-2xl shadow-green-400/30">
+                                                    <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center  shadow-green-400/30">
                                                         <i className="bx bx-check-circle w-12 h-12 text-white"  />
                                                     </div>
                                                 </div>
@@ -369,7 +369,7 @@ export default function ContactPage() {
                                                             <input
                                                                 name="name" type="text" required value={formState.name} onChange={handleChange}
                                                                 placeholder="Student Name"
-                                                                className="relative w-full px-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all font-medium placeholder:text-slate-400 text-sm shadow-sm"
+                                                                className="relative w-full px-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent  font-medium placeholder:text-slate-400 text-sm "
                                                             />
                                                         </div>
                                                     </div>
@@ -382,7 +382,7 @@ export default function ContactPage() {
                                                             <input
                                                                 name="email" type="email" required value={formState.email} onChange={handleChange}
                                                                 placeholder="email@mmmut.ac.in"
-                                                                className="relative w-full px-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all font-medium placeholder:text-slate-400 text-sm shadow-sm"
+                                                                className="relative w-full px-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent  font-medium placeholder:text-slate-400 text-sm "
                                                             />
                                                         </div>
                                                     </div>
@@ -399,7 +399,7 @@ export default function ContactPage() {
                                                             <input
                                                                 name="university" type="text" value={formState.university} onChange={handleChange}
                                                                 placeholder="e.g. MMMUT, Gorakhpur"
-                                                                className="relative w-full px-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all font-medium placeholder:text-slate-400 text-sm shadow-sm"
+                                                                className="relative w-full px-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent  font-medium placeholder:text-slate-400 text-sm "
                                                             />
                                                         </div>
                                                     </div>
@@ -411,7 +411,7 @@ export default function ContactPage() {
                                                             <div className="absolute -inset-0.5 bg-gradient-to-r from-accent to-accent rounded-xl blur opacity-0 group-focus-within:opacity-20 transition duration-500" />
                                                             <select
                                                                 name="category" required value={formState.category} onChange={handleChange}
-                                                                className="relative appearance-none w-full px-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all font-medium text-sm pr-10 shadow-sm"
+                                                                className="relative appearance-none w-full px-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent  font-medium text-sm pr-10 "
                                                             >
                                                                 {SUPPORT_CATEGORIES.map((cat) => (
                                                                     <option key={cat} value={cat === "Select a category..." ? "" : cat} disabled={cat === "Select a category..."}>{cat}</option>
@@ -432,20 +432,20 @@ export default function ContactPage() {
                                                         <textarea
                                                             name="message" required value={formState.message} onChange={handleChange} rows={5}
                                                             placeholder="Describe your issue, suggestion, or inquiry in detail..."
-                                                            className="relative w-full px-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all font-medium resize-none text-sm placeholder:text-slate-400 shadow-sm"
+                                                            className="relative w-full px-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent  font-medium resize-none text-sm placeholder:text-slate-400 "
                                                         />
                                                     </div>
                                                     <p className="text-right text-xs text-slate-400">{formState.message.length} / 1000 characters</p>
                                                 </div>
 
                                                 {/* Checkbox */}
-                                                <label className="flex items-start gap-3 cursor-pointer group p-4 rounded-2xl border border-dashed border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-accent hover:bg-blue-50/50 dark:hover:bg-blue-950/20 transition-all duration-200">
+                                                <label className="flex items-start gap-3 cursor-pointer group p-4 rounded-2xl border border-dashed border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-accent hover:bg-blue-50/50 dark:hover:bg-blue-950/20  duration-200">
                                                     <div className="relative mt-0.5 flex-shrink-0">
                                                         <input
                                                             type="checkbox" name="requestUniversity" checked={formState.requestUniversity} onChange={handleChange}
                                                             className="sr-only peer"
                                                         />
-                                                        <div className="w-5 h-5 rounded-md border-2 border-slate-300 dark:border-slate-600 peer-checked:bg-gradient-to-br peer-checked:from-accent peer-checked:to-accent peer-checked:border-accent transition-all flex items-center justify-center shadow-sm">
+                                                        <div className="w-5 h-5 rounded-md border-2 border-slate-300 dark:border-slate-600 peer-checked:bg-gradient-to-br peer-checked:from-accent peer-checked:to-accent peer-checked:border-accent  flex items-center justify-center ">
                                                             {formState.requestUniversity && <i className="bx bx-check-circle w-3.5 h-3.5 text-white"  />}
                                                         </div>
                                                     </div>
@@ -461,12 +461,12 @@ export default function ContactPage() {
                                                 <div className="space-y-3 pt-1">
                                                     <button
                                                         type="submit" disabled={loading}
-                                                        className="group w-full h-14 text-base rounded-2xl font-bold flex items-center justify-center gap-2.5 bg-gradient-to-r from-accent to-indigo-700 hover:from-accent hover:to-indigo-800 text-white shadow-xl shadow-accent/30 hover:shadow-accent/50 transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                                                        className="group w-full h-14 text-base rounded-2xl font-bold flex items-center justify-center gap-2.5 bg-gradient-to-r from-accent to-indigo-700 hover:from-accent hover:to-indigo-800 text-white  shadow-accent/30 /50  duration-300 .5 active:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                                                     >
                                                         {loading ? (
-                                                            <><span className="w-5 h-5 rounded-full border-2 border-white border-b-blue-300 animate-spin" />Sending your message...</>
+                                                            <><span className="w-5 h-5 rounded-full border-2 border-white border-t-[#059669] animate-spin" />Sending your message...</>
                                                         ) : (
-                                                            <><i className="bx bx-send w-5 h-5 group-hover:translate-x-1 transition-transform"  />Send Message <i className="bx bx-right-arrow-alt w-4 h-4 group-hover:translate-x-1 transition-transform"  /></>
+                                                            <><i className="bx bx-send w-5 h-5 group-hover:translate-x-1 "  />Send Message <i className="bx bx-right-arrow-alt w-4 h-4 group-hover:translate-x-1 "  /></>
                                                         )}
                                                     </button>
                                                     <p className="text-center text-xs text-slate-400 dark:text-slate-500 font-medium">
@@ -488,16 +488,16 @@ export default function ContactPage() {
                                     {CONTACT_INFO.map((item) => (
                                         <a
                                             key={item.label} href={item.href} target="_blank" rel="noopener noreferrer"
-                                            className="flex items-center gap-4 p-5 bg-white dark:bg-primary border border-slate-100 dark:border-slate-800 rounded-2xl hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/10 transition-all duration-300 group"
+                                            className="flex items-center gap-4 p-5 bg-white dark:bg-primary border border-slate-100 dark:border-slate-800 rounded-2xl  hover: /10  duration-300 group"
                                         >
-                                            <div className={`w-11 h-11 ${item.bg} rounded-xl flex items-center justify-center ${item.color} flex-shrink-0 group-hover:scale-110 transition-transform`}>
+                                            <div className={`w-11 h-11 ${item.bg} rounded-xl flex items-center justify-center ${item.color} flex-shrink-0 group- `}>
                                                 {item.icon}
                                             </div>
                                             <div className="min-w-0">
                                                 <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">{item.label}</p>
                                                 <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 truncate">{item.value}</p>
                                             </div>
-                                            <i className="bx bx-right-arrow-alt w-4 h-4 text-slate-300 dark:text-slate-600 ml-auto flex-shrink-0 group-hover:text-accent group-hover:translate-x-1 transition-all"  />
+                                            <i className="bx bx-right-arrow-alt w-4 h-4 text-slate-300 dark:text-slate-600 ml-auto flex-shrink-0 group-hover:text-accent group-hover:translate-x-1 "  />
                                         </a>
                                     ))}
                                 </motion.div>
@@ -508,9 +508,9 @@ export default function ContactPage() {
                                     <div className="grid grid-cols-2 gap-3">
                                         {SOCIAL_LINKS.map((link) => (
                                             <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer"
-                                                className={`flex items-center gap-2.5 px-4 py-3 rounded-xl border border-slate-100 dark:border-slate-800 ${link.color} transition-all duration-200 group font-semibold text-sm text-slate-600 dark:text-slate-400`}
+                                                className={`flex items-center gap-2.5 px-4 py-3 rounded-xl border border-slate-100 dark:border-slate-800 ${link.color}  duration-200 group font-semibold text-sm text-slate-600 dark:text-slate-400`}
                                             >
-                                                <span className="group-hover:scale-110 transition-transform">{link.icon}</span>
+                                                <span className="group- ">{link.icon}</span>
                                                 {link.label}
                                             </a>
                                         ))}
@@ -523,7 +523,7 @@ export default function ContactPage() {
                                         Have a quick question?{" "}
                                         <a href="#faq" className="font-bold text-accent dark:text-indigo-400 relative group inline-block">
                                             Visit our FAQ section
-                                            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent dark:bg-indigo-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                                            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent dark:bg-indigo-400 scale-x-0 group-hover:scale-x-100  duration-300 origin-left" />
                                         </a>
                                         .
                                     </p>
@@ -574,7 +574,7 @@ export default function ContactPage() {
                                     </div>
                                     <h3 className="font-bold text-slate-700 dark:text-slate-200">Located At — MMMUT, Gorakhpur</h3>
                                 </div>
-                                <div className="rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none w-full h-[300px]">
+                                <div className="rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800  shadow-slate-200/50 dark:shadow-none w-full h-[300px]">
                                     <iframe
                                         title="MMMUT Location"
                                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3564.08867385966!2d83.43320637628886!3d26.7027001766854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39915ca3e0000001%3A0x7d670cca108201b!2sMadan%20Mohan%20Malaviya%20University%20of%20Technology!5e0!3m2!1sen!2sin!4v1714850000000!5m2!1sen!2sin"
@@ -598,7 +598,7 @@ export default function ContactPage() {
                                         <p className="font-bold text-slate-700 dark:text-slate-200 group-hover:text-accent dark:group-hover:text-blue-400 transition-colors">Open in Google Maps</p>
                                         <p className="text-xs text-slate-400">Gorakhpur, Uttar Pradesh, India</p>
                                     </div>
-                                    <i className="bx bx-right-arrow-alt w-4 h-4 text-blue-400 ml-auto group-hover:translate-x-1 transition-transform"  />
+                                    <i className="bx bx-right-arrow-alt w-4 h-4 text-blue-400 ml-auto group-hover:translate-x-1 "  />
                                 </a>
                             </motion.div>
                         </div>

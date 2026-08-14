@@ -329,14 +329,14 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
         return (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {currentSchema.map((table: any) => (
-                    <div key={table.name} className="bg-white rounded-lg border shadow-sm flex flex-col">
-                        <div className="bg-gray-50 border-b p-3 font-bold text-gray-700 flex items-center justify-between">
-                            <div className="flex items-center gap-2"> <TableIcon size={14} className="text-gray-400" /> {table.name} </div>
-                            <span className="text-[10px] bg-gray-200 px-2 py-0.5 rounded text-gray-500">{currentData[table.name]?.length} Records</span>
+                    <div key={table.name} className="bg-card rounded-none-none border shadow-none-none flex flex-col">
+                        <div className="bg-card border-b p-3 font-bold text-muted-foreground flex items-center justify-between">
+                            <div className="flex items-center gap-2"> <TableIcon size={14} className="text-muted-foreground" /> {table.name} </div>
+                            <span className="text-[10px] bg-card px-2 py-0.5 rounded-none text-muted-foreground">{currentData[table.name]?.length} Records</span>
                         </div>
                         <div className="p-0 overflow-x-auto flex-1 h-48">
                             <table className="w-full text-xs">
-                                <thead className="bg-[#f8f9fa] text-gray-500 border-b sticky top-0">
+                                <thead className="bg-[#f8f9fa] text-muted-foreground border-b sticky top-0">
                                     <tr>
                                         {table.columns.map((col: string) => <th key={col} className="px-3 py-2 text-left font-medium bg-[#f8f9fa]">{col}</th>)}
                                         <th className="px-3 py-2 text-right bg-[#f8f9fa]">Actions</th>
@@ -345,14 +345,14 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
                                 <tbody className="divide-y">
                                     {currentData[table.name]?.slice().reverse().map((row: any, i: number) => (
                                         <tr key={i} className="hover:bg-blue-50/50 group">
-                                            {table.columns.map((col: string) => <td key={col} className="px-3 py-2 text-gray-600 truncate max-w-[100px]">{row[col]}</td>)}
+                                            {table.columns.map((col: string) => <td key={col} className="px-3 py-2 text-muted-foreground truncate max-w-[100px]">{row[col]}</td>)}
                                             <td className="px-3 py-2 text-right flex justify-end gap-1 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <button onClick={() => startEdit(table.name, row)} className="p-1 hover:bg-gray-200 rounded text-blue-600"><i className="bx bx-edit"  /></button>
-                                                <button onClick={() => deleteRecord(table.name, row.id)} className="p-1 hover:bg-red-100 rounded text-red-600"><i className="bx bx-trash2"  /></button>
+                                                <button onClick={() => startEdit(table.name, row)} className="p-1 hover:bg-card rounded-none text-primary"><i className="bx bx-edit"  /></button>
+                                                <button onClick={() => deleteRecord(table.name, row.id)} className="p-1 hover:bg-red-100 rounded-none text-red-600"><i className="bx bx-trash2"  /></button>
                                             </td>
                                         </tr>
                                     ))}
-                                    {currentData[table.name]?.length === 0 && <tr><td colSpan={table.columns.length + 1} className="p-4 text-center text-gray-300 italic">Empty</td></tr>}
+                                    {currentData[table.name]?.length === 0 && <tr><td colSpan={table.columns.length + 1} className="p-4 text-center text-muted-foreground italic">Empty</td></tr>}
                                 </tbody>
                             </table>
                         </div>
@@ -362,27 +362,27 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
         );
     };
 
-    function TableIcon({ size, className }: { size: number, className: string }) { return <div className={`border rounded p-0.5 ${className}`} style={{ width: size, height: size, display: 'inline-block' }} ></div> }
+    function TableIcon({ size, className }: { size: number, className: string }) { return <div className={`border rounded-none p-0.5 ${className}`} style={{ width: size, height: size, display: 'inline-block' }} ></div> }
 
     return (
-        <div className="flex h-full flex-col bg-gray-50 font-sans">
-            <header className="bg-white border-b shadow-sm z-10 p-3 flex justify-between items-center shrink-0">
+        <div className="flex h-full flex-col bg-card font-sans">
+            <header className="bg-card border-b shadow-none-none z-10 p-3 flex justify-between items-center shrink-0">
                 <div className="flex items-center gap-3">
                 </div>
-                <div className="flex gap-2 bg-gray-100 p-1 rounded-lg items-center">
+                <div className="flex gap-2 bg-card p-1 rounded-none-none items-center">
                     {feedback && <span className="text-xs text-green-600 font-medium px-2">{feedback}</span>}
                     {isExam && (
                         <Button onClick={() => {
                             window.parent.postMessage({ type: 'SAVE_EXAM_STATE', payload: { type: 'DBMS_APP_DEV', appMode, data, actionLog, sqlQuery } }, '*');
                             setFeedback("Progress saved successfully!");
                             setTimeout(() => setFeedback(""), 3000);
-                        }} size="sm" variant="outline" className="h-8 text-xs text-blue-600 border-blue-600/20 hover:bg-blue-50 bg-white mr-1">
+                        }} size="sm" variant="outline" className="h-8 text-xs text-primary border-primary/20 hover:bg-blue-50 bg-card mr-1">
                             SAVE PROGRESS
                         </Button>
                     )}
                     {["Store", "Vendor", "Finance"].map((m) => (
                         <button key={m} onClick={() => { setAppMode(m as AppMode); setActionLog([]); resetForm(); }}
-                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${appMode === m ? "bg-white shadow text-[#d32f2f]" : "text-gray-500 hover:text-gray-700"}`}>
+                            className={`px-4 py-1.5 rounded-none-none text-sm font-medium  ${appMode === m ? "bg-card shadow-none text-[#d32f2f]" : "text-muted-foreground hover:text-muted-foreground"}`}>
                             {m} System
                         </button>
                     ))}
@@ -390,17 +390,17 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
             </header>
 
             <div className="flex flex-1 overflow-hidden">
-                <main className="flex-1 overflow-auto p-6 space-y-8 bg-gray-50">
+                <main className="flex-1 overflow-auto p-6 space-y-8 bg-card">
                     {/* Action Bar */}
-                    <div className="bg-white p-4 rounded-xl border shadow-sm flex items-center justify-between">
+                    <div className="bg-card p-4 rounded-none-none border shadow-none-none flex items-center justify-between">
                         <div>
-                            <h2 className="font-bold text-gray-800 flex items-center gap-2">
+                            <h2 className="font-bold text-muted-foreground flex items-center gap-2">
                                 {appMode === "Store" && <i className="bx bx-shoppingcart text-orange-500"  />}
-                                {appMode === "Vendor" && <i className="bx bx-box text-blue-500"  />}
+                                {appMode === "Vendor" && <i className="bx bx-box text-primary"  />}
                                 {appMode === "Finance" && <i className="bx bx-creditcard text-green-500"  />}
                                 {appMode} Management Dashboard
                             </h2>
-                            <p className="text-xs text-gray-500 mt-1">Select an action or use icons in tables to Edit/Delete.</p>
+                            <p className="text-xs text-muted-foreground mt-1">Select an action or use icons in tables to Edit/Delete.</p>
                         </div>
                         <div className="flex gap-3">
                             {!readonly && appMode === "Store" && (
@@ -413,15 +413,15 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
                             {!readonly && appMode === "Vendor" && (
                                 <>
                                     <Button onClick={() => setActiveAction("addVendor")} className="bg-[#d32f2f] hover:bg-[#b71c1c] text-white"> <i className="bx bx-plus mr-1"  /> New Vendor </Button>
-                                    <Button onClick={() => setActiveAction("createPO")} variant="outline" className="border-blue-500 text-blue-600 hover:bg-blue-50"> <i className="bx bx-right-arrow-alt mr-1"  /> Create PO </Button>
+                                    <Button onClick={() => setActiveAction("createPO")} variant="outline" className="border-primary text-primary hover:bg-blue-50"> <i className="bx bx-right-arrow-alt mr-1"  /> Create PO </Button>
                                     <Button onClick={() => setActiveAction("addDelivery")} className="bg-purple-600 hover:bg-purple-700 text-white"> <i className="bx bx-plus mr-1"  /> Add Delivery </Button>
                                 </>
                             )}
                             {!readonly && appMode === "Finance" && (
                                 <>
-                                    <Button onClick={() => setActiveAction("addAccount")} className="bg-blue-600 hover:bg-blue-700 text-white"> <i className="bx bx-plus mr-1"  /> Add Account </Button>
+                                    <Button onClick={() => setActiveAction("addAccount")} className="bg-primary hover:bg-primary text-white"> <i className="bx bx-plus mr-1"  /> Add Account </Button>
                                     <Button onClick={() => setActiveAction("transaction")} className="bg-green-600 hover:bg-green-700 text-white"> <i className="bx bx-plus mr-1"  /> Record Transaction </Button>
-                                    <Button onClick={() => setActiveAction("addLedger")} variant="outline" className="border-gray-500 text-gray-700 hover:bg-gray-100"> <i className="bx bx-file mr-1"  /> Add Ledger </Button>
+                                    <Button onClick={() => setActiveAction("addLedger")} variant="outline" className="border-border text-muted-foreground hover:bg-card"> <i className="bx bx-file mr-1"  /> Add Ledger </Button>
                                 </>
                             )}
                         </div>
@@ -429,41 +429,41 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
 
                     {/* Forms Area */}
                     {activeAction && (
-                        <div className="bg-orange-50/50 p-6 rounded-xl border border-orange-200 animate-in fade-in slide-in-from-top-4">
-                            <div className="max-w-md mx-auto bg-white p-6 rounded shadow-lg">
+                        <div className="bg-orange-50/50 p-6 rounded-none-none border border-orange-200 animate-in fade-in slide-in-from-top-4">
+                            <div className="max-w-md mx-auto bg-card p-6 rounded-none shadow-none-none">
                                 <h3 className="font-bold mb-4 border-b pb-2 flex justify-between items-center">
                                     {editingState ? `Edit Record (ID: ${editingState.id})` : "New Record"}
-                                    <span className="text-xs font-normal text-gray-500 px-2 py-1 bg-gray-100 rounded">{activeAction}</span>
+                                    <span className="text-xs font-normal text-muted-foreground px-2 py-1 bg-card rounded-none">{activeAction}</span>
                                 </h3>
 
                                 <div className="space-y-4">
                                     {/* Store Forms */}
                                     {activeAction === "addProduct" && (
                                         <>
-                                            <input className="w-full border p-2 rounded" placeholder="Product Name" value={formInputs.name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
-                                            <input className="w-full border p-2 rounded" placeholder="Price" type="number" value={formInputs.price || ""} onChange={(e) => setFormInputs({ ...formInputs, price: e.target.value })} />
-                                            <input className="w-full border p-2 rounded" placeholder="Stock Qty" type="number" value={formInputs.stock_qty || formInputs.qty || ""} onChange={(e) => setFormInputs({ ...formInputs, qty: e.target.value, stock_qty: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none" placeholder="Product Name" value={formInputs.name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none" placeholder="Price" type="number" value={formInputs.price || ""} onChange={(e) => setFormInputs({ ...formInputs, price: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none" placeholder="Stock Qty" type="number" value={formInputs.stock_qty || formInputs.qty || ""} onChange={(e) => setFormInputs({ ...formInputs, qty: e.target.value, stock_qty: e.target.value })} />
                                             <Button onClick={handleAddProduct} className="w-full bg-[#d32f2f]">Save Product</Button>
                                         </>
                                     )}
                                     {activeAction === "addCustomer" && (
                                         <>
-                                            <input className="w-full border p-2 rounded" placeholder="Name" value={formInputs.name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
-                                            <input className="w-full border p-2 rounded" placeholder="Email" value={formInputs.email || ""} onChange={(e) => setFormInputs({ ...formInputs, email: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none" placeholder="Name" value={formInputs.name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none" placeholder="Email" value={formInputs.email || ""} onChange={(e) => setFormInputs({ ...formInputs, email: e.target.value })} />
                                             <Button onClick={handleAddCustomer} className="w-full bg-[#f57f17]">Save Customer</Button>
                                         </>
                                     )}
                                     {activeAction === "purchase" && (
                                         <>
-                                            <select className="w-full border p-2 rounded" onChange={(e) => setFormInputs({ ...formInputs, customerId: e.target.value })}>
+                                            <select className="w-full border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, customerId: e.target.value })}>
                                                 <option value="">Select Customer...</option>
                                                 {data.Store.Customers.map((c: any) => <option key={c.id} value={c.id}>{c.name}</option>)}
                                             </select>
-                                            <select className="w-full border p-2 rounded" onChange={(e) => setFormInputs({ ...formInputs, productId: e.target.value })}>
+                                            <select className="w-full border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, productId: e.target.value })}>
                                                 <option value="">Select Product...</option>
                                                 {data.Store.Products.map((p: any) => <option key={p.id} value={p.id}>{p.name} (Stock: {p.stock_qty})</option>)}
                                             </select>
-                                            <input className="w-full border p-2 rounded" placeholder="Quantity" type="number" onChange={(e) => setFormInputs({ ...formInputs, qty: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none" placeholder="Quantity" type="number" onChange={(e) => setFormInputs({ ...formInputs, qty: e.target.value })} />
                                             <Button onClick={handlePurchase} className="w-full bg-[#f57f17]">Process Order</Button>
                                         </>
                                     )}
@@ -471,28 +471,28 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
                                     {/* Vendor Forms */}
                                     {activeAction === "addVendor" && (
                                         <>
-                                            <input className="w-full border p-2 rounded" placeholder="Name" value={formInputs.name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
-                                            <input className="w-full border p-2 rounded" placeholder="Contact" value={formInputs.contact_info || formInputs.contact || ""} onChange={(e) => setFormInputs({ ...formInputs, contact: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none" placeholder="Name" value={formInputs.name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none" placeholder="Contact" value={formInputs.contact_info || formInputs.contact || ""} onChange={(e) => setFormInputs({ ...formInputs, contact: e.target.value })} />
                                             <Button onClick={handleAddVendor} className="w-full bg-[#d32f2f]">Save Vendor</Button>
                                         </>
                                     )}
                                     {activeAction === "createPO" && (
                                         <>
-                                            <select className="w-full border p-2 rounded" onChange={(e) => setFormInputs({ ...formInputs, vendorId: e.target.value })}>
+                                            <select className="w-full border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, vendorId: e.target.value })}>
                                                 {data.Vendor.Vendors.map((v: any) => <option key={v.id} value={v.id}>{v.name}</option>)}
                                             </select>
-                                            <input className="w-full border p-2 rounded" placeholder="Item Name" value={formInputs.item || formInputs.item_name || ""} onChange={(e) => setFormInputs({ ...formInputs, item: e.target.value })} />
-                                            <input className="w-full border p-2 rounded" placeholder="Qty" type="number" value={formInputs.qty || ""} onChange={(e) => setFormInputs({ ...formInputs, qty: e.target.value })} />
-                                            <Button onClick={handleCreatePO} className="w-full bg-blue-600">Save PO</Button>
+                                            <input className="w-full border p-2 rounded-none" placeholder="Item Name" value={formInputs.item || formInputs.item_name || ""} onChange={(e) => setFormInputs({ ...formInputs, item: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none" placeholder="Qty" type="number" value={formInputs.qty || ""} onChange={(e) => setFormInputs({ ...formInputs, qty: e.target.value })} />
+                                            <Button onClick={handleCreatePO} className="w-full bg-primary">Save PO</Button>
                                         </>
                                     )}
                                     {activeAction === "addDelivery" && (
                                         <>
-                                            <select className="w-full border p-2 rounded" onChange={(e) => setFormInputs({ ...formInputs, poId: e.target.value })}>
+                                            <select className="w-full border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, poId: e.target.value })}>
                                                 <option value="">Select PO...</option>
                                                 {data.Vendor.PurchaseOrders.map((p: any) => <option key={p.id} value={p.id}>PO #{p.id} - {p.item_name}</option>)}
                                             </select>
-                                            <input type="date" className="w-full border p-2 rounded" onChange={(e) => setFormInputs({ ...formInputs, date: e.target.value })} />
+                                            <input type="date" className="w-full border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, date: e.target.value })} />
                                             <Button onClick={handleAddDelivery} className="w-full bg-purple-600 text-white">Save Delivery</Button>
                                         </>
                                     )}
@@ -500,49 +500,49 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
                                     {/* Finance Forms */}
                                     {activeAction === "addAccount" && (
                                         <>
-                                            <input className="w-full border p-2 rounded" placeholder="Account Name" value={formInputs.name || formInputs.account_name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
-                                            <select className="w-full border p-2 rounded" value={formInputs.type} onChange={(e) => setFormInputs({ ...formInputs, type: e.target.value })}>
+                                            <input className="w-full border p-2 rounded-none" placeholder="Account Name" value={formInputs.name || formInputs.account_name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
+                                            <select className="w-full border p-2 rounded-none" value={formInputs.type} onChange={(e) => setFormInputs({ ...formInputs, type: e.target.value })}>
                                                 <option value="Asset">Asset</option>
                                                 <option value="Liability">Liability</option>
                                                 <option value="Income">Income</option>
                                                 <option value="Expense">Expense</option>
                                             </select>
-                                            <input className="w-full border p-2 rounded" placeholder="Balance" type="number" value={formInputs.balance || ""} onChange={(e) => setFormInputs({ ...formInputs, balance: e.target.value })} />
-                                            <Button onClick={handleAddAccount} className="w-full bg-blue-600">Save Account</Button>
+                                            <input className="w-full border p-2 rounded-none" placeholder="Balance" type="number" value={formInputs.balance || ""} onChange={(e) => setFormInputs({ ...formInputs, balance: e.target.value })} />
+                                            <Button onClick={handleAddAccount} className="w-full bg-primary">Save Account</Button>
                                         </>
                                     )}
                                     {activeAction === "transaction" && (
                                         <>
-                                            <select className="w-full border p-2 rounded" onChange={(e) => setFormInputs({ ...formInputs, accountId: e.target.value })}>
+                                            <select className="w-full border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, accountId: e.target.value })}>
                                                 <option value="">Select Account...</option>
                                                 {data.Finance.Accounts.map((a: any) => <option key={a.id} value={a.id}>{a.account_name} (Bal: {a.balance})</option>)}
                                             </select>
                                             <div className="flex gap-2">
-                                                <select className="w-1/3 border p-2 rounded" onChange={(e) => setFormInputs({ ...formInputs, type: e.target.value })}>
+                                                <select className="w-1/3 border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, type: e.target.value })}>
                                                     <option value="">Type...</option>
                                                     <option value="Credit">Credit (+)</option>
                                                     <option value="Debit">Debit (-)</option>
                                                 </select>
-                                                <input className="w-2/3 border p-2 rounded" placeholder="Amount" type="number" onChange={(e) => setFormInputs({ ...formInputs, amount: e.target.value })} />
+                                                <input className="w-2/3 border p-2 rounded-none" placeholder="Amount" type="number" onChange={(e) => setFormInputs({ ...formInputs, amount: e.target.value })} />
                                             </div>
                                             <Button onClick={handleTransaction} className="w-full bg-green-600">Post Transaction</Button>
                                         </>
                                     )}
                                     {activeAction === "addLedger" && (
                                         <>
-                                            <select className="w-full border p-2 rounded" onChange={(e) => setFormInputs({ ...formInputs, transId: e.target.value })}>
+                                            <select className="w-full border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, transId: e.target.value })}>
                                                 <option value="">Select Transaction...</option>
                                                 {data.Finance.Transactions.map((t: any) => <option key={t.id} value={t.id}>Tx #{t.id} ({t.type} {t.amount})</option>)}
                                             </select>
                                             <div className="flex gap-2">
-                                                <input className="w-1/2 border p-2 rounded" placeholder="Debit" type="number" onChange={(e) => setFormInputs({ ...formInputs, debit: e.target.value })} />
-                                                <input className="w-1/2 border p-2 rounded" placeholder="Credit" type="number" onChange={(e) => setFormInputs({ ...formInputs, credit: e.target.value })} />
+                                                <input className="w-1/2 border p-2 rounded-none" placeholder="Debit" type="number" onChange={(e) => setFormInputs({ ...formInputs, debit: e.target.value })} />
+                                                <input className="w-1/2 border p-2 rounded-none" placeholder="Credit" type="number" onChange={(e) => setFormInputs({ ...formInputs, credit: e.target.value })} />
                                             </div>
-                                            <Button onClick={handleAddLedger} className="w-full bg-gray-600">Save Entry</Button>
+                                            <Button onClick={handleAddLedger} className="w-full bg-card">Save Entry</Button>
                                         </>
                                     )}
 
-                                    <Button variant="ghost" size="sm" onClick={resetForm} className="w-full text-gray-400">Cancel</Button>
+                                    <Button variant="ghost" size="sm" onClick={resetForm} className="w-full text-muted-foreground">Cancel</Button>
                                 </div>
                             </div>
                         </div>
@@ -551,17 +551,17 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
 
                     {/* Visualizer */}
                     <div>
-                        <h3 className="font-bold text-gray-500 text-xs uppercase mb-3">Live Database State</h3>
+                        <h3 className="font-bold text-muted-foreground text-xs uppercase mb-3">Live Database State</h3>
                         {renderVisualizer()}
                     </div>
                 </main>
 
                 {/* Right Sidebar */}
-                <aside className="w-96 bg-[#1e1e1e] border-l border-gray-700 flex flex-col shrink-0">
+                <aside className="w-96 bg-[#1e1e1e] border-l border-border flex flex-col shrink-0">
                     {/* Top: SQL Console */}
-                    <div className="flex-1 flex flex-col border-b border-gray-700">
-                        <div className="p-3 bg-[#252526] border-b border-gray-700 flex items-center justify-between">
-                            <div className="flex items-center gap-2"> <i className="bx bx-terminal text-green-400"  /> <span className="text-xs font-mono font-bold text-gray-300">SQL Console</span> </div>
+                    <div className="flex-1 flex flex-col border-b border-border">
+                        <div className="p-3 bg-[#252526] border-b border-border flex items-center justify-between">
+                            <div className="flex items-center gap-2"> <i className="bx bx-terminal text-green-400"  /> <span className="text-xs font-mono font-bold text-muted-foreground">SQL Console</span> </div>
                         </div>
                         <div className="flex-1 bg-[#1e1e1e] p-3">
                             <textarea disabled={readonly} value={sqlQuery} onChange={(e) => setSqlQuery(e.target.value)} placeholder="> query..." className="w-full h-full bg-transparent text-green-400 font-mono text-xs outline-none resize-none placeholder-gray-600" />
@@ -574,11 +574,11 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
                     </div>
 
                     {/* Bottom: Activity Log */}
-                    <div className="h-1/3 flex flex-col border-t-2 border-gray-800">
-                        <div className="p-2 bg-[#252526] border-b border-black flex items-center gap-2"> <span className="font-mono font-bold text-[10px] text-gray-400 uppercase">Activity Log</span> </div>
+                    <div className="h-1/3 flex flex-col border-t-2 border-border">
+                        <div className="p-2 bg-[#252526] border-b border-black flex items-center gap-2"> <span className="font-mono font-bold text-[10px] text-muted-foreground uppercase">Activity Log</span> </div>
                         <div className="flex-1 overflow-y-auto p-3 space-y-2 font-mono text-[10px]">
-                            {actionLog.map((log, i) => (<div key={i} className="text-gray-400 border-l border-gray-600 pl-2 leading-tight"> {log} </div>))}
-                            {actionLog.length === 0 && <span className="text-gray-700 italic">No activity yet.</span>}
+                            {actionLog.map((log, i) => (<div key={i} className="text-muted-foreground border-l border-border pl-2 leading-tight"> {log} </div>))}
+                            {actionLog.length === 0 && <span className="text-muted-foreground italic">No activity yet.</span>}
                         </div>
                     </div>
                 </aside>

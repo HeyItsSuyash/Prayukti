@@ -49,7 +49,7 @@ export function TestimonialsMarquee() {
                 <div className="animate-marquee whitespace-nowrap flex gap-6 px-3">
                     {/* Double the testimonials for seamless infinite scroll */}
                     {[...testimonials, ...testimonials].map((t, idx) => (
-                        <div key={idx} className="w-[400px] inline-flex flex-col whitespace-normal rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 p-8 shadow-lg backdrop-blur-xl">
+                        <div key={idx} className="w-[400px] inline-flex flex-col whitespace-normal rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-white/5 p-8  backdrop-blur-xl">
                             <div className="flex text-accent mb-6 gap-1">
                                 {[1, 2, 3, 4, 5].map(i => <i key={i} className="bx bxs-star text-lg"></i>)}
                             </div>

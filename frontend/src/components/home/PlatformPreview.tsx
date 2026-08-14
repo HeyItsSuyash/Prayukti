@@ -22,7 +22,7 @@ export function PlatformPreview() {
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-500/10 blur-[120px] rounded-full -z-10"></div>
 
                     {/* Mockup Frame */}
-                    <div className="glass dark:glass-dark rounded-[2.5rem] border border-slate-200/50 dark:border-slate-700/30 shadow-2xl overflow-hidden card-interaction">
+                    <div className="glass dark:glass-dark rounded-[2.5rem] border border-slate-200/50 dark:border-slate-700/30  overflow-hidden card-interaction">
                         {/* Mockup Title Bar */}
                         <div className="bg-white/80 dark:bg-slate-900/80 border-b border-slate-200/50 dark:border-slate-800 px-6 py-4 flex items-center justify-between">
                             <div className="flex gap-2">
@@ -41,7 +41,7 @@ export function PlatformPreview() {
                             {/* Mockup Sidebar */}
                             <div className="w-16 md:w-20 bg-white/40 dark:bg-slate-900/40 border-r border-slate-200/30 dark:border-slate-800 flex flex-col items-center py-8 gap-8">
                                 {['📂', '🔍', '⚙️', '👤'].map((icon, i) => (
-                                    <div key={i} className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl transition-all hover:bg-white dark:hover:bg-slate-800 cursor-pointer ${i === 0 ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'text-slate-400 opacity-60'}`}>
+                                    <div key={i} className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl  hover:bg-white dark:hover:bg-slate-800 cursor-pointer ${i === 0 ? 'bg-blue-600 text-white  shadow-blue-500/30' : 'text-slate-400 opacity-60'}`}>
                                         {icon}
                                     </div>
                                 ))}
@@ -82,7 +82,7 @@ export function PlatformPreview() {
                     </div>
 
                     {/* Character Floating Cards */}
-                    <div className="absolute -top-10 -right-6 md:-right-12 w-48 bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 animate-bounce transition-all duration-1000">
+                    <div className="absolute -top-10 -right-6 md:-right-12 w-48 bg-white dark:bg-slate-900 p-5 rounded-2xl  border border-slate-100 dark:border-slate-800 animate-bounce  duration-1000">
                         <div className="flex items-center gap-3 mb-2">
                             <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-blue-600">⚡</div>
                             <span className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white leading-none">High Fidelity</span>
@@ -90,7 +90,7 @@ export function PlatformPreview() {
                         <p className="text-[10px] text-slate-500 font-bold leading-relaxed uppercase tracking-widest">Pixel-perfect medical & engineering grade precision.</p>
                     </div>
 
-                    <div className="absolute top-1/2 -left-6 md:-left-16 w-56 glass p-6 rounded-2xl shadow-2xl border border-white/20 animate-pulse">
+                    <div className="absolute top-1/2 -left-6 md:-left-16 w-56 glass p-6 rounded-2xl  border border-white/20 animate-pulse">
                         <div className="flex items-center gap-3 mb-3">
                             <div className="w-8 h-8 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center text-emerald-600">🚀</div>
                             <span className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white leading-none">Instant Access</span>

@@ -15,7 +15,7 @@ export default async function DashboardExperimentRoute({
   return (
     <Suspense fallback={
       <div className="flex h-screen items-center justify-center bg-white">
-        <i className="bx bx-loader2 w-8 h-8 animate-spin text-blue-600"  />
+        <i className="bx bx-loader2 w-8 h-8 animate-spin text-[#059669]"  />
       </div>
     }>
       <ExperimentPage id={experiment} />

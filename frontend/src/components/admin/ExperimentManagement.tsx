@@ -122,7 +122,7 @@ export function ExperimentManagement() {
                 </div>
                 <div className="flex gap-3">
                     <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                        <SelectTrigger className="w-[240px] rounded-xl border-slate-100 shadow-sm bg-white font-bold h-12">
+                        <SelectTrigger className="w-[240px] rounded-xl border-slate-100  bg-white font-bold h-12">
                             <i className="bx bx-filter mr-2 text-indigo-600"  />
                             <SelectValue placeholder="All Subjects" />
                         </SelectTrigger>
@@ -142,7 +142,7 @@ export function ExperimentManagement() {
             <div className="space-y-12">
                 {loading ? (
                     <div className="py-20 text-center">
-                        <i className="bx bx-loader2 animate-spin inline-block mr-2 text-indigo-600"  />
+                        <i className="bx bx-loader2 animate-spin inline-block mr-2 text-[#059669]"  />
                         <span className="font-black text-slate-400 uppercase tracking-widest italic">Syncing Registry...</span>
                     </div>
                 ) : experiments.length === 0 ? (
@@ -173,7 +173,7 @@ export function ExperimentManagement() {
                             
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {subjectExps.map(exp => (
-                                    <Card key={exp._id} className="rounded-[2.5rem] border-none shadow-xl shadow-slate-100 hover:shadow-indigo-100 transition-all group overflow-hidden bg-white">
+                                    <Card key={exp._id} className="rounded-[2.5rem] border-none  shadow-slate-100 -100  group overflow-hidden bg-white">
                                         <div className="p-8 space-y-4">
                                             <div className="flex justify-between items-start">
                                                 <div className={`p-4 rounded-[1.5rem] ${exp.type === 'learning' ? 'bg-amber-100/50' : 'bg-indigo-100/50'}`}>
@@ -205,7 +205,7 @@ export function ExperimentManagement() {
                                             <Button 
                                                 variant="outline" 
                                                 onClick={() => handleManageResources(exp._id)}
-                                                className="w-full rounded-2xl border-slate-100 font-black text-xs h-12 uppercase group-hover:bg-slate-900 group-hover:text-white transition-all"
+                                                className="w-full rounded-2xl border-slate-100 font-black text-xs h-12 uppercase group-hover:bg-slate-900 group-hover:text-white "
                                             >
                                                 Manage Resources <i className="bx bx-chevronright ml-2"  />
                                             </Button>
@@ -219,7 +219,7 @@ export function ExperimentManagement() {
             </div>
 
             <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
-                <DialogContent className="rounded-[2.5rem] bg-white border-none shadow-2xl p-0 overflow-hidden max-w-lg">
+                <DialogContent className="rounded-[2.5rem] bg-white border-none  p-0 overflow-hidden max-w-lg">
                     <div className="bg-slate-900 p-8 text-white">
                         <DialogTitle className="text-2xl font-black uppercase tracking-tighter">Experiment Architect</DialogTitle>
                         <DialogDescription className="text-slate-400 font-medium">Define a new laboratory terminal and link it to the syllabus.</DialogDescription>

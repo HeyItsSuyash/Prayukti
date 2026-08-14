@@ -23,7 +23,7 @@ export function AnalyticsSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#071D2B] shadow-2xl overflow-hidden flex flex-col relative z-20"
+                        className="rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#071D2B]  overflow-hidden flex flex-col relative z-20"
                     >
                         <div className="h-12 border-b border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 flex items-center px-6 gap-4">
                             <div className="font-semibold text-slate-800 dark:text-white">Institution Dashboard</div>
@@ -91,7 +91,7 @@ export function AnalyticsSection() {
                     <motion.div 
                         animate={{ y: [10, -10, 10] }}
                         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute -top-12 -right-12 z-30 hidden lg:flex rounded-2xl border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-[#071D2B]/90 backdrop-blur-xl shadow-xl p-4 gap-4 items-center"
+                        className="absolute -top-12 -right-12 z-30 hidden lg:flex rounded-2xl border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-[#071D2B]/90 backdrop-blur-xl  p-4 gap-4 items-center"
                     >
                         <div className="w-12 h-12 rounded-full conic-gradient-mock flex items-center justify-center relative bg-slate-100 dark:bg-slate-800">
                             <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
@@ -108,7 +108,7 @@ export function AnalyticsSection() {
                     <motion.div 
                         animate={{ y: [-15, 15, -15] }}
                         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                        className="absolute -bottom-8 -left-8 z-30 hidden lg:flex rounded-2xl border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-[#071D2B]/90 backdrop-blur-xl shadow-xl p-4 flex-col gap-2 w-48"
+                        className="absolute -bottom-8 -left-8 z-30 hidden lg:flex rounded-2xl border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-[#071D2B]/90 backdrop-blur-xl  p-4 flex-col gap-2 w-48"
                     >
                         <div className="text-sm font-semibold text-slate-800 dark:text-white mb-1">Activity Heatmap</div>
                         <div className="grid grid-cols-7 gap-1">

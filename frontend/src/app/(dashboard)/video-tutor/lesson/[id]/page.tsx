@@ -311,7 +311,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
         return (
             <VideoTutorLayout>
                 <div className="flex flex-col items-center justify-center py-40 animate-pulse">
-                    <i className="bx bx-loader2 w-12 h-12 text-indigo-600 animate-spin mb-4"  />
+                    <i className="bx bx-loader2 w-12 h-12 text-[#059669] animate-spin mb-4"  />
                     <p className="text-slate-400 font-black uppercase tracking-widest text-[10px]">Loading Lesson Data...</p>
                 </div>
             </VideoTutorLayout>
@@ -332,7 +332,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
         <VideoTutorLayout>
             <div className="space-y-8 animate-in fade-in duration-500 max-w-7xl">
                 {/* Lesson Header Row */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-slate-900 border-2 rounded-[2rem] p-6 shadow-sm">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-slate-900 border-2 rounded-[2rem] p-6 ">
                     <div>
                         <span className="text-[9px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 px-3 py-1.5 rounded-xl">
                             {payload.lesson.mode.replace("_", " ")} Mode
@@ -360,7 +360,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Left Column: Player Screen */}
                     <div className="lg:col-span-2 space-y-6">
-                        <div className="aspect-video w-full bg-slate-950 rounded-[2.5rem] border-2 border-slate-900 shadow-2xl relative overflow-hidden flex items-center justify-center p-4">
+                        <div className="aspect-video w-full bg-slate-950 rounded-[2.5rem] border-2 border-slate-900  relative overflow-hidden flex items-center justify-center p-4">
                             {/* Inner Visual: Avatar + Active slide / animation */}
                             <div className="w-full h-full grid grid-cols-3 gap-4 relative">
                                 
@@ -409,7 +409,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
                             </div>
 
                             {/* Caption Overlay */}
-                            <div className="absolute bottom-16 left-6 right-6 bg-slate-900/90 border border-slate-800 p-4 rounded-2xl backdrop-blur-sm text-center text-xs font-semibold leading-relaxed text-slate-100 z-10 shadow-lg">
+                            <div className="absolute bottom-16 left-6 right-6 bg-slate-900/90 border border-slate-800 p-4 rounded-2xl backdrop-blur-sm text-center text-xs font-semibold leading-relaxed text-slate-100 z-10 ">
                                 {interruptData ? interruptData.response : activeScript?.narration_text}
                             </div>
 
@@ -465,7 +465,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
                     <div className="space-y-6 lg:col-span-1">
                         
                         {/* Doubt interruption form */}
-                        <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900 p-6 shadow-sm">
+                        <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900 p-6 ">
                             <div className="flex items-center gap-2 border-b pb-3 mb-4 border-slate-100 dark:border-slate-800">
                                 <i className="bx bx-help-circle text-indigo-600 dark:text-indigo-400"  />
                                 <h3 className="font-black text-sm uppercase tracking-tight">Ask doubts in Real-time</h3>
@@ -508,7 +508,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
                         </Card>
 
                         {/* Practice assessment quiz */}
-                        <Card className="rounded-[2rem] border-2 bg-white dark:bg-slate-900 p-6 shadow-sm">
+                        <Card className="rounded-[2rem] border-2 bg-white dark:bg-slate-900 p-6 ">
                             <div className="flex items-center justify-between border-b pb-3 mb-4 border-slate-100 dark:border-slate-800">
                                 <div className="flex items-center gap-2">
                                     <i className="bx bx-sparkles text-indigo-600 dark:text-indigo-400"  />
@@ -586,7 +586,7 @@ export default function LessonPlayerPage({ params }: { params: Promise<{ id: str
                 </div>
 
                 {/* Downloadable markdown summaries */}
-                <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 p-8 shadow-sm">
+                <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 p-8 ">
                     <div className="flex items-center gap-2 border-b pb-4 mb-6 border-slate-100 dark:border-slate-800">
                         <i className="bx bx-bookopen text-indigo-600 dark:text-indigo-400"  />
                         <h3 className="font-black text-base uppercase tracking-tight">AI Generated Study Notes</h3>

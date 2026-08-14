@@ -63,7 +63,7 @@ export function Hero() {
 
                     {/* Graphics / Interactive Element placeholder */}
                     <div className="flex-1 w-full max-w-[600px] lg:max-w-none relative">
-                        <div className="relative aspect-square md:aspect-[4/3] bg-slate-100 rounded-3xl border border-slate-200 shadow-2xl overflow-hidden group">
+                        <div className="relative aspect-square md:aspect-[4/3] bg-slate-100 rounded-3xl border border-slate-200  overflow-hidden group">
                             {/* Placeholder for now - can be replaced with Spline or Image */}
                             <div className="absolute inset-0 bg-gradient-to-tr from-slate-50 to-white flex items-center justify-center">
                                 <div className="grid grid-cols-2 gap-4 p-8 w-full h-full opacity-50 rotate-3 scale-110">
@@ -73,14 +73,14 @@ export function Hero() {
                                     <div className="bg-blue-50 rounded-2xl w-full h-40"></div>
                                 </div>
                                 <div className="absolute inset-0 flex items-center justify-center">
-                                    <span className="bg-white/80 backdrop-blur border border-white/50 px-6 py-3 rounded-xl shadow-xl font-bold text-slate-800">
+                                    <span className="bg-white/80 backdrop-blur border border-white/50 px-6 py-3 rounded-xl  font-bold text-slate-800">
                                         Interactive Simulation Preview
                                     </span>
                                 </div>
                             </div>
                         </div>
                         {/* Floating elements */}
-                        <div className="absolute -bottom-8 -left-8 bg-white p-4 rounded-xl shadow-xl border border-slate-100 hidden md:block animate-bounce duration-[3000ms]">
+                        <div className="absolute -bottom-8 -left-8 bg-white p-4 rounded-xl  border border-slate-100 hidden md:block animate-bounce duration-[3000ms]">
                             <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">✓</div>
                                 <div className="flex flex-col">

@@ -16,7 +16,7 @@ export function UniversityComparison() {
                     </p>
                 </div>
 
-                <div className="max-w-5xl mx-auto rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#071D2B] shadow-2xl overflow-hidden flex flex-col md:flex-row">
+                <div className="max-w-5xl mx-auto rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#071D2B]  overflow-hidden flex flex-col md:flex-row">
                     
                     {/* Traditional Labs (Left) */}
                     <div className="flex-1 p-8 md:p-12 border-b md:border-b-0 md:border-r border-slate-200 dark:border-white/10 relative">

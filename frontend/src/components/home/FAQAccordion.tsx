@@ -40,7 +40,7 @@ export function FAQAccordion() {
                         return (
                             <div 
                                 key={idx} 
-                                className={`rounded-2xl border transition-all duration-300 overflow-hidden ${isActive ? 'border-primary/50 bg-slate-50 dark:bg-white/5' : 'border-slate-200 dark:border-white/10 bg-white dark:bg-transparent hover:border-slate-300 dark:hover:border-white/20'}`}
+                                className={`rounded-2xl border  duration-300 overflow-hidden ${isActive ? 'border-primary/50 bg-slate-50 dark:bg-white/5' : 'border-slate-200 dark:border-white/10 bg-white dark:bg-transparent hover:border-slate-300 dark:hover:border-white/20'}`}
                             >
                                 <button 
                                     onClick={() => setActiveIndex(isActive ? null : idx)}
@@ -49,7 +49,7 @@ export function FAQAccordion() {
                                     <span className="font-semibold text-slate-900 dark:text-white text-lg pr-8">
                                         {faq.q}
                                     </span>
-                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${isActive ? 'bg-primary text-white rotate-180' : 'bg-slate-100 dark:bg-white/10 text-slate-500 dark:text-slate-400'}`}>
+                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0  duration-300 ${isActive ? 'bg-primary text-white rotate-180' : 'bg-slate-100 dark:bg-white/10 text-slate-500 dark:text-slate-400'}`}>
                                         <i className="bx bx-chevron-down text-xl"></i>
                                     </div>
                                 </button>

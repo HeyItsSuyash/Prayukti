@@ -63,28 +63,28 @@ export const LAB_CONTENT: Record<string, LabContent> = {
                 <section>
                     <h3 className="text-xl font-bold text-gray-900 mb-4">2. Key Concepts & Terminology</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div className="bg-white p-4 rounded-lg border border-gray-200 ">
                             <div className="flex items-center gap-2 mb-2 text-blue-700">
                                 <i className="bx bx-database"  />
                                 <h4 className="font-bold">Database</h4>
                             </div>
                             <p className="text-sm text-gray-600">An organized collection of structured information, or data, typically stored electronically in a computer system.</p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div className="bg-white p-4 rounded-lg border border-gray-200 ">
                             <div className="flex items-center gap-2 mb-2 text-green-700">
                                 <i className="bx bx-table"  />
                                 <h4 className="font-bold">Table (Relation)</h4>
                             </div>
                             <p className="text-sm text-gray-600">A collection of related data held in a table format within a database. It consists of columns and rows.</p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div className="bg-white p-4 rounded-lg border border-gray-200 ">
                             <div className="flex items-center gap-2 mb-2 text-purple-700">
                                 <i className="bx bx-columns"  />
                                 <h4 className="font-bold">Attribute (Column)</h4>
                             </div>
                             <p className="text-sm text-gray-600">A specific characteristic or property of a table. Example: `Name`, `Age` in a Student table.</p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div className="bg-white p-4 rounded-lg border border-gray-200 ">
                             <div className="flex items-center gap-2 mb-2 text-orange-700">
                                 <i className="bx bx-layoutlist"  />
                                 <h4 className="font-bold">Tuple (Row/Record)</h4>
@@ -1052,15 +1052,15 @@ export const LAB_CONTENT: Record<string, LabContent> = {
                 <section>
                     <h3 className="text-xl font-bold text-gray-900 mb-4">2. Protocol Types</h3>
                     <div className="space-y-4">
-                        <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                        <div className="p-4 bg-white border border-gray-200 rounded-lg ">
                             <h4 className="font-bold text-blue-600">Stop-and-Wait ARQ</h4>
                             <p className="text-sm text-gray-600 mt-1">Sender sends one frame, stops, and waits for ACK. Very inefficient for long distances (high propagation delay).</p>
                         </div>
-                        <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                        <div className="p-4 bg-white border border-gray-200 rounded-lg ">
                             <h4 className="font-bold text-indigo-600">Go-Back-N (GBN)</h4>
                             <p className="text-sm text-gray-600 mt-1">Sender sends up to N frames (Window Size). If Frame X is lost, Receiver discards all subsequent frames. Sender retransmits everything from X.</p>
                         </div>
-                        <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                        <div className="p-4 bg-white border border-gray-200 rounded-lg ">
                             <h4 className="font-bold text-green-600">Selective Repeat (SR)</h4>
                             <p className="text-sm text-gray-600 mt-1">Receiver accepts out-of-order frames and buffers them. Sender **only** retransmits the lost Frame X. Most efficient but complex.</p>
                         </div>

@@ -143,7 +143,7 @@ export function ResourceManager() {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
                     <Select value={selectedSubject || ""} onValueChange={setSelectedSubject}>
-                        <SelectTrigger className="w-full sm:w-[240px] rounded-xl border-slate-100 shadow-sm bg-white font-black h-12">
+                        <SelectTrigger className="w-full sm:w-[240px] rounded-xl border-slate-100  bg-white font-black h-12">
                             <SelectValue placeholder="Select Subject" />
                         </SelectTrigger>
                         <SelectContent className="rounded-2xl border-slate-100">
@@ -154,7 +154,7 @@ export function ResourceManager() {
                     </Select>
 
                     <Select value={selectedExp || ""} onValueChange={setSelectedExp} disabled={!selectedSubject}>
-                        <SelectTrigger className="w-full sm:w-[240px] rounded-xl border-slate-100 shadow-sm bg-white font-black h-12">
+                        <SelectTrigger className="w-full sm:w-[240px] rounded-xl border-slate-100  bg-white font-black h-12">
                             <SelectValue placeholder="Select Experiment" />
                         </SelectTrigger>
                         <SelectContent className="rounded-2xl border-slate-100">
@@ -176,7 +176,7 @@ export function ResourceManager() {
             ) : (
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Add Resource Panel */}
-                    <Card className="rounded-[2.5rem] border-none shadow-xl shadow-slate-100 bg-white h-fit sticky top-8">
+                    <Card className="rounded-[2.5rem] border-none  shadow-slate-100 bg-white h-fit sticky top-8">
                         <CardHeader className="bg-slate-900 text-white rounded-t-[2.5rem] p-8">
                             <CardTitle className="text-xl font-black uppercase tracking-tighter">Add Knowledge Item</CardTitle>
                         </CardHeader>
@@ -188,8 +188,8 @@ export function ResourceManager() {
                                         <button
                                             key={type}
                                             onClick={() => setNewRes({...newRes, type})}
-                                            className={`flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
-                                                newRes.type === type ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-400'
+                                            className={`flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest  ${
+                                                newRes.type === type ? 'bg-white  text-indigo-600' : 'text-slate-400'
                                             }`}
                                         >
                                             {type}
@@ -245,7 +245,7 @@ export function ResourceManager() {
                                 <p className="text-slate-300 font-black uppercase italic tracking-widest">No resources cataloged yet</p>
                             </div>
                         ) : resources.map(res => (
-                            <Card key={res._id} className="rounded-3xl border-none shadow-lg shadow-slate-100/50 bg-white overflow-hidden group">
+                            <Card key={res._id} className="rounded-3xl border-none  shadow-slate-100/50 bg-white overflow-hidden group">
                                 <CardContent className="p-1 flex items-center gap-4">
                                     <div className={`p-6 rounded-2xl flex items-center justify-center ${
                                         res.type === 'video' ? 'bg-red-50 text-red-600' :

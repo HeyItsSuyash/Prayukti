@@ -36,7 +36,7 @@ export function CSISSection() {
                         <div className="flex flex-wrap gap-6">
                             <a href="https://csis-mmmut.org" target="_blank" rel="noopener noreferrer">
                                 <Button className="h-14 px-8 rounded-xl bg-white text-primary hover:bg-slate-200 border-0 font-black uppercase tracking-widest text-[10px] gap-2 group">
-                                    Visit Official Site <i className="bx bx-externallink group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"  />
+                                    Visit Official Site <i className="bx bx-externallink group-hover:translate-x-1 group- "  />
                                 </Button>
                             </a>
                             
@@ -49,9 +49,9 @@ export function CSISSection() {
                                     <a 
                                         key={i} 
                                         href={social.href} 
-                                        className="w-14 h-14 rounded-xl border-2 border-white/10 flex items-center justify-center text-white hover:border-accent hover:text-accent transition-all group"
+                                        className="w-14 h-14 rounded-xl border-2 border-white/10 flex items-center justify-center text-white hover:border-accent hover:text-accent  group"
                                     >
-                                        <social.icon size={20} className="group-hover:scale-110 transition-transform" />
+                                        <social.icon size={20} className="group- " />
                                     </a>
                                 ))}
                             </div>

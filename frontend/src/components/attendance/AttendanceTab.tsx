@@ -99,7 +99,7 @@ export default function AttendanceTab() {
     if (loading && !analytics) {
         return (
             <div className="flex items-center justify-center p-20">
-                <i className="bx bx-loader2 h-8 w-8 animate-spin text-blue-600"  />
+                <i className="bx bx-loader2 h-8 w-8 animate-spin text-[#059669]"  />
             </div>
         );
     }

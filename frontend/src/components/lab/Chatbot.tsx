@@ -111,13 +111,13 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
-              className="bg-white px-4 py-3 rounded-2xl rounded-tr-none shadow-xl border-2 border-slate-100 max-w-[200px]"
+              className="bg-white px-4 py-3 rounded-2xl rounded-tr-none  border-2 border-slate-100 max-w-[200px]"
             >
               <p className="text-sm font-bold text-black">Hi, how can I help you Today!</p>
             </motion.div>
 
             {/* Robot Icon */}
-            <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center shadow-2xl border-4 border-white transition-transform group-hover:scale-110 relative overflow-hidden">
+            <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center  border-4 border-white  group- relative overflow-hidden">
               {/* Simple CSS Robot Face Placeholder since we don't have the image asset */}
               <div className="absolute inset-0 bg-gradient-to-tr from-slate-900 to-slate-800"></div>
               <div className="relative z-10 flex flex-col items-center mt-1">
@@ -139,7 +139,7 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "100%", opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white shadow-2xl z-50 border-l border-slate-200 flex flex-col"
+            className="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white  z-50 border-l border-slate-200 flex flex-col"
           >
             {/* Header */}
             <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
@@ -172,7 +172,7 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
                   <div
                     className={`max-w-[85%] p-3 rounded-2xl text-sm font-medium leading-relaxed ${msg.role === "user"
                       ? "bg-black text-white rounded-br-none"
-                      : "bg-white border border-slate-200 text-slate-800 rounded-bl-none shadow-sm"
+                      : "bg-white border border-slate-200 text-slate-800 rounded-bl-none "
                       }`}
                   >
                     {msg.role === "bot" ? (
@@ -197,7 +197,7 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
               ))}
               {isTyping && (
                 <div className="flex justify-start">
-                  <div className="bg-white border border-slate-200 px-4 py-3 rounded-2xl rounded-bl-none shadow-sm">
+                  <div className="bg-white border border-slate-200 px-4 py-3 rounded-2xl rounded-bl-none ">
                     <i className="bx bx-loader2 w-4 h-4 animate-spin text-slate-400"  />
                   </div>
                 </div>

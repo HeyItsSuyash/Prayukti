@@ -119,7 +119,7 @@ export function ResourcesSection({ resources, labId }: ResourcesSectionProps) {
                             whileTap={{ scale: 0.98 }}
                         >
                             <Card
-                                className="cursor-pointer hover:shadow-md transition-shadow border-gray-200 h-full"
+                                className="cursor-pointer hover: transition-shadow border-gray-200 h-full"
                                 onClick={() => openResource(item.type)}
                             >
                                 <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
@@ -164,7 +164,7 @@ export function ResourcesSection({ resources, labId }: ResourcesSectionProps) {
 
                     <div className="mt-4">
                         {selectedType === 'video' && finalVideoData && (
-                            <div className="aspect-video w-full rounded-lg overflow-hidden bg-black shadow-lg">
+                            <div className="aspect-video w-full rounded-lg overflow-hidden bg-black ">
                                 <iframe
                                     className="w-full h-full"
                                     src={finalVideoData.url}
@@ -199,7 +199,7 @@ export function ResourcesSection({ resources, labId }: ResourcesSectionProps) {
                                             href={link.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-sm transition-all group"
+                                            className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300   group"
                                         >
                                             <span className="font-medium text-gray-700 group-hover:text-blue-600">{link.text}</span>
                                             <i className="bx bx-externallink text-gray-400 group-hover:text-blue-500"  />

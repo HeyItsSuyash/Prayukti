@@ -44,7 +44,7 @@ export function TestimonialsSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            className="bg-white rounded-2xl border border-slate-100 p-8 shadow-sm flex flex-col hover:shadow-md transition-shadow"
+                            className="bg-white rounded-2xl border border-slate-100 p-8  flex flex-col hover: transition-shadow"
                         >
                             <div className="text-primary/20 mb-4">
                                 <i className="bx bxs-quote-alt-left text-3xl"></i>

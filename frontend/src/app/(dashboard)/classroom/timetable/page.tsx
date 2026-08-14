@@ -303,7 +303,7 @@ export default function TimetablePage() {
 
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-32 animate-pulse">
-                        <i className="bx bx-loader2 w-10 h-10 text-indigo-600 animate-spin mb-4"  />
+                        <i className="bx bx-loader2 w-10 h-10 text-[#059669] animate-spin mb-4"  />
                         <p className="text-slate-400 font-black uppercase tracking-widest text-[9px]">Synchronizing schedules...</p>
                     </div>
                 ) : (

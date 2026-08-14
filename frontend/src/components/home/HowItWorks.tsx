@@ -48,13 +48,13 @@ export function HowItWorks() {
                                 className={`relative flex items-center gap-8 ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
                             >
                                 {/* Center Node */}
-                                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-white dark:bg-[#0A1929] border-4 border-slate-50 dark:border-[#071D2B] flex items-center justify-center z-10 shadow-lg shadow-primary/20">
+                                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-white dark:bg-[#0A1929] border-4 border-slate-50 dark:border-[#071D2B] flex items-center justify-center z-10  /20">
                                     <div className="w-4 h-4 rounded-full bg-gradient-to-br from-primary to-accent"></div>
                                 </div>
                                 
                                 {/* Content Card */}
                                 <div className="ml-20 md:ml-0 md:w-1/2 flex flex-col pt-2 pb-2">
-                                    <div className={`bg-white dark:bg-[#0A1929] p-6 rounded-2xl border border-slate-200 dark:border-white/10 shadow-xl ${idx % 2 === 0 ? 'md:mr-12 md:text-right' : 'md:ml-12 md:text-left'} hover:-translate-y-1 transition-transform`}>
+                                    <div className={`bg-white dark:bg-[#0A1929] p-6 rounded-2xl border border-slate-200 dark:border-white/10  ${idx % 2 === 0 ? 'md:mr-12 md:text-right' : 'md:ml-12 md:text-left'}  `}>
                                         <div className="text-sm font-black text-primary/50 mb-1">{step.num}</div>
                                         <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{step.title}</h3>
                                         <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">{step.desc}</p>

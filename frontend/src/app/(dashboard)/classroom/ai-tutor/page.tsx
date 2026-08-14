@@ -297,7 +297,7 @@ export default function AiTutorPage() {
 
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-32 animate-pulse">
-                        <i className="bx bx-loader2 w-10 h-10 text-indigo-600 animate-spin mb-4"  />
+                        <i className="bx bx-loader2 w-10 h-10 text-[#059669] animate-spin mb-4"  />
                         <p className="text-slate-400 font-black uppercase tracking-widest text-[9px]">Binding AI engine parameters...</p>
                     </div>
                 ) : (
@@ -305,14 +305,14 @@ export default function AiTutorPage() {
                         
                         {/* Tab 1: Ask Doubts */}
                         {activeTab === "chat" && (
-                            <Card className="rounded-[2rem] border-2 bg-white dark:bg-slate-900 overflow-hidden shadow-sm flex flex-col h-[600px]">
+                            <Card className="rounded-[2rem] border-2 bg-white dark:bg-slate-900 overflow-hidden  flex flex-col h-[600px]">
                                 <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50/20 dark:bg-slate-950/20">
                                     {messages.map((msg, i) => (
                                         <div key={i} className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
                                             <div className={`max-w-[75%] p-4 rounded-2xl text-xs font-semibold leading-relaxed ${
                                                 msg.sender === "user" 
                                                     ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950 rounded-br-none" 
-                                                    : "bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-none shadow-sm"
+                                                    : "bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-none "
                                             }`}>
                                                 {msg.sender === "ai" ? (
                                                     <div className="markdown-content prose dark:prose-invert max-w-none">
@@ -328,7 +328,7 @@ export default function AiTutorPage() {
                                     ))}
                                     {chatLoading && (
                                         <div className="flex justify-start">
-                                            <div className="bg-white border dark:bg-slate-900 dark:border-slate-800 border-slate-200 px-4 py-3 rounded-2xl rounded-bl-none shadow-sm flex items-center gap-2">
+                                            <div className="bg-white border dark:bg-slate-900 dark:border-slate-800 border-slate-200 px-4 py-3 rounded-2xl rounded-bl-none  flex items-center gap-2">
                                                 <i className="bx bx-loader2 w-4 h-4 animate-spin text-slate-400"  />
                                                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Tutor compiling answer...</span>
                                             </div>
@@ -359,7 +359,7 @@ export default function AiTutorPage() {
 
                         {/* Tab 2: Quiz Engine */}
                         {activeTab === "quiz" && (
-                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8">
+                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900  p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
                                     <div>
                                         <h3 className="font-extrabold text-lg uppercase tracking-tight">AI Generated <span className="text-indigo-600 dark:text-indigo-400 italic">Assessment</span></h3>
@@ -372,7 +372,7 @@ export default function AiTutorPage() {
 
                                 {quizLoading ? (
                                     <div className="flex flex-col items-center justify-center py-20 animate-pulse">
-                                        <i className="bx bx-loader2 w-8 h-8 text-indigo-600 animate-spin mb-3"  />
+                                        <i className="bx bx-loader2 w-8 h-8 text-[#059669] animate-spin mb-3"  />
                                         <p className="text-slate-400 font-bold uppercase tracking-widest text-[9px]">Generating quiz dataset...</p>
                                     </div>
                                 ) : quizQuestions.length > 0 ? (
@@ -405,7 +405,7 @@ export default function AiTutorPage() {
                                                                     type="button"
                                                                     disabled={quizSubmitted}
                                                                     onClick={() => setQuizAnswers(prev => ({ ...prev, [q.id]: optIdx }))}
-                                                                    className={`p-3 rounded-xl text-xs font-bold text-left transition-all ${optStyle}`}
+                                                                    className={`p-3 rounded-xl text-xs font-bold text-left  ${optStyle}`}
                                                                 >
                                                                     {opt}
                                                                 </button>
@@ -449,7 +449,7 @@ export default function AiTutorPage() {
 
                         {/* Tab 3: Flashcards */}
                         {activeTab === "flashcards" && (
-                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8 flex flex-col items-center">
+                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900  p-6 md:p-8 flex flex-col items-center">
                                 <div className="w-full flex justify-between items-center mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
                                     <div>
                                         <h3 className="font-extrabold text-lg uppercase tracking-tight">AI Generated <span className="text-indigo-600 dark:text-indigo-400 italic">Flashcards</span></h3>
@@ -461,7 +461,7 @@ export default function AiTutorPage() {
 
                                 {flashLoading ? (
                                     <div className="flex flex-col items-center justify-center py-20 animate-pulse">
-                                        <i className="bx bx-loader2 w-8 h-8 text-indigo-600 animate-spin mb-3"  />
+                                        <i className="bx bx-loader2 w-8 h-8 text-[#059669] animate-spin mb-3"  />
                                         <p className="text-slate-400 font-bold uppercase tracking-widest text-[9px]">Assembling flashcards...</p>
                                     </div>
                                 ) : flashcards.length > 0 ? (
@@ -515,7 +515,7 @@ export default function AiTutorPage() {
 
                         {/* Tab 4: Study Guides (Notes) */}
                         {activeTab === "notes" && (
-                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8">
+                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900  p-6 md:p-8">
                                 <div className="flex justify-between items-center mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
                                     <div>
                                         <h3 className="font-extrabold text-lg uppercase tracking-tight">AI Generated <span className="text-indigo-600 dark:text-indigo-400 italic">Study Guide</span></h3>
@@ -533,7 +533,7 @@ export default function AiTutorPage() {
 
                                 {notesLoading ? (
                                     <div className="flex flex-col items-center justify-center py-20 animate-pulse">
-                                        <i className="bx bx-loader2 w-8 h-8 text-indigo-600 animate-spin mb-3"  />
+                                        <i className="bx bx-loader2 w-8 h-8 text-[#059669] animate-spin mb-3"  />
                                         <p className="text-slate-400 font-bold uppercase tracking-widest text-[9px]">Compiling notes markdown...</p>
                                     </div>
                                 ) : notesText ? (

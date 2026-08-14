@@ -575,14 +575,14 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
     return (
         <div className="flex flex-col h-full bg-[#f8fafc] overflow-hidden">
             {/* Minimalist Tabs */}
-            <div className="flex bg-white border-b px-6 pt-2 gap-8 shadow-sm">
+            <div className="flex bg-card border-b px-6 pt-2 gap-8 shadow-none-none">
                 {["simulation", "comparison", "quiz"].map((tab) => (
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab as any)}
-                        className={`pb-3 text-xs font-black uppercase tracking-[0.2em] transition-all border-b-2 ${activeTab === tab
+                        className={`pb-3 text-xs font-black uppercase tracking-[0.2em]  border-b-2 ${activeTab === tab
                             ? "border-cyan-500 text-cyan-600"
-                            : "border-transparent text-slate-400 hover:text-slate-600"
+                            : "border-transparent text-muted-foreground hover:text-muted-foreground"
                             }`}
                     >
                         {tab}
@@ -595,20 +595,20 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                     <div className="p-6 max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-5 gap-6">
                         {/* Control Sidebar */}
                         <div className="lg:col-span-1 space-y-6">
-                            <div className="bg-white/70 backdrop-blur-md p-6 rounded-[2.5rem] border border-slate-200 shadow-xl space-y-8">
-                                <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                                    <Layout className="h-4 w-4 text-indigo-500" />
+                            <div className="bg-card/70 backdrop-blur-md p-6 rounded-none-[2.5rem] border border-border shadow-none-none space-y-8">
+                                <h3 className="text-[10px] font-black text-muted-foreground uppercase tracking-widest flex items-center gap-2">
+                                    <Layout className="h-4 w-4 text-primary" />
                                     Environment
                                 </h3>
 
                                 <div className="space-y-6">
                                     <div className="space-y-3">
-                                        <label className="text-[10px] font-black text-slate-400 uppercase">Topology</label>
-                                        <div className="grid grid-cols-2 p-1 bg-slate-100 rounded-2xl gap-1">
+                                        <label className="text-[10px] font-black text-muted-foreground uppercase">Topology</label>
+                                        <div className="grid grid-cols-2 p-1 bg-card rounded-none-none gap-1">
                                             <Button
                                                 variant={mode === "ring" ? "default" : "ghost"}
                                                 size="sm"
-                                                className={`rounded-xl text-[10px] font-bold ${mode === "ring" ? "bg-indigo-600 shadow-md text-white" : ""}`}
+                                                className={`rounded-none-none text-[10px] font-bold ${mode === "ring" ? "bg-primary shadow-none-none text-white" : ""}`}
                                                 onClick={() => setMode("ring")}
                                             >
                                                 Ring
@@ -616,7 +616,7 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                             <Button
                                                 variant={mode === "bus" ? "default" : "ghost"}
                                                 size="sm"
-                                                className={`rounded-xl text-[10px] font-bold ${mode === "bus" ? "bg-amber-600 shadow-md text-white" : ""}`}
+                                                className={`rounded-none-none text-[10px] font-bold ${mode === "bus" ? "bg-amber-600 shadow-none-none text-white" : ""}`}
                                                 onClick={() => setMode("bus")}
                                             >
                                                 Bus
@@ -624,7 +624,7 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                             <Button
                                                 variant={mode === "star" ? "default" : "ghost"}
                                                 size="sm"
-                                                className={`rounded-xl text-[10px] font-bold ${mode === "star" ? "bg-cyan-600 shadow-md text-white" : ""}`}
+                                                className={`rounded-none-none text-[10px] font-bold ${mode === "star" ? "bg-cyan-600 shadow-none-none text-white" : ""}`}
                                                 onClick={() => setMode("star")}
                                             >
                                                 Star
@@ -632,7 +632,7 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                             <Button
                                                 variant={mode === "mesh" ? "default" : "ghost"}
                                                 size="sm"
-                                                className={`rounded-xl text-[10px] font-bold ${mode === "mesh" ? "bg-emerald-600 shadow-md text-white" : ""}`}
+                                                className={`rounded-none-none text-[10px] font-bold ${mode === "mesh" ? "bg-primary shadow-none-none text-white" : ""}`}
                                                 onClick={() => setMode("mesh")}
                                             >
                                                 Mesh
@@ -640,7 +640,7 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                             <Button
                                                 variant={mode === "hybrid" ? "default" : "ghost"}
                                                 size="sm"
-                                                className={`col-span-2 rounded-xl text-[10px] font-bold ${mode === "hybrid" ? "bg-slate-800 shadow-md text-white" : ""}`}
+                                                className={`col-span-2 rounded-none-none text-[10px] font-bold ${mode === "hybrid" ? "bg-card shadow-none-none text-white" : ""}`}
                                                 onClick={() => { setMode("hybrid"); setIsDesignerMode(true); }}
                                             >
                                                 Hybrid (Designer Mode)
@@ -650,24 +650,24 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
 
                                     <div className="space-y-4">
                                         <div className="flex justify-between items-center">
-                                            <span className="text-[10px] font-black text-slate-400 uppercase">Nodes</span>
-                                            <span className="text-xs font-bold text-indigo-600">{nodeCount}</span>
+                                            <span className="text-[10px] font-black text-muted-foreground uppercase">Nodes</span>
+                                            <span className="text-xs font-bold text-primary">{nodeCount}</span>
                                         </div>
                                         <Slider value={[nodeCount]} min={3} max={10} step={1} onValueChange={(v) => setNodeCount(v[0]!)} />
                                     </div>
 
                                     <div className="pt-2">
-                                        <label className="text-[10px] font-black text-slate-400 uppercase mb-3 block">Fault Hazards</label>
+                                        <label className="text-[10px] font-black text-muted-foreground uppercase mb-3 block">Fault Hazards</label>
                                         <div className="grid grid-cols-2 gap-2">
-                                            <Button variant="outline" size="sm" className="rounded-xl text-[9px] font-bold text-rose-600 border-rose-100 bg-rose-50" onClick={() => injectFault('node')}>
+                                            <Button variant="outline" size="sm" className="rounded-none-none text-[9px] font-bold text-rose-600 border-rose-100 bg-rose-50" onClick={() => injectFault('node')}>
                                                 Fail Node
                                             </Button>
-                                            <Button variant="outline" size="sm" className="rounded-xl text-[9px] font-bold text-rose-600 border-rose-100 bg-rose-50" onClick={() => injectFault('token')}>
+                                            <Button variant="outline" size="sm" className="rounded-none-none text-[9px] font-bold text-rose-600 border-rose-100 bg-rose-50" onClick={() => injectFault('token')}>
                                                 Lose Token
                                             </Button>
                                         </div>
                                         {isTokenLost && (
-                                            <Button className="w-full mt-2 bg-emerald-600 text-[9px] h-8 rounded-xl" onClick={() => setIsTokenLost(false)}>
+                                            <Button className="w-full mt-2 bg-primary text-[9px] h-8 rounded-none-none" onClick={() => setIsTokenLost(false)}>
                                                 Regenerate Token
                                             </Button>
                                         )}
@@ -676,34 +676,34 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
 
                                 <div className="pt-4 space-y-3">
                                     <Button
-                                        className={`w-full rounded-[1.5rem] h-12 text-xs font-black uppercase tracking-widest ${isRunning ? "bg-rose-500 hover:bg-rose-600" : "bg-indigo-600 hover:bg-indigo-700"} shadow-lg`}
+                                        className={`w-full rounded-none-[1.5rem] h-12 text-xs font-black uppercase tracking-widest ${isRunning ? "bg-rose-500 hover:bg-rose-600" : "bg-primary hover:bg-primary"} shadow-none-none`}
                                         onClick={() => setIsRunning(!isRunning)}
                                     >
                                         {isRunning ? <Pause className="mr-2 h-4 w-4" /> : <Play className="mr-2 h-4 w-4" />}
                                         {isRunning ? "Stop Lab" : "Initiate Lab"}
                                     </Button>
                                     <div className="flex gap-2">
-                                        <Button variant="ghost" className={`flex-1 rounded-xl text-[9px] ${isStepMode ? "bg-slate-200" : ""}`} onClick={() => setIsStepMode(!isStepMode)}>
+                                        <Button variant="ghost" className={`flex-1 rounded-none-none text-[9px] ${isStepMode ? "bg-card" : ""}`} onClick={() => setIsStepMode(!isStepMode)}>
                                             Step Mode
                                         </Button>
-                                        <Button variant="ghost" className="flex-1 rounded-xl text-[9px]" onClick={() => tick()}>
+                                        <Button variant="ghost" className="flex-1 rounded-none-none text-[9px]" onClick={() => tick()}>
                                             Step {">>"}
                                         </Button>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="bg-slate-900 p-6 rounded-[2.5rem] shadow-2xl h-64 flex flex-col relative overflow-hidden">
+                            <div className="bg-card p-6 rounded-none-[2.5rem] shadow-none-2xl h-64 flex flex-col relative overflow-hidden">
                                 <div className="flex justify-between items-center mb-6">
-                                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Performance Metrics</h4>
+                                    <h4 className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Performance Metrics</h4>
                                     <div className="flex gap-4">
                                         <div className="flex items-center gap-2">
-                                            <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.5)]"></div>
-                                            <span className="text-[8px] text-slate-500 font-bold uppercase tracking-tighter">Throughput</span>
+                                            <div className="w-2 h-2 rounded-none-full bg-cyan-400 shadow-none-[0_0_8px_rgba(34,211,238,0.5)]"></div>
+                                            <span className="text-[8px] text-muted-foreground font-bold uppercase tracking-tighter">Throughput</span>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
-                                            <span className="text-[8px] text-slate-500 font-bold uppercase tracking-tighter">Efficiency</span>
+                                            <div className="w-2 h-2 rounded-none-full bg-primary shadow-none-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+                                            <span className="text-[8px] text-muted-foreground font-bold uppercase tracking-tighter">Efficiency</span>
                                         </div>
                                     </div>
                                 </div>
@@ -733,22 +733,22 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                                 {/* Area Fills */}
                                                 <path
                                                     d={`M 0,100 L ${history.map((h, i) => `${(i / (history.length - 1)) * 200},${100 - Math.min(90, h.throughput / 20)}`).join(' L ')} L 200,100 Z`}
-                                                    fill="url(#grad-cyan)" className="transition-all duration-500"
+                                                    fill="url(#grad-cyan)" className=" duration-500"
                                                 />
                                                 <path
                                                     d={`M 0,100 L ${history.map((h, i) => `${(i / (history.length - 1)) * 200},${100 - Math.min(90, h.efficiency)}`).join(' L ')} L 200,100 Z`}
-                                                    fill="url(#grad-emerald)" className="transition-all duration-500"
+                                                    fill="url(#grad-emerald)" className=" duration-500"
                                                 />
 
                                                 {/* Throughput Path */}
                                                 <path
                                                     d={`M ${history.map((h, i) => `${(i / (history.length - 1)) * 200},${100 - Math.min(90, h.throughput / 20)}`).join(' L ')}`}
-                                                    fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-all duration-500"
+                                                    fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className=" duration-500"
                                                 />
                                                 {/* Efficiency Path */}
                                                 <path
                                                     d={`M ${history.map((h, i) => `${(i / (history.length - 1)) * 200},${100 - Math.min(90, h.efficiency)}`).join(' L ')}`}
-                                                    fill="none" stroke="#10b981" strokeWidth="2" strokeDasharray="4 2" strokeLinecap="round" strokeLinejoin="round" className="transition-all duration-500 opacity-80"
+                                                    fill="none" stroke="#10b981" strokeWidth="2" strokeDasharray="4 2" strokeLinecap="round" strokeLinejoin="round" className=" duration-500 opacity-80"
                                                 />
 
                                                 {/* Final Point Glow */}
@@ -763,41 +763,41 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                         </div>
 
                         {/* Interactive Stage */}
-                        <div className="lg:col-span-4 bg-white rounded-[3rem] border border-slate-200 relative overflow-hidden flex flex-col p-8 shadow-inner min-h-[600px]">
+                        <div className="lg:col-span-4 bg-card rounded-none-[3rem] border border-border relative overflow-hidden flex flex-col p-8 shadow-none-none min-h-[600px]">
                             {mode === "hybrid" && isDesignerMode && (
                                 <div className="absolute top-8 right-8 flex flex-col gap-4 z-10">
-                                    <div className="flex gap-2 bg-white/80 backdrop-blur p-1 rounded-full border border-slate-200 shadow-sm">
+                                    <div className="flex gap-2 bg-card/80 backdrop-blur p-1 rounded-none-full border border-border shadow-none-none">
                                         <Button
                                             variant={designerTool === "move" ? "default" : "ghost"}
                                             size="sm"
-                                            className="rounded-full h-8 px-4 text-[10px] font-bold"
+                                            className="rounded-none-full h-8 px-4 text-[10px] font-bold"
                                             onClick={() => { setDesignerTool("move"); setConnectSource(null); }}
                                         >Move</Button>
                                         <Button
                                             variant={designerTool === "connect" ? "default" : "ghost"}
                                             size="sm"
-                                            className="rounded-full h-8 px-4 text-[10px] font-bold"
+                                            className="rounded-none-full h-8 px-4 text-[10px] font-bold"
                                             onClick={() => { setDesignerTool("connect"); setDraggedNode(null); }}
                                         >Connect</Button>
                                     </div>
                                     <div className="flex gap-2">
-                                        <Button variant="outline" size="sm" className="rounded-full bg-white/80 backdrop-blur font-bold text-[10px]" onClick={() => {
+                                        <Button variant="outline" size="sm" className="rounded-none-full bg-card/80 backdrop-blur font-bold text-[10px]" onClick={() => {
                                             const newId = nodes.length > 0 ? Math.max(...nodes.map(n => n.id)) + 1 : 0;
                                             setNodes([...nodes, { id: newId, x: 350, y: 250, state: "idle", hasToken: nodes.length === 0, waitingTime: 0, priority: 1, type: "pc" }]);
                                             addLog(`Node PC-${newId} added`, "info");
                                         }}>Add PC</Button>
-                                        <Button variant="outline" size="sm" className="rounded-full bg-white/80 backdrop-blur font-bold text-[10px]" onClick={() => {
+                                        <Button variant="outline" size="sm" className="rounded-none-full bg-card/80 backdrop-blur font-bold text-[10px]" onClick={() => {
                                             const newId = nodes.length > 0 ? Math.max(...nodes.map(n => n.id)) + 1 : 0;
                                             setNodes([...nodes, { id: newId, x: 350, y: 250, state: "idle", hasToken: false, waitingTime: 0, priority: 0, type: "hub" }]);
                                             addLog(`Central Hub added`, "info");
                                         }}>Add Hub</Button>
-                                        <Button variant="outline" size="sm" className="rounded-full bg-rose-50 border-rose-200 text-rose-600 font-bold text-[10px]" onClick={() => {
+                                        <Button variant="outline" size="sm" className="rounded-none-full bg-rose-50 border-rose-200 text-rose-600 font-bold text-[10px]" onClick={() => {
                                             setNodes([]);
                                             setEdges([]);
                                             setTokenPos(0);
                                             addLog("Canvas Cleared", "error");
                                         }}>Clear</Button>
-                                        <Button variant="outline" size="sm" className="rounded-full bg-[#10b981] text-white border-0 hover:bg-[#059669] font-bold text-[10px] ml-4" onClick={() => {
+                                        <Button variant="outline" size="sm" className="rounded-none-full bg-[#10b981] text-white border-0 hover:bg-[#059669] font-bold text-[10px] ml-4" onClick={() => {
                                             if (edges.length === 0 && nodes.length > 1) {
                                                 addLog("Cannot start without connections!", "error");
                                                 return;
@@ -813,31 +813,31 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                 <div className="flex flex-col w-full h-full gap-8">
 
                                     {/* Observation metrics for easy side-by-side comparison */}
-                                    <div className="bg-slate-50 flex-1 rounded-[3rem] p-8 border border-slate-100 overflow-auto">
+                                    <div className="bg-card flex-1 rounded-none-[3rem] p-8 border border-border overflow-auto">
                                         <div className="flex items-center gap-3 mb-8">
-                                            <div className="h-8 w-1 bg-indigo-500 rounded-full"></div>
-                                            <h5 className="font-black text-slate-800 uppercase tracking-widest text-xs">Engineering Parameter Analysis</h5>
+                                            <div className="h-8 w-1 bg-primary rounded-none-full"></div>
+                                            <h5 className="font-black text-muted-foreground uppercase tracking-widest text-xs">Engineering Parameter Analysis</h5>
                                         </div>
 
                                         <div className="grid grid-cols-7 gap-6">
                                             {/* Labels Column */}
                                             <div className="col-span-1 flex flex-col pt-12 gap-10">
                                                 {["Throughput", "Latency", "Cost-Efficiency", "Fault Tolerance", "Setup Ease"].map(label => (
-                                                    <span key={label} className="text-[10px] font-black text-slate-400 uppercase tracking-tighter h-4 flex items-center">{label}</span>
+                                                    <span key={label} className="text-[10px] font-black text-muted-foreground uppercase tracking-tighter h-4 flex items-center">{label}</span>
                                                 ))}
                                             </div>
 
                                             {/* Topology Alpha Stats */}
-                                            <div className="col-span-3 bg-white p-6 rounded-3xl border border-slate-100 shadow-sm relative">
+                                            <div className="col-span-3 bg-card p-6 rounded-none-3xl border border-border shadow-none-none relative">
                                                 <div className="flex items-center justify-between mb-6">
                                                     <div className="flex items-center gap-2">
-                                                        <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
-                                                        <span className="text-[10px] font-black text-indigo-500 uppercase">Topology Alpha</span>
+                                                        <div className="w-2 h-2 rounded-none-full bg-primary"></div>
+                                                        <span className="text-[10px] font-black text-primary uppercase">Topology Alpha</span>
                                                     </div>
                                                     <select
                                                         value={compTopologyA}
                                                         onChange={(e) => setCompTopologyA(e.target.value as any)}
-                                                        className="text-[10px] font-bold bg-slate-50 border-none rounded-lg px-3 py-1 cursor-pointer focus:ring-1 ring-indigo-500"
+                                                        className="text-[10px] font-bold bg-card border-none rounded-none-none px-3 py-1 cursor-pointer focus:ring-1 ring-indigo-500"
                                                     >
                                                         <option value="ring">Ring</option>
                                                         <option value="bus">Bus</option>
@@ -855,28 +855,28 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                                         TOPOLOGY_CHARACTERISTICS[compTopologyA].setup
                                                     ].map((val, idx) => (
                                                         <div key={idx} className="space-y-1.5">
-                                                            <div className="flex justify-between items-center text-[9px] font-bold text-slate-500">
+                                                            <div className="flex justify-between items-center text-[9px] font-bold text-muted-foreground">
                                                                 <span>{val}%</span>
                                                             </div>
-                                                            <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                                                                <div className="h-full bg-indigo-500 rounded-full transition-all duration-1000 ease-out" style={{ width: `${val}%` }}></div>
+                                                            <div className="h-1.5 w-full bg-card rounded-none-full overflow-hidden">
+                                                                <div className="h-full bg-primary rounded-none-full  duration-1000 ease-out" style={{ width: `${val}%` }}></div>
                                                             </div>
                                                         </div>
                                                     ))}
                                                 </div>
                                                 <div className="mt-8 pt-6 border-t border-slate-50 space-y-4">
-                                                    <p className="text-[9px] font-black text-slate-300 uppercase tracking-widest italic">Core Use Case</p>
-                                                    <p className="text-xs font-bold text-slate-700">{TOPOLOGY_CHARACTERISTICS[compTopologyA].bestFor}</p>
+                                                    <p className="text-[9px] font-black text-muted-foreground uppercase tracking-widest italic">Core Use Case</p>
+                                                    <p className="text-xs font-bold text-muted-foreground">{TOPOLOGY_CHARACTERISTICS[compTopologyA].bestFor}</p>
                                                 </div>
                                             </div>
 
                                             {/* Topology Beta Stats */}
-                                            <div className="col-span-3 bg-white p-6 rounded-3xl border border-slate-100 shadow-sm relative">
+                                            <div className="col-span-3 bg-card p-6 rounded-none-3xl border border-border shadow-none-none relative">
                                                 <div className="flex items-center justify-between mb-6">
                                                     <select
                                                         value={compTopologyB}
                                                         onChange={(e) => setCompTopologyB(e.target.value as any)}
-                                                        className="text-[10px] font-bold bg-slate-50 border-none rounded-lg px-3 py-1 cursor-pointer focus:ring-1 ring-amber-500"
+                                                        className="text-[10px] font-bold bg-card border-none rounded-none-none px-3 py-1 cursor-pointer focus:ring-1 ring-amber-500"
                                                     >
                                                         <option value="ring">Ring</option>
                                                         <option value="bus">Bus</option>
@@ -886,7 +886,7 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                                     </select>
                                                     <div className="flex items-center gap-2">
                                                         <span className="text-[10px] font-black text-amber-500 uppercase">Topology Beta</span>
-                                                        <div className="w-2 h-2 rounded-full bg-amber-500"></div>
+                                                        <div className="w-2 h-2 rounded-none-full bg-amber-500"></div>
                                                     </div>
                                                 </div>
                                                 <div className="space-y-10">
@@ -898,40 +898,40 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                                         TOPOLOGY_CHARACTERISTICS[compTopologyB].setup
                                                     ].map((val, idx) => (
                                                         <div key={idx} className="space-y-1.5">
-                                                            <div className="flex justify-between items-center text-[9px] font-bold text-slate-500">
+                                                            <div className="flex justify-between items-center text-[9px] font-bold text-muted-foreground">
                                                                 <span>{val}%</span>
                                                             </div>
-                                                            <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                                                                <div className="h-full bg-amber-500 rounded-full transition-all duration-1000 ease-out" style={{ width: `${val}%` }}></div>
+                                                            <div className="h-1.5 w-full bg-card rounded-none-full overflow-hidden">
+                                                                <div className="h-full bg-amber-500 rounded-none-full  duration-1000 ease-out" style={{ width: `${val}%` }}></div>
                                                             </div>
                                                         </div>
                                                     ))}
                                                 </div>
                                                 <div className="mt-8 pt-6 border-t border-slate-50 space-y-4 text-right">
-                                                    <p className="text-[9px] font-black text-slate-300 uppercase tracking-widest italic">Core Use Case</p>
-                                                    <p className="text-xs font-bold text-slate-700">{TOPOLOGY_CHARACTERISTICS[compTopologyB].bestFor}</p>
+                                                    <p className="text-[9px] font-black text-muted-foreground uppercase tracking-widest italic">Core Use Case</p>
+                                                    <p className="text-xs font-bold text-muted-foreground">{TOPOLOGY_CHARACTERISTICS[compTopologyB].bestFor}</p>
                                                 </div>
                                             </div>
                                         </div>
 
                                         {/* qualitative summary restored */}
                                         <div className="grid grid-cols-2 gap-6 mt-10">
-                                            <div className="bg-indigo-50/30 p-6 rounded-3xl border border-indigo-50">
-                                                <h6 className="text-[10px] font-bold text-indigo-700 uppercase mb-4">Alpha Advantages</h6>
+                                            <div className="bg-indigo-50/30 p-6 rounded-none-3xl border border-indigo-50">
+                                                <h6 className="text-[10px] font-bold text-primary uppercase mb-4">Alpha Advantages</h6>
                                                 <ul className="text-xs space-y-2">
                                                     {TOPOLOGY_CHARACTERISTICS[compTopologyA].pros.map((p, i) => (
-                                                        <li key={i} className="flex items-center gap-2 text-slate-600 font-medium">
-                                                            <div className="w-1 h-1 rounded-full bg-indigo-400"></div> {p}
+                                                        <li key={i} className="flex items-center gap-2 text-muted-foreground font-medium">
+                                                            <div className="w-1 h-1 rounded-none-full bg-primary"></div> {p}
                                                         </li>
                                                     ))}
                                                 </ul>
                                             </div>
-                                            <div className="bg-amber-50/30 p-6 rounded-3xl border border-amber-50">
+                                            <div className="bg-amber-50/30 p-6 rounded-none-3xl border border-amber-50">
                                                 <h6 className="text-[10px] font-bold text-amber-700 uppercase mb-4">Beta Advantages</h6>
                                                 <ul className="text-xs space-y-2">
                                                     {TOPOLOGY_CHARACTERISTICS[compTopologyB].pros.map((p, i) => (
-                                                        <li key={i} className="flex items-center gap-2 text-slate-600 font-medium">
-                                                            <div className="w-1.5 h-1.5 rounded-full bg-amber-400"></div> {p}
+                                                        <li key={i} className="flex items-center gap-2 text-muted-foreground font-medium">
+                                                            <div className="w-1.5 h-1.5 rounded-none-full bg-amber-400"></div> {p}
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -939,7 +939,7 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                         </div>
 
                                         {/* Experiment Observation Section */}
-                                        <div className="mt-10 p-8 bg-slate-900 rounded-[2.5rem] border border-slate-800 shadow-2xl relative overflow-hidden">
+                                        <div className="mt-10 p-8 bg-card rounded-none-[2.5rem] border border-border shadow-none-2xl relative overflow-hidden">
                                             <div className="absolute top-0 right-0 p-8 opacity-10">
                                                 <FileText className="h-24 w-24 text-white" />
                                             </div>
@@ -949,25 +949,25 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                             </h5>
                                             <div className="grid grid-cols-2 gap-8 relative z-10">
                                                 <div className="space-y-4">
-                                                    <p className="text-xs text-slate-400 leading-relaxed font-medium">
+                                                    <p className="text-xs text-muted-foreground leading-relaxed font-medium">
                                                         Based on the simulation, <span className="text-white font-bold">{TOPOLOGY_CHARACTERISTICS[compTopologyA].name}</span> shows
                                                         a {TOPOLOGY_CHARACTERISTICS[compTopologyA].throughput > 80 ? "steady" : "variable"} throughput
                                                         with {TOPOLOGY_CHARACTERISTICS[compTopologyA].reliability}% fault tolerance.
                                                     </p>
-                                                    <div className="p-4 bg-white/5 rounded-2xl border border-white/10">
-                                                        <p className="text-[10px] text-slate-500 font-bold uppercase mb-1 italic">Analysis Note:</p>
-                                                        <p className="text-[10px] text-slate-300">Deterministic nature of token passing eliminates collisions, unlike CSMA/CD.</p>
+                                                    <div className="p-4 bg-card/5 rounded-none-none border border-white/10">
+                                                        <p className="text-[10px] text-muted-foreground font-bold uppercase mb-1 italic">Analysis Note:</p>
+                                                        <p className="text-[10px] text-muted-foreground">Deterministic nature of token passing eliminates collisions, unlike CSMA/CD.</p>
                                                     </div>
                                                 </div>
                                                 <div className="space-y-4">
-                                                    <p className="text-xs text-slate-400 leading-relaxed font-medium text-right">
+                                                    <p className="text-xs text-muted-foreground leading-relaxed font-medium text-right">
                                                         In contrast, <span className="text-white font-bold">{TOPOLOGY_CHARACTERISTICS[compTopologyB].name}</span> exhibits
                                                         {TOPOLOGY_CHARACTERISTICS[compTopologyB].delay < 30 ? " minimal " : " moderate "} latency
                                                         and is optimized for {TOPOLOGY_CHARACTERISTICS[compTopologyB].bestFor.toLowerCase()}.
                                                     </p>
-                                                    <div className="p-4 bg-white/5 rounded-2xl border border-white/10 text-right">
-                                                        <p className="text-[10px] text-slate-500 font-bold uppercase mb-1 italic">Comparison Note:</p>
-                                                        <p className="text-[10px] text-slate-300">Topology design impacts scalability and reconfiguration complexity significantly.</p>
+                                                    <div className="p-4 bg-card/5 rounded-none-none border border-white/10 text-right">
+                                                        <p className="text-[10px] text-muted-foreground font-bold uppercase mb-1 italic">Comparison Note:</p>
+                                                        <p className="text-[10px] text-muted-foreground">Topology design impacts scalability and reconfiguration complexity significantly.</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1000,10 +1000,10 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                             {/* Log Banner */}
                             <div className="absolute top-8 left-8 space-y-2 max-w-[300px]">
                                 {logs.map((log, i) => (
-                                    <div key={i} className={`p-2 px-4 rounded-xl text-[9px] font-bold shadow-sm flex items-center gap-2 animate-in slide-in-from-left duration-500
+                                    <div key={i} className={`p-2 px-4 rounded-none-none text-[9px] font-bold shadow-none-none flex items-center gap-2 animate-in slide-in-from-left duration-500
                                         ${log.type === 'error' ? 'bg-rose-50 text-rose-600 border border-rose-100' :
                                             log.type === 'success' ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' :
-                                                'bg-blue-50 text-blue-600 border border-blue-100'}`}>
+                                                'bg-blue-50 text-primary border border-primary'}`}>
                                         {log.type === 'error' ? <AlertTriangle className="h-3 w-3" /> : log.type === 'success' ? <CheckCircle2 className="h-3 w-3" /> : <Info className="h-3 w-3" />}
                                         {log.msg}
                                     </div>
@@ -1011,9 +1011,9 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                             </div>
 
                             {/* Legend Overlay */}
-                            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-8 px-8 py-3 bg-white/50 backdrop-blur-md rounded-full border border-slate-200">
+                            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-8 px-8 py-3 bg-card/50 backdrop-blur-md rounded-none-full border border-border">
                                 <LegendItem label="Token" color="bg-amber-500" />
-                                <LegendItem label="Data Flow" color="bg-indigo-500" />
+                                <LegendItem label="Data Flow" color="bg-primary" />
                                 <LegendItem label="Failed Node" color="bg-rose-500" />
                             </div>
                         </div>
@@ -1023,43 +1023,43 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                 {activeTab === "comparison" && (
                     <div className="p-8 max-w-5xl mx-auto space-y-8">
                         <div className="flex items-center justify-between">
-                            <h2 className="text-2xl font-black text-slate-800">Experiment Observations</h2>
-                            <Button variant="outline" size="sm" onClick={() => window.print()} className="rounded-xl">
+                            <h2 className="text-2xl font-black text-muted-foreground">Experiment Observations</h2>
+                            <Button variant="outline" size="sm" onClick={() => window.print()} className="rounded-none-none">
                                 Export Results (PDF)
                             </Button>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                            <StatCard label="Total Transmission Cycles" value={stats.totalTransmissions} icon={<RotateCcw className="text-blue-500" />} />
+                            <StatCard label="Total Transmission Cycles" value={stats.totalTransmissions} icon={<RotateCcw className="text-primary" />} />
                             <StatCard label="Peak Throughput" value={`${stats.throughput.toFixed(2)} bps`} icon={<Zap className="text-amber-500" />} />
                             <StatCard label="Time Efficiency" value={`${stats.efficiency.toFixed(1)}%`} icon={<Activity className="text-emerald-500" />} />
                             <StatCard label="Avg Access Delay" value={`${(stats.avgDelay / 10).toFixed(2)} ms`} icon={<Activity className="text-rose-500" />} />
                         </div>
 
-                        <div className="bg-white rounded-[2.5rem] border border-slate-200 overflow-hidden shadow-xl">
+                        <div className="bg-card rounded-none-[2.5rem] border border-border overflow-hidden shadow-none-none">
                             <table className="w-full text-left">
-                                <thead className="bg-slate-50 border-b">
+                                <thead className="bg-card border-b">
                                     <tr>
-                                        <th className="px-6 py-4 text-[10px] font-black uppercase text-slate-400">Time Point</th>
-                                        <th className="px-6 py-4 text-[10px] font-black uppercase text-slate-400">Active Nodes</th>
-                                        <th className="px-6 py-4 text-[10px] font-black uppercase text-slate-400">Throughput (bps)</th>
-                                        <th className="px-6 py-4 text-[10px] font-black uppercase text-slate-400">Efficiency (%)</th>
-                                        <th className="px-6 py-4 text-[10px] font-black uppercase text-slate-400">Status</th>
+                                        <th className="px-6 py-4 text-[10px] font-black uppercase text-muted-foreground">Time Point</th>
+                                        <th className="px-6 py-4 text-[10px] font-black uppercase text-muted-foreground">Active Nodes</th>
+                                        <th className="px-6 py-4 text-[10px] font-black uppercase text-muted-foreground">Throughput (bps)</th>
+                                        <th className="px-6 py-4 text-[10px] font-black uppercase text-muted-foreground">Efficiency (%)</th>
+                                        <th className="px-6 py-4 text-[10px] font-black uppercase text-muted-foreground">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {history.map((h, i) => (
-                                        <tr key={i} className="border-b last:border-0 hover:bg-slate-50 transition-colors">
+                                        <tr key={i} className="border-b last:border-0 hover:bg-card transition-colors">
                                             <td className="px-6 py-4 text-xs font-mono">{h.time} units</td>
                                             <td className="px-6 py-4 text-xs">{h.nodeCount}</td>
-                                            <td className="px-6 py-4 text-xs font-bold text-blue-600">{h.throughput.toFixed(2)}</td>
+                                            <td className="px-6 py-4 text-xs font-bold text-primary">{h.throughput.toFixed(2)}</td>
                                             <td className="px-6 py-4 text-xs font-bold text-emerald-600">{h.efficiency.toFixed(1)}%</td>
                                             <td className="px-6 py-4 text-[9px] font-black uppercase text-emerald-500">Normal Operation</td>
                                         </tr>
                                     ))}
                                     {history.length === 0 && (
                                         <tr>
-                                            <td colSpan={4} className="px-6 py-12 text-center text-slate-400 italic text-sm">
+                                            <td colSpan={4} className="px-6 py-12 text-center text-muted-foreground italic text-sm">
                                                 No observations recorded. Run the simulation to capture data.
                                             </td>
                                         </tr>
@@ -1069,11 +1069,11 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                         </div>
 
                         {/* Result Analysis */}
-                        <div className="bg-blue-600 p-8 rounded-[2.5rem] text-white space-y-4">
+                        <div className="bg-primary p-8 rounded-none-[2.5rem] text-white space-y-4">
                             <h3 className="font-bold text-lg flex items-center gap-2">
                                 <CheckCircle2 /> Final Result Analysis
                             </h3>
-                            <p className="text-sm text-blue-100 leading-relaxed">
+                            <p className="text-sm text-primary leading-relaxed">
                                 Base on the recorded {stats.totalTransmissions} transmissions, the {mode} protocol demonstrates
                                 a channel utilization of {stats.channelUtilization.toFixed(1)}%. The system maintained a Fairness
                                 Index of {stats.fairnessIndex.toFixed(2)}, proving deterministic access.
@@ -1085,18 +1085,18 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                 {activeTab === "quiz" && (
                     <div className="p-8 max-w-3xl mx-auto">
                         {/* Quiz Content remains mostly similar but with results refined */}
-                        <div className="bg-white rounded-[3rem] border border-slate-200 shadow-2xl overflow-hidden">
-                            <div className="bg-indigo-600 p-10 text-white relative">
+                        <div className="bg-card rounded-none-[3rem] border border-border shadow-none-2xl overflow-hidden">
+                            <div className="bg-primary p-10 text-white relative">
                                 <div className="absolute top-0 right-0 p-8 opacity-20"><HelpCircle size={80} /></div>
                                 <h2 className="text-3xl font-black tracking-tight mb-2 italic">Theory Mastery</h2>
-                                <p className="text-indigo-100 text-xs font-bold uppercase tracking-widest opacity-80">B.Tech CN Lab Evaluation</p>
+                                <p className="text-primary text-xs font-bold uppercase tracking-widest opacity-80">B.Tech CN Lab Evaluation</p>
                             </div>
 
                             <div className="p-10 space-y-12">
                                 {quizQuestions.map((q, qIdx) => (
                                     <div key={qIdx} className="space-y-6">
-                                        <h4 className="font-bold text-slate-800 flex gap-4">
-                                            <span className="text-indigo-100 text-2xl font-black italic">{qIdx + 1}</span>
+                                        <h4 className="font-bold text-muted-foreground flex gap-4">
+                                            <span className="text-primary text-2xl font-black italic">{qIdx + 1}</span>
                                             {q.q}
                                         </h4>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pl-9">
@@ -1105,13 +1105,13 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                                     key={oIdx}
                                                     disabled={showResults}
                                                     onClick={() => setQuizAnswers({ ...quizAnswers, [qIdx]: oIdx })}
-                                                    className={`p-4 text-left text-sm rounded-2xl border-2 transition-all ${quizAnswers[qIdx] === oIdx
+                                                    className={`p-4 text-left text-sm rounded-none-none border-2  ${quizAnswers[qIdx] === oIdx
                                                         ? showResults
                                                             ? oIdx === q.correct
                                                                 ? "border-emerald-500 bg-emerald-50 text-emerald-800"
                                                                 : "border-rose-500 bg-rose-50 text-rose-800"
-                                                            : "border-indigo-600 bg-indigo-50 text-indigo-700 font-bold"
-                                                        : "border-slate-100 hover:border-slate-200 text-slate-600"
+                                                            : "border-primary bg-indigo-50 text-primary font-bold"
+                                                        : "border-border hover:border-border text-muted-foreground"
                                                         } ${showResults && oIdx === q.correct ? "border-emerald-500 bg-emerald-50" : ""}`}
                                                 >
                                                     {opt}
@@ -1124,7 +1124,7 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                 <div className="pt-8 border-t">
                                     {!showResults ? (
                                         <Button
-                                            className="w-full h-16 bg-indigo-600 hover:bg-indigo-700 rounded-3xl font-black uppercase tracking-widest text-xs shadow-xl"
+                                            className="w-full h-16 bg-primary hover:bg-primary rounded-none-3xl font-black uppercase tracking-widest text-xs shadow-none-none"
                                             onClick={() => setShowResults(true)}
                                             disabled={Object.keys(quizAnswers).length < quizQuestions.length}
                                         >
@@ -1132,16 +1132,16 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                         </Button>
                                     ) : (
                                         <div className="flex flex-col items-center gap-6">
-                                            <div className="text-center p-8 bg-indigo-50 rounded-[2rem] w-full border border-indigo-100">
-                                                <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-2">Final Score</p>
-                                                <p className="text-5xl font-black text-indigo-600">
+                                            <div className="text-center p-8 bg-indigo-50 rounded-none-[2rem] w-full border border-primary">
+                                                <p className="text-[10px] font-black text-primary uppercase tracking-widest mb-2">Final Score</p>
+                                                <p className="text-5xl font-black text-primary">
                                                     {Object.entries(quizAnswers).filter(([idx, ans]) => {
                                                         const q = quizQuestions[Number(idx)];
                                                         return q && q.correct === ans;
                                                     }).length} / {quizQuestions.length}
                                                 </p>
                                             </div>
-                                            <Button variant="outline" className="rounded-2xl h-12 px-12 font-bold" onClick={() => { setShowResults(false); setQuizAnswers({}); }}>
+                                            <Button variant="outline" className="rounded-none-none h-12 px-12 font-bold" onClick={() => { setShowResults(false); setQuizAnswers({}); }}>
                                                 Try Again
                                             </Button>
                                         </div>
@@ -1154,16 +1154,16 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
             </div>
 
             {/* Footer Status Bar */}
-            <div className="bg-slate-900 px-6 py-2 flex items-center justify-between text-[8px] font-black uppercase tracking-[0.2em]">
+            <div className="bg-card px-6 py-2 flex items-center justify-between text-[8px] font-black uppercase tracking-[0.2em]">
                 <div className="flex items-center gap-4">
                     <div className="flex items-center gap-1.5 text-cyan-400">
-                        <div className={`w-1.5 h-1.5 rounded-full ${isRunning ? "bg-cyan-400 animate-pulse" : "bg-slate-700"}`} />
+                        <div className={`w-1.5 h-1.5 rounded-none-full ${isRunning ? "bg-cyan-400 animate-pulse" : "bg-card"}`} />
                         {mode === "ring" ? "IEEE 802.5 Protocol Active" : "IEEE 802.4 Protocol Active"}
                     </div>
-                    <span className="text-slate-700">|</span>
-                    <span className="text-slate-400 italic">Collision probability: 0.0% (Deterministic)</span>
+                    <span className="text-muted-foreground">|</span>
+                    <span className="text-muted-foreground italic">Collision probability: 0.0% (Deterministic)</span>
                 </div>
-                <div className="text-slate-500">
+                <div className="text-muted-foreground">
                     Engineered for Prayukti-vLAB Academic Excellence
                 </div>
             </div>
@@ -1408,7 +1408,7 @@ function SimulationSVGArt({ mode, nodes, edges, tokenPos, activeTransmission, wi
                         stroke={connectSourceId === node.id ? "#f59e0b" : (selectedNodeId === node.id ? "#3b82f6" : (node.state === "failed" ? "#ef4444" : node.hasToken ? "#059669" : node.type === "hub" ? "#f59e0b" : "#e2e8f0"))}
                         strokeWidth={connectSourceId === node.id || selectedNodeId === node.id ? "5" : (node.type === "hub" ? "4" : "3")}
                         filter={connectSourceId === node.id || selectedNodeId === node.id ? "url(#glow)" : ""}
-                        className="transition-all duration-300"
+                        className=" duration-300"
                     />
                     <foreignObject
                         x={nodePositions[i].x - (node.type === "hub" ? (nodeSize * 0.6) : (nodeSize * 0.5))}
@@ -1417,7 +1417,7 @@ function SimulationSVGArt({ mode, nodes, edges, tokenPos, activeTransmission, wi
                         height={node.type === "hub" ? (nodeSize * 1.2) : nodeSize}
                         className="pointer-events-none"
                     >
-                        <Monitor className={`w-full h-full ${node.hasToken ? "text-white" : node.state === "failed" ? "text-rose-500" : node.type === "hub" ? "text-amber-600" : "text-slate-400"}`} />
+                        <Monitor className={`w-full h-full ${node.hasToken ? "text-white" : node.state === "failed" ? "text-rose-500" : node.type === "hub" ? "text-amber-600" : "text-muted-foreground"}`} />
                     </foreignObject>
 
                     <text x={nodePositions[i].x} y={nodePositions[i].y + (nodeSize + 20)} textAnchor="middle" className="text-[10px] font-black fill-slate-500 pointer-events-none">
@@ -1434,7 +1434,7 @@ function SimulationSVGArt({ mode, nodes, edges, tokenPos, activeTransmission, wi
 
             {/* Token Sprite */}
             {nodePositions[tokenPos] && !activeTransmission && (
-                <g className="transition-all duration-700" style={{ transform: `translate(${nodePositions[tokenPos].x}px, ${nodePositions[tokenPos].y}px)` }}>
+                <g className=" duration-700" style={{ transform: `translate(${nodePositions[tokenPos].x}px, ${nodePositions[tokenPos].y}px)` }}>
                     <circle cx="0" cy="0" r="14" fill="#f59e0b" filter="url(#glow)">
                         <animate attributeName="r" values="12;16;12" dur="2s" repeatCount="indefinite" />
                     </circle>
@@ -1447,12 +1447,12 @@ function SimulationSVGArt({ mode, nodes, edges, tokenPos, activeTransmission, wi
 
 function StatCard({ label, value, icon }: any) {
     return (
-        <div className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm space-y-2">
+        <div className="bg-card p-6 rounded-none-[2rem] border border-border shadow-none-none space-y-2">
             <div className="flex items-center justify-between">
-                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{label}</span>
-                <div className="p-2 bg-slate-50 rounded-xl">{icon}</div>
+                <span className="text-[9px] font-black text-muted-foreground uppercase tracking-widest">{label}</span>
+                <div className="p-2 bg-card rounded-none-none">{icon}</div>
             </div>
-            <p className="text-xl font-black text-slate-800 font-mono">{value}</p>
+            <p className="text-xl font-black text-muted-foreground font-mono">{value}</p>
         </div>
     );
 }
@@ -1460,8 +1460,8 @@ function StatCard({ label, value, icon }: any) {
 function LegendItem({ label, color }: { label: string, color: string }) {
     return (
         <div className="flex items-center gap-2">
-            <div className={`w-3 h-3 rounded-full ${color} shadow-sm`}></div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">{label}</span>
+            <div className={`w-3 h-3 rounded-none-full ${color} shadow-none-none`}></div>
+            <span className="text-[10px] font-black text-muted-foreground uppercase tracking-wider">{label}</span>
         </div>
     );
 }

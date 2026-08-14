@@ -91,7 +91,7 @@ export default function CodeCompiler({
                     <select
                         value={currentLanguage}
                         onChange={(e) => setLanguage(e.target.value)}
-                        className="bg-black/40 text-blue-400 border border-white/5 rounded-lg px-3 py-1.5 text-[10px] font-black uppercase tracking-widest outline-none hover:bg-black/60 transition-all cursor-pointer mr-2 shadow-inner"
+                        className="bg-black/40 text-primary border border-white/5 rounded-none-none px-3 py-1.5 text-[10px] font-black uppercase tracking-widest outline-none hover:bg-black/60  cursor-pointer mr-2 shadow-none-none"
                     >
                         <option value="c" className="bg-[#252526]">C</option>
                         <option value="cpp" className="bg-[#252526]">C++</option>
@@ -99,23 +99,23 @@ export default function CodeCompiler({
                         <option value="java" className="bg-[#252526]">Java</option>
                     </select>
 
-                    <div className="flex border border-white/5 rounded-lg overflow-hidden mr-2 bg-black/20">
+                    <div className="flex border border-white/5 rounded-none-none overflow-hidden mr-2 bg-black/20">
                         <button
                             onClick={() => setTheme("vs-dark")}
-                            className={`p-1.5 transition-colors ${theme === 'vs-dark' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-slate-300'}`}
+                            className={`p-1.5 transition-colors ${theme === 'vs-dark' ? 'bg-primary text-white' : 'text-muted-foreground hover:text-muted-foreground'}`}
                         >
                             <i className="bx bx-moon h-3 w-3"  />
                         </button>
                         <button
                             onClick={() => setTheme("light")}
-                            className={`p-1.5 transition-colors ${theme === 'light' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-slate-300'}`}
+                            className={`p-1.5 transition-colors ${theme === 'light' ? 'bg-primary text-white' : 'text-muted-foreground hover:text-muted-foreground'}`}
                         >
                             <i className="bx bx-sun h-3 w-3"  />
                         </button>
                     </div>
 
-                    <Badge variant="outline" className="bg-emerald-500/10 text-emerald-500 border-emerald-500/20 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 animate-pulse">
-                        <div className="h-1 w-1 bg-emerald-500 rounded-full mr-2 shadow-[0_0_5px_rgba(16,185,129,0.5)]" />
+                    <Badge variant="outline" className="bg-primary/10 text-emerald-500 border-emerald-500/20 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 animate-pulse">
+                        <div className="h-1 w-1 bg-primary rounded-none-full mr-2 shadow-none-[0_0_5px_rgba(16,185,129,0.5)]" />
                         Live Compiler
                     </Badge>
                 </div>
@@ -123,30 +123,30 @@ export default function CodeCompiler({
                 <div className="flex items-center gap-2">
                     <button
                         onClick={handleSave}
-                        className={`p-2 rounded-lg transition-all ${saveStatus === 'saved' ? 'bg-green-600 text-white' : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'}`}
+                        className={`p-2 rounded-none-none  ${saveStatus === 'saved' ? 'bg-green-600 text-white' : 'bg-card/5 text-muted-foreground hover:text-white hover:bg-card/10'}`}
                     >
                         {saveStatus === 'saving' ? <i className="bx bx-loader2 h-3.5 w-3.5 animate-spin"  /> : <i className="bx bx-save h-3.5 w-3.5"  />}
                     </button>
                     <button
                         onClick={handleDownload}
-                        className="p-2 rounded-lg bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+                        className="p-2 rounded-none-none bg-card/5 text-muted-foreground hover:text-white hover:bg-card/10 "
                     >
                         <i className="bx bx-download h-3.5 w-3.5"  />
                     </button>
                     <button
                         onClick={handleCopy}
-                        className="p-2 rounded-lg bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+                        className="p-2 rounded-none-none bg-card/5 text-muted-foreground hover:text-white hover:bg-card/10 "
                     >
                         <i className="bx bx-copy h-3.5 w-3.5"  />
                     </button>
 
-                    <div className="h-4 w-[1px] bg-white/10 mx-1" />
+                    <div className="h-4 w-[1px] bg-card/10 mx-1" />
 
                     <Button
                         variant="outline"
                         size="sm"
                         onClick={() => setIsChallengeMode(!isChallengeMode)}
-                        className={`h-8 px-3 text-[10px] font-black uppercase tracking-widest transition-all ${isChallengeMode ? 'bg-orange-500/20 text-orange-500 border-orange-500/40 hover:bg-orange-500/30' : 'bg-slate-500/10 text-slate-500 border-white/5 hover:bg-white/10 hover:text-white'}`}
+                        className={`h-8 px-3 text-[10px] font-black uppercase tracking-widest  ${isChallengeMode ? 'bg-orange-500/20 text-orange-500 border-orange-500/40 hover:bg-orange-500/30' : 'bg-card/10 text-muted-foreground border-white/5 hover:bg-card/10 hover:text-white'}`}
                     >
                         {isChallengeMode ? 'Challenge Mode ON' : 'Challenge Mode'}
                     </Button>
@@ -167,7 +167,7 @@ export default function CodeCompiler({
                 {/* Bottom Workbench Area */}
                 <div className="h-2/5 flex border-t border-black/40">
                     <div className="w-1/3 bg-[#252526] border-r border-white/5 flex flex-col pt-3 px-4">
-                        <div className="flex items-center gap-2 text-blue-400 mb-3">
+                        <div className="flex items-center gap-2 text-primary mb-3">
                             <i className="bx bx-keyboard h-3.5 w-3.5"  />
                             <span className="text-[10px] font-black uppercase tracking-widest">Custom Input</span>
                         </div>
@@ -176,14 +176,14 @@ export default function CodeCompiler({
                             value={customInput}
                             onChange={(e) => setCustomInput(e.target.value)}
                             placeholder={isChallengeMode ? "Hidden Inputs are enabled..." : "Type test data here..."}
-                            className="flex-1 w-full bg-black/30 border border-white/5 rounded-xl p-3 text-xs font-mono text-slate-300 outline-none focus:border-blue-500/50 transition-all resize-none shadow-inner"
+                            className="flex-1 w-full bg-black/30 border border-white/5 rounded-none-none p-3 text-xs font-mono text-muted-foreground outline-none focus:border-primary/50  resize-none shadow-none-none"
                         />
                         <div className="py-3 flex items-center justify-between gap-2">
                             <Button
                                 variant="ghost"
                                 size="sm"
                                 onClick={handleReset}
-                                className="text-slate-500 hover:text-white text-[9px] font-black uppercase tracking-widest h-6 px-1"
+                                className="text-muted-foreground hover:text-white text-[9px] font-black uppercase tracking-widest h-6 px-1"
                             >
                                 <i className="bx bx-rotateccw h-3 w-3 mr-1"  /> Reset Code
                             </Button>
@@ -191,7 +191,7 @@ export default function CodeCompiler({
                                 variant="link"
                                 size="sm"
                                 onClick={() => inputRef.current?.focus()}
-                                className="text-blue-500 hover:text-blue-400 text-[9px] font-black uppercase tracking-widest h-6 px-1"
+                                className="text-primary hover:text-primary text-[9px] font-black uppercase tracking-widest h-6 px-1"
                             >
                                 Try Different Input
                             </Button>

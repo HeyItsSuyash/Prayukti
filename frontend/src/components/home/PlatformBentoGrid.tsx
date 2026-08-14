@@ -69,7 +69,7 @@ export function PlatformBentoGrid() {
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.5, delay: idx * 0.1 }}
                             className={cn(
-                                "group relative rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0A1929] overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex flex-col justify-end p-8",
+                                "group relative rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0A1929] overflow-hidden hover:  duration-500  flex flex-col justify-end p-8",
                                 card.colSpan,
                                 card.rowSpan
                             )}
@@ -81,12 +81,12 @@ export function PlatformBentoGrid() {
                             )}></div>
                             
                             {/* Abstract Illustration Placeholder based on Icon */}
-                            <div className="absolute top-8 right-8 text-8xl opacity-10 dark:opacity-20 transform group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-700">
+                            <div className="absolute top-8 right-8 text-8xl opacity-10 dark:opacity-20 transform group- group-hover:-rotate-12  duration-700">
                                 <i className={`bx ${card.icon}`}></i>
                             </div>
 
                             <div className="relative z-10">
-                                <div className={cn("w-12 h-12 rounded-xl bg-white dark:bg-[#071D2B] shadow-sm border border-slate-100 dark:border-white/10 flex items-center justify-center mb-6", card.color.split(' ')[2])}>
+                                <div className={cn("w-12 h-12 rounded-xl bg-white dark:bg-[#071D2B]  border border-slate-100 dark:border-white/10 flex items-center justify-center mb-6", card.color.split(' ')[2])}>
                                     <i className={`bx ${card.icon} text-2xl`}></i>
                                 </div>
                                 <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{card.title}</h3>

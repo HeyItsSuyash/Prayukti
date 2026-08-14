@@ -110,7 +110,7 @@ export function SubjectManagement() {
                 </div>
                 <div className="flex gap-3">
                     <Select value={selectedBranch} onValueChange={setSelectedBranch}>
-                        <SelectTrigger className="w-[180px] rounded-xl border-slate-100 shadow-sm bg-white font-bold h-12">
+                        <SelectTrigger className="w-[180px] rounded-xl border-slate-100  bg-white font-bold h-12">
                             <SelectValue placeholder="All Branches" />
                         </SelectTrigger>
                         <SelectContent className="rounded-xl">
@@ -121,7 +121,7 @@ export function SubjectManagement() {
                         </SelectContent>
                     </Select>
                     <Select value={selectedSemester} onValueChange={setSelectedSemester}>
-                        <SelectTrigger className="w-[160px] rounded-xl border-slate-100 shadow-sm bg-white font-bold h-12">
+                        <SelectTrigger className="w-[160px] rounded-xl border-slate-100  bg-white font-bold h-12">
                             <SelectValue placeholder="All Semesters" />
                         </SelectTrigger>
                         <SelectContent className="rounded-xl">
@@ -201,7 +201,7 @@ export function SubjectManagement() {
                 </Card>
             )}
 
-            <Card className="rounded-[2.5rem] border-none shadow-xl shadow-slate-100 overflow-hidden bg-white">
+            <Card className="rounded-[2.5rem] border-none  shadow-slate-100 overflow-hidden bg-white">
                 <Table>
                     <TableHeader className="bg-slate-50/50">
                         <TableRow className="hover:bg-transparent">
@@ -215,7 +215,7 @@ export function SubjectManagement() {
                         {loading ? (
                             <TableRow>
                                 <TableCell colSpan={4} className="text-center py-20">
-                                    <i className="bx bx-loader2 animate-spin inline-block mr-2 text-indigo-600"  /> 
+                                    <i className="bx bx-loader2 animate-spin inline-block mr-2 text-[#059669]"  /> 
                                     <span className="font-black text-slate-300 uppercase tracking-widest italic">Syncing Registry...</span>
                                 </TableCell>
                             </TableRow>
@@ -229,7 +229,7 @@ export function SubjectManagement() {
                         ) : subjects.map((subject) => (
                             <TableRow 
                                 key={subject._id} 
-                                className="hover:bg-indigo-50/30 transition-all cursor-pointer group"
+                                className="hover:bg-indigo-50/30  cursor-pointer group"
                                 onClick={() => setSelectedSubjectId(subject._id)}
                             >
                                 <TableCell className="p-6">
@@ -344,7 +344,7 @@ function SubjectDetail({ subject, onBack }: SubjectDetailProps) {
                         variant="outline" 
                         size="icon" 
                         onClick={onBack}
-                        className="rounded-2xl border-slate-100 bg-white shadow-xl shadow-slate-100 hover:scale-110 transition-all w-14 h-14"
+                        className="rounded-2xl border-slate-100 bg-white  shadow-slate-100   w-14 h-14"
                     >
                         <i className="bx bx-chevron-left"  />
                     </Button>
@@ -390,15 +390,15 @@ function SubjectDetail({ subject, onBack }: SubjectDetailProps) {
                     )}
     
                     {loading ? (
-                        <div className="py-12 text-center bg-white rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-100/50">
-                            <i className="bx bx-loader2 animate-spin inline-block text-indigo-600 mb-2"  />
+                        <div className="py-12 text-center bg-white rounded-[2rem] border border-slate-100  shadow-slate-100/50">
+                            <i className="bx bx-loader2 animate-spin inline-block text-[#059669] mb-2"  />
                             <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">Accessing Files...</p>
                         </div>
                     ) : experiments.map((exp) => (
                         <Card 
                             key={exp._id}
                             onClick={() => setSelectedExpId(exp._id)}
-                            className={`rounded-[2rem] border-none shadow-xl transition-all cursor-pointer group overflow-hidden ${
+                            className={`rounded-[2rem] border-none   cursor-pointer group overflow-hidden ${
                                 selectedExpId === exp._id 
                                 ? 'bg-indigo-600 text-white shadow-indigo-200' 
                                 : 'bg-white text-slate-800 shadow-slate-100/50 hover:bg-slate-50'
@@ -444,7 +444,7 @@ function SubjectDetail({ subject, onBack }: SubjectDetailProps) {
                         <SubjectResourceManager experimentId={selectedExpId} experimentName={experiments.find(e => e._id === selectedExpId)?.name} />
                     ) : (
                         <Card className="h-full min-h-[400px] rounded-[3rem] border-2 border-dashed border-slate-100 bg-slate-50/50 flex flex-col items-center justify-center p-12 text-center">
-                            <div className="bg-white p-6 rounded-full shadow-2xl shadow-indigo-100 mb-6">
+                            <div className="bg-white p-6 rounded-full  shadow-indigo-100 mb-6">
                                 <i className="bx bx-chevronright text-slate-200"  />
                             </div>
                             <h4 className="text-xl font-black text-slate-300 uppercase tracking-tight italic mb-2">Select a simulation terminal</h4>
@@ -506,7 +506,7 @@ function SubjectResourceManager({ experimentId, experimentName }: { experimentId
     };
 
     return (
-        <Card className="rounded-[3rem] border-none shadow-2xl shadow-slate-100 overflow-hidden bg-white animate-in slide-in-from-right-4 duration-500">
+        <Card className="rounded-[3rem] border-none  shadow-slate-100 overflow-hidden bg-white animate-in slide-in-from-right-4 duration-500">
             <div className="bg-slate-900 p-8 text-white">
                 <h4 className="text-2xl font-black tracking-tighter uppercase mb-1">Asset Control: {experimentName}</h4>
                 <p className="text-slate-400 text-xs font-medium tracking-wide">Manage educational resources for this laboratory terminal.</p>
@@ -561,7 +561,7 @@ function SubjectResourceManager({ experimentId, experimentName }: { experimentId
                     <h4 className="font-black text-slate-800 uppercase tracking-widest text-xs ml-2">Deployed Assets</h4>
                     {loading ? (
                         <div className="py-12 text-center">
-                            <i className="bx bx-loader2 animate-spin inline-block text-indigo-600"  />
+                            <i className="bx bx-loader2 animate-spin inline-block text-[#059669]"  />
                         </div>
                     ) : resources.length === 0 ? (
                         <div className="py-12 text-center bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-100">
@@ -570,7 +570,7 @@ function SubjectResourceManager({ experimentId, experimentName }: { experimentId
                     ) : (
                         <div className="grid grid-cols-1 gap-3">
                             {resources.map((res) => (
-                                <div key={res._id} className="flex items-center gap-4 p-4 bg-white border border-slate-100 rounded-2xl hover:border-indigo-100 hover:bg-indigo-50/10 transition-all group">
+                                <div key={res._id} className="flex items-center gap-4 p-4 bg-white border border-slate-100 rounded-2xl hover:border-indigo-100 hover:bg-indigo-50/10  group">
                                     <div className="bg-slate-100 p-3 rounded-xl group-hover:bg-white transition-colors">
                                         {res.type === 'video' ? <i className="bx bx-video text-rose-500"  /> :
                                          res.type === 'pdf' ? <i className="bx bx-file text-indigo-500"  /> :

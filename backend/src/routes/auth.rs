@@ -380,13 +380,21 @@ pub async fn verify_otp(
 
     use axum::http::header::{SET_COOKIE, HeaderValue};
 
-    let cookie_val = format!(
-        "vlab_access_token={}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=86400",
-        token
-    );
+    let cookie_val = if state.config.frontend_url.starts_with("https") {
+        format!(
+            "vlab_access_token={}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=86400",
+            token
+        )
+    } else {
+        format!(
+            "vlab_access_token={}; HttpOnly; SameSite=Lax; Path=/; Max-Age=86400",
+            token
+        )
+    };
 
     let mut response = (StatusCode::OK, Json(json!({
         "message": "Account verified successfully",
+        "token": token,
         "user": user_resp
     }))).into_response();
 
@@ -480,13 +488,21 @@ pub async fn signin(
 
     use axum::http::header::{SET_COOKIE, HeaderValue};
 
-    let cookie_val = format!(
-        "vlab_access_token={}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=86400",
-        token
-    );
+    let cookie_val = if state.config.frontend_url.starts_with("https") {
+        format!(
+            "vlab_access_token={}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=86400",
+            token
+        )
+    } else {
+        format!(
+            "vlab_access_token={}; HttpOnly; SameSite=Lax; Path=/; Max-Age=86400",
+            token
+        )
+    };
 
     let mut response = (StatusCode::OK, Json(json!({
         "message": "Login successful",
+        "token": token,
         "user": user_resp
     }))).into_response();
 
@@ -602,11 +618,15 @@ pub async fn resend_otp(
     )
 }
 
-pub async fn logout() -> impl IntoResponse {
+pub async fn logout(State(state): State<AppState>) -> impl IntoResponse {
     use axum::http::header::{SET_COOKIE, HeaderValue};
     use axum::response::Response;
 
-    let cookie_val = "vlab_access_token=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0";
+    let cookie_val = if state.config.frontend_url.starts_with("https") {
+        "vlab_access_token=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0"
+    } else {
+        "vlab_access_token=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0"
+    };
 
     let mut response = Json(json!({
         "message": "Logged out successfully"

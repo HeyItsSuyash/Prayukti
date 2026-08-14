@@ -62,7 +62,7 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
                     className="relative"
                 >
                     <div className="absolute inset-0 bg-blue-100 rounded-full blur-xl opacity-50"></div>
-                    <div className="relative bg-white p-6 rounded-full shadow-lg border-4 border-blue-100">
+                    <div className="relative bg-white p-6 rounded-full  border-4 border-blue-100">
                         <span className="text-4xl font-bold text-blue-600">{score} / {questions.length}</span>
                     </div>
                 </motion.div>
@@ -129,7 +129,7 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
                                 transition={{ delay: index * 0.1 }}
                                 onClick={() => handleOptionSelect(index)}
                                 className={`
-                                    relative flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all duration-200
+                                    relative flex items-center p-4 rounded-xl border-2 cursor-pointer  duration-200
                                     ${borderColor} ${bgColor}
                                 `}
                             >

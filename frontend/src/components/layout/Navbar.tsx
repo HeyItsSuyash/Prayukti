@@ -68,16 +68,16 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
     return (
         <header
             className={cn(
-                "fixed top-0 z-50 w-full transition-all duration-300",
+                "fixed top-0 z-50 w-full  duration-300",
                 scrolled
-                    ? "bg-background/80 backdrop-blur-md border-b border-border shadow-sm py-3"
+                    ? "bg-background/80 backdrop-blur-md border-b border-border  py-3"
                     : "bg-background border-b border-border py-4"
             )}
         >
             <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
                 {/* Logo Section */}
                 <a href="/" className="flex items-center gap-3 group">
-                    <div className="w-14 h-14 flex items-center justify-center transform group-hover:scale-105 transition-all duration-500">
+                    <div className="w-14 h-14 flex items-center justify-center transform group-  duration-500">
                         <img
                             src="/prayukti 2.0/logo/logo_blue.png"
                             alt="Prayukti Logo"
@@ -98,7 +98,7 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
                                 key={link.name}
                                 href={link.href}
                                 className={cn(
-                                    "text-sm font-medium transition-all relative py-2 group",
+                                    "text-sm font-medium  relative py-2 group",
                                     isActive
                                         ? "text-primary"
                                         : "text-muted-foreground hover:text-foreground"
@@ -106,7 +106,7 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
                             >
                                 {link.name}
                                 {!isActive && (
-                                    <span className="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
+                                    <span className="absolute bottom-0 left-0 w-0 h-px bg-primary  duration-300 group-hover:w-full" />
                                 )}
                             </a>
                         );
@@ -167,16 +167,16 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
                         className="w-10 h-10 flex flex-col items-center justify-center gap-1.5 group"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
-                        <div className={cn("w-6 h-0.5 bg-foreground transition-all", isMobileMenuOpen && "rotate-45 translate-y-2")} />
-                        <div className={cn("w-6 h-0.5 bg-foreground transition-all", isMobileMenuOpen && "opacity-0")} />
-                        <div className={cn("w-6 h-0.5 bg-foreground transition-all", isMobileMenuOpen && "-rotate-45 -translate-y-2")} />
+                        <div className={cn("w-6 h-0.5 bg-foreground ", isMobileMenuOpen && "rotate-45 translate-y-2")} />
+                        <div className={cn("w-6 h-0.5 bg-foreground ", isMobileMenuOpen && "opacity-0")} />
+                        <div className={cn("w-6 h-0.5 bg-foreground ", isMobileMenuOpen && "-rotate-45 -translate-y-2")} />
                     </button>
                 </div>
             </div>
 
             {/* Mobile Navigation Dropdown */}
             {isMobileMenuOpen && (
-                <div className="lg:hidden border-t border-border bg-background p-6 absolute top-full left-0 w-full shadow-xl animate-in slide-in-from-top-2 duration-300">
+                <div className="lg:hidden border-t border-border bg-background p-6 absolute top-full left-0 w-full  animate-in slide-in-from-top-2 duration-300">
                     <nav className="flex flex-col gap-4">
                         {navLinks.map((link) => (
                             <a

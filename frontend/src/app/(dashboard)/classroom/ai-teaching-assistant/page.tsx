@@ -176,7 +176,7 @@ export default function AiTeachingAssistantPage() {
 
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-32 animate-pulse">
-                        <i className="bx bx-loader2 w-10 h-10 text-indigo-600 animate-spin mb-4"  />
+                        <i className="bx bx-loader2 w-10 h-10 text-[#059669] animate-spin mb-4"  />
                         <p className="text-slate-400 font-black uppercase tracking-widest text-[9px]">Binding copilot engine...</p>
                     </div>
                 ) : (
@@ -184,7 +184,7 @@ export default function AiTeachingAssistantPage() {
                         
                         {/* Column 1: Generator Tool parameters */}
                         <div className="space-y-6 lg:col-span-1">
-                            <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900 shadow-sm p-6 space-y-4">
+                            <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900  p-6 space-y-4">
                                 <div className="flex items-center gap-2 border-b pb-3 border-slate-100 dark:border-slate-800">
                                     <i className="bx bx-bot text-indigo-600 dark:text-indigo-400"  />
                                     <h3 className="font-black text-sm uppercase tracking-tight">AI Materials Generator</h3>
@@ -261,7 +261,7 @@ export default function AiTeachingAssistantPage() {
 
                             {/* Class Summary Stats Panel */}
                             {perfSummary && (
-                                <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900 shadow-sm p-6 space-y-4">
+                                <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900  p-6 space-y-4">
                                     <div className="flex items-center gap-2 border-b pb-3 border-slate-100 dark:border-slate-800">
                                         <i className="bx bx-barchart3 text-emerald-500"  />
                                         <h3 className="font-black text-sm uppercase tracking-tight">Class diagnostics</h3>
@@ -288,7 +288,7 @@ export default function AiTeachingAssistantPage() {
                             
                             {/* AI Output Window */}
                             {genResult && (
-                                <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8 animate-in slide-in-from-right duration-300">
+                                <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900  p-6 md:p-8 animate-in slide-in-from-right duration-300">
                                     <div className="flex justify-between items-center mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
                                         <div>
                                             <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">Output Stream</span>
@@ -307,7 +307,7 @@ export default function AiTeachingAssistantPage() {
                             )}
 
                             {/* Topic Difficulty Diagnostic table */}
-                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm overflow-hidden">
+                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900  overflow-hidden">
                                 <div className="p-6 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 flex justify-between items-center">
                                     <div>
                                         <h3 className="font-black text-lg uppercase tracking-tight">Lab Difficulty <span className="text-indigo-600 dark:text-indigo-400 italic">Hotspots</span></h3>
@@ -317,7 +317,7 @@ export default function AiTeachingAssistantPage() {
                                 <CardContent className="p-0">
                                     {statsLoading ? (
                                         <div className="flex flex-col items-center justify-center py-12 animate-pulse">
-                                            <i className="bx bx-loader2 w-6 h-6 text-indigo-600 animate-spin mb-2"  />
+                                            <i className="bx bx-loader2 w-6 h-6 text-[#059669] animate-spin mb-2"  />
                                             <p className="text-slate-400 font-bold uppercase tracking-widest text-[8px]">Analyzing failed attempts...</p>
                                         </div>
                                     ) : diffAnalysis.length > 0 ? (

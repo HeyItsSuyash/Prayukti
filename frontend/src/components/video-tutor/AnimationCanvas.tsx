@@ -43,7 +43,7 @@ export default function AnimationCanvas({
         const isClientSender = activeStage.from === "Client";
 
         return (
-            <div className="w-full h-full flex flex-col justify-between p-6 bg-slate-900 text-slate-100 rounded-3xl border border-slate-800 shadow-lg relative overflow-hidden select-none">
+            <div className="w-full h-full flex flex-col justify-between p-6 bg-slate-900 text-slate-100 rounded-3xl border border-slate-800  relative overflow-hidden select-none">
                 <div className="absolute top-3 left-6">
                     <span className="text-[9px] font-black uppercase tracking-widest text-indigo-400">
                         Animation: packet transmission
@@ -53,7 +53,7 @@ export default function AnimationCanvas({
                 <div className="flex justify-between items-center mt-6 h-40 relative">
                     {/* Client Node */}
                     <div className="flex flex-col items-center z-10">
-                        <div className="w-16 h-16 rounded-2xl bg-indigo-600/30 border-2 border-indigo-500 flex items-center justify-center font-extrabold text-xs shadow-lg shadow-indigo-500/20">
+                        <div className="w-16 h-16 rounded-2xl bg-indigo-600/30 border-2 border-indigo-500 flex items-center justify-center font-extrabold text-xs  shadow-indigo-500/20">
                             Client
                         </div>
                         <span className="text-[10px] text-slate-400 font-bold mt-2">192.168.1.50</span>
@@ -67,7 +67,7 @@ export default function AnimationCanvas({
                             initial={{ left: isClientSender ? "0%" : "100%" }}
                             animate={{ left: isClientSender ? "100%" : "0%" }}
                             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute -top-4 w-8 h-8 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg -translate-x-1/2"
+                            className="absolute -top-4 w-8 h-8 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center  -translate-x-1/2"
                         >
                             <span className="text-[8px] font-black">{activeStage.label}</span>
                         </motion.div>
@@ -75,7 +75,7 @@ export default function AnimationCanvas({
 
                     {/* Server Node */}
                     <div className="flex flex-col items-center z-10">
-                        <div className="w-16 h-16 rounded-2xl bg-purple-600/30 border-2 border-purple-500 flex items-center justify-center font-extrabold text-xs shadow-lg shadow-purple-500/20">
+                        <div className="w-16 h-16 rounded-2xl bg-purple-600/30 border-2 border-purple-500 flex items-center justify-center font-extrabold text-xs  shadow-purple-500/20">
                             Server
                         </div>
                         <span className="text-[10px] text-slate-400 font-bold mt-2">10.0.0.1</span>
@@ -108,7 +108,7 @@ export default function AnimationCanvas({
         const activeVal = activeIdx < sequence.length ? sequence[activeIdx] : null;
 
         return (
-            <div className="w-full h-full flex flex-col justify-between p-6 bg-slate-900 text-slate-100 rounded-3xl border border-slate-800 shadow-lg relative overflow-hidden select-none">
+            <div className="w-full h-full flex flex-col justify-between p-6 bg-slate-900 text-slate-100 rounded-3xl border border-slate-800  relative overflow-hidden select-none">
                 <div className="absolute top-3 left-6">
                     <span className="text-[9px] font-black uppercase tracking-widest text-indigo-400">
                         Animation: bst key search
@@ -119,7 +119,7 @@ export default function AnimationCanvas({
                 <div className="flex flex-col items-center justify-center mt-6 h-48 space-y-8">
                     {/* Root Node */}
                     <div className="flex justify-center w-full">
-                        <div className={`w-12 h-12 rounded-full border-2 flex items-center justify-center font-extrabold text-xs shadow-md transition-all duration-300 ${
+                        <div className={`w-12 h-12 rounded-full border-2 flex items-center justify-center font-extrabold text-xs   duration-300 ${
                             activeVal === 8 
                                 ? "bg-indigo-500 border-white text-white scale-110 shadow-indigo-500/50" 
                                 : "bg-slate-800 border-slate-700 text-slate-300"
@@ -130,14 +130,14 @@ export default function AnimationCanvas({
 
                     {/* Children row */}
                     <div className="flex justify-between w-full max-w-[200px]">
-                        <div className={`w-12 h-12 rounded-full border-2 flex items-center justify-center font-extrabold text-xs shadow-md transition-all duration-300 ${
+                        <div className={`w-12 h-12 rounded-full border-2 flex items-center justify-center font-extrabold text-xs   duration-300 ${
                             activeVal === 3 
                                 ? "bg-indigo-500 border-white text-white scale-110 shadow-indigo-500/50" 
                                 : "bg-slate-800 border-slate-700 text-slate-300"
                         }`}>
                             3
                         </div>
-                        <div className={`w-12 h-12 rounded-full border-2 flex items-center justify-center font-extrabold text-xs shadow-md transition-all duration-300 ${
+                        <div className={`w-12 h-12 rounded-full border-2 flex items-center justify-center font-extrabold text-xs   duration-300 ${
                             activeVal === 10 
                                 ? "bg-indigo-500 border-white text-white scale-110 shadow-indigo-500/50" 
                                 : "bg-slate-800 border-slate-700 text-slate-300"
@@ -176,7 +176,7 @@ export default function AnimationCanvas({
 
         // Custom canvas element to render signal waves
         return (
-            <div className="w-full h-full flex flex-col justify-between p-6 bg-slate-900 text-slate-100 rounded-3xl border border-slate-800 shadow-lg relative overflow-hidden select-none">
+            <div className="w-full h-full flex flex-col justify-between p-6 bg-slate-900 text-slate-100 rounded-3xl border border-slate-800  relative overflow-hidden select-none">
                 <div className="absolute top-3 left-6">
                     <span className="text-[9px] font-black uppercase tracking-widest text-indigo-400">
                         Animation: digital logic gate signal flow
@@ -240,7 +240,7 @@ export default function AnimationCanvas({
 
     // 4. Default / Generic Simulation View
     return (
-        <div className="w-full h-full flex flex-col justify-between p-6 bg-slate-900 text-slate-100 rounded-3xl border border-slate-800 shadow-lg relative overflow-hidden select-none">
+        <div className="w-full h-full flex flex-col justify-between p-6 bg-slate-900 text-slate-100 rounded-3xl border border-slate-800  relative overflow-hidden select-none">
             <div className="absolute top-3 left-6">
                 <span className="text-[9px] font-black uppercase tracking-widest text-indigo-400">
                     Animation: academic concept simulator
@@ -249,8 +249,8 @@ export default function AnimationCanvas({
 
             {/* Canvas/Visual Simulation */}
             <div className="flex flex-col items-center justify-center mt-6 h-48 space-y-4">
-                <div className="relative w-36 h-36 border border-dashed border-indigo-500/20 rounded-full flex items-center justify-center animate-spin duration-[20s]">
-                    <div className="w-24 h-24 border border-indigo-400/40 rounded-full flex items-center justify-center animate-spin duration-[10s]">
+                <div className="relative w-36 h-36 border border-dashed border-t-[#059669]/20 rounded-full flex items-center justify-center animate-spin duration-[20s]">
+                    <div className="w-24 h-24 border border-t-[#059669]/40 rounded-full flex items-center justify-center animate-spin duration-[10s]">
                         <div className="w-12 h-12 bg-indigo-500/10 rounded-full border border-indigo-300/60 animate-ping"></div>
                     </div>
                 </div>

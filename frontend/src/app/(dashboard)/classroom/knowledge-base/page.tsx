@@ -213,7 +213,7 @@ export default function KnowledgeBasePage() {
                     
                     {/* Left Column: Ask query form */}
                     <div className="space-y-6 lg:col-span-1">
-                        <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900 shadow-sm p-6">
+                        <Card className="rounded-3xl border-2 bg-white dark:bg-slate-900  p-6">
                             <div className="flex items-center gap-2 border-b pb-3 mb-4 border-slate-100 dark:border-slate-800">
                                 <i className="bx bx-help-circle text-indigo-600 dark:text-indigo-400"  />
                                 <h3 className="font-black text-sm uppercase tracking-tight">Ask the Knowledge Base</h3>
@@ -268,7 +268,7 @@ export default function KnowledgeBasePage() {
                     <div className="lg:col-span-2 space-y-6">
                         
                         {/* Search and Approved Feed */}
-                        <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8">
+                        <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900  p-6 md:p-8">
                             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
                                 <div>
                                     <h3 className="font-black text-lg uppercase tracking-tight">Verified Q&A <span className="text-indigo-600 dark:text-indigo-400 italic">Database</span></h3>
@@ -288,7 +288,7 @@ export default function KnowledgeBasePage() {
 
                             {loading ? (
                                 <div className="flex flex-col items-center justify-center py-12 animate-pulse">
-                                    <i className="bx bx-loader2 w-6 h-6 text-indigo-600 animate-spin mb-2"  />
+                                    <i className="bx bx-loader2 w-6 h-6 text-[#059669] animate-spin mb-2"  />
                                     <p className="text-slate-400 font-bold uppercase tracking-widest text-[8px]">Loading dataset...</p>
                                 </div>
                             ) : filteredApproved.length > 0 ? (
@@ -319,7 +319,7 @@ export default function KnowledgeBasePage() {
 
                         {/* Pending Review Panel (Teacher Only) */}
                         {isTeacher && (
-                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8 border-amber-500/20">
+                            <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900  p-6 md:p-8 border-amber-500/20">
                                 <div className="flex items-center gap-2 border-b pb-4 mb-6 border-slate-100 dark:border-slate-800">
                                     <i className="bx bx-clock text-amber-500"  />
                                     <h3 className="font-black text-lg uppercase tracking-tight">Pending Teacher Reviews</h3>

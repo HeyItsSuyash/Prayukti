@@ -118,7 +118,7 @@ export function MissionVisionSection() {
                                 <button
                                     key={i}
                                     onClick={() => setActiveIndex(i)}
-                                    className={`h-1 transition-all duration-500 rounded-full ${activeIndex === i ? 'w-12 bg-accent' : 'w-4 bg-slate-200 dark:bg-slate-800'}`}
+                                    className={`h-1  duration-500 rounded-full ${activeIndex === i ? 'w-12 bg-accent' : 'w-4 bg-slate-200 dark:bg-slate-800'}`}
                                 />
                             ))}
                         </div>

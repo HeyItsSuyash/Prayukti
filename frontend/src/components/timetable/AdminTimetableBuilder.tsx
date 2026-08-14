@@ -181,7 +181,7 @@ export default function AdminTimetableBuilder() {
           <Button 
             onClick={handleAutoGenerate}
             disabled={isGenerating}
-            className={`font-bold py-6 px-6 rounded-xl uppercase tracking-widest text-xs transition-all shadow-xl
+            className={`font-bold py-6 px-6 rounded-xl uppercase tracking-widest text-xs  
               ${isGenerating ? 'bg-slate-800 text-slate-500' : 'bg-gradient-to-r from-accent to-orange-500 hover:from-accent/90 hover:to-orange-500/90 text-white shadow-accent/20'}`}
           >
             {isGenerating ? (
@@ -307,7 +307,7 @@ export default function AdminTimetableBuilder() {
                             onClick={() => openManualModal(day, time)}
                           >
                             {slot ? (
-                              <div className={`h-full rounded-xl p-3 border group relative transition-all shadow-lg ${
+                              <div className={`h-full rounded-xl p-3 border group relative   ${
                                 slot.type === 'lab' 
                                   ? 'bg-purple-500/20 border-purple-500/40 hover:border-purple-500/60' 
                                   : 'bg-accent/20 border-accent/40 hover:border-accent/60'
@@ -327,7 +327,7 @@ export default function AdminTimetableBuilder() {
                               </div>
                             ) : (
                               <div className="w-full h-full rounded-xl flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-white/5 border border-white/10 hover:border-accent/50 group">
-                                <i className="bx bx-plus w-5 h-5 text-accent/50 group-hover:text-accent group-hover:scale-125 transition-transform"  />
+                                <i className="bx bx-plus w-5 h-5 text-accent/50 group-hover:text-accent group- "  />
                               </div>
                             )}
                           </div>

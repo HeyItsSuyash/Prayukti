@@ -91,7 +91,7 @@ export default function StudentExamsPage() {
                         
                         {activeExams.map((exam) => (
                             <Card key={exam.id} className={`border-2 rounded-[2rem] overflow-hidden ${
-                                exam.status === "active" ? "border-accent/30 shadow-lg" : "border-slate-200"
+                                exam.status === "active" ? "border-accent/30 " : "border-slate-200"
                             }`}>
                                 <CardContent className="p-8">
                                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -117,7 +117,7 @@ export default function StudentExamsPage() {
                                             </div>
                                         </div>
 
-                                        <Button className={`h-12 px-8 uppercase font-black tracking-widest text-xs rounded-xl shadow-md ${
+                                        <Button className={`h-12 px-8 uppercase font-black tracking-widest text-xs rounded-xl  ${
                                             exam.status === "active" 
                                                 ? "bg-accent hover:bg-accent/90 text-white" 
                                                 : "bg-slate-200 text-slate-500 cursor-not-allowed"

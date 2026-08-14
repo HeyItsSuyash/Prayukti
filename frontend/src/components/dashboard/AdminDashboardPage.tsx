@@ -37,9 +37,9 @@ const NAV_ITEMS = [
 
 function StatCard({ title, value, subtext, icon: Icon, trend }: any) {
     return (
-        <Card className="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/10 transition-all overflow-hidden group">
+        <Card className="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/10  overflow-hidden group">
             <CardContent className="p-6 relative">
-                <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-500">
+                <div className="absolute top-0 right-0 p-6 opacity-10 group- group-hover:-rotate-12  duration-500">
                     <i className={`${Icon} text-[80px]`} />
                 </div>
                 <div className="relative z-10">
@@ -168,7 +168,7 @@ function AdminContent() {
                             </div>
 
                             <div className="space-y-6">
-                                <Card className="rounded-[2rem] border-none bg-gradient-to-br from-accent/80 to-accent text-white p-8 shadow-2xl relative overflow-hidden group">
+                                <Card className="rounded-[2rem] border-none bg-gradient-to-br from-accent/80 to-accent text-white p-8  relative overflow-hidden group">
                                     <div className="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors" />
                                     <div className="relative z-10 space-y-4">
                                         <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-md">
@@ -242,7 +242,7 @@ function AdminContent() {
             {/* Sidebar */}
             <aside className={`
                 ${isSidebarOpen ? 'w-72' : 'w-0 lg:w-20'} 
-                transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
+                 duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
                 flex flex-col border-r border-white/5 bg-slate-950/50 backdrop-blur-2xl relative z-40 overflow-hidden
             `}>
                 <div className="h-20 flex items-center justify-between px-6 border-b border-white/5 shrink-0">
@@ -268,7 +268,7 @@ function AdminContent() {
                                 key={item.id}
                                 onClick={() => setCurrentView(item.id)}
                                 className={`
-                                    w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300
+                                    w-full flex items-center gap-4 px-4 py-3 rounded-xl  duration-300
                                     ${active 
                                         ? 'bg-accent/10 text-accent font-bold' 
                                         : 'text-white/60 hover:text-white hover:bg-white/5 font-medium'
@@ -289,7 +289,7 @@ function AdminContent() {
                     <button
                         onClick={handleLogout}
                         className={`
-                            w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all
+                            w-full flex items-center gap-4 px-4 py-3 rounded-xl 
                             text-red-400 hover:bg-red-400/10 font-medium
                             ${!isSidebarOpen ? 'justify-center' : ''}
                         `}
@@ -329,7 +329,7 @@ function AdminContent() {
                                 <div className="text-sm font-bold text-white">System Admin</div>
                                 <div className="text-[10px] text-accent uppercase tracking-widest font-bold">Verified</div>
                             </div>
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-orange-600 flex items-center justify-center border-2 border-slate-950 text-white font-bold shadow-lg">
+                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-orange-600 flex items-center justify-center border-2 border-slate-950 text-white font-bold ">
                                 A
                             </div>
                         </div>

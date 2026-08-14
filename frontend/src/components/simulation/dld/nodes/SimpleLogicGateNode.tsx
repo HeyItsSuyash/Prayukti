@@ -28,7 +28,7 @@ export const SimpleLogicGateNode = memo(({ id, data, selected, symbol, svgPath, 
                 type="target"
                 position={Position.Left}
                 id={inputs === 1 ? 'a' : String.fromCharCode(97 + i)} // 'a', 'b', etc.
-                className="!bg-gray-400 !w-3 !h-3 hover:!bg-blue-500 !border-none transition-colors"
+                className="!bg-card !w-3 !h-3 hover:!bg-primary !border-none transition-colors"
                 style={{
                     top: inputs === 1 ? '50%' : (i + 1) * handleSpacing,
                     left: -3, // Flush with border
@@ -46,7 +46,7 @@ export const SimpleLogicGateNode = memo(({ id, data, selected, symbol, svgPath, 
                     width={width}
                     height={height}
                     viewBox={`0 0 ${width} ${height}`}
-                    className={`overflow-visible pointer-events-none drop-shadow-sm transition-all ${selected ? 'drop-shadow-[0_0_5px_orange]' : ''}`}
+                    className={`overflow-visible pointer-events-none drop-shadow-none-none  ${selected ? 'drop-shadow-none-[0_0_5px_orange]' : ''}`}
                 >
                     <path
                         d={svgPath}
@@ -60,7 +60,7 @@ export const SimpleLogicGateNode = memo(({ id, data, selected, symbol, svgPath, 
                 </svg>
             ) : (
                 // Fallback for missing path (should not happen if updated correctly)
-                <div className={`w-full h-full border-2 bg-white flex items-center justify-center font-bold ${selected ? 'border-orange-500' : 'border-black'}`}>
+                <div className={`w-full h-full border-2 bg-card flex items-center justify-center font-bold ${selected ? 'border-orange-500' : 'border-black'}`}>
                     {symbol}
                 </div>
             )}
@@ -80,7 +80,7 @@ export const SimpleLogicGateNode = memo(({ id, data, selected, symbol, svgPath, 
                 type="source"
                 position={Position.Right}
                 id="source"
-                className="!bg-gray-400 !w-3 !h-3 hover:!bg-blue-500 !border-none transition-colors"
+                className="!bg-card !w-3 !h-3 hover:!bg-primary !border-none transition-colors"
                 style={{
                     top: '50%',
                     right: -3, // Flush with border
@@ -90,7 +90,7 @@ export const SimpleLogicGateNode = memo(({ id, data, selected, symbol, svgPath, 
 
             {/* Editable Label */}
             <input
-                className={`absolute -top-5 left-1/2 -translate-x-1/2 bg-transparent text-center text-[10px] font-bold text-gray-500 uppercase tracking-wider outline-none w-20 hover:text-black focus:text-black transition-colors ${selected ? 'opacity-100' : 'opacity-0 group-hover/node:opacity-100'}`}
+                className={`absolute -top-5 left-1/2 -translate-x-1/2 bg-transparent text-center text-[10px] font-bold text-muted-foreground uppercase tracking-wider outline-none w-20 hover:text-black focus:text-black transition-colors ${selected ? 'opacity-100' : 'opacity-0 group-hover/node:opacity-100'}`}
                 value={(data.label as string) || label}
                 onChange={(evt) => {
                     setNodes((nds) => nds.map((n) => {

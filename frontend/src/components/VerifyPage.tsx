@@ -81,7 +81,7 @@ export default function VerifyPage() {
 
     return (
         <div className="flex-1 flex items-center justify-center p-4 py-12 bg-[#021D24] font-sans selection:bg-[#14D98F]/30 min-h-screen">
-            <div className="bg-[#03252E] p-8 md:p-12 rounded-none border border-[#14D98F]/20 shadow-2xl max-w-md w-full text-center">
+            <div className="bg-[#03252E] p-8 md:p-12 rounded-none border border-[#14D98F]/20  max-w-md w-full text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-[#084738] text-[#14D98F] rounded-none mb-6 border border-[#14D98F]/30">
                     <i className="bx bx-shieldcheck"  />
                 </div>
@@ -109,14 +109,14 @@ export default function VerifyPage() {
                         type="text"
                         maxLength={6}
                         placeholder="· · · · · ·"
-                        className="h-20 text-center text-4xl font-black tracking-[1em] rounded-none bg-[#021D24] border border-[#14D98F]/20 focus:border-[#14D98F] focus:bg-[#021D24] transition-all text-white placeholder:text-slate-700 outline-none focus-visible:ring-0"
+                        className="h-20 text-center text-4xl font-black tracking-[1em] rounded-none bg-[#021D24] border border-[#14D98F]/20 focus:border-[#14D98F] focus:bg-[#021D24]  text-white placeholder:text-slate-700 outline-none focus-visible:ring-0"
                         value={otp}
                         onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
                         required
                     />
 
                     <Button
-                        className="w-full h-14 text-lg font-bold bg-[#14D98F] hover:bg-[#14D98F]/90 text-[#021D24] rounded-none transition-all active:scale-[0.98]"
+                        className="w-full h-14 text-lg font-bold bg-[#14D98F] hover:bg-[#14D98F]/90 text-[#021D24] rounded-none  active:scale-[0.98]"
                         disabled={loading}
                     >
                         {loading ? <i className="bx bx-loader2 animate-spin"  /> : "VERIFY ACCOUNT"}

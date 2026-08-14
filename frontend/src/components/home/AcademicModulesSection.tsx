@@ -88,14 +88,14 @@ function ModuleCard({ mod, index }: { mod: ModuleItem, index: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="group relative bg-white dark:bg-slate-900 rounded-[2rem] border-2 border-slate-100 dark:border-slate-800 p-8 hover:border-accent transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-accent/5 flex flex-col h-full overflow-hidden cursor-pointer"
+            className="group relative bg-white dark:bg-slate-900 rounded-[2rem] border-2 border-slate-100 dark:border-slate-800 p-8 hover:border-accent  duration-500  hover: /5 flex flex-col h-full overflow-hidden cursor-pointer"
             onClick={() => navigate(mod.href)}
         >
             <div className="relative w-full h-48 mb-6 overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-800">
                 <img
                     src={mod.imageSrc}
                     alt={mod.imageAlt}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0  duration-700 group-"
                 />
             </div>
 
@@ -103,7 +103,7 @@ function ModuleCard({ mod, index }: { mod: ModuleItem, index: number }) {
             <span className="absolute top-4 right-8 text-8xl font-black text-slate-50 dark:text-slate-800/50 -z-0 select-none group-hover:text-accent/5 transition-colors">{mod.number}</span>
             
             <div className="relative z-10 flex-1 space-y-6">
-                <div className="w-14 h-14 rounded-2xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all duration-500 shadow-inner">
+                <div className="w-14 h-14 rounded-2xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white  duration-500 shadow-inner">
                     {mod.icon}
                 </div>
                 
@@ -121,7 +121,7 @@ function ModuleCard({ mod, index }: { mod: ModuleItem, index: number }) {
 
             <div className="relative z-10 mt-10 pt-8 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between group/btn">
                 <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary dark:text-slate-400 group-hover:text-accent transition-colors">Launch Module</span>
-                <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary dark:text-white group-hover:bg-accent group-hover:text-white group-hover:translate-x-1 transition-all">
+                <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary dark:text-white group-hover:bg-accent group-hover:text-white group-hover:translate-x-1 ">
                     <i className="bx bx-right-arrow-alt"  />
                 </div>
             </div>
@@ -159,10 +159,10 @@ export function AcademicModulesSection() {
                 <div className="mt-20 text-center">
                     <a 
                         href="/explore"
-                        className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-primary dark:text-slate-400 hover:text-accent transition-all group"
+                        className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-primary dark:text-slate-400 hover:text-accent  group"
                     >
                         Explore All Subjects
-                        <div className="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all">
+                        <div className="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center group-hover:bg-accent group-hover:text-white ">
                             <i className="bx bx-right-arrow-alt"  />
                         </div>
                     </a>

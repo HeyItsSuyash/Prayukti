@@ -48,7 +48,7 @@ export function AnalyticsDashboard() {
     if (loading) {
         return (
             <div className="flex items-center justify-center p-20">
-                <i className="bx bx-loader2 animate-spin text-indigo-600 w-8 h-8"  />
+                <i className="bx bx-loader2 animate-spin text-[#059669] w-8 h-8"  />
             </div>
         );
     }
@@ -56,7 +56,7 @@ export function AnalyticsDashboard() {
     return (
         <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <Card className="rounded-3xl border-slate-100 shadow-sm overflow-hidden">
+                <Card className="rounded-3xl border-slate-100  overflow-hidden">
                     <CardContent className="p-6">
                         <div className="flex items-center gap-4">
                             <div className="bg-indigo-100 p-3 rounded-2xl">
@@ -74,7 +74,7 @@ export function AnalyticsDashboard() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <Card className="rounded-[2.5rem] border-slate-100 shadow-xl shadow-slate-100 overflow-hidden">
+                <Card className="rounded-[2.5rem] border-slate-100  shadow-slate-100 overflow-hidden">
                     <CardHeader>
                         <CardTitle className="text-xl font-black text-slate-800 flex items-center gap-2 uppercase tracking-tight">
                             <i className="bx bx-bookopen text-indigo-600"  />
@@ -111,7 +111,7 @@ export function AnalyticsDashboard() {
                     </CardContent>
                 </Card>
 
-                <Card className="rounded-[2.5rem] border-slate-100 shadow-xl shadow-slate-100 overflow-hidden">
+                <Card className="rounded-[2.5rem] border-slate-100  shadow-slate-100 overflow-hidden">
                     <CardHeader>
                         <CardTitle className="text-xl font-black text-slate-800 flex items-center gap-2 uppercase tracking-tight">
                             <i className="bx bx-trendingup text-emerald-500"  />

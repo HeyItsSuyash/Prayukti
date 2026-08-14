@@ -35,7 +35,7 @@ export default function VerifyCertificatePage({ certificateId }: VerifyCertifica
 
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4 font-sans">
-            <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
+            <div className="max-w-2xl w-full bg-white rounded-2xl  overflow-hidden border border-slate-200">
                 {/* Header */}
                 <div className={`p-8 text-center ${isValid ? 'bg-primary' : 'bg-red-600'} text-white`}>
                     <div className="flex justify-center mb-4">

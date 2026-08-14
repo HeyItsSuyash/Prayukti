@@ -135,7 +135,7 @@ export default function AnalyticsPage() {
 
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-32 animate-pulse">
-                        <i className="bx bx-loader2 w-10 h-10 text-indigo-600 animate-spin mb-4"  />
+                        <i className="bx bx-loader2 w-10 h-10 text-[#059669] animate-spin mb-4"  />
                         <p className="text-slate-400 font-black uppercase tracking-widest text-[9px]">Calculating performance vectors...</p>
                     </div>
                 ) : (
@@ -145,7 +145,7 @@ export default function AnalyticsPage() {
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                                 {/* Left column: Progress info */}
                                 <div className="space-y-6 lg:col-span-1">
-                                    <Card className="rounded-[2rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6 text-center">
+                                    <Card className="rounded-[2rem] border-2 bg-white dark:bg-slate-900  p-6 text-center">
                                         <div className="w-16 h-16 bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
                                             <i className="bx bx-bookopen"  />
                                         </div>
@@ -179,7 +179,7 @@ export default function AnalyticsPage() {
                                         </p>
                                     </Card>
 
-                                    <Card className="rounded-[2rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6">
+                                    <Card className="rounded-[2rem] border-2 bg-white dark:bg-slate-900  p-6">
                                         <div className="flex items-center gap-2 border-b pb-3 mb-4 border-slate-100 dark:border-slate-800">
                                             <i className="bx bx-activity text-emerald-500"  />
                                             <h3 className="font-extrabold text-sm uppercase tracking-wider text-slate-800 dark:text-slate-200">Engagement Trend</h3>
@@ -199,7 +199,7 @@ export default function AnalyticsPage() {
 
                                 {/* Right columns: Attendance Log history list */}
                                 <div className="lg:col-span-2">
-                                    <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm overflow-hidden h-full">
+                                    <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900  overflow-hidden h-full">
                                         <div className="p-6 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 flex justify-between items-center">
                                             <div>
                                                 <h3 className="font-black text-lg uppercase tracking-tight">Classroom Join <span className="text-indigo-600 dark:text-indigo-400 italic">Logs</span></h3>
@@ -247,7 +247,7 @@ export default function AnalyticsPage() {
                         {/* 2. Teacher Analytics Panel */}
                         {isTeacher && teacherData && (
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8 flex flex-col justify-between">
+                                <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900  p-6 md:p-8 flex flex-col justify-between">
                                     <div>
                                         <div className="flex items-center justify-between mb-6 border-b pb-4 border-slate-100 dark:border-slate-800">
                                             <h3 className="font-extrabold text-sm uppercase tracking-wider text-slate-800 dark:text-slate-200">Class Participation indices</h3>
@@ -267,7 +267,7 @@ export default function AnalyticsPage() {
                                     <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mt-4">Participation score calculations compile logs of assignments, chatbot activity, and session joins.</p>
                                 </Card>
 
-                                <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8">
+                                <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900  p-6 md:p-8">
                                     <div className="flex items-center justify-between mb-6 border-b pb-4 border-slate-100 dark:border-slate-800">
                                         <h3 className="font-extrabold text-sm uppercase tracking-wider text-slate-800 dark:text-slate-200">Assignment effectiveness</h3>
                                         <i className="bx bx-usercheck text-emerald-500"  />
@@ -305,7 +305,7 @@ export default function AnalyticsPage() {
                         {/* 3. Institution Analytics Panel (Admin) */}
                         {isAdmin && adminData && (
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8">
+                                <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900  p-6 md:p-8">
                                     <div className="flex items-center justify-between mb-6 border-b pb-4 border-slate-100 dark:border-slate-800">
                                         <h3 className="font-extrabold text-sm uppercase tracking-wider text-slate-800 dark:text-slate-200">Department performance averages</h3>
                                         <i className="bx bx-barchart3 text-indigo-600 dark:text-indigo-400"  />
@@ -320,7 +320,7 @@ export default function AnalyticsPage() {
                                     </div>
                                 </Card>
 
-                                <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900 shadow-sm p-6 md:p-8">
+                                <Card className="rounded-[2.5rem] border-2 bg-white dark:bg-slate-900  p-6 md:p-8">
                                     <div className="flex items-center justify-between mb-6 border-b pb-4 border-slate-100 dark:border-slate-800">
                                         <h3 className="font-extrabold text-sm uppercase tracking-wider text-slate-800 dark:text-slate-200">Faculty effectiveness indexes</h3>
                                         <i className="bx bx-usercheck text-emerald-500"  />

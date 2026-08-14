@@ -53,11 +53,11 @@ export function HeroSection() {
                         className="flex flex-wrap gap-4 mb-12"
                     >
                         <Link href="/labs">
-                            <Button size="lg" className="h-12 px-8 rounded-md bg-primary hover:bg-primary/90 text-white font-semibold text-base transition-all">
+                            <Button size="lg" className="h-12 px-8 rounded-md bg-primary hover:bg-primary/90 text-white font-semibold text-base ">
                                 Explore Labs
                             </Button>
                         </Link>
-                        <Button onClick={() => setIsDemoOpen(true)} size="lg" variant="outline" className="h-12 px-8 rounded-md bg-transparent border-white/30 text-white hover:bg-white/10 font-semibold text-base transition-all">
+                        <Button onClick={() => setIsDemoOpen(true)} size="lg" variant="outline" className="h-12 px-8 rounded-md bg-transparent border-white/30 text-white hover:bg-white/10 font-semibold text-base ">
                             <i className="bx bx-play text-xl mr-2"></i> Watch Demo
                         </Button>
                     </motion.div>

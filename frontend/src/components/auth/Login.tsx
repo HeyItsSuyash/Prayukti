@@ -145,7 +145,7 @@ export default function LoginPage() {
     if (!mounted) {
         return (
             <div className="h-screen flex bg-white font-sans items-center justify-center">
-                <i className="bx bx-loader2 animate-spin text-primary w-10 h-10"  />
+                <i className="bx bx-loader2 animate-spin text-[#059669] w-10 h-10"  />
             </div>
         );
     }
@@ -156,7 +156,7 @@ export default function LoginPage() {
             <div className="hidden lg:flex lg:w-1/2 relative bg-secondary overflow-hidden items-stretch">
                 {/* Background Image with Overlay */}
                 <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000"
+                    className="absolute inset-0 bg-cover bg-center  duration-1000"
                     style={{ backgroundImage: `url('/muj_auth_sidebar_bg_1778010617249.png')` }}
                 />
                 <div className="absolute inset-0 bg-secondary/80" />
@@ -165,7 +165,7 @@ export default function LoginPage() {
                 <div className="relative z-10 flex flex-col justify-between w-full p-12">
                     <div className="flex items-center justify-between">
                         <a href="/" className="flex items-center gap-3 group">
-                            <div className="w-16 h-16 flex items-center justify-center transform group-hover:scale-105 transition-all duration-500">
+                            <div className="w-16 h-16 flex items-center justify-center transform group-  duration-500">
                                 <img
                                     src="/prayukti 2.0/logo/logo_blue.png"
                                     alt="Prayukti Logo"
@@ -178,7 +178,7 @@ export default function LoginPage() {
                             </div>
                         </a>
 
-                        <a href="/" className="flex items-center gap-2 text-white/80 hover:text-white font-medium text-sm bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-sm transition-all border border-white/10 hover:bg-white/20">
+                        <a href="/" className="flex items-center gap-2 text-white/80 hover:text-white font-medium text-sm bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-sm  border border-white/10 hover:bg-white/20">
                             Back to website <i className="bx bx-right-arrow-alt"  />
                         </a>
                     </div>
@@ -188,7 +188,7 @@ export default function LoginPage() {
                         {slides.map((slide, idx) => (
                             <div
                                 key={idx}
-                                className={`absolute inset-0 flex flex-col justify-center transition-all duration-1000 ${idx === currentSlide ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
+                                className={`absolute inset-0 flex flex-col justify-center  duration-1000 ${idx === currentSlide ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
                                     }`}
                             >
                                 <div className="space-y-6">
@@ -200,7 +200,7 @@ export default function LoginPage() {
                                     </div>
 
                                     {slide.testimonial ? (
-                                        <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-md space-y-4 max-w-lg shadow-sm relative">
+                                        <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-md space-y-4 max-w-lg  relative">
                                             <i className="bx bxs-quote-alt-left absolute -top-4 -left-4 text-primary-foreground w-10 h-10 opacity-50"  />
                                             <p className="text-white/90 text-lg font-medium leading-relaxed">
                                                 "{slide.testimonial.text}"
@@ -231,7 +231,7 @@ export default function LoginPage() {
                                 <button
                                     key={idx}
                                     onClick={() => setCurrentSlide(idx)}
-                                    className={`h-1.5 rounded-full transition-all duration-500 ${idx === currentSlide ? "w-8 bg-primary shadow-sm" : "w-2 bg-white/20 hover:bg-white/40"
+                                    className={`h-1.5 rounded-full  duration-500 ${idx === currentSlide ? "w-8 bg-primary " : "w-2 bg-white/20 hover:bg-white/40"
                                         }`}
                                 />
                             ))}
@@ -263,8 +263,8 @@ export default function LoginPage() {
                             <button
                                 key={r}
                                 onClick={() => setRole(r)}
-                                className={`flex-1 py-2.5 text-sm font-medium capitalize rounded-sm transition-all ${role === r
-                                    ? 'bg-background text-foreground shadow-sm'
+                                className={`flex-1 py-2.5 text-sm font-medium capitalize rounded-sm  ${role === r
+                                    ? 'bg-background text-foreground '
                                     : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                                     }`}
                             >
@@ -278,7 +278,7 @@ export default function LoginPage() {
 
                     {success ? (
                         <div className="text-center py-12 space-y-6 animate-in fade-in zoom-in duration-500">
-                            <div className="w-20 h-20 bg-success/10 text-success rounded-full flex items-center justify-center mx-auto shadow-sm">
+                            <div className="w-20 h-20 bg-success/10 text-success rounded-full flex items-center justify-center mx-auto ">
                                 <i className="bx bx-check-circle"  />
                             </div>
                             <div className="space-y-2">
@@ -295,7 +295,7 @@ export default function LoginPage() {
                                         type="email"
                                         required
                                         placeholder="name@mmmut.ac.in"
-                                        className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary rounded-sm outline-none transition-all text-foreground text-sm pl-11 shadow-sm"
+                                        className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary rounded-sm outline-none  text-foreground text-sm pl-11 "
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                     />
@@ -313,7 +313,7 @@ export default function LoginPage() {
                                         type={showPassword ? "text" : "password"}
                                         required
                                         placeholder="••••••••"
-                                        className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary rounded-sm outline-none transition-all text-foreground text-sm pl-11 shadow-sm"
+                                        className="w-full px-4 py-3 bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary rounded-sm outline-none  text-foreground text-sm pl-11 "
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
@@ -339,7 +339,7 @@ export default function LoginPage() {
                                 <Button
                                     type="submit"
                                     disabled={loading}
-                                    className="w-full py-6 text-base font-semibold rounded-sm shadow-sm transition-all"
+                                    className="w-full py-6 text-base font-semibold rounded-sm  "
                                 >
                                     {loading ? <i className="bx bx-loader2 animate-spin w-5 h-5"  /> : "Sign In"}
                                 </Button>

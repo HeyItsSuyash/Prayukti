@@ -57,7 +57,7 @@ export function AISection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    className="max-w-4xl mx-auto rounded-3xl border border-white/10 bg-[#0A1929]/80 backdrop-blur-2xl shadow-2xl overflow-hidden flex flex-col"
+                    className="max-w-4xl mx-auto rounded-3xl border border-white/10 bg-[#0A1929]/80 backdrop-blur-2xl  overflow-hidden flex flex-col"
                 >
                     <div className="h-16 border-b border-white/10 flex items-center px-6 gap-4 bg-white/5">
                         <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
@@ -77,7 +77,7 @@ export function AISection() {
                             <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center shrink-0">
                                 <i className="bx bx-user text-white"></i>
                             </div>
-                            <div className="bg-primary text-white p-4 rounded-2xl rounded-tr-sm max-w-[80%] md:max-w-[70%] shadow-md">
+                            <div className="bg-primary text-white p-4 rounded-2xl rounded-tr-sm max-w-[80%] md:max-w-[70%] ">
                                 <p className="text-sm md:text-base leading-relaxed">I'm struggling to understand how the pipeline registers work in the MIPS architecture simulator.</p>
                             </div>
                         </div>
@@ -87,7 +87,7 @@ export function AISection() {
                             <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
                                 <i className="bx bx-bot text-primary"></i>
                             </div>
-                            <div className="bg-white/10 border border-white/10 text-slate-200 p-4 rounded-2xl rounded-tl-sm max-w-[80%] md:max-w-[70%] shadow-md space-y-4">
+                            <div className="bg-white/10 border border-white/10 text-slate-200 p-4 rounded-2xl rounded-tl-sm max-w-[80%] md:max-w-[70%]  space-y-4">
                                 <p className="text-sm md:text-base leading-relaxed">Pipeline registers act as temporary storage between the stages (IF, ID, EX, MEM, WB) of the MIPS datapath. Let me show you a visual diagram of what happens during the IF/ID transition.</p>
                                 
                                 <div className="rounded-xl border border-white/10 bg-black/40 p-4 font-mono text-xs text-slate-300">

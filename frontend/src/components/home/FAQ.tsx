@@ -52,7 +52,7 @@ export function FAQ() {
                 </div>
 
                 <div className="space-y-4">
-                    <div className="border border-slate-200 dark:border-slate-800 rounded-[2rem] overflow-hidden shadow-2xl shadow-slate-200/50 dark:shadow-none bg-white dark:bg-slate-900/50 backdrop-blur-sm">
+                    <div className="border border-slate-200 dark:border-slate-800 rounded-[2rem] overflow-hidden  shadow-slate-200/50 dark:shadow-none bg-white dark:bg-slate-900/50 backdrop-blur-sm">
                         <div className="divide-y divide-slate-100 dark:divide-slate-800">
                             {faqs.map((faq, index) => (
                                 <div key={index} className="bg-white dark:bg-slate-900/40">
@@ -96,11 +96,11 @@ export function FAQ() {
                         <p className="text-slate-500 dark:text-slate-400 font-medium text-sm">
                             Not what you're looking for? Try our detailed{" "}
                             <a href="/faq" className="text-accent font-bold hover:underline inline-flex items-center gap-1 group">
-                                FAQ Section <i className="bx bx-right-arrow-alt group-hover:translate-x-1 transition-transform"  />
+                                FAQ Section <i className="bx bx-right-arrow-alt group-hover:translate-x-1 "  />
                             </a>
                             {" "}or contact{" "}
                             <a href="/support" className="text-accent font-bold hover:underline inline-flex items-center gap-1 group">
-                                Support <i className="bx bx-right-arrow-alt group-hover:translate-x-1 transition-transform"  />
+                                Support <i className="bx bx-right-arrow-alt group-hover:translate-x-1 "  />
                             </a>
                         </p>
                     </div>

@@ -18,7 +18,7 @@ export function TheorySection({ content }: TheorySectionProps) {
     };
 
     return (
-        <section className="bg-white rounded-xl border-2 border-black/5 shadow-sm overflow-hidden">
+        <section className="bg-white rounded-xl border-2 border-black/5  overflow-hidden">
             {/* Header / Toggle */}
             <div
                 className="flex items-center justify-between p-6 bg-slate-50 border-b border-black/5 cursor-pointer hover:bg-slate-100 transition-colors"
@@ -47,7 +47,7 @@ export function TheorySection({ content }: TheorySectionProps) {
                         <i className="bx bx-download"  />
                         <span className="text-xs font-bold uppercase tracking-wider">Download PDF</span>
                     </Button>
-                    <div className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+                    <div className={` duration-300 ${isOpen ? 'rotate-180' : ''}`}>
                         <i className="bx bx-chevron-down w-5 h-5 text-slate-400"  />
                     </div>
                 </div>

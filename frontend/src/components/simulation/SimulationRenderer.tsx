@@ -60,7 +60,7 @@ const DAASimulator = lazy(() => import("@/components/simulation/daa/DAASimulator
 
 const LoadingSpinner = () => (
     <div className="flex h-full w-full items-center justify-center p-8">
-        <i className="bx bx-loader2 h-8 w-8 animate-spin text-primary"  />
+        <i className="bx bx-loader2 h-8 w-8 animate-spin text-[#059669]"  />
         <span className="ml-2 text-sm text-muted-foreground">Loading Simulation...</span>
     </div>
 );

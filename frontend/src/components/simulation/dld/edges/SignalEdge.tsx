@@ -36,7 +36,7 @@ export default function SignalEdge({
 
     if (isHigh) {
         stroke = customColor || '#22c55e'; // Custom or Green-500
-        filter = `drop-shadow(0 0 3px ${customColor || 'rgba(34,197,94,0.6)'})`; // Glow
+        filter = `drop-shadow-none(0 0 3px ${customColor || 'rgba(34,197,94,0.6)'})`; // Glow
         strokeWidth = 3;
         opacity = 1;
     } else if (isLow) {

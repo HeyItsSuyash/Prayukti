@@ -47,7 +47,7 @@ export function ActivityLogView() {
     };
 
     return (
-        <Card className="rounded-[2.5rem] border-slate-100 shadow-xl shadow-slate-100 overflow-hidden">
+        <Card className="rounded-[2.5rem] border-slate-100  shadow-slate-100 overflow-hidden">
             <CardHeader className="bg-slate-900 text-white p-8">
                 <div className="flex items-center justify-between">
                     <div>
@@ -73,7 +73,7 @@ export function ActivityLogView() {
                     <div className="divide-y divide-slate-100">
                         {logs.map((log) => (
                             <div key={log._id} className="p-6 hover:bg-slate-50 transition-colors flex items-start gap-4">
-                                <div className="mt-1 bg-white p-2.5 rounded-xl shadow-sm border border-slate-100">
+                                <div className="mt-1 bg-white p-2.5 rounded-xl  border border-slate-100">
                                     {getActionIcon(log.action)}
                                 </div>
                                 <div className="flex-1 min-w-0">

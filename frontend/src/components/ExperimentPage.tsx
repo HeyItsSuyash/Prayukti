@@ -208,7 +208,7 @@ export default function ExperimentPage({ id }: { id: string }) {
     if (loading) {
         return (
             <div className="flex flex-col min-h-screen items-center justify-center bg-white">
-                <i className="bx bx-loader2 h-10 w-10 animate-spin text-blue-600 mb-4"  />
+                <i className="bx bx-loader2 h-10 w-10 animate-spin text-[#059669] mb-4"  />
                 <p className="text-sm font-black uppercase tracking-[0.2em] text-gray-400">Initializing Lab Environment...</p>
             </div>
         );
@@ -223,7 +223,7 @@ export default function ExperimentPage({ id }: { id: string }) {
                 <h1 className="text-3xl font-black uppercase tracking-tighter mb-2 text-slate-900">Experiment Not Found</h1>
                 <p className="text-slate-500 max-w-md mb-8">The experiment you are looking for might have been moved or deleted.</p>
                 <a href="/dashboard">
-                    <Button className="bg-blue-600 text-white hover:bg-blue-700 px-8 py-6 rounded-xl font-bold uppercase tracking-widest text-xs shadow-lg shadow-blue-200 transition-all">
+                    <Button className="bg-blue-600 text-white hover:bg-blue-700 px-8 py-6 rounded-xl font-bold uppercase tracking-widest text-xs  shadow-blue-200 ">
                         Back to Dashboard
                     </Button>
                 </a>
@@ -242,7 +242,7 @@ export default function ExperimentPage({ id }: { id: string }) {
                 <header className="h-12 bg-white border-b border-black/5 flex items-center justify-between px-4 z-50 flex-shrink-0">
                     <div className="flex items-center gap-4">
                         <a href="/dashboard" className="flex items-center gap-2 text-slate-400 hover:text-slate-900 transition-colors group">
-                            <div className="p-1.5 rounded-lg group-hover:bg-slate-100 transition-all">
+                            <div className="p-1.5 rounded-lg group-hover:bg-slate-100 ">
                                 <i className="bx bx-arrowleft h-3.5 w-3.5"  />
                             </div>
                             <span className="text-[10px] font-black uppercase tracking-widest">Dashboard</span>
@@ -262,7 +262,7 @@ export default function ExperimentPage({ id }: { id: string }) {
                 {/* Tabs: Simulation + Test */}
                 <Tabs defaultValue={defaultTab} key={defaultTab} className="flex-1 flex flex-col overflow-hidden">
                     <TabsList className="flex-shrink-0 h-10 bg-slate-50 border-b border-slate-200 rounded-none px-4 justify-start gap-1">
-                        <TabsTrigger value="simulation" className="text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg h-7 px-4">
+                        <TabsTrigger value="simulation" className="text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-white data-[state=active]: rounded-lg h-7 px-4">
                             <i className="bx bx-bookopen w-3 h-3 mr-1.5"  /> Simulation
                         </TabsTrigger>
                         <TabsTrigger value="test" className="text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-orange-600 data-[state=active]:text-white rounded-lg h-7 px-4">
@@ -296,7 +296,7 @@ export default function ExperimentPage({ id }: { id: string }) {
             <header className="h-12 bg-white border-b border-black/5 flex items-center justify-between px-4 z-50">
                 <div className="flex items-center gap-4">
                     <a href="/dashboard" className="flex items-center gap-2 text-slate-400 hover:text-slate-900 transition-colors group">
-                        <div className="p-1.5 rounded-lg group-hover:bg-slate-100 transition-all">
+                        <div className="p-1.5 rounded-lg group-hover:bg-slate-100 ">
                             <i className="bx bx-arrowleft h-3.5 w-3.5"  />
                         </div>
                         <span className="text-[10px] font-black uppercase tracking-widest">Dashboard</span>
@@ -319,7 +319,7 @@ export default function ExperimentPage({ id }: { id: string }) {
                         size="sm"
                         onClick={handleRun}
                         disabled={isRunning}
-                        className="bg-blue-600 hover:bg-blue-700 text-white h-8 px-4 font-black text-[10px] uppercase tracking-widest transition-all rounded-lg shadow-lg shadow-blue-500/20"
+                        className="bg-blue-600 hover:bg-blue-700 text-white h-8 px-4 font-black text-[10px] uppercase tracking-widest  rounded-lg  shadow-blue-500/20"
                     >
                         {isRunning ? <i className="bx bx-loader2 h-3 w-3 animate-spin mr-2"  /> : <i className="bx bx-play-circle h-3 w-3 mr-2"  />}
                         {isRunning ? 'Compiling' : 'Run Experiment'}
@@ -330,14 +330,14 @@ export default function ExperimentPage({ id }: { id: string }) {
             {/* Experiment Progress Bar */}
             <div className="h-1 w-full bg-slate-100 relative group cursor-help">
                 <div
-                    className="h-full bg-blue-600 transition-all duration-1000 ease-in-out shadow-[0_0_10px_rgba(37,99,235,0.5)]"
+                    className="h-full bg-blue-600  duration-1000 ease-in-out shadow-[0_0_10px_rgba(37,99,235,0.5)]"
                     style={{ width: isCompleted ? '100%' : '65%' }}
                 />
             </div>
 
             <main className="flex-1 flex overflow-hidden">
                 {/* CENTER PANEL: Professional Workbench (75%) */}
-                <div className="flex-1 flex flex-col bg-[#1e1e1e] relative z-10 shadow-2xl overflow-hidden border-x border-black/10">
+                <div className="flex-1 flex flex-col bg-[#1e1e1e] relative z-10  overflow-hidden border-x border-black/10">
                     <CodeCompiler
                         labId={experiment._id}
                         code={code}

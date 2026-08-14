@@ -98,7 +98,7 @@ export default function AboutPage() {
                                 {...fadeIn}
                                 className="bg-slate-50 dark:bg-primary/50 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 relative group"
                             >
-                                <div className="absolute -top-6 -left-6 w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-2xl flex items-center justify-center text-red-600 border-2 border-white dark:border-slate-800 shadow-xl">
+                                <div className="absolute -top-6 -left-6 w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-2xl flex items-center justify-center text-red-600 border-2 border-white dark:border-slate-800 ">
                                     <i className="bx bx-alerttriangle w-8 h-8"  />
                                 </div>
                                 <h3 className="text-2xl font-bold mb-8 text-primary dark:text-white">Traditional Lab Challenges</h3>
@@ -123,9 +123,9 @@ export default function AboutPage() {
                             <motion.div
                                 {...fadeIn}
                                 transition={{ duration: 0.6, delay: 0.2 }}
-                                className="bg-accent p-10 rounded-[2.5rem] border border-accent shadow-2xl shadow-accent/20 relative group text-white"
+                                className="bg-accent p-10 rounded-[2.5rem] border border-accent  shadow-accent/20 relative group text-white"
                             >
-                                <div className="absolute -top-6 -right-6 w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-accent border-2 border-accent shadow-xl">
+                                <div className="absolute -top-6 -right-6 w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-accent border-2 border-accent ">
                                     <i className="bx bx-sparkles w-8 h-8"  />
                                 </div>
                                 <h3 className="text-2xl font-bold mb-8">Prayukti Solution</h3>
@@ -152,7 +152,7 @@ export default function AboutPage() {
                 {/* Our Mission Section */}
                 <section className="py-32 section-shade-soft relative overflow-hidden">
                     <div className="container mx-auto px-4 relative z-10">
-                        <div className="max-w-5xl mx-auto bg-white dark:bg-slate-950 p-12 md:p-20 rounded-[3rem] border border-slate-200/50 dark:border-slate-800/50 shadow-xl text-center">
+                        <div className="max-w-5xl mx-auto bg-white dark:bg-slate-950 p-12 md:p-20 rounded-[3rem] border border-slate-200/50 dark:border-slate-800/50  text-center">
                             <motion.div
                                 {...fadeIn}
                                 className="inline-flex items-center justify-center w-20 h-20 bg-indigo-50 dark:bg-indigo-900/30 rounded-3xl mb-8"
@@ -223,7 +223,7 @@ export default function AboutPage() {
                                     </div>
                                 </div>
                                 <div className="absolute inset-0 p-12 flex flex-col justify-end">
-                                    <div className="glass p-8 rounded-3xl border border-white/20 shadow-2xl">
+                                    <div className="glass p-8 rounded-3xl border border-white/20 ">
                                         <p className="text-sm font-bold text-accent dark:text-indigo-400 uppercase tracking-widest mb-2">Expansion Insight</p>
                                         <p className="text-2xl font-black text-primary dark:text-white mb-4">India's First Truly Syllabus-Centric vLAB Ecosystem.</p>
                                         <div className="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
@@ -246,8 +246,8 @@ export default function AboutPage() {
                     <div className="container mx-auto px-4">
                         <div className="bg-primary dark:bg-white rounded-[3.5rem] p-12 md:p-24 text-center relative overflow-hidden group">
                             {/* Background Accents */}
-                            <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] -mr-48 -mt-48 transition-transform duration-1000 group-hover:scale-110"></div>
-                            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] -ml-48 -mb-48 transition-transform duration-1000 group-hover:scale-110"></div>
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] -mr-48 -mt-48  duration-1000 group-"></div>
+                            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] -ml-48 -mb-48  duration-1000 group-"></div>
 
                             <div className="relative z-10">
                                 <motion.h2
@@ -273,7 +273,7 @@ export default function AboutPage() {
                                         </Button>
                                     </a>
                                     <a href="/labs">
-                                        <Button size="lg" className="h-16 px-12 text-xl rounded-xl border-2 border-slate-700 dark:border-slate-200 text-white dark:text-primary hover:bg-white/10 dark:hover:bg-slate-100 transition-all w-full sm:w-auto">
+                                        <Button size="lg" className="h-16 px-12 text-xl rounded-xl border-2 border-slate-700 dark:border-slate-200 text-white dark:text-primary hover:bg-white/10 dark:hover:bg-slate-100  w-full sm:w-auto">
                                             Explore Labs
                                         </Button>
                                     </a>

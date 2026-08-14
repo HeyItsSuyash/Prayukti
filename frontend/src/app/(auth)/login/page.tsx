@@ -179,7 +179,7 @@ export default function LoginPage() {
                                                 value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
                                                 placeholder="you@mmmut.ac.in"
-                                                className="w-full h-12 pl-11 pr-4 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-[#059669] focus:ring-4 focus:ring-[#059669]/10 outline-none transition-all text-sm text-slate-700 placeholder:text-slate-400"
+                                                className="w-full h-12 pl-11 pr-4 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-[#059669] focus:ring-4 focus:ring-[#059669]/10 outline-none  text-sm text-slate-700 placeholder:text-slate-400"
                                                 required
                                                 suppressHydrationWarning
                                             />
@@ -198,7 +198,7 @@ export default function LoginPage() {
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                                 placeholder="Enter your password"
-                                                className="w-full h-12 pl-11 pr-12 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-[#059669] focus:ring-4 focus:ring-[#059669]/10 outline-none transition-all text-sm text-slate-700 placeholder:text-slate-400"
+                                                className="w-full h-12 pl-11 pr-12 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-[#059669] focus:ring-4 focus:ring-[#059669]/10 outline-none  text-sm text-slate-700 placeholder:text-slate-400"
                                                 required
                                                 suppressHydrationWarning
                                             />
@@ -222,7 +222,7 @@ export default function LoginPage() {
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="w-full h-12 bg-[#059669] hover:bg-[#047857] text-white font-semibold rounded-xl transition-all shadow-[0_4px_14px_0_rgba(5,150,105,0.39)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.23)] hover:-translate-y-0.5 mt-2 flex items-center justify-center disabled:opacity-70 disabled:hover:translate-y-0"
+                                        className="w-full h-12 bg-[#059669] hover:bg-[#047857] text-white font-semibold rounded-xl  shadow-[0_4px_14px_0_rgba(5,150,105,0.39)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.23)] .5 mt-2 flex items-center justify-center disabled:opacity-70 disabled:hover:translate-y-0"
                                         suppressHydrationWarning
                                     >
                                         {loading ? <i className="bx bx-loader-alt bx-spin text-xl" /> : "Sign In"}

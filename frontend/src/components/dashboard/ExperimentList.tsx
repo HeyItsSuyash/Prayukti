@@ -32,7 +32,7 @@ export function ExperimentList({ subject, experiments }: ExperimentListProps) {
     return (
         <div className="space-y-8">
             {/* Header Controls */}
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+            <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white p-4 rounded-xl  border border-slate-100">
                 <div className="relative w-full md:w-96">
                     <i className="bx bx-search absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400"  />
                     <input
@@ -83,7 +83,7 @@ export function ExperimentList({ subject, experiments }: ExperimentListProps) {
             {/* Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredExperiments.map((exp) => (
-                    <div key={exp.id} className="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden flex flex-col group">
+                    <div key={exp.id} className="bg-white rounded-xl border border-slate-200  hover:  duration-300  overflow-hidden flex flex-col group">
                         <div className="p-6 flex-1">
                             <div className="flex justify-between items-start mb-4">
                                 <span className={`px-2 py-1 rounded text-xs font-bold uppercase tracking-wider ${exp.difficulty === 'Easy' ? 'bg-green-100 text-green-700' :

@@ -78,11 +78,11 @@ export function FacultyTestimonials() {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -20 }}
                             transition={{ duration: 0.5 }}
-                            className="bg-white dark:bg-slate-900 rounded-[2rem] p-8 md:p-16 border border-slate-100 dark:border-slate-800 shadow-2xl flex flex-col md:flex-row gap-12 items-center"
+                            className="bg-white dark:bg-slate-900 rounded-[2rem] p-8 md:p-16 border border-slate-100 dark:border-slate-800  flex flex-col md:flex-row gap-12 items-center"
                         >
                             {/* Photo Placeholder */}
                             <div className="w-48 h-48 md:w-64 md:h-64 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center relative group shrink-0 overflow-hidden border-2 border-slate-100 dark:border-slate-800">
-                                <i className="bx bx-user w-20 h-20 text-slate-300 group-hover:scale-110 transition-transform duration-500"  />
+                                <i className="bx bx-user w-20 h-20 text-slate-300 group-  duration-500"  />
                                 <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
                                 <div className="absolute bottom-4 left-4 right-4 h-1 bg-accent/30 rounded-full overflow-hidden">
                                     <motion.div 
@@ -121,7 +121,7 @@ export function FacultyTestimonials() {
                             variant="outline"
                             size="icon"
                             onClick={prev}
-                            className="w-12 h-12 rounded-xl border-2 border-slate-200 dark:border-slate-800 hover:bg-accent hover:border-accent hover:text-white transition-all"
+                            className="w-12 h-12 rounded-xl border-2 border-slate-200 dark:border-slate-800 hover:bg-accent hover:border-accent hover:text-white "
                         >
                             <i className="bx bx-chevron-left"  />
                         </Button>
@@ -129,7 +129,7 @@ export function FacultyTestimonials() {
                             variant="outline"
                             size="icon"
                             onClick={next}
-                            className="w-12 h-12 rounded-xl border-2 border-slate-200 dark:border-slate-800 hover:bg-accent hover:border-accent hover:text-white transition-all"
+                            className="w-12 h-12 rounded-xl border-2 border-slate-200 dark:border-slate-800 hover:bg-accent hover:border-accent hover:text-white "
                         >
                             <i className="bx bx-chevronright"  />
                         </Button>
@@ -141,7 +141,7 @@ export function FacultyTestimonials() {
                             <button
                                 key={i}
                                 onClick={() => setIndex(i)}
-                                className={`h-1.5 transition-all duration-300 rounded-full ${
+                                className={`h-1.5  duration-300 rounded-full ${
                                     index === i ? "w-8 bg-accent" : "w-2 bg-slate-300 dark:bg-slate-700"
                                 }`}
                             />

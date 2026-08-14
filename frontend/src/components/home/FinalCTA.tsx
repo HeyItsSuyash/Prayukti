@@ -34,12 +34,12 @@ export function FinalCTA() {
                     
                     <div className="flex flex-wrap justify-center gap-6 pt-8">
                         <Link href="/register">
-                            <Button size="lg" className="h-16 px-10 rounded-full bg-primary text-white hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] font-bold text-lg transition-all shadow-[0_0_40px_-10px_rgba(75,110,245,0.6)]">
+                            <Button size="lg" className="h-16 px-10 rounded-full bg-primary text-white hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] font-bold text-lg  shadow-[0_0_40px_-10px_rgba(75,110,245,0.6)]">
                                 Start Free
                             </Button>
                         </Link>
                         <Link href="/demo">
-                            <Button size="lg" className="h-16 px-10 rounded-full bg-white/5 text-white hover:bg-white/10 border border-white/10 backdrop-blur-md hover:scale-[1.02] active:scale-[0.98] font-bold text-lg transition-all">
+                            <Button size="lg" className="h-16 px-10 rounded-full bg-white/5 text-white hover:bg-white/10 border border-white/10 backdrop-blur-md hover:scale-[1.02] active:scale-[0.98] font-bold text-lg ">
                                 Book Demo
                             </Button>
                         </Link>

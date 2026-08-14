@@ -160,7 +160,7 @@ export default function TeacherDashboard() {
             {!isClient && <div className="absolute inset-0 flex items-center justify-center bg-gray-50 z-50">Loading dashboard...</div>}
             {isClient && (
                 <>
-                    <header className="bg-white border-b sticky top-0 z-30 px-6 py-4 flex items-center justify-between shadow-sm">
+                    <header className="bg-white border-b sticky top-0 z-30 px-6 py-4 flex items-center justify-between ">
                         <div>
                             <h1 className="text-2xl font-bold tracking-tight text-gray-900">Teacher Analytics</h1>
                             <p className="text-sm text-muted-foreground">Monitor performance & engagement</p>
@@ -235,7 +235,7 @@ export default function TeacherDashboard() {
                         </div>
 
                         {/* Smart Classroom Quick Access Banner */}
-                        <div className="border border-indigo-100/50 rounded-2xl p-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex flex-col md:flex-row justify-between items-center gap-4 shadow-md">
+                        <div className="border border-indigo-100/50 rounded-2xl p-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex flex-col md:flex-row justify-between items-center gap-4 ">
                             <div>
                                 <h3 className="text-lg font-bold flex items-center gap-2">
                                     <i className="bx bx-sparkles w-5 h-5 text-indigo-200 animate-pulse"  />

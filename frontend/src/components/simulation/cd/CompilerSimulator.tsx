@@ -91,69 +91,69 @@ export default function CompilerSimulator({ labId }: { labId: string }) {
 
     return (
         <div className="flex flex-col h-full bg-[#fafbfe] p-6 space-y-6 overflow-y-auto">
-            <div className="flex justify-between items-center bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <div className="flex justify-between items-center bg-card p-6 rounded-none-none border border-border shadow-none-none">
                 <div>
-                    <h2 className="text-xl font-black text-slate-800 uppercase tracking-tight">Compiler Design</h2>
-                    <p className="text-sm text-slate-500 mt-1">Parser, Lexer & Code Generation Simulator</p>
+                    <h2 className="text-xl font-black text-muted-foreground uppercase tracking-tight">Compiler Design</h2>
+                    <p className="text-sm text-muted-foreground mt-1">Parser, Lexer & Code Generation Simulator</p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-violet-500 animate-pulse"></span>
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-widest bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">Lab Slot: {labId}</span>
+                    <span className="h-2.5 w-2.5 rounded-none-full bg-violet-500 animate-pulse"></span>
+                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest bg-card px-3 py-1.5 rounded-none-none border border-border">Lab Slot: {labId}</span>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                 <div className="xl:col-span-2 space-y-6">
                     {/* INPUT SECTION */}
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
-                        <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                            <i className="bx bx-filecode h-5 w-5 text-indigo-500"  /> Compiler Inputs
+                    <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-6">
+                        <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                            <i className="bx bx-filecode h-5 w-5 text-primary"  /> Compiler Inputs
                         </h3>
 
                         {isFirstFollow || isLeftRecursion ? (
                             <div className="space-y-2">
-                                <label className="text-[10px] uppercase font-bold text-slate-400 block">Context-Free Grammar rules</label>
+                                <label className="text-[10px] uppercase font-bold text-muted-foreground block">Context-Free Grammar rules</label>
                                 <textarea 
                                     rows={4} 
                                     value={grammar} 
                                     onChange={e => setGrammar(e.target.value)} 
-                                    className="w-full text-sm bg-slate-50 border border-slate-200 rounded-xl p-3 font-mono text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                    className="w-full text-sm bg-card border border-border rounded-none-none p-3 font-mono text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                 />
                             </div>
                         ) : isParseTree || isThreeAddress ? (
                             <div className="space-y-2">
-                                <label className="text-[10px] uppercase font-bold text-slate-400 block">Arithmetic Expression</label>
+                                <label className="text-[10px] uppercase font-bold text-muted-foreground block">Arithmetic Expression</label>
                                 <input 
                                     type="text" 
                                     value={expression} 
                                     onChange={e => setExpression(e.target.value)} 
-                                    className="w-full text-sm bg-slate-50 border border-slate-200 rounded-xl p-3 font-mono text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                    className="w-full text-sm bg-card border border-border rounded-none-none p-3 font-mono text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                 />
                             </div>
                         ) : isNfa ? (
                             <div className="space-y-2">
-                                <label className="text-[10px] uppercase font-bold text-slate-400 block">Regular Expression</label>
+                                <label className="text-[10px] uppercase font-bold text-muted-foreground block">Regular Expression</label>
                                 <input 
                                     type="text" 
                                     value={regex} 
                                     onChange={e => setRegex(e.target.value)} 
-                                    className="w-full text-sm bg-slate-50 border border-slate-200 rounded-xl p-3 font-mono text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                    className="w-full text-sm bg-card border border-border rounded-none-none p-3 font-mono text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                 />
                             </div>
                         ) : (
                             <div className="space-y-2">
-                                <label className="text-[10px] uppercase font-bold text-slate-400 block">Infix Expression</label>
+                                <label className="text-[10px] uppercase font-bold text-muted-foreground block">Infix Expression</label>
                                 <input 
                                     type="text" 
                                     value="A + B * C" 
                                     disabled 
-                                    className="w-full text-sm bg-slate-50 border border-slate-200 rounded-xl p-3 font-mono text-slate-400" 
+                                    className="w-full text-sm bg-card border border-border rounded-none-none p-3 font-mono text-muted-foreground" 
                                 />
                             </div>
                         )}
 
                         <div className="flex gap-2">
-                            <Button onClick={runCompilerSimulation} className="bg-blue-600 hover:bg-blue-700 text-white font-bold">
+                            <Button onClick={runCompilerSimulation} className="bg-primary hover:bg-primary text-white font-bold">
                                 <i className="bx bx-play mr-2 h-4 w-4"  /> Run Compilation Phase
                             </Button>
                         </div>
@@ -161,25 +161,25 @@ export default function CompilerSimulator({ labId }: { labId: string }) {
 
                     {/* INTERACTIVE VISUALIZER */}
                     {isParseTree && outputs.length > 0 && (
-                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
-                            <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <i className="bx bx-network h-5 w-5 text-indigo-500"  /> Syntax Derivation parse tree
+                        <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-4">
+                            <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                <i className="bx bx-network h-5 w-5 text-primary"  /> Syntax Derivation parse tree
                             </h3>
-                            <div className="border border-slate-200 rounded-2xl p-6 bg-slate-50 flex flex-col items-center justify-center min-h-[200px]">
+                            <div className="border border-border rounded-none-none p-6 bg-card flex flex-col items-center justify-center min-h-[200px]">
                                 <div className="flex flex-col items-center gap-6">
-                                    <div className="h-10 w-10 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-xs shadow">E</div>
+                                    <div className="h-10 w-10 rounded-none-full bg-card text-white flex items-center justify-center font-bold text-xs shadow-none">E</div>
                                     <div className="flex gap-12">
                                         <div className="flex flex-col items-center gap-4">
-                                            <div className="h-10 w-10 rounded-full bg-slate-700 text-white flex items-center justify-center font-bold text-xs shadow">E</div>
-                                            <div className="h-9 w-9 rounded-full bg-slate-600 text-white flex items-center justify-center font-bold text-[10px] shadow">id (a)</div>
+                                            <div className="h-10 w-10 rounded-none-full bg-card text-white flex items-center justify-center font-bold text-xs shadow-none">E</div>
+                                            <div className="h-9 w-9 rounded-none-full bg-card text-white flex items-center justify-center font-bold text-[10px] shadow-none">id (a)</div>
                                         </div>
-                                        <div className="h-10 w-10 rounded-full bg-slate-400 text-white flex items-center justify-center font-bold text-xs shadow">+</div>
+                                        <div className="h-10 w-10 rounded-none-full bg-card text-white flex items-center justify-center font-bold text-xs shadow-none">+</div>
                                         <div className="flex flex-col items-center gap-4">
-                                            <div className="h-10 w-10 rounded-full bg-slate-700 text-white flex items-center justify-center font-bold text-xs shadow">T</div>
+                                            <div className="h-10 w-10 rounded-none-full bg-card text-white flex items-center justify-center font-bold text-xs shadow-none">T</div>
                                             <div className="flex gap-8">
-                                                <div className="h-9 w-9 rounded-full bg-slate-600 text-white flex items-center justify-center font-bold text-[10px] shadow">id (b)</div>
-                                                <div className="h-9 w-9 rounded-full bg-slate-400 text-white flex items-center justify-center font-bold text-[10px] shadow">*</div>
-                                                <div className="h-9 w-9 rounded-full bg-slate-600 text-white flex items-center justify-center font-bold text-[10px] shadow">id (c)</div>
+                                                <div className="h-9 w-9 rounded-none-full bg-card text-white flex items-center justify-center font-bold text-[10px] shadow-none">id (b)</div>
+                                                <div className="h-9 w-9 rounded-none-full bg-card text-white flex items-center justify-center font-bold text-[10px] shadow-none">*</div>
+                                                <div className="h-9 w-9 rounded-none-full bg-card text-white flex items-center justify-center font-bold text-[10px] shadow-none">id (c)</div>
                                             </div>
                                         </div>
                                     </div>
@@ -190,43 +190,43 @@ export default function CompilerSimulator({ labId }: { labId: string }) {
 
                     {/* RE TO NFA VISUALIZER */}
                     {isNfa && outputs.length > 0 && (
-                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
-                            <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <i className="bx bx-network h-5 w-5 text-indigo-500"  /> Thompson NFA state machine graph
+                        <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-4">
+                            <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                <i className="bx bx-network h-5 w-5 text-primary"  /> Thompson NFA state machine graph
                             </h3>
-                            <div className="border border-slate-200 rounded-2xl p-6 bg-slate-50 flex items-center justify-around min-h-[160px] overflow-x-auto">
-                                <div className="h-12 w-12 rounded-full border-2 border-slate-600 bg-white flex items-center justify-center font-bold text-xs">q0</div>
-                                <div className="text-slate-400">── ε ──➔</div>
-                                <div className="h-12 w-12 rounded-full border-2 border-slate-600 bg-white flex items-center justify-center font-bold text-xs">q1</div>
-                                <div className="text-slate-400">── a ──➔</div>
-                                <div className="h-12 w-12 rounded-full border-2 border-slate-600 bg-white flex items-center justify-center font-bold text-xs">q2</div>
-                                <div className="text-slate-400">── b ──➔</div>
-                                <div className="h-12 w-12 rounded-full border-2 double border-double border-indigo-600 bg-indigo-50 flex items-center justify-center font-bold text-xs shadow-sm">q3</div>
+                            <div className="border border-border rounded-none-none p-6 bg-card flex items-center justify-around min-h-[160px] overflow-x-auto">
+                                <div className="h-12 w-12 rounded-none-full border-2 border-border bg-card flex items-center justify-center font-bold text-xs">q0</div>
+                                <div className="text-muted-foreground">── ε ──➔</div>
+                                <div className="h-12 w-12 rounded-none-full border-2 border-border bg-card flex items-center justify-center font-bold text-xs">q1</div>
+                                <div className="text-muted-foreground">── a ──➔</div>
+                                <div className="h-12 w-12 rounded-none-full border-2 border-border bg-card flex items-center justify-center font-bold text-xs">q2</div>
+                                <div className="text-muted-foreground">── b ──➔</div>
+                                <div className="h-12 w-12 rounded-none-full border-2 double border-double border-primary bg-indigo-50 flex items-center justify-center font-bold text-xs shadow-none-none">q3</div>
                             </div>
                         </div>
                     )}
 
                     {/* INFIX POSTFIX STEPS TABLE */}
                     {isInfixPostfix && postfixSteps.length > 0 && (
-                        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
-                            <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                                <TableIcon className="h-5 w-5 text-indigo-500" /> Parsing Stack Execution Trace
+                        <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none space-y-4">
+                            <h3 className="font-bold text-muted-foreground flex items-center gap-2">
+                                <TableIcon className="h-5 w-5 text-primary" /> Parsing Stack Execution Trace
                             </h3>
                             <div className="overflow-x-auto">
                                 <table className="w-full text-left text-sm">
                                     <thead>
-                                        <tr className="bg-slate-50 text-slate-400 uppercase text-[10px] font-black border-b border-slate-100">
+                                        <tr className="bg-card text-muted-foreground uppercase text-[10px] font-black border-b border-border">
                                             <th className="px-4 py-3">Token Scanned</th>
                                             <th className="px-4 py-3">Operator Stack</th>
-                                            <th className="px-4 py-3 text-indigo-600">Postfix String</th>
+                                            <th className="px-4 py-3 text-primary">Postfix String</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-slate-100">
                                         {postfixSteps.map((step, sIdx) => (
-                                            <tr key={sIdx} className="hover:bg-slate-50 transition-colors">
-                                                <td className="px-4 py-3 font-bold text-slate-700">{step.token}</td>
-                                                <td className="px-4 py-3 font-mono text-slate-600">{step.stack}</td>
-                                                <td className="px-4 py-3 font-mono font-bold text-indigo-600">{step.postfix}</td>
+                                            <tr key={sIdx} className="hover:bg-card transition-colors">
+                                                <td className="px-4 py-3 font-bold text-muted-foreground">{step.token}</td>
+                                                <td className="px-4 py-3 font-mono text-muted-foreground">{step.stack}</td>
+                                                <td className="px-4 py-3 font-mono font-bold text-primary">{step.postfix}</td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -237,15 +237,15 @@ export default function CompilerSimulator({ labId }: { labId: string }) {
                 </div>
 
                 {/* OUTPUT TERMINAL LOGS */}
-                <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col h-[500px]">
-                    <h3 className="font-bold text-slate-800 flex items-center gap-2 mb-4">
+                <div className="bg-card p-6 rounded-none-none border border-border shadow-none-none flex flex-col h-[500px]">
+                    <h3 className="font-bold text-muted-foreground flex items-center gap-2 mb-4">
                         <i className="bx bx-check-circle h-5 w-5 text-emerald-500"  /> Compiler Outputs
                     </h3>
-                    <div className="flex-1 bg-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
+                    <div className="flex-1 bg-card rounded-none-none p-4 font-mono text-xs text-emerald-400 overflow-y-auto space-y-2">
                         {outputs.length > 0 ? (
                             outputs.map((out, idx) => <div key={idx} className="animate-in fade-in-50">{out}</div>)
                         ) : (
-                            <div className="text-slate-500 italic">No compiler outputs compiled. Click 'Run' to generate results.</div>
+                            <div className="text-muted-foreground italic">No compiler outputs compiled. Click 'Run' to generate results.</div>
                         )}
                     </div>
                 </div>

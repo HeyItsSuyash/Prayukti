@@ -159,14 +159,14 @@ export default function ExplorePage() {
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
                                     placeholder="Search subject or experiment…"
-                                    className="relative w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-primary text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent transition-all font-medium shadow-sm"
+                                    className="relative w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-primary text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent  font-medium "
                                 />
                             </div>
 
                             {/* University */}
                             <div className="relative">
                                 <select
-                                    className="appearance-none pl-10 pr-10 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-primary text-primary dark:text-white font-semibold focus:outline-none focus:ring-2 focus:ring-accent/40 transition-all shadow-sm"
+                                    className="appearance-none pl-10 pr-10 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-primary text-primary dark:text-white font-semibold focus:outline-none focus:ring-2 focus:ring-accent/40  "
                                     defaultValue="MMMUT"
                                 >
                                     <option value="MMMUT">MMMUT, Gorakhpur</option>
@@ -183,7 +183,7 @@ export default function ExplorePage() {
                                 <select
                                     value={semester}
                                     onChange={(e) => setSemester(e.target.value)}
-                                    className="appearance-none pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-primary text-primary dark:text-white font-semibold focus:outline-none focus:ring-2 focus:ring-accent/40 transition-all shadow-sm"
+                                    className="appearance-none pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-primary text-primary dark:text-white font-semibold focus:outline-none focus:ring-2 focus:ring-accent/40  "
                                 >
                                     {SEMESTERS.map((s) => <option key={s}>{s}</option>)}
                                 </select>
@@ -195,7 +195,7 @@ export default function ExplorePage() {
                                 <select
                                     value={difficulty}
                                     onChange={(e) => setDifficulty(e.target.value)}
-                                    className="appearance-none pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-primary text-primary dark:text-white font-semibold focus:outline-none focus:ring-2 focus:ring-accent/40 transition-all shadow-sm"
+                                    className="appearance-none pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-primary text-primary dark:text-white font-semibold focus:outline-none focus:ring-2 focus:ring-accent/40  "
                                 >
                                     {DIFFICULTIES.map((d) => <option key={d}>{d}</option>)}
                                 </select>
@@ -203,7 +203,7 @@ export default function ExplorePage() {
                             </div>
 
                             {/* Filter Icon (visual) */}
-                            <div className="hidden md:flex items-center justify-center w-13 h-13 bg-accent text-white rounded-xl px-4 py-3.5 shadow-md shadow-accent/20">
+                            <div className="hidden md:flex items-center justify-center w-13 h-13 bg-accent text-white rounded-xl px-4 py-3.5  shadow-accent/20">
                                 <i className="bx bx-filter w-5 h-5"  />
                             </div>
                         </div>
@@ -221,13 +221,13 @@ export default function ExplorePage() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {BRANCHES.map((branch, i) => (
                                 <motion.div key={branch.code} {...fadeUp(i * 0.08)}>
-                                    <div className={`group relative bg-white dark:bg-primary border border-slate-100 dark:border-slate-800 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-accent/10 ${branch.comingSoon ? "opacity-70" : "cursor-pointer"}`}>
+                                    <div className={`group relative bg-white dark:bg-primary border border-slate-100 dark:border-slate-800 rounded-3xl p-8  duration-300 .5 hover: /10 ${branch.comingSoon ? "opacity-70" : "cursor-pointer"}`}>
                                         {branch.comingSoon && (
                                             <span className="absolute top-5 right-5 text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-full border border-slate-200 dark:border-slate-700">
                                                 Coming Soon
                                             </span>
                                         )}
-                                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${branch.color} flex items-center justify-center text-white text-2xl mb-6 shadow-lg`}>
+                                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${branch.color} flex items-center justify-center text-white text-2xl mb-6 `}>
                                             {branch.icon}
                                         </div>
                                         <h3 className="font-bold text-primary dark:text-white text-lg mb-3 leading-snug group-hover:text-accent dark:group-hover:text-blue-400 transition-colors">
@@ -273,7 +273,7 @@ export default function ExplorePage() {
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                                 {filteredSubjects.map((subject, i) => (
                                     <motion.div key={subject.code} {...fadeUp(i * 0.1)}>
-                                        <div className={`group relative bg-white dark:bg-primary border-2 ${subjectColorMap[subject.color]} dark:border-slate-800 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col h-full shadow-sm`}>
+                                        <div className={`group relative bg-white dark:bg-primary border-2 ${subjectColorMap[subject.color]} dark:border-slate-800 rounded-3xl p-8  duration-300 .5 hover: -500/10 flex flex-col h-full `}>
                                             <div className={`w-14 h-14 ${subjectIconBg[subject.color]} rounded-2xl flex items-center justify-center text-accent dark:text-white mb-5`}>
                                                 {subject.icon}
                                             </div>
@@ -321,7 +321,7 @@ export default function ExplorePage() {
                             {TRENDING.map((item, i) => (
                                 <motion.div key={item.title} {...fadeUp(i * 0.07)}>
                                     <a href={item.href}>
-                                        <div className="group bg-white dark:bg-primary border border-slate-100 dark:border-slate-800 rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-purple-500/10 hover:border-purple-200 dark:hover:border-purple-900 cursor-pointer h-full flex flex-col shadow-sm">
+                                        <div className="group bg-white dark:bg-primary border border-slate-100 dark:border-slate-800 rounded-3xl p-6  duration-300 .5 hover: -500/10 hover:border-purple-200 dark:hover:border-purple-900 cursor-pointer h-full flex flex-col ">
                                             <div className="flex items-start justify-between mb-4">
                                                 <div className="flex items-center gap-3">
                                                     <div className="text-accent dark:text-white">{item.icon}</div>
@@ -361,8 +361,8 @@ export default function ExplorePage() {
                 <section className="py-24 bg-white dark:bg-slate-950">
                     <div className="container mx-auto px-4">
                         <div className="bg-primary dark:bg-slate-800 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden group">
-                            <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] -mr-48 -mt-48 group-hover:scale-110 transition-transform duration-1000" />
-                            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] -ml-48 -mb-48 group-hover:scale-110 transition-transform duration-1000" />
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] -mr-48 -mt-48 group-  duration-1000" />
+                            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] -ml-48 -mb-48 group-  duration-1000" />
                             <div className="relative z-10">
                                 <motion.h2 {...fadeUp()} className="text-3xl md:text-5xl font-black text-white tracking-tight mb-6">
                                     Start Practicing <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Today</span>
@@ -372,12 +372,12 @@ export default function ExplorePage() {
                                 </motion.p>
                                 <motion.div {...fadeUp(0.2)} className="flex flex-col sm:flex-row gap-4 justify-center">
                                     <a href="/login">
-                                        <Button size="lg" className="h-14 px-10 text-lg rounded-full bg-accent hover:bg-accent/90 text-white shadow-xl shadow-accent/30 border-0 w-full sm:w-auto">
+                                        <Button size="lg" className="h-14 px-10 text-lg rounded-full bg-accent hover:bg-accent/90 text-white  shadow-accent/30 border-0 w-full sm:w-auto">
                                             Start Practicing <i className="bx bx-right-arrow-alt ml-2 w-5 h-5"  />
                                         </Button>
                                     </a>
                                     <a href="/dashboard/dld">
-                                        <Button size="lg" className="h-14 px-10 text-lg rounded-full border-2 border-slate-700 text-white hover:bg-white/10 transition-all w-full sm:w-auto">
+                                        <Button size="lg" className="h-14 px-10 text-lg rounded-full border-2 border-slate-700 text-white hover:bg-white/10  w-full sm:w-auto">
                                             Browse All Labs
                                         </Button>
                                     </a>

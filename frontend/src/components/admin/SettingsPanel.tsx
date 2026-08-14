@@ -63,7 +63,7 @@ export function SettingsPanel() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Security & Access */}
-                <Card className="rounded-[2.5rem] border-none shadow-xl shadow-slate-100 bg-white overflow-hidden">
+                <Card className="rounded-[2.5rem] border-none  shadow-slate-100 bg-white overflow-hidden">
                     <CardHeader className="bg-slate-900 text-white p-8">
                         <div className="flex items-center gap-3">
                             <i className="bx bx-shield text-indigo-400"  />
@@ -98,7 +98,7 @@ export function SettingsPanel() {
                 </Card>
 
                 {/* Email (SMTP) */}
-                <Card className="rounded-[2.5rem] border-none shadow-xl shadow-slate-100 bg-white overflow-hidden">
+                <Card className="rounded-[2.5rem] border-none  shadow-slate-100 bg-white overflow-hidden">
                     <CardHeader className="bg-indigo-600 text-white p-8">
                         <div className="flex items-center gap-3">
                             <i className="bx bx-envelope text-white"  />
@@ -124,7 +124,7 @@ export function SettingsPanel() {
                 </Card>
 
                 {/* Lab parameters */}
-                <Card className="rounded-[2.5rem] border-none shadow-xl shadow-slate-100 bg-white overflow-hidden">
+                <Card className="rounded-[2.5rem] border-none  shadow-slate-100 bg-white overflow-hidden">
                     <CardHeader className="bg-slate-50 p-8 border-b border-slate-100">
                         <div className="flex items-center gap-3">
                             <i className="bx bx-clock text-slate-400"  />
@@ -146,7 +146,7 @@ export function SettingsPanel() {
                 </Card>
 
                 {/* Maintenance */}
-                <Card className="rounded-[2.5rem] border-none shadow-xl shadow-slate-100 bg-white overflow-hidden flex flex-col justify-between">
+                <Card className="rounded-[2.5rem] border-none  shadow-slate-100 bg-white overflow-hidden flex flex-col justify-between">
                     <div className="p-8 border-b border-slate-50">
                          <div className="flex items-center gap-3 mb-4">
                             <i className="bx bx-database text-amber-500"  />

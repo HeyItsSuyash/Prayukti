@@ -79,7 +79,7 @@ export default function TeacherExamsPage() {
                 </div>
 
                 {/* Exams List Card */}
-                <Card className="border-2 rounded-[2.5rem] overflow-hidden shadow-sm">
+                <Card className="border-2 rounded-[2.5rem] overflow-hidden ">
                     <CardHeader className="p-8 border-b">
                         <CardTitle className="uppercase font-black tracking-tight text-xl">Active & Scheduled Examinations</CardTitle>
                         <CardDescription>View status, duration, and student submission statistics.</CardDescription>

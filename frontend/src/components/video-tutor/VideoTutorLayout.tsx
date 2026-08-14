@@ -38,7 +38,7 @@ export default function VideoTutorLayout({ children }: VideoTutorLayoutProps) {
     if (!user) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
-                <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-12 h-12 border-4 border-t-[#059669] border-t-transparent rounded-full animate-spin"></div>
             </div>
         );
     }
@@ -66,9 +66,9 @@ export default function VideoTutorLayout({ children }: VideoTutorLayoutProps) {
                             const Icon = item.icon;
                             return (
                                 <a key={item.name} href={item.path} className="block">
-                                    <span className={`flex items-center gap-4 px-4 py-3 rounded-2xl font-bold text-sm transition-all duration-300 ${
+                                    <span className={`flex items-center gap-4 px-4 py-3 rounded-2xl font-bold text-sm  duration-300 ${
                                         active 
-                                            ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950 shadow-md scale-102" 
+                                            ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950  scale-102" 
                                             : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/50"
                                     }`}>
                                         <Icon size={18} className={active ? "scale-110 text-indigo-400 dark:text-indigo-600" : ""} />
@@ -94,7 +94,7 @@ export default function VideoTutorLayout({ children }: VideoTutorLayoutProps) {
                 <div className="md:hidden fixed bottom-6 right-6 z-40">
                     <Button 
                         size="icon" 
-                        className="w-14 h-14 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-950 shadow-2xl hover:scale-105 active:scale-95 transition-transform"
+                        className="w-14 h-14 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-950    "
                         onClick={() => setIsMobileOpen(true)}
                     >
                         <i className="bx bx-menu"  />
@@ -146,7 +146,7 @@ export default function VideoTutorLayout({ children }: VideoTutorLayoutProps) {
                                                     onClick={() => setIsMobileOpen(false)}
                                                     className="block"
                                                 >
-                                                    <span className={`flex items-center gap-4 px-4 py-3 rounded-2xl font-bold text-sm transition-all ${
+                                                    <span className={`flex items-center gap-4 px-4 py-3 rounded-2xl font-bold text-sm  ${
                                                         active 
                                                             ? "bg-slate-900 text-white dark:bg-white dark:text-slate-950" 
                                                             : "text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
@@ -178,7 +178,7 @@ export default function VideoTutorLayout({ children }: VideoTutorLayoutProps) {
                 <main className="flex-1 md:ml-72 p-6 md:p-10 max-w-7xl mx-auto w-full overflow-x-hidden">
                     <div className="mb-6">
                         <a href="/classroom" className="text-xs font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-2 group mb-4 hover:underline">
-                            <i className="bx bx-arrowleft group-hover:-translate-x-1 transition-transform"  />
+                            <i className="bx bx-arrowleft group-hover:-translate-x-1 "  />
                             Back to Smart Classroom
                         </a>
                     </div>
