@@ -13,6 +13,11 @@ type Message = {
 
 export function AssistantBot() {
     const pathname = usePathname();
+    
+    if (pathname === "/forgot-password") {
+        return null;
+    }
+
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         { role: "assistant", content: "Welcome to Prayukti vLAB! I'm your AI assistant. How can I help you today?" }
