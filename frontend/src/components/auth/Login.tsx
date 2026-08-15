@@ -84,6 +84,8 @@ export default function LoginPage() {
             if (typeof window !== 'undefined') {
                 localStorage.setItem("studentName", user.fullName);
                 localStorage.setItem("studentRoll", user.rollNo || "");
+                localStorage.setItem("vlab_user", JSON.stringify(user));
+                localStorage.setItem("vlab_access_token", token);
             }
 
             // Sync token with Next.js middleware
@@ -135,6 +137,7 @@ export default function LoginPage() {
                     localStorage.setItem('studentName', data.user?.fullName || '');
                     localStorage.setItem('studentRoll', data.user?.rollNo || '');
                 }
+                localStorage.setItem('vlab_user', JSON.stringify(data.user));
                 
                 // Sync token with Next.js middleware
                 await fetch('/api/auth/set-cookie', {

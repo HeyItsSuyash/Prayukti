@@ -67,8 +67,8 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
     ];
 
     const headerClass = !isLander 
-        ? "fixed top-0 left-0 right-0 z-50 bg-[#021D24]/95 backdrop-blur-md  py-4 border-b border-white/5  duration-300"
-        : cn("fixed top-0 left-0 right-0 z-50  duration-300", isScrolled ? "bg-[#021D24]/95 backdrop-blur-md  py-4 border-b border-white/5" : "bg-transparent py-6");
+        ? "fixed top-0 left-0 right-0 z-50 bg-[#021D24]/95 dark:bg-background/95 backdrop-blur-md  py-4 border-b border-white/5 dark:border-white/10  duration-300"
+        : cn("fixed top-0 left-0 right-0 z-50  duration-300", isScrolled ? "bg-[#021D24]/95 dark:bg-background/95 backdrop-blur-md  py-4 border-b border-white/5 dark:border-white/10" : "bg-transparent py-6");
 
     const textClass = "text-white/80 hover:text-white";
     const activeTextClass = "text-[#14D98F] border-[#14D98F]";
@@ -124,9 +124,9 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
                             </div>
                             
                             {isProfileMenuOpen && (
-                                <div className="absolute right-0 mt-3 w-56 bg-[#021D24] border border-white/10 rounded-2xl shadow-[0_10px_40px_rgb(0,0,0,0.2)] py-2 top-full z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                                <div className="absolute right-0 mt-3 w-56 bg-[#021D24] dark:bg-background border border-white/10 dark:border-white/10 rounded-2xl shadow-[0_10px_40px_rgb(0,0,0,0.2)] py-2 top-full z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                                     {/* Top Arrow */}
-                                    <div className="absolute top-0 right-4 -mt-2 w-4 h-4 bg-[#021D24] border-t border-l border-white/10 rotate-45 rounded-tl-sm z-[-1]"></div>
+                                    <div className="absolute top-0 right-4 -mt-2 w-4 h-4 bg-[#021D24] dark:bg-background border-t border-l border-white/10 dark:border-white/10 rotate-45 rounded-tl-sm z-[-1]"></div>
                                     
                                     <Link href="/profile" onClick={() => setIsProfileMenuOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-white/80 hover:bg-white/5 hover:text-white transition-colors"><i className="bx bx-user mr-2 text-[#059669]"></i>Profile</Link>
                                     <Link href="/leaderboards" onClick={() => setIsProfileMenuOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-white/80 hover:bg-white/5 hover:text-white transition-colors"><i className="bx bx-trophy mr-2 text-[#059669]"></i>Leaderboards</Link>

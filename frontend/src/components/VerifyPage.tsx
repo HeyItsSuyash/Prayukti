@@ -49,6 +49,16 @@ export default function VerifyPage() {
             if (res.data.user) {
                 localStorage.setItem("studentName", res.data.user.fullName || "");
                 localStorage.setItem("studentRoll", res.data.user.rollNo || "");
+                localStorage.setItem("vlab_user", JSON.stringify(res.data.user));
+            }
+            if (res.data.token) {
+                localStorage.setItem("vlab_access_token", res.data.token);
+                // Sync token with Next.js middleware so it is set as a first-party cookie
+                await fetch('/api/auth/set-cookie', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: res.data.token })
+                });
             }
 
             localStorage.removeItem("verifyEmail");

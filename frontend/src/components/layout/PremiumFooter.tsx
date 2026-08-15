@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 export function PremiumFooter() {
     return (
-        <footer className="bg-[#021D24] text-white pt-20 pb-8 relative overflow-hidden">
+        <footer className="bg-[#021D24] dark:bg-background text-white pt-20 pb-8 relative overflow-hidden">
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8 mb-16">
                     {/* Brand Column */}

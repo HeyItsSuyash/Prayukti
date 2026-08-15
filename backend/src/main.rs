@@ -113,13 +113,20 @@ async fn main() {
     let rate_limit_state = std::sync::Arc::new(tokio::sync::Mutex::new(std::collections::HashMap::new()));
     let sensitive_rate_limit_state = rate_limit_state.clone();
 
-    // Configure CORS
+    let frontend_url = config.frontend_url.clone();
+    // Configure CORS securely
     let cors = CorsLayer::new()
-        .allow_origin(vec![
-            config.frontend_url.parse::<axum::http::HeaderValue>().unwrap_or_else(|_| "https://mmmut.prayukti.org".parse().unwrap()),
-            "http://localhost:3000".parse::<axum::http::HeaderValue>().unwrap(),
-            "http://localhost:3001".parse::<axum::http::HeaderValue>().unwrap(),
-        ])
+        .allow_origin(tower_http::cors::AllowOrigin::predicate(move |origin: &axum::http::HeaderValue, _| {
+            if let Ok(origin_str) = origin.to_str() {
+                origin_str == frontend_url ||
+                origin_str == "https://mmmut.prayukti.org" ||
+                origin_str.starts_with("http://localhost:") ||
+                origin_str.ends_with(".vercel.app") ||
+                origin_str.ends_with(".onrender.com")
+            } else {
+                false
+            }
+        }))
         .allow_credentials(true)
         .allow_headers([
             axum::http::header::AUTHORIZATION,

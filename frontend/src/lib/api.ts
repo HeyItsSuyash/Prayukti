@@ -10,6 +10,20 @@ const api = axios.create({
     }
 });
 
+// Request interceptor to attach Authorization header
+api.interceptors.request.use(
+    (config) => {
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem('vlab_access_token');
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+
 // Response interceptor for handling 401s globally
 api.interceptors.response.use(
     (response) => response,

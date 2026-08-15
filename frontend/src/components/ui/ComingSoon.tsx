@@ -10,12 +10,17 @@ interface ComingSoonProps {
 export function ComingSoon({ title }: ComingSoonProps) {
     return (
         <section className="min-h-[80vh] flex items-center justify-center bg-background py-20 px-6">
-            <div className="max-w-3xl mx-auto text-center flex flex-col items-center p-12 bg-gradient-to-br from-primary/10 via-accent/10 to-primary/5 rounded-3xl border border-primary/20">
-                <span className="bg-primary/10 text-primary border border-primary/20 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-sm mb-6">
-                    Coming Soon
-                </span>
+            <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
+                <div className="w-80 h-80 md:w-96 md:h-96 mb-4 relative drop- animate-in zoom-in duration-700">
+                    <img 
+                        src="/prayukti 2.0/illustrations/laptop_guy.png" 
+                        alt="Coming Soon" 
+                        className="w-full h-full object-contain"
+                    />
+                </div>
+                
                 <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
-                    <span className="text-primary">{title}</span> is in development
+                    <span className="text-[#059669]">{title}</span> coming soon
                 </h1>
                 
                 <p className="text-lg md:text-xl text-slate-500 max-w-xl mx-auto mb-10 leading-relaxed font-medium">

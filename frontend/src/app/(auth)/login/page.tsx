@@ -48,11 +48,18 @@ export default function LoginPage() {
             const { token, user } = response.data;
 
             if (typeof window !== 'undefined') {
-                if (user.role === 'student') {
-                    localStorage.setItem("studentName", user.fullName || "");
-                    localStorage.setItem("studentRoll", user.rollNo || "");
-                }
+                localStorage.setItem("studentName", user.fullName || "");
+                localStorage.setItem("studentRoll", user.rollNo || "");
+                localStorage.setItem("vlab_user", JSON.stringify(user));
+                localStorage.setItem("vlab_access_token", token);
             }
+
+            // Sync token with Next.js middleware so it is set as a first-party cookie
+            await fetch('/api/auth/set-cookie', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token })
+            });
 
             showToast('success', "You're in! Setting up the dashboard...");
             setTimeout(() => {
