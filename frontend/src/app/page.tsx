@@ -25,7 +25,7 @@ export default function Home() {
             <TrustStrip />
             <MissionSection />
             <LabsGrid />
-            <TestimonialsSection />
+            {/* <TestimonialsSection /> - Hidden for now, to be implemented later */}
             <FAQSection />
 
             <PremiumFooter />

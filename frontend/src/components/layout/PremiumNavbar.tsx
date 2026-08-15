@@ -15,6 +15,7 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
     const [isScrolled, setIsScrolled] = useState(false);
     const [user, setUser] = useState<any>(null);
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -79,20 +80,30 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
     return (
         <header className={headerClass}>
             <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
-                {/* Logo */}
-                <Link href={isDashboard ? "/dashboard" : "/"} className="flex items-center gap-2 group">
-                    <div className="w-10 h-10 flex items-center justify-center">
-                        <img
-                            src="/prayukti 2.0/logo/logo_blue.png"
-                            alt="Prayukti Logo"
-                            className={logoClass}
-                        />
-                    </div>
-                    <div className="flex items-center">
-                        <span className={cn("text-xl font-bold leading-none tracking-tight", logoTextClass)}>Prayukti</span>
-                        <span className={cn("text-xl font-light leading-none ml-1", logoSubTextClass)}>vLAB</span>
-                    </div>
-                </Link>
+                <div className="flex items-center gap-3">
+                    {/* Mobile Menu Toggle */}
+                    <button 
+                        className="lg:hidden flex items-center justify-center w-10 h-10 border border-white/30 rounded-lg text-white hover:bg-white/10 transition-colors focus:outline-none"
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    >
+                        <i className={`bx ${isMobileMenuOpen ? 'bx-x' : 'bx-menu'} text-2xl`}></i>
+                    </button>
+                    
+                    {/* Logo */}
+                    <Link href={isDashboard ? "/dashboard" : "/"} className="flex items-center gap-2 group">
+                        <div className="w-10 h-10 flex items-center justify-center">
+                            <img
+                                src="/prayukti 2.0/logo/logo_blue.png"
+                                alt="Prayukti Logo"
+                                className={logoClass}
+                            />
+                        </div>
+                        <div className="flex items-center">
+                            <span className={cn("text-xl font-bold leading-none tracking-tight", logoTextClass)}>Prayukti</span>
+                            <span className={cn("text-xl font-light leading-none ml-1", logoSubTextClass)}>vLAB</span>
+                        </div>
+                    </Link>
+                </div>
 
                 {/* Links */}
                 <nav className="hidden lg:flex items-center gap-8">
@@ -144,7 +155,7 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
                                 </Button>
                             </Link>
                             <Link href="/register">
-                                <Button className="rounded-xl bg-[#059669] hover:bg-[#047857] text-white font-semibold h-10 px-6 shadow-[0_4px_14px_0_rgba(5,150,105,0.39)]">
+                                <Button className="hidden sm:flex rounded-xl bg-[#059669] hover:bg-[#047857] text-white font-semibold h-10 px-6 shadow-[0_4px_14px_0_rgba(5,150,105,0.39)]">
                                     Get Started
                                 </Button>
                             </Link>
@@ -152,6 +163,39 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
                     )}
                 </div>
             </div>
+
+            {/* Mobile Menu Overlay */}
+            {isMobileMenuOpen && (
+                <div className="lg:hidden absolute top-full left-0 right-0 bg-[#021D24] border-b border-white/10 shadow-2xl py-4 flex flex-col items-center gap-4 animate-in slide-in-from-top-2 fade-in">
+                    {navLinks.map((link, idx) => (
+                        <Link 
+                            key={idx} 
+                            href={link.href}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className={cn(
+                                "text-base font-medium py-2 px-4 w-full text-center transition-colors hover:bg-white/5",
+                                pathname === link.href ? activeTextClass : textClass
+                            )}
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
+                    {!user && (
+                        <div className="flex flex-col gap-3 mt-2 w-full px-6">
+                            <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                                <Button variant="outline" className="w-full rounded-xl h-12 border-white/30 text-white hover:bg-white/10 bg-transparent">
+                                    Log In
+                                </Button>
+                            </Link>
+                            <Link href="/register" onClick={() => setIsMobileMenuOpen(false)}>
+                                <Button className="w-full rounded-xl bg-[#059669] hover:bg-[#047857] text-white font-semibold h-12 shadow-[0_4px_14px_0_rgba(5,150,105,0.39)]">
+                                    Get Started
+                                </Button>
+                            </Link>
+                        </div>
+                    )}
+                </div>
+            )}
         </header>
     );
 }

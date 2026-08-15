@@ -17,7 +17,7 @@ export const DldSidebar = ({ onAddNode }: DldSidebarProps) => {
     };
 
     return (
-        <div className="absolute left-4 top-4 bottom-4 w-60 bg-card/90 backdrop-blur-md border border-border shadow-none-none rounded-none-none overflow-hidden flex flex-col z-50  select-none">
+        <div className="absolute left-4 top-4 bottom-4 w-60 bg-card/90 backdrop-blur-md border border-border shadow-none-none rounded-none-none overflow-hidden flex flex-col z-50 transition-all select-none">
             <div className="p-4 border-b border-border bg-card/50">
                 <h2 className="font-bold text-muted-foreground text-sm uppercase tracking-wider">Components</h2>
                 <p className="text-[10px] text-muted-foreground mt-1">Drag and drop to canvas</p>
@@ -132,7 +132,7 @@ const SidebarItem = ({ label, onClick, icon, iconNode, disabled, type, data }: {
             onClick={onClick}
             disabled={disabled}
             className={`
-        w-full flex flex-col items-center justify-center p-3 rounded-none-none border border-border bg-card hover:border-primary -none  group
+        w-full flex flex-col items-center justify-center p-3 rounded-none-none border border-border bg-card hover:border-primary hover:shadow-none-none transition-all group
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-grab active:cursor-grabbing'}
       `}
         >

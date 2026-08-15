@@ -42,7 +42,7 @@ export const SvgGateNode = memo(({ id, data, selected, path, width = 60, height 
                 width={width}
                 height={height}
                 viewBox={`0 0 ${width} ${height}`}
-                className={`overflow-visible  duration-300 ${selected ? 'drop-shadow-none-[0_0_8px_rgba(255,165,0,0.8)]' : 'drop-shadow-none-none'}`}
+                className={`overflow-visible transition-all duration-300 ${selected ? 'drop-shadow-none-[0_0_8px_rgba(255,165,0,0.8)]' : 'drop-shadow-none-none'}`}
             >
                 <path
                     d={path}

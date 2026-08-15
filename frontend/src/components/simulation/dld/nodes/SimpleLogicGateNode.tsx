@@ -46,7 +46,7 @@ export const SimpleLogicGateNode = memo(({ id, data, selected, symbol, svgPath, 
                     width={width}
                     height={height}
                     viewBox={`0 0 ${width} ${height}`}
-                    className={`overflow-visible pointer-events-none drop-shadow-none-none  ${selected ? 'drop-shadow-none-[0_0_5px_orange]' : ''}`}
+                    className={`overflow-visible pointer-events-none drop-shadow-none-none transition-all ${selected ? 'drop-shadow-none-[0_0_5px_orange]' : ''}`}
                 >
                     <path
                         d={svgPath}

@@ -6,14 +6,14 @@ export default function OutputNode({ data }: { data: { label?: string; value?: n
     return (
         <div className="flex flex-col items-center group relative">
             {/* Label */}
-            <div className="mb-1 text-[10px] font-bold text-muted-foreground uppercase tracking-wider bg-card/80 px-1 rounded-none backdrop-blur-sm border border-transparent group-hover:border-border ">
+            <div className="mb-1 text-[10px] font-bold text-muted-foreground uppercase tracking-wider bg-card/80 px-1 rounded-none backdrop-blur-sm border border-transparent group-hover:border-border transition-all">
                 {data.label || 'LED'}
             </div>
 
             <div className="relative">
                 {/* LED Body */}
                 <div className={`
-                    relative w-12 h-12 rounded-none-full border-4  duration-300 flex items-center justify-center shadow-none-none
+                    relative w-12 h-12 rounded-none-full border-4 transition-all duration-300 flex items-center justify-center shadow-none-none
                     ${isOn ? 'bg-red-500 border-red-600 shadow-none-[0_0_30px_rgba(239,68,68,0.6)] animate-pulse-slow' : 'bg-red-900 border-border opacity-80'}
                 `}>
                     {/* Reflection/Shine */}

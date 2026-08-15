@@ -158,9 +158,20 @@ export default function ForgotPasswordPage() {
                 </div>
             </div>
 
-            {/* Right Column - Reset Form */}
-            <div className="w-full lg:w-1/2 bg-[#FAFAFA] flex flex-col items-center justify-center relative p-8 sm:p-12">
-                <div className="w-full max-w-[480px] bg-white rounded-[24px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 p-10 sm:p-12 relative">
+            {/* Right Column - Form */}
+            <div className="w-full lg:w-1/2 bg-transparent lg:bg-[#FAFAFA] flex flex-col items-center justify-center relative p-8 sm:p-12 min-h-screen lg:min-h-0">
+                {/* Mobile Background Image */}
+                <div className="absolute inset-0 z-0 lg:hidden">
+                    <img 
+                        src="/prayukti 2.0/illustrations/login_page.png" 
+                        alt="Background" 
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
+                </div>
+
+                {/* Card Container */}
+                <div className="w-full max-w-[480px] bg-white rounded-none lg:rounded-[24px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 p-10 sm:p-12 relative z-10">
                     
                     <Link href="/login" className="absolute top-8 left-8 w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-50 text-slate-400 hover:text-slate-600 transition-colors">
                         <i className="bx bx-left-arrow-alt text-2xl"></i>

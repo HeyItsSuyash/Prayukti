@@ -480,7 +480,7 @@ export default function CircuitCanvas({
             {/* Top Bar - Minimal */}
             <div className="absolute top-4 right-4 z-20 flex gap-2">
                 <button
-                    className={`px-4 py-2 rounded-none-full text-xs font-bold border shadow-none-none flex items-center gap-2  ${generating ? 'bg-green-500 text-white border-green-600' : 'bg-card text-muted-foreground'}`}
+                    className={`px-4 py-2 rounded-none-full text-xs font-bold border shadow-none-none flex items-center gap-2 transition-all ${generating ? 'bg-green-500 text-white border-green-600' : 'bg-card text-muted-foreground'}`}
                     onClick={() => setGenerating(!generating)}
                 >
                     {generating ? <i className="bx bx-pause" /> : <i className="bx bx-play" />}

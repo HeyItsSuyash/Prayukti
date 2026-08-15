@@ -39,6 +39,18 @@ const SUBJECT_EXPERIMENTS: Record<string, Experiment[]> = {
         { id: "cn-exp-5", title: "Selective Repeat ARQ", href: "/dashboard/cn/cn-exp-5", description: "Simulate Selective Repeat sliding window protocol for error control." },
         { id: "cn-exp-6", title: "Sliding Window Simulation", href: "/dashboard/cn/cn-exp-6", description: "Visualize flow control using sliding window protocols." },
         { id: "cn-exp-7", title: "Token Ring / FDDI Protocol", href: "/dashboard/cn/cn-exp-7", description: "Simulate Token Ring, Token Bus, and FDDI token-passing protocols." },
+    ],
+    dld: [
+        { id: "dld-exp-1", title: "Study and Verification of Logic Gates", href: "/dashboard/dld/dld-exp-1", description: "Design and verify basic logic gates using digital ICs." },
+        { id: "dld-exp-2", title: "Half Adder and Full Adder", href: "/dashboard/dld/dld-exp-2", description: "Construct and test half adder and full adder circuits." },
+        { id: "dld-exp-3", title: "Half Subtractor and Full Subtractor", href: "/dashboard/dld/dld-exp-3", description: "Construct and test half subtractor and full subtractor circuits." },
+        { id: "dld-exp-4", title: "Code Conversion (Binary to Gray)", href: "/dashboard/dld/dld-exp-4", description: "Implement binary to gray code conversion." },
+        { id: "dld-exp-5", title: "Combinational Logic Design (SOP)", href: "/dashboard/dld/dld-exp-5", description: "Design combinational logic circuits for SOP expressions." },
+        { id: "dld-exp-6", title: "Decoder and Encoder Circuits", href: "/dashboard/dld/dld-exp-6", description: "Design and verify decoders and encoders." },
+        { id: "dld-exp-7", title: "Multiplexer and Demultiplexer", href: "/dashboard/dld/dld-exp-7", description: "Design and verify multiplexer and demultiplexer." },
+        { id: "dld-exp-8", title: "Comparators (1-bit & 4-bit)", href: "/dashboard/dld/dld-exp-8", description: "Design 1-bit and 4-bit magnitude comparators." },
+        { id: "dld-exp-9", title: "Flip-Flops", href: "/dashboard/dld/dld-exp-9", description: "Study and verify truth tables of various flip-flops." },
+        { id: "dld-exp-10", title: "Synchronous and Asynchronous Counters", href: "/dashboard/dld/dld-exp-10", description: "Design and verify synchronous and asynchronous counters." },
     ]
 };
 

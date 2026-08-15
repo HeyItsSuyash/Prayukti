@@ -165,9 +165,19 @@ export default function LoginPage() {
             </div>
 
             {/* Right Column - Login Form */}
-            <div className="w-full lg:w-1/2 bg-[#FAFAFA] flex flex-col items-center justify-center relative p-8 sm:p-12">
+            <div className="w-full lg:w-1/2 bg-transparent lg:bg-[#FAFAFA] flex flex-col items-center justify-center relative p-8 sm:p-12 min-h-screen lg:min-h-0">
+                {/* Mobile Background Image */}
+                <div className="absolute inset-0 z-0 lg:hidden">
+                    <img 
+                        src="/prayukti 2.0/illustrations/login_page.png" 
+                        alt="Background" 
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
+                </div>
+
                 {/* Card Container */}
-                <div className="w-full max-w-[480px] bg-white rounded-[24px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 p-10 sm:p-12">
+                <div className="w-full max-w-[480px] bg-white rounded-none lg:rounded-[24px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 p-10 sm:p-12 relative z-10">
                     <div className="text-center mb-10">
                         <h2 className="text-2xl font-bold text-slate-800 mb-2">Welcome Back</h2>
                         <p className="text-slate-500 text-sm">Sign in to access your Prayukti vLAB account</p>
