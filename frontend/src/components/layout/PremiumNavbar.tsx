@@ -18,6 +18,31 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
+    const NavItem = ({ link, pathname, activeTextClass, textClass, className, onClick }: any) => {
+        const [isActive, setIsActive] = useState(pathname === link.href);
+        
+        useEffect(() => {
+            if (link.href.includes('?')) {
+                setIsActive(window.location.pathname + window.location.search === link.href);
+            } else {
+                setIsActive(pathname === link.href);
+            }
+        }, [pathname, link.href]);
+
+        return (
+            <Link 
+                href={link.href}
+                onClick={onClick}
+                className={cn(
+                    className || "text-sm font-medium transition-colors",
+                    isActive ? cn(activeTextClass, "border-b-2 pb-1 -mb-1") : textClass
+                )}
+            >
+                {link.label}
+            </Link>
+        );
+    };
+
     useEffect(() => {
         const storedUser = localStorage.getItem('vlab_user');
         if (storedUser) {
@@ -108,16 +133,7 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
                 {/* Links */}
                 <nav className="hidden lg:flex items-center gap-8">
                     {navLinks.map((link, idx) => (
-                        <Link 
-                            key={idx} 
-                            href={link.href}
-                            className={cn(
-                                "text-sm font-medium transition-colors",
-                                pathname === link.href ? cn(activeTextClass, "border-b-2 pb-1 -mb-1") : textClass
-                            )}
-                        >
-                            {link.label}
-                        </Link>
+                        <NavItem key={idx} link={link} pathname={pathname} activeTextClass={activeTextClass} textClass={textClass} />
                     ))}
                 </nav>
 
@@ -168,17 +184,15 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
             {isMobileMenuOpen && (
                 <div className="lg:hidden absolute top-full left-0 right-0 bg-[#021D24] border-b border-white/10 shadow-2xl py-4 flex flex-col items-center gap-4 animate-in slide-in-from-top-2 fade-in">
                     {navLinks.map((link, idx) => (
-                        <Link 
+                        <NavItem 
                             key={idx} 
-                            href={link.href}
+                            link={link} 
+                            pathname={pathname} 
+                            activeTextClass={activeTextClass} 
+                            textClass={textClass} 
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className={cn(
-                                "text-base font-medium py-2 px-4 w-full text-center transition-colors hover:bg-white/5",
-                                pathname === link.href ? activeTextClass : textClass
-                            )}
-                        >
-                            {link.label}
-                        </Link>
+                            className="text-base font-medium py-2 px-4 w-full text-center transition-colors hover:bg-white/5"
+                        />
                     ))}
                     {!user && (
                         <div className="flex flex-col gap-3 mt-2 w-full px-6">

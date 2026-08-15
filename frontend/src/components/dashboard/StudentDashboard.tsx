@@ -157,7 +157,7 @@ export function StudentDashboard() {
                             className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide"
                             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                         >
-                            {subjects.slice(0, 5).map((sub, idx) => {
+                            {subjects.filter((sub) => !isComingSoon(sub.title, sub.icon)).slice(0, 5).map((sub, idx) => {
                                 const comingSoon = isComingSoon(sub.title, sub.icon);
                                 return (
                                     <div key={sub._id} className="w-[300px] md:w-[350px] flex-shrink-0 snap-start">

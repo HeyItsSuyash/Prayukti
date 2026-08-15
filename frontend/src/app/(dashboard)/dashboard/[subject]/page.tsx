@@ -51,6 +51,13 @@ const SUBJECT_EXPERIMENTS: Record<string, Experiment[]> = {
         { id: "dld-exp-8", title: "Comparators (1-bit & 4-bit)", href: "/dashboard/dld/dld-exp-8", description: "Design 1-bit and 4-bit magnitude comparators." },
         { id: "dld-exp-9", title: "Flip-Flops", href: "/dashboard/dld/dld-exp-9", description: "Study and verify truth tables of various flip-flops." },
         { id: "dld-exp-10", title: "Synchronous and Asynchronous Counters", href: "/dashboard/dld/dld-exp-10", description: "Design and verify synchronous and asynchronous counters." },
+    ],
+    dbms: [
+        { id: "dbms-exp-1", title: "Introduction to DBMS", href: "/dashboard/dbms/dbms-exp-1", description: "Introduction to database concepts, ACID properties, and basic SQL queries." },
+        { id: "dbms-exp-2", title: "Application Development", href: "/dashboard/dbms/dbms-exp-2", description: "Build an E-R model and map it to a relational schema." },
+        { id: "dbms-exp-3", title: "Relational Algebra", href: "/dashboard/dbms/dbms-exp-3", description: "Practice Relational Algebra operations and functional dependencies." },
+        { id: "dbms-exp-4", title: "Normalization", href: "/dashboard/dbms/dbms-exp-4", description: "Apply normalization up to BCNF to reduce data redundancy." },
+        { id: "dbms-exp-5", title: "Host Language Integration", href: "/dashboard/dbms/dbms-exp-5", description: "Embed SQL in C/Java programs using cursors and transactions." },
     ]
 };
 
@@ -170,7 +177,7 @@ export default function SubjectPage() {
                     <div className="flex flex-col gap-4 pl-4">
                         <h2 className="text-2xl font-bold text-foreground mb-4">List of Experiments</h2>
                         {experiments.map((exp, index) => (
-                            <div key={exp.id} className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center p-6 gap-6 rounded-xl">
+                            <div key={exp.id} className="bg-white dark:bg-background border border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center p-6 gap-6 rounded-xl">
                                 
                                 <div className="flex-grow">
                                     <div className="flex items-center gap-2 mb-2">

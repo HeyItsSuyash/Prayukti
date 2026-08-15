@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { LabCard } from '@/components/ui/LabCard';
+import { LanderCourseCard } from '@/components/ui/LanderCourseCard';
 
 // Dummy data for labs matching the dashboard style
 const allLabs = [
@@ -34,10 +34,12 @@ export function LabsGrid() {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8; // 4x2 grid
 
-    const filteredLabs = allLabs.filter(lab => 
-        lab.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-        lab.description.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredLabs = allLabs
+        .filter(lab => !isComingSoon(lab.slug))
+        .filter(lab => 
+            lab.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+            lab.description.toLowerCase().includes(searchTerm.toLowerCase())
+        );
 
     const totalPages = Math.ceil(filteredLabs.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -66,13 +68,12 @@ export function LabsGrid() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
                     {currentLabs.map((lab) => (
                         <div key={lab._id} className="w-full h-full">
-                            <LabCard
+                            <LanderCourseCard
                                 id={lab._id}
                                 slug={lab.slug}
                                 title={lab.title}
                                 description={lab.description}
                                 imageSrc={getSubjectImage(lab.slug)}
-                                comingSoon={isComingSoon(lab.slug)}
                             />
                         </div>
                     ))}
