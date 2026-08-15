@@ -9,13 +9,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Token is required' }, { status: 400 });
     }
 
-    // Set the cookie on the Next.js domain so middleware can access it
-    cookies().set('vlab_access_token', token, {
+    // Set the cookie on the Next.js domain
+    const cookieStore = await cookies();
+    cookieStore.set({
+      name: 'vlab_access_token',
+      value: token,
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',
-      maxAge: 86400 // 1 day
+      maxAge: 7 * 24 * 60 * 60 // 7 days
     });
 
     return NextResponse.json({ success: true });
