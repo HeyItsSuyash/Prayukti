@@ -26,7 +26,7 @@ const getSubjectImage = (slug: string) => {
 };
 
 const isComingSoon = (slug: string) => {
-    return !['cn', 'dbms', 'dld', 'oops'].includes(slug);
+    return !['cn', 'dbms', 'dld'].includes(slug);
 };
 
 export function LabsGrid() {
@@ -35,7 +35,7 @@ export function LabsGrid() {
     const itemsPerPage = 8; // 4x2 grid
 
     const filteredLabs = allLabs
-        .filter(lab => !isComingSoon(lab.slug))
+        
         .filter(lab => 
             lab.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
             lab.description.toLowerCase().includes(searchTerm.toLowerCase())

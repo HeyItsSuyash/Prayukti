@@ -44,10 +44,10 @@ export default function VideoTutorLayout({ children }: VideoTutorLayoutProps) {
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-300">
+        <div className="h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-300 overflow-hidden">
             <Navbar pathname={pathname} />
 
-            <div className="flex flex-1 pt-20 h-full relative">
+            <div className="flex flex-1 pt-20 h-full relative overflow-hidden">
                 {/* Desktop Sidebar */}
                 <aside className="hidden md:flex w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md fixed top-20 bottom-0 left-0 p-6 z-20 overflow-y-auto">
                     <div className="mb-8 flex items-center gap-3">
@@ -175,7 +175,7 @@ export default function VideoTutorLayout({ children }: VideoTutorLayoutProps) {
                 </AnimatePresence>
 
                 {/* Main Content Area */}
-                <main className="flex-1 md:ml-72 p-6 md:p-10 max-w-7xl mx-auto w-full overflow-x-hidden">
+                <main className="flex-1 md:ml-72 p-6 md:p-10 max-w-7xl mx-auto w-full overflow-y-auto overflow-x-hidden">
                     <div className="mb-6">
                         <a href="/classroom" className="text-xs font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-2 group mb-4 hover:underline">
                             <i className="bx bx-arrowleft group-hover:-translate-x-1 "  />

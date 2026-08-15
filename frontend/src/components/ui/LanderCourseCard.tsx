@@ -15,7 +15,7 @@ export function LanderCourseCard({ id, slug, title, description, imageSrc }: Lan
     
     return (
         <a href={href} className="block h-full group">
-            <Card className="h-full flex flex-col border border-border/50 rounded-2xl overflow-hidden bg-white hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1">
+            <Card className="h-full flex flex-col border border-border/50 rounded-2xl overflow-hidden bg-card hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1">
                 <CardContent className="p-0 flex flex-col h-full relative">
                     <div className="w-full h-48 relative shrink-0 overflow-hidden">
                         <img 
@@ -27,16 +27,16 @@ export function LanderCourseCard({ id, slug, title, description, imageSrc }: Lan
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                     
-                    <div className="p-6 flex flex-col flex-grow bg-white relative z-10">
-                        <h3 className="text-xl font-bold tracking-tight leading-tight mb-3 text-slate-900 group-hover:text-primary transition-colors">
+                    <div className="p-6 flex flex-col flex-grow bg-card relative z-10">
+                        <h3 className="text-xl font-bold tracking-tight leading-tight mb-3 text-foreground group-hover:text-primary transition-colors">
                             {title}
                         </h3>
 
-                        <p className="text-sm text-slate-500 font-medium leading-relaxed mb-6 line-clamp-3 flex-grow">
+                        <p className="text-sm text-muted-foreground font-medium leading-relaxed mb-6 line-clamp-3 flex-grow">
                             {description}
                         </p>
 
-                        <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div className="mt-auto pt-4 border-t border-border flex items-center justify-between">
                             <span className="text-sm font-semibold text-primary">Explore Course</span>
                             <i className="bx bx-right-arrow-alt text-xl text-primary transform group-hover:translate-x-1 transition-transform" />
                         </div>

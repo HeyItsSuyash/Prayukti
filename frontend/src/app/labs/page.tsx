@@ -1,14 +1,14 @@
 import React from 'react';
 import { PremiumNavbar } from '@/components/layout/PremiumNavbar';
-import { PremiumFooter } from '@/components/layout/PremiumFooter';
 import { LabsGrid } from '@/components/home/LabsGrid';
 
 export default function LabsPage() {
     return (
-        <main className="min-h-screen bg-background flex flex-col font-sans transition-colors">
+        <main className="h-screen bg-background flex flex-col font-sans transition-colors overflow-hidden">
             <PremiumNavbar pathname="/labs" />
             
             {/* Hero Section */}
+            <div className="flex-1 overflow-y-auto w-full">
             <section 
                 className="pt-48 pb-32 text-white relative bg-slate-950"
                 style={{ 
@@ -30,7 +30,7 @@ export default function LabsPage() {
                 <LabsGrid />
             </div>
 
-            <PremiumFooter />
+            </div>
         </main>
     );
 }
