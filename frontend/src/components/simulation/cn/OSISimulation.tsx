@@ -156,7 +156,7 @@ export default function OSISimulation() {
                                             {layer.name}
                                             {currentAnimLayer === layer.id && (
                                                 <div className="absolute -right-8 top-1/2 -translate-y-1/2 text-2xl animate-bounce">
-                                                    📦
+                                                    
                                                 </div>
                                             )}
                                         </div>

@@ -30,16 +30,16 @@ export function PremiumFooter() {
                         
                         {/* Socials */}
                         <div className="flex items-center gap-3 pt-2">
-                            <Link href="https://twitter.com/mmmut" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white ">
+                            <Link href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white ">
                                 <i className="bx bxl-twitter"></i>
                             </Link>
-                            <Link href="https://linkedin.com/school/mmmut" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white ">
+                            <Link href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white ">
                                 <i className="bx bxl-linkedin"></i>
                             </Link>
-                            <Link href="https://instagram.com/mmmut" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white ">
+                            <Link href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white ">
                                 <i className="bx bxl-instagram"></i>
                             </Link>
-                            <Link href="https://youtube.com/mmmut" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white ">
+                            <Link href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white ">
                                 <i className="bx bxl-youtube"></i>
                             </Link>
                         </div>

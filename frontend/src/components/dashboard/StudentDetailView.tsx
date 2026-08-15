@@ -43,13 +43,13 @@ export function StudentDetailView({ student }: StudentDetailViewProps) {
                        <p>Please log in and complete your pending practical work.</p>`
             },
             performance: {
-                subject: '📉 Virtual Lab Performance Alert',
+                subject: ' Virtual Lab Performance Alert',
                 body: `<p>Dear <strong>${student.name || student.fullName}</strong>,</p>
                        <p>Your current average score is <strong>${student.quizScoreAvg || 0}%</strong>, which is below the recommended threshold.</p>
                        <p>Please review the course materials and retake the quizzes.</p>`
             },
             manual: {
-                subject: '🔔 Virtual Lab Reminder',
+                subject: ' Virtual Lab Reminder',
                 body: `<p>Dear <strong>${student.name || student.fullName}</strong>,</p>
                        <p>This is a reminder to continue your progress in the Virtual Lab.</p>
                        <p>Current Progress: <strong>${Math.round(((student.practicalsCompleted || 0) / (student.practicalsAssigned || 1)) * 100)}%</strong></p>`
@@ -80,13 +80,13 @@ export function StudentDetailView({ student }: StudentDetailViewProps) {
 
             const result = await response.json();
             if (result.success) {
-                alert(`✅ Email sent successfully to ${student.email}`);
+                alert(` Email sent successfully to ${student.email}`);
             } else {
-                alert(`❌ Failed to send email: ${result.error || 'Unknown error'}`);
+                alert(` Failed to send email: ${result.error || 'Unknown error'}`);
             }
         } catch (error) {
             console.error("Failed to send email", error);
-            alert("❌ Network error. Check console.");
+            alert(" Network error. Check console.");
         } finally {
             setEmailLoading(null);
         }

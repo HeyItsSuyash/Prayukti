@@ -61,15 +61,15 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
                     animate={{ scale: 1, opacity: 1 }}
                     className="relative"
                 >
-                    <div className="absolute inset-0 bg-blue-100 rounded-full blur-xl opacity-50"></div>
-                    <div className="relative bg-white p-6 rounded-full  border-4 border-blue-100">
-                        <span className="text-4xl font-bold text-blue-600">{score} / {questions.length}</span>
+                    <div className="absolute inset-0 bg-blue-100 dark:bg-blue-900/30 rounded-full blur-xl opacity-50"></div>
+                    <div className="relative bg-white dark:bg-card p-6 rounded-full border-4 border-blue-100 dark:border-blue-900/50">
+                        <span className="text-4xl font-bold text-blue-600 dark:text-blue-400">{score} / {questions.length}</span>
                     </div>
                 </motion.div>
 
                 <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Quiz Completed!</h3>
-                    <p className="text-gray-500">
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-foreground mb-2">Quiz Completed!</h3>
+                    <p className="text-gray-500 dark:text-muted-foreground">
                         {score === questions.length ? "Perfect Score! You mastered this topic." : "Good effort! Review the material and try again."}
                     </p>
                 </div>
@@ -82,15 +82,15 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
     }
 
     return (
-        <Card className="w-full border-0 shadow-none">
+        <Card className="w-full border-0 shadow-none bg-transparent">
             <CardHeader>
-                <div className="flex justify-between items-center text-sm text-gray-500 mb-2">
+                <div className="flex justify-between items-center text-sm text-gray-500 dark:text-muted-foreground mb-2">
                     <span>Question {currentIndex + 1} of {questions.length}</span>
                     <span>Score: {score}</span>
                 </div>
-                <div className="relative w-full h-1 bg-gray-100 rounded-full overflow-hidden">
+                <div className="relative w-full h-1 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
                     <motion.div
-                        className="absolute h-full bg-blue-600 rounded-full"
+                        className="absolute h-full bg-blue-600 dark:bg-blue-500 rounded-full"
                         initial={{ width: 0 }}
                         animate={{ width: `${((currentIndex + 1) / questions.length) * 100}%` }}
                     />
@@ -102,23 +102,23 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
             <CardContent className="space-y-3">
                 <AnimatePresence mode="wait">
                     {currentQuestion.options.map((option, index) => {
-                        let borderColor = "border-gray-200 hover:border-blue-300";
-                        let bgColor = "bg-white hover:bg-gray-50";
+                        let borderColor = "border-gray-200 dark:border-slate-800 hover:border-blue-300 dark:hover:border-blue-700";
+                        let bgColor = "bg-white dark:bg-card hover:bg-gray-50 dark:hover:bg-slate-800/50";
                         let icon = null;
 
                         if (isAnswered) {
                             if (index === currentQuestion.correctAnswer) {
-                                borderColor = "border-green-500 bg-green-50";
-                                icon = <i className="bx bx-check-circle text-green-600"  />;
+                                borderColor = "border-green-500 bg-green-50 dark:bg-green-500/10";
+                                icon = <i className="bx bx-check-circle text-green-600 dark:text-green-400"  />;
                             } else if (index === selectedOption) {
-                                borderColor = "border-red-500 bg-red-50";
-                                icon = <i className="bx bx-xcircle text-red-600"  />;
+                                borderColor = "border-red-500 bg-red-50 dark:bg-red-500/10";
+                                icon = <i className="bx bx-xcircle text-red-600 dark:text-red-400"  />;
                             } else {
-                                borderColor = "border-gray-100 opacity-50";
+                                borderColor = "border-gray-100 dark:border-slate-800 opacity-50";
                             }
                         } else if (selectedOption === index) {
                             borderColor = "border-blue-500 ring-1 ring-blue-500";
-                            bgColor = "bg-blue-50";
+                            bgColor = "bg-blue-50 dark:bg-blue-500/10";
                         }
 
                         return (
@@ -133,7 +133,7 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
                                     ${borderColor} ${bgColor}
                                 `}
                             >
-                                <span className="flex-grow font-medium text-gray-700">{option}</span>
+                                <span className="flex-grow font-medium text-gray-700 dark:text-slate-200">{option}</span>
                                 {icon}
                             </motion.div>
                         );
@@ -144,7 +144,7 @@ export function QuizView({ questions, onComplete }: QuizViewProps) {
                     <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
-                        className="mt-4 p-3 bg-blue-50 rounded-lg text-sm text-blue-800 border border-blue-100"
+                        className="mt-4 p-3 bg-blue-50 dark:bg-blue-500/10 rounded-lg text-sm text-blue-800 dark:text-blue-300 border border-blue-100 dark:border-blue-500/20"
                     >
                         <strong>Explanation:</strong> {currentQuestion.explanation}
                     </motion.div>

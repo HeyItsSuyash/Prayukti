@@ -440,30 +440,30 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
                                     {/* Store Forms */}
                                     {activeAction === "addProduct" && (
                                         <>
-                                            <input className="w-full border p-2 rounded-none" placeholder="Product Name" value={formInputs.name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
-                                            <input className="w-full border p-2 rounded-none" placeholder="Price" type="number" value={formInputs.price || ""} onChange={(e) => setFormInputs({ ...formInputs, price: e.target.value })} />
-                                            <input className="w-full border p-2 rounded-none" placeholder="Stock Qty" type="number" value={formInputs.stock_qty || formInputs.qty || ""} onChange={(e) => setFormInputs({ ...formInputs, qty: e.target.value, stock_qty: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Product Name" value={formInputs.name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Price" type="number" value={formInputs.price || ""} onChange={(e) => setFormInputs({ ...formInputs, price: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Stock Qty" type="number" value={formInputs.stock_qty || formInputs.qty || ""} onChange={(e) => setFormInputs({ ...formInputs, qty: e.target.value, stock_qty: e.target.value })} />
                                             <Button onClick={handleAddProduct} className="w-full bg-[#d32f2f]">Save Product</Button>
                                         </>
                                     )}
                                     {activeAction === "addCustomer" && (
                                         <>
-                                            <input className="w-full border p-2 rounded-none" placeholder="Name" value={formInputs.name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
-                                            <input className="w-full border p-2 rounded-none" placeholder="Email" value={formInputs.email || ""} onChange={(e) => setFormInputs({ ...formInputs, email: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Name" value={formInputs.name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Email" value={formInputs.email || ""} onChange={(e) => setFormInputs({ ...formInputs, email: e.target.value })} />
                                             <Button onClick={handleAddCustomer} className="w-full bg-[#f57f17]">Save Customer</Button>
                                         </>
                                     )}
                                     {activeAction === "purchase" && (
                                         <>
-                                            <select className="w-full border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, customerId: e.target.value })}>
+                                            <select className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" onChange={(e) => setFormInputs({ ...formInputs, customerId: e.target.value })}>
                                                 <option value="">Select Customer...</option>
                                                 {data.Store.Customers.map((c: any) => <option key={c.id} value={c.id}>{c.name}</option>)}
                                             </select>
-                                            <select className="w-full border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, productId: e.target.value })}>
+                                            <select className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" onChange={(e) => setFormInputs({ ...formInputs, productId: e.target.value })}>
                                                 <option value="">Select Product...</option>
                                                 {data.Store.Products.map((p: any) => <option key={p.id} value={p.id}>{p.name} (Stock: {p.stock_qty})</option>)}
                                             </select>
-                                            <input className="w-full border p-2 rounded-none" placeholder="Quantity" type="number" onChange={(e) => setFormInputs({ ...formInputs, qty: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Quantity" type="number" onChange={(e) => setFormInputs({ ...formInputs, qty: e.target.value })} />
                                             <Button onClick={handlePurchase} className="w-full bg-[#f57f17]">Process Order</Button>
                                         </>
                                     )}
@@ -471,28 +471,28 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
                                     {/* Vendor Forms */}
                                     {activeAction === "addVendor" && (
                                         <>
-                                            <input className="w-full border p-2 rounded-none" placeholder="Name" value={formInputs.name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
-                                            <input className="w-full border p-2 rounded-none" placeholder="Contact" value={formInputs.contact_info || formInputs.contact || ""} onChange={(e) => setFormInputs({ ...formInputs, contact: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Name" value={formInputs.name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Contact" value={formInputs.contact_info || formInputs.contact || ""} onChange={(e) => setFormInputs({ ...formInputs, contact: e.target.value })} />
                                             <Button onClick={handleAddVendor} className="w-full bg-[#d32f2f]">Save Vendor</Button>
                                         </>
                                     )}
                                     {activeAction === "createPO" && (
                                         <>
-                                            <select className="w-full border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, vendorId: e.target.value })}>
+                                            <select className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" onChange={(e) => setFormInputs({ ...formInputs, vendorId: e.target.value })}>
                                                 {data.Vendor.Vendors.map((v: any) => <option key={v.id} value={v.id}>{v.name}</option>)}
                                             </select>
-                                            <input className="w-full border p-2 rounded-none" placeholder="Item Name" value={formInputs.item || formInputs.item_name || ""} onChange={(e) => setFormInputs({ ...formInputs, item: e.target.value })} />
-                                            <input className="w-full border p-2 rounded-none" placeholder="Qty" type="number" value={formInputs.qty || ""} onChange={(e) => setFormInputs({ ...formInputs, qty: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Item Name" value={formInputs.item || formInputs.item_name || ""} onChange={(e) => setFormInputs({ ...formInputs, item: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Qty" type="number" value={formInputs.qty || ""} onChange={(e) => setFormInputs({ ...formInputs, qty: e.target.value })} />
                                             <Button onClick={handleCreatePO} className="w-full bg-primary">Save PO</Button>
                                         </>
                                     )}
                                     {activeAction === "addDelivery" && (
                                         <>
-                                            <select className="w-full border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, poId: e.target.value })}>
+                                            <select className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" onChange={(e) => setFormInputs({ ...formInputs, poId: e.target.value })}>
                                                 <option value="">Select PO...</option>
                                                 {data.Vendor.PurchaseOrders.map((p: any) => <option key={p.id} value={p.id}>PO #{p.id} - {p.item_name}</option>)}
                                             </select>
-                                            <input type="date" className="w-full border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, date: e.target.value })} />
+                                            <input type="date" className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" onChange={(e) => setFormInputs({ ...formInputs, date: e.target.value })} />
                                             <Button onClick={handleAddDelivery} className="w-full bg-purple-600 text-white">Save Delivery</Button>
                                         </>
                                     )}
@@ -500,43 +500,43 @@ export default function ApplicationDevelopmentSimulation({ mode = "LEARNING", in
                                     {/* Finance Forms */}
                                     {activeAction === "addAccount" && (
                                         <>
-                                            <input className="w-full border p-2 rounded-none" placeholder="Account Name" value={formInputs.name || formInputs.account_name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
-                                            <select className="w-full border p-2 rounded-none" value={formInputs.type} onChange={(e) => setFormInputs({ ...formInputs, type: e.target.value })}>
+                                            <input className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Account Name" value={formInputs.name || formInputs.account_name || ""} onChange={(e) => setFormInputs({ ...formInputs, name: e.target.value })} />
+                                            <select className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" value={formInputs.type} onChange={(e) => setFormInputs({ ...formInputs, type: e.target.value })}>
                                                 <option value="Asset">Asset</option>
                                                 <option value="Liability">Liability</option>
                                                 <option value="Income">Income</option>
                                                 <option value="Expense">Expense</option>
                                             </select>
-                                            <input className="w-full border p-2 rounded-none" placeholder="Balance" type="number" value={formInputs.balance || ""} onChange={(e) => setFormInputs({ ...formInputs, balance: e.target.value })} />
+                                            <input className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Balance" type="number" value={formInputs.balance || ""} onChange={(e) => setFormInputs({ ...formInputs, balance: e.target.value })} />
                                             <Button onClick={handleAddAccount} className="w-full bg-primary">Save Account</Button>
                                         </>
                                     )}
                                     {activeAction === "transaction" && (
                                         <>
-                                            <select className="w-full border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, accountId: e.target.value })}>
+                                            <select className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" onChange={(e) => setFormInputs({ ...formInputs, accountId: e.target.value })}>
                                                 <option value="">Select Account...</option>
                                                 {data.Finance.Accounts.map((a: any) => <option key={a.id} value={a.id}>{a.account_name} (Bal: {a.balance})</option>)}
                                             </select>
                                             <div className="flex gap-2">
-                                                <select className="w-1/3 border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, type: e.target.value })}>
+                                                <select className="w-1/3 border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" onChange={(e) => setFormInputs({ ...formInputs, type: e.target.value })}>
                                                     <option value="">Type...</option>
                                                     <option value="Credit">Credit (+)</option>
                                                     <option value="Debit">Debit (-)</option>
                                                 </select>
-                                                <input className="w-2/3 border p-2 rounded-none" placeholder="Amount" type="number" onChange={(e) => setFormInputs({ ...formInputs, amount: e.target.value })} />
+                                                <input className="w-2/3 border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Amount" type="number" onChange={(e) => setFormInputs({ ...formInputs, amount: e.target.value })} />
                                             </div>
                                             <Button onClick={handleTransaction} className="w-full bg-green-600">Post Transaction</Button>
                                         </>
                                     )}
                                     {activeAction === "addLedger" && (
                                         <>
-                                            <select className="w-full border p-2 rounded-none" onChange={(e) => setFormInputs({ ...formInputs, transId: e.target.value })}>
+                                            <select className="w-full border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" onChange={(e) => setFormInputs({ ...formInputs, transId: e.target.value })}>
                                                 <option value="">Select Transaction...</option>
                                                 {data.Finance.Transactions.map((t: any) => <option key={t.id} value={t.id}>Tx #{t.id} ({t.type} {t.amount})</option>)}
                                             </select>
                                             <div className="flex gap-2">
-                                                <input className="w-1/2 border p-2 rounded-none" placeholder="Debit" type="number" onChange={(e) => setFormInputs({ ...formInputs, debit: e.target.value })} />
-                                                <input className="w-1/2 border p-2 rounded-none" placeholder="Credit" type="number" onChange={(e) => setFormInputs({ ...formInputs, credit: e.target.value })} />
+                                                <input className="w-1/2 border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Debit" type="number" onChange={(e) => setFormInputs({ ...formInputs, debit: e.target.value })} />
+                                                <input className="w-1/2 border p-2 rounded-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-100" placeholder="Credit" type="number" onChange={(e) => setFormInputs({ ...formInputs, credit: e.target.value })} />
                                             </div>
                                             <Button onClick={handleAddLedger} className="w-full bg-card">Save Entry</Button>
                                         </>

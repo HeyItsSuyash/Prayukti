@@ -226,8 +226,8 @@ export default function AnimationCanvas({
                     <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-[10px] space-y-1.5">
                         <p className="text-emerald-400 font-bold">{"[LOGIC_SYS] Circuit waveforms active:"}</p>
                         <div className="flex items-center justify-between text-slate-400">
-                            <span>Sum (S): {gates[0].output === 1 ? "⚡ HIGH" : "○ LOW"}</span>
-                            <span>Carry (C): {gates[1].output === 1 ? "⚡ HIGH" : "○ LOW"}</span>
+                            <span>Sum (S): {gates[0].output === 1 ? " HIGH" : "○ LOW"}</span>
+                            <span>Carry (C): {gates[1].output === 1 ? " HIGH" : "○ LOW"}</span>
                         </div>
                         {config.message && (
                             <p className="text-[9px] text-amber-500 italic mt-1">{config.message}</p>

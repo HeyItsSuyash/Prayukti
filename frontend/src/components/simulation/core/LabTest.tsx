@@ -113,7 +113,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
             clearInterval(timerRef.current!);
           } else {
             setWarningMessage(
-              `⚠️ Tab Switch Warning ${next}/3: You switched tabs or minimized the window. ${
+              ` Tab Switch Warning ${next}/3: You switched tabs or minimized the window. ${
                 3 - next
               } warning(s) remaining before you are removed from this test.`
             );
@@ -291,7 +291,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
   const renderContent = () => {
     if (questions.length === 0 && testState !== "instructions") {
       return (
-        <div className="flex flex-col items-center justify-center h-full p-10 text-center bg-[#f4f6fb]">
+        <div className="flex flex-col items-center justify-center h-full p-10 text-center bg-background">
           <BookOpen className="w-16 h-16 text-muted-foreground mb-4" />
           <h2 className="text-2xl font-black uppercase tracking-tight text-muted-foreground">Test Not Available</h2>
           <p className="text-muted-foreground mt-2">No test questions found for this lab experiment yet.</p>
@@ -304,17 +304,17 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
     // ═══════════════════════════════════════════════════════════════════════════
     if (testState === "kicked") {
       return (
-        <div className="flex flex-col items-center justify-center h-full bg-red-50 text-red-900 p-10 text-center select-none">
-          <div className="w-24 h-24 bg-red-100 rounded-none-full flex items-center justify-center mb-6">
+        <div className="flex flex-col items-center justify-center h-full bg-background text-foreground p-10 text-center select-none">
+          <div className="w-24 h-24 bg-red-500/10 rounded-full flex items-center justify-center mb-6">
             <XCircle className="w-14 h-14 text-red-600" />
           </div>
           <h1 className="text-4xl font-bold uppercase tracking-tight mb-3">Removed from Test</h1>
-          <p className="text-red-700 max-w-lg text-lg mb-8">
+          <p className="text-muted-foreground max-w-lg text-lg mb-8">
             You were removed from the test after switching tabs/windows 3 times. This action has been logged.
           </p>
           <button
             onClick={() => { setTestState("instructions"); setTabWarnings(0); }}
-            className="px-8 py-3 bg-red-600 text-white font-bold uppercase tracking-widest rounded-none-none hover:bg-red-700  shadow-none-none"
+            className="px-8 py-3 bg-red-600 text-white font-bold uppercase tracking-widest rounded-xl hover:bg-red-700  shadow-none-none"
           >
             Return to Instructions
           </button>
@@ -327,50 +327,50 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
     // ═══════════════════════════════════════════════════════════════════════════
     if (testState === "instructions") {
       return (
-        <div className="flex flex-col items-center min-h-full bg-[#f4f6fb] text-muted-foreground select-none overflow-y-auto pb-12">
+        <div className="flex flex-col items-center min-h-full bg-background text-muted-foreground select-none overflow-y-auto pb-12">
           {/* Header Banner */}
           <div className="w-full max-w-4xl mt-8">
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-none-t-2xl p-8 text-white relative overflow-hidden">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-t-2xl p-8 text-white relative overflow-hidden">
               <div className="absolute top-[-20%] right-[-10%] opacity-10">
                 <BookOpen className="w-64 h-64" />
               </div>
               <div className="relative z-10 flex items-start gap-4">
-                <div className="bg-card/20 p-3 rounded-none-none backdrop-blur-sm">
+                <div className="bg-card/20 p-3 rounded-xl backdrop-blur-sm">
                   <BookOpen className="w-8 h-8 text-white" />
                 </div>
                 <div>
                   <p className="text-primary font-bold tracking-widest text-xs uppercase mb-1">{getSubjectName(labId)}</p>
-                  <h1 className="text-4xl font-serif font-bold text-white mb-3">{labTitle}</h1>
+                  <h1 className="text-4xl font-bold text-white mb-3">{labTitle}</h1>
                   <p className="text-primary text-sm">Chapter Test • Online Assessment</p>
                 </div>
               </div>
             </div>
 
             {/* Stats Bar */}
-            <div className="bg-card rounded-none-b-2xl shadow-none-none border border-border grid grid-cols-4 divide-x divide-slate-100 p-6">
+            <div className="bg-card rounded-b-2xl shadow-none-none border border-border grid grid-cols-4 divide-x divide-slate-100 p-6">
               <div className="flex flex-col items-center text-center">
-                <div className="w-10 h-10 bg-card rounded-none-full flex items-center justify-center mb-2">
+                <div className="w-10 h-10 bg-card rounded-full flex items-center justify-center mb-2">
                   <BookOpen className="w-5 h-5 text-muted-foreground" />
                 </div>
                 <span className="font-bold text-xl">30</span>
                 <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest mt-1">Questions</span>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="w-10 h-10 bg-card rounded-none-full flex items-center justify-center mb-2">
+                <div className="w-10 h-10 bg-card rounded-full flex items-center justify-center mb-2">
                   <Clock className="w-5 h-5 text-muted-foreground" />
                 </div>
                 <span className="font-bold text-xl">30 min</span>
                 <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest mt-1">Duration</span>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="w-10 h-10 bg-card rounded-none-full flex items-center justify-center mb-2">
+                <div className="w-10 h-10 bg-card rounded-full flex items-center justify-center mb-2">
                   <Trophy className="w-5 h-5 text-orange-500" />
                 </div>
                 <span className="font-bold text-xl">30</span>
                 <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest mt-1">Total Marks</span>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="w-10 h-10 bg-card rounded-none-full flex items-center justify-center mb-2">
+                <div className="w-10 h-10 bg-card rounded-full flex items-center justify-center mb-2">
                   <CheckSquare className="w-5 h-5 text-green-500" />
                 </div>
                 <span className="font-bold text-xl">12</span>
@@ -379,17 +379,17 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
             </div>
 
             {/* User Card */}
-            <div className="bg-card rounded-none-none shadow-none-none border border-border p-5 mt-6 flex items-center justify-between">
+            <div className="bg-card rounded-xl shadow-none-none border border-border p-5 mt-6 flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary text-white rounded-none-full flex items-center justify-center text-xl font-bold">
+                <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold">
                   {userInitial}
                 </div>
                 <div>
-                  <h3 className="font-serif font-bold text-lg text-muted-foreground">{userName} <span className="text-muted-foreground font-sans text-sm font-normal">(student)</span></h3>
+                  <h3 className="font-bold text-lg text-muted-foreground">{userName} <span className="text-muted-foreground font-sans text-sm font-normal">(student)</span></h3>
                   <p className="text-muted-foreground text-sm">{userEmail}</p>
                 </div>
               </div>
-              <div className="bg-blue-50 text-primary font-bold text-[10px] px-3 py-1.5 rounded-none-full uppercase tracking-widest">
+              <div className="bg-primary/20 text-primary font-bold text-[10px] px-3 py-1.5 rounded-full uppercase tracking-widest">
                 Student
               </div>
             </div>
@@ -409,10 +409,10 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                   "Review your answers before final submission."
                 ].map((rule, i) => (
                   <div key={i} className="flex items-center gap-4">
-                    <div className="w-6 h-6 rounded-none-full bg-primary text-primary flex items-center justify-center text-xs font-bold flex-shrink-0">
-                      {i + 1}
+                    <div className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold flex-shrink-0">
+                      <CheckCircle2 className="w-4 h-4" />
                     </div>
-                    <p className="text-muted-foreground font-serif text-[15px]">{rule}</p>
+                    <p className="text-muted-foreground text-sm font-medium">{rule}</p>
                   </div>
                 ))}
               </div>
@@ -422,7 +422,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
             <button
               onClick={startTest}
               disabled={questions.length === 0}
-              className="w-full mt-10 py-4 bg-primary hover:bg-primary text-white font-bold rounded-none-none text-lg  shadow-none-none active:scale-[0.98] disabled:opacity-50"
+              className="w-full mt-10 py-4 bg-primary hover:bg-primary text-white font-bold rounded-xl text-lg  shadow-none-none active:scale-[0.98] disabled:opacity-50"
             >
               {questions.length === 0 ? "Loading Questions..." : "START TEST"}
             </button>
@@ -436,13 +436,13 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
     // ═══════════════════════════════════════════════════════════════════════════
     if (testState === "result") {
       return (
-        <div className="overflow-y-auto h-full bg-[#f4f6fb] text-muted-foreground p-8 select-none">
+        <div className="overflow-y-auto h-full bg-background text-muted-foreground p-8 select-none">
           <div className="max-w-4xl mx-auto">
             {/* Header Banner */}
-            <div className={`rounded-none-none p-8 text-center text-white mb-8 relative overflow-hidden shadow-none-none ${isPassed ? 'bg-gradient-to-r from-emerald-500 to-green-600' : 'bg-gradient-to-r from-rose-500 to-red-600'}`}>
+            <div className={`rounded-xl p-8 text-center text-white mb-8 relative overflow-hidden shadow-none-none ${isPassed ? 'bg-gradient-to-r from-emerald-500 to-green-600' : 'bg-gradient-to-r from-rose-500 to-red-600'}`}>
               <div className="relative z-10">
                 <Layers className="w-12 h-12 mx-auto mb-4 opacity-90" />
-                <h1 className="text-3xl font-serif font-bold mb-2">
+                <h1 className="text-3xl font-bold mb-2">
                   {isPassed ? 'Congratulations!' : 'Keep Practicing!'}
                 </h1>
                 <p className="text-white/90 text-sm">
@@ -452,26 +452,26 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
             </div>
 
             {/* Main Score Card */}
-            <div className="bg-card rounded-none-3xl shadow-none-none border border-border p-8 mb-6 relative">
+            <div className="bg-card rounded-3xl shadow-none-none border border-border p-8 mb-6 relative">
               <div className="flex justify-between items-start mb-10">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary text-white rounded-none-full flex items-center justify-center text-xl font-bold">
+                  <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold">
                     {userInitial}
                   </div>
                   <div>
-                    <h3 className="font-serif font-bold text-lg text-muted-foreground">{userName} <span className="text-muted-foreground font-sans text-sm font-normal">(student)</span></h3>
+                    <h3 className="font-bold text-lg text-muted-foreground">{userName} <span className="text-muted-foreground font-sans text-sm font-normal">(student)</span></h3>
                     <p className="text-muted-foreground text-sm">{userEmail}</p>
                   </div>
                 </div>
                 <div className="text-right">
                   <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Test</span>
-                  <p className="font-serif font-bold text-muted-foreground text-sm">{labTitle}</p>
+                  <p className="font-bold text-muted-foreground text-sm">{labTitle}</p>
                 </div>
               </div>
 
               {/* Circle Score */}
               <div className="flex justify-center mb-10">
-                <div className="w-32 h-32 rounded-none-full border-[12px] border-border flex flex-col items-center justify-center relative">
+                <div className="w-32 h-32 rounded-full border-[12px] border-border flex flex-col items-center justify-center relative">
                   <svg className="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="44" fill="none" stroke={isPassed ? '#10b981' : '#f43f5e'} strokeWidth="12" strokeDasharray={`${score * 2.76} 276`} />
                   </svg>
@@ -481,7 +481,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
               </div>
 
               {/* Horizontal Bar Chart */}
-              <div className="flex h-12 rounded-none-none overflow-hidden mb-2 shadow-none-none bg-card">
+              <div className="flex h-12 rounded-xl overflow-hidden mb-2 shadow-none-none bg-card">
                 <div style={{ width: `${(correctCount / 30) * 100}%` }} className="bg-green-500 h-full " />
                 <div style={{ width: `${(wrongCount / 30) * 100}%` }} className="bg-red-500 h-full " />
                 <div style={{ width: `${(skippedCount / 30) * 100}%` }} className="bg-yellow-500 h-full " />
@@ -496,28 +496,28 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
 
             {/* 4 Detail Cards */}
             <div className="grid grid-cols-4 gap-4 mb-6">
-              <div className="bg-green-50 border border-green-100 rounded-none-none p-4 flex flex-col justify-center items-center">
+              <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4 flex flex-col justify-center items-center">
                 <div className="flex items-center gap-2 mb-1">
                   <CheckCircle2 className="w-4 h-4 text-green-600" />
                   <span className="text-2xl font-black text-green-800">{correctCount}</span>
                 </div>
                 <span className="text-[10px] font-bold text-green-600 uppercase tracking-widest">Correct</span>
               </div>
-              <div className="bg-red-50 border border-red-100 rounded-none-none p-4 flex flex-col justify-center items-center">
+              <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex flex-col justify-center items-center">
                 <div className="flex items-center gap-2 mb-1">
                   <XCircle className="w-4 h-4 text-red-600" />
                   <span className="text-2xl font-black text-red-800">{wrongCount}</span>
                 </div>
                 <span className="text-[10px] font-bold text-red-600 uppercase tracking-widest">Wrong</span>
               </div>
-              <div className="bg-yellow-50 border border-yellow-100 rounded-none-none p-4 flex flex-col justify-center items-center">
+              <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4 flex flex-col justify-center items-center">
                 <div className="flex items-center gap-2 mb-1">
                   <AlertTriangle className="w-4 h-4 text-yellow-600" />
                   <span className="text-2xl font-black text-yellow-800">{skippedCount}</span>
                 </div>
                 <span className="text-[10px] font-bold text-yellow-600 uppercase tracking-widest">Skipped</span>
               </div>
-              <div className="bg-blue-50 border border-primary rounded-none-none p-4 flex flex-col justify-center items-center">
+              <div className="bg-primary/10 border border-primary/20 rounded-xl p-4 flex flex-col justify-center items-center">
                 <div className="flex items-center gap-2 mb-1">
                   <Clock className="w-4 h-4 text-primary" />
                   <span className="text-xl font-black text-primary">{formatTime(timeTaken)}</span>
@@ -527,7 +527,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
             </div>
 
             {/* Final Status Row */}
-            <div className="bg-card border border-border shadow-none-none rounded-none-none p-6 mb-8 flex justify-between items-center">
+            <div className="bg-card border border-border shadow-none-none rounded-xl p-6 mb-8 flex justify-between items-center">
               <div>
                 <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest block mb-1">Marks Obtained</span>
                 <div className="text-3xl font-black text-muted-foreground">{correctCount} <span className="text-lg text-muted-foreground font-medium">/ 30</span></div>
@@ -535,9 +535,9 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
               <div className="text-center">
                 <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest block mb-2">Status</span>
                 {isPassed ? (
-                  <span className="bg-green-100 text-green-700 px-4 py-1.5 rounded-none-full text-xs font-bold uppercase tracking-widest">✓ Passed</span>
+                  <span className="bg-green-500/20 text-green-500 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">✓ Passed</span>
                 ) : (
-                  <span className="bg-red-100 text-red-700 px-4 py-1.5 rounded-none-full text-xs font-bold uppercase tracking-widest">✗ Failed</span>
+                  <span className="bg-red-500/20 text-red-500 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">✗ Failed</span>
                 )}
               </div>
               <div className="text-right">
@@ -549,13 +549,13 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
             {/* Bottom Actions */}
             <div className="flex gap-4">
               <button
-                className="flex-1 py-4 border-2 border-border text-muted-foreground hover:bg-card font-bold rounded-none-none  flex items-center justify-center gap-2"
+                className="flex-1 py-4 border-2 border-border text-muted-foreground hover:bg-card font-bold rounded-xl  flex items-center justify-center gap-2"
               >
                 <BookOpen className="w-5 h-5" /> Review Answers
               </button>
               <button
                 onClick={startTest}
-                className="flex-1 py-4 bg-primary hover:bg-primary text-white font-bold rounded-none-none  flex items-center justify-center gap-2 shadow-none-none"
+                className="flex-1 py-4 bg-primary hover:bg-primary text-white font-bold rounded-xl  flex items-center justify-center gap-2 shadow-none-none"
               >
                 <LogOut className="w-5 h-5 rotate-180" /> Retake Test
               </button>
@@ -573,31 +573,31 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
     const isFlagged = flaggedAnswers[currentIndex];
     
     return (
-      <div className="flex flex-col h-full bg-[#f4f6fb] text-muted-foreground select-none">
+      <div className="flex flex-col h-full bg-background text-muted-foreground select-none">
         {/* TOP HEADER */}
         <header className="bg-card border-b border-border h-16 flex items-center justify-between px-6 flex-shrink-0 shadow-none-none z-10">
           <div className="flex items-center gap-6">
             <button
               onClick={() => setShowQuitConfirm(true)}
-              className="text-red-500 border border-red-200 hover:bg-red-50 text-xs font-bold px-4 py-2 rounded-none-none uppercase tracking-widest "
+              className="text-red-500 border border-red-200 hover:bg-red-50 text-xs font-bold px-4 py-2 rounded-xl uppercase tracking-widest "
             >
               Quit Test
             </button>
             <div className="flex items-center gap-3">
               <span className="text-muted-foreground text-sm font-bold w-14">Q {currentIndex + 1} / 30</span>
-              <div className="w-48 h-1.5 bg-card rounded-none-full overflow-hidden">
+              <div className="w-48 h-1.5 bg-card rounded-full overflow-hidden">
                 <div className="h-full bg-primary" style={{ width: `${((currentIndex + 1) / 30) * 100}%` }} />
               </div>
             </div>
           </div>
           
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 bg-card px-4 py-2 rounded-none-full font-bold text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 bg-card px-4 py-2 rounded-full font-bold text-sm text-muted-foreground">
               <Clock className="w-4 h-4 text-muted-foreground" />
               {formatTime(timeLeft)}
             </div>
             <div className="flex items-center gap-3 border-l border-border pl-6">
-              <div className="w-8 h-8 bg-primary text-white rounded-none-full flex items-center justify-center text-sm font-bold">
+              <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
                 {userInitial}
               </div>
               <div className="hidden md:block">
@@ -614,24 +614,24 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
             <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col">
               
               {/* Question Card */}
-              <div className="bg-card rounded-none-none shadow-none-none border border-border p-8 mb-6 relative">
+              <div className="bg-card rounded-xl shadow-none-none border border-border p-8 mb-6 relative">
                 <div className="flex justify-between items-start mb-6">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-primary text-white rounded-none-full flex items-center justify-center font-bold text-sm shadow-none-none">
+                    <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold text-sm shadow-none-none">
                       {currentIndex + 1}
                     </div>
                     <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Question <span className="text-muted-foreground font-normal ml-1">+1 Mark</span></span>
                   </div>
                   <button
                     onClick={toggleFlag}
-                    className={`flex items-center gap-2 px-3 py-1.5 border rounded-none-none text-xs font-bold tracking-widest uppercase  ${
-                      isFlagged ? 'bg-yellow-50 border-yellow-200 text-yellow-600' : 'bg-card border-border text-muted-foreground hover:bg-card'
+                    className={`flex items-center gap-2 px-3 py-1.5 border rounded-xl text-xs font-bold tracking-widest uppercase  ${
+                      isFlagged ? 'bg-yellow-500/10 border-yellow-500/20 text-yellow-500' : 'bg-card border-border text-muted-foreground hover:bg-card'
                     }`}
                   >
                     <Flag className={`w-3.5 h-3.5 ${isFlagged ? 'fill-yellow-600' : ''}`} /> Flag
                   </button>
                 </div>
-                <h2 className="text-xl font-serif font-bold text-muted-foreground leading-relaxed">
+                <h2 className="text-xl font-bold text-muted-foreground leading-relaxed">
                   {currentQuestion?.question}
                 </h2>
               </div>
@@ -644,13 +644,13 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                     <button
                       key={optIdx}
                       onClick={() => selectOption(optIdx)}
-                      className={`w-full text-left px-6 py-5 rounded-none-none border text-[15px] font-serif  flex items-center gap-4 ${
+                      className={`w-full text-left px-6 py-5 rounded-xl border text-[15px]  flex items-center gap-4 ${
                         isSelected
-                          ? "bg-blue-50/50 border-primary ring-1 ring-blue-400 shadow-none-none"
+                          ? "bg-primary/10 border-primary ring-1 ring-primary/50 shadow-none-none"
                           : "bg-card border-border hover:border-primary hover:bg-card shadow-none-none"
                       }`}
                     >
-                      <span className={`w-8 h-8 rounded-none-full border flex items-center justify-center text-xs font-bold flex-shrink-0 transition-colors ${
+                      <span className={`w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold flex-shrink-0 transition-colors ${
                         isSelected ? "border-primary text-primary bg-primary" : "border-border text-muted-foreground bg-card"
                       }`}>
                         {["A", "B", "C", "D"][optIdx]}
@@ -668,7 +668,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
               <button
                 onClick={() => setCurrentIndex((i) => Math.max(0, i - 1))}
                 disabled={currentIndex === 0}
-                className="flex items-center gap-2 text-orange-500 border border-orange-200 hover:bg-orange-50 px-5 py-2 rounded-none-none text-xs font-bold uppercase tracking-widest  disabled:opacity-40 disabled:hover:bg-transparent"
+                className="flex items-center gap-2 text-orange-500 border border-orange-200 hover:bg-orange-500/10 px-5 py-2 rounded-xl text-xs font-bold uppercase tracking-widest  disabled:opacity-40 disabled:hover:bg-transparent"
               >
                 <ChevronLeft className="w-4 h-4" /> Prev
               </button>
@@ -680,13 +680,13 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
               <div className="flex gap-3">
                 <button
                   onClick={clearAnswer}
-                  className="flex items-center gap-2 text-muted-foreground border border-border hover:bg-card px-5 py-2 rounded-none-none text-xs font-bold uppercase tracking-widest "
+                  className="flex items-center gap-2 text-muted-foreground border border-border hover:bg-card px-5 py-2 rounded-xl text-xs font-bold uppercase tracking-widest "
                 >
                   Clear & Next <ChevronRight className="w-4 h-4" />
                 </button>
                 <button
                   onClick={saveAndNext}
-                  className="flex items-center gap-2 bg-primary hover:bg-primary text-white px-6 py-2 rounded-none-none text-xs font-bold uppercase tracking-widest  shadow-none-none "
+                  className="flex items-center gap-2 bg-primary hover:bg-primary text-white px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest  shadow-none-none "
                 >
                   Save & Next <ChevronRight className="w-4 h-4" />
                 </button>
@@ -706,11 +706,11 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                     <button
                       key={i}
                       onClick={() => setCurrentIndex(i)}
-                      className={`h-10 text-xs font-bold rounded-none-none  border flex items-center justify-center relative ${
+                      className={`h-10 text-xs font-bold rounded-xl  border flex items-center justify-center relative ${
                         status === "current"
                           ? "bg-primary text-white border-primary shadow-none-none transform scale-105"
                           : status === "flagged"
-                          ? "bg-yellow-50 text-yellow-700 border-yellow-200"
+                          ? "bg-yellow-500/10 text-yellow-500 border-yellow-500/30"
                           : status === "answered"
                           ? "bg-green-500 text-white border-green-500 shadow-none-none"
                           : "bg-card text-muted-foreground border-border hover:bg-card hover:border-border"
@@ -718,7 +718,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                     >
                       {i + 1}
                       {status === "flagged" && (
-                        <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-yellow-400 border border-white rounded-none-full"></div>
+                        <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-yellow-400 border border-white rounded-full"></div>
                       )}
                     </button>
                   );
@@ -730,7 +730,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                 {[
                   { color: "bg-green-500", label: "Answered" },
                   { color: "bg-card border border-border", label: "Not Answered" },
-                  { color: "bg-yellow-100 border border-yellow-300", label: "Flagged" },
+                  { color: "bg-yellow-500/20 border border-yellow-500/30", label: "Flagged" },
                   { color: "bg-primary", label: "Current" },
                 ].map((item) => (
                   <div key={item.label} className="flex items-center gap-3">
@@ -745,7 +745,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
             <div className="p-6 border-t border-border bg-card/50">
               <button
                 onClick={() => setShowSubmitConfirm(true)}
-                className="w-full py-4 bg-primary hover:bg-primary text-white font-bold rounded-none-none flex items-center justify-center gap-2 shadow-none-none  "
+                className="w-full py-4 bg-primary hover:bg-primary text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-none-none  "
               >
                 <CheckCircle2 className="w-5 h-5" /> SUBMIT TEST
               </button>
@@ -759,15 +759,15 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
         {/* MODALS */}
         {showWarningModal && (
           <div className="fixed inset-0 bg-card/40 backdrop-blur-sm z-[999] flex items-center justify-center p-6">
-            <div className="bg-card rounded-none-none p-8 max-w-md w-full text-center shadow-none-2xl border border-orange-100">
-              <AlertTriangle className="w-16 h-16 text-orange-500 mx-auto mb-4" />
+              <div className="bg-card rounded-xl p-8 max-w-md w-full text-center shadow-none-2xl border border-red-100">
+                <AlertTriangle className="w-16 h-16 text-red-500 mx-auto mb-4" />
               <h2 className="text-xl font-black uppercase text-muted-foreground mb-3">Integrity Warning</h2>
               <p className="text-muted-foreground text-sm mb-6">{warningMessage}</p>
               <button
                 onClick={() => setShowWarningModal(false)}
-                className="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold uppercase tracking-widest rounded-none-none  shadow-none-none"
-              >
-                I Understand — Return
+                  className="w-full py-3 bg-red-500 hover:bg-red-600 text-white font-bold uppercase tracking-widest rounded-xl  shadow-none-none"
+                >
+                  I Understand — Return
               </button>
             </div>
           </div>
@@ -775,23 +775,23 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
 
         {showSubmitConfirm && (
           <div className="fixed inset-0 bg-card/40 backdrop-blur-sm z-[999] flex items-center justify-center p-6">
-            <div className="bg-card rounded-none-none p-8 max-w-md w-full text-center shadow-none-2xl">
+            <div className="bg-card rounded-xl p-8 max-w-md w-full text-center shadow-none-2xl">
               <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
               <h2 className="text-xl font-black uppercase text-muted-foreground mb-2">Submit Test?</h2>
               <p className="text-muted-foreground text-sm mb-2">
                 You have answered {answers.filter((a) => a !== null).length} of {questions.length} questions.
               </p>
-              <p className="text-orange-500 text-sm font-bold mb-6 mt-4">⚠️ This action cannot be undone.</p>
+                <p className="text-red-500 text-sm font-bold mb-6 mt-4">! This action cannot be undone.</p>
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowSubmitConfirm(false)}
-                  className="flex-1 py-3 border border-border text-muted-foreground hover:bg-card font-bold uppercase tracking-widest rounded-none-none  text-xs"
+                  className="flex-1 py-3 border border-border text-muted-foreground hover:bg-card font-bold uppercase tracking-widest rounded-xl  text-xs"
                 >
                   Review Again
                 </button>
                 <button
                   onClick={submitTest}
-                  className="flex-1 py-3 bg-green-500 hover:bg-green-600 text-white font-bold uppercase tracking-widest rounded-none-none  text-xs shadow-none-none"
+                  className="flex-1 py-3 bg-green-500 hover:bg-green-600 text-white font-bold uppercase tracking-widest rounded-xl  text-xs shadow-none-none"
                 >
                   Final Submit
                 </button>
@@ -802,7 +802,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
 
         {showQuitConfirm && (
           <div className="fixed inset-0 bg-card/40 backdrop-blur-sm z-[999] flex items-center justify-center p-6">
-            <div className="bg-card rounded-none-none p-8 max-w-md w-full text-center shadow-none-2xl">
+            <div className="bg-card rounded-xl p-8 max-w-md w-full text-center shadow-none-2xl">
               <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
               <h2 className="text-xl font-black uppercase mb-2 text-muted-foreground">Quit Test?</h2>
               <p className="text-muted-foreground text-sm mb-6">
@@ -811,13 +811,13 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowQuitConfirm(false)}
-                  className="flex-1 py-3 border border-border text-muted-foreground hover:bg-card font-bold uppercase tracking-widest rounded-none-none  text-xs"
+                  className="flex-1 py-3 border border-border text-muted-foreground hover:bg-card font-bold uppercase tracking-widest rounded-xl  text-xs"
                 >
                   Continue Test
                 </button>
                 <button
                   onClick={quitTest}
-                  className="flex-1 py-3 bg-red-500 hover:bg-red-600 text-white font-bold uppercase tracking-widest rounded-none-none  text-xs shadow-none-none"
+                  className="flex-1 py-3 bg-red-500 hover:bg-red-600 text-white font-bold uppercase tracking-widest rounded-xl  text-xs shadow-none-none"
                 >
                   Yes, Quit
                 </button>

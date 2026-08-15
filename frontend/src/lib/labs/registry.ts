@@ -33,7 +33,7 @@ const Labs: LabManifest[] = [
             title: "Sum of Natural Numbers",
             description: "Calculate the sum of first N natural numbers using a loop.",
             difficulty: "Easy",
-            thumbnailUrl: "💻"
+            thumbnailUrl: ""
         }
     },
     {
@@ -44,7 +44,7 @@ const Labs: LabManifest[] = [
             title: "Factorial of a Number",
             description: "Recursive implementation of factorial calculation.",
             difficulty: "Easy",
-            thumbnailUrl: "💻"
+            thumbnailUrl: ""
         }
     },
 
@@ -57,7 +57,7 @@ const Labs: LabManifest[] = [
             title: "Binary Search Implementation",
             description: "Efficient searching in a sorted array using binary search.",
             difficulty: "Medium",
-            thumbnailUrl: "📊"
+            thumbnailUrl: ""
         }
     },
     {
@@ -68,7 +68,7 @@ const Labs: LabManifest[] = [
             title: "Reverse an Array",
             description: "Algorithm to reverse elements of an array in-place.",
             difficulty: "Easy",
-            thumbnailUrl: "📊"
+            thumbnailUrl: ""
         }
     },
 
@@ -83,7 +83,7 @@ const Labs: LabManifest[] = [
             difficulty: "Easy",
             prerequisites: ["None"],
             estimatedTime: "30 min",
-            thumbnailUrl: "🗄️"
+            thumbnailUrl: ""
         }
     },
     {
@@ -96,7 +96,7 @@ const Labs: LabManifest[] = [
             difficulty: "Medium",
             prerequisites: ["Exp 1"],
             estimatedTime: "45 min",
-            thumbnailUrl: "🗄️"
+            thumbnailUrl: ""
         }
     },
     {
@@ -109,7 +109,7 @@ const Labs: LabManifest[] = [
             difficulty: "Hard",
             prerequisites: ["Exp 2"],
             estimatedTime: "60 min",
-            thumbnailUrl: "🗄️"
+            thumbnailUrl: ""
         }
     },
     {
@@ -122,7 +122,7 @@ const Labs: LabManifest[] = [
             difficulty: "Hard",
             prerequisites: ["Relational Model"],
             estimatedTime: "40 min",
-            thumbnailUrl: "🗄️"
+            thumbnailUrl: ""
         }
     },
     {
@@ -135,7 +135,7 @@ const Labs: LabManifest[] = [
             difficulty: "Medium",
             prerequisites: ["SQL Basics"],
             estimatedTime: "30 min",
-            thumbnailUrl: "🗄️"
+            thumbnailUrl: ""
         }
     },
 
@@ -148,7 +148,7 @@ const Labs: LabManifest[] = [
             title: "OSI vs TCP/IP Reference Models",
             description: "Comparative study of OSI 7-layer and TCP/IP 4-layer models.",
             difficulty: "Easy",
-            thumbnailUrl: "🌐"
+            thumbnailUrl: ""
         }
     },
     {
@@ -160,7 +160,7 @@ const Labs: LabManifest[] = [
             description: "Interactive simulation of Carrier Sense Multiple Access with Collision Detection.",
             difficulty: "Medium",
             prerequisites: ["cn-exp-1"],
-            thumbnailUrl: "🌐"
+            thumbnailUrl: ""
         }
     },
     {
@@ -171,7 +171,7 @@ const Labs: LabManifest[] = [
             title: "Token Bus and Token Ring Protocols",
             description: "Study of deterministic channel access using token passing mechanisms.",
             difficulty: "Medium",
-            thumbnailUrl: "🌐"
+            thumbnailUrl: ""
         }
     },
     {
@@ -182,7 +182,7 @@ const Labs: LabManifest[] = [
             title: "Sliding Window Protocols",
             description: "Visualizing Stop & Wait, Go-Back-N, and Selective Repeat flow control.",
             difficulty: "Hard",
-            thumbnailUrl: "🌐"
+            thumbnailUrl: ""
         }
     },
     {
@@ -193,7 +193,7 @@ const Labs: LabManifest[] = [
             title: "Cyclic Redundancy Check (CRC)",
             description: "Implement and verify error detection using CRC polynomials.",
             difficulty: "Medium",
-            thumbnailUrl: "🌐"
+            thumbnailUrl: ""
         }
     },
 
@@ -206,7 +206,7 @@ const Labs: LabManifest[] = [
             title: "Study and Verification of Logic Gates",
             description: "Study of basic logic gates (AND, OR, NOT, NAND, NOR, XOR, XNOR).",
             difficulty: "Easy",
-            thumbnailUrl: "⚡"
+            thumbnailUrl: ""
         }
     },
     {
@@ -217,7 +217,7 @@ const Labs: LabManifest[] = [
             title: "Half Adder and Full Adder",
             description: "Design and verification of Half Adder and Full Adder circuits.",
             difficulty: "Medium",
-            thumbnailUrl: "⚡"
+            thumbnailUrl: ""
         }
     },
     {
@@ -228,7 +228,7 @@ const Labs: LabManifest[] = [
             title: "Half Subtractor and Full Subtractor",
             description: "Design and verification of Half Subtractor and Full Subtractor circuits.",
             difficulty: "Medium",
-            thumbnailUrl: "⚡"
+            thumbnailUrl: ""
         }
     },
     {
@@ -239,7 +239,7 @@ const Labs: LabManifest[] = [
             title: "Code Conversion (Binary to Gray & Gray to Binary)",
             description: "Design 4-bit Binary to Gray and Gray to Binary code converters.",
             difficulty: "Hard",
-            thumbnailUrl: "⚡"
+            thumbnailUrl: ""
         }
     },
     {
@@ -250,7 +250,7 @@ const Labs: LabManifest[] = [
             title: "Combinational Logic Design (SOP & POS)",
             description: "Design and verify combinational logic in SOP and POS forms.",
             difficulty: "Medium",
-            thumbnailUrl: "⚡"
+            thumbnailUrl: ""
         }
     },
     {
@@ -261,7 +261,7 @@ const Labs: LabManifest[] = [
             title: "Decoder and Encoder Circuits",
             description: "Realization of 2:4 Decoder and 4:2 Encoder circuits.",
             difficulty: "Medium",
-            thumbnailUrl: "⚡"
+            thumbnailUrl: ""
         }
     },
     {
@@ -272,7 +272,7 @@ const Labs: LabManifest[] = [
             title: "Multiplexer and Demultiplexer",
             description: "Design and verify 4:1 Multiplexer and 1:4 Demultiplexer.",
             difficulty: "Medium",
-            thumbnailUrl: "⚡"
+            thumbnailUrl: ""
         }
     },
     {
@@ -283,7 +283,7 @@ const Labs: LabManifest[] = [
             title: "Comparators (1-bit & 4-bit)",
             description: "Design 1-bit comparator and study 4-bit comparator (IC 7485).",
             difficulty: "Medium",
-            thumbnailUrl: "⚡"
+            thumbnailUrl: ""
         }
     },
     {
@@ -294,7 +294,7 @@ const Labs: LabManifest[] = [
             title: "Flip-Flops and Shift Registers",
             description: "Verify SR, D, JK, T Flip-Flops and Shift Registers (SISO, SIPO, PISO, PIPO).",
             difficulty: "Hard",
-            thumbnailUrl: "⚡"
+            thumbnailUrl: ""
         }
     },
     {
@@ -305,7 +305,7 @@ const Labs: LabManifest[] = [
             title: "Synchronous and Asynchronous Counters",
             description: "Design and verify Asynchronous (Mod-n) and Synchronous counters.",
             difficulty: "Hard",
-            thumbnailUrl: "⚡"
+            thumbnailUrl: ""
         }
     },
 
@@ -318,7 +318,7 @@ const Labs: LabManifest[] = [
             title: "Introduction to Classes and Objects",
             description: "Understanding class structure, attributes, methods, and instantiation.",
             difficulty: "Easy",
-            thumbnailUrl: "💻"
+            thumbnailUrl: ""
         }
     },
     {
@@ -329,7 +329,7 @@ const Labs: LabManifest[] = [
             title: "Implementation of Inheritance",
             description: "Learn how to establish parent-child relationships between classes.",
             difficulty: "Medium",
-            thumbnailUrl: "💻"
+            thumbnailUrl: ""
         }
     },
     {
@@ -340,7 +340,7 @@ const Labs: LabManifest[] = [
             title: "Demonstration of Polymorphism",
             description: "Explore method overriding and overloading concepts.",
             difficulty: "Medium",
-            thumbnailUrl: "💻"
+            thumbnailUrl: ""
         }
     },
     {
@@ -351,7 +351,7 @@ const Labs: LabManifest[] = [
             title: "Data Encapsulation and Abstraction",
             description: "Master information hiding and abstract class design.",
             difficulty: "Hard",
-            thumbnailUrl: "💻"
+            thumbnailUrl: ""
         }
     },
 
@@ -364,7 +364,7 @@ const Labs: LabManifest[] = [
             title: "Decimal Addition & Subtraction",
             description: "Binary Coded Decimal (BCD) arithmetic using DAA instruction.",
             difficulty: "Medium",
-            thumbnailUrl: "📟"
+            thumbnailUrl: ""
         }
     },
     {
@@ -375,7 +375,7 @@ const Labs: LabManifest[] = [
             title: "Hexadecimal Addition & Subtraction",
             description: "8-bit hexadecimal arithmetic operations.",
             difficulty: "Easy",
-            thumbnailUrl: "📟"
+            thumbnailUrl: ""
         }
     },
     {
@@ -386,7 +386,7 @@ const Labs: LabManifest[] = [
             title: "Addition & Subtraction of Two BCD Numbers",
             description: "Advanced BCD operations with carry/borrow handling.",
             difficulty: "Hard",
-            thumbnailUrl: "📟"
+            thumbnailUrl: ""
         }
     },
     {
@@ -397,7 +397,7 @@ const Labs: LabManifest[] = [
             title: "Multiplication & Division of Two 8-bit Numbers",
             description: "Repeated addition and repeated subtraction methods.",
             difficulty: "Medium",
-            thumbnailUrl: "📟"
+            thumbnailUrl: ""
         }
     },
     {
@@ -408,7 +408,7 @@ const Labs: LabManifest[] = [
             title: "Find Largest & Smallest Number in an Array",
             description: "Array traversal and comparison logic.",
             difficulty: "Medium",
-            thumbnailUrl: "📟"
+            thumbnailUrl: ""
         }
     },
     {
@@ -419,7 +419,7 @@ const Labs: LabManifest[] = [
             title: "Arrange Array in Ascending Order",
             description: "Bubble sort implementation on 8085.",
             difficulty: "Hard",
-            thumbnailUrl: "📟"
+            thumbnailUrl: ""
         }
     },
     {
@@ -430,7 +430,7 @@ const Labs: LabManifest[] = [
             title: "Arrange Array in Descending Order",
             description: "Selection/Bubble sort for descending order.",
             difficulty: "Hard",
-            thumbnailUrl: "📟"
+            thumbnailUrl: ""
         }
     },
     {
@@ -441,7 +441,7 @@ const Labs: LabManifest[] = [
             title: "Hexadecimal to ASCII & Vice Versa",
             description: "Character encoding and data conversion.",
             difficulty: "Medium",
-            thumbnailUrl: "📟"
+            thumbnailUrl: ""
         }
     },
 
@@ -455,7 +455,7 @@ const Labs: LabManifest[] = [
             description: "Analyze the time complexity of Insertion Sort with different input sizes.",
             difficulty: "Medium",
             estimatedTime: "45 min",
-            thumbnailUrl: "📊"
+            thumbnailUrl: ""
         }
     }
 ];

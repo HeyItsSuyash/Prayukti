@@ -207,23 +207,23 @@ export default function ExperimentPage({ id }: { id: string }) {
 
     if (loading) {
         return (
-            <div className="flex flex-col min-h-screen items-center justify-center bg-white">
+            <div className="flex flex-col min-h-screen items-center justify-center bg-background">
                 <i className="bx bx-loader2 h-10 w-10 animate-spin text-[#059669] mb-4"  />
-                <p className="text-sm font-black uppercase tracking-[0.2em] text-gray-400">Initializing Lab Environment...</p>
+                <p className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground">Initializing Lab Environment...</p>
             </div>
         );
     }
 
     if (error || !experiment) {
         return (
-            <div className="flex flex-col min-h-screen items-center justify-center bg-white p-4 text-center">
-                <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mb-6">
+            <div className="flex flex-col min-h-screen items-center justify-center bg-background p-4 text-center">
+                <div className="w-20 h-20 bg-red-50 dark:bg-red-950/30 rounded-full flex items-center justify-center mb-6">
                     <i className="bx bx-info h-10 w-10 text-red-500"  />
                 </div>
-                <h1 className="text-3xl font-black uppercase tracking-tighter mb-2 text-slate-900">Experiment Not Found</h1>
-                <p className="text-slate-500 max-w-md mb-8">The experiment you are looking for might have been moved or deleted.</p>
+                <h1 className="text-3xl font-black uppercase tracking-tighter mb-2 text-foreground">Experiment Not Found</h1>
+                <p className="text-muted-foreground max-w-md mb-8">The experiment you are looking for might have been moved or deleted.</p>
                 <a href="/dashboard">
-                    <Button className="bg-blue-600 text-white hover:bg-blue-700 px-8 py-6 rounded-xl font-bold uppercase tracking-widest text-xs  shadow-blue-200 ">
+                    <Button className="bg-blue-600 text-white hover:bg-blue-700 px-8 py-6 rounded-xl font-bold uppercase tracking-widest text-xs shadow-blue-200 dark:shadow-none">
                         Back to Dashboard
                     </Button>
                 </a>
@@ -237,22 +237,22 @@ export default function ExperimentPage({ id }: { id: string }) {
     if (!isProgrammingLab) {
         const simLabId = experiment.slug || experiment.id || experiment._id;
         return (
-            <div className="flex flex-col h-screen bg-white overflow-hidden">
+            <div className="flex flex-col h-screen bg-background overflow-hidden">
                 {/* Top Minimal Navigation */}
-                <header className="h-12 bg-white border-b border-black/5 flex items-center justify-between px-4 z-50 flex-shrink-0">
+                <header className="h-12 bg-background border-b border-border flex items-center justify-between px-4 z-50 flex-shrink-0">
                     <div className="flex items-center gap-4">
-                        <a href="/dashboard" className="flex items-center gap-2 text-slate-400 hover:text-slate-900 transition-colors group">
-                            <div className="p-1.5 rounded-lg group-hover:bg-slate-100 ">
+                        <a href="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group">
+                            <div className="p-1.5 rounded-lg group-hover:bg-accent">
                                 <i className="bx bx-arrowleft h-3.5 w-3.5"  />
                             </div>
                             <span className="text-[10px] font-black uppercase tracking-widest">Dashboard</span>
                         </a>
-                        <div className="h-3 w-[1px] bg-slate-200" />
+                        <div className="h-3 w-[1px] bg-border" />
                         <div className="flex items-center gap-2">
-                            <Badge className="bg-blue-600 hover:bg-blue-600 text-[9px] font-black tracking-widest px-1.5 py-0">
+                            <Badge className="bg-blue-600 hover:bg-blue-600 text-[9px] font-black tracking-widest px-1.5 py-0 text-white">
                                 EXP {experiment.experimentNumber || "01"}
                             </Badge>
-                            <h1 className="text-xs font-black text-slate-900 uppercase tracking-tight truncate max-w-[300px]">
+                            <h1 className="text-xs font-black text-foreground uppercase tracking-tight truncate max-w-[300px]">
                                 {experiment.title}
                             </h1>
                         </div>
@@ -261,8 +261,8 @@ export default function ExperimentPage({ id }: { id: string }) {
 
                 {/* Tabs: Simulation + Test */}
                 <Tabs defaultValue={defaultTab} key={defaultTab} className="flex-1 flex flex-col overflow-hidden">
-                    <TabsList className="flex-shrink-0 h-10 bg-slate-50 border-b border-slate-200 rounded-none px-4 justify-start gap-1">
-                        <TabsTrigger value="simulation" className="text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-white data-[state=active]: rounded-lg h-7 px-4">
+                    <TabsList className="flex-shrink-0 h-10 bg-card border-b border-border rounded-none px-4 justify-start gap-1">
+                        <TabsTrigger value="simulation" className="text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-background data-[state=active]: rounded-lg h-7 px-4">
                             <i className="bx bx-bookopen w-3 h-3 mr-1.5"  /> Simulation
                         </TabsTrigger>
                         <TabsTrigger value="test" className="text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-orange-600 data-[state=active]:text-white rounded-lg h-7 px-4">
@@ -271,7 +271,7 @@ export default function ExperimentPage({ id }: { id: string }) {
                     </TabsList>
 
                     <TabsContent value="simulation" className="data-[state=active]:flex flex-col flex-1 overflow-y-auto mt-0 w-full">
-                        <div className="flex-1 flex flex-col bg-white min-h-min w-full">
+                        <div className="flex-1 flex flex-col bg-background min-h-min w-full">
                             <SimulationRenderer
                                 labId={simLabId}
                                 initialCode={experiment.codeTemplate}
@@ -291,27 +291,27 @@ export default function ExperimentPage({ id }: { id: string }) {
     }
 
     return (
-        <div className="flex flex-col h-screen bg-slate-100 selection:bg-blue-600 selection:text-white overflow-hidden">
+        <div className="flex flex-col h-screen bg-background selection:bg-blue-600 selection:text-white overflow-hidden">
             {/* Top Minimal Navigation */}
-            <header className="h-12 bg-white border-b border-black/5 flex items-center justify-between px-4 z-50">
+            <header className="h-12 bg-background border-b border-border flex items-center justify-between px-4 z-50">
                 <div className="flex items-center gap-4">
-                    <a href="/dashboard" className="flex items-center gap-2 text-slate-400 hover:text-slate-900 transition-colors group">
-                        <div className="p-1.5 rounded-lg group-hover:bg-slate-100 ">
+                    <a href="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group">
+                        <div className="p-1.5 rounded-lg group-hover:bg-accent ">
                             <i className="bx bx-arrowleft h-3.5 w-3.5"  />
                         </div>
                         <span className="text-[10px] font-black uppercase tracking-widest">Dashboard</span>
                     </a>
-                    <div className="h-3 w-[1px] bg-slate-200" />
+                    <div className="h-3 w-[1px] bg-border" />
                     <div className="flex items-center gap-2">
-                        <Badge className="bg-blue-600 hover:bg-blue-600 text-[9px] font-black tracking-widest px-1.5 py-0">EXP {experiment.experimentNumber || "01"}</Badge>
-                        <h1 className="text-xs font-black text-slate-900 uppercase tracking-tight truncate max-w-[300px]">{experiment.title}</h1>
+                        <Badge className="bg-blue-600 hover:bg-blue-600 text-[9px] font-black tracking-widest px-1.5 py-0 text-white">EXP {experiment.experimentNumber || "01"}</Badge>
+                        <h1 className="text-xs font-black text-foreground uppercase tracking-tight truncate max-w-[300px]">{experiment.title}</h1>
                     </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                    <div className="hidden md:flex items-center gap-1.5 px-3 py-1 bg-slate-50 rounded-full border border-slate-200/50">
+                    <div className="hidden md:flex items-center gap-1.5 px-3 py-1 bg-muted rounded-full border border-border">
                         <div className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse" />
-                        <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Auto-Saving Active</span>
+                        <span className="text-[9px] font-black text-muted-foreground uppercase tracking-widest">Auto-Saving Active</span>
                     </div>
                     <Badge variant="outline" className="border-blue-200 text-blue-600 text-[9px] font-black uppercase px-2 py-0.5 rounded-full mr-2">Pro Lab Mode</Badge>
 
@@ -328,7 +328,7 @@ export default function ExperimentPage({ id }: { id: string }) {
             </header>
 
             {/* Experiment Progress Bar */}
-            <div className="h-1 w-full bg-slate-100 relative group cursor-help">
+            <div className="h-1 w-full bg-muted relative group cursor-help">
                 <div
                     className="h-full bg-blue-600  duration-1000 ease-in-out shadow-[0_0_10px_rgba(37,99,235,0.5)]"
                     style={{ width: isCompleted ? '100%' : '65%' }}

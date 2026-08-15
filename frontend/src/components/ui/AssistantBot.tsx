@@ -87,11 +87,11 @@ export function AssistantBot() {
 
                         {/* Panel */}
                         <motion.div
-                            initial={{ x: "100%" }}
-                            animate={{ x: 0 }}
-                            exit={{ x: "100%" }}
-                            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-                            className="fixed inset-y-0 right-0 w-full md:w-[400px] bg-white  z-[101] flex flex-col"
+                            initial={{ x: '100%', opacity: 0.5 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            exit={{ x: '100%', opacity: 0 }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                            className="fixed inset-y-0 right-0 w-full md:w-[400px] bg-white dark:bg-background z-[101] flex flex-col shadow-2xl"
                         >
                             {/* Header */}
                             <div className="bg-[#021D24] p-6 flex items-center justify-between text-white border-b border-white/10">
@@ -114,7 +114,7 @@ export function AssistantBot() {
                             {/* Chat Body */}
                             <div
                                 ref={scrollRef}
-                                className="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50"
+                                className="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50 dark:bg-background"
                             >
                                 {messages.map((msg, i) => (
                                     <motion.div
@@ -130,10 +130,10 @@ export function AssistantBot() {
                                         )}
                                         <div className={`max-w-[75%] p-4 text-sm font-medium leading-relaxed ${msg.role === 'user'
                                             ? 'bg-primary text-white rounded-2xl rounded-tr-sm '
-                                            : 'bg-white text-slate-700 rounded-2xl rounded-tl-sm border border-slate-200 '
+                                            : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 rounded-2xl rounded-tl-sm border border-slate-200 dark:border-slate-800'
                                             }`}>
                                             {msg.role === 'assistant' ? (
-                                                <div className="prose prose-sm prose-slate max-w-none prose-p:mb-2 prose-p:last:mb-0">
+                                                <div className="prose prose-sm prose-slate dark:prose-invert max-w-none prose-p:mb-2 prose-p:last:mb-0">
                                                     <ReactMarkdown>
                                                         {msg.content}
                                                     </ReactMarkdown>
@@ -149,8 +149,8 @@ export function AssistantBot() {
                                         <div className="w-12 h-12 flex-shrink-0 mt-1">
                                             <img src="/prayukti 2.0/illustrations/ai_chatbot.png" alt="Bot" className="w-full h-full object-contain scale-[1.45]" />
                                         </div>
-                                        <div className="bg-white border border-slate-200 px-4 py-3 rounded-2xl rounded-tl-sm  flex items-center gap-1.5 h-10 mt-1">
-                                            <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                                        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-4 py-3 rounded-2xl rounded-tl-sm  flex items-center gap-1.5 h-10 mt-1">
+                                            <div className="w-1.5 h-1.5 bg-slate-400 dark:bg-slate-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                                             <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
                                             <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce"></div>
                                         </div>
@@ -159,15 +159,16 @@ export function AssistantBot() {
                             </div>
 
                             {/* Input Area */}
-                            <div className="p-6 bg-white border-t border-slate-100">
+                            <div className="p-6 bg-white dark:bg-background border-t border-slate-100 dark:border-slate-800">
                                 <div className="relative">
                                     <input
                                         type="text"
                                         value={input}
                                         onChange={(e) => setInput(e.target.value)}
+                                        disabled={isTyping}
                                         onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                                        placeholder="Ask me anything..."
-                                        className="w-full h-12 pl-4 pr-12 rounded-xl bg-slate-100 border-2 border-transparent focus:border-primary/50 focus:bg-white outline-none  text-sm text-slate-700 placeholder:text-slate-400"
+                                        placeholder="Ask Prayukti AI..."
+                                        className="w-full h-12 pl-4 pr-12 rounded-xl bg-slate-100 dark:bg-card border-2 border-transparent focus:border-primary/50 dark:focus:border-primary/50 focus:bg-white dark:focus:bg-slate-900 outline-none text-sm text-slate-700 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder-slate-500"
                                     />
                                     <button
                                         onClick={handleSend}

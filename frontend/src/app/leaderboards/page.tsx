@@ -58,9 +58,9 @@ export default function LeaderboardsPage() {
                                     {leaderboardData.map((user, index) => (
                                         <tr key={index} className="bg-card border-b border-border hover:bg-muted/50 transition-colors">
                                             <td className="px-6 py-4 font-medium">
-                                                {user.rank === 1 && <span className="text-yellow-500 font-bold text-lg">🥇 1</span>}
-                                                {user.rank === 2 && <span className="text-slate-400 font-bold text-lg">🥈 2</span>}
-                                                {user.rank === 3 && <span className="text-amber-600 font-bold text-lg">🥉 3</span>}
+                                                {user.rank === 1 && <span className="text-yellow-500 font-bold text-lg"> 1</span>}
+                                                {user.rank === 2 && <span className="text-slate-400 font-bold text-lg"> 2</span>}
+                                                {user.rank === 3 && <span className="text-amber-600 font-bold text-lg"> 3</span>}
                                                 {user.rank > 3 && <span className="text-foreground">#{user.rank}</span>}
                                             </td>
                                             <td className="px-6 py-4">

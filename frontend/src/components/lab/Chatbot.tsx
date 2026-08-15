@@ -145,29 +145,29 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "100%", opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white  z-50 border-l border-slate-200 flex flex-col"
+            className="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white dark:bg-background z-50 border-l border-slate-200 dark:border-slate-800 flex flex-col"
           >
             {/* Header */}
-            <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+            <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-card">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white">
                   <i className="bx bx-bot"  />
                 </div>
                 <div>
-                  <h3 className="font-bold text-black text-sm">Lab Assistant</h3>
+                  <h3 className="font-bold text-black dark:text-white text-sm">Lab Assistant</h3>
                   <div className="flex items-center gap-1.5">
                     <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                     <span className="text-xs text-slate-500 font-medium">{subject} Module</span>
                   </div>
                 </div>
               </div>
-              <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="hover:bg-slate-200 rounded-full">
+              <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full">
                 <i className="bx bx-x"  />
               </Button>
             </div>
 
             {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/50 scroll-smooth">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/50 dark:bg-background scroll-smooth">
               {messages.map((msg) => (
                 <motion.div
                   key={msg.id}
@@ -177,19 +177,19 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
                 >
                   <div
                     className={`max-w-[85%] p-3 rounded-2xl text-sm font-medium leading-relaxed ${msg.role === "user"
-                      ? "bg-black text-white rounded-br-none"
-                      : "bg-white border border-slate-200 text-slate-800 rounded-bl-none "
+                      ? "bg-black dark:bg-primary text-white rounded-br-none"
+                      : "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-none "
                       }`}
                   >
                     {msg.role === "bot" ? (
                       <ReactMarkdown
                         components={{
                           p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-                          strong: ({ children }) => <strong className="font-bold text-black underline decoration-blue-500/30 decoration-2 underline-offset-2">{children}</strong>,
+                          strong: ({ children }) => <strong className="font-bold text-black dark:text-white underline decoration-blue-500/30 decoration-2 underline-offset-2">{children}</strong>,
                           ul: ({ children }) => <ul className="list-disc ml-4 mb-2 space-y-1">{children}</ul>,
                           ol: ({ children }) => <ol className="list-decimal ml-4 mb-2 space-y-1">{children}</ol>,
                           li: ({ children }) => <li className="mb-0">{children}</li>,
-                          h1: ({ children }) => <h1 className="text-base font-bold mb-2 border-b border-slate-100 pb-1">{children}</h1>,
+                          h1: ({ children }) => <h1 className="text-base font-bold mb-2 border-b border-slate-100 dark:border-slate-800 pb-1">{children}</h1>,
                           h2: ({ children }) => <h2 className="text-sm font-bold mb-1">{children}</h2>,
                         }}
                       >
@@ -203,7 +203,7 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
               ))}
               {isTyping && (
                 <div className="flex justify-start">
-                  <div className="bg-white border border-slate-200 px-4 py-3 rounded-2xl rounded-bl-none ">
+                  <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-4 py-3 rounded-2xl rounded-bl-none ">
                     <i className="bx bx-loader2 w-4 h-4 animate-spin text-slate-400"  />
                   </div>
                 </div>
@@ -212,7 +212,7 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
             </div>
 
             {/* Input Area */}
-            <div className="p-4 bg-white border-t border-slate-100">
+            <div className="p-4 bg-white dark:bg-background border-t border-slate-100 dark:border-slate-800">
               <div className="relative flex items-center">
                 <input
                   type="text"
@@ -220,11 +220,11 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
                   placeholder="Ask a question..."
-                  className="w-full pl-4 pr-12 py-3 bg-slate-50 border-2 border-slate-100 rounded-xl focus:outline-none focus:border-black transition-colors font-medium text-sm"
+                  className="w-full pl-4 pr-12 py-3 bg-slate-50 dark:bg-card border-2 border-slate-100 dark:border-transparent rounded-xl focus:outline-none focus:border-black dark:focus:border-primary/50 transition-colors font-medium text-sm text-slate-800 dark:text-slate-200"
                 />
                 <Button
                   size="icon"
-                  className="absolute right-1 top-1 bottom-1 w-9 h-9 rounded-lg bg-black text-white hover:bg-slate-800"
+                  className="absolute right-1 top-1 bottom-1 w-9 h-9 rounded-lg bg-black dark:bg-primary text-white hover:bg-slate-800 dark:hover:bg-primary/90"
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim() || isTyping}
                 >
