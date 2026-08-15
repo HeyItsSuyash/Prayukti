@@ -72,7 +72,7 @@ export function StudentDashboard() {
             console.error('[LOGOUT] attendance API failed:', err);
         } finally {
             
-            localStorage.removeItem('vlab_user');
+            localStorage.removeItem('vlab_user'); await fetch('/api/auth/clear-cookie', { method: 'POST' }).catch(() => {});
             window.location.href = ('/login');
         }
     };

@@ -27,8 +27,11 @@ export default function DashboardPage() {
         } catch (e) {
             console.error("Failed to parse user", e);
             localStorage.removeItem('vlab_user');
-            
-            window.location.href = ('/login');
+            fetch('/api/auth/clear-cookie', { method: 'POST' })
+                .catch(() => {})
+                .finally(() => {
+                    window.location.href = '/login';
+                });
         } finally {
             setLoading(false);
         }

@@ -188,11 +188,21 @@ pub async fn signup(
     let role = payload.role.unwrap_or_else(|| "student".to_string());
 
     if let Some(user) = user_exists {
+        // Enforce 30 second cooldown for re-registration
+        if let Some(last_resent) = user.otp_last_resent_at {
+            if chrono::Utc::now() < last_resent + chrono::Duration::seconds(30) {
+                return (
+                    StatusCode::TOO_MANY_REQUESTS,
+                    Json(json!({ "message": "Please wait 30 seconds before requesting a new OTP" })),
+                );
+            }
+        }
+
         info!("[AUTH] Updating unverified user: {}", email);
         let update_res = sqlx::query(
             r#"
             UPDATE users
-            SET full_name = $1, roll_no = $2, password = $3, otp_hash = $4, otp_expiry = $5, role = $6, otp_attempts = 0
+            SET full_name = $1, roll_no = $2, password = $3, otp_hash = $4, otp_expiry = $5, role = $6, otp_attempts = 0, otp_last_resent_at = CURRENT_TIMESTAMP
             WHERE id = $7
             "#
         )
@@ -218,8 +228,8 @@ pub async fn signup(
         let new_id = Uuid::new_v4();
         let insert_res = sqlx::query(
             r#"
-            INSERT INTO users (id, full_name, roll_no, email, password, role, otp_hash, otp_expiry, otp_attempts, is_verified, enrollment_no, branch, year, semester)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 0, FALSE, $9, $10, $11, $12)
+            INSERT INTO users (id, full_name, roll_no, email, password, role, otp_hash, otp_expiry, otp_attempts, is_verified, enrollment_no, branch, year, semester, otp_last_resent_at)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 0, FALSE, $9, $10, $11, $12, CURRENT_TIMESTAMP)
             "#
         )
         .bind(new_id)
@@ -551,12 +561,12 @@ pub async fn resend_otp(
         );
     }
 
-    // Rate limiting: 1 minute cooldown
+    // Rate limiting: 30 seconds cooldown
     if let Some(last_resent) = user.otp_last_resent_at {
-        if chrono::Utc::now() < last_resent + chrono::Duration::minutes(1) {
+        if chrono::Utc::now() < last_resent + chrono::Duration::seconds(30) {
             return (
                 StatusCode::TOO_MANY_REQUESTS,
-                Json(json!({ "message": "Please wait a minute before requesting another OTP" })),
+                Json(json!({ "message": "Please wait 30 seconds before requesting another OTP" })),
             );
         }
     }
@@ -669,6 +679,16 @@ pub async fn forgot_password(
             );
         }
     };
+
+    // Rate limiting: 30 seconds cooldown
+    if let Some(last_resent) = user.otp_last_resent_at {
+        if chrono::Utc::now() < last_resent + chrono::Duration::seconds(30) {
+            return (
+                StatusCode::TOO_MANY_REQUESTS,
+                Json(json!({ "message": "Please wait 30 seconds before requesting another OTP" })),
+            );
+        }
+    }
 
     let otp = generate_otp();
     let otp_expiry = chrono::Utc::now() + chrono::Duration::minutes(state.config.otp_expiry_minutes);

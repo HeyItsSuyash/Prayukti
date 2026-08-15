@@ -150,7 +150,7 @@ export default function TeacherDashboard() {
         } catch (err) {
             console.error("Attendance logout failed:", err);
         }
-        localStorage.removeItem('vlab_user');
+        localStorage.removeItem('vlab_user'); await fetch('/api/auth/clear-cookie', { method: 'POST' }).catch(() => {});
         
         window.location.href = ('/login');
     };

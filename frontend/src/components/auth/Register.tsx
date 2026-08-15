@@ -81,7 +81,17 @@ export default function RegisterPage() {
     const [otp, setOtp] = useState("");
     const [resending, setResending] = useState(false);
     const [verifySuccess, setVerifySuccess] = useState("");
-    
+    const [resendTimer, setResendTimer] = useState(0);
+
+    useEffect(() => {
+        let timer: NodeJS.Timeout;
+        if (resendTimer > 0) {
+            timer = setTimeout(() => setResendTimer(resendTimer - 1), 1000);
+        }
+        return () => {
+            if (timer) clearTimeout(timer);
+        };
+    }, [resendTimer]);
 
     useEffect(() => {
         setIsMounted(true);
@@ -120,8 +130,7 @@ export default function RegisterPage() {
         return () => clearInterval(timer);
     }, []);
 
-    const handleRegister = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleRegister = async () => {
         setError("");
 
         if (!agreeTerms) {
@@ -144,11 +153,23 @@ export default function RegisterPage() {
             });
 
             localStorage.removeItem("registerDraft");
+            setResendTimer(30);
             setStep(4);
         } catch (err: any) {
             setError(err.response?.data?.message || "Registration failed. Please try again.");
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (step < 3) {
+            nextStep();
+        } else if (step === 3) {
+            await handleRegister();
+        } else if (step === 4) {
+            await handleVerify(e);
         }
     };
 
@@ -192,6 +213,7 @@ export default function RegisterPage() {
         try {
             await axios.post(`${API_URL}/api/auth/resend-otp`, { email }, { withCredentials: true });
             setVerifySuccess("A new OTP has been sent to your email.");
+            setResendTimer(30);
         } catch (err: any) {
             setError(err.response?.data?.message || "Failed to resend OTP.");
         } finally {
@@ -334,7 +356,7 @@ export default function RegisterPage() {
                         </div>
                     )}
 
-                    <form onSubmit={handleRegister} className="space-y-6">
+                    <form onSubmit={handleSubmit} className="space-y-6">
                         {step === 1 && (
                             <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-500">
                                 <div className="space-y-1.5">
@@ -455,7 +477,11 @@ export default function RegisterPage() {
                                 <div className="grid grid-cols-2 gap-5">
                                     <div className="space-y-1.5">
                                         <Label className="text-sm font-semibold text-slate-700 block text-left">Academic Year</Label>
-                                        <Select onValueChange={v => setYear(parseInt(v))}>
+                                        <Select onValueChange={v => {
+                                            const selectedYear = parseInt(v);
+                                            setYear(selectedYear);
+                                            setSemester(selectedYear * 2 - 1);
+                                        }}>
                                             <SelectTrigger className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white focus:ring-4 focus:ring-[#059669]/10 focus:border-[#059669]  text-sm text-slate-700 shadow-none">
                                                 <SelectValue placeholder="Year" />
                                             </SelectTrigger>
@@ -474,7 +500,7 @@ export default function RegisterPage() {
                                                 <SelectValue placeholder="Semester" />
                                             </SelectTrigger>
                                             <SelectContent className="bg-white rounded-xl border border-slate-200 shadow-[0_4px_20px_rgb(0,0,0,0.05)] text-slate-700">
-                                                {[1, 2, 3, 4, 5, 6, 7, 8].map(s => <SelectItem key={s} value={s.toString()} className="text-slate-700 focus:bg-slate-100 focus:text-slate-900">Sem {s}</SelectItem>)}
+                                                {[year * 2 - 1, year * 2].map(s => <SelectItem key={s} value={s.toString()} className="text-slate-700 focus:bg-slate-100 focus:text-slate-900">Sem {s}</SelectItem>)}
                                             </SelectContent>
                                         </Select>
                                     </div>
@@ -531,11 +557,11 @@ export default function RegisterPage() {
                                     <button
                                         type="button"
                                         onClick={handleResend}
-                                        disabled={resending}
-                                        className="text-slate-500 text-sm font-medium hover:text-[#059669] transition-colors flex items-center justify-center gap-1.5 mx-auto mt-2"
+                                        disabled={resending || resendTimer > 0}
+                                        className={`text-sm font-medium flex items-center justify-center gap-1.5 mx-auto mt-2 transition-colors ${resendTimer > 0 ? "text-slate-300 cursor-not-allowed" : "text-slate-500 hover:text-[#059669]"}`}
                                     >
                                         {resending ? <i className="bx bx-loader-alt bx-spin" /> : <i className="bx bx-refresh" />}
-                                        Resend Code
+                                        {resendTimer > 0 ? `Resend Code in ${resendTimer}s` : "Resend Code"}
                                     </button>
                                 </div>
                             </div>

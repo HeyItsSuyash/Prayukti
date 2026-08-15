@@ -60,13 +60,9 @@ async fn main() {
 
     let pool = pool.expect("Failed to connect to PostgreSQL database after 5 attempts");
 
-    info!("Running OTP security migration...");
-    sqlx::query("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_hash VARCHAR;").execute(&pool).await.expect("Migration failed (otp_hash)");
-    sqlx::query("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_attempts INT DEFAULT 0 NOT NULL;").execute(&pool).await.expect("Migration failed (otp_attempts)");
-    sqlx::query("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_resends INT DEFAULT 0 NOT NULL;").execute(&pool).await.expect("Migration failed (otp_resends)");
-    sqlx::query("ALTER TABLE users ADD COLUMN IF NOT EXISTS otp_last_resent_at TIMESTAMP WITH TIME ZONE;").execute(&pool).await.expect("Migration failed (otp_last_resent_at)");
-    sqlx::query("ALTER TABLE users DROP COLUMN IF EXISTS otp;").execute(&pool).await.expect("Migration failed (drop otp)");
-    info!("OTP security migration complete.");
+    info!("Running database migrations...");
+    sqlx::migrate!().run(&pool).await.expect("Failed to run migrations");
+    info!("Database migrations complete.");
 
     info!("Skipping seed scripts because database is already seeded...");
 

@@ -86,6 +86,13 @@ export default function LoginPage() {
                 localStorage.setItem("studentRoll", user.rollNo || "");
             }
 
+            // Sync token with Next.js middleware
+            await fetch('/api/auth/set-cookie', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token })
+            });
+
             setSuccess(true);
                 setTimeout(() => {
                     window.location.href = ("/dashboard");
@@ -128,6 +135,14 @@ export default function LoginPage() {
                     localStorage.setItem('studentName', data.user?.fullName || '');
                     localStorage.setItem('studentRoll', data.user?.rollNo || '');
                 }
+                
+                // Sync token with Next.js middleware
+                await fetch('/api/auth/set-cookie', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: data.token })
+                });
+
                 setSuccess(true);
                 setTimeout(() => {
                     window.location.href = ('/dashboard');
