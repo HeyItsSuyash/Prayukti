@@ -1,1 +1,1 @@
-backend/migrations/*.sql text eol=crlf
+backend/migrations/*.sql text eol=lf

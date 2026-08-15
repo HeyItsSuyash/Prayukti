@@ -158,7 +158,7 @@ export default function SubjectPage() {
                     <div className="flex flex-col gap-4 pl-4">
                         <h2 className="text-2xl font-bold text-foreground mb-4">List of Experiments</h2>
                         {experiments.map((exp, index) => (
-                            <div key={exp.id} className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex flex-col md:flex-row items-center p-6 gap-6 rounded-xl">
+                            <div key={exp.id} className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center p-6 gap-6 rounded-xl">
                                 
                                 <div className="flex-grow">
                                     <div className="flex items-center gap-2 mb-2">

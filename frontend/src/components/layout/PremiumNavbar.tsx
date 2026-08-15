@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -15,12 +15,24 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
     const [isScrolled, setIsScrolled] = useState(false);
     const [user, setUser] = useState<any>(null);
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const storedUser = localStorage.getItem('vlab_user');
         if (storedUser) {
             setUser(JSON.parse(storedUser));
         }
+
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsProfileMenuOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
     }, []);
 
     useMotionValueEvent(scrollY, "change", (latest) => {
@@ -101,7 +113,7 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
                 {/* CTAs */}
                 <div className="flex items-center gap-4">
                     {user ? (
-                        <div className="relative">
+                        <div className="relative" ref={dropdownRef}>
                             <div className="flex items-center gap-3 cursor-pointer" onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}>
                                 <div className="hidden md:flex items-center">
                                     <p className="text-sm font-semibold text-white">{user.fullName}</p>

@@ -19,9 +19,9 @@ function ComingSoonContent() {
 
 export default function ComingSoonPage() {
     return (
-        <main className="min-h-screen bg-[#FAFAFA] flex flex-col font-sans">
+        <main className="min-h-screen bg-background flex flex-col font-sans">
             <PremiumNavbar pathname="/coming-soon" />
-            <Suspense fallback={<div className="flex-grow pt-24 flex items-center justify-center h-[50vh]"><i className="bx bx-loader-alt bx-spin text-4xl text-[#059669]" /></div>}>
+            <Suspense fallback={<div className="flex-grow pt-24 flex items-center justify-center h-[50vh]"><i className="bx bx-loader-alt bx-spin text-4xl text-primary" /></div>}>
                 <ComingSoonContent />
             </Suspense>
             <PremiumFooter />

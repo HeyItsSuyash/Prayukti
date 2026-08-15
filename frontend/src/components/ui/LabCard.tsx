@@ -26,17 +26,21 @@ export function LabCard({ id, slug, title, description, imageSrc, comingSoon, on
                 className={`h-full flex flex-col border-border rounded-2xl overflow-hidden bg-card ${comingSoon ? 'opacity-60 grayscale-[50%]' : 'border'}`}
             >
                 <CardContent className="p-0 flex flex-col h-full relative">
-                    {comingSoon && (
-                        <div className="absolute inset-0 z-10 backdrop-blur-[2px] bg-background/20 flex flex-col items-center justify-center">
-                            <span className="bg-background border border-border text-foreground px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-sm">
-                                Coming Soon
-                            </span>
-                        </div>
-                    )}
                     <div className="w-full h-40 relative shrink-0 p-3 pb-0">
-                        <div className="w-full h-full relative overflow-hidden rounded-xl bg-slate-100">
-                            <img src={imageSrc} alt={title} className="w-full h-full object-cover" />
-                        </div>
+                        {comingSoon ? (
+                            <div className="w-full h-full relative overflow-hidden rounded-xl bg-gradient-to-br from-primary/10 via-accent/10 to-primary/5 flex flex-col items-center justify-center p-4 text-center border border-primary/20">
+                                <span className="bg-primary/10 text-primary border border-primary/20 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm mb-2">
+                                    Coming Soon
+                                </span>
+                                <span className="text-muted-foreground text-xs font-medium leading-tight">
+                                    Please be patient
+                                </span>
+                            </div>
+                        ) : (
+                            <div className="w-full h-full relative overflow-hidden rounded-xl bg-slate-100">
+                                <img src={imageSrc} alt={title} className="w-full h-full object-cover" />
+                            </div>
+                        )}
                     </div>
                     
                     <div className="p-6 flex flex-col flex-grow">
