@@ -38,7 +38,7 @@ const SECTIONS = [
     { id: "references", label: "References" }
 ];
 
-export default function ExperimentPage({ id }: { id: string }) {
+function ExperimentPageContent({ id }: { id: string }) {
     const [experiment, setExperiment] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -55,6 +55,7 @@ export default function ExperimentPage({ id }: { id: string }) {
 
     // Sidebar state
     const [activeSection, setActiveSection] = useState("aim");
+    const [simulationStarted, setSimulationStarted] = useState(false);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -238,7 +239,7 @@ export default function ExperimentPage({ id }: { id: string }) {
 
     if (isProgrammingLab) {
         return (
-            <div className="flex flex-col h-screen bg-background selection:bg-primary selection:text-primary-foreground overflow-hidden">
+            <div className="hidden md:flex flex-col h-screen bg-background selection:bg-primary selection:text-primary-foreground overflow-hidden">
                 <header className="h-12 bg-background border-b border-border flex items-center justify-between px-4 z-50">
                     <div className="flex items-center gap-4">
                         <a href="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group">
@@ -342,6 +343,40 @@ export default function ExperimentPage({ id }: { id: string }) {
                     </div>
                 );
             case "simulation":
+                if (!simulationStarted) {
+                    return (
+                        <div className="flex flex-col items-center min-h-full bg-background text-muted-foreground select-none overflow-y-auto pb-12 w-full">
+                            <div className="w-full max-w-4xl mt-8">
+                                <div className="bg-gradient-to-br from-[#021D24] to-[#059669] rounded-t-2xl p-8 text-white relative overflow-hidden">
+                                    <div className="relative z-10 flex items-start gap-4">
+                                        <div className="bg-card/20 p-3 rounded-xl backdrop-blur-sm">
+                                            <i className="bx bx-play-circle text-3xl text-white"></i>
+                                        </div>
+                                        <div>
+                                            <p className="text-white/80 font-bold tracking-widest text-xs uppercase mb-1">{subjectName}</p>
+                                            <h1 className="text-4xl font-bold text-white mb-3">{experiment.title}</h1>
+                                            <p className="text-white/80 text-sm">Interactive Simulation Overview</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div className="bg-card rounded-b-2xl shadow-none-none border border-border p-6 mb-6">
+                                    <h2 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">Simulation Details</h2>
+                                    <p className="text-muted-foreground text-sm font-medium leading-relaxed">
+                                        {experiment.description || "In this interactive simulation, you will be able to visualize and interact with the concepts discussed in the theory section. Follow the provided algorithm and observe the outcomes closely."}
+                                    </p>
+                                </div>
+
+                                <button
+                                    onClick={() => setSimulationStarted(true)}
+                                    className="w-full mt-4 py-4 bg-primary hover:bg-primary text-white font-bold rounded-xl text-lg shadow-none-none active:scale-[0.98]"
+                                >
+                                    START SIMULATION
+                                </button>
+                            </div>
+                        </div>
+                    );
+                }
                 return (
                     <div className="flex-1 flex flex-col h-full bg-background min-h-[600px] w-full">
                         <SimulationRenderer labId={simLabId} initialCode={experiment.codeTemplate} language={experiment.language} />
@@ -364,7 +399,7 @@ export default function ExperimentPage({ id }: { id: string }) {
     };
 
     return (
-        <div className="flex flex-col h-screen bg-background overflow-hidden font-sans">
+        <div className="hidden md:flex flex-col h-screen bg-background overflow-hidden font-sans">
             <header className="h-14 bg-background border-b border-border flex items-center justify-between px-6 z-50 flex-shrink-0">
                 <div className="flex items-center text-sm font-medium text-muted-foreground">
                     <a href="/dashboard" className="hover:text-primary transition-colors">Dashboard</a>
@@ -409,5 +444,30 @@ export default function ExperimentPage({ id }: { id: string }) {
                 </main>
             </div>
         </div>
+    );
+}
+
+
+export default function ExperimentPage({ id }: { id: string }) {
+    return (
+        <>
+            <div className="flex md:hidden flex-col items-center justify-center h-screen bg-background p-6 text-center z-[9999] relative">
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                    <i className="bx bx-laptop text-4xl text-primary"></i>
+                </div>
+                <h1 className="text-2xl font-black uppercase tracking-tighter mb-3 text-foreground">Larger Screen Required</h1>
+                <p className="text-muted-foreground text-sm max-w-[280px] mb-8">
+                    Smaller device widths are not able to load experiment interfaces properly. Please open this page on a tablet or desktop.
+                </p>
+                <a href="/dashboard">
+                    <Button className="bg-primary hover:bg-primary text-primary-foreground font-bold uppercase tracking-widest text-xs px-8 py-6 rounded-xl shadow-none">
+                        Back to Dashboard
+                    </Button>
+                </a>
+            </div>
+            <div className="hidden md:block h-full w-full">
+                <ExperimentPageContent id={id} />
+            </div>
+        </>
     );
 }

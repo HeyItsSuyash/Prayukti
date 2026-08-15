@@ -158,7 +158,7 @@ export default function SubjectPage() {
                         
                         <div>
                             <h3 className="text-[#059669] font-bold text-sm uppercase tracking-widest mb-1">Faculty In-Charge</h3>
-                            <p className="text-white/70 text-base font-medium">Dr. Alan Turing & Dr. Grace Hopper</p>
+                            <p className="text-white/70 text-base font-medium">Prof. to be added soon</p>
                         </div>
                     </div>
                 </main>

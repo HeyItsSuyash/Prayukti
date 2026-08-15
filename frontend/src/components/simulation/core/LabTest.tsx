@@ -464,8 +464,8 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                   </div>
                 </div>
                 <div className="text-right">
-                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Test</span>
-                  <p className="font-bold text-muted-foreground text-sm">{labTitle}</p>
+                  <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Test</span>
+                  <p className="font-bold text-white text-sm">{labTitle}</p>
                 </div>
               </div>
 
@@ -651,7 +651,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                       }`}
                     >
                       <span className={`w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold flex-shrink-0 transition-colors ${
-                        isSelected ? "border-primary text-primary bg-primary" : "border-border text-muted-foreground bg-card"
+                        isSelected ? "border-primary text-white bg-primary" : "border-border text-muted-foreground bg-card"
                       }`}>
                         {["A", "B", "C", "D"][optIdx]}
                       </span>

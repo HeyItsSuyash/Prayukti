@@ -7,7 +7,7 @@ import { ReactFlow, Controls, Background, BackgroundVariant, useNodesState, useE
 import '@xyflow/react/dist/style.css';
 import { evaluateCircuit } from '@/lib/circuit-engine';
 import { generateTruthTable, TableData } from '@/lib/table-generator';
-import { WorkspacesPanel } from '../core/WorkspacesPanel';
+import { WorkspacesPanel } from '@/components/simulation/core/WorkspacesPanel';
 
 
 // Use environment variable for API URL
