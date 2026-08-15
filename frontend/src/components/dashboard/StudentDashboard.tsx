@@ -7,7 +7,6 @@ import { useEffect, useState, useRef } from "react";
 
 import { Button } from "@/components/ui/button";
 import { PremiumNavbar } from "@/components/layout/PremiumNavbar";
-import { PremiumFooter } from "@/components/layout/PremiumFooter";
 import { RoleGuard } from "@/lib/auth/withRole";
 import { LabCard } from "@/components/ui/LabCard";
 
@@ -100,10 +99,10 @@ export function StudentDashboard() {
     };
 
     return (
-        <div className="min-h-screen bg-background font-sans transition-colors">
+        <div className="h-screen flex flex-col bg-background font-sans transition-colors overflow-hidden">
             <PremiumNavbar pathname="/dashboard" />
 
-            <main className="container mx-auto px-4 pt-28 pb-20 max-w-7xl">
+            <div className="flex-1 overflow-y-auto w-full"><main className="container mx-auto px-4 pt-28 pb-10 max-w-7xl">
                 {/* Dashboard Header */}
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                     <div className="animate-in slide-in-from-left ">
@@ -216,9 +215,8 @@ export function StudentDashboard() {
                         </p>
                     </div>
                 </div>
-            </main>
+            </main></div>
 
-            <PremiumFooter />
-        </div>
+                    </div>
     );
 }

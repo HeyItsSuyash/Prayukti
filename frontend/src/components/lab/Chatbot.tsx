@@ -128,8 +128,8 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
               <div className="absolute inset-0 bg-gradient-to-tr from-slate-900 to-slate-800"></div>
               <div className="relative z-10 flex flex-col items-center mt-1">
                 <div className="flex gap-2 mb-1">
-                  <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
-                  <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
+                  <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                  <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
                 </div>
                 <div className="w-6 h-1 bg-white rounded-full"></div>
               </div>
@@ -167,7 +167,7 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
             </div>
 
             {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/50 dark:bg-background scroll-smooth">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 dark:bg-background scroll-smooth">
               {messages.map((msg) => (
                 <motion.div
                   key={msg.id}
@@ -177,15 +177,15 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
                 >
                   <div
                     className={`max-w-[85%] p-3 rounded-2xl text-sm font-medium leading-relaxed ${msg.role === "user"
-                      ? "bg-black dark:bg-primary text-white rounded-br-none"
-                      : "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-none "
+                      ? "bg-primary text-primary-foreground rounded-br-none"
+                      : "bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-bl-none "
                       }`}
                   >
                     {msg.role === "bot" ? (
                       <ReactMarkdown
                         components={{
                           p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-                          strong: ({ children }) => <strong className="font-bold text-black dark:text-white underline decoration-blue-500/30 decoration-2 underline-offset-2">{children}</strong>,
+                          strong: ({ children }) => <strong className="font-bold text-black dark:text-white underline decoration-primary/30 decoration-2 underline-offset-2">{children}</strong>,
                           ul: ({ children }) => <ul className="list-disc ml-4 mb-2 space-y-1">{children}</ul>,
                           ol: ({ children }) => <ol className="list-decimal ml-4 mb-2 space-y-1">{children}</ol>,
                           li: ({ children }) => <li className="mb-0">{children}</li>,
@@ -220,7 +220,7 @@ export function Chatbot({ subject = "General", labTitle }: ChatbotProps) {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
                   placeholder="Ask a question..."
-                  className="w-full pl-4 pr-12 py-3 bg-slate-50 dark:bg-card border-2 border-slate-100 dark:border-transparent rounded-xl focus:outline-none focus:border-black dark:focus:border-primary/50 transition-colors font-medium text-sm text-slate-800 dark:text-slate-200"
+                  className="w-full pl-4 pr-12 py-3 bg-slate-100 dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:border-primary transition-colors font-medium text-sm text-slate-800 dark:text-slate-200 placeholder:text-slate-500"
                 />
                 <Button
                   size="icon"

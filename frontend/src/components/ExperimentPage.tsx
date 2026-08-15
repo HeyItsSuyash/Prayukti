@@ -1,26 +1,49 @@
 "use client";
 
 import { API_URL } from "@/lib/config";
-
-import { useState, useEffect, useRef } from "react";
-
+import { useState, useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SimulationRenderer from "@/components/simulation/SimulationRenderer";
-
 import { ExecutionInsights } from "@/components/simulation/core/ExecutionInsights";
 import CodeCompiler from "@/components/simulation/core/CodeCompiler";
 import LabTest from "@/components/simulation/core/LabTest";
-import { Navbar } from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import { ChevronRight } from "lucide-react";
 
+const getSubjectName = (id: string) => {
+    const lower = id.toLowerCase();
+    if (lower.startsWith('cn')) return "Computer Networks";
+    if (lower.startsWith('dsa') || lower.startsWith('data')) return "Data Structures & Algorithms";
+    if (lower.startsWith('dbms')) return "Database Management Systems";
+    if (lower.startsWith('oops') || lower.startsWith('java')) return "Object Oriented Programming";
+    if (lower.startsWith('dld') || lower.startsWith('digital')) return "Digital Logic Design";
+    if (lower.startsWith('os')) return "Operating Systems";
+    if (lower.startsWith('mpmc') || lower.startsWith('micro')) return "Microprocessors & Microcontrollers";
+    if (lower.startsWith('daa')) return "Design & Analysis of Algorithms";
+    if (lower.startsWith('pds')) return "Programming & Data Structures";
+    if (lower.startsWith('cd')) return "Compiler Design";
+    if (lower.startsWith('ot')) return "Optimization Techniques";
+    if (lower.startsWith('bee')) return "Basic Electrical Engineering";
+    if (lower.startsWith('coa') || lower.startsWith('aca')) return "Computer Organization & Architecture";
+    if (lower.startsWith('error-detection')) return "Error Detection";
+    return "Virtual Lab Assessment";
+};
+
+const SECTIONS = [
+    { id: "aim", label: "Aim" },
+    { id: "theory", label: "Theory" },
+    { id: "simulation", label: "Simulation" },
+    { id: "test", label: "Test" },
+    { id: "references", label: "References" }
+];
 
 export default function ExperimentPage({ id }: { id: string }) {
     const [experiment, setExperiment] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    
+    // IDE state
     const [output, setOutput] = useState<any>(null);
     const [isRunning, setIsRunning] = useState(false);
     const [isCompleted, setIsCompleted] = useState(false);
@@ -29,15 +52,18 @@ export default function ExperimentPage({ id }: { id: string }) {
     const [compilerError, setCompilerError] = useState<string | null>(null);
     const [customInput, setCustomInput] = useState("");
     const [complexityData, setComplexityData] = useState<any>(null);
-    // Read sessionStorage flag set by "Take Test" button on subject page
-    const [defaultTab, setDefaultTab] = useState("simulation");
+
+    // Sidebar state
+    const [activeSection, setActiveSection] = useState("aim");
 
     useEffect(() => {
         if (typeof window !== "undefined") {
             const intent = sessionStorage.getItem("openTab");
             if (intent) {
-                setDefaultTab(intent);
-                sessionStorage.removeItem("openTab"); // clear after reading
+                // Map 'test' intent to test
+                if (intent === 'test') setActiveSection('test');
+                else setActiveSection(intent);
+                sessionStorage.removeItem("openTab");
             }
         }
     }, []);
@@ -83,7 +109,8 @@ export default function ExperimentPage({ id }: { id: string }) {
                         title: fallbackTitle,
                         description: "Interactive Simulation Environment",
                         compilerEnabled: false,
-                        theory: "Interact with the simulation to learn the concepts.",
+                        theory: "Detailed theory will be populated here.",
+                        aim: "To study and analyze the core concepts of this experiment.",
                         algorithm: "1. Follow on-screen instructions.\n2. Observe output."
                     });
                     setError(null);
@@ -97,9 +124,7 @@ export default function ExperimentPage({ id }: { id: string }) {
                     applyFallback();
                 }
             } catch (err) {
-                // Fallback for when backend DB connection fails locally (network error)
                 console.warn("[VLAB] Network Error fetching experiment, applying fallback for ID:", id);
-                
                 let fallbackTitle = "Experiment Simulation";
                 if (id === 'cn-exp-1') fallbackTitle = 'OSI vs TCP/IP Reference Models';
                 else if (id === 'cn-exp-2') fallbackTitle = 'CSMA/CD Protocol Simulation';
@@ -124,7 +149,8 @@ export default function ExperimentPage({ id }: { id: string }) {
                     title: fallbackTitle,
                     description: "Interactive Simulation Environment",
                     compilerEnabled: false,
-                    theory: "Interact with the simulation to learn the concepts.",
+                    theory: "Detailed theory will be populated here.",
+                    aim: "To study and analyze the core concepts of this experiment.",
                     algorithm: "1. Follow on-screen instructions.\n2. Observe output."
                 });
                 setError(null);
@@ -139,29 +165,19 @@ export default function ExperimentPage({ id }: { id: string }) {
         setIsRunning(true);
         setCompilerError(null);
         setOutput(null);
-        setComplexityData(null); // Clear old analysis when code changes
+        setComplexityData(null);
 
         try {
-            console.log(`[VLAB] Running ${currentLanguage} on ${API_URL}`);
             const res = await fetch(`${API_URL}/api/code/run`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    code,
-                    language: currentLanguage.toLowerCase(),
-                    input: customInput
-                })
+                body: JSON.stringify({ code, language: currentLanguage.toLowerCase(), input: customInput })
             });
 
             const data = await res.json();
-
-            if (res.ok) {
-                setOutput(data);
-            } else {
-                setCompilerError(data.error || "Execution failed");
-            }
+            if (res.ok) setOutput(data);
+            else setCompilerError(data.error || "Execution failed");
         } catch (err) {
-            console.error("[VLAB ERROR]", err);
             setCompilerError("Network Error: Could not connect to compiler service.");
         } finally {
             setIsRunning(false);
@@ -171,34 +187,22 @@ export default function ExperimentPage({ id }: { id: string }) {
     const handleAnalyzeComplexity = async () => {
         setIsRunning(true);
         setCompilerError(null);
-
         try {
-            // Generate test inputs for N = 1000, 10000, 50000, 100000
             const inputs = [
                 { label: "N=1,000", size: 1000, input: "1000" },
                 { label: "N=10,000", size: 10000, input: "10000" },
                 { label: "N=50,000", size: 50000, input: "50000" },
                 { label: "N=100,000", size: 100000, input: "100000" }
             ];
-
             const res = await fetch(`${API_URL}/api/code/complexity`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    code,
-                    language: currentLanguage.toLowerCase(),
-                    inputs
-                })
+                body: JSON.stringify({ code, language: currentLanguage.toLowerCase(), inputs })
             });
-
             const data = await res.json();
-            if (res.ok) {
-                setComplexityData(data);
-            } else {
-                setCompilerError(data.error || "Complexity analysis failed");
-            }
+            if (res.ok) setComplexityData(data);
+            else setCompilerError(data.error || "Complexity analysis failed");
         } catch (err) {
-            console.error("[COMPLEXITY ERROR]", err);
             setCompilerError("Network Error: Could not connect to complexity service.");
         } finally {
             setIsRunning(false);
@@ -207,9 +211,8 @@ export default function ExperimentPage({ id }: { id: string }) {
 
     if (loading) {
         return (
-            <div className="flex flex-col min-h-screen items-center justify-center bg-background">
-                <i className="bx bx-loader2 h-10 w-10 animate-spin text-[#059669] mb-4"  />
-                <p className="text-sm font-black uppercase tracking-[0.2em] text-muted-foreground">Initializing Lab Environment...</p>
+            <div className="flex flex-col min-h-screen items-center justify-center bg-transparent">
+                <i className="bx bx-loader2 h-10 w-10 animate-spin text-primary mb-4" />
             </div>
         );
     }
@@ -217,13 +220,13 @@ export default function ExperimentPage({ id }: { id: string }) {
     if (error || !experiment) {
         return (
             <div className="flex flex-col min-h-screen items-center justify-center bg-background p-4 text-center">
-                <div className="w-20 h-20 bg-red-50 dark:bg-red-950/30 rounded-full flex items-center justify-center mb-6">
-                    <i className="bx bx-info h-10 w-10 text-red-500"  />
+                <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mb-6">
+                    <i className="bx bx-info h-10 w-10 text-red-500" />
                 </div>
                 <h1 className="text-3xl font-black uppercase tracking-tighter mb-2 text-foreground">Experiment Not Found</h1>
                 <p className="text-muted-foreground max-w-md mb-8">The experiment you are looking for might have been moved or deleted.</p>
                 <a href="/dashboard">
-                    <Button className="bg-blue-600 text-white hover:bg-blue-700 px-8 py-6 rounded-xl font-bold uppercase tracking-widest text-xs shadow-blue-200 dark:shadow-none">
+                    <Button className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 rounded-xl font-bold uppercase tracking-widest text-xs">
                         Back to Dashboard
                     </Button>
                 </a>
@@ -231,139 +234,180 @@ export default function ExperimentPage({ id }: { id: string }) {
         );
     }
 
-    // Safety Check: Use 3-Panel Layout only for programming labs
     const isProgrammingLab = experiment.compilerEnabled === true || !!experiment.codeTemplate;
 
-    if (!isProgrammingLab) {
-        const simLabId = experiment.slug || experiment.id || experiment._id;
+    if (isProgrammingLab) {
         return (
-            <div className="flex flex-col h-screen bg-background overflow-hidden">
-                {/* Top Minimal Navigation */}
-                <header className="h-12 bg-background border-b border-border flex items-center justify-between px-4 z-50 flex-shrink-0">
+            <div className="flex flex-col h-screen bg-background selection:bg-primary selection:text-primary-foreground overflow-hidden">
+                <header className="h-12 bg-background border-b border-border flex items-center justify-between px-4 z-50">
                     <div className="flex items-center gap-4">
                         <a href="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group">
                             <div className="p-1.5 rounded-lg group-hover:bg-accent">
-                                <i className="bx bx-arrowleft h-3.5 w-3.5"  />
+                                <i className="bx bx-arrowleft h-3.5 w-3.5" />
                             </div>
                             <span className="text-[10px] font-black uppercase tracking-widest">Dashboard</span>
                         </a>
                         <div className="h-3 w-[1px] bg-border" />
                         <div className="flex items-center gap-2">
-                            <Badge className="bg-blue-600 hover:bg-blue-600 text-[9px] font-black tracking-widest px-1.5 py-0 text-white">
-                                EXP {experiment.experimentNumber || "01"}
-                            </Badge>
-                            <h1 className="text-xs font-black text-foreground uppercase tracking-tight truncate max-w-[300px]">
-                                {experiment.title}
-                            </h1>
+                            <Badge className="bg-primary hover:bg-primary text-[9px] font-black tracking-widest px-1.5 py-0 text-primary-foreground">EXP {experiment.experimentNumber || "01"}</Badge>
+                            <h1 className="text-xs font-black text-foreground uppercase tracking-tight truncate max-w-[300px]">{experiment.title}</h1>
                         </div>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                        <div className="hidden md:flex items-center gap-1.5 px-3 py-1 bg-muted rounded-full border border-border">
+                            <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                            <span className="text-[9px] font-black text-muted-foreground uppercase tracking-widest">Auto-Saving Active</span>
+                        </div>
+                        <Badge variant="outline" className="border-primary/50 text-primary text-[9px] font-black uppercase px-2 py-0.5 rounded-full mr-2">Pro Lab Mode</Badge>
+
+                        <Button
+                            size="sm"
+                            onClick={handleRun}
+                            disabled={isRunning}
+                            className="bg-primary hover:bg-primary/90 text-primary-foreground h-8 px-4 font-black text-[10px] uppercase tracking-widest rounded-lg"
+                        >
+                            {isRunning ? <i className="bx bx-loader2 h-3 w-3 animate-spin mr-2" /> : <i className="bx bx-play-circle h-3 w-3 mr-2" />}
+                            {isRunning ? 'Compiling' : 'Run Experiment'}
+                        </Button>
                     </div>
                 </header>
 
-                {/* Tabs: Simulation + Test */}
-                <Tabs defaultValue={defaultTab} key={defaultTab} className="flex-1 flex flex-col overflow-hidden">
-                    <TabsList className="flex-shrink-0 h-10 bg-card border-b border-border rounded-none px-4 justify-start gap-1">
-                        <TabsTrigger value="simulation" className="text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-background data-[state=active]: rounded-lg h-7 px-4">
-                            <i className="bx bx-bookopen w-3 h-3 mr-1.5"  /> Simulation
-                        </TabsTrigger>
-                        <TabsTrigger value="test" className="text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-orange-600 data-[state=active]:text-white rounded-lg h-7 px-4">
-                            <i className="bx bx-clipboardlist w-3 h-3 mr-1.5"  /> Take Test · 30Q
-                        </TabsTrigger>
-                    </TabsList>
+                <div className="h-1 w-full bg-muted relative group cursor-help">
+                    <div className="h-full bg-primary duration-1000 ease-in-out" style={{ width: isCompleted ? '100%' : '65%' }} />
+                </div>
 
-                    <TabsContent value="simulation" className="data-[state=active]:flex flex-col flex-1 overflow-y-auto mt-0 w-full">
-                        <div className="flex-1 flex flex-col bg-background min-h-min w-full">
-                            <SimulationRenderer
-                                labId={simLabId}
-                                initialCode={experiment.codeTemplate}
-                                language={experiment.language}
-                            />
-                        </div>
-                    </TabsContent>
-
-                    <TabsContent value="test" className="data-[state=active]:flex flex-col flex-1 overflow-y-auto mt-0 w-full">
-                        <div className="flex-1 min-h-min w-full">
-                            <LabTest labId={simLabId} labTitle={experiment.title} />
-                        </div>
-                    </TabsContent>
-                </Tabs>
+                <main className="flex-1 flex overflow-hidden">
+                    <div className="flex-1 flex flex-col bg-[#1e1e1e] relative z-10 overflow-hidden border-x border-black/10">
+                        <CodeCompiler
+                            labId={experiment._id}
+                            code={code}
+                            setCode={setCode}
+                            currentLanguage={currentLanguage}
+                            setLanguage={setCurrentLanguage}
+                            output={output}
+                            setOutput={setOutput}
+                            isRunning={isRunning}
+                            setIsRunning={setIsRunning}
+                            handleRun={handleRun}
+                            error={compilerError}
+                            setError={setCompilerError}
+                            customInput={customInput}
+                            setCustomInput={setCustomInput}
+                        />
+                    </div>
+                    <ExecutionInsights output={output} isRunning={isRunning} complexityData={complexityData} onAnalyzeComplexity={handleAnalyzeComplexity} />
+                </main>
             </div>
         );
     }
 
-    return (
-        <div className="flex flex-col h-screen bg-background selection:bg-blue-600 selection:text-white overflow-hidden">
-            {/* Top Minimal Navigation */}
-            <header className="h-12 bg-background border-b border-border flex items-center justify-between px-4 z-50">
-                <div className="flex items-center gap-4">
-                    <a href="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group">
-                        <div className="p-1.5 rounded-lg group-hover:bg-accent ">
-                            <i className="bx bx-arrowleft h-3.5 w-3.5"  />
+    const simLabId = experiment.slug || experiment.id || experiment._id;
+    const subjectName = getSubjectName(simLabId);
+
+    const renderContent = () => {
+        switch (activeSection) {
+            case "aim":
+                return (
+                    <div className="p-8 max-w-4xl">
+                        <h2 className="text-2xl font-bold mb-6 underline decoration-primary/50 underline-offset-8">Aim</h2>
+                        
+                        <div className="mb-8">
+                            <h3 className="text-lg font-bold mb-2">Estimated Time</h3>
+                            <p className="text-muted-foreground">1 hour</p>
                         </div>
-                        <span className="text-[10px] font-black uppercase tracking-widest">Dashboard</span>
-                    </a>
-                    <div className="h-3 w-[1px] bg-border" />
-                    <div className="flex items-center gap-2">
-                        <Badge className="bg-blue-600 hover:bg-blue-600 text-[9px] font-black tracking-widest px-1.5 py-0 text-white">EXP {experiment.experimentNumber || "01"}</Badge>
-                        <h1 className="text-xs font-black text-foreground uppercase tracking-tight truncate max-w-[300px]">{experiment.title}</h1>
+                        
+                        <div>
+                            <h3 className="text-lg font-bold mb-2">Learning Objective of the Experiment</h3>
+                            <p className="text-muted-foreground whitespace-pre-wrap">{experiment.aim || "To study and analyze the core concepts of this experiment."}</p>
+                        </div>
                     </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                    <div className="hidden md:flex items-center gap-1.5 px-3 py-1 bg-muted rounded-full border border-border">
-                        <div className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse" />
-                        <span className="text-[9px] font-black text-muted-foreground uppercase tracking-widest">Auto-Saving Active</span>
+                );
+            case "theory":
+                return (
+                    <div className="p-8 max-w-4xl">
+                        <h2 className="text-2xl font-bold mb-6 underline decoration-primary/50 underline-offset-8">Theory</h2>
+                        <div className="prose dark:prose-invert max-w-none text-muted-foreground whitespace-pre-wrap">
+                            This is a dummy sample theory. Newton's law of universal gravitation states that every particle attracts every other particle in the universe with a force proportional to the product of their masses and inversely proportional to the square of the distance between their centers. The formula is F = G(m1m2)/r². This foundational concept revolutionized our understanding of celestial mechanics and the fundamental forces of nature.
+                        </div>
                     </div>
-                    <Badge variant="outline" className="border-blue-200 text-blue-600 text-[9px] font-black uppercase px-2 py-0.5 rounded-full mr-2">Pro Lab Mode</Badge>
+                );
+            case "procedure":
+                return (
+                    <div className="p-8 max-w-4xl">
+                        <h2 className="text-2xl font-bold mb-6 underline decoration-primary/50 underline-offset-8">Procedure</h2>
+                        <div className="prose dark:prose-invert max-w-none text-muted-foreground whitespace-pre-wrap">
+                            {experiment.algorithm || "1. Read the theory carefully.\n2. Proceed to the simulation section.\n3. Interact with the simulation environment.\n4. Complete the posttest to evaluate your learning."}
+                        </div>
+                    </div>
+                );
+            case "simulation":
+                return (
+                    <div className="flex-1 flex flex-col h-full bg-background min-h-[600px] w-full">
+                        <SimulationRenderer labId={simLabId} initialCode={experiment.codeTemplate} language={experiment.language} />
+                    </div>
+                );
+            case "test":
+                return (
+                    <div className="flex-1 flex flex-col h-full">
+                        <LabTest labId={simLabId} labTitle={experiment.title} />
+                    </div>
+                );
+            default:
+                return (
+                    <div className="p-8 max-w-4xl">
+                        <h2 className="text-2xl font-bold mb-6 underline decoration-primary/50 underline-offset-8 capitalize">{activeSection}</h2>
+                        <p className="text-muted-foreground italic">Content for {activeSection} is currently being updated for {experiment.title}.</p>
+                    </div>
+                );
+        }
+    };
 
-                    <Button
-                        size="sm"
-                        onClick={handleRun}
-                        disabled={isRunning}
-                        className="bg-blue-600 hover:bg-blue-700 text-white h-8 px-4 font-black text-[10px] uppercase tracking-widest  rounded-lg  shadow-blue-500/20"
-                    >
-                        {isRunning ? <i className="bx bx-loader2 h-3 w-3 animate-spin mr-2"  /> : <i className="bx bx-play-circle h-3 w-3 mr-2"  />}
-                        {isRunning ? 'Compiling' : 'Run Experiment'}
-                    </Button>
+    return (
+        <div className="flex flex-col h-screen bg-background overflow-hidden font-sans">
+            <header className="h-14 bg-background border-b border-border flex items-center justify-between px-6 z-50 flex-shrink-0">
+                <div className="flex items-center text-sm font-medium text-muted-foreground">
+                    <a href="/dashboard" className="hover:text-primary transition-colors">Dashboard</a>
+                    <ChevronRight className="w-4 h-4 mx-2" />
+                    <span className="hover:text-primary transition-colors cursor-pointer">{subjectName}</span>
+                    <ChevronRight className="w-4 h-4 mx-2" />
+                    <span className="text-foreground font-semibold">Experiments</span>
                 </div>
             </header>
 
-            {/* Experiment Progress Bar */}
-            <div className="h-1 w-full bg-muted relative group cursor-help">
-                <div
-                    className="h-full bg-blue-600  duration-1000 ease-in-out shadow-[0_0_10px_rgba(37,99,235,0.5)]"
-                    style={{ width: isCompleted ? '100%' : '65%' }}
-                />
+            <div className="flex flex-1 overflow-hidden">
+                <aside className="w-64 bg-card border-r border-border flex flex-col flex-shrink-0 overflow-y-auto">
+                    <div className="py-4">
+                        {SECTIONS.map((section) => (
+                            <button
+                                key={section.id}
+                                onClick={() => setActiveSection(section.id)}
+                                className={`w-full text-left px-8 py-4 text-base font-semibold transition-colors ${
+                                    activeSection === section.id 
+                                        ? "text-primary border-l-4 border-primary bg-primary/10" 
+                                        : "text-muted-foreground hover:bg-muted border-l-4 border-transparent hover:border-primary/30"
+                                }`}
+                            >
+                                {section.label}
+                            </button>
+                        ))}
+                    </div>
+                </aside>
+
+                <main className="flex-1 flex flex-col overflow-y-auto bg-background">
+                    {/* Common Title Header for non-fullscreen tabs */}
+                    {["simulation", "test"].includes(activeSection) ? null : (
+                        <div className="w-full text-center py-8 bg-card border-b border-border">
+                            <h1 className="text-3xl font-black uppercase tracking-tighter text-primary">{subjectName}</h1>
+                            <p className="text-muted-foreground font-semibold mt-2 text-lg">Experiment {experiment.experimentNumber || "01"} • {experiment.title}</p>
+                        </div>
+                    )}
+                    
+                    <div className="flex-1 flex flex-col">
+                        {renderContent()}
+                    </div>
+                </main>
             </div>
-
-            <main className="flex-1 flex overflow-hidden">
-                {/* CENTER PANEL: Professional Workbench (75%) */}
-                <div className="flex-1 flex flex-col bg-[#1e1e1e] relative z-10  overflow-hidden border-x border-black/10">
-                    <CodeCompiler
-                        labId={experiment._id}
-                        code={code}
-                        setCode={setCode}
-                        currentLanguage={currentLanguage}
-                        setLanguage={setCurrentLanguage}
-                        output={output}
-                        setOutput={setOutput}
-                        isRunning={isRunning}
-                        setIsRunning={setIsRunning}
-                        handleRun={handleRun}
-                        error={compilerError}
-                        setError={setCompilerError}
-                        customInput={customInput}
-                        setCustomInput={setCustomInput}
-                    />
-                </div>
-
-                {/* RIGHT PANEL: Execution Insights (25%) */}
-                <ExecutionInsights
-                    output={output}
-                    isRunning={isRunning}
-                    complexityData={complexityData}
-                    onAnalyzeComplexity={handleAnalyzeComplexity}
-                />
-            </main>
         </div>
     );
 }

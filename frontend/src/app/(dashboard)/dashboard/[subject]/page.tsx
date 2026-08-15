@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { PremiumNavbar } from "@/components/layout/PremiumNavbar";
-import { PremiumFooter } from "@/components/layout/PremiumFooter";
 
 import { API_URL } from "@/lib/config";
 import { Button } from "@/components/ui/button";
@@ -124,10 +123,11 @@ export default function SubjectPage() {
     const bgImage = `url('${getHeroImage(subjectSlug?.toLowerCase() || "")}')`;
 
     return (
-        <div className="min-h-screen bg-background font-sans">
+        <div className="h-screen flex flex-col bg-background font-sans overflow-hidden">
             <PremiumNavbar pathname={`/dashboard/${subjectSlug}`} />
 
             {/* Hero Section with BG Image */}
+            <div className="flex-1 overflow-y-auto w-full">
             <div 
                 className="text-white pt-32 pb-24 px-4 bg-cover bg-center relative"
                 style={{ backgroundImage: bgImage }}
@@ -219,8 +219,7 @@ export default function SubjectPage() {
                     </div>
                 )}
             </main>
-
-            <PremiumFooter />
+            </div>
         </div>
     );
 }

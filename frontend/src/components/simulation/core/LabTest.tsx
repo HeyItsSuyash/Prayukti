@@ -48,8 +48,8 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
   const [warningMessage, setWarningMessage] = useState("");
   const [showSubmitConfirm, setShowSubmitConfirm] = useState(false);
   const [showQuitConfirm, setShowQuitConfirm] = useState(false);
-  const [userEmail, setUserEmail] = useState("student@university.ac.in");
-  const [userName, setUserName] = useState("Student User");
+  const [userEmail, setUserEmail] = useState("suyash@university.ac.in");
+  const [userName, setUserName] = useState("Suyash");
   const [userInitial, setUserInitial] = useState("S");
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -330,7 +330,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
         <div className="flex flex-col items-center min-h-full bg-background text-muted-foreground select-none overflow-y-auto pb-12">
           {/* Header Banner */}
           <div className="w-full max-w-4xl mt-8">
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-t-2xl p-8 text-white relative overflow-hidden">
+            <div className="bg-gradient-to-br from-[#021D24] to-[#059669] rounded-t-2xl p-8 text-white relative overflow-hidden">
               <div className="absolute top-[-20%] right-[-10%] opacity-10">
                 <BookOpen className="w-64 h-64" />
               </div>
@@ -339,9 +339,9 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                   <BookOpen className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <p className="text-primary font-bold tracking-widest text-xs uppercase mb-1">{getSubjectName(labId)}</p>
+                  <p className="text-white/80 font-bold tracking-widest text-xs uppercase mb-1">{getSubjectName(labId)}</p>
                   <h1 className="text-4xl font-bold text-white mb-3">{labTitle}</h1>
-                  <p className="text-primary text-sm">Chapter Test • Online Assessment</p>
+                  <p className="text-white/80 text-sm">Chapter Test • Online Assessment</p>
                 </div>
               </div>
             </div>
@@ -625,10 +625,10 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                   <button
                     onClick={toggleFlag}
                     className={`flex items-center gap-2 px-3 py-1.5 border rounded-xl text-xs font-bold tracking-widest uppercase  ${
-                      isFlagged ? 'bg-yellow-500/10 border-yellow-500/20 text-yellow-500' : 'bg-card border-border text-muted-foreground hover:bg-card'
+                      isFlagged ? 'bg-yellow-500 border-yellow-600 text-black' : 'bg-card border-border text-muted-foreground hover:bg-card'
                     }`}
                   >
-                    <Flag className={`w-3.5 h-3.5 ${isFlagged ? 'fill-yellow-600' : ''}`} /> Flag
+                    <Flag className={`w-3.5 h-3.5 ${isFlagged ? 'fill-black' : ''}`} /> Flag
                   </button>
                 </div>
                 <h2 className="text-xl font-bold text-muted-foreground leading-relaxed">
@@ -646,7 +646,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                       onClick={() => selectOption(optIdx)}
                       className={`w-full text-left px-6 py-5 rounded-xl border text-[15px]  flex items-center gap-4 ${
                         isSelected
-                          ? "bg-primary/10 border-primary ring-1 ring-primary/50 shadow-none-none"
+                          ? "border-primary bg-card ring-1 ring-primary/50 shadow-none-none"
                           : "bg-card border-border hover:border-primary hover:bg-card shadow-none-none"
                       }`}
                     >
@@ -655,7 +655,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                       }`}>
                         {["A", "B", "C", "D"][optIdx]}
                       </span>
-                      <span className={`${isSelected ? 'text-primary font-medium' : 'text-muted-foreground'}`}>{option}</span>
+                      <span className={`${isSelected ? 'text-primary font-bold' : 'text-muted-foreground'}`}>{option}</span>
                     </button>
                   );
                 })}
@@ -710,7 +710,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                         status === "current"
                           ? "bg-primary text-white border-primary shadow-none-none transform scale-105"
                           : status === "flagged"
-                          ? "bg-yellow-500/10 text-yellow-500 border-yellow-500/30"
+                          ? "bg-yellow-500 text-black border-yellow-600"
                           : status === "answered"
                           ? "bg-green-500 text-white border-green-500 shadow-none-none"
                           : "bg-card text-muted-foreground border-border hover:bg-card hover:border-border"
@@ -730,7 +730,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
                 {[
                   { color: "bg-green-500", label: "Answered" },
                   { color: "bg-card border border-border", label: "Not Answered" },
-                  { color: "bg-yellow-500/20 border border-yellow-500/30", label: "Flagged" },
+                  { color: "bg-yellow-500 border border-yellow-600", label: "Flagged" },
                   { color: "bg-primary", label: "Current" },
                 ].map((item) => (
                   <div key={item.label} className="flex items-center gap-3">

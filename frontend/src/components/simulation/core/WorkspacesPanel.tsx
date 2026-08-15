@@ -261,7 +261,7 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
             <div className="flex-1 overflow-auto p-4 bg-card">
                 {loading && (
                     <div className="flex flex-col items-center justify-center h-full text-muted-foreground space-y-2">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-500"></div>
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                         <span className="text-xs">Analyzing Circuit Logic...</span>
                     </div>
                 )}
