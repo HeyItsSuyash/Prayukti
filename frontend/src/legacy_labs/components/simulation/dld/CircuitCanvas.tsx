@@ -539,11 +539,10 @@ export default function CircuitCanvas({
                 >
                     <Controls className="!bg-card !border-border !shadow-none-none !rounded-none-none !m-4" />
                     <Background
-                        color="#cbd5e1"
-                        variant={BackgroundVariant.Lines}
+                        variant={BackgroundVariant.Dots}
                         gap={20}
-                        size={1}
-                        className="bg-card/50"
+                        size={1.5}
+                        className="bg-slate-50 dark:bg-slate-900 [&>svg>pattern>circle]:fill-slate-300 dark:[&>svg>pattern>circle]:fill-white"
                     />
                 </ReactFlow>
             </div>

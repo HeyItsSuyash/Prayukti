@@ -400,49 +400,71 @@ function ExperimentPageContent({ id }: { id: string }) {
 
     return (
         <div className="hidden md:flex flex-col h-screen bg-background overflow-hidden font-sans">
-            <header className="h-14 bg-background border-b border-border flex items-center justify-between px-6 z-50 flex-shrink-0">
-                <div className="flex items-center text-sm font-medium text-muted-foreground">
-                    <a href="/dashboard" className="hover:text-primary transition-colors">Dashboard</a>
-                    <ChevronRight className="w-4 h-4 mx-2" />
-                    <span className="hover:text-primary transition-colors cursor-pointer">{subjectName}</span>
-                    <ChevronRight className="w-4 h-4 mx-2" />
-                    <span className="text-foreground font-semibold">Experiments</span>
-                </div>
-            </header>
-
-            <div className="flex flex-1 overflow-hidden">
-                <aside className="w-64 bg-card border-r border-border flex flex-col flex-shrink-0 overflow-y-auto">
-                    <div className="py-4">
-                        {SECTIONS.map((section) => (
-                            <button
-                                key={section.id}
-                                onClick={() => setActiveSection(section.id)}
-                                className={`w-full text-left px-8 py-4 text-base font-semibold transition-colors ${
-                                    activeSection === section.id 
-                                        ? "text-primary border-l-4 border-primary bg-primary/10" 
-                                        : "text-muted-foreground hover:bg-muted border-l-4 border-transparent hover:border-primary/30"
-                                }`}
-                            >
-                                {section.label}
-                            </button>
-                        ))}
-                    </div>
-                </aside>
-
-                <main className="flex-1 flex flex-col overflow-y-auto bg-background">
-                    {/* Common Title Header for non-fullscreen tabs */}
-                    {["simulation", "test"].includes(activeSection) ? null : (
-                        <div className="w-full text-center py-8 bg-card border-b border-border">
-                            <h1 className="text-3xl font-black uppercase tracking-tighter text-primary">{subjectName}</h1>
-                            <p className="text-muted-foreground font-semibold mt-2 text-lg">Experiment {experiment.experimentNumber || "01"} • {experiment.title}</p>
+            {activeSection === "simulation" && simulationStarted ? (
+                <div className="flex-1 flex flex-col h-screen bg-background overflow-hidden relative">
+                    <div className="h-10 bg-card border-b border-border flex items-center justify-between px-4 z-50 flex-shrink-0">
+                        <button
+                            onClick={() => setSimulationStarted(false)}
+                            className="flex items-center gap-2 text-xs font-bold text-muted-foreground hover:text-primary transition-colors bg-muted/60 hover:bg-muted px-3 py-1.5 rounded-lg"
+                        >
+                            <i className="bx bx-arrow-back text-sm" />
+                            <span>Exit Simulation / Back to Lab</span>
+                        </button>
+                        <div className="text-xs font-semibold text-muted-foreground truncate">
+                            {experiment.title} • Interactive Simulation Mode
                         </div>
-                    )}
-                    
-                    <div className="flex-1 flex flex-col">
-                        {renderContent()}
                     </div>
-                </main>
-            </div>
+                    <div className="flex-1 flex flex-col h-full w-full overflow-hidden">
+                        <SimulationRenderer labId={simLabId} initialCode={experiment.codeTemplate} language={experiment.language} />
+                    </div>
+                </div>
+            ) : (
+                <>
+                    <header className="h-14 bg-background border-b border-border flex items-center justify-between px-6 z-50 flex-shrink-0">
+                        <div className="flex items-center text-sm font-medium text-muted-foreground">
+                            <a href="/dashboard" className="hover:text-primary transition-colors">Dashboard</a>
+                            <ChevronRight className="w-4 h-4 mx-2" />
+                            <span className="hover:text-primary transition-colors cursor-pointer">{subjectName}</span>
+                            <ChevronRight className="w-4 h-4 mx-2" />
+                            <span className="text-foreground font-semibold">Experiments</span>
+                        </div>
+                    </header>
+
+                    <div className="flex flex-1 overflow-hidden">
+                        <aside className="w-64 bg-card border-r border-border flex flex-col flex-shrink-0 overflow-y-auto">
+                            <div className="py-4">
+                                {SECTIONS.map((section) => (
+                                    <button
+                                        key={section.id}
+                                        onClick={() => setActiveSection(section.id)}
+                                        className={`w-full text-left px-8 py-4 text-base font-semibold transition-colors ${
+                                            activeSection === section.id 
+                                                ? "text-primary border-l-4 border-primary bg-primary/10" 
+                                                : "text-muted-foreground hover:bg-muted border-l-4 border-transparent hover:border-primary/30"
+                                        }`}
+                                    >
+                                        {section.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </aside>
+
+                        <main className="flex-1 flex flex-col overflow-y-auto bg-background">
+                            {/* Common Title Header for non-fullscreen tabs */}
+                            {["simulation", "test"].includes(activeSection) ? null : (
+                                <div className="w-full text-center py-8 bg-card border-b border-border">
+                                    <h1 className="text-3xl font-black uppercase tracking-tighter text-primary">{subjectName}</h1>
+                                    <p className="text-muted-foreground font-semibold mt-2 text-lg">Experiment {experiment.experimentNumber || "01"} • {experiment.title}</p>
+                                </div>
+                            )}
+                            
+                            <div className="flex-1 flex flex-col">
+                                {renderContent()}
+                            </div>
+                        </main>
+                    </div>
+                </>
+            )}
         </div>
     );
 }
