@@ -10,10 +10,15 @@ export const DldSidebar = ({ onAddNode, tableData }: DldSidebarProps & { tableDa
     const [activeTab, setActiveTab] = useState<'components' | 'analysis'>('components');
     const [analysisTab, setAnalysisTab] = useState<'truth' | 'kmap' | 'excitation'>('truth');
     
-    // Excitation states
+    // Excitation states & Custom Dropdown toggle states
     const [presentStateInput, setPresentStateInput] = useState<string>('');
     const [nextStateOutput, setNextStateOutput] = useState<string>('');
     const [selectedKMapOutput, setSelectedKMapOutput] = useState<string>('');
+
+    const [isAnalysisDropdownOpen, setIsAnalysisDropdownOpen] = useState<boolean>(false);
+    const [isKMapDropdownOpen, setIsKMapDropdownOpen] = useState<boolean>(false);
+    const [isQnDropdownOpen, setIsQnDropdownOpen] = useState<boolean>(false);
+    const [isQnNextDropdownOpen, setIsQnNextDropdownOpen] = useState<boolean>(false);
 
     const [openCategories, setOpenCategories] = useState<Record<string, boolean>>({
         'io': true,
@@ -184,17 +189,43 @@ export const DldSidebar = ({ onAddNode, tableData }: DldSidebarProps & { tableDa
             ) : (
                 /* Analysis Tab View */
                 <div className="flex-1 overflow-y-auto p-3 space-y-3">
+                    {/* Custom Dropdown for Analysis Tab Selection */}
                     <div className="relative">
-                        <select
-                            value={analysisTab}
-                            onChange={(e) => setAnalysisTab(e.target.value as any)}
-                            className="w-full bg-muted border border-border text-foreground font-bold text-xs p-2 rounded-xl outline-none appearance-none cursor-pointer pr-8"
+                        <button
+                            type="button"
+                            onClick={() => setIsAnalysisDropdownOpen(!isAnalysisDropdownOpen)}
+                            className="w-full bg-card border border-border text-foreground font-bold text-xs p-2.5 rounded-xl flex items-center justify-between shadow-sm hover:bg-muted/50 transition-colors"
                         >
-                            <option value="truth">Truth Table</option>
-                            <option value="kmap">K-Map Analysis</option>
-                            <option value="excitation">Excitation Table</option>
-                        </select>
-                        <i className="bx bx-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none text-sm" />
+                            <span>
+                                {analysisTab === 'truth' && 'Truth Table'}
+                                {analysisTab === 'kmap' && 'K-Map Analysis'}
+                                {analysisTab === 'excitation' && 'Excitation Table'}
+                            </span>
+                            <i className={`bx bx-chevron-down text-sm transition-transform duration-200 ${isAnalysisDropdownOpen ? 'rotate-180' : ''}`} />
+                        </button>
+
+                        {isAnalysisDropdownOpen && (
+                            <div className="absolute left-0 right-0 top-full mt-1.5 bg-card border border-border rounded-xl shadow-2xl py-1 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                                {[
+                                    { value: 'truth', label: 'Truth Table' },
+                                    { value: 'kmap', label: 'K-Map Analysis' },
+                                    { value: 'excitation', label: 'Excitation Table' }
+                                ].map((option) => (
+                                    <button
+                                        key={option.value}
+                                        type="button"
+                                        onClick={() => {
+                                            setAnalysisTab(option.value as any);
+                                            setIsAnalysisDropdownOpen(false);
+                                        }}
+                                        className={`w-full text-left px-3 py-2 text-xs font-bold transition-colors flex items-center justify-between ${analysisTab === option.value ? 'bg-primary/10 text-primary' : 'text-foreground hover:bg-muted'}`}
+                                    >
+                                        <span>{option.label}</span>
+                                        {analysisTab === option.value && <i className="bx bx-check text-sm text-primary" />}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     {!tableData ? (
@@ -233,16 +264,36 @@ export const DldSidebar = ({ onAddNode, tableData }: DldSidebarProps & { tableDa
                             )}
 
                             {analysisTab === 'kmap' && (
-                                <div className="p-2 bg-muted/20 border border-border rounded-xl text-xs space-y-2">
-                                    <div className="flex justify-between items-center">
-                                        <span className="font-bold">Output Variable:</span>
-                                        <select
-                                            value={selectedKMapOutput}
-                                            onChange={(e) => setSelectedKMapOutput(e.target.value)}
-                                            className="bg-card border border-border p-1 rounded-lg font-bold"
-                                        >
-                                            {tableData.outputNames.map((o: string) => <option key={o} value={o}>{o}</option>)}
-                                        </select>
+                                <div className="p-2.5 bg-muted/20 border border-border rounded-xl text-xs space-y-2">
+                                    <div className="flex justify-between items-center relative">
+                                        <span className="font-bold text-foreground">Output Variable:</span>
+                                        <div className="relative">
+                                            <button
+                                                type="button"
+                                                onClick={() => setIsKMapDropdownOpen(!isKMapDropdownOpen)}
+                                                className="bg-card border border-border px-2.5 py-1 rounded-lg font-bold text-foreground flex items-center gap-1.5 hover:bg-muted transition-colors"
+                                            >
+                                                <span>{selectedKMapOutput || 'Select'}</span>
+                                                <i className={`bx bx-chevron-down text-xs transition-transform ${isKMapDropdownOpen ? 'rotate-180' : ''}`} />
+                                            </button>
+                                            {isKMapDropdownOpen && (
+                                                <div className="absolute right-0 top-full mt-1 bg-card border border-border rounded-lg shadow-xl py-1 z-50 min-w-[80px]">
+                                                    {tableData.outputNames.map((o: string) => (
+                                                        <button
+                                                            key={o}
+                                                            type="button"
+                                                            onClick={() => {
+                                                                setSelectedKMapOutput(o);
+                                                                setIsKMapDropdownOpen(false);
+                                                            }}
+                                                            className={`w-full text-left px-3 py-1.5 text-xs font-bold transition-colors ${selectedKMapOutput === o ? 'bg-primary/10 text-primary' : 'text-foreground hover:bg-muted'}`}
+                                                        >
+                                                            {o}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                     <p className="text-[10px] text-muted-foreground italic text-center">
                                         Live K-Map view automatically synchronized with inputs.
@@ -251,27 +302,66 @@ export const DldSidebar = ({ onAddNode, tableData }: DldSidebarProps & { tableDa
                             )}
 
                             {analysisTab === 'excitation' && (
-                                <div className="p-2 bg-muted/20 border border-border rounded-xl text-xs space-y-2">
+                                <div className="p-2.5 bg-muted/20 border border-border rounded-xl text-xs space-y-2">
                                     <div className="grid grid-cols-2 gap-2">
-                                        <div>
-                                            <span className="block font-bold mb-1">Qn</span>
-                                            <select
-                                                value={presentStateInput}
-                                                onChange={(e) => setPresentStateInput(e.target.value)}
-                                                className="w-full bg-card border border-border p-1 rounded-lg font-semibold"
+                                        {/* Qn Custom Dropdown */}
+                                        <div className="relative">
+                                            <span className="block font-bold mb-1 text-foreground">Qn</span>
+                                            <button
+                                                type="button"
+                                                onClick={() => setIsQnDropdownOpen(!isQnDropdownOpen)}
+                                                className="w-full bg-card border border-border p-1.5 rounded-lg font-semibold text-foreground flex items-center justify-between hover:bg-muted transition-colors"
                                             >
-                                                {tableData.inputNames.map((n: string) => <option key={n} value={n}>{n}</option>)}
-                                            </select>
+                                                <span>{presentStateInput || 'Select'}</span>
+                                                <i className={`bx bx-chevron-down text-xs transition-transform ${isQnDropdownOpen ? 'rotate-180' : ''}`} />
+                                            </button>
+                                            {isQnDropdownOpen && (
+                                                <div className="absolute left-0 right-0 top-full mt-1 bg-card border border-border rounded-lg shadow-xl py-1 z-50">
+                                                    {tableData.inputNames.map((n: string) => (
+                                                        <button
+                                                            key={n}
+                                                            type="button"
+                                                            onClick={() => {
+                                                                setPresentStateInput(n);
+                                                                setIsQnDropdownOpen(false);
+                                                            }}
+                                                            className={`w-full text-left px-3 py-1 text-xs font-semibold transition-colors ${presentStateInput === n ? 'bg-primary/10 text-primary' : 'text-foreground hover:bg-muted'}`}
+                                                        >
+                                                            {n}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            )}
                                         </div>
-                                        <div>
-                                            <span className="block font-bold mb-1">Qn+1</span>
-                                            <select
-                                                value={nextStateOutput}
-                                                onChange={(e) => setNextStateOutput(e.target.value)}
-                                                className="w-full bg-card border border-border p-1 rounded-lg font-semibold"
+
+                                        {/* Qn+1 Custom Dropdown */}
+                                        <div className="relative">
+                                            <span className="block font-bold mb-1 text-foreground">Qn+1</span>
+                                            <button
+                                                type="button"
+                                                onClick={() => setIsQnNextDropdownOpen(!isQnNextDropdownOpen)}
+                                                className="w-full bg-card border border-border p-1.5 rounded-lg font-semibold text-foreground flex items-center justify-between hover:bg-muted transition-colors"
                                             >
-                                                {tableData.outputNames.map((n: string) => <option key={n} value={n}>{n}</option>)}
-                                            </select>
+                                                <span>{nextStateOutput || 'Select'}</span>
+                                                <i className={`bx bx-chevron-down text-xs transition-transform ${isQnNextDropdownOpen ? 'rotate-180' : ''}`} />
+                                            </button>
+                                            {isQnNextDropdownOpen && (
+                                                <div className="absolute left-0 right-0 top-full mt-1 bg-card border border-border rounded-lg shadow-xl py-1 z-50">
+                                                    {tableData.outputNames.map((n: string) => (
+                                                        <button
+                                                            key={n}
+                                                            type="button"
+                                                            onClick={() => {
+                                                                setNextStateOutput(n);
+                                                                setIsQnNextDropdownOpen(false);
+                                                            }}
+                                                            className={`w-full text-left px-3 py-1 text-xs font-semibold transition-colors ${nextStateOutput === n ? 'bg-primary/10 text-primary' : 'text-foreground hover:bg-muted'}`}
+                                                        >
+                                                            {n}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

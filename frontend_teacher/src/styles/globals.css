@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   PRAYUKTI DESIGN SYSTEM — BRAND TOKEN LAYER
+   Reference: Dashboard screenshot — "Clean Academic Blue"
+   Primary: #4B6EF5 (vivid blue)  Secondary: #1B2A6B (deep navy)
+   ============================================================ */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* White */
+    --foreground: 222.2 84% 4.9%;
+
+    /* Teacher Orange Theme (#ea580c / #f97316) */
+    --primary: 24 95% 53%; /* #f97316 orange-500 */
+    --primary-foreground: 0 0% 100%;
+
+    --accent: 20 90% 48%; /* #ea580c orange-600 */
+    --accent-foreground: 0 0% 100%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --secondary: 24 100% 96%;
+    --secondary-foreground: 24 95% 30%;
+
+    --muted: 24 20% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 24 95% 53%;
+
+    /* Sharp corners */
+    --radius: 0px; 
+
+    /* ─── Radius Scale ─── */
+    --radius-xs:  0px;
+    --radius-sm:  0px;
+    --radius:     0px;
+    --radius-lg:  0px;
+    --radius-xl:  0px;
+    --radius-2xl: 0px;
+
+    /* ─── Shadow Scale ─── */
+    --shadow-xs:  0 1px 2px  rgba(0,0,0,0.02);
+    --shadow-sm:  0 4px 12px rgba(0,0,0,0.03);
+    --shadow-md:  0 8px 24px rgba(0,0,0,0.04);
+    --shadow-lg:  0 16px 48px rgba(0,0,0,0.06);
+    --shadow-xl:  0 24px 64px rgba(0,0,0,0.08);
+    --shadow-primary: 0 8px 32px rgba(249,115,22,0.25);
+
+    /* ─── Sidebar ─── */
+    --sidebar-from:        203 72% 10%;
+    --sidebar-to:          203 72% 14%;
+    --sidebar-text:        215 25% 75%;
+    --sidebar-text-active: 0 0% 100%;
+    --sidebar-active-bg:   255 100% 100% / 0.10;
+
+    /* ─── Layout ─── */
+    --nav-height: 80px;
+  }
+
+  .dark {
+    --background:         0 0% 9%;
+    --foreground:         216 33% 97%;
+
+    --card:               0 0% 12%;
+    --card-foreground:    216 33% 97%;
+
+    --popover:            0 0% 12%;
+    --popover-foreground: 216 33% 97%;
+
+    --primary:            24 95% 53%;    /* #f97316 orange-500 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary:          0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
+
+    --accent:             20 90% 48%;    /* #ea580c orange-600 */
+    --accent-foreground:  0 0% 100%;
+
+    --muted:              0 0% 15%;
+    --muted-foreground:   220 9% 65%;
+
+    --destructive:        0 63% 35%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border:             0 0% 20%;
+    --input:              0 0% 20%;
+    --ring:               24 95% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    /* Hide scrollbars globally across all elements while keeping scrolling enabled */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  *::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02","cv03","cv04","cv11";
+  }
+}
+
+/* ─── Loader ─── */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid hsl(var(--border));
+  border-bottom-color: hsl(var(--primary));
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: prayukti-spin 1s linear infinite;
+}
+
+@keyframes prayukti-spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ─── Blob animation (landing page blobs) ─── */
+.animate-blob {
+  animation: blob 7s infinite ease;
+}
+
+@keyframes blob {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  33%  { transform: translate(30px, -50px) scale(1.1); }
+  66%  { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+
+/* ─── Glassmorphism ─── */
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+/* Hide ReactFlow Attribution watermark */
+.react-flow__attribution {
+  display: none !important;
+}
+
+.dark .glass {
+  background: rgba(13, 21, 38, 0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Interactive utilities ─── */
+.card-hover {
+  @apply transition-all duration-200 hover:shadow-md hover:-translate-y-0.5;
+}
+
+.btn-press {
+  @apply active:scale-[0.97] transition-transform duration-100;
+}
+
+/* ─── Link underline slide ─── */
+.link-animate {
+  @apply relative cursor-pointer;
+}
+
+.link-animate::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-full h-px bg-primary transform scale-x-0
+         transition-transform duration-300 origin-left;
+}
+
+.link-animate:hover::after {
+  @apply scale-x-100;
+}
+
+/* ─── Section soft background ─── */
+.section-shade-soft {
+  @apply bg-muted/50 dark:bg-muted/20;
+}

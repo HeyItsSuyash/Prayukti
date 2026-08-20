@@ -1,0 +1,94 @@
+"use client";
+
+import { API_URL } from "@/lib/config";
+
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+
+
+export default function OOPSCompiler({ initialData }: { initialData?: { code?: string, output?: string } }) {
+    const defaultCode = `public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}`;
+    const [code, setCode] = useState<string>(initialData?.code || defaultCode);
+    const [output, setOutput] = useState<string>(initialData?.output || "");
+    const [isRunning, setIsRunning] = useState(false);
+
+    const runCode = async () => {
+        setIsRunning(true);
+        setOutput("Compiling and Running...");
+
+        try {
+            const response = await fetch(`${API_URL}/api/v1/oopj/run`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ code })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setOutput(data.output || "Program executed successfully (No Output).");
+            } else {
+                setOutput(`Error:\n${data.error}\n\nOutput:\n${data.output}`);
+            }
+        } catch {
+            setOutput("Failed to connect to compilation server.");
+        } finally {
+            setIsRunning(false);
+        }
+    };
+
+    // Listen for Exam Submission requests from the parent window
+    useEffect(() => {
+        const handleMessage = (event: MessageEvent) => {
+            if (event.data && event.data.type === 'REQUEST_EXAM_STATE') {
+                if (event.source) {
+                    (event.source as Window).postMessage({
+                        type: 'EXAM_STATE_RESPONSE',
+                        payload: {
+                            type: 'CODE',
+                            language: 'java',
+                            code: code,
+                            output: output
+                        }
+                    }, '*');
+                }
+            }
+        };
+        window.addEventListener('message', handleMessage);
+        return () => window.removeEventListener('message', handleMessage);
+    }, [code, output]);
+
+    return (
+        <div className="flex flex-col h-full bg-card text-white font-mono">
+            <div className="flex items-center justify-between p-4 bg-card border-b border-border">
+                <div className="text-sm text-muted-foreground">Main.java</div>
+                <div className="flex gap-2">
+                    <Button variant="ghost" size="sm" onClick={() => setCode("")} className="text-muted-foreground hover:text-white">
+                        <i className="bx bx-rotateccw h-4 w-4 mr-2"  /> Reset
+                    </Button>
+                    <Button size="sm" onClick={runCode} disabled={isRunning} className="bg-green-600 hover:bg-green-700">
+                        <i className="bx bx-play h-4 w-4 mr-2"  /> Run
+                    </Button>
+                </div>
+            </div>
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-2">
+                <textarea
+                    value={code}
+                    onChange={(e) => setCode(e.target.value)}
+                    className="p-4 bg-card text-muted-foreground resize-none focus:outline-none font-mono text-sm leading-6"
+                    spellCheck={false}
+                />
+                <div className="border-l border-border bg-black p-4 flex flex-col">
+                    <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Console Output</div>
+                    <pre className="flex-1 text-green-400 font-mono text-sm whitespace-pre-wrap">
+                        {output}
+                    </pre>
+                </div>
+            </div>
+        </div>
+    );
+}

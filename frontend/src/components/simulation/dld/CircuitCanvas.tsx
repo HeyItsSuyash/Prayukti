@@ -513,7 +513,7 @@ export default function CircuitCanvas({
                         variant={BackgroundVariant.Dots}
                         gap={20}
                         size={1.5}
-                        className="bg-slate-50 dark:bg-slate-900 [&>svg>pattern>circle]:fill-slate-300 dark:[&>svg>pattern>circle]:fill-white"
+                        className="bg-background [&>svg>pattern>circle]:fill-foreground/25"
                     />
                 </ReactFlow>
             </div>

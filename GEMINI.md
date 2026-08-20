@@ -47,3 +47,6 @@ This file contains a growing ruleset that improves over time. **At session start
 8. [UX] Ensure breadcrumbs ("Dashboard > Subject > Experiment") are fully functional links with proper href routing.
 9. [STYLE] Never use em-dashes (—) in the codebase UI/prose; use standard hyphens (-) instead.
 10. [UX] Redesign LabTest results page to be modern, theme-consistent (white/dark gray), and visually appealing.
+11. [STYLE] Ensure DLD simulation canvas strictly uses theme-consistent backgrounds (white in light mode, dark gray in dark mode); remove all lingering blue tint/bg-blue classes.
+12. [UX] Hide scrollbars globally across the entire website while keeping all scrollable areas fully functional (`::-webkit-scrollbar { display: none }` / `scrollbar-width: none`).
+13. [UX] Always use custom React state-driven dropdown menus instead of native HTML `<select>` elements to prevent OS-level blue highlights and ensure 100% theme consistency.
