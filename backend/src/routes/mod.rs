@@ -23,3 +23,4 @@ pub mod video_tutor;
 pub mod academic_hierarchy;
 pub mod public_metrics;
 pub mod chat;
+pub mod teacher;

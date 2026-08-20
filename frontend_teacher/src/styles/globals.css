@@ -13,11 +13,11 @@
     --background: 0 0% 100%; /* White */
     --foreground: 222.2 84% 4.9%;
 
-    /* Teacher Orange Theme (#ea580c / #f97316) */
-    --primary: 24 95% 53%; /* #f97316 orange-500 */
+    /* Vivid Academic Blue Theme (#2563eb / #3b82f6) */
+    --primary: 217 91% 60%; /* #3b82f6 blue-500 */
     --primary-foreground: 0 0% 100%;
 
-    --accent: 20 90% 48%; /* #ea580c orange-600 */
+    --accent: 221 83% 53%; /* #2563eb blue-600 */
     --accent-foreground: 0 0% 100%;
 
     --card: 0 0% 100%;
@@ -26,10 +26,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --secondary: 24 100% 96%;
-    --secondary-foreground: 24 95% 30%;
+    --secondary: 214 100% 97%;
+    --secondary-foreground: 221 83% 53%;
 
-    --muted: 24 20% 96%;
+    --muted: 214 32% 96%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
     --destructive: 0 84.2% 60.2%;
@@ -37,7 +37,7 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 24 95% 53%;
+    --ring: 217 91% 60%;
 
     /* Sharp corners */
     --radius: 0px; 
@@ -56,7 +56,7 @@
     --shadow-md:  0 8px 24px rgba(0,0,0,0.04);
     --shadow-lg:  0 16px 48px rgba(0,0,0,0.06);
     --shadow-xl:  0 24px 64px rgba(0,0,0,0.08);
-    --shadow-primary: 0 8px 32px rgba(249,115,22,0.25);
+    --shadow-primary: 0 8px 32px rgba(37,99,235,0.25);
 
     /* ─── Sidebar ─── */
     --sidebar-from:        203 72% 10%;
@@ -79,13 +79,13 @@
     --popover:            0 0% 12%;
     --popover-foreground: 216 33% 97%;
 
-    --primary:            24 95% 53%;    /* #f97316 orange-500 */
+    --primary:            217 91% 60%;    /* #3b82f6 blue-500 */
     --primary-foreground: 0 0% 100%;
 
     --secondary:          0 0% 15%;
     --secondary-foreground: 0 0% 100%;
 
-    --accent:             20 90% 48%;    /* #ea580c orange-600 */
+    --accent:             221 83% 53%;    /* #2563eb blue-600 */
     --accent-foreground:  0 0% 100%;
 
     --muted:              0 0% 15%;
@@ -96,7 +96,7 @@
 
     --border:             0 0% 20%;
     --input:              0 0% 20%;
-    --ring:               24 95% 53%;
+    --ring:               217 91% 60%;
   }
 }
 

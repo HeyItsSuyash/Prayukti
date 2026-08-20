@@ -1,9 +1,9 @@
-import DashboardWrapper from '@/components/dashboard/DashboardWrapper';
+import { NewTeacherDashboard } from "@/components/dashboard/NewTeacherDashboard";
 
 export const metadata = {
-  title: 'Dashboard - Prayukti x MMMUT',
+  title: 'Teacher Control Center - Prayukti vLAB',
 };
 
-export default function DashboardPage() {
-  return <DashboardWrapper />;
+export default function TeacherDashboardPage() {
+  return <NewTeacherDashboard />;
 }

@@ -167,6 +167,7 @@ async fn main() {
         .nest("/api/academic-hierarchy", routes::academic_hierarchy::router())
         .nest("/api/public-metrics", routes::public_metrics::router())
         .nest("/api/chat", routes::chat::router())
+        .nest("/api/teacher", routes::teacher::router())
         .layer(axum::middleware::from_fn_with_state(rate_limit_state, middleware::security::rate_limiter))
         .layer(axum::middleware::from_fn(middleware::security::security_headers))
         .layer(cors)

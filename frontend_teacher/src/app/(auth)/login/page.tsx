@@ -30,12 +30,15 @@ export default function LoginPage() {
         try {
             loginSchema.parse({ email, password });
         } catch (e: any) {
-            if (e instanceof z.ZodError) {
-                const zodError = e as any;
-                showToast('error', zodError.errors[0].message);
-                setLoading(false);
-                return;
+            if (e && e.errors && Array.isArray(e.errors) && e.errors.length > 0) {
+                showToast('error', e.errors[0].message);
+            } else if (e?.message) {
+                showToast('error', e.message);
+            } else {
+                showToast('error', 'Invalid email or password input');
             }
+            setLoading(false);
+            return;
         }
 
         try {
@@ -84,25 +87,25 @@ export default function LoginPage() {
         <main className="h-screen w-full flex bg-white font-sans overflow-hidden relative">
             {/* Custom Toast */}
             {toast && (
-                <div className={`fixed top-6 left-1/2 -translate-x-1/2 z-[100] bg-white border shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-xl py-3 px-5 flex items-center gap-3 animate-in slide-in-from-top-4 fade-in duration-300 ${toast.type === 'success' ? 'border-[#059669]/20' : 'border-red-500/20'}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${toast.type === 'success' ? 'bg-[#059669]/10 text-[#059669]' : 'bg-red-50 text-red-500'}`}>
+                <div className={`fixed top-6 left-1/2 -translate-x-1/2 z-[100] bg-white border shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-xl py-3 px-5 flex items-center gap-3 animate-in slide-in-from-top-4 fade-in duration-300 ${toast.type === 'success' ? 'border-blue-500/20' : 'border-red-500/20'}`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${toast.type === 'success' ? 'bg-blue-50 text-blue-600' : 'bg-red-50 text-red-500'}`}>
                         <i className={`bx ${toast.type === 'success' ? 'bx-check-circle' : 'bx-error-circle'} text-xl`}></i>
                     </div>
                     <p className="text-sm font-semibold text-slate-800">{toast.message}</p>
                 </div>
             )}
 
-            {/* Left Column - Branding & Illustration */}
-            <div className="hidden lg:flex w-1/2 bg-[#084738] relative flex-col justify-between p-12 overflow-hidden">
-                {/* Background Illustration */}
+            {/* Left Column - Branding & Illustration (Blue Accent Overlay) */}
+            <div className="hidden lg:flex w-1/2 bg-blue-900 relative flex-col justify-between p-12 overflow-hidden">
+                {/* Background Illustration with Blue Color Filter Overlay */}
                 <div className="absolute inset-0 z-0">
                     <img 
                         src="/prayukti 2.0/illustrations/login_page.png" 
                         alt="Campus" 
-                        className="w-full h-full object-cover opacity-80"
+                        className="w-full h-full object-cover opacity-70 filter hue-rotate-[90deg] saturate-150"
                     />
-                    {/* Gradient overlay to ensure top text is readable and blends well */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#084738] via-[#084738]/60 to-transparent"></div>
+                    {/* Dark Blue gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-blue-950 via-blue-900/70 to-blue-950/90"></div>
                 </div>
 
                 {/* Content Overlay */}
@@ -120,7 +123,7 @@ export default function LoginPage() {
                             <div className="flex flex-col">
                                 <div className="flex items-center">
                                     <span className="text-2xl font-bold text-white leading-none tracking-tight">Prayukti</span>
-                                    <span className="text-2xl font-light text-[#14D98F] leading-none ml-1">vLAB</span>
+                                    <span className="text-2xl font-light text-blue-400 leading-none ml-1">vLAB</span>
                                 </div>
                                 <span className="text-xs text-white/80 mt-1 font-medium tracking-wide">MMMUT, Gorakhpur</span>
                             </div>
@@ -129,29 +132,30 @@ export default function LoginPage() {
 
                     {/* Middle Text */}
                     <div className="mt-24 max-w-lg">
+                        <span className="inline-block px-3 py-1 bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-bold rounded-full uppercase tracking-wider mb-4">Teacher Portal</span>
                         <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                            Virtual Labs.<br />
-                            Real Learning.
+                            Faculty OS.<br />
+                            Smart Learning.
                         </h1>
                         <p className="text-lg text-white/80 leading-relaxed max-w-md">
-                            Empowering engineering education through interactive simulations and smart analytics.
+                            Empowering engineering educators with AI question generation, resource-driven teaching, and live smart classes.
                         </p>
                         
-                        <div className="w-12 h-1 bg-[#14D98F] mt-8 rounded-full"></div>
+                        <div className="w-12 h-1 bg-blue-400 mt-8 rounded-full"></div>
                     </div>
 
                     {/* Features Grid */}
                     <div className="mt-auto pt-20">
                         <div className="grid grid-cols-4 gap-4">
                             {[
-                                { icon: 'bx-test-tube', title: 'Virtual Experiments', desc: 'Hands-on learning in a virtual environment' },
-                                { icon: 'bx-code-alt', title: 'Code Execution', desc: 'Compile, run and analyze your code' },
-                                { icon: 'bx-bar-chart-alt-2', title: 'Smart Analytics', desc: 'Track progress and get insights' },
-                                { icon: 'bx-shield', title: 'Secure Platform', desc: 'Enterprise-grade security & privacy' }
+                                { icon: 'bx-chalkboard', title: 'Smart Classes', desc: 'Schedule and manage live sessions' },
+                                { icon: 'bx-file', title: 'Teaching Resources', desc: 'PDF, notes and experiment materials' },
+                                { icon: 'bx-sparkles', title: 'AI Questions', desc: 'Extract questions from resources' },
+                                { icon: 'bx-shield', title: 'Teacher RBAC', desc: 'Role-based access control' }
                             ].map((feature, i) => (
                                 <div key={i} className="flex flex-col items-center text-center group cursor-default">
-                                    <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 backdrop-blur-sm group-hover:bg-white/10 transition-colors">
-                                        <i className={`bx ${feature.icon} text-2xl text-[#14D98F]`}></i>
+                                    <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center mb-4 backdrop-blur-md group-hover:bg-white/20 transition-colors">
+                                        <i className={`bx ${feature.icon} text-2xl text-blue-400`}></i>
                                     </div>
                                     <h4 className="text-white font-semibold text-[13px] mb-1.5">{feature.title}</h4>
                                     <p className="text-white/60 text-[11px] leading-relaxed px-1">
@@ -179,9 +183,9 @@ export default function LoginPage() {
                 {/* Card Container */}
                 <div className="w-full max-w-[480px] bg-white rounded-none lg:rounded-[24px] shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-slate-100 p-10 sm:p-12 relative z-10">
                     <div className="text-center mb-10">
-                        <span className="inline-block px-3 py-1 bg-orange-100 text-orange-600 font-bold text-xs rounded-full mb-3 uppercase tracking-wider">Teacher Portal</span>
-                        <h2 className="text-2xl font-bold text-slate-800 mb-2">Welcome Back, Educator</h2>
-                        <p className="text-slate-500 text-sm">Sign in to access your Prayukti Teacher Control Center</p>
+                        <span className="inline-block px-3 py-1 bg-blue-100 text-blue-600 font-bold text-xs rounded-full mb-3 uppercase tracking-wider">Teacher Authentication</span>
+                        <h2 className="text-2xl font-bold text-slate-800 mb-2">Faculty Sign In</h2>
+                        <p className="text-slate-500 text-sm">Access your Prayukti Teacher Dashboard</p>
                     </div>
 
                     <form onSubmit={handleLogin} className="space-y-6">
@@ -190,14 +194,14 @@ export default function LoginPage() {
                                         <label className="text-sm font-semibold text-slate-700 block text-left">Faculty Email</label>
                                         <div className="relative group">
                                             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                                <i className="bx bx-envelope text-slate-400 group-focus-within:text-orange-600 text-lg transition-colors"></i>
+                                                <i className="bx bx-envelope text-slate-400 group-focus-within:text-blue-600 text-lg transition-colors"></i>
                                             </div>
                                             <input
                                                 type="email"
                                                 value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
                                                 placeholder="faculty@mmmut.ac.in"
-                                                className="w-full h-12 pl-11 pr-4 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-orange-600 focus:ring-4 focus:ring-orange-600/10 outline-none text-sm text-slate-700 placeholder:text-slate-400"
+                                                className="w-full h-12 pl-11 pr-4 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none text-sm text-slate-700 placeholder:text-slate-400"
                                                 required
                                                 suppressHydrationWarning
                                             />
@@ -209,14 +213,14 @@ export default function LoginPage() {
                                         <label className="text-sm font-semibold text-slate-700 block text-left">Password</label>
                                         <div className="relative group">
                                             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                                <i className="bx bx-lock-alt text-slate-400 group-focus-within:text-orange-600 text-lg transition-colors"></i>
+                                                <i className="bx bx-lock-alt text-slate-400 group-focus-within:text-blue-600 text-lg transition-colors"></i>
                                             </div>
                                             <input
                                                 type={showPassword ? "text" : "password"}
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                                 placeholder="Enter your password"
-                                                className="w-full h-12 pl-11 pr-12 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-orange-600 focus:ring-4 focus:ring-orange-600/10 outline-none text-sm text-slate-700 placeholder:text-slate-400"
+                                                className="w-full h-12 pl-11 pr-12 rounded-xl border border-slate-200 bg-white focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 outline-none text-sm text-slate-700 placeholder:text-slate-400"
                                                 required
                                                 suppressHydrationWarning
                                             />
@@ -229,27 +233,22 @@ export default function LoginPage() {
                                                 <i className={`bx ${showPassword ? 'bx-hide' : 'bx-show'} text-lg`}></i>
                                             </button>
                                         </div>
-                                        <div className="flex justify-end pt-1">
-                                            <Link href="/forgot-password" className="text-sm font-medium text-orange-600 hover:text-orange-700 transition-colors">
-                                                Forgot password?
-                                            </Link>
-                                        </div>
                                     </div>
 
                                     {/* Submit Button */}
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="w-full h-12 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-xl shadow-[0_4px_14px_0_rgba(234,88,12,0.39)] hover:shadow-[0_6px_20px_rgba(234,88,12,0.23)] transition-all mt-2 flex items-center justify-center disabled:opacity-70 disabled:hover:translate-y-0"
+                                        className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-[0_4px_14px_0_rgba(37,99,235,0.39)] hover:shadow-[0_6px_20px_rgba(37,99,235,0.23)] transition-all mt-4 flex items-center justify-center disabled:opacity-70 disabled:hover:translate-y-0"
                                         suppressHydrationWarning
                                     >
                                         {loading ? <i className="bx bx-loader-alt bx-spin text-xl" /> : "Sign In to Teacher Portal"}
                                     </button>
                                 </form>
 
-                                <div className="mt-8 text-center">
-                                    <p className="text-sm text-slate-500">
-                                        Need a faculty account? <Link href="/register" className="font-semibold text-orange-600 hover:text-orange-700 transition-colors">Register as Educator</Link>
+                                <div className="mt-8 text-center border-t pt-4">
+                                    <p className="text-xs text-slate-400">
+                                        Faculty accounts are provisioned by institution administrator.
                                     </p>
                                 </div>
                 </div>
