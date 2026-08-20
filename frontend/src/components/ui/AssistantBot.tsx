@@ -94,18 +94,18 @@ export function AssistantBot() {
                             className="fixed inset-y-0 right-0 w-full md:w-[400px] bg-white dark:bg-background z-[101] flex flex-col shadow-2xl"
                         >
                             {/* Header */}
-                            <div className="bg-slate-900 dark:bg-card p-6 flex items-center justify-between text-white border-b border-border">
+                            <div className="bg-card border-b border-border p-5 flex items-center justify-between text-foreground">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-12 h-12 flex items-center justify-center">
-                                        <img src="/prayukti 2.0/illustrations/ai_chatbot.png" alt="AI Chatbot" className="w-full h-full object-contain scale-[1.45]" />
+                                    <div className="w-10 h-10 flex items-center justify-center bg-primary/10 border border-primary/20 rounded-full">
+                                        <img src="/prayukti 2.0/illustrations/ai_chatbot.png" alt="AI Chatbot" className="w-full h-full object-contain scale-[1.3]" />
                                     </div>
                                     <div>
-                                        <h3 className="text-sm font-bold tracking-wide">Prayukti AI</h3>
+                                        <h3 className="text-sm font-bold tracking-wide text-foreground">Prayukti AI Assistant</h3>
                                     </div>
                                 </div>
                                 <button
                                     onClick={() => setIsOpen(false)}
-                                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 "
+                                    className="w-8 h-8 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground flex items-center justify-center transition-colors"
                                 >
                                     <i className="bx bx-x text-xl" />
                                 </button>
@@ -114,7 +114,7 @@ export function AssistantBot() {
                             {/* Chat Body */}
                             <div
                                 ref={scrollRef}
-                                className="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50 dark:bg-background"
+                                className="flex-1 overflow-y-auto p-6 space-y-6 bg-background"
                             >
                                 {messages.map((msg, i) => (
                                     <motion.div
@@ -124,13 +124,13 @@ export function AssistantBot() {
                                         className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                                     >
                                         {msg.role === 'assistant' && (
-                                            <div className="w-12 h-12 flex-shrink-0 mt-1">
-                                                <img src="/prayukti 2.0/illustrations/ai_chatbot.png" alt="Bot" className="w-full h-full object-contain scale-[1.45]" />
+                                            <div className="w-10 h-10 flex-shrink-0 mt-1 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center overflow-hidden">
+                                                <img src="/prayukti 2.0/illustrations/ai_chatbot.png" alt="Bot" className="w-full h-full object-contain scale-[1.3]" />
                                             </div>
                                         )}
-                                        <div className={`max-w-[75%] p-4 text-sm font-medium leading-relaxed ${msg.role === 'user'
-                                            ? 'bg-primary text-white rounded-2xl rounded-tr-sm '
-                                            : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 rounded-2xl rounded-tl-sm border border-slate-200 dark:border-slate-800'
+                                        <div className={`max-w-[78%] p-4 text-sm font-medium leading-relaxed ${msg.role === 'user'
+                                            ? 'bg-primary text-primary-foreground rounded-2xl rounded-tr-sm shadow-sm'
+                                            : 'bg-card text-foreground rounded-2xl rounded-tl-sm border border-border shadow-sm'
                                             }`}>
                                             {msg.role === 'assistant' ? (
                                                 <div className="prose prose-sm prose-slate dark:prose-invert max-w-none prose-p:mb-2 prose-p:last:mb-0">

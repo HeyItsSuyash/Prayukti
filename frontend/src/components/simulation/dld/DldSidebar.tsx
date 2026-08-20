@@ -44,7 +44,7 @@ export const DldSidebar = ({ onAddNode, tableData }: DldSidebarProps & { tableDa
         return (
             <button
                 onClick={() => setIsCollapsed(false)}
-                className="absolute left-4 top-4 z-50 p-3 bg-card border border-border rounded-xl shadow-lg hover:bg-muted text-foreground flex items-center gap-2 text-xs font-bold transition-all"
+                className="m-4 z-40 p-3 bg-card border border-border rounded-xl shadow-lg hover:bg-muted text-foreground flex items-center gap-2 text-xs font-bold transition-all self-start"
                 title="Expand Simulator Tools"
             >
                 <i className="bx bx-chevrons-right text-lg text-primary" />
@@ -54,7 +54,7 @@ export const DldSidebar = ({ onAddNode, tableData }: DldSidebarProps & { tableDa
     }
 
     return (
-        <div className="absolute left-4 top-4 bottom-4 w-80 bg-card/95 backdrop-blur-md border border-border shadow-2xl rounded-2xl overflow-hidden flex flex-col z-50 transition-all select-none">
+        <div className="w-80 h-full bg-card border-r border-border shadow-md overflow-hidden flex flex-col z-30 flex-shrink-0 transition-all select-none relative">
             {/* Header & Tab Toggle */}
             <div className="p-3 border-b border-border bg-card/50 flex flex-col gap-2">
                 <div className="flex items-center justify-between">

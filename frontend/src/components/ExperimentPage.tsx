@@ -56,6 +56,7 @@ function ExperimentPageContent({ id }: { id: string }) {
     // Sidebar state
     const [activeSection, setActiveSection] = useState("aim");
     const [simulationStarted, setSimulationStarted] = useState(false);
+    const [zoomLevel, setZoomLevel] = useState(100);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -347,7 +348,7 @@ function ExperimentPageContent({ id }: { id: string }) {
                     return (
                         <div className="flex flex-col items-center min-h-full bg-background text-muted-foreground select-none overflow-y-auto pb-12 w-full">
                             <div className="w-full max-w-4xl mt-8">
-                                <div className="bg-gradient-to-br from-emerald-800 to-teal-900 rounded-t-2xl p-8 text-white relative overflow-hidden shadow-lg">
+                                <div className="bg-gradient-to-br from-[#021D24] to-[#059669] rounded-t-2xl p-8 text-white relative overflow-hidden shadow-lg">
                                     <div className="relative z-10 flex items-start gap-4">
                                         <div className="bg-card/20 p-3 rounded-xl backdrop-blur-sm">
                                             <i className="bx bx-play-circle text-3xl text-white"></i>
@@ -402,53 +403,52 @@ function ExperimentPageContent({ id }: { id: string }) {
         <div className="hidden md:flex flex-col h-screen bg-background overflow-hidden font-sans">
             {activeSection === "simulation" && simulationStarted ? (
                 <div className="flex-1 flex flex-col h-screen bg-background overflow-hidden relative">
-                    <div className="h-14 bg-card border-b border-border flex items-center justify-between px-6 z-50 flex-shrink-0 shadow-sm">
-                        {/* Left Section - Clean Lab Title */}
+                    <div className="h-14 bg-card border-b border-border flex items-center justify-between px-6 z-50 flex-shrink-0 shadow-sm font-sans">
+                        {/* Left Section - Clean Brand Text format "Subject: Exp 0x Title" */}
                         <div className="flex items-center gap-3">
-                            <span className="text-xs font-black uppercase tracking-widest text-primary bg-primary/10 px-3 py-1.5 rounded-lg border border-primary/20">
-                                {subjectName}
+                            <span className="text-xs font-bold tracking-tight text-foreground/90">
+                                {subjectName}: Exp {experiment.experimentNumber || "01"} {experiment.title}
                             </span>
                         </div>
 
-                        {/* Center Title - Dynamic Experiment Title */}
-                        <div className="text-sm font-black text-foreground tracking-wide uppercase truncate max-w-[500px]">
-                            {experiment.title}
-                        </div>
-
-                        {/* Right Section - Zoom Controls horizontally to the left of Exit Simulation Button */}
+                        {/* Right Section - Zoom Icon controls (% size) and Icon Square Exit button */}
                         <div className="flex items-center gap-3">
-                            <div className="flex items-center gap-1 bg-muted/60 border border-border p-1 rounded-xl">
-                                <button
-                                    onClick={() => {
-                                        const rfZoomIn = document.querySelector('.react-flow__controls-zoomin') as HTMLButtonElement;
-                                        if (rfZoomIn) rfZoomIn.click();
-                                    }}
-                                    className="p-1.5 hover:bg-card text-foreground rounded-lg transition-colors flex items-center gap-1 text-xs font-bold px-2"
-                                    title="Zoom In"
-                                >
-                                    <i className="bx bx-zoom-in text-base" />
-                                    <span>Zoom In</span>
-                                </button>
-                                <div className="w-[1px] h-4 bg-border" />
-                                <button
-                                    onClick={() => {
-                                        const rfZoomOut = document.querySelector('.react-flow__controls-zoomout') as HTMLButtonElement;
-                                        if (rfZoomOut) rfZoomOut.click();
-                                    }}
-                                    className="p-1.5 hover:bg-card text-foreground rounded-lg transition-colors flex items-center gap-1 text-xs font-bold px-2"
-                                    title="Zoom Out"
-                                >
-                                    <i className="bx bx-zoom-out text-base" />
-                                    <span>Zoom Out</span>
-                                </button>
-                            </div>
+                            {simLabId === "dld" && (
+                                <div className="flex items-center gap-1.5 bg-muted/60 border border-border px-2 py-1 rounded-xl text-xs font-bold text-foreground">
+                                    <button
+                                        onClick={() => {
+                                            const zoomOutBtn = document.querySelector('.react-flow__controls-zoomout') as HTMLButtonElement;
+                                            if (zoomOutBtn) zoomOutBtn.click();
+                                            setZoomLevel(prev => Math.max(20, prev - 10));
+                                        }}
+                                        className="p-1 hover:bg-card rounded-lg transition-colors text-foreground text-sm font-bold flex items-center justify-center w-6 h-6"
+                                        title="Zoom Out"
+                                    >
+                                        <i className="bx bx-minus" />
+                                    </button>
+                                    <span className="text-[11px] font-mono font-semibold px-1 text-muted-foreground w-10 text-center select-none">
+                                        {zoomLevel}%
+                                    </span>
+                                    <button
+                                        onClick={() => {
+                                            const zoomInBtn = document.querySelector('.react-flow__controls-zoomin') as HTMLButtonElement;
+                                            if (zoomInBtn) zoomInBtn.click();
+                                            setZoomLevel(prev => Math.min(300, prev + 10));
+                                        }}
+                                        className="p-1 hover:bg-card rounded-lg transition-colors text-foreground text-sm font-bold flex items-center justify-center w-6 h-6"
+                                        title="Zoom In"
+                                    >
+                                        <i className="bx bx-plus" />
+                                    </button>
+                                </div>
+                            )}
 
                             <button
                                 onClick={() => setSimulationStarted(false)}
-                                className="flex items-center gap-2 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 transition-all px-4 py-2.5 rounded-xl shadow-sm"
+                                className="w-9 h-9 flex items-center justify-center text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 transition-all rounded-xl shadow-sm"
+                                title="Exit Simulation"
                             >
-                                <i className="bx bx-log-out text-sm" />
-                                <span>Exit Simulation</span>
+                                <i className="bx bx-log-out text-lg" />
                             </button>
                         </div>
                     </div>

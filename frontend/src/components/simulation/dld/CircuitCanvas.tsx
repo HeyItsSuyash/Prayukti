@@ -475,12 +475,12 @@ export default function CircuitCanvas({
     }, [nodes, edges]);
 
     return (
-        <div className="h-full w-full bg-card flex flex-col relative overflow-hidden">
+        <div className="h-full w-full bg-card flex flex-row relative overflow-hidden">
 
-            {/* Single Consolidated Sidebar (Components & Analysis Tools) */}
+            {/* Single Consolidated Non-Floating Left Sidebar (Components & Analysis Tools) */}
             {!readonly && <DldSidebar onAddNode={addNode} tableData={tableData} />}
 
-            <div className="flex-1 h-full">
+            <div className="flex-1 h-full relative">
                 <ReactFlow
                     nodes={nodes}
                     edges={edges}
@@ -497,6 +497,8 @@ export default function CircuitCanvas({
                     deleteKeyCode={['Backspace', 'Delete']}
                     multiSelectionKeyCode={['Control', 'Meta']}
                     selectionKeyCode={['Shift']}
+                    minZoom={0.2}
+                    maxZoom={3}
                     panOnScroll
                     selectionOnDrag
                     panOnDrag={[1, 2]}
@@ -507,7 +509,6 @@ export default function CircuitCanvas({
                     proOptions={{ hideAttribution: true }}
                     className="bg-card bg-opacity-50"
                 >
-                    <Controls className="!bg-card !border-border !shadow-none-none !rounded-none-none !m-4" />
                     <Background
                         variant={BackgroundVariant.Dots}
                         gap={20}
