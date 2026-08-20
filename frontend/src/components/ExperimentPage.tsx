@@ -347,7 +347,7 @@ function ExperimentPageContent({ id }: { id: string }) {
                     return (
                         <div className="flex flex-col items-center min-h-full bg-background text-muted-foreground select-none overflow-y-auto pb-12 w-full">
                             <div className="w-full max-w-4xl mt-8">
-                                <div className="bg-gradient-to-br from-[#021D24] to-[#059669] rounded-t-2xl p-8 text-white relative overflow-hidden">
+                                <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-t-2xl p-8 text-white relative overflow-hidden">
                                     <div className="relative z-10 flex items-start gap-4">
                                         <div className="bg-card/20 p-3 rounded-xl backdrop-blur-sm">
                                             <i className="bx bx-play-circle text-3xl text-white"></i>
@@ -402,17 +402,52 @@ function ExperimentPageContent({ id }: { id: string }) {
         <div className="hidden md:flex flex-col h-screen bg-background overflow-hidden font-sans">
             {activeSection === "simulation" && simulationStarted ? (
                 <div className="flex-1 flex flex-col h-screen bg-background overflow-hidden relative">
-                    <div className="h-10 bg-card border-b border-border flex items-center justify-between px-4 z-50 flex-shrink-0">
+                    <div className="h-14 bg-card border-b border-border flex items-center justify-between px-6 z-50 flex-shrink-0 shadow-sm">
+                        <div className="flex items-center gap-3">
+                            {/* Dropdown Menu at Top-Left */}
+                            <div className="relative group">
+                                <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-muted/50 hover:bg-muted text-xs font-bold text-foreground transition-colors">
+                                    <i className="bx bx-menu text-base" />
+                                    <span>Menu</span>
+                                    <i className="bx bx-chevron-down text-xs text-muted-foreground group-hover:rotate-180 transition-transform" />
+                                </button>
+                                <div className="absolute left-0 top-full mt-1.5 w-48 bg-card border border-border rounded-xl shadow-xl py-1 hidden group-hover:block z-50">
+                                    {SECTIONS.map((sec) => (
+                                        <button
+                                            key={sec.id}
+                                            onClick={() => {
+                                                if (sec.id !== 'simulation') setSimulationStarted(false);
+                                                setActiveSection(sec.id);
+                                            }}
+                                            className={`w-full text-left px-4 py-2 text-xs font-semibold hover:bg-muted transition-colors ${activeSection === sec.id ? 'text-primary bg-primary/10' : 'text-foreground'}`}
+                                        >
+                                            {sec.label}
+                                        </button>
+                                    ))}
+                                    <div className="h-[1px] bg-border my-1" />
+                                    <a
+                                        href="/dashboard"
+                                        className="block w-full text-left px-4 py-2 text-xs font-semibold text-red-500 hover:bg-red-500/10 transition-colors"
+                                    >
+                                        Back to Dashboard
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Center Title */}
+                        <div className="text-sm font-black text-foreground tracking-wide uppercase">
+                            DLD Virtual Simulator
+                        </div>
+
+                        {/* Right Exit Button */}
                         <button
                             onClick={() => setSimulationStarted(false)}
-                            className="flex items-center gap-2 text-xs font-bold text-muted-foreground hover:text-primary transition-colors bg-muted/60 hover:bg-muted px-3 py-1.5 rounded-lg"
+                            className="flex items-center gap-2 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 transition-all px-4 py-2 rounded-xl shadow-sm"
                         >
-                            <i className="bx bx-arrow-back text-sm" />
-                            <span>Exit Simulation / Back to Lab</span>
+                            <i className="bx bx-log-out text-sm" />
+                            <span>Exit Simulation</span>
                         </button>
-                        <div className="text-xs font-semibold text-muted-foreground truncate">
-                            {experiment.title} • Interactive Simulation Mode
-                        </div>
                     </div>
                     <div className="flex-1 flex flex-col h-full w-full overflow-hidden">
                         <SimulationRenderer labId={simLabId} initialCode={experiment.codeTemplate} language={experiment.language} />

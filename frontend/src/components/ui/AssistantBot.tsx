@@ -82,7 +82,7 @@ export function AssistantBot() {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setIsOpen(false)}
-                            className="fixed inset-0 bg-[#021D24]/60 backdrop-blur-sm z-[100]"
+                            className="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-[100]"
                         />
 
                         {/* Panel */}
@@ -94,7 +94,7 @@ export function AssistantBot() {
                             className="fixed inset-y-0 right-0 w-full md:w-[400px] bg-white dark:bg-background z-[101] flex flex-col shadow-2xl"
                         >
                             {/* Header */}
-                            <div className="bg-[#021D24] p-6 flex items-center justify-between text-white border-b border-white/10">
+                            <div className="bg-slate-900 dark:bg-card p-6 flex items-center justify-between text-white border-b border-border">
                                 <div className="flex items-center gap-3">
                                     <div className="w-12 h-12 flex items-center justify-center">
                                         <img src="/prayukti 2.0/illustrations/ai_chatbot.png" alt="AI Chatbot" className="w-full h-full object-contain scale-[1.45]" />

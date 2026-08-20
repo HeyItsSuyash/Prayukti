@@ -12,8 +12,12 @@ import { PremiumFooter } from '@/components/layout/PremiumFooter';
 
 export default function Home() {
     useEffect(() => {
-        if (typeof window !== 'undefined' && localStorage.getItem('vlab_user')) {
-            window.location.href = '/dashboard';
+        if (typeof window !== 'undefined') {
+            const hasUser = localStorage.getItem('vlab_user');
+            const hasToken = localStorage.getItem('vlab_access_token') || document.cookie.includes('vlab_access_token');
+            if (hasUser && hasToken) {
+                window.location.href = '/dashboard';
+            }
         }
     }, []);
 

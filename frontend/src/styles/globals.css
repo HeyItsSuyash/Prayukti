@@ -152,6 +152,11 @@
   border: 1px solid rgba(255, 255, 255, 0.22);
 }
 
+/* Hide ReactFlow Attribution watermark */
+.react-flow__attribution {
+  display: none !important;
+}
+
 .dark .glass {
   background: rgba(13, 21, 38, 0.80);
   backdrop-filter: blur(12px);

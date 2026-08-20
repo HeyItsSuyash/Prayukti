@@ -480,25 +480,12 @@ export default function CircuitCanvas({
             {/* Top Bar - Minimal */}
             <div className="absolute top-4 right-4 z-20 flex gap-2">
                 <button
-                    className={`px-4 py-2 rounded-none-full text-xs font-bold border shadow-none-none flex items-center gap-2 transition-all ${generating ? 'bg-green-500 text-white border-green-600' : 'bg-card text-muted-foreground'}`}
-                    onClick={() => setGenerating(!generating)}
-                >
-                    {generating ? <i className="bx bx-pause" /> : <i className="bx bx-play" />}
-                    {generating ? 'SIMULATING' : 'PAUSED'}
-                </button>
-
-                <button
-                    className="px-4 py-2 bg-card hover:bg-card text-muted-foreground border border-border rounded-none-full text-xs font-bold shadow-none-none flex items-center gap-2"
+                    className="px-4 py-2 bg-card hover:bg-muted text-foreground border border-border rounded-xl text-xs font-bold shadow-sm flex items-center gap-2 transition-colors"
                     onClick={handleWorkspacesOpen}
                 >
-                    <i className="bx bx-table"  /> Truth Table
+                    <i className="bx bx-table text-primary" />
+                    <span>Truth Table</span>
                 </button>
-
-                {!readonly && (
-                    <button className="px-4 py-2 bg-black hover:bg-card text-white rounded-none-full text-xs font-bold shadow-none-none flex items-center gap-2" onClick={saveCircuit}>
-                        <i className="bx bx-save"  /> Save
-                    </button>
-                )}
             </div>
 
             <WorkspacesPanel
@@ -535,6 +522,7 @@ export default function CircuitCanvas({
                     snapToGrid
                     snapGrid={[10, 10]}
                     defaultEdgeOptions={{ type: 'signal', animated: false, style: { strokeWidth: 2 } }}
+                    proOptions={{ hideAttribution: true }}
                     className="bg-card bg-opacity-50"
                 >
                     <Controls className="!bg-card !border-border !shadow-none-none !rounded-none-none !m-4" />

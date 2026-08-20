@@ -535,6 +535,7 @@ export default function CircuitCanvas({
                     snapToGrid
                     snapGrid={[10, 10]}
                     defaultEdgeOptions={{ type: 'signal', animated: false, style: { strokeWidth: 2 } }}
+                    proOptions={{ hideAttribution: true }}
                     className="bg-card bg-opacity-50"
                 >
                     <Controls className="!bg-card !border-border !shadow-none-none !rounded-none-none !m-4" />
