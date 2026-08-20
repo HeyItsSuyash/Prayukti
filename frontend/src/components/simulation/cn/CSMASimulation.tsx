@@ -274,22 +274,6 @@ export default function CSMASimulation() {
 
     return (
         <div className="flex flex-col h-full bg-card overflow-y-auto">
-            {/* Tabs */}
-            <div className="flex border-b sticky top-0 bg-card z-10">
-                {["Simulation", "Observation", "Quiz"].map((tab) => (
-                    <button
-                        key={tab}
-                        onClick={() => setActiveTab(tab.toLowerCase())}
-                        className={`px-6 py-3 font-medium transition-colors border-b-2 ${activeTab === tab.toLowerCase()
-                            ? "border-primary text-primary bg-blue-50"
-                            : "border-transparent text-muted-foreground hover:text-muted-foreground hover:bg-card"
-                            }`}
-                    >
-                        {tab}
-                    </button>
-                ))}
-            </div>
-
             <div className="p-6 max-w-[1600px] mx-auto w-full">
                 {activeTab === "simulation" && (
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">

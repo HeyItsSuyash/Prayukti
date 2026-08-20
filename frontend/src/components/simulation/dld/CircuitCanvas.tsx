@@ -477,26 +477,8 @@ export default function CircuitCanvas({
     return (
         <div className="h-full w-full bg-card flex flex-col relative overflow-hidden">
 
-            {/* Top Bar - Minimal */}
-            <div className="absolute top-4 right-4 z-20 flex gap-2">
-                <button
-                    className="px-4 py-2 bg-card hover:bg-muted text-foreground border border-border rounded-xl text-xs font-bold shadow-sm flex items-center gap-2 transition-colors"
-                    onClick={handleWorkspacesOpen}
-                >
-                    <i className="bx bx-table text-primary" />
-                    <span>Truth Table</span>
-                </button>
-            </div>
-
-            <WorkspacesPanel
-                isOpen={showWorkspaces}
-                onClose={() => setShowWorkspaces(false)}
-                data={tableData}
-                loading={false}
-            />
-
-            {/* Sidebar Component Palette */}
-            {!readonly && <DldSidebar onAddNode={addNode} />}
+            {/* Single Consolidated Sidebar (Components & Analysis Tools) */}
+            {!readonly && <DldSidebar onAddNode={addNode} tableData={tableData} />}
 
             <div className="flex-1 h-full">
                 <ReactFlow

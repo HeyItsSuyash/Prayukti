@@ -451,113 +451,113 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
               </div>
             </div>
 
-            {/* Main Score Card */}
-            <div className="bg-card rounded-3xl shadow-none-none border border-border p-8 mb-6 relative">
-              <div className="flex justify-between items-start mb-10">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold">
-                    {userInitial}
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-muted-foreground">{userName} <span className="text-muted-foreground font-sans text-sm font-normal">(student)</span></h3>
-                    <p className="text-muted-foreground text-sm">{userEmail}</p>
-                  </div>
+            {/* Header Result Banner */}
+            <div className="bg-card rounded-2xl border border-border p-6 mb-6 flex items-center justify-between shadow-sm">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-primary/10 border border-primary/20 text-primary rounded-xl flex items-center justify-center text-xl font-bold">
+                  {userInitial}
                 </div>
-                <div className="text-right">
-                  <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">Test</span>
-                  <p className="font-bold text-white text-sm">{labTitle}</p>
+                <div>
+                  <h3 className="font-bold text-base text-foreground flex items-center gap-2">
+                    {userName}
+                    <span className="text-xs text-muted-foreground font-normal bg-muted px-2 py-0.5 rounded-md">Student</span>
+                  </h3>
+                  <p className="text-xs text-muted-foreground">{userEmail}</p>
                 </div>
-              </div>
-
-              {/* Circle Score */}
-              <div className="flex justify-center mb-10">
-                <div className="w-32 h-32 rounded-full border-[12px] border-border flex flex-col items-center justify-center relative">
-                  <svg className="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="44" fill="none" stroke={isPassed ? '#10b981' : '#f43f5e'} strokeWidth="12" strokeDasharray={`${score * 2.76} 276`} />
-                  </svg>
-                  <span className="text-2xl font-black text-muted-foreground">{score}%</span>
-                  <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">Score</span>
-                </div>
-              </div>
-
-              {/* Horizontal Bar Chart */}
-              <div className="flex h-12 rounded-xl overflow-hidden mb-2 shadow-none-none bg-card">
-                <div style={{ width: `${(correctCount / 30) * 100}%` }} className="bg-green-500 h-full " />
-                <div style={{ width: `${(wrongCount / 30) * 100}%` }} className="bg-red-500 h-full " />
-                <div style={{ width: `${(skippedCount / 30) * 100}%` }} className="bg-yellow-500 h-full " />
-              </div>
-              <div className="flex justify-between text-xs font-bold text-muted-foreground px-1 uppercase tracking-wider">
-                <div className="flex-1 text-center border-t-2 border-green-500 pt-2"><span className="text-green-600">{correctCount}</span> Correct</div>
-                <div className="flex-1 text-center border-t-2 border-red-500 pt-2"><span className="text-red-600">{wrongCount}</span> Wrong</div>
-                <div className="flex-1 text-center border-t-2 border-yellow-500 pt-2"><span className="text-yellow-600">{skippedCount}</span> Skipped</div>
-                <div className="flex-1 text-center border-t-2 border-primary pt-2"><span className="text-primary">30</span> Total</div>
-              </div>
-            </div>
-
-            {/* 4 Detail Cards */}
-            <div className="grid grid-cols-4 gap-4 mb-6">
-              <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4 flex flex-col justify-center items-center">
-                <div className="flex items-center gap-2 mb-1">
-                  <CheckCircle2 className="w-4 h-4 text-green-600" />
-                  <span className="text-2xl font-black text-green-800">{correctCount}</span>
-                </div>
-                <span className="text-[10px] font-bold text-green-600 uppercase tracking-widest">Correct</span>
-              </div>
-              <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex flex-col justify-center items-center">
-                <div className="flex items-center gap-2 mb-1">
-                  <XCircle className="w-4 h-4 text-red-600" />
-                  <span className="text-2xl font-black text-red-800">{wrongCount}</span>
-                </div>
-                <span className="text-[10px] font-bold text-red-600 uppercase tracking-widest">Wrong</span>
-              </div>
-              <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4 flex flex-col justify-center items-center">
-                <div className="flex items-center gap-2 mb-1">
-                  <AlertTriangle className="w-4 h-4 text-yellow-600" />
-                  <span className="text-2xl font-black text-yellow-800">{skippedCount}</span>
-                </div>
-                <span className="text-[10px] font-bold text-yellow-600 uppercase tracking-widest">Skipped</span>
-              </div>
-              <div className="bg-primary/10 border border-primary/20 rounded-xl p-4 flex flex-col justify-center items-center">
-                <div className="flex items-center gap-2 mb-1">
-                  <Clock className="w-4 h-4 text-primary" />
-                  <span className="text-xl font-black text-primary">{formatTime(timeTaken)}</span>
-                </div>
-                <span className="text-[10px] font-bold text-primary uppercase tracking-widest">Time Taken</span>
-              </div>
-            </div>
-
-            {/* Final Status Row */}
-            <div className="bg-card border border-border shadow-none-none rounded-xl p-6 mb-8 flex justify-between items-center">
-              <div>
-                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest block mb-1">Marks Obtained</span>
-                <div className="text-3xl font-black text-muted-foreground">{correctCount} <span className="text-lg text-muted-foreground font-medium">/ 30</span></div>
-              </div>
-              <div className="text-center">
-                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest block mb-2">Status</span>
-                {isPassed ? (
-                  <span className="bg-green-500/20 text-green-500 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">✓ Passed</span>
-                ) : (
-                  <span className="bg-red-500/20 text-red-500 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">✗ Failed</span>
-                )}
               </div>
               <div className="text-right">
-                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest block mb-1">Passing Marks</span>
-                <div className="text-2xl font-black text-muted-foreground">{passMarks}</div>
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest block mb-0.5">Lab Assessment</span>
+                <p className="font-bold text-foreground text-sm truncate max-w-[250px]">{labTitle}</p>
+              </div>
+            </div>
+
+            {/* Main Score Card */}
+            <div className="bg-card rounded-2xl border border-border p-8 mb-6 shadow-sm relative overflow-hidden">
+              {/* Circle Score */}
+              <div className="flex flex-col items-center justify-center mb-8">
+                <div className="w-36 h-36 rounded-full border-[10px] border-muted flex flex-col items-center justify-center relative shadow-inner">
+                  <svg className="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="44"
+                      fill="none"
+                      stroke={isPassed ? '#10b981' : '#f43f5e'}
+                      strokeWidth="10"
+                      strokeDasharray={`${score * 2.76} 276`}
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <span className="text-3xl font-black text-foreground">{score}%</span>
+                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-0.5">Overall Score</span>
+                </div>
+
+                <div className="mt-4">
+                  {isPassed ? (
+                    <span className="bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-1.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Assessment Passed
+                    </span>
+                  ) : (
+                    <span className="bg-rose-500/10 text-rose-600 border border-rose-500/20 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-1.5">
+                      <XCircle className="w-4 h-4 text-rose-600" /> Assessment Failed
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Progress Breakdown Bar */}
+              <div className="space-y-2">
+                <div className="flex h-3 rounded-full overflow-hidden bg-muted">
+                  <div style={{ width: `${(correctCount / 30) * 100}%` }} className="bg-emerald-500 h-full" />
+                  <div style={{ width: `${(wrongCount / 30) * 100}%` }} className="bg-rose-500 h-full" />
+                  <div style={{ width: `${(skippedCount / 30) * 100}%` }} className="bg-amber-500 h-full" />
+                </div>
+                <div className="grid grid-cols-4 text-xs font-bold text-muted-foreground pt-1">
+                  <div className="text-left text-emerald-600 dark:text-emerald-400">● {correctCount} Correct</div>
+                  <div className="text-center text-rose-600 dark:text-rose-400">● {wrongCount} Wrong</div>
+                  <div className="text-center text-amber-600 dark:text-amber-400">● {skippedCount} Skipped</div>
+                  <div className="text-right text-foreground">30 Total</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Metric Cards */}
+            <div className="grid grid-cols-4 gap-4 mb-6">
+              <div className="bg-card border border-border rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
+                <CheckCircle2 className="w-5 h-5 text-emerald-500 mb-1" />
+                <span className="text-2xl font-black text-foreground">{correctCount}</span>
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Correct</span>
+              </div>
+              <div className="bg-card border border-border rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
+                <XCircle className="w-5 h-5 text-rose-500 mb-1" />
+                <span className="text-2xl font-black text-foreground">{wrongCount}</span>
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Wrong</span>
+              </div>
+              <div className="bg-card border border-border rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
+                <AlertTriangle className="w-5 h-5 text-amber-500 mb-1" />
+                <span className="text-2xl font-black text-foreground">{skippedCount}</span>
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Skipped</span>
+              </div>
+              <div className="bg-card border border-border rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
+                <Clock className="w-5 h-5 text-primary mb-1" />
+                <span className="text-xl font-black text-foreground">{formatTime(timeTaken)}</span>
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Time Taken</span>
               </div>
             </div>
 
             {/* Bottom Actions */}
             <div className="flex gap-4">
               <button
-                className="flex-1 py-4 border-2 border-border text-muted-foreground hover:bg-card font-bold rounded-xl  flex items-center justify-center gap-2"
+                onClick={() => setTestState("active")}
+                className="flex-1 py-3.5 bg-card hover:bg-muted text-foreground border border-border font-bold rounded-xl flex items-center justify-center gap-2 text-xs uppercase tracking-widest transition-colors shadow-sm"
               >
-                <BookOpen className="w-5 h-5" /> Review Answers
+                <BookOpen className="w-4 h-4 text-primary" /> Review Answers
               </button>
               <button
                 onClick={startTest}
-                className="flex-1 py-4 bg-primary hover:bg-primary text-white font-bold rounded-xl  flex items-center justify-center gap-2 shadow-none-none"
+                className="flex-1 py-3.5 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl flex items-center justify-center gap-2 text-xs uppercase tracking-widest transition-colors shadow-sm"
               >
-                <LogOut className="w-5 h-5 rotate-180" /> Retake Test
+                <LogOut className="w-4 h-4 rotate-180" /> Retake Test
               </button>
             </div>
           </div>

@@ -347,7 +347,7 @@ function ExperimentPageContent({ id }: { id: string }) {
                     return (
                         <div className="flex flex-col items-center min-h-full bg-background text-muted-foreground select-none overflow-y-auto pb-12 w-full">
                             <div className="w-full max-w-4xl mt-8">
-                                <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-t-2xl p-8 text-white relative overflow-hidden">
+                                <div className="bg-gradient-to-br from-emerald-800 to-teal-900 rounded-t-2xl p-8 text-white relative overflow-hidden shadow-lg">
                                     <div className="relative z-10 flex items-start gap-4">
                                         <div className="bg-card/20 p-3 rounded-xl backdrop-blur-sm">
                                             <i className="bx bx-play-circle text-3xl text-white"></i>
@@ -403,51 +403,54 @@ function ExperimentPageContent({ id }: { id: string }) {
             {activeSection === "simulation" && simulationStarted ? (
                 <div className="flex-1 flex flex-col h-screen bg-background overflow-hidden relative">
                     <div className="h-14 bg-card border-b border-border flex items-center justify-between px-6 z-50 flex-shrink-0 shadow-sm">
+                        {/* Left Section - Clean Lab Title */}
                         <div className="flex items-center gap-3">
-                            {/* Dropdown Menu at Top-Left */}
-                            <div className="relative group">
-                                <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-muted/50 hover:bg-muted text-xs font-bold text-foreground transition-colors">
-                                    <i className="bx bx-menu text-base" />
-                                    <span>Menu</span>
-                                    <i className="bx bx-chevron-down text-xs text-muted-foreground group-hover:rotate-180 transition-transform" />
+                            <span className="text-xs font-black uppercase tracking-widest text-primary bg-primary/10 px-3 py-1.5 rounded-lg border border-primary/20">
+                                {subjectName}
+                            </span>
+                        </div>
+
+                        {/* Center Title - Dynamic Experiment Title */}
+                        <div className="text-sm font-black text-foreground tracking-wide uppercase truncate max-w-[500px]">
+                            {experiment.title}
+                        </div>
+
+                        {/* Right Section - Zoom Controls horizontally to the left of Exit Simulation Button */}
+                        <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-1 bg-muted/60 border border-border p-1 rounded-xl">
+                                <button
+                                    onClick={() => {
+                                        const rfZoomIn = document.querySelector('.react-flow__controls-zoomin') as HTMLButtonElement;
+                                        if (rfZoomIn) rfZoomIn.click();
+                                    }}
+                                    className="p-1.5 hover:bg-card text-foreground rounded-lg transition-colors flex items-center gap-1 text-xs font-bold px-2"
+                                    title="Zoom In"
+                                >
+                                    <i className="bx bx-zoom-in text-base" />
+                                    <span>Zoom In</span>
                                 </button>
-                                <div className="absolute left-0 top-full mt-1.5 w-48 bg-card border border-border rounded-xl shadow-xl py-1 hidden group-hover:block z-50">
-                                    {SECTIONS.map((sec) => (
-                                        <button
-                                            key={sec.id}
-                                            onClick={() => {
-                                                if (sec.id !== 'simulation') setSimulationStarted(false);
-                                                setActiveSection(sec.id);
-                                            }}
-                                            className={`w-full text-left px-4 py-2 text-xs font-semibold hover:bg-muted transition-colors ${activeSection === sec.id ? 'text-primary bg-primary/10' : 'text-foreground'}`}
-                                        >
-                                            {sec.label}
-                                        </button>
-                                    ))}
-                                    <div className="h-[1px] bg-border my-1" />
-                                    <a
-                                        href="/dashboard"
-                                        className="block w-full text-left px-4 py-2 text-xs font-semibold text-red-500 hover:bg-red-500/10 transition-colors"
-                                    >
-                                        Back to Dashboard
-                                    </a>
-                                </div>
+                                <div className="w-[1px] h-4 bg-border" />
+                                <button
+                                    onClick={() => {
+                                        const rfZoomOut = document.querySelector('.react-flow__controls-zoomout') as HTMLButtonElement;
+                                        if (rfZoomOut) rfZoomOut.click();
+                                    }}
+                                    className="p-1.5 hover:bg-card text-foreground rounded-lg transition-colors flex items-center gap-1 text-xs font-bold px-2"
+                                    title="Zoom Out"
+                                >
+                                    <i className="bx bx-zoom-out text-base" />
+                                    <span>Zoom Out</span>
+                                </button>
                             </div>
-                        </div>
 
-                        {/* Center Title */}
-                        <div className="text-sm font-black text-foreground tracking-wide uppercase">
-                            DLD Virtual Simulator
+                            <button
+                                onClick={() => setSimulationStarted(false)}
+                                className="flex items-center gap-2 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 transition-all px-4 py-2.5 rounded-xl shadow-sm"
+                            >
+                                <i className="bx bx-log-out text-sm" />
+                                <span>Exit Simulation</span>
+                            </button>
                         </div>
-
-                        {/* Right Exit Button */}
-                        <button
-                            onClick={() => setSimulationStarted(false)}
-                            className="flex items-center gap-2 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 transition-all px-4 py-2 rounded-xl shadow-sm"
-                        >
-                            <i className="bx bx-log-out text-sm" />
-                            <span>Exit Simulation</span>
-                        </button>
                     </div>
                     <div className="flex-1 flex flex-col h-full w-full overflow-hidden">
                         <SimulationRenderer labId={simLabId} initialCode={experiment.codeTemplate} language={experiment.language} />
@@ -459,9 +462,9 @@ function ExperimentPageContent({ id }: { id: string }) {
                         <div className="flex items-center text-sm font-medium text-muted-foreground">
                             <a href="/dashboard" className="hover:text-primary transition-colors">Dashboard</a>
                             <ChevronRight className="w-4 h-4 mx-2" />
-                            <span className="hover:text-primary transition-colors cursor-pointer">{subjectName}</span>
+                            <a href={`/dashboard/${simLabId.split('-')[0]}`} className="hover:text-primary transition-colors">{subjectName}</a>
                             <ChevronRight className="w-4 h-4 mx-2" />
-                            <span className="text-foreground font-semibold">Experiments</span>
+                            <span className="text-foreground font-semibold truncate max-w-[300px]">{experiment.title}</span>
                         </div>
                     </header>
 

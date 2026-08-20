@@ -36,3 +36,14 @@ This file contains a growing ruleset that improves over time. **At session start
 ## Learned Rules
 
 <!-- New rules are appended below this line. Do not edit above this section. -->
+
+1. [STYLE] Always check GEMINI.md before performing any task — system requirement.
+2. [STYLE] Never use dark blue background colors (#021D24 or similar) across chatbot dialogs, chat responses, simulation cards, or canvas backgrounds. Always use theme-consistent background colors (white for light mode, dark gray for dark mode).
+3. [UX] Start simulation overview cards must use green gradients (`from-[#021D24]` is prohibited, use green/emerald gradient).
+4. [UX] For DLD simulation, consolidate components palette and truth/excitation table analysis into a single toggleable left sidebar; remove floating top menus and top canvas buttons.
+5. [UX] Place zoom in and zoom out controls horizontally to the left of the Exit Simulation button in the top navigation header.
+6. [UX] Remove extra top navs ("simulation", "comparison", "quiz") inside non-DLD simulations.
+7. [UX] In the center of the active simulation top navigation bar, dynamically display the current experiment's title.
+8. [UX] Ensure breadcrumbs ("Dashboard > Subject > Experiment") are fully functional links with proper href routing.
+9. [STYLE] Never use em-dashes (—) in the codebase UI/prose; use standard hyphens (-) instead.
+10. [UX] Redesign LabTest results page to be modern, theme-consistent (white/dark gray), and visually appealing.

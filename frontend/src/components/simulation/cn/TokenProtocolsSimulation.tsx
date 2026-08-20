@@ -574,22 +574,6 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
 
     return (
         <div className="flex flex-col h-full bg-[#f8fafc] overflow-hidden">
-            {/* Minimalist Tabs */}
-            <div className="flex bg-card border-b px-6 pt-2 gap-8 shadow-none-none">
-                {["simulation", "comparison", "quiz"].map((tab) => (
-                    <button
-                        key={tab}
-                        onClick={() => setActiveTab(tab as any)}
-                        className={`pb-3 text-xs font-black uppercase tracking-[0.2em]  border-b-2 ${activeTab === tab
-                            ? "border-cyan-500 text-cyan-600"
-                            : "border-transparent text-muted-foreground hover:text-muted-foreground"
-                            }`}
-                    >
-                        {tab}
-                    </button>
-                ))}
-            </div>
-
             <div className="flex-1 overflow-auto">
                 {(activeTab === "simulation" || activeTab === "comparison") && (
                     <div className="p-6 max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-5 gap-6">
