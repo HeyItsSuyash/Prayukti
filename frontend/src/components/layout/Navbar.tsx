@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Navbar({ pathname = "/" }: { pathname?: string }) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -115,14 +116,7 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
 
                 {/* Desktop CTA & Controls */}
                 <div className="hidden md:flex items-center gap-4">
-                    <button
-                        onClick={toggleDarkMode}
-                        className="p-2 rounded-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-                        aria-label="Toggle dark mode"
-                        suppressHydrationWarning
-                    >
-                        {isDarkMode ? <i className="bx bx-sun text-xl" /> : <i className="bx bx-moon text-xl" />}
-                    </button>
+                    <ThemeToggle />
 
                     {isLoggedIn ? (
                         <div className="flex items-center gap-3">
@@ -157,12 +151,7 @@ export function Navbar({ pathname = "/" }: { pathname?: string }) {
 
                 {/* Mobile Menu Toggle */}
                 <div className="flex items-center gap-4 lg:hidden">
-                    <button
-                        onClick={toggleDarkMode}
-                        className="p-2 rounded-sm text-muted-foreground"
-                    >
-                        {isDarkMode ? <i className="bx bx-sun text-xl" /> : <i className="bx bx-moon text-xl" />}
-                    </button>
+                    <ThemeToggle />
                     <button
                         className="w-10 h-10 flex flex-col items-center justify-center gap-1.5 group"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

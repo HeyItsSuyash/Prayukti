@@ -10,6 +10,7 @@ import { ExecutionInsights } from "@/components/simulation/core/ExecutionInsight
 import CodeCompiler from "@/components/simulation/core/CodeCompiler";
 import LabTest from "@/components/simulation/core/LabTest";
 import { ChevronRight } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const getSubjectName = (id: string) => {
     const lower = id.toLowerCase();
@@ -37,6 +38,59 @@ const SECTIONS = [
     { id: "test", label: "Test" },
     { id: "references", label: "References" }
 ];
+
+
+const getFallbackData = (id: string) => {
+    let title = "Experiment Simulation";
+    let aim = "To study and analyze the core concepts of this experiment.";
+    let theory = "Detailed theory will be populated here.";
+    
+    // CN Experiments
+    if (id === 'cn-exp-1') {
+        title = 'OSI vs TCP/IP Reference Models';
+        aim = 'To understand and compare the layers, protocols, and functionalities of the OSI and TCP/IP reference models.';
+        theory = 'The Open Systems Interconnection (OSI) model is a conceptual framework used to comprehend and standardize the functions of a telecommunication or computing system. It divides the communication process into seven abstract layers: Physical, Data Link, Network, Transport, Session, Presentation, and Application. In contrast, the TCP/IP model is a more concise framework with four layers: Network Access, Internet, Transport, and Application. Both models serve as guidelines for designing network protocols and troubleshooting network issues.';
+    } else if (id === 'cn-exp-2') {
+        title = 'CSMA/CD Protocol Simulation';
+        aim = 'To simulate the Carrier Sense Multiple Access with Collision Detection (CSMA/CD) protocol and observe network collision handling.';
+        theory = 'CSMA/CD is a media access control method used in early Ethernet networks. "Carrier Sense" means a node listens to the channel before transmitting. If the channel is idle, it transmits; if busy, it waits. "Multiple Access" means multiple nodes share the same medium. "Collision Detection" means nodes monitor the medium while transmitting. If a collision is detected (i.e., multiple nodes transmit simultaneously), they stop, broadcast a jam signal, and wait for a random backoff period before attempting retransmission.';
+    } else if (id === 'cn-exp-3') {
+        title = 'ARP Protocol Simulation';
+        aim = 'To understand how the Address Resolution Protocol (ARP) maps IP addresses to MAC addresses in a local network.';
+        theory = 'ARP is a fundamental network protocol used to map a known logical address (IPv4) to an unknown physical hardware address (MAC address). When a device needs to communicate with another device on the same local network, it broadcasts an ARP Request asking "Who has this IP address?". The device with that IP address replies with an ARP Reply containing its MAC address. This mapping is then cached in the ARP table for future communications.';
+    } else if (id === 'cn-exp-4') {
+        title = 'Distance Vector Routing';
+        aim = 'To simulate Distance Vector Routing protocols (like RIP) and observe how routing tables converge using the Bellman-Ford algorithm.';
+        theory = 'Distance Vector Routing is an intra-domain routing protocol where each router maintains a table (vector) giving the best known distance to each destination and which link to use to get there. Routers periodically share their routing tables with their immediate neighbors. Using the Bellman-Ford algorithm, they update their tables to find the shortest path. While simple, it can suffer from the "count-to-infinity" problem, mitigated by techniques like split horizon and poison reverse.';
+    } else if (id === 'cn-exp-5') {
+        title = 'Selective Repeat Simulation';
+        aim = 'To study the Selective Repeat ARQ protocol and how it handles packet loss by selectively retransmitting only the lost frames.';
+        theory = 'Selective Repeat is an Automatic Repeat reQuest (ARQ) protocol used for reliable data transmission over unreliable networks. Unlike Go-Back-N, which retransmits all frames starting from the lost one, Selective Repeat only retransmits the specific frame that was lost or corrupted. Both the sender and receiver maintain a window of sequence numbers. The receiver buffers out-of-order frames and sends individual acknowledgments (ACKs) for each successfully received frame.';
+    } else if (id === 'cn-exp-6') {
+        title = 'Sliding Window Simulation';
+        aim = 'To demonstrate flow control mechanisms using the Sliding Window protocol.';
+        theory = 'The Sliding Window protocol is a flow control mechanism used in data link and transport layer protocols (like TCP) to ensure reliable and efficient data transmission. It allows the sender to transmit multiple frames before needing an acknowledgment (ACK). The "window" represents the maximum number of unacknowledged frames allowed. As ACKs are received, the window slides forward, allowing more frames to be sent, preventing the sender from overwhelming the receiver.';
+    } else if (id === 'cn-exp-7') {
+        title = 'Token Protocols Simulation';
+        aim = 'To simulate Token Ring networks and understand deterministic media access control using tokens.';
+        theory = 'Token Ring is a local area network (LAN) protocol in which all computers are connected in a ring or star topology and a bit- or token-passing scheme is used to prevent the collision of data between two computers that want to send messages at the same time. A special three-byte frame called a "token" circulates around the ring. A station must seize the token before it can transmit data, ensuring deterministic, collision-free access.';
+    
+    // DBMS
+    } else if (id === 'dbms-exp-1') { title = 'Introduction to DBMS'; aim = 'To learn the fundamentals of Database Management Systems.'; theory = 'A Database Management System (DBMS) is software that interacts with end users, applications, and the database itself to capture and analyze the data...'; }
+    else if (id === 'dbms-exp-2') { title = 'Application Development'; aim = 'To develop database applications using SQL.'; theory = 'Database application development involves creating front-end interfaces that interact with a backend SQL database...'; }
+    else if (id === 'dbms-exp-3') { title = 'Relational Algebra'; aim = 'To study relational algebra operations.'; theory = 'Relational algebra is a procedural query language, which takes instances of relations as input and yields instances of relations as output...'; }
+    else if (id === 'dbms-exp-4') { title = 'Normalization'; aim = 'To understand database normalization forms (1NF, 2NF, 3NF, BCNF).'; theory = 'Normalization is the process of organizing data in a database to reduce redundancy and improve data integrity...'; }
+    else if (id === 'dbms-exp-5') { title = 'Host Language Integration'; aim = 'To integrate SQL with a host programming language.'; theory = 'Host language integration allows SQL statements to be embedded within a procedural programming language like C or Java...'; }
+    
+    // Others
+    else if (id.startsWith('error-detection')) { title = 'Error Detection Simulation'; aim = 'To study CRC and parity check methods.'; theory = 'Error detection techniques like Cyclic Redundancy Check (CRC) ensure data integrity over noisy channels...'; }
+    else if (id.startsWith('daa')) { title = 'Algorithm Analysis'; aim = 'To analyze the time and space complexity of algorithms.'; theory = 'Algorithm analysis involves determining the computational complexity of an algorithm in terms of time (Big-O) and space...'; }
+    else if (id.startsWith('mpmc')) { title = '8086 Simulator'; aim = 'To simulate 8086 microprocessor instructions.'; theory = 'The 8086 is a 16-bit microprocessor with a complex instruction set. Simulators allow testing assembly programs without hardware...'; }
+    else if (id.startsWith('dld')) { title = 'Circuit Canvas'; aim = 'To design and simulate digital logic circuits.'; theory = 'Digital Logic Design involves creating circuits using basic logic gates (AND, OR, NOT) to perform boolean functions...'; }
+    else if (id.startsWith('oops')) { title = 'Java Compiler'; aim = 'To practice Object-Oriented Programming concepts in Java.'; theory = 'Object-Oriented Programming (OOP) paradigms include encapsulation, inheritance, polymorphism, and abstraction...'; }
+    
+    return { title, aim, theory };
+};
 
 function ExperimentPageContent({ id }: { id: string }) {
     const [experiment, setExperiment] = useState<any>(null);
@@ -86,32 +140,14 @@ function ExperimentPageContent({ id }: { id: string }) {
                 
                 const applyFallback = () => {
                     console.warn("[VLAB] Backend unreachable or missing data, using fallback experiment data for ID:", id);
-                    let fallbackTitle = "Experiment Simulation";
-                    if (id === 'cn-exp-1') fallbackTitle = 'OSI vs TCP/IP Reference Models';
-                    else if (id === 'cn-exp-2') fallbackTitle = 'CSMA/CD Protocol Simulation';
-                    else if (id === 'cn-exp-3') fallbackTitle = 'ARP Protocol Simulation';
-                    else if (id === 'cn-exp-4') fallbackTitle = 'Distance Vector Routing';
-                    else if (id === 'cn-exp-5') fallbackTitle = 'Selective Repeat Simulation';
-                    else if (id === 'cn-exp-6') fallbackTitle = 'Sliding Window Simulation';
-                    else if (id === 'cn-exp-7') fallbackTitle = 'Token Protocols Simulation';
-                    else if (id === 'dbms-exp-1') fallbackTitle = 'Introduction to DBMS';
-                    else if (id === 'dbms-exp-2') fallbackTitle = 'Application Development';
-                    else if (id === 'dbms-exp-3') fallbackTitle = 'Relational Algebra';
-                    else if (id === 'dbms-exp-4') fallbackTitle = 'Normalization';
-                    else if (id === 'dbms-exp-5') fallbackTitle = 'Host Language Integration';
-                    else if (id.startsWith('error-detection')) fallbackTitle = 'Error Detection Simulation';
-                    else if (id.startsWith('daa')) fallbackTitle = 'Algorithm Analysis';
-                    else if (id.startsWith('mpmc')) fallbackTitle = '8086 Simulator';
-                    else if (id.startsWith('dld')) fallbackTitle = 'Circuit Canvas';
-                    else if (id.startsWith('oops')) fallbackTitle = 'Java Compiler';
-                    
+                    const { title, aim, theory } = getFallbackData(id);
                     setExperiment({
                         id,
-                        title: fallbackTitle,
+                        title,
                         description: "Interactive Simulation Environment",
                         compilerEnabled: false,
-                        theory: "Detailed theory will be populated here.",
-                        aim: "To study and analyze the core concepts of this experiment.",
+                        theory,
+                        aim,
                         algorithm: "1. Follow on-screen instructions.\n2. Observe output."
                     });
                     setError(null);
@@ -126,32 +162,14 @@ function ExperimentPageContent({ id }: { id: string }) {
                 }
             } catch (err) {
                 console.warn("[VLAB] Network Error fetching experiment, applying fallback for ID:", id);
-                let fallbackTitle = "Experiment Simulation";
-                if (id === 'cn-exp-1') fallbackTitle = 'OSI vs TCP/IP Reference Models';
-                else if (id === 'cn-exp-2') fallbackTitle = 'CSMA/CD Protocol Simulation';
-                else if (id === 'cn-exp-3') fallbackTitle = 'ARP Protocol Simulation';
-                else if (id === 'cn-exp-4') fallbackTitle = 'Distance Vector Routing';
-                else if (id === 'cn-exp-5') fallbackTitle = 'Selective Repeat Simulation';
-                else if (id === 'cn-exp-6') fallbackTitle = 'Sliding Window Simulation';
-                else if (id === 'cn-exp-7') fallbackTitle = 'Token Protocols Simulation';
-                else if (id === 'dbms-exp-1') fallbackTitle = 'Introduction to DBMS';
-                else if (id === 'dbms-exp-2') fallbackTitle = 'Application Development';
-                else if (id === 'dbms-exp-3') fallbackTitle = 'Relational Algebra';
-                else if (id === 'dbms-exp-4') fallbackTitle = 'Normalization';
-                else if (id === 'dbms-exp-5') fallbackTitle = 'Host Language Integration';
-                else if (id.startsWith('error-detection')) fallbackTitle = 'Error Detection Simulation';
-                else if (id.startsWith('daa')) fallbackTitle = 'Algorithm Analysis';
-                else if (id.startsWith('mpmc')) fallbackTitle = '8086 Simulator';
-                else if (id.startsWith('dld')) fallbackTitle = 'Circuit Canvas';
-                else if (id.startsWith('oops')) fallbackTitle = 'Java Compiler';
-                
+                const { title, aim, theory } = getFallbackData(id);
                 setExperiment({
                     id,
-                    title: fallbackTitle,
+                    title,
                     description: "Interactive Simulation Environment",
                     compilerEnabled: false,
-                    theory: "Detailed theory will be populated here.",
-                    aim: "To study and analyze the core concepts of this experiment.",
+                    theory,
+                    aim,
                     algorithm: "1. Follow on-screen instructions.\n2. Observe output."
                 });
                 setError(null);
@@ -271,6 +289,7 @@ function ExperimentPageContent({ id }: { id: string }) {
                             {isRunning ? <i className="bx bx-loader2 h-3 w-3 animate-spin mr-2" /> : <i className="bx bx-play-circle h-3 w-3 mr-2" />}
                             {isRunning ? 'Compiling' : 'Run Experiment'}
                         </Button>
+                        <ThemeToggle />
                     </div>
                 </header>
 
@@ -329,7 +348,7 @@ function ExperimentPageContent({ id }: { id: string }) {
                     <div className="p-8 max-w-4xl">
                         <h2 className="text-2xl font-bold mb-6 underline decoration-primary/50 underline-offset-8">Theory</h2>
                         <div className="prose dark:prose-invert max-w-none text-muted-foreground whitespace-pre-wrap">
-                            This is a dummy sample theory. Newton's law of universal gravitation states that every particle attracts every other particle in the universe with a force proportional to the product of their masses and inversely proportional to the square of the distance between their centers. The formula is F = G(m1m2)/r². This foundational concept revolutionized our understanding of celestial mechanics and the fundamental forces of nature.
+                            {experiment.theory || "Detailed theory will be populated here."}
                         </div>
                     </div>
                 );
@@ -410,8 +429,11 @@ function ExperimentPageContent({ id }: { id: string }) {
                             <i className="bx bx-arrow-back text-sm" />
                             <span>Exit Simulation / Back to Lab</span>
                         </button>
-                        <div className="text-xs font-semibold text-muted-foreground truncate">
-                            {experiment.title} • Interactive Simulation Mode
+                        <div className="flex items-center gap-4">
+                            <div className="text-xs font-semibold text-muted-foreground truncate hidden sm:block">
+                                {experiment.title} • Interactive Simulation Mode
+                            </div>
+                            <ThemeToggle />
                         </div>
                     </div>
                     <div className="flex-1 flex flex-col h-full w-full overflow-hidden">
@@ -428,6 +450,7 @@ function ExperimentPageContent({ id }: { id: string }) {
                             <ChevronRight className="w-4 h-4 mx-2" />
                             <span className="text-foreground font-semibold">Experiments</span>
                         </div>
+                        <ThemeToggle />
                     </header>
 
                     <div className="flex flex-1 overflow-hidden">

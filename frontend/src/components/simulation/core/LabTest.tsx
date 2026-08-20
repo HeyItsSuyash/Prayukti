@@ -13,7 +13,7 @@ interface LabTestProps {
   labTitle: string;
 }
 
-type TestState = "instructions" | "active" | "result" | "kicked";
+type TestState = "instructions" | "active" | "result" | "kicked" | "review";
 
 const getSubjectName = (id: string) => {
   const lower = id.toLowerCase();
@@ -549,6 +549,7 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
             {/* Bottom Actions */}
             <div className="flex gap-4">
               <button
+                onClick={() => { setTestState("review"); setCurrentIndex(0); }}
                 className="flex-1 py-4 border-2 border-border text-muted-foreground hover:bg-card font-bold rounded-xl  flex items-center justify-center gap-2"
               >
                 <BookOpen className="w-5 h-5" /> Review Answers
@@ -577,12 +578,21 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
         {/* TOP HEADER */}
         <header className="bg-card border-b border-border h-16 flex items-center justify-between px-6 flex-shrink-0 shadow-none-none z-10">
           <div className="flex items-center gap-6">
-            <button
-              onClick={() => setShowQuitConfirm(true)}
-              className="text-red-500 border border-red-200 hover:bg-red-50 text-xs font-bold px-4 py-2 rounded-xl uppercase tracking-widest "
-            >
-              Quit Test
-            </button>
+            {testState === "review" ? (
+              <button
+                onClick={() => setTestState("result")}
+                className="text-muted-foreground border border-border hover:bg-card text-xs font-bold px-4 py-2 rounded-xl uppercase tracking-widest "
+              >
+                <ChevronLeft className="w-4 h-4 inline mr-1" /> Back to Results
+              </button>
+            ) : (
+              <button
+                onClick={() => setShowQuitConfirm(true)}
+                className="text-red-500 border border-red-200 hover:bg-red-50 text-xs font-bold px-4 py-2 rounded-xl uppercase tracking-widest "
+              >
+                Quit Test
+              </button>
+            )}
             <div className="flex items-center gap-3">
               <span className="text-muted-foreground text-sm font-bold w-14">Q {currentIndex + 1} / 30</span>
               <div className="w-48 h-1.5 bg-card rounded-full overflow-hidden">
@@ -592,10 +602,16 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
           </div>
           
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 bg-card px-4 py-2 rounded-full font-bold text-sm text-muted-foreground">
-              <Clock className="w-4 h-4 text-muted-foreground" />
-              {formatTime(timeLeft)}
-            </div>
+            {testState === "review" ? (
+              <div className="flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full font-bold text-sm uppercase tracking-widest">
+                Review Mode
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 bg-card px-4 py-2 rounded-full font-bold text-sm text-muted-foreground">
+                <Clock className="w-4 h-4 text-muted-foreground" />
+                {formatTime(timeLeft)}
+              </div>
+            )}
             <div className="flex items-center gap-3 border-l border-border pl-6">
               <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
                 {userInitial}
@@ -640,22 +656,46 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
               <div className="space-y-3 mb-8">
                 {currentQuestion?.options.map((option, optIdx) => {
                   const isSelected = currentAnswer === optIdx;
+                  const isCorrectAnswer = optIdx === currentQuestion.correctAnswer;
+                  
+                  let btnClass = "";
+                  let iconClass = "";
+                  
+                  if (testState === "review") {
+                    if (isCorrectAnswer) {
+                      btnClass = "border-green-500 bg-green-500/10 ring-1 ring-green-500/50 shadow-none-none";
+                      iconClass = "border-green-500 text-white bg-green-500";
+                    } else if (isSelected && !isCorrectAnswer) {
+                      btnClass = "border-red-500 bg-red-500/10 ring-1 ring-red-500/50 shadow-none-none";
+                      iconClass = "border-red-500 text-white bg-red-500";
+                    } else {
+                      btnClass = "bg-card border-border shadow-none-none opacity-50";
+                      iconClass = "border-border text-muted-foreground bg-card";
+                    }
+                  } else {
+                    if (isSelected) {
+                      btnClass = "border-primary bg-card ring-1 ring-primary/50 shadow-none-none";
+                      iconClass = "border-primary text-white bg-primary";
+                    } else {
+                      btnClass = "bg-card border-border hover:border-primary hover:bg-card shadow-none-none";
+                      iconClass = "border-border text-muted-foreground bg-card";
+                    }
+                  }
+
                   return (
                     <button
                       key={optIdx}
-                      onClick={() => selectOption(optIdx)}
-                      className={`w-full text-left px-6 py-5 rounded-xl border text-[15px]  flex items-center gap-4 ${
-                        isSelected
-                          ? "border-primary bg-card ring-1 ring-primary/50 shadow-none-none"
-                          : "bg-card border-border hover:border-primary hover:bg-card shadow-none-none"
-                      }`}
+                      onClick={() => testState === "active" && selectOption(optIdx)}
+                      disabled={testState === "review"}
+                      className={`w-full text-left px-6 py-5 rounded-xl border text-[15px]  flex items-center gap-4 ${btnClass}`}
                     >
-                      <span className={`w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold flex-shrink-0 transition-colors ${
-                        isSelected ? "border-primary text-white bg-primary" : "border-border text-muted-foreground bg-card"
-                      }`}>
+                      <span className={`w-8 h-8 rounded-full border flex items-center justify-center text-xs font-bold flex-shrink-0 transition-colors ${iconClass}`}>
                         {["A", "B", "C", "D"][optIdx]}
                       </span>
-                      <span className={`${isSelected ? 'text-primary font-bold' : 'text-muted-foreground'}`}>{option}</span>
+                      <span className={`${testState === "active" && isSelected ? 'text-primary font-bold' : (testState === "review" && (isCorrectAnswer || isSelected) ? 'font-bold' : 'text-muted-foreground')}`}>{option}</span>
+                      
+                      {testState === "review" && isCorrectAnswer && <CheckCircle2 className="w-5 h-5 text-green-500 ml-auto" />}
+                      {testState === "review" && isSelected && !isCorrectAnswer && <XCircle className="w-5 h-5 text-red-500 ml-auto" />}
                     </button>
                   );
                 })}
@@ -678,18 +718,32 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
               </span>
 
               <div className="flex gap-3">
-                <button
-                  onClick={clearAnswer}
-                  className="flex items-center gap-2 text-muted-foreground border border-border hover:bg-card px-5 py-2 rounded-xl text-xs font-bold uppercase tracking-widest "
-                >
-                  Clear & Next <ChevronRight className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={saveAndNext}
-                  className="flex items-center gap-2 bg-primary hover:bg-primary text-white px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest  shadow-none-none "
-                >
-                  Save & Next <ChevronRight className="w-4 h-4" />
-                </button>
+                {testState === "review" ? (
+                  <button
+                    onClick={() => {
+                        if (currentIndex < questions.length - 1) setCurrentIndex(i => i + 1);
+                        else setTestState("result");
+                    }}
+                    className="flex items-center gap-2 bg-primary hover:bg-primary text-white px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest shadow-none-none"
+                  >
+                    {currentIndex < questions.length - 1 ? 'Next' : 'Finish Review'} <ChevronRight className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      onClick={clearAnswer}
+                      className="flex items-center gap-2 text-muted-foreground border border-border hover:bg-card px-5 py-2 rounded-xl text-xs font-bold uppercase tracking-widest "
+                    >
+                      Clear & Next <ChevronRight className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={saveAndNext}
+                      className="flex items-center gap-2 bg-primary hover:bg-primary text-white px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest  shadow-none-none "
+                    >
+                      Save & Next <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </main>
@@ -743,15 +797,26 @@ export default function LabTest({ labId, labTitle }: LabTestProps) {
 
             {/* Bottom Submit Button */}
             <div className="p-6 border-t border-border bg-card/50">
-              <button
-                onClick={() => setShowSubmitConfirm(true)}
-                className="w-full py-4 bg-primary hover:bg-primary text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-none-none  "
-              >
-                <CheckCircle2 className="w-5 h-5" /> SUBMIT TEST
-              </button>
-              <p className="text-center mt-3 text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
-                {answers.filter(a => a !== null).length}/30 Answered
-              </p>
+              {testState === "review" ? (
+                  <button
+                    onClick={() => setTestState("result")}
+                    className="w-full py-4 bg-muted hover:bg-muted text-foreground font-bold rounded-xl flex items-center justify-center gap-2 shadow-none-none"
+                  >
+                    <ChevronLeft className="w-5 h-5" /> Back to Results
+                  </button>
+              ) : (
+                  <>
+                    <button
+                      onClick={() => setShowSubmitConfirm(true)}
+                      className="w-full py-4 bg-primary hover:bg-primary text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-none-none  "
+                    >
+                      <CheckCircle2 className="w-5 h-5" /> SUBMIT TEST
+                    </button>
+                    <p className="text-center mt-3 text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
+                      {answers.filter(a => a !== null).length}/30 Answered
+                    </p>
+                  </>
+              )}
             </div>
           </aside>
         </div>

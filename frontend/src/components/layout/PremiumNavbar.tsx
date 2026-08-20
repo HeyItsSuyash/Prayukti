@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface NavbarProps {
     pathname: string;
@@ -139,6 +140,9 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
 
                 {/* CTAs */}
                 <div className="flex items-center gap-4">
+                    <div className="hidden sm:flex text-white hover:text-white/80">
+                        <ThemeToggle />
+                    </div>
                     {user ? (
                         <div className="relative" ref={dropdownRef}>
                             <div className="flex items-center gap-3 cursor-pointer" onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}>
