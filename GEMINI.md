@@ -36,5 +36,3 @@ This file contains a growing ruleset that improves over time. **At session start
 ## Learned Rules
 
 <!-- New rules are appended below this line. Do not edit above this section. -->
-
-ye lo same prompt likha hua
