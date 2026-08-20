@@ -1,4 +1,10 @@
 {
+  "name": "prayukti-monorepo",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "frontend_teacher"
+  ],
   "dependencies": {
     "pg": "^8.21.0"
   }
