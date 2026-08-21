@@ -12,6 +12,8 @@ pub struct Config {
     pub otp_length: usize,
     pub otp_max_attempts: i32,
     pub frontend_url: String,
+    pub student_frontend_url: String,
+    pub teacher_frontend_url: String,
 }
 
 impl Config {
@@ -44,7 +46,11 @@ impl Config {
         let otp_max_attempts = env::var("OTP_MAX_ATTEMPTS").unwrap_or_else(|_| "5".to_string()).parse::<i32>().unwrap_or(5);
         
         let frontend_url = env::var("FRONTEND_URL")
-            .unwrap_or_else(|_| "https://mmmut.prayukti.org,http://localhost:3000,http://localhost:3001".to_string());
+            .unwrap_or_else(|_| "https://mmmut.prayukti.org".to_string());
+        let student_frontend_url = env::var("STUDENT_FRONTEND_URL")
+            .unwrap_or_else(|_| frontend_url.clone());
+        let teacher_frontend_url = env::var("TEACHER_FRONTEND_URL")
+            .unwrap_or_else(|_| "http://localhost:3001".to_string());
 
         Self {
             database_url,
@@ -57,14 +63,18 @@ impl Config {
             otp_length,
             otp_max_attempts,
             frontend_url,
+            student_frontend_url,
+            teacher_frontend_url,
         }
     }
 
     pub fn frontend_origins(&self) -> Vec<String> {
-        self.frontend_url
-            .split(',')
-            .map(|s| s.trim().to_string())
-            .filter(|s| !s.is_empty())
-            .collect()
+        let mut list = vec![
+            self.frontend_url.clone(),
+            self.student_frontend_url.clone(),
+            self.teacher_frontend_url.clone(),
+        ];
+        list.retain(|s| !s.trim().is_empty());
+        list
     }
 }
