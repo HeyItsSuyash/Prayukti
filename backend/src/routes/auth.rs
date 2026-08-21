@@ -390,7 +390,8 @@ pub async fn verify_otp(
 
     use axum::http::header::{SET_COOKIE, HeaderValue};
 
-    let cookie_val = if state.config.frontend_url.starts_with("https") {
+    let is_https = state.config.student_frontend_url.starts_with("https") || state.config.teacher_frontend_url.starts_with("https");
+    let cookie_val = if is_https {
         format!(
             "vlab_access_token={}; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=86400",
             token
@@ -498,7 +499,8 @@ pub async fn signin(
 
     use axum::http::header::{SET_COOKIE, HeaderValue};
 
-    let cookie_val = if state.config.frontend_url.starts_with("https") {
+    let is_https = state.config.student_frontend_url.starts_with("https") || state.config.teacher_frontend_url.starts_with("https");
+    let cookie_val = if is_https {
         format!(
             "vlab_access_token={}; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=86400",
             token
@@ -632,7 +634,8 @@ pub async fn logout(State(state): State<AppState>) -> impl IntoResponse {
     use axum::http::header::{SET_COOKIE, HeaderValue};
     use axum::response::Response;
 
-    let cookie_val = if state.config.frontend_url.starts_with("https") {
+    let is_https = state.config.student_frontend_url.starts_with("https") || state.config.teacher_frontend_url.starts_with("https");
+    let cookie_val = if is_https {
         "vlab_access_token=; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=0"
     } else {
         "vlab_access_token=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0"

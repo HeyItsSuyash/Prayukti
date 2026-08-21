@@ -114,15 +114,12 @@ async fn main() {
     let sensitive_rate_limit_state = rate_limit_state.clone();
 
     let origins = config.frontend_origins();
-    // Configure CORS securely
+    // Configure CORS strictly for configured frontend origins
     let cors = CorsLayer::new()
         .allow_origin(tower_http::cors::AllowOrigin::predicate(move |origin: &axum::http::HeaderValue, _| {
             if let Ok(origin_str) = origin.to_str() {
-                origins.iter().any(|o| o == origin_str) ||
-                origin_str == "https://mmmut.prayukti.org" ||
-                origin_str.starts_with("http://localhost:") ||
-                origin_str.ends_with(".vercel.app") ||
-                origin_str.ends_with(".onrender.com")
+                let clean_origin = origin_str.trim_end_matches('/');
+                origins.iter().any(|o| o == clean_origin)
             } else {
                 false
             }
