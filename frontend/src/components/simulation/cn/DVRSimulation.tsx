@@ -435,9 +435,9 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                     <h2 className="text-xl font-black uppercase tracking-tight text-muted-foreground">DVR Simulator</h2>
 
                     <div className="ml-6 flex items-center bg-card p-1 rounded-none-none">
-                        <button className={`px-4 py-1.5 text-sm font-semibold rounded-none-none  ${activeTab === 'simulation' ? 'bg-card shadow-none-none text-purple-600' : 'text-muted-foreground hover:text-muted-foreground'}`} onClick={() => setActiveTab('simulation')}>Simulation</button>
-                        <button className={`px-4 py-1.5 text-sm font-semibold rounded-none-none  ${activeTab === 'observation' ? 'bg-card shadow-none-none text-purple-600' : 'text-muted-foreground hover:text-muted-foreground'}`} onClick={() => setActiveTab('observation')}>Observation Logger</button>
-                        <button className={`px-4 py-1.5 text-sm font-semibold rounded-none-none  ${activeTab === 'statistics' ? 'bg-card shadow-none-none text-purple-600' : 'text-muted-foreground hover:text-muted-foreground'}`} onClick={() => setActiveTab('statistics')}>Statistics</button>
+                        <button className={`px-4 py-1.5 text-sm font-semibold rounded-none-none transition-all ${activeTab === 'simulation' ? 'bg-card shadow-none-none text-purple-600' : 'text-muted-foreground hover:text-muted-foreground'}`} onClick={() => setActiveTab('simulation')}>Simulation</button>
+                        <button className={`px-4 py-1.5 text-sm font-semibold rounded-none-none transition-all ${activeTab === 'observation' ? 'bg-card shadow-none-none text-purple-600' : 'text-muted-foreground hover:text-muted-foreground'}`} onClick={() => setActiveTab('observation')}>Observation Logger</button>
+                        <button className={`px-4 py-1.5 text-sm font-semibold rounded-none-none transition-all ${activeTab === 'statistics' ? 'bg-card shadow-none-none text-purple-600' : 'text-muted-foreground hover:text-muted-foreground'}`} onClick={() => setActiveTab('statistics')}>Statistics</button>
                     </div>
                 </div>
 
@@ -518,7 +518,7 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                                     return (
                                         <g key={link.id} className="pointer-events-auto cursor-pointer group" onClick={(e) => { e.stopPropagation(); handleLinkClick(link.id); }}>
                                             <line x1={`${source.x}%`} y1={`${source.y}%`} x2={`${target.x}%`} y2={`${target.y}%`} stroke="transparent" strokeWidth="25" />
-                                            <line x1={`${source.x}%`} y1={`${source.y}%`} x2={`${target.x}%`} y2={`${target.y}%`} stroke={link.isActive ? "#94a3b8" : "#f87171"} strokeWidth={link.isActive ? "4" : "2"} strokeDasharray={link.isActive ? "none" : "5 5"} className=" duration-300 group-hover:stroke-purple-400" />
+                                            <line x1={`${source.x}%`} y1={`${source.y}%`} x2={`${target.x}%`} y2={`${target.y}%`} stroke={link.isActive ? "#94a3b8" : "#f87171"} strokeWidth={link.isActive ? "4" : "2"} strokeDasharray={link.isActive ? "none" : "5 5"} className="transition-all duration-300 group-hover:stroke-purple-400" />
                                             {link.isActive && (
                                                 <g transform={`translate(calc(${source.x}% / 2 + ${target.x}% / 2), calc(${source.y}% / 2 + ${target.y}% / 2))`}>
                                                     <rect x="-12" y="-12" width="24" height="24" rx="4" fill="white" stroke="#e2e8f0" strokeWidth="2" className="group-hover:stroke-purple-400 transition-colors" />
@@ -554,7 +554,7 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                             {Object.values(nodes).map(node => (
                                 <div
                                     key={node.id}
-                                    className={`absolute z-10 flex flex-col items-center justify-center   ${editMode !== 'none' ? 'cursor-pointer' : 'cursor-pointer'}`}
+                                    className={`absolute z-10 flex flex-col items-center justify-center transition-transform hover:scale-105 ${editMode !== 'none' ? 'cursor-pointer' : 'cursor-pointer'}`}
                                     style={{ left: getCoordPx(node.id).x, top: getCoordPx(node.id).y, transform: 'translate(-50%, -50%)' }}
                                     onClick={(e) => { e.stopPropagation(); handleNodeClick(node.id); }}
                                 >

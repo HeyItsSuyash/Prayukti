@@ -341,7 +341,7 @@ export default function SelectiveRepeatSimulation() {
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab.toLowerCase() as any)}
-                        className={`flex-1 py-4 text-xs font-black uppercase tracking-[0.2em]  border-b-4 ${activeTab === tab.toLowerCase()
+                        className={`flex-1 py-4 text-xs font-black uppercase tracking-[0.2em] transition-all border-b-4 ${activeTab === tab.toLowerCase()
                             ? "border-primary text-primary bg-blue-50/50"
                             : "border-transparent text-muted-foreground hover:text-muted-foreground hover:bg-card"
                             }`}
@@ -360,10 +360,10 @@ export default function SelectiveRepeatSimulation() {
                             <div className="flex items-center justify-between gap-6 flex-wrap xl:flex-nowrap">
                                 {/* Left Side: Simulation Controls */}
                                 <div className="flex items-center gap-4">
-                                    <Button onClick={() => setIsRunning(!isRunning)} className={`h-11 px-8 rounded-none-none text-xs font-black uppercase tracking-[0.15em] ${isRunning ? "bg-amber-500 hover:bg-amber-600 shadow-none-none-200" : "bg-primary hover:bg-primary shadow-none-none-200"} text-white  shadow-none-none `}>
+                                    <Button onClick={() => setIsRunning(!isRunning)} className={`h-11 px-8 rounded-none-none text-xs font-black uppercase tracking-[0.15em] ${isRunning ? "bg-amber-500 hover:bg-amber-600 shadow-none-none-200" : "bg-primary hover:bg-primary shadow-none-none-200"} text-white transition-all shadow-none-none active:scale-95`}>
                                         {isRunning ? <i className="bx bx-pause mr-2 h-4 w-4"  /> : <i className="bx bx-play mr-2 h-4 w-4"  />} {isRunning ? "Pause" : "Start Simulation"}
                                     </Button>
-                                    <Button onClick={reset} variant="outline" className="h-11 px-6 rounded-none-none text-xs font-black uppercase tracking-widest text-muted-foreground border-border hover:bg-card  ">
+                                    <Button onClick={reset} variant="outline" className="h-11 px-6 rounded-none-none text-xs font-black uppercase tracking-widest text-muted-foreground border-border hover:bg-card active:scale-95 transition-all">
                                         <i className="bx bx-rotateccw h-4 w-4 mr-2"  /> Reset
                                     </Button>
 
@@ -508,7 +508,7 @@ export default function SelectiveRepeatSimulation() {
                                         const hasTimer = isInFlight && activeTimers[i] !== undefined;
                                         return (
                                             <div key={`s-${i}`} className="flex flex-col items-center gap-1">
-                                                <div className={`w-8 h-8 flex items-center justify-center rounded-none-none text-[10px] font-black border-2  shadow-none-none
+                                                <div className={`w-8 h-8 flex items-center justify-center rounded-none-none text-[10px] font-black border-2 transition-all shadow-none-none
                                         ${isAcked ? 'bg-primary border-emerald-600 text-white' :
                                                         isInFlight ? 'bg-amber-400 border-amber-500 text-amber-900' :
                                                             'bg-card border-border text-muted-foreground'
@@ -537,7 +537,7 @@ export default function SelectiveRepeatSimulation() {
                                     const isData = p.type === 'data';
 
                                     return (
-                                        <div key={p.id} className={`absolute  duration-[50ms] ease-linear z-20`}
+                                        <div key={p.id} className={`absolute transition-all duration-[50ms] ease-linear z-20`}
                                             style={{
                                                 left: `${p.progress}%`,
                                                 top: isData ? '40%' : '60%',
@@ -584,7 +584,7 @@ export default function SelectiveRepeatSimulation() {
                                         const isBuffered = receiverBuffered.includes(i);
                                         const inWindow = i >= receiverBase && i < receiverBase + windowSize;
                                         return (
-                                            <div key={`r-${i}`} className={`w-8 h-8 flex items-center justify-center rounded-none-none text-[10px] font-black border-2  shadow-none-none relative
+                                            <div key={`r-${i}`} className={`w-8 h-8 flex items-center justify-center rounded-none-none text-[10px] font-black border-2 transition-all shadow-none-none relative
                                      ${isDelivered ? 'bg-primary border-emerald-600 text-white' :
                                                     isBuffered ? 'bg-primary border-primary text-white' :
                                                         inWindow ? 'bg-emerald-50 border-emerald-200 text-emerald-600 border-dashed' :

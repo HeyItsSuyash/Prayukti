@@ -574,6 +574,22 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
 
     return (
         <div className="flex flex-col h-full bg-[#f8fafc] overflow-hidden">
+            {/* Minimalist Tabs */}
+            <div className="flex bg-card border-b px-6 pt-2 gap-8 shadow-none-none">
+                {["simulation", "comparison", "quiz"].map((tab) => (
+                    <button
+                        key={tab}
+                        onClick={() => setActiveTab(tab as any)}
+                        className={`pb-3 text-xs font-black uppercase tracking-[0.2em] transition-all border-b-2 ${activeTab === tab
+                            ? "border-cyan-500 text-cyan-600"
+                            : "border-transparent text-muted-foreground hover:text-muted-foreground"
+                            }`}
+                    >
+                        {tab}
+                    </button>
+                ))}
+            </div>
+
             <div className="flex-1 overflow-auto">
                 {(activeTab === "simulation" || activeTab === "comparison") && (
                     <div className="p-6 max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-5 gap-6">
@@ -717,22 +733,22 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                                 {/* Area Fills */}
                                                 <path
                                                     d={`M 0,100 L ${history.map((h, i) => `${(i / (history.length - 1)) * 200},${100 - Math.min(90, h.throughput / 20)}`).join(' L ')} L 200,100 Z`}
-                                                    fill="url(#grad-cyan)" className=" duration-500"
+                                                    fill="url(#grad-cyan)" className="transition-all duration-500"
                                                 />
                                                 <path
                                                     d={`M 0,100 L ${history.map((h, i) => `${(i / (history.length - 1)) * 200},${100 - Math.min(90, h.efficiency)}`).join(' L ')} L 200,100 Z`}
-                                                    fill="url(#grad-emerald)" className=" duration-500"
+                                                    fill="url(#grad-emerald)" className="transition-all duration-500"
                                                 />
 
                                                 {/* Throughput Path */}
                                                 <path
                                                     d={`M ${history.map((h, i) => `${(i / (history.length - 1)) * 200},${100 - Math.min(90, h.throughput / 20)}`).join(' L ')}`}
-                                                    fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className=" duration-500"
+                                                    fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-all duration-500"
                                                 />
                                                 {/* Efficiency Path */}
                                                 <path
                                                     d={`M ${history.map((h, i) => `${(i / (history.length - 1)) * 200},${100 - Math.min(90, h.efficiency)}`).join(' L ')}`}
-                                                    fill="none" stroke="#10b981" strokeWidth="2" strokeDasharray="4 2" strokeLinecap="round" strokeLinejoin="round" className=" duration-500 opacity-80"
+                                                    fill="none" stroke="#10b981" strokeWidth="2" strokeDasharray="4 2" strokeLinecap="round" strokeLinejoin="round" className="transition-all duration-500 opacity-80"
                                                 />
 
                                                 {/* Final Point Glow */}
@@ -843,7 +859,7 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                                                 <span>{val}%</span>
                                                             </div>
                                                             <div className="h-1.5 w-full bg-card rounded-none-full overflow-hidden">
-                                                                <div className="h-full bg-primary rounded-none-full  duration-1000 ease-out" style={{ width: `${val}%` }}></div>
+                                                                <div className="h-full bg-primary rounded-none-full transition-all duration-1000 ease-out" style={{ width: `${val}%` }}></div>
                                                             </div>
                                                         </div>
                                                     ))}
@@ -886,7 +902,7 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                                                 <span>{val}%</span>
                                                             </div>
                                                             <div className="h-1.5 w-full bg-card rounded-none-full overflow-hidden">
-                                                                <div className="h-full bg-amber-500 rounded-none-full  duration-1000 ease-out" style={{ width: `${val}%` }}></div>
+                                                                <div className="h-full bg-amber-500 rounded-none-full transition-all duration-1000 ease-out" style={{ width: `${val}%` }}></div>
                                                             </div>
                                                         </div>
                                                     ))}
@@ -1089,7 +1105,7 @@ export default function TokenProtocolsSimulation({ labMode = "LEARNING" }: { lab
                                                     key={oIdx}
                                                     disabled={showResults}
                                                     onClick={() => setQuizAnswers({ ...quizAnswers, [qIdx]: oIdx })}
-                                                    className={`p-4 text-left text-sm rounded-none-none border-2  ${quizAnswers[qIdx] === oIdx
+                                                    className={`p-4 text-left text-sm rounded-none-none border-2 transition-all ${quizAnswers[qIdx] === oIdx
                                                         ? showResults
                                                             ? oIdx === q.correct
                                                                 ? "border-emerald-500 bg-emerald-50 text-emerald-800"
@@ -1392,7 +1408,7 @@ function SimulationSVGArt({ mode, nodes, edges, tokenPos, activeTransmission, wi
                         stroke={connectSourceId === node.id ? "#f59e0b" : (selectedNodeId === node.id ? "#3b82f6" : (node.state === "failed" ? "#ef4444" : node.hasToken ? "#059669" : node.type === "hub" ? "#f59e0b" : "#e2e8f0"))}
                         strokeWidth={connectSourceId === node.id || selectedNodeId === node.id ? "5" : (node.type === "hub" ? "4" : "3")}
                         filter={connectSourceId === node.id || selectedNodeId === node.id ? "url(#glow)" : ""}
-                        className=" duration-300"
+                        className="transition-all duration-300"
                     />
                     <foreignObject
                         x={nodePositions[i].x - (node.type === "hub" ? (nodeSize * 0.6) : (nodeSize * 0.5))}
@@ -1418,7 +1434,7 @@ function SimulationSVGArt({ mode, nodes, edges, tokenPos, activeTransmission, wi
 
             {/* Token Sprite */}
             {nodePositions[tokenPos] && !activeTransmission && (
-                <g className=" duration-700" style={{ transform: `translate(${nodePositions[tokenPos].x}px, ${nodePositions[tokenPos].y}px)` }}>
+                <g className="transition-all duration-700" style={{ transform: `translate(${nodePositions[tokenPos].x}px, ${nodePositions[tokenPos].y}px)` }}>
                     <circle cx="0" cy="0" r="14" fill="#f59e0b" filter="url(#glow)">
                         <animate attributeName="r" values="12;16;12" dur="2s" repeatCount="indefinite" />
                     </circle>

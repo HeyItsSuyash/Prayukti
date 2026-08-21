@@ -260,7 +260,7 @@ export default function SlidingWindowSimulation() {
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab as any)}
-                        className={`pb-4 text-[10px] font-black uppercase tracking-[0.3em]  border-b-4 ${activeTab === tab
+                        className={`pb-4 text-[10px] font-black uppercase tracking-[0.3em] transition-all border-b-4 ${activeTab === tab
                             ? "border-primary text-primary"
                             : "border-transparent text-muted-foreground hover:text-muted-foreground"
                             }`}
@@ -291,7 +291,7 @@ export default function SlidingWindowSimulation() {
                                                 <button
                                                     key={opt.id}
                                                     onClick={() => setProtocol(opt.id as any)}
-                                                    className={`p-3 rounded-none-none text-[10px] font-bold text-left  border-2 ${protocol === opt.id
+                                                    className={`p-3 rounded-none-none text-[10px] font-bold text-left transition-all border-2 ${protocol === opt.id
                                                         ? `border-${opt.color}-500 bg-${opt.color}-50 text-${opt.color}-700 shadow-none-none transform scale-105`
                                                         : "border-border bg-card text-muted-foreground hover:border-border"
                                                         }`}
@@ -325,7 +325,7 @@ export default function SlidingWindowSimulation() {
 
                                 <div className="pt-4 space-y-3">
                                     <Button
-                                        className={`w-full rounded-none-3xl h-14 text-xs font-black uppercase tracking-widest ${isRunning ? "bg-rose-500 hover:bg-rose-600" : "bg-primary hover:bg-primary"} shadow-none-none  hover:scale-[1.02]`}
+                                        className={`w-full rounded-none-3xl h-14 text-xs font-black uppercase tracking-widest ${isRunning ? "bg-rose-500 hover:bg-rose-600" : "bg-primary hover:bg-primary"} shadow-none-none transition-all hover:scale-[1.02]`}
                                         onClick={() => setIsRunning(!isRunning)}
                                     >
                                         {isRunning ? <i className="bx bx-pause mr-2 h-5 w-5"  /> : <i className="bx bx-play mr-2 h-5 w-5"  />}
@@ -339,7 +339,7 @@ export default function SlidingWindowSimulation() {
 
                             {/* Live Stats */}
                             <div className="bg-card text-white p-8 rounded-none-[3rem] shadow-none-2xl relative overflow-hidden group">
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-[80px] rounded-none-full -mr-16 -mt-16 group-hover:bg-primary/20  duration-700"></div>
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-[80px] rounded-none-full -mr-16 -mt-16 group-hover:bg-primary/20 transition-all duration-700"></div>
                                 <h4 className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-6">Real-time Telemetry</h4>
                                 <div className="grid grid-cols-2 gap-6">
                                     <div>
@@ -358,7 +358,7 @@ export default function SlidingWindowSimulation() {
                                             <span>{Math.min(100, (packets.length * 10)).toFixed(0)}%</span>
                                         </div>
                                         <div className="h-1.5 w-full bg-card rounded-none-full overflow-hidden">
-                                            <div className="h-full bg-primary  duration-1000" style={{ width: `${Math.min(100, (packets.length * 10))}%` }}></div>
+                                            <div className="h-full bg-primary transition-all duration-1000" style={{ width: `${Math.min(100, (packets.length * 10))}%` }}></div>
                                         </div>
                                     </div>
                                 </div>
@@ -392,7 +392,7 @@ export default function SlidingWindowSimulation() {
                                             {Array.from({ length: 15 }).map((_, i) => (
                                                 <div
                                                     key={i}
-                                                    className={`w-6 h-8 flex items-center justify-center rounded-none-none text-[10px] font-black  border-2
+                                                    className={`w-6 h-8 flex items-center justify-center rounded-none-none text-[10px] font-black transition-all border-2
                                                         ${i >= senderBase && i < senderBase + (protocol === 'sw' ? 1 : windowSize) ? 'bg-primary border-primary text-white shadow-none-none' :
                                                             i < senderBase ? 'bg-emerald-50 border-emerald-100 text-emerald-600' : 'bg-card border-border text-muted-foreground'}
                                                         ${i === nextSeqToSend ? 'animate-pulse scale-110 shadow-none-none-200' : ''}
@@ -405,7 +405,7 @@ export default function SlidingWindowSimulation() {
                                     </div>
                                     <div className="h-0.5 w-full bg-card rounded-none-full relative">
                                         <div
-                                            className="absolute h-full bg-primary/30  duration-500 rounded-none-full"
+                                            className="absolute h-full bg-primary/30 transition-all duration-500 rounded-none-full"
                                             style={{
                                                 left: `${(senderBase / 15) * 100}%`,
                                                 width: `${((protocol === 'sw' ? 1 : windowSize) / 15) * 100}%`
@@ -423,7 +423,7 @@ export default function SlidingWindowSimulation() {
                                     {packets.map(p => (
                                         <div
                                             key={p.id}
-                                            className={`absolute  duration-100 ease-linear flex flex-col items-center gap-2
+                                            className={`absolute transition-all duration-100 ease-linear flex flex-col items-center gap-2
                                                 ${p.status === 'lost' ? 'opacity-0 scale-0 pointer-events-none' : 'opacity-100'}
                                             `}
                                             style={{
@@ -458,7 +458,7 @@ export default function SlidingWindowSimulation() {
                                             {Array.from({ length: 15 }).map((_, i) => (
                                                 <div
                                                     key={i}
-                                                    className={`w-6 h-8 flex items-center justify-center rounded-none-none text-[10px] font-black  border-2
+                                                    className={`w-6 h-8 flex items-center justify-center rounded-none-none text-[10px] font-black transition-all border-2
                                                         ${receivedPackets.includes(i) ? 'bg-primary border-emerald-500 text-white shadow-none-none' :
                                                             i === receiverExpected ? 'bg-card border-orange-400 text-orange-600 animate-pulse' : 'bg-card border-border text-muted-foreground'}
                                                     `}
@@ -486,7 +486,7 @@ export default function SlidingWindowSimulation() {
                                 </h5>
                                 <div className="space-y-1.5 overflow-y-auto pr-2">
                                     {log.map((entry, i) => (
-                                        <div key={i} className={`text-[10px] font-bold flex items-center gap-2 animate-in slide-in-from-left-2  duration-300 ${entry.type === 'error' ? 'text-rose-600' : entry.type === 'success' ? 'text-emerald-600' : 'text-muted-foreground'
+                                        <div key={i} className={`text-[10px] font-bold flex items-center gap-2 animate-in slide-in-from-left-2 transition-all duration-300 ${entry.type === 'error' ? 'text-rose-600' : entry.type === 'success' ? 'text-emerald-600' : 'text-muted-foreground'
                                             }`}>
                                             {entry.type === 'error' ? <i className="bx bx-xcircle h-3 w-3"  /> : entry.type === 'success' ? <i className="bx bx-check-circle h-3 w-3"  /> : <i className="bx bx-clock h-3 w-3"  />}
                                             {entry.msg}
@@ -563,7 +563,7 @@ export default function SlidingWindowSimulation() {
                                                     key={oIdx}
                                                     disabled={showResults}
                                                     onClick={() => setQuizAnswers({ ...quizAnswers, [qIdx]: oIdx })}
-                                                    className={`p-5 text-left text-sm rounded-none-3xl border-2  ${quizAnswers[qIdx] === oIdx
+                                                    className={`p-5 text-left text-sm rounded-none-3xl border-2 transition-all ${quizAnswers[qIdx] === oIdx
                                                         ? showResults
                                                             ? oIdx === q.correct
                                                                 ? "border-emerald-500 bg-emerald-50 text-emerald-800"

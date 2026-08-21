@@ -354,13 +354,13 @@ export default function ARPSimulation({ labId }: { labId: string }) {
 
                     <div className="ml-6 flex items-center bg-card p-1 rounded-none-none">
                         <button
-                            className={`px-4 py-1.5 text-sm font-semibold rounded-none-none  ${activeTab === 'simulation' ? 'bg-card shadow-none-none text-primary' : 'text-muted-foreground hover:text-muted-foreground'}`}
+                            className={`px-4 py-1.5 text-sm font-semibold rounded-none-none transition-all ${activeTab === 'simulation' ? 'bg-card shadow-none-none text-primary' : 'text-muted-foreground hover:text-muted-foreground'}`}
                             onClick={() => setActiveTab('simulation')}
                         >
                             Simulation
                         </button>
                         <button
-                            className={`px-4 py-1.5 text-sm font-semibold rounded-none-none  ${activeTab === 'observation' ? 'bg-card shadow-none-none text-primary' : 'text-muted-foreground hover:text-muted-foreground'}`}
+                            className={`px-4 py-1.5 text-sm font-semibold rounded-none-none transition-all ${activeTab === 'observation' ? 'bg-card shadow-none-none text-primary' : 'text-muted-foreground hover:text-muted-foreground'}`}
                             onClick={() => setActiveTab('observation')}
                         >
                             Observation
@@ -481,7 +481,7 @@ export default function ARPSimulation({ labId }: { labId: string }) {
                         <div className="relative w-full max-w-2xl h-96 flex items-center justify-between border-2 border-dashed border-border rounded-none-none bg-card/50 p-8 shadow-none-none">
 
                             {/* PC-1 Node (Left) */}
-                            <div id="pc1" className={`relative z-10 flex flex-col items-center p-4 bg-card border-2 shadow-none-none rounded-none-none  ${selectedSourceId === 'pc1' ? 'border-primary ring-4 ring-blue-100' : 'border-border'}`}>
+                            <div id="pc1" className={`relative z-10 flex flex-col items-center p-4 bg-card border-2 shadow-none-none rounded-none-none transition-all ${selectedSourceId === 'pc1' ? 'border-primary ring-4 ring-blue-100' : 'border-border'}`}>
                                 <Server className={`w-12 h-12 mb-2 ${selectedSourceId === 'pc1' ? 'text-primary' : 'text-muted-foreground'}`} />
                                 <Badge variant={selectedSourceId === 'pc1' ? "default" : "secondary"} className="mb-1">PC-1</Badge>
                                 <span className="font-mono text-[10px] text-muted-foreground">{NODES.pc1.ip}</span>
@@ -495,12 +495,12 @@ export default function ARPSimulation({ labId }: { labId: string }) {
 
                             {/* Receivers (Right) */}
                             <div className="relative z-10 flex flex-col gap-12">
-                                <div id="pc2" className={`flex flex-col items-center p-4 bg-card border-2 shadow-none-none rounded-none-none  ${selectedSourceId === 'pc2' ? 'border-primary ring-4 ring-blue-100' : 'border-border'}`}>
+                                <div id="pc2" className={`flex flex-col items-center p-4 bg-card border-2 shadow-none-none rounded-none-none transition-all ${selectedSourceId === 'pc2' ? 'border-primary ring-4 ring-blue-100' : 'border-border'}`}>
                                     <Server className={`w-8 h-8 mb-2 ${selectedSourceId === 'pc2' ? 'text-primary' : 'text-muted-foreground'}`} />
                                     <Badge variant={selectedSourceId === 'pc2' ? "default" : "secondary"} className="mb-1">PC-2</Badge>
                                     <span className="font-mono text-[10px] text-muted-foreground">{NODES.pc2.ip}</span>
                                 </div>
-                                <div id="pc3" className={`flex flex-col items-center p-4 bg-card border-2 shadow-none-none rounded-none-none  ${selectedSourceId === 'pc3' ? 'border-primary ring-4 ring-blue-100' : 'border-border'}`}>
+                                <div id="pc3" className={`flex flex-col items-center p-4 bg-card border-2 shadow-none-none rounded-none-none transition-all ${selectedSourceId === 'pc3' ? 'border-primary ring-4 ring-blue-100' : 'border-border'}`}>
                                     <Server className={`w-8 h-8 mb-2 ${selectedSourceId === 'pc3' ? 'text-primary' : 'text-muted-foreground'}`} />
                                     <Badge variant={selectedSourceId === 'pc3' ? "default" : "secondary"} className="mb-1">PC-3</Badge>
                                     <span className="font-mono text-[10px] text-muted-foreground">{NODES.pc3.ip}</span>

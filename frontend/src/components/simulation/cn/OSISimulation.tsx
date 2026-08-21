@@ -101,6 +101,22 @@ export default function OSISimulation() {
 
     return (
         <div className="flex flex-col h-full bg-card overflow-y-auto">
+            {/* Tabs */}
+            <div className="flex border-b sticky top-0 bg-card z-10">
+                {["Simulation", "Quiz", "Comparison"].map((tab) => (
+                    <button
+                        key={tab}
+                        onClick={() => setActiveTab(tab.toLowerCase())}
+                        className={`px-6 py-3 font-medium transition-colors border-b-2 ${activeTab === tab.toLowerCase()
+                            ? "border-primary text-primary bg-blue-50"
+                            : "border-transparent text-muted-foreground hover:text-muted-foreground hover:bg-card"
+                            }`}
+                    >
+                        {tab}
+                    </button>
+                ))}
+            </div>
+
             <div className="p-6">
                 {activeTab === "simulation" && (
                     <div className="grid grid-cols-1 xl:grid-cols-2 gap-12">
@@ -130,9 +146,9 @@ export default function OSISimulation() {
                                             key={layer.id}
                                             onClick={() => setSelectedLayer(layer)}
                                             className={`
-                                                relative cursor-pointer  duration-300 transform
+                                                relative cursor-pointer transition-all duration-300 transform
                                                 ${layer.color} text-white font-bold p-3 rounded-none shadow-none-none text-center text-sm
-                                                ${selectedLayer?.id === layer.id && selectedLayer?.tcpMap ? "ring-4 ring-blue-300 scale-105 z-10" : ""}
+                                                ${selectedLayer?.id === layer.id && selectedLayer?.tcpMap ? "ring-4 ring-blue-300 scale-105 z-10" : "hover:scale-102"}
                                                 ${currentAnimLayer === layer.id ? "ring-4 ring-yellow-400 scale-110 shadow-none-none z-20" : ""}
                                             `}
                                         >
@@ -140,7 +156,7 @@ export default function OSISimulation() {
                                             {layer.name}
                                             {currentAnimLayer === layer.id && (
                                                 <div className="absolute -right-8 top-1/2 -translate-y-1/2 text-2xl animate-bounce">
-                                                    
+                                                    📦
                                                 </div>
                                             )}
                                         </div>
@@ -257,7 +273,7 @@ export default function OSISimulation() {
                                                 key={oIdx}
                                                 onClick={() => handleQuizOption(qIdx, oIdx)}
                                                 className={`
-                                                    p-4 text-left rounded-none-none text-sm  border-2
+                                                    p-4 text-left rounded-none-none text-sm transition-all border-2
                                                     ${quizAnswers[qIdx] === oIdx
                                                         ? "border-primary bg-blue-50 text-primary font-medium"
                                                         : "border-border hover:border-border hover:bg-card"

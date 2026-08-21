@@ -274,6 +274,22 @@ export default function CSMASimulation() {
 
     return (
         <div className="flex flex-col h-full bg-card overflow-y-auto">
+            {/* Tabs */}
+            <div className="flex border-b sticky top-0 bg-card z-10">
+                {["Simulation", "Observation", "Quiz"].map((tab) => (
+                    <button
+                        key={tab}
+                        onClick={() => setActiveTab(tab.toLowerCase())}
+                        className={`px-6 py-3 font-medium transition-colors border-b-2 ${activeTab === tab.toLowerCase()
+                            ? "border-primary text-primary bg-blue-50"
+                            : "border-transparent text-muted-foreground hover:text-muted-foreground hover:bg-card"
+                            }`}
+                    >
+                        {tab}
+                    </button>
+                ))}
+            </div>
+
             <div className="p-6 max-w-[1600px] mx-auto w-full">
                 {activeTab === "simulation" && (
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
@@ -350,7 +366,7 @@ export default function CSMASimulation() {
 
                                 <div className="pt-4 space-y-3">
                                     <Button
-                                        className={`w-full rounded-none-none h-12 text-sm font-bold shadow-none-none   ${isRunning ? "bg-amber-500 hover:bg-amber-600 shadow-none-none-200/50" : "bg-cyan-600 hover:bg-cyan-700 shadow-none-none-200/50"}`}
+                                        className={`w-full rounded-none-none h-12 text-sm font-bold shadow-none-none transition-all active:scale-95 ${isRunning ? "bg-amber-500 hover:bg-amber-600 shadow-none-none-200/50" : "bg-cyan-600 hover:bg-cyan-700 shadow-none-none-200/50"}`}
                                         onClick={() => setIsRunning(!isRunning)}
                                     >
                                         {isRunning ? <Pause className="mr-2 h-4 w-4 fill-current" /> : <Play className="mr-2 h-4 w-4 fill-current" />}
@@ -364,7 +380,7 @@ export default function CSMASimulation() {
 
                             {/* Dynamic Stats Glaze */}
                             <div className="bg-card text-white p-6 rounded-none-[2rem] shadow-none-2xl relative overflow-hidden group">
-                                <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 blur-3xl rounded-none-full -mr-12 -mt-12 group-hover:bg-cyan-500/20  duration-500"></div>
+                                <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 blur-3xl rounded-none-full -mr-12 -mt-12 group-hover:bg-cyan-500/20 transition-all duration-500"></div>
                                 <h4 className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-4">Telemetry</h4>
                                 <div className="grid grid-cols-2 gap-y-4">
                                     <div>
@@ -378,7 +394,7 @@ export default function CSMASimulation() {
                                     <div className="col-span-2 pt-2">
                                         <p className="text-[8px] text-cyan-400/70 font-black uppercase mb-1 text-center">Efficiency Score</p>
                                         <div className="w-full h-1.5 bg-card rounded-none-full overflow-hidden">
-                                            <div className="h-full bg-cyan-500  duration-500" style={{ width: `${Math.min(stats.throughput, 100)}%` }}></div>
+                                            <div className="h-full bg-cyan-500 transition-all duration-500" style={{ width: `${Math.min(stats.throughput, 100)}%` }}></div>
                                         </div>
                                         <p className="text-center text-xs font-bold mt-1 text-cyan-400">{stats.throughput.toFixed(2)}%</p>
                                     </div>
@@ -414,7 +430,7 @@ export default function CSMASimulation() {
                                             (node.state === "transmitting" || node.state === "jamming" || node.state === "collision" || node.state === "success") && (
                                                 <div
                                                     key={`sig-${node.id}`}
-                                                    className={`absolute h-8  duration-100 blur-[2px] ${node.state === "jamming" ? "bg-amber-400 animate-pulse w-full h-1" :
+                                                    className={`absolute h-8 transition-all duration-100 blur-[2px] ${node.state === "jamming" ? "bg-amber-400 animate-pulse w-full h-1" :
                                                             node.state === "collision" ? "bg-rose-500 w-full h-1.5 shadow-none-[0_0_20px_rgba(244,63,94,0.6)]" :
                                                                 node.state === "success" ? "bg-primary/40 w-full h-1" :
                                                                     "bg-cyan-400/30 h-1"
@@ -510,7 +526,7 @@ export default function CSMASimulation() {
                                     {history.map((h, i) => (
                                         <div
                                             key={i}
-                                            className="bg-primary hover:bg-primary  flex-1"
+                                            className="bg-primary hover:bg-primary transition-all flex-1"
                                             style={{ height: `${h.throughput * 2}%`, minWidth: "4px" }}
                                             title={`Time: ${h.t}, TP: ${h.throughput.toFixed(2)}%`}
                                         ></div>
@@ -526,7 +542,7 @@ export default function CSMASimulation() {
                                     {history.map((h, i) => (
                                         <div
                                             key={i}
-                                            className="bg-red-400 hover:bg-red-500  flex-1"
+                                            className="bg-red-400 hover:bg-red-500 transition-all flex-1"
                                             style={{ height: `${(h.collisions / (stats.collisions + 1)) * 100}%`, minWidth: "4px" }}
                                             title={`Time: ${h.t}, Collisions: ${h.collisions}`}
                                         ></div>
@@ -560,7 +576,7 @@ export default function CSMASimulation() {
                                                 key={oIdx}
                                                 onClick={() => handleQuizOption(qIdx, oIdx)}
                                                 className={`
-                                                    p-4 text-left rounded-none-none text-sm  border-2
+                                                    p-4 text-left rounded-none-none text-sm transition-all border-2
                                                     ${quizAnswers[qIdx] === oIdx
                                                         ? "border-primary bg-blue-50 text-primary font-medium"
                                                         : "border-border hover:border-border hover:bg-card"
@@ -614,8 +630,8 @@ export default function CSMASimulation() {
 
 function NodeComponent({ node }: { node: Node }) {
     return (
-        <div className="flex flex-col items-center gap-4  duration-300">
-            <div className={`p-4 rounded-none-none shadow-none-none border-2  duration-300 relative ${node.state === "idle" ? "bg-card border-border" :
+        <div className="flex flex-col items-center gap-4 transition-all duration-300">
+            <div className={`p-4 rounded-none-none shadow-none-none border-2 transition-all duration-300 relative ${node.state === "idle" ? "bg-card border-border" :
                 node.state === "sensing" ? "bg-cyan-900 border-cyan-400 animate-pulse" :
                     node.state === "transmitting" ? "bg-green-900 border-green-400" :
                         node.state === "collision" ? "bg-red-900 border-red-400 animate-bounce" :
@@ -698,7 +714,7 @@ function CSMAFlowchart({ activeState }: { activeState: string }) {
                     return (
                         <React.Fragment key={step.id}>
                             <div className={`
-                                w-32 py-1.5 px-2 text-center  duration-500 relative z-10
+                                w-32 py-1.5 px-2 text-center transition-all duration-500 relative z-10
                                 ${isActive ? 'scale-105 shadow-none-[0_0_15px_rgba(34,211,238,0.4)]' : 'scale-100 opacity-40'}
                                 ${isDecision ? 'rotate-45 w-16 h-16 flex items-center justify-center border border-border' :
                                     isTerminator ? 'rounded-none-full bg-primary/10 border border-emerald-500/50 text-emerald-400' :
@@ -719,7 +735,7 @@ function CSMAFlowchart({ activeState }: { activeState: string }) {
 
                             {idx < steps.length - 1 && (
                                 <div className="h-2 w-px bg-card relative">
-                                    <div className={`absolute inset-0 bg-cyan-400  duration-500 ${isActive ? 'h-full' : 'h-0'}`}></div>
+                                    <div className={`absolute inset-0 bg-cyan-400 transition-all duration-500 ${isActive ? 'h-full' : 'h-0'}`}></div>
                                 </div>
                             )}
                         </React.Fragment>
