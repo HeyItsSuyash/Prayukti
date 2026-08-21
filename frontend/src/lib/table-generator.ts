@@ -21,6 +21,8 @@ export interface MultiCircuitAnalysis {
     circuits: SingleCircuitTableData[];
 }
 
+export type TableData = MultiCircuitAnalysis;
+
 // Helper to decompose graph into connected components
 function getConnectedComponents(nodes: Node[], edges: Edge[]): { nodes: Node[], edges: Edge[] }[] {
     if (nodes.length === 0) return [];
