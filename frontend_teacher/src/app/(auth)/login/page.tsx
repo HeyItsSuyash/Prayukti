@@ -7,7 +7,7 @@ import { API_URL } from '@/lib/config';
 import { z } from 'zod';
 
 const loginSchema = z.object({
-    email: z.string().min(1, 'Email is required').email('Invalid email address').endsWith('@mmmut.ac.in', 'Only @mmmut.ac.in emails are allowed'),
+    email: z.string().min(1, 'Email is required').email('Invalid email address'),
     password: z.string().min(6, 'Password must be at least 6 characters')
 });
 
@@ -30,13 +30,16 @@ export default function LoginPage() {
         try {
             loginSchema.parse({ email, password });
         } catch (e: any) {
-            if (e && e.errors && Array.isArray(e.errors) && e.errors.length > 0) {
-                showToast('error', e.errors[0].message);
-            } else if (e?.message) {
-                showToast('error', e.message);
-            } else {
-                showToast('error', 'Invalid email or password input');
+            let errorMsg = 'Invalid email or password format';
+            if (e && e.issues && Array.isArray(e.issues) && e.issues.length > 0) {
+                errorMsg = e.issues[0].message;
+            } else if (e && e.errors && Array.isArray(e.errors) && e.errors.length > 0) {
+                const first = e.errors[0];
+                errorMsg = typeof first === 'string' ? first : (first.message || JSON.stringify(first));
+            } else if (typeof e?.message === 'string') {
+                errorMsg = e.message;
             }
+            showToast('error', errorMsg);
             setLoading(false);
             return;
         }
@@ -70,7 +73,10 @@ export default function LoginPage() {
             }, 2000);
 
         } catch (err: any) {
-            const message = err.response?.data?.message || "Login failed, please try again after some time";
+            let message = err.response?.data?.message || "Login failed, please try again after some time";
+            if (typeof message !== 'string') {
+                message = JSON.stringify(message);
+            }
             showToast('error', message);
 
             // Special handling for unverified accounts
