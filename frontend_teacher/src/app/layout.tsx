@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   creator: 'CSIS Society',
   publisher: 'MMMUT Gorakhpur',
   icons: {
-    icon: '/prayukti 2.0/logo/logo_green.png',
-    apple: '/prayukti 2.0/logo/logo_green.png',
+    icon: '/prayukti 2.0/logo/logo_blue.png',
+    apple: '/prayukti 2.0/logo/logo_blue.png',
   },
   openGraph: {
     title: 'Prayukti | Virtual Laboratory Platform | MMMUT Gorakhpur',
