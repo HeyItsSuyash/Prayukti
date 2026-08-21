@@ -51,9 +51,10 @@ export default function TeacherDashboard() {
     const loadData = async () => {
         try {
                         
+            const token = typeof window !== "undefined" ? (localStorage.getItem("vlab_access_token") || localStorage.getItem("token") || "") : "";
             const res = await fetch(`${API_URL}/api/users`, {
                 headers: {
-                    'Authorization': `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") || "" : ""}`
+                    'Authorization': `Bearer ${token}`
                 }
             });
             if (!res.ok) throw new Error("Failed to fetch users");
