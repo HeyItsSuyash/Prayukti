@@ -119,8 +119,6 @@ export default function CircuitCanvas({
 
     // Realtime Truth Table Analysis
     useEffect(() => {
-        if (!showWorkspaces) return;
-
         // Debounce analysis to prevent lag during dragging
         const timer = setTimeout(() => {
             try {
@@ -129,9 +127,7 @@ export default function CircuitCanvas({
                 if (inputCount <= 6) {
                     const data = generateTruthTable(nodes, edges);
                     setTableData(data);
-                } else if (inputCount > 6 && !tableData) {
-                    // Warn once or handle large circuits differently
-                    // For now, valid up to 10 but we throttle auto-update for >6
+                } else if (inputCount > 6) {
                     if (inputCount <= 10) {
                         const data = generateTruthTable(nodes, edges);
                         setTableData(data);
@@ -140,10 +136,10 @@ export default function CircuitCanvas({
             } catch (err) {
                 console.error("Analysis failed", err);
             }
-        }, 500); // 500ms debounce ensures smooth UI
+        }, 300); // 300ms debounce ensures smooth UI and fast realtime table update
 
         return () => clearTimeout(timer);
-    }, [nodes, edges, showWorkspaces]);
+    }, [nodes, edges]);
 
     const getRandomColor = () => {
         const h = Math.floor(Math.random() * 360);

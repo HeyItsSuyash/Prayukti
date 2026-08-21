@@ -248,16 +248,28 @@ export const DldSidebar = ({ onAddNode, tableData }: DldSidebarProps & { tableDa
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-border">
-                                            {tableData.rows.map((row: any, i: number) => (
-                                                <tr key={i} className="hover:bg-muted/40 font-mono">
-                                                    {tableData.inputNames.map((name: string) => (
-                                                        <td key={name} className="p-1.5 border-r border-border text-foreground">{row.inputs[name]}</td>
-                                                    ))}
-                                                    {tableData.outputNames.map((name: string) => (
-                                                        <td key={name} className="p-1.5 font-bold text-primary bg-primary/5">{row.outputs[name]}</td>
-                                                    ))}
-                                                </tr>
-                                            ))}
+                                            {tableData.rows.map((row: any, i: number) => {
+                                                // Check if current row matches active circuit input state
+                                                const isCurrentRow = tableData.inputNames.length > 0 && tableData.inputNames.every((name: string) => {
+                                                    const matchNode = (tableData as any).inputNodes?.find((n: any) => (n.data?.label || n.id) === name);
+                                                    return matchNode ? (matchNode.data?.value ?? 0) === row.inputs[name] : true;
+                                                });
+
+                                                return (
+                                                    <tr key={i} className={`font-mono transition-colors ${isCurrentRow ? 'bg-primary/20 font-bold border-y-2 border-primary/50' : 'hover:bg-muted/40'}`}>
+                                                        {tableData.inputNames.map((name: string) => (
+                                                            <td key={name} className="p-1.5 border-r border-border text-foreground">
+                                                                <span className={isCurrentRow ? 'text-primary font-bold' : ''}>{row.inputs[name]}</span>
+                                                            </td>
+                                                        ))}
+                                                        {tableData.outputNames.map((name: string) => (
+                                                            <td key={name} className={`p-1.5 font-bold border-r border-border ${row.outputs[name] === 1 ? 'text-emerald-500 bg-emerald-500/10' : 'text-muted-foreground'}`}>
+                                                                {row.outputs[name]}
+                                                            </td>
+                                                        ))}
+                                                    </tr>
+                                                );
+                                            })}
                                         </tbody>
                                     </table>
                                 </div>

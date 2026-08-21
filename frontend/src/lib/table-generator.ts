@@ -73,5 +73,5 @@ export function generateTruthTable(nodes: Node[], edges: Edge[]): TableData {
         rows.push({ inputs: rowInputs, outputs: rowOutputs });
     }
 
-    return { inputNames, outputNames, rows };
+    return { inputNames, outputNames, rows, inputNodes, outputNodes };
 }
