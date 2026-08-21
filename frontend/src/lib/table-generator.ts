@@ -10,6 +10,8 @@ export interface TableData {
     inputNames: string[];
     outputNames: string[];
     rows: TruthTableRow[];
+    inputNodes?: Node[];
+    outputNodes?: Node[];
 }
 
 export function generateTruthTable(nodes: Node[], edges: Edge[]): TableData {
