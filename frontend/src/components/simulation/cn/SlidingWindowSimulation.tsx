@@ -254,22 +254,6 @@ export default function SlidingWindowSimulation() {
 
     return (
         <div className="flex flex-col h-full bg-background overflow-hidden">
-            {/* Header Tabs */}
-            <div className="flex bg-card border-b px-8 pt-4 gap-12 shadow-md">
-                {["simulation", "logic", "quiz"].map((tab) => (
-                    <button
-                        key={tab}
-                        onClick={() => setActiveTab(tab as any)}
-                        className={`pb-4 text-[10px] font-black uppercase tracking-[0.3em]  border-b-4 ${activeTab === tab
-                            ? "border-primary text-primary"
-                            : "border-transparent text-muted-foreground hover:text-muted-foreground"
-                            }`}
-                    >
-                        {tab}
-                    </button>
-                ))}
-            </div>
-
             <div className="flex-1 overflow-auto p-6">
                 {activeTab === "simulation" && (
                     <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6 h-full">
