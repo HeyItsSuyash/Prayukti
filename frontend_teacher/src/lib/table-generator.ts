@@ -6,72 +6,151 @@ export interface TruthTableRow {
     outputs: Record<string, number>;
 }
 
-export interface TableData {
+export interface SingleCircuitTableData {
+    circuitId: string;
+    circuitName: string;
+    gateSummary: string;
     inputNames: string[];
     outputNames: string[];
     rows: TruthTableRow[];
+    inputNodes: Node[];
+    outputNodes: Node[];
 }
 
-export function generateTruthTable(nodes: Node[], edges: Edge[]): TableData {
-    // 1. Identify Inputs and Outputs
-    // Sort by position or label to have consistent order
-    const inputNodes = nodes
-        .filter(n => n.type === 'inputNode')
-        .sort((a, b) => (a.data.label as string || '').localeCompare(b.data.label as string || ''));
+export interface MultiCircuitAnalysis {
+    circuits: SingleCircuitTableData[];
+}
 
-    const outputNodes = nodes
-        .filter(n => n.type === 'outputNode')
-        .sort((a, b) => (a.data.label as string || '').localeCompare(b.data.label as string || ''));
+// Helper to decompose graph into connected components
+function getConnectedComponents(nodes: Node[], edges: Edge[]): { nodes: Node[], edges: Edge[] }[] {
+    if (nodes.length === 0) return [];
 
-    const inputNames = inputNodes.map(n => n.data.label as string || n.id);
-    const outputNames = outputNodes.map(n => n.data.label as string || n.id);
+    const adj = new Map<string, Set<string>>();
+    nodes.forEach(n => adj.set(n.id, new Set()));
 
-    // 2. Generate all permutations (2^n)
-    const rowCount = Math.pow(2, inputNodes.length);
-    const rows: TruthTableRow[] = [];
+    edges.forEach(e => {
+        if (adj.has(e.source) && adj.has(e.target)) {
+            adj.get(e.source)!.add(e.target);
+            adj.get(e.target)!.add(e.source);
+        }
+    });
 
-    // Limit to prevent browser crash on huge circuits (e.g. max 10 inputs = 1024 rows)
-    if (inputNodes.length > 10) {
-        throw new Error("Too many inputs for auto-table generation (Limit: 10)");
-    }
+    const visited = new Set<string>();
+    const components: { nodes: Node[], edges: Edge[] }[] = [];
 
-    for (let i = 0; i < rowCount; i++) {
-        // Prepare input state for this iteration
-        const inputState = new Map<string, number>();
-        inputNodes.forEach((node, index) => {
-            // Extract bit value: (i >> (total - 1 - index)) & 1 for big-endian like table
-            const bit = (i >> (inputNodes.length - 1 - index)) & 1;
-            inputState.set(node.id, bit);
-        });
+    nodes.forEach(node => {
+        if (visited.has(node.id)) return;
 
-        // Clone nodes to simulate without affecting main canvas state
-        const simNodes = nodes.map(n => ({
-            ...n,
-            data: {
-                ...n.data,
-                value: inputState.has(n.id) ? inputState.get(n.id) : n.data.value
+        const componentNodeIds = new Set<string>();
+        const queue = [node.id];
+        visited.add(node.id);
+
+        while (queue.length > 0) {
+            const curr = queue.shift()!;
+            componentNodeIds.add(curr);
+            const neighbors = adj.get(curr);
+            if (neighbors) {
+                neighbors.forEach(neighbor => {
+                    if (!visited.has(neighbor)) {
+                        visited.add(neighbor);
+                        queue.push(neighbor);
+                    }
+                });
             }
-        }));
+        }
 
-        // Run evaluation
-        const evaluatedNodes = evaluateCircuit(simNodes, edges);
+        const compNodes = nodes.filter(n => componentNodeIds.has(n.id));
+        const compEdges = edges.filter(e => componentNodeIds.has(e.source) && componentNodeIds.has(e.target));
+        components.push({ nodes: compNodes, edges: compEdges });
+    });
 
-        // Capture results
-        const rowInputs: Record<string, number> = {};
-        const rowOutputs: Record<string, number> = {};
+    return components;
+}
 
-        inputNodes.forEach(n => {
-            rowInputs[n.data.label as string || n.id] = inputState.get(n.id) as number;
-        });
+export function generateTruthTable(nodes: Node[], edges: Edge[]): MultiCircuitAnalysis {
+    const rawComponents = getConnectedComponents(nodes, edges);
 
-        outputNodes.forEach(n => {
-            // Find the evaluated node
-            const finalNode = evaluatedNodes.find(en => en.id === n.id);
-            rowOutputs[n.data.label as string || n.id] = (finalNode?.data?.value as number) || 0;
-        });
+    // Filter components to only those that have at least 1 input AND 1 output node
+    const validComponents = rawComponents.filter(comp => {
+        const hasInput = comp.nodes.some(n => n.type === 'inputNode');
+        const hasOutput = comp.nodes.some(n => n.type === 'outputNode');
+        return hasInput && hasOutput;
+    });
 
-        rows.push({ inputs: rowInputs, outputs: rowOutputs });
+    if (validComponents.length === 0) {
+        return { circuits: [] };
     }
 
-    return { inputNames, outputNames, rows };
+    const circuits: SingleCircuitTableData[] = validComponents.map((comp, idx) => {
+        const inputNodes = comp.nodes
+            .filter(n => n.type === 'inputNode')
+            .sort((a, b) => (a.data.label as string || '').localeCompare(b.data.label as string || ''));
+
+        const outputNodes = comp.nodes
+            .filter(n => n.type === 'outputNode')
+            .sort((a, b) => (a.data.label as string || '').localeCompare(b.data.label as string || ''));
+
+        const inputNames = inputNodes.map(n => (n.data.label as string) || n.id);
+        const outputNames = outputNodes.map(n => (n.data.label as string) || n.id);
+
+        // Compute Gate Summary
+        const gateCounts: Record<string, number> = {};
+        comp.nodes.forEach(n => {
+            if (n.type && n.type !== 'inputNode' && n.type !== 'outputNode') {
+                const name = (n.data?.label as string) || n.type.toUpperCase();
+                gateCounts[name] = (gateCounts[name] || 0) + 1;
+            }
+        });
+        const gateSummary = Object.entries(gateCounts)
+            .map(([gate, cnt]) => `${cnt}x ${gate}`)
+            .join(', ') || 'Direct Connection';
+
+        const rowCount = Math.pow(2, inputNodes.length);
+        const rows: TruthTableRow[] = [];
+
+        for (let i = 0; i < rowCount; i++) {
+            const inputState = new Map<string, number>();
+            inputNodes.forEach((node, index) => {
+                const bit = (i >> (inputNodes.length - 1 - index)) & 1;
+                inputState.set(node.id, bit);
+            });
+
+            const simNodes = comp.nodes.map(n => ({
+                ...n,
+                data: {
+                    ...n.data,
+                    value: inputState.has(n.id) ? inputState.get(n.id) : n.data.value
+                }
+            }));
+
+            const evaluatedNodes = evaluateCircuit(simNodes, comp.edges);
+
+            const rowInputs: Record<string, number> = {};
+            const rowOutputs: Record<string, number> = {};
+
+            inputNodes.forEach(n => {
+                rowInputs[(n.data.label as string) || n.id] = inputState.get(n.id) as number;
+            });
+
+            outputNodes.forEach(n => {
+                const finalNode = evaluatedNodes.find(en => en.id === n.id);
+                rowOutputs[(n.data.label as string) || n.id] = (finalNode?.data?.value as number) || 0;
+            });
+
+            rows.push({ inputs: rowInputs, outputs: rowOutputs });
+        }
+
+        return {
+            circuitId: `circuit-${idx + 1}`,
+            circuitName: `Circuit ${idx + 1}`,
+            gateSummary,
+            inputNames,
+            outputNames,
+            rows,
+            inputNodes,
+            outputNodes
+        };
+    });
+
+    return { circuits };
 }
