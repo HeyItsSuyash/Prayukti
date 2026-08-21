@@ -1,4 +1,5 @@
 import React from 'react';
+import DbmsTheoryDiagram from '@/components/simulation/dbms/DbmsTheoryDiagram';
 
 
 export interface QuizQuestion {
@@ -43,111 +44,121 @@ export const LAB_CONTENT: Record<string, LabContent> = {
     // =========================================================================
 
     "dbms-exp-1": {
-        aim: "To demonstrate the installation and basic environment setup of a Database Management System (MySQL/Oracle/PostgreSQL) and perform basic DDL/DML operations (Create Database, Create Table, Insert Record).",
+        aim: "To study fundamental Database Management System (DBMS) concepts, master the core ACID properties of database transactions, analyze enterprise multi-tier architecture, and execute basic SQL Data Definition Language (DDL) and Data Manipulation Language (DML) commands.",
         theory: (
             <div className="space-y-8">
                 {/* 1. Introduction */}
                 <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">1. Introduction</h3>
-                    <p className="text-gray-700 leading-relaxed mb-4">
-                        A <strong>Database Management System (DBMS)</strong> is system software for creating and managing databases. It provides users and programmers with a systematic way to create, retrieve, update, and manage data. It serves as an interface between the database and the end-users or application programs, ensuring that data is consistently organized and remains easily accessible.
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">1. Introduction to Database Concepts</h3>
+                    <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
+                        A <strong>Database Management System (DBMS)</strong> is specialized system software designed to define, create, maintain, and control access to structured data. It serves as an intelligent intermediary between application programs and physical storage devices.
                     </p>
-                    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
-                        <p className="text-sm text-blue-800">
-                            <strong>Why is it important?</strong> Without a DBMS, managing large amounts of data would be chaotic, insecure, and inefficient. DBMS ensures data integrity, security, and concurrent access.
-                        </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+                        <div className="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 p-4 rounded-xl">
+                            <h4 className="font-bold text-emerald-900 dark:text-emerald-300 text-sm mb-1">Traditional File System</h4>
+                            <ul className="text-xs text-emerald-800 dark:text-emerald-400 space-y-1 list-disc pl-4">
+                                <li>High data redundancy & duplication</li>
+                                <li>No concurrent access control</li>
+                                <li>Data isolation & security vulnerabilities</li>
+                                <li>Risk of data corruption during system crash</li>
+                            </ul>
+                        </div>
+                        <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 p-4 rounded-xl">
+                            <h4 className="font-bold text-blue-900 dark:text-blue-300 text-sm mb-1">Modern DBMS Solution</h4>
+                            <ul className="text-xs text-blue-800 dark:text-blue-400 space-y-1 list-disc pl-4">
+                                <li>Centralized data storage & minimal redundancy</li>
+                                <li>ACID transaction guarantees</li>
+                                <li>Fine-grained access security & roles</li>
+                                <li>Automated crash recovery & WAL logging</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
-                {/* 2. Key Concepts */}
+                {/* 2. Interactive Concept & ACID Visualizer */}
                 <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-4">2. Key Concepts & Terminology</h3>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">2. Interactive Architecture & ACID Visualizer</h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
+                        Interact with the diagram below to test how database transactions enforce ACID rules, explore 3-tier architecture, and preview SQL query categories.
+                    </p>
+                    <DbmsTheoryDiagram />
+                </section>
+
+                {/* 3. Deep Dive: ACID Properties */}
+                <section>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-4">3. Deep Dive into ACID Properties</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="bg-white p-4 rounded-lg border border-gray-200 ">
-                            <div className="flex items-center gap-2 mb-2 text-blue-700">
-                                <i className="bx bx-database"  />
-                                <h4 className="font-bold">Database</h4>
+                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <div className="flex items-center gap-2 mb-2 text-emerald-600 dark:text-emerald-400">
+                                <i className="bx bx-check-shield text-xl" />
+                                <h4 className="font-bold text-slate-900 dark:text-slate-100">Atomicity ("All or Nothing")</h4>
                             </div>
-                            <p className="text-sm text-gray-600">An organized collection of structured information, or data, typically stored electronically in a computer system.</p>
+                            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Guarantees that all operations inside a transaction complete successfully. If any single command fails or the system crashes mid-way, the entire transaction is rolled back, leaving the database unchanged.
+                            </p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200 ">
-                            <div className="flex items-center gap-2 mb-2 text-green-700">
-                                <i className="bx bx-table"  />
-                                <h4 className="font-bold">Table (Relation)</h4>
+
+                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <div className="flex items-center gap-2 mb-2 text-blue-600 dark:text-blue-400">
+                                <i className="bx bx-git-commit text-xl" />
+                                <h4 className="font-bold text-slate-900 dark:text-slate-100">Consistency (Valid State Transitions)</h4>
                             </div>
-                            <p className="text-sm text-gray-600">A collection of related data held in a table format within a database. It consists of columns and rows.</p>
+                            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Ensures that a transaction transfers the database from one valid state to another, maintaining all predefined integrity constraints, foreign keys, and unique indexes.
+                            </p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200 ">
-                            <div className="flex items-center gap-2 mb-2 text-purple-700">
-                                <i className="bx bx-columns"  />
-                                <h4 className="font-bold">Attribute (Column)</h4>
+
+                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <div className="flex items-center gap-2 mb-2 text-purple-600 dark:text-purple-400">
+                                <i className="bx bx-[#059669] text-xl" />
+                                <h4 className="font-bold text-slate-900 dark:text-slate-100">Isolation (Concurrency Control)</h4>
                             </div>
-                            <p className="text-sm text-gray-600">A specific characteristic or property of a table. Example: `Name`, `Age` in a Student table.</p>
+                            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Ensures concurrent transactions execute independently without interfering with each other. Prevents dirty reads, non-repeatable reads, and phantom reads through locking mechanisms.
+                            </p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200 ">
-                            <div className="flex items-center gap-2 mb-2 text-orange-700">
-                                <i className="bx bx-layoutlist"  />
-                                <h4 className="font-bold">Tuple (Row/Record)</h4>
+
+                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <div className="flex items-center gap-2 mb-2 text-amber-600 dark:text-amber-400">
+                                <i className="bx bx-save text-xl" />
+                                <h4 className="font-bold text-slate-900 dark:text-slate-100">Durability (Permanent Storage)</h4>
                             </div>
-                            <p className="text-sm text-gray-600">A single entry in a table representing a set of related data. Example: `(1, "John", 20)`.</p>
+                            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Guarantees that once a transaction commits, its results are permanently recorded in non-volatile storage (via Write-Ahead Logging) and will survive subsequent system crashes.
+                            </p>
                         </div>
                     </div>
                 </section>
 
-                {/* 3. SQL Commands Classification */}
+                {/* 4. SQL Commands Classification */}
                 <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">3. SQL Command Classification</h3>
-                    <p className="text-gray-700 mb-4">SQL (Structured Query Language) commands are grouped into several categories based on their function:</p>
-                    <ul className="list-disc pl-6 space-y-2 text-gray-700">
-                        <li><strong>DDL (Data Definition Language):</strong> Defines the structure of the database.
-                            <ul className="list-circle pl-6 mt-1 text-gray-600">
-                                <li><code>CREATE</code>: Creates a new table/database.</li>
-                                <li><code>ALTER</code>: Modifies an existing database structure.</li>
-                                <li><code>DROP</code>: Deletes a table/database.</li>
-                                <li><code>TRUNCATE</code>: Removes all records but keeps the structure.</li>
-                            </ul>
-                        </li>
-                        <li><strong>DML (Data Manipulation Language):</strong> Manages data within tables.
-                            <ul className="list-circle pl-6 mt-1 text-gray-600">
-                                <li><code>INSERT</code>: Adds new rows.</li>
-                                <li><code>UPDATE</code>: Modifies existing rows.</li>
-                                <li><code>DELETE</code>: Removes specific rows.</li>
-                            </ul>
-                        </li>
-                        <li><strong>DQL (Data Query Language):</strong> Retrieves data.
-                            <ul className="list-circle pl-6 mt-1 text-gray-600">
-                                <li><code>SELECT</code>: Fetches data from the database.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </section>
-
-                {/* 4. Advantages & Disadvantages */}
-                <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h4 className="font-bold text-green-800 mb-2 uppercase tracking-wide text-sm">Advantages</h4>
-                        <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
-                            <li><strong>Reduced Data Redundancy:</strong> Minimizes duplicate data.</li>
-                            <li><strong>Data Integrity:</strong> Ensures accuracy and consistency.</li>
-                            <li><strong>Data Security:</strong> Control access to data.</li>
-                            <li><strong>Better Data Sharing:</strong> Multiple users can access data simultaneously.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 className="font-bold text-red-800 mb-2 uppercase tracking-wide text-sm">Disadvantages</h4>
-                        <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
-                            <li><strong>Cost:</strong> High initial setup and maintenance cost.</li>
-                            <li><strong>Complexity:</strong> Requires skilled personnel to manage.</li>
-                            <li><strong>Performance:</strong> Can be slower than file systems for simple tasks.</li>
-                        </ul>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">4. SQL Command Classification</h3>
+                    <p className="text-slate-700 dark:text-slate-300 mb-4">Structured Query Language (SQL) is divided into 5 standard categories based on execution scope:</p>
+                    <div className="space-y-3">
+                        <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-800 text-xs">
+                            <strong className="text-emerald-600 dark:text-emerald-400">1. DDL (Data Definition Language):</strong> Defines and alters schema structures.
+                            <span className="block text-slate-500 dark:text-slate-400 mt-1 font-mono">Commands: CREATE, ALTER, DROP, TRUNCATE, RENAME</span>
+                        </div>
+                        <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-800 text-xs">
+                            <strong className="text-blue-600 dark:text-blue-400">2. DML (Data Manipulation Language):</strong> Manages stored record data.
+                            <span className="block text-slate-500 dark:text-slate-400 mt-1 font-mono">Commands: INSERT, UPDATE, DELETE, MERGE</span>
+                        </div>
+                        <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-800 text-xs">
+                            <strong className="text-purple-600 dark:text-purple-400">3. DQL (Data Query Language):</strong> Retrieves stored data matching criteria.
+                            <span className="block text-slate-500 dark:text-slate-400 mt-1 font-mono">Commands: SELECT (with JOIN, WHERE, GROUP BY, HAVING, ORDER BY)</span>
+                        </div>
+                        <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-800 text-xs">
+                            <strong className="text-amber-600 dark:text-amber-400">4. TCL (Transaction Control Language):</strong> Controls transactional state boundary.
+                            <span className="block text-slate-500 dark:text-slate-400 mt-1 font-mono">Commands: COMMIT, ROLLBACK, SAVEPOINT</span>
+                        </div>
                     </div>
                 </section>
 
                 {/* 5. Summary */}
-                <section className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">Summary</h3>
-                    <p className="text-gray-700 text-sm">
-                        In this experiment, we set up a DBMS environment and explored the fundamental building blocks of a database: Tables, Columns, and Rows. We learned that DDL commands build the skeleton (structure), while DML commands add the flesh (data). Mastering these basic commands is the first step toward becoming a database administrator or developer.
+                <section className="bg-slate-50 dark:bg-slate-800/60 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2">Summary</h3>
+                    <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+                        In this experiment, you have explored database management fundamentals, enterprise 3-tier architecture, and the core ACID properties that keep modern database platforms safe and consistent. Using SQL commands, developers design structures (DDL), populate data (DML), query information (DQL), and control transactions (TCL).
                     </p>
                 </section>
             </div>

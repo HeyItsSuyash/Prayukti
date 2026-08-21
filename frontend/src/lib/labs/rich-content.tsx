@@ -1,4 +1,5 @@
 import React from 'react';
+import DbmsTheoryDiagram from '@/components/simulation/dbms/DbmsTheoryDiagram';
 
 
 export interface QuizQuestion {
@@ -43,111 +44,121 @@ export const LAB_CONTENT: Record<string, LabContent> = {
     // =========================================================================
 
     "dbms-exp-1": {
-        aim: "To demonstrate the installation and basic environment setup of a Database Management System (MySQL/Oracle/PostgreSQL) and perform basic DDL/DML operations (Create Database, Create Table, Insert Record).",
+        aim: "To study fundamental Database Management System (DBMS) concepts, master the core ACID properties of database transactions, analyze enterprise multi-tier architecture, and execute basic SQL Data Definition Language (DDL) and Data Manipulation Language (DML) commands.",
         theory: (
             <div className="space-y-8">
                 {/* 1. Introduction */}
                 <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">1. Introduction</h3>
-                    <p className="text-gray-700 leading-relaxed mb-4">
-                        A <strong>Database Management System (DBMS)</strong> is system software for creating and managing databases. It provides users and programmers with a systematic way to create, retrieve, update, and manage data. It serves as an interface between the database and the end-users or application programs, ensuring that data is consistently organized and remains easily accessible.
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">1. Introduction to Database Concepts</h3>
+                    <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
+                        A <strong>Database Management System (DBMS)</strong> is specialized system software designed to define, create, maintain, and control access to structured data. It serves as an intelligent intermediary between application programs and physical storage devices.
                     </p>
-                    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
-                        <p className="text-sm text-blue-800">
-                            <strong>Why is it important?</strong> Without a DBMS, managing large amounts of data would be chaotic, insecure, and inefficient. DBMS ensures data integrity, security, and concurrent access.
-                        </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+                        <div className="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 p-4 rounded-xl">
+                            <h4 className="font-bold text-emerald-900 dark:text-emerald-300 text-sm mb-1">Traditional File System</h4>
+                            <ul className="text-xs text-emerald-800 dark:text-emerald-400 space-y-1 list-disc pl-4">
+                                <li>High data redundancy & duplication</li>
+                                <li>No concurrent access control</li>
+                                <li>Data isolation & security vulnerabilities</li>
+                                <li>Risk of data corruption during system crash</li>
+                            </ul>
+                        </div>
+                        <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 p-4 rounded-xl">
+                            <h4 className="font-bold text-blue-900 dark:text-blue-300 text-sm mb-1">Modern DBMS Solution</h4>
+                            <ul className="text-xs text-blue-800 dark:text-blue-400 space-y-1 list-disc pl-4">
+                                <li>Centralized data storage & minimal redundancy</li>
+                                <li>ACID transaction guarantees</li>
+                                <li>Fine-grained access security & roles</li>
+                                <li>Automated crash recovery & WAL logging</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
-                {/* 2. Key Concepts */}
+                {/* 2. Interactive Concept & ACID Visualizer */}
                 <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-4">2. Key Concepts & Terminology</h3>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">2. Interactive Architecture & ACID Visualizer</h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
+                        Interact with the diagram below to test how database transactions enforce ACID rules, explore 3-tier architecture, and preview SQL query categories.
+                    </p>
+                    <DbmsTheoryDiagram />
+                </section>
+
+                {/* 3. Deep Dive: ACID Properties */}
+                <section>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-4">3. Deep Dive into ACID Properties</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="bg-white p-4 rounded-lg border border-gray-200 ">
-                            <div className="flex items-center gap-2 mb-2 text-blue-700">
-                                <i className="bx bx-database"  />
-                                <h4 className="font-bold">Database</h4>
+                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <div className="flex items-center gap-2 mb-2 text-emerald-600 dark:text-emerald-400">
+                                <i className="bx bx-check-shield text-xl" />
+                                <h4 className="font-bold text-slate-900 dark:text-slate-100">Atomicity ("All or Nothing")</h4>
                             </div>
-                            <p className="text-sm text-gray-600">An organized collection of structured information, or data, typically stored electronically in a computer system.</p>
+                            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Guarantees that all operations inside a transaction complete successfully. If any single command fails or the system crashes mid-way, the entire transaction is rolled back, leaving the database unchanged.
+                            </p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200 ">
-                            <div className="flex items-center gap-2 mb-2 text-green-700">
-                                <i className="bx bx-table"  />
-                                <h4 className="font-bold">Table (Relation)</h4>
+
+                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <div className="flex items-center gap-2 mb-2 text-blue-600 dark:text-blue-400">
+                                <i className="bx bx-git-commit text-xl" />
+                                <h4 className="font-bold text-slate-900 dark:text-slate-100">Consistency (Valid State Transitions)</h4>
                             </div>
-                            <p className="text-sm text-gray-600">A collection of related data held in a table format within a database. It consists of columns and rows.</p>
+                            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Ensures that a transaction transfers the database from one valid state to another, maintaining all predefined integrity constraints, foreign keys, and unique indexes.
+                            </p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200 ">
-                            <div className="flex items-center gap-2 mb-2 text-purple-700">
-                                <i className="bx bx-columns"  />
-                                <h4 className="font-bold">Attribute (Column)</h4>
+
+                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <div className="flex items-center gap-2 mb-2 text-purple-600 dark:text-purple-400">
+                                <i className="bx bx-[#059669] text-xl" />
+                                <h4 className="font-bold text-slate-900 dark:text-slate-100">Isolation (Concurrency Control)</h4>
                             </div>
-                            <p className="text-sm text-gray-600">A specific characteristic or property of a table. Example: `Name`, `Age` in a Student table.</p>
+                            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Ensures concurrent transactions execute independently without interfering with each other. Prevents dirty reads, non-repeatable reads, and phantom reads through locking mechanisms.
+                            </p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200 ">
-                            <div className="flex items-center gap-2 mb-2 text-orange-700">
-                                <i className="bx bx-layoutlist"  />
-                                <h4 className="font-bold">Tuple (Row/Record)</h4>
+
+                        <div className="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <div className="flex items-center gap-2 mb-2 text-amber-600 dark:text-amber-400">
+                                <i className="bx bx-save text-xl" />
+                                <h4 className="font-bold text-slate-900 dark:text-slate-100">Durability (Permanent Storage)</h4>
                             </div>
-                            <p className="text-sm text-gray-600">A single entry in a table representing a set of related data. Example: `(1, "John", 20)`.</p>
+                            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Guarantees that once a transaction commits, its results are permanently recorded in non-volatile storage (via Write-Ahead Logging) and will survive subsequent system crashes.
+                            </p>
                         </div>
                     </div>
                 </section>
 
-                {/* 3. SQL Commands Classification */}
+                {/* 4. SQL Commands Classification */}
                 <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">3. SQL Command Classification</h3>
-                    <p className="text-gray-700 mb-4">SQL (Structured Query Language) commands are grouped into several categories based on their function:</p>
-                    <ul className="list-disc pl-6 space-y-2 text-gray-700">
-                        <li><strong>DDL (Data Definition Language):</strong> Defines the structure of the database.
-                            <ul className="list-circle pl-6 mt-1 text-gray-600">
-                                <li><code>CREATE</code>: Creates a new table/database.</li>
-                                <li><code>ALTER</code>: Modifies an existing database structure.</li>
-                                <li><code>DROP</code>: Deletes a table/database.</li>
-                                <li><code>TRUNCATE</code>: Removes all records but keeps the structure.</li>
-                            </ul>
-                        </li>
-                        <li><strong>DML (Data Manipulation Language):</strong> Manages data within tables.
-                            <ul className="list-circle pl-6 mt-1 text-gray-600">
-                                <li><code>INSERT</code>: Adds new rows.</li>
-                                <li><code>UPDATE</code>: Modifies existing rows.</li>
-                                <li><code>DELETE</code>: Removes specific rows.</li>
-                            </ul>
-                        </li>
-                        <li><strong>DQL (Data Query Language):</strong> Retrieves data.
-                            <ul className="list-circle pl-6 mt-1 text-gray-600">
-                                <li><code>SELECT</code>: Fetches data from the database.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </section>
-
-                {/* 4. Advantages & Disadvantages */}
-                <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h4 className="font-bold text-green-800 mb-2 uppercase tracking-wide text-sm">Advantages</h4>
-                        <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
-                            <li><strong>Reduced Data Redundancy:</strong> Minimizes duplicate data.</li>
-                            <li><strong>Data Integrity:</strong> Ensures accuracy and consistency.</li>
-                            <li><strong>Data Security:</strong> Control access to data.</li>
-                            <li><strong>Better Data Sharing:</strong> Multiple users can access data simultaneously.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 className="font-bold text-red-800 mb-2 uppercase tracking-wide text-sm">Disadvantages</h4>
-                        <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
-                            <li><strong>Cost:</strong> High initial setup and maintenance cost.</li>
-                            <li><strong>Complexity:</strong> Requires skilled personnel to manage.</li>
-                            <li><strong>Performance:</strong> Can be slower than file systems for simple tasks.</li>
-                        </ul>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">4. SQL Command Classification</h3>
+                    <p className="text-slate-700 dark:text-slate-300 mb-4">Structured Query Language (SQL) is divided into 5 standard categories based on execution scope:</p>
+                    <div className="space-y-3">
+                        <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-800 text-xs">
+                            <strong className="text-emerald-600 dark:text-emerald-400">1. DDL (Data Definition Language):</strong> Defines and alters schema structures.
+                            <span className="block text-slate-500 dark:text-slate-400 mt-1 font-mono">Commands: CREATE, ALTER, DROP, TRUNCATE, RENAME</span>
+                        </div>
+                        <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-800 text-xs">
+                            <strong className="text-blue-600 dark:text-blue-400">2. DML (Data Manipulation Language):</strong> Manages stored record data.
+                            <span className="block text-slate-500 dark:text-slate-400 mt-1 font-mono">Commands: INSERT, UPDATE, DELETE, MERGE</span>
+                        </div>
+                        <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-800 text-xs">
+                            <strong className="text-purple-600 dark:text-purple-400">3. DQL (Data Query Language):</strong> Retrieves stored data matching criteria.
+                            <span className="block text-slate-500 dark:text-slate-400 mt-1 font-mono">Commands: SELECT (with JOIN, WHERE, GROUP BY, HAVING, ORDER BY)</span>
+                        </div>
+                        <div className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-800 text-xs">
+                            <strong className="text-amber-600 dark:text-amber-400">4. TCL (Transaction Control Language):</strong> Controls transactional state boundary.
+                            <span className="block text-slate-500 dark:text-slate-400 mt-1 font-mono">Commands: COMMIT, ROLLBACK, SAVEPOINT</span>
+                        </div>
                     </div>
                 </section>
 
                 {/* 5. Summary */}
-                <section className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">Summary</h3>
-                    <p className="text-gray-700 text-sm">
-                        In this experiment, we set up a DBMS environment and explored the fundamental building blocks of a database: Tables, Columns, and Rows. We learned that DDL commands build the skeleton (structure), while DML commands add the flesh (data). Mastering these basic commands is the first step toward becoming a database administrator or developer.
+                <section className="bg-slate-50 dark:bg-slate-800/60 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2">Summary</h3>
+                    <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+                        In this experiment, you have explored database management fundamentals, enterprise 3-tier architecture, and the core ACID properties that keep modern database platforms safe and consistent. Using SQL commands, developers design structures (DDL), populate data (DML), query information (DQL), and control transactions (TCL).
                     </p>
                 </section>
             </div>
@@ -240,56 +251,113 @@ export const LAB_CONTENT: Record<string, LabContent> = {
     },
 
     "dbms-exp-2": {
-        aim: "To design and develop a database application for a Store, Vendor, or Finance Management System. This simulation focuses on schema design, data entry forms, and transactional integrity.",
+        aim: "To design and develop a database application for a Store, Vendor, or Finance Management System. This simulation focuses on Entity-Relationship (ER) modelling, schema design, data entry forms, and transactional integrity.",
         theory: (
             <div className="space-y-8">
                 <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">1. Introduction</h3>
-                    <p className="text-gray-700 leading-relaxed">
-                        A **Database Application** is a computer program whose primary purpose is to enter and retrieve information from a computerized database. While DBMS is the backend engine, the Application is the frontend interface that users interact with.
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">1. Database Application Development</h3>
+                    <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
+                        A <strong>Database Application</strong> bridges end-users with an underlying relational database. It encompasses three fundamental layers: a <em>Presentation Layer</em> (UI forms, dashboards), an <em>Application Logic Layer</em> (business rules, validations), and a <em>Data Access Layer</em> (parameterized SQL queries, stored procedures). The goal is to abstract raw SQL away from the user while ensuring data integrity through constraints and transactions.
                     </p>
-                </section>
-
-                <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">2. Application Components</h3>
-                    <ul className="list-disc pl-6 space-y-2 text-gray-700">
-                        <li><strong>User Interface (UI):</strong> Forms for data entry and reports for viewing data.</li>
-                        <li><strong>Application Logic:</strong> Validations and business rules (e.g., "Cannot sell more items than in stock").</li>
-                        <li><strong>Backend Database:</strong> Tables that store the persistent data.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-4">3. Case Study: Components</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-                            <h4 className="font-bold text-blue-800 mb-2">Store Management</h4>
-                            <ul className="text-xs text-blue-700 list-disc pl-4 space-y-1">
-                                <li><strong>Tables:</strong> Products, Inventory, Sales</li>
-                                <li><strong>Goal:</strong> Track stock levels and daily sales.</li>
-                            </ul>
-                        </div>
-                        <div className="bg-green-50 p-4 rounded-lg border border-green-100">
-                            <h4 className="font-bold text-green-800 mb-2">Vendor Management</h4>
-                            <ul className="text-xs text-green-700 list-disc pl-4 space-y-1">
-                                <li><strong>Tables:</strong> Vendors, PurchaseOrders, Supplies</li>
-                                <li><strong>Goal:</strong> Manage supplier relationships and orders.</li>
-                            </ul>
-                        </div>
-                        <div className="bg-purple-50 p-4 rounded-lg border border-purple-100">
-                            <h4 className="font-bold text-purple-800 mb-2">Finance Management</h4>
-                            <ul className="text-xs text-purple-700 list-disc pl-4 space-y-1">
-                                <li><strong>Tables:</strong> Accounts, Transactions, Ledger</li>
-                                <li><strong>Goal:</strong> Track income, expenses, and balance.</li>
-                            </ul>
-                        </div>
+                        {[{color:'blue',title:'Presentation Layer',desc:'HTML forms, dashboards, mobile UIs - any interface the end-user directly touches.',icon:'bx-window-alt'},{color:'purple',title:'Application Logic Layer',desc:'Business rules: stock validation, access control, invoice generation, error handling.',icon:'bx-chip'},{color:'emerald',title:'Data Access Layer',desc:'SQL queries, stored procedures, JDBC/ODBC drivers, ORM frameworks (Hibernate, SQLAlchemy).',icon:'bx-data'}].map(l => (
+                            <div key={l.title} className={`bg-${l.color}-50 dark:bg-${l.color}-950/30 border border-${l.color}-200 dark:border-${l.color}-800 p-4 rounded-xl`}>
+                                <div className={`w-8 h-8 rounded-lg bg-${l.color}-100 dark:bg-${l.color}-900 flex items-center justify-center mb-2`}>
+                                    <i className={`bx ${l.icon} text-${l.color}-600 dark:text-${l.color}-400 text-lg`} />
+                                </div>
+                                <h4 className={`font-bold text-${l.color}-900 dark:text-${l.color}-300 text-sm mb-1`}>{l.title}</h4>
+                                <p className={`text-xs text-${l.color}-700 dark:text-${l.color}-400`}>{l.desc}</p>
+                            </div>
+                        ))}
                     </div>
                 </section>
 
                 <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">4. Summary</h3>
-                    <p className="text-gray-700 text-sm">
-                        Building a database application requires understanding the "Business Logic" of the domain. In this experiment, you will see how a high-level action like "Sell Item" translates into multiple low-level SQL operations (Insert into Sales, Update Inventory).
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">2. Entity-Relationship (ER) Model</h3>
+                    <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
+                        Before writing any SQL, database designers create an <strong>ER Diagram</strong> - a visual blueprint of entities (things we store data about), their attributes, and the relationships between them. Peter Chen introduced the ER model in 1976 and it remains the industry standard for conceptual database design.
+                    </p>
+                    <div className="space-y-3">
+                        {[{term:'Entity',color:'emerald',def:'A real-world object or concept about which data is stored. Represented by a rectangle. Example: STUDENT, PRODUCT, VENDOR.'},
+                          {term:'Attribute',color:'blue',def:'A property of an entity. Represented by an ellipse. Types: Simple (Name), Composite (Address = Street+City), Multi-valued (Phone Numbers), Derived (Age from DOB).'},
+                          {term:'Relationship',color:'purple',def:'An association between two or more entities. Represented by a diamond. Cardinality: 1:1, 1:N (one-to-many), M:N (many-to-many).'},
+                          {term:'Primary Key',color:'amber',def:'A minimal set of attributes that uniquely identifies each entity instance. Underlined in ER diagrams. Must be NOT NULL and UNIQUE.'},
+                          {term:'Foreign Key',color:'rose',def:'An attribute in one entity that references the Primary Key of another entity, establishing a referential integrity link between tables.'}].map(e => (
+                            <div key={e.term} className={`flex gap-3 p-3 bg-${e.color}-50 dark:bg-${e.color}-950/20 border border-${e.color}-200 dark:border-${e.color}-800 rounded-xl`}>
+                                <span className={`shrink-0 font-bold text-xs px-2 py-1 rounded-lg bg-${e.color}-100 dark:bg-${e.color}-900 text-${e.color}-700 dark:text-${e.color}-300 h-fit`}>{e.term}</span>
+                                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{e.def}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <section>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">3. ER to Relational Schema Mapping Rules</h3>
+                    <p className="text-slate-700 dark:text-slate-300 mb-4 text-sm">The ER model is a conceptual design. The following systematic rules convert it to a physical relational schema:</p>
+                    <div className="space-y-2">
+                        {[
+                          {rule:'Rule 1',title:'Entity Mapping',desc:'Each strong entity becomes a table. Each attribute becomes a column. The primary key attribute becomes the table primary key.'},
+                          {rule:'Rule 2',title:'1:1 Relationship',desc:'Add the primary key of one entity as a foreign key to the other entity table. Place the FK on the entity with total participation.'},
+                          {rule:'Rule 3',title:'1:N Relationship',desc:'Add the primary key of the "1" side entity as a foreign key in the "N" side entity table. This is the most common mapping.'},
+                          {rule:'Rule 4',title:'M:N Relationship',desc:'Create a new junction/bridge table containing the primary keys of BOTH participating entities. The combination of these keys forms the composite primary key of the new table.'},
+                          {rule:'Rule 5',title:'Multi-valued Attribute',desc:'Create a separate new table. It contains the multi-valued attribute and the primary key of its parent entity (as a FK). Their combination is the PK of this new table.'},
+                        ].map((r,i) => (
+                            <div key={i} className="flex gap-3 items-start p-3 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-200 dark:border-slate-700">
+                                <span className="shrink-0 w-16 text-xs font-bold text-emerald-600 dark:text-emerald-400">{r.rule}</span>
+                                <div>
+                                    <p className="text-sm font-bold text-slate-800 dark:text-slate-200">{r.title}</p>
+                                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{r.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <section>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">4. Case Study: Store Management System Schema</h3>
+                    <p className="text-slate-700 dark:text-slate-300 text-sm mb-4">A "Sell Item" operation in a store management system translates into multiple coordinated SQL DML statements wrapped in a single ACID transaction:</p>
+                    <div className="bg-slate-900 rounded-xl p-5 font-mono text-xs space-y-2 overflow-x-auto">
+                        <p className="text-slate-500">-- Entity Tables (from ER mapping)</p>
+                        <pre className="text-emerald-400">{`CREATE TABLE Products (
+  product_id   INT PRIMARY KEY,
+  name         VARCHAR(100) NOT NULL,
+  unit_price   DECIMAL(10,2) NOT NULL,
+  stock_qty    INT DEFAULT 0 CHECK (stock_qty >= 0)
+);
+
+CREATE TABLE Customers (
+  customer_id  INT PRIMARY KEY,
+  name         VARCHAR(100) NOT NULL,
+  phone        VARCHAR(15)
+);
+
+-- Junction Table (M:N between Customers and Products via Sales)
+CREATE TABLE Sales (
+  sale_id      INT PRIMARY KEY,
+  customer_id  INT REFERENCES Customers(customer_id),
+  sale_date    DATE DEFAULT CURRENT_DATE,
+  total_amount DECIMAL(12,2)
+);
+
+CREATE TABLE Sale_Items (
+  sale_id      INT REFERENCES Sales(sale_id),
+  product_id   INT REFERENCES Products(product_id),
+  quantity     INT NOT NULL,
+  PRIMARY KEY (sale_id, product_id)  -- Composite PK
+);`}</pre>
+                        <p className="text-slate-500 mt-3">-- Transaction: Sell 3 units of Product #101</p>
+                        <pre className="text-amber-400">{`BEGIN TRANSACTION;
+  INSERT INTO Sales VALUES (1001, 5, CURRENT_DATE, 3*299.99);
+  INSERT INTO Sale_Items VALUES (1001, 101, 3);
+  UPDATE Products SET stock_qty = stock_qty - 3 WHERE product_id = 101;
+COMMIT; -- or ROLLBACK on any error`}</pre>
+                    </div>
+                </section>
+
+                <section className="bg-slate-50 dark:bg-slate-800/50 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2">Summary</h3>
+                    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                        Database application development follows a top-down design approach: (1) identify entities and relationships in the real world, (2) model them using ER diagrams, (3) convert the ER diagram to a relational schema using systematic mapping rules, (4) implement tables with SQL DDL, and (5) build application logic that wraps DML operations in ACID transactions to ensure correctness. The store, vendor, and finance management systems each demonstrate a distinct set of entities, relationship cardinalities, and business transaction patterns.
                     </p>
                 </section>
             </div>
@@ -362,45 +430,119 @@ export const LAB_CONTENT: Record<string, LabContent> = {
     },
 
     "dbms-exp-3": {
-        aim: "To demonstrate advanced SQL operations including Joins, Subqueries, Triggers, Views, and PL/SQL blocks.",
+        aim: "To demonstrate advanced SQL operations including Joins, Subqueries, Triggers, Views, Stored Procedures, and PL/SQL programming blocks.",
         theory: (
             <div className="space-y-8">
                 <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">1. Introduction</h3>
-                    <p className="text-gray-700 leading-relaxed">
-                        Beyond simple storage and retrieval, SQL provides powerful tools for combining data from multiple sources and automating database logic.
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">1. SQL Joins - Combining Data from Multiple Tables</h3>
+                    <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
+                        In a normalized relational database, related data is distributed across multiple tables. <strong>SQL Joins</strong> are the mechanism to reconstruct complete, meaningful records by combining rows from two or more tables based on a related column - typically a foreign key relationship. The join condition is specified in the ON clause.
                     </p>
-                </section>
-
-                <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">2. Joins (Combining Data)</h3>
-                    <p className="text-gray-700 mb-2">Joins allow you to retrieve data from two or more tables based on a logical relationship between them.</p>
-                    <ul className="list-disc pl-6 space-y-2 text-gray-700 text-sm">
-                        <li><strong>INNER JOIN:</strong> Returns records that have matching values in both tables.</li>
-                        <li><strong>LEFT (OUTER) JOIN:</strong> Returns all records from the left table, and the matched records from the right table.</li>
-                        <li><strong>RIGHT (OUTER) JOIN:</strong> Returns all records from the right table, and the matched records from the left table.</li>
-                        <li><strong>FULL JOIN:</strong> Returns all records when there is a match in either left or right table.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">3. Advanced Objects</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="bg-white p-4 rounded-lg border border-gray-200">
-                            <h4 className="font-bold text-gray-800">Views</h4>
-                            <p className="text-xs text-gray-600 mt-1">Virtual tables based on the result-set of an SQL statement. Used to simplify complex queries or restrict access to sensitive data.</p>
-                        </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200">
-                            <h4 className="font-bold text-gray-800">Triggers</h4>
-                            <p className="text-xs text-gray-600 mt-1">Special stored procedures that are automatically executed (fired) when an event (INSERT, UPDATE, DELETE) occurs in the database.</p>
-                        </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        {[
+                          {type:'INNER JOIN',color:'emerald',desc:'Returns only the rows where the join condition is TRUE in BOTH tables. Rows with no match in either table are excluded. Most commonly used join type.',sql:'SELECT e.name, d.dept_name\nFROM Employees e\nINNER JOIN Departments d ON e.dept_id = d.id;'},
+                          {type:'LEFT OUTER JOIN',color:'blue',desc:'Returns ALL rows from the LEFT table plus matched rows from the RIGHT table. Non-matching right rows appear as NULL. Use to find all employees, even those without a department.',sql:'SELECT e.name, d.dept_name\nFROM Employees e\nLEFT JOIN Departments d ON e.dept_id = d.id;'},
+                          {type:'RIGHT OUTER JOIN',color:'purple',desc:'Returns ALL rows from the RIGHT table plus matched rows from the LEFT table. Mirror image of LEFT JOIN. Rarely used - a LEFT JOIN with tables swapped is equivalent.',sql:'SELECT e.name, d.dept_name\nFROM Employees e\nRIGHT JOIN Departments d ON e.dept_id = d.id;'},
+                          {type:'FULL OUTER JOIN',color:'amber',desc:'Returns ALL rows from BOTH tables. Rows with no match in the opposite table have NULL values. Use to find all employees and all departments whether matched or not.',sql:'SELECT e.name, d.dept_name\nFROM Employees e\nFULL OUTER JOIN Departments d ON e.dept_id = d.id;'},
+                        ].map(j => (
+                            <div key={j.type} className={`bg-${j.color}-50 dark:bg-${j.color}-950/20 border border-${j.color}-200 dark:border-${j.color}-800 rounded-xl p-4`}>
+                                <h4 className={`font-bold text-${j.color}-800 dark:text-${j.color}-300 text-sm mb-1`}>{j.type}</h4>
+                                <p className={`text-xs text-${j.color}-700 dark:text-${j.color}-400 mb-3 leading-relaxed`}>{j.desc}</p>
+                                <pre className="bg-slate-900 text-emerald-400 text-[10px] p-2 rounded-lg overflow-x-auto font-mono">{j.sql}</pre>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
+                        <h4 className="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2">SELF JOIN and CROSS JOIN</h4>
+                        <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong>SELF JOIN:</strong> A table joined to itself. Used for hierarchical data (e.g., Employee-Manager where both are in the same Employees table). <strong>CROSS JOIN:</strong> Returns the Cartesian product - every row in table A combined with every row in table B. If A has 5 rows and B has 4 rows, CROSS JOIN returns 20 rows. Use with caution on large tables.</p>
                     </div>
                 </section>
 
                 <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">4. Summary</h3>
-                    <p className="text-gray-700 text-sm">
-                        Joins are essential for specific reporting needs in relational databases where data is normalized (spread across tables). Triggers ensure data integrity by enforcing rules automatically at the database level.
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">2. Subqueries (Nested Queries)</h3>
+                    <p className="text-slate-700 dark:text-slate-300 mb-4">A <strong>subquery</strong> is a SELECT statement embedded inside another SQL statement. The outer query uses the result of the inner query as a condition or data source.</p>
+                    <div className="space-y-3">
+                        {[
+                          {type:'Scalar Subquery',desc:'Returns exactly one row and one column. Can be used anywhere a single value is expected.',sql:`SELECT name, salary\nFROM Employees\nWHERE salary > (SELECT AVG(salary) FROM Employees);`},
+                          {type:'Correlated Subquery',desc:'References columns from the outer query. Evaluated once for each row processed by the outer query. Performance-intensive but powerful.',sql:`SELECT e.name\nFROM Employees e\nWHERE salary > (SELECT AVG(salary) FROM Employees WHERE dept_id = e.dept_id);`},
+                          {type:'EXISTS Subquery',desc:'Returns TRUE if the subquery returns any rows. More efficient than IN for large datasets. Used to check for the existence of related records.',sql:`SELECT c.name FROM Customers c\nWHERE EXISTS (SELECT 1 FROM Orders o WHERE o.customer_id = c.id);`},
+                        ].map(s => (
+                            <div key={s.type} className="bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+                                <h4 className="font-bold text-slate-800 dark:text-slate-200 text-sm mb-1">{s.type}</h4>
+                                <p className="text-xs text-slate-500 dark:text-slate-400 mb-2">{s.desc}</p>
+                                <pre className="bg-slate-900 text-emerald-400 text-[10px] p-2 rounded-lg overflow-x-auto font-mono">{s.sql}</pre>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <section>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">3. Views - Virtual Tables</h3>
+                    <p className="text-slate-700 dark:text-slate-300 mb-4">A <strong>View</strong> is a named, stored SELECT query that behaves like a virtual table. The view does not store data physically - it re-executes the underlying SELECT every time the view is queried.</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+                        <div className="bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 p-4 rounded-xl">
+                            <h4 className="font-bold text-emerald-800 dark:text-emerald-300 text-sm mb-1">Benefits of Views</h4>
+                            <ul className="text-xs text-emerald-700 dark:text-emerald-400 list-disc pl-4 space-y-1">
+                                <li>Data abstraction - hide complex joins from users</li>
+                                <li>Security - grant SELECT on view, not base tables</li>
+                                <li>Consistent interface when base tables are restructured</li>
+                                <li>Simplify repetitive complex queries</li>
+                            </ul>
+                        </div>
+                        <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 p-4 rounded-xl">
+                            <h4 className="font-bold text-amber-800 dark:text-amber-300 text-sm mb-1">Updatable Views</h4>
+                            <p className="text-xs text-amber-700 dark:text-amber-400">A view is updatable (INSERT/UPDATE/DELETE allowed) only if it maps to a single base table, contains no DISTINCT, GROUP BY, HAVING, UNION, or aggregate functions, and includes the primary key. Otherwise it is read-only.</p>
+                        </div>
+                    </div>
+                    <pre className="bg-slate-900 text-emerald-400 text-xs p-4 rounded-xl font-mono overflow-x-auto">{`-- Create a view hiding sensitive salary data
+CREATE VIEW Employee_Public_Info AS
+    SELECT emp_id, name, department, hire_date
+    FROM Employees;
+
+-- Query the view like a regular table
+SELECT * FROM Employee_Public_Info WHERE department = 'Engineering';
+
+-- Drop the view
+DROP VIEW Employee_Public_Info;`}</pre>
+                </section>
+
+                <section>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">4. Triggers - Automated Database Logic</h3>
+                    <p className="text-slate-700 dark:text-slate-300 mb-4">A <strong>Trigger</strong> is a stored procedure that automatically executes (fires) in response to a DML event (INSERT, UPDATE, DELETE) on a specific table. Triggers enforce complex business rules at the database level, independent of the application layer.</p>
+                    <div className="overflow-x-auto mb-4">
+                        <table className="w-full text-xs border-collapse">
+                            <thead>
+                                <tr className="bg-slate-100 dark:bg-slate-800">
+                                    {['Property','BEFORE Trigger','AFTER Trigger'].map(h => <th key={h} className="border border-slate-300 dark:border-slate-600 px-3 py-2 text-left font-bold text-slate-700 dark:text-slate-300">{h}</th>)}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {[['When it fires','Before the DML statement executes','After the DML statement completes'],
+                                  ['Can modify NEW values','Yes (cancel or alter the insert/update)','No (data already written)'],
+                                  ['Use case','Input validation, default assignment','Audit logging, cascade updates, notifications'],
+                                  ['Can rollback statement','Yes, by raising an exception','Yes, but data was temporarily written'],
+                                ].map((row, i) => (
+                                    <tr key={i} className={i % 2 === 0 ? 'bg-white dark:bg-slate-900' : 'bg-slate-50 dark:bg-slate-800/50'}>
+                                        {row.map((cell, j) => <td key={j} className="border border-slate-300 dark:border-slate-600 px-3 py-2 text-slate-600 dark:text-slate-400">{cell}</td>)}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <pre className="bg-slate-900 text-emerald-400 text-xs p-4 rounded-xl font-mono overflow-x-auto">{`-- AFTER UPDATE trigger for audit logging
+CREATE OR REPLACE TRIGGER salary_audit_log
+AFTER UPDATE OF salary ON Employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO Salary_Audit (emp_id, old_salary, new_salary, changed_at)
+    VALUES (:OLD.emp_id, :OLD.salary, :NEW.salary, SYSDATE);
+END;`}</pre>
+                </section>
+
+                <section className="bg-slate-50 dark:bg-slate-800/50 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2">Summary</h3>
+                    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                        Advanced SQL moves beyond simple CRUD operations to harness the full power of the relational model. JOINs reconstruct normalized data for reporting. Subqueries enable comparative analytics (e.g., find above-average salaries). Views abstract and secure data access. Triggers automate enforcement of business logic at the database engine level, making constraints resilient to application bugs. Together, these features allow databases to act as intelligent, self-governing systems.
                     </p>
                 </section>
             </div>
@@ -462,53 +604,105 @@ export const LAB_CONTENT: Record<string, LabContent> = {
     },
 
     "dbms-exp-4": {
-        aim: "To analyze and decompose schemas for Normalization (1NF to 5NF) to reduce redundancy.",
+        aim: "To analyze relational schemas, identify functional dependencies, and systematically apply database normalization from Unnormalized Form (UNF) through 1NF, 2NF, 3NF, and BCNF to eliminate all forms of data redundancy and anomalies.",
         theory: (
             <div className="space-y-8">
                 <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">1. Introduction</h3>
-                    <p className="text-gray-700 leading-relaxed">
-                        <strong>Normalization</strong> is a systematic approach of decomposing tables to eliminate data redundancy (repetition) and undesirable characteristics like Insertion, Update, and Deletion Anomalies.
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">1. Database Anomalies and the Need for Normalization</h3>
+                    <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
+                        When data is stored in a poorly designed, un-normalized table, it suffers from <strong>update anomalies</strong> - situations where a data modification leaves the database in an inconsistent state. E.F. Codd introduced <strong>Normalization</strong> in 1972 as a systematic, step-by-step process of decomposing tables to eliminate redundancy and dependency problems. Each step is called a <em>Normal Form</em>.
                     </p>
-                </section>
-
-                <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-4">2. Normal Forms</h3>
-                    <div className="space-y-4">
-                        <div className="border-l-4 border-red-500 bg-red-50 p-4 rounded-r-lg">
-                            <h4 className="font-bold text-red-900">First Normal Form (1NF)</h4>
-                            <p className="text-sm text-red-800">
-                                <strong>Rule:</strong> Each column must contain atomic values (single value, not a list).<br />
-                                <strong>Fix:</strong> Create a separate row for each value or separate table.
-                            </p>
-                        </div>
-                        <div className="border-l-4 border-orange-500 bg-orange-50 p-4 rounded-r-lg">
-                            <h4 className="font-bold text-orange-900">Second Normal Form (2NF)</h4>
-                            <p className="text-sm text-orange-800">
-                                <strong>Rule:</strong> Must be in 1NF + No Partial Dependency (All non-key attributes must depend on the *entire* primary key).<br />
-                                <strong>Fix:</strong> Move partial dependent data to a new table.
-                            </p>
-                        </div>
-                        <div className="border-l-4 border-yellow-500 bg-yellow-50 p-4 rounded-r-lg">
-                            <h4 className="font-bold text-yellow-900">Third Normal Form (3NF)</h4>
-                            <p className="text-sm text-yellow-800">
-                                <strong>Rule:</strong> Must be in 2NF + No Transitive Dependency (Non-key attributes should not depend on other non-key attributes).<br />
-                                <strong>Fix:</strong> Move transitive data to a new table.
-                            </p>
-                        </div>
-                        <div className="border-l-4 border-green-500 bg-green-50 p-4 rounded-r-lg">
-                            <h4 className="font-bold text-green-900">BCNF (Boyce-Codd Normal Form)</h4>
-                            <p className="text-sm text-green-800">
-                                <strong>Rule:</strong> A stricter version of 3NF. For every functional dependency X &rarr; Y, X must be a super key.
-                            </p>
-                        </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {[
+                          {name:'Insertion Anomaly',color:'rose',icon:'bx-error-circle',desc:'Cannot insert a new entity without providing data for another unrelated entity. Example: Cannot add a new Department unless at least one employee belongs to it.'},
+                          {name:'Deletion Anomaly',color:'amber',icon:'bx-trash',desc:'Deleting a record inadvertently destroys other important data. Example: Deleting the last employee in a department also loses the department information.'},
+                          {name:'Update Anomaly',color:'orange',icon:'bx-edit',desc:'Updating one piece of data requires updating multiple rows. If any row is missed, the database becomes inconsistent. Example: Changing a department name requires updating every employee row.'},
+                        ].map(a => (
+                            <div key={a.name} className={`bg-${a.color}-50 dark:bg-${a.color}-950/20 border border-${a.color}-200 dark:border-${a.color}-800 rounded-xl p-4`}>
+                                <div className="flex items-center gap-2 mb-2">
+                                    <i className={`bx ${a.icon} text-${a.color}-500 text-lg`} />
+                                    <h4 className={`font-bold text-${a.color}-800 dark:text-${a.color}-300 text-sm`}>{a.name}</h4>
+                                </div>
+                                <p className={`text-xs text-${a.color}-700 dark:text-${a.color}-400`}>{a.desc}</p>
+                            </div>
+                        ))}
                     </div>
                 </section>
 
                 <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">3. Summary</h3>
-                    <p className="text-gray-700 text-sm">
-                        Calculated normalization is a trade-off. While higher normal forms reduce redundancy, they often require more Joins which can slow down read performance. 3NF is usually considered sufficient for most business applications.
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">2. Functional Dependencies and Armstrong's Axioms</h3>
+                    <p className="text-slate-700 dark:text-slate-300 mb-4">A <strong>Functional Dependency</strong> (FD) X -&gt; Y means: for any two tuples with the same value of X, they must also have the same value of Y. X determines Y. Y is functionally dependent on X. Armstrong's Axioms are a complete and sound set of inference rules for deriving all FDs from a given set:</p>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                        {[
+                          {name:'Reflexivity',rule:'If Y ⊆ X, then X -> Y',color:'blue',eg:'(A, B) -> A'},
+                          {name:'Augmentation',rule:'If X -> Y, then XZ -> YZ',color:'purple',eg:'A -> B implies AC -> BC'},
+                          {name:'Transitivity',rule:'If X -> Y and Y -> Z, then X -> Z',color:'emerald',eg:'A -> B and B -> C implies A -> C'},
+                        ].map(ax => (
+                            <div key={ax.name} className={`bg-${ax.color}-50 dark:bg-${ax.color}-950/20 border border-${ax.color}-200 dark:border-${ax.color}-800 rounded-xl p-4`}>
+                                <h4 className={`font-bold text-${ax.color}-800 dark:text-${ax.color}-300 text-xs mb-1`}>{ax.name}</h4>
+                                <p className={`font-mono text-xs text-${ax.color}-700 dark:text-${ax.color}-400 mb-1`}>{ax.rule}</p>
+                                <p className={`text-[10px] text-${ax.color}-600 dark:text-${ax.color}-500`}>Example: {ax.eg}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Additional derived rules: <strong>Union</strong> (X-&gt;Y and X-&gt;Z implies X-&gt;YZ), <strong>Decomposition</strong> (X-&gt;YZ implies X-&gt;Y and X-&gt;Z), <strong>Pseudo-transitivity</strong> (X-&gt;Y and WY-&gt;Z implies WX-&gt;Z).</p>
+                </section>
+
+                <section>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">3. Normal Forms - Step-by-Step</h3>
+                    <div className="space-y-4">
+                        {[
+                          {nf:'UNF (Unnormalized)',color:'red',condition:'Raw table - no constraints',violation:'Repeating groups and multi-valued cells',fix:'Flatten by creating separate rows for each repeating value'},
+                          {nf:'1NF',color:'orange',condition:'All attributes are atomic (indivisible, single-valued). All rows are unique.',violation:'Phone field contains multiple numbers: "91-999, 91-888"',fix:'Create separate phone row per number, or a separate Phone table'},
+                          {nf:'2NF',color:'yellow',condition:'Must be in 1NF + No Partial Dependencies. Every non-key attribute must depend on the ENTIRE composite primary key.',violation:'In table (StudentID, CourseID, StudentName, Grade): StudentName depends only on StudentID, not on the full PK.',fix:'Split into Students(StudentID, StudentName) and Enrollments(StudentID, CourseID, Grade)'},
+                          {nf:'3NF',color:'lime',condition:'Must be in 2NF + No Transitive Dependencies. Non-key attributes must not depend on other non-key attributes.',violation:'Employees(EmpID, DeptID, DeptName): DeptName depends on DeptID (non-key), not directly on EmpID.',fix:'Split into Employees(EmpID, DeptID) and Departments(DeptID, DeptName)'},
+                          {nf:'BCNF',color:'emerald',condition:'A stronger version of 3NF. For every FD X -> Y, X must be a Super Key. Eliminates anomalies 3NF misses with overlapping candidate keys.',violation:'Table(Student, Subject, Teacher): Teacher -> Subject but Teacher is not a super key.',fix:'Split into Teaching(Teacher, Subject) and Enrollment(Student, Teacher)'},
+                        ].map(n => (
+                            <div key={n.nf} className={`border-l-4 border-${n.color}-500 bg-${n.color}-50 dark:bg-${n.color}-950/20 p-4 rounded-r-xl`}>
+                                <h4 className={`font-bold text-${n.color}-900 dark:text-${n.color}-200 mb-2`}>{n.nf}</h4>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
+                                    <div><span className={`font-bold text-${n.color}-700 dark:text-${n.color}-400`}>Condition: </span><span className={`text-${n.color}-800 dark:text-${n.color}-300`}>{n.condition}</span></div>
+                                    <div><span className={`font-bold text-${n.color}-700 dark:text-${n.color}-400`}>Violation Ex: </span><span className={`text-${n.color}-800 dark:text-${n.color}-300`}>{n.violation}</span></div>
+                                    <div><span className={`font-bold text-${n.color}-700 dark:text-${n.color}-400`}>Fix: </span><span className={`text-${n.color}-800 dark:text-${n.color}-300`}>{n.fix}</span></div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <section>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">4. Worked Example: UNF to 3NF</h3>
+                    <p className="text-slate-700 dark:text-slate-300 text-sm mb-3">Starting with a single un-normalized Order table, we apply normal forms step by step:</p>
+                    <div className="overflow-x-auto">
+                        <table className="text-xs border-collapse w-full">
+                            <thead>
+                                <tr className="bg-slate-100 dark:bg-slate-800">
+                                    {['OrderID','CustomerID','CustomerName','ProductID','ProductName','Qty','UnitPrice'].map(h => <th key={h} className="border border-slate-300 dark:border-slate-600 px-2 py-1.5 text-slate-700 dark:text-slate-300 font-bold">{h}</th>)}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {[['1001','C01','Alice','P10','Laptop','2','45000'],['1001','C01','Alice','P11','Mouse','5','500'],['1002','C02','Bob','P10','Laptop','1','45000']].map((row, i) => (
+                                    <tr key={i} className={i%2===0?'bg-white dark:bg-slate-900':'bg-slate-50 dark:bg-slate-800/50'}>
+                                        {row.map((cell, j) => <td key={j} className="border border-slate-300 dark:border-slate-600 px-2 py-1.5 text-slate-600 dark:text-slate-400 text-center">{cell}</td>)}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="mt-3 bg-slate-900 rounded-xl p-4 font-mono text-xs overflow-x-auto">
+                        <p className="text-slate-500 mb-2">-- After 3NF decomposition:</p>
+                        <pre className="text-emerald-400">{`Customers(CustomerID PK, CustomerName)
+Products(ProductID PK, ProductName, UnitPrice)
+Orders(OrderID PK, CustomerID FK)
+Order_Items(OrderID FK, ProductID FK, Qty)  -- Composite PK`}</pre>
+                    </div>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">CustomerName depends only on CustomerID (partial dep -&gt; removed to 2NF). ProductName and UnitPrice depend on ProductID (partial dep -&gt; removed to 2NF). No transitive dependencies remain.</p>
+                </section>
+
+                <section className="bg-slate-50 dark:bg-slate-800/50 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2">Summary</h3>
+                    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                        Normalization is a scientific trade-off: higher normal forms reduce storage redundancy and eliminate update anomalies, but increase the number of tables and require more JOINs for queries, potentially impacting read performance. In practice, most OLTP (Online Transaction Processing) systems are normalized to 3NF or BCNF. Data warehouses often use <em>de-normalized</em> star or snowflake schemas optimized for fast analytical reads. Understanding normalization is fundamental to designing correct, maintainable, and scalable relational databases.
                     </p>
                 </section>
             </div>
@@ -580,38 +774,120 @@ export const LAB_CONTENT: Record<string, LabContent> = {
     },
 
     "dbms-exp-5": {
-        aim: "To implement Host Language Interface by embedding SQL within a high-level programming language.",
+        aim: "To implement Host Language Interface by embedding SQL within high-level programming languages (Java, Python, C++) using JDBC, PyODBC, and ODBC drivers, and to understand connection pooling, prepared statements, and the ResultSet processing lifecycle.",
         theory: (
             <div className="space-y-8">
                 <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">1. Introduction</h3>
-                    <p className="text-gray-700 leading-relaxed">
-                        SQL is a query language, not a programming language. To build complete applications, we need to embed SQL inside a **Host Language** like C++, Java, or Python. This allows us to combine the data manipulation power of SQL with the logic and UI capabilities of the host language.
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">1. Host Language Interface - Concept</h3>
+                    <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
+                        SQL is a <em>declarative</em> data manipulation language - it specifies <em>what</em> to retrieve, not <em>how</em> to compute it. General-purpose programming languages (Java, Python, C++) are <em>imperative</em> - they express control flow, data structures, and user interfaces that SQL alone cannot handle. <strong>Host Language Integration</strong> (also called Embedded SQL or Database Connectivity) bridges these two worlds by allowing SQL statements to be constructed and executed from within a host programming language program.
                     </p>
-                </section>
-
-                <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">2. Working Principle</h3>
-                    <p className="text-gray-700 mb-4">The interaction typically happens via an API or Driver (e.g., JDBC for Java, ODBC for C++, PyODBC for Python).</p>
-                    <div className="flex flex-col md:flex-row gap-4 items-center justify-center bg-gray-50 p-6 rounded-lg">
-                        <div className="p-3 bg-white border border-gray-300 rounded text-center w-32 font-bold">Application (Java/Python)</div>
-                        <div className="text-gray-400">&rarr; API Call &rarr;</div>
-                        <div className="p-3 bg-blue-100 border border-blue-300 rounded text-center w-32 font-bold text-blue-900">Driver (JDBC/ODBC)</div>
-                        <div className="text-gray-400">&rarr; SQL &rarr;</div>
-                        <div className="p-3 bg-green-100 border border-green-300 rounded text-center w-32 font-bold text-green-900">DBMS Engine</div>
+                    <div className="flex flex-col md:flex-row items-stretch gap-2">
+                        {[
+                          {label:'Host Application',sub:'Java / Python / C++',color:'blue',desc:'Business logic, loops, UI rendering, exception handling'},
+                          {label:'Driver/API',sub:'JDBC / PyODBC / ODBC / SQLx',color:'purple',desc:'Translates host language calls into database wire protocol packets'},
+                          {label:'DBMS Engine',sub:'PostgreSQL / MySQL / Oracle',color:'emerald',desc:'Parses, plans, and executes SQL; returns result sets'},
+                        ].map((b, i) => (
+                            <div key={i} className="flex items-stretch flex-1">
+                                <div className={`bg-${b.color}-50 dark:bg-${b.color}-950/20 border border-${b.color}-200 dark:border-${b.color}-800 rounded-xl p-4 flex-1`}>
+                                    <p className={`font-bold text-${b.color}-800 dark:text-${b.color}-300 text-sm`}>{b.label}</p>
+                                    <p className={`text-xs text-${b.color}-600 dark:text-${b.color}-400 font-mono mb-2`}>{b.sub}</p>
+                                    <p className={`text-xs text-${b.color}-700 dark:text-${b.color}-500`}>{b.desc}</p>
+                                </div>
+                                {i < 2 && <div className="hidden md:flex items-center px-1 text-slate-400 text-lg">&#8594;</div>}
+                            </div>
+                        ))}
                     </div>
                 </section>
 
                 <section>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">3. Key Steps</h3>
-                    <ul className="list-decimal pl-6 space-y-2 text-gray-700">
-                        <li><strong>Import Driver:</strong> Load the library that talks to the DB.</li>
-                        <li><strong>Establish Connection:</strong> Provide URL, Username, Password.</li>
-                        <li><strong>Create Statement:</strong> Prepare the SQL query string.</li>
-                        <li><strong>Execute Query:</strong> Send the query to the DBMS.</li>
-                        <li><strong>Process Result:</strong> Loop through the returned rows (ResultSet).</li>
-                        <li><strong>Close Connection:</strong> Release resources.</li>
-                    </ul>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">2. JDBC - Java Database Connectivity</h3>
+                    <p className="text-slate-700 dark:text-slate-300 mb-4">JDBC is a standard Java API (java.sql package) that provides a uniform interface to connect Java applications to any relational database. The 6-step JDBC lifecycle is:</p>
+                    <div className="space-y-2 mb-4">
+                        {['Step 1: Load the JDBC Driver class (or use DriverManager auto-detection in JDBC 4.0+)','Step 2: Establish a Connection using DriverManager.getConnection(url, user, password)','Step 3: Create a Statement or PreparedStatement object','Step 4: Execute the SQL query using executeQuery() (SELECT) or executeUpdate() (DML)','Step 5: Process the ResultSet - iterate with rs.next() and retrieve column values','Step 6: Close ResultSet, Statement, and Connection to release resources (use try-with-resources)'].map((s,i) => (
+                            <div key={i} className="flex gap-3 items-start">
+                                <span className="shrink-0 w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 text-xs font-bold flex items-center justify-center">{i+1}</span>
+                                <p className="text-sm text-slate-600 dark:text-slate-400">{s}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <pre className="bg-slate-900 text-emerald-400 text-[11px] p-4 rounded-xl font-mono overflow-x-auto">{`import java.sql.*;
+
+public class DBDemo {
+  public static void main(String[] args) {
+    String url = "jdbc:postgresql://localhost:5432/university";
+    String user = "admin"; String pass = "secret";
+
+    // try-with-resources auto-closes all resources
+    try (Connection conn = DriverManager.getConnection(url, user, pass);
+         PreparedStatement ps = conn.prepareStatement(
+             "SELECT id, name FROM Students WHERE dept = ? ORDER BY name");
+    ) {
+        ps.setString(1, "CS"); // Prevent SQL Injection via parameterization
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            System.out.println(rs.getInt("id") + " | " + rs.getString("name"));
+        }
+    } catch (SQLException e) { e.printStackTrace(); }
+  }
+}`}</pre>
+                </section>
+
+                <section>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">3. Statement vs PreparedStatement vs CallableStatement</h3>
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-xs border-collapse">
+                            <thead>
+                                <tr className="bg-slate-100 dark:bg-slate-800">
+                                    {['Feature','Statement','PreparedStatement','CallableStatement'].map(h => <th key={h} className="border border-slate-300 dark:border-slate-600 px-3 py-2 text-left font-bold text-slate-700 dark:text-slate-300">{h}</th>)}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {[
+                                  ['SQL Injection Safe','No','Yes (parameterized)','Yes'],
+                                  ['Pre-compiled by DB','No','Yes (execution plan cached)','Yes'],
+                                  ['Use for','One-off dynamic SQL','Repeated queries with params','Stored Procedure calls'],
+                                  ['Performance (repeated calls)','Poor','Excellent','Excellent'],
+                                  ['Java Interface','Statement','PreparedStatement','CallableStatement'],
+                                ].map((row, i) => (
+                                    <tr key={i} className={i%2===0?'bg-white dark:bg-slate-900':'bg-slate-50 dark:bg-slate-800/40'}>
+                                        {row.map((cell, j) => <td key={j} className={`border border-slate-300 dark:border-slate-600 px-3 py-2 text-slate-600 dark:text-slate-400 ${j===0?'font-semibold':''}`}>{cell}</td>)}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">4. Python DB-API and PyODBC</h3>
+                    <p className="text-slate-700 dark:text-slate-300 mb-3">Python's PEP 249 defines the DB-API 2.0 standard. Libraries like <code className="bg-slate-100 dark:bg-slate-800 px-1 rounded">psycopg2</code> (PostgreSQL), <code className="bg-slate-100 dark:bg-slate-800 px-1 rounded">mysql-connector-python</code>, and <code className="bg-slate-100 dark:bg-slate-800 px-1 rounded">pyodbc</code> all follow this standard interface:</p>
+                    <pre className="bg-slate-900 text-emerald-400 text-[11px] p-4 rounded-xl font-mono overflow-x-auto">{`import psycopg2  # PostgreSQL Python driver (DB-API 2.0)
+
+conn = psycopg2.connect(host="localhost", database="university",
+                        user="admin", password="secret")
+cursor = conn.cursor()
+
+# Parameterized query - %s placeholders prevent SQL injection
+cursor.execute("INSERT INTO Students (id, name, dept) VALUES (%s, %s, %s)",
+               (101, 'Aarav Singh', 'CS'))
+conn.commit()  # Explicit commit required for DML
+
+# Fetch results
+cursor.execute("SELECT * FROM Students WHERE dept = %s", ('CS',))
+for row in cursor.fetchall():
+    print(row)
+
+cursor.close()
+conn.close()`}</pre>
+                </section>
+
+                <section className="bg-slate-50 dark:bg-slate-800/50 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2">Summary</h3>
+                    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                        Host language integration allows developers to leverage SQL's data querying power within full-fledged programming languages. Always use <strong>PreparedStatements</strong> (parameterized queries) rather than string concatenation to prevent SQL Injection attacks. For production applications, use a <strong>Connection Pool</strong> (HikariCP for Java, SQLAlchemy connection pool for Python) to avoid the overhead of creating a new database connection for every query. Understanding JDBC/DB-API fundamentals is the foundation of all backend development with relational databases.
+                    </p>
                 </section>
             </div>
         ),
