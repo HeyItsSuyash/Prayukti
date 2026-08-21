@@ -21,27 +21,29 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
     const [presentStateInput, setPresentStateInput] = useState<string>('');
     const [nextStateOutput, setNextStateOutput] = useState<string>('');
 
+    const activeCircuit = data?.circuits?.[0];
+
     // Initialize defaults when data loads
     useMemo(() => {
-        if (data) {
-            if (data.outputNames.length > 0 && !selectedKMapOutput) {
-                setSelectedKMapOutput(data.outputNames[0] || '');
+        if (activeCircuit) {
+            if (activeCircuit.outputNames.length > 0 && !selectedKMapOutput) {
+                setSelectedKMapOutput(activeCircuit.outputNames[0] || '');
             }
-            if (data.inputNames.length > 0 && !presentStateInput) {
-                setPresentStateInput(data.inputNames[0] || '');
+            if (activeCircuit.inputNames.length > 0 && !presentStateInput) {
+                setPresentStateInput(activeCircuit.inputNames[0] || '');
             }
-            if (data.outputNames.length > 0 && !nextStateOutput) {
-                setNextStateOutput(data.outputNames[0] || '');
+            if (activeCircuit.outputNames.length > 0 && !nextStateOutput) {
+                setNextStateOutput(activeCircuit.outputNames[0] || '');
             }
         }
-    }, [data, selectedKMapOutput, presentStateInput, nextStateOutput]);
+    }, [activeCircuit, selectedKMapOutput, presentStateInput, nextStateOutput]);
 
     if (!isOpen) return null;
 
     // --- K-Map Logic ---
     const renderKMap = () => {
-        if (!data || !selectedKMapOutput) return null;
-        const numInputs = data.inputNames.length;
+        if (!activeCircuit || !selectedKMapOutput) return null;
+        const numInputs = activeCircuit.inputNames.length;
         if (numInputs < 2 || numInputs > 4) {
             return <div className="p-4 text-center text-muted-foreground">K-Map only supported for 2, 3, or 4 inputs.</div>;
         }
@@ -55,32 +57,25 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
         let colLabels: string[] = [];
         let mapIndices: number[][] = [];
 
-        if (numInputs === 2) { // AB -> Row: A, Col: B
-            rowLabels = gray1; // A=0, A=1
-            colLabels = gray1; // B=0, B=1
-            // 00, 01, 10, 11 (Standard binary order is 0,1,2,3)
-            // Grid is [0, 1]
-            //         [2, 3]
+        if (numInputs === 2) {
+            rowLabels = gray1;
+            colLabels = gray1;
             mapIndices = [[0, 1], [2, 3]];
-        } else if (numInputs === 3) { // ABC -> Row: A, Col: BC
+        } else if (numInputs === 3) {
             rowLabels = gray1;
             colLabels = gray2;
-            // 000, 001, 011, 010 (Indices: 0, 1, 3, 2)
-            // 100, 101, 111, 110 (Indices: 4, 5, 7, 6)
             mapIndices = [
                 [0, 1, 3, 2],
                 [4, 5, 7, 6]
             ];
-        } else if (numInputs === 4) { // ABCD -> Row: AB, Col: CD
+        } else if (numInputs === 4) {
             rowLabels = gray2;
             colLabels = gray2;
-            // Rows: 00, 01, 11, 10
-            // Cols: 00, 01, 11, 10
             mapIndices = [
-                [0, 1, 3, 2],      // 00xx
-                [4, 5, 7, 6],      // 01xx
-                [12, 13, 15, 14],  // 11xx (Indices 12-15)
-                [8, 9, 11, 10]     // 10xx (Indices 8-11)
+                [0, 1, 3, 2],
+                [4, 5, 7, 6],
+                [12, 13, 15, 14],
+                [8, 9, 11, 10]
             ];
         }
 
@@ -93,7 +88,7 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                         onChange={(e) => setSelectedKMapOutput(e.target.value)}
                         className="text-xs border rounded-none px-1"
                     >
-                        {data.outputNames.map(o => (
+                        {activeCircuit.outputNames.map(o => (
                             <option key={o} value={o}>{o}</option>
                         ))}
                     </select>
@@ -102,9 +97,9 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                 <div className="relative border-2 border-border rounded-none bg-card">
                     {/* Top Left Label */}
                     <div className="absolute -top-6 -left-6 text-xs font-bold font-mono">
-                        {numInputs === 2 ? `${data.inputNames[0]}\\${data.inputNames[1]}` :
-                            numInputs === 3 ? `${data.inputNames[0]}\\${data.inputNames[1]}${data.inputNames[2]}` :
-                                `${data.inputNames[0]}${data.inputNames[1]}\\${data.inputNames[2]}${data.inputNames[3]}`}
+                        {numInputs === 2 ? `${activeCircuit.inputNames[0]}\\${activeCircuit.inputNames[1]}` :
+                            numInputs === 3 ? `${activeCircuit.inputNames[0]}\\${activeCircuit.inputNames[1]}${activeCircuit.inputNames[2]}` :
+                                `${activeCircuit.inputNames[0]}${activeCircuit.inputNames[1]}\\${activeCircuit.inputNames[2]}${activeCircuit.inputNames[3]}`}
                     </div>
 
                     {/* Column Labels */}
@@ -127,7 +122,7 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
 
                             {/* Cells */}
                             {mapIndices[rIdx] && mapIndices[rIdx].map((dataIndex, cIdx) => {
-                                const val = data.rows[dataIndex]?.outputs?.[selectedKMapOutput];
+                                const val = activeCircuit.rows[dataIndex]?.outputs?.[selectedKMapOutput];
                                 return (
                                     <div key={cIdx} className={`w-10 h-10 flex items-center justify-center border-l border-t border-border font-bold ${val ? 'text-primary bg-primary/10' : 'text-muted-foreground'}`}>
                                         {val}
@@ -143,10 +138,8 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
 
     // --- Excitation Logic ---
     const renderExcitationTable = () => {
-        if (!data) return null;
+        if (!activeCircuit) return null;
 
-        // Group inputs by transition
-        // Transitions: 0->0, 0->1, 1->0, 1->1
         const transitions = {
             '0->0': [] as string[],
             '0->1': [] as string[],
@@ -154,13 +147,12 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
             '1->1': [] as string[]
         };
 
-        data.rows.forEach(row => {
-            const ps = row.inputs[presentStateInput]; // Present State Value
-            const ns = row.outputs[nextStateOutput];   // Next State Value
+        activeCircuit.rows.forEach(row => {
+            const ps = row.inputs[presentStateInput];
+            const ns = row.outputs[nextStateOutput];
             const key = `${ps}->${ns}`;
 
-            // Format other inputs (Excitation Inputs)
-            const otherInputs = data.inputNames
+            const otherInputs = activeCircuit.inputNames
                 .filter(n => n !== presentStateInput)
                 .map(n => `${n}=${row.inputs[n]}`)
                 .join(', ');
@@ -180,7 +172,7 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                             onChange={(e) => setPresentStateInput(e.target.value)}
                             className="w-full bg-muted border border-border text-foreground font-semibold rounded-xl p-2 outline-none"
                         >
-                            {data.inputNames.map(n => <option key={n} value={n}>{n}</option>)}
+                            {activeCircuit.inputNames.map(n => <option key={n} value={n}>{n}</option>)}
                         </select>
                     </div>
                     <div>
@@ -190,7 +182,7 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                             onChange={(e) => setNextStateOutput(e.target.value)}
                             className="w-full bg-muted border border-border text-foreground font-semibold rounded-xl p-2 outline-none"
                         >
-                            {data.outputNames.map(n => <option key={n} value={n}>{n}</option>)}
+                            {activeCircuit.outputNames.map(n => <option key={n} value={n}>{n}</option>)}
                         </select>
                     </div>
                 </div>
@@ -221,18 +213,13 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                         </tr>
                     </tbody>
                 </table>
-                <p className="text-[10px] text-muted-foreground italic">
-                    * Shows input combinations required to achieve specific state transitions.
-                </p>
             </div>
         );
     };
 
     return (
         <div className="absolute top-16 right-4 w-[480px] h-[580px] bg-card/95 backdrop-blur-md border border-border shadow-2xl rounded-2xl flex flex-col z-50 overflow-hidden">
-            {/* Header / Tab Navigation */}
             <div className="bg-card border-b border-border p-3 flex justify-between items-center z-10">
-                {/* Tab Selector Dropdown / Buttons */}
                 <div className="flex items-center gap-2">
                     <div className="relative">
                         <select
@@ -253,7 +240,6 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                 </div>
             </div>
 
-            {/* Content */}
             <div className="flex-1 overflow-auto p-4 bg-card">
                 {loading && (
                     <div className="flex flex-col items-center justify-center h-full text-muted-foreground space-y-2">
@@ -262,37 +248,35 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                     </div>
                 )}
 
-                {!loading && !data && (
+                {!loading && (!data || !activeCircuit) && (
                     <div className="text-center py-10 text-muted-foreground text-sm">
                         No inputs/outputs detected. Add nodes to simulation.
                     </div>
                 )}
 
-                {!loading && data && (
+                {!loading && activeCircuit && (
                     <div className="bg-card p-4 rounded-xl shadow-sm border border-border min-h-full">
-
-                        {/* Truth Table View */}
                         {activeTab === 'truth' && (
                             <div className="overflow-x-auto">
                                 <h3 className="text-xs font-bold text-muted-foreground uppercase mb-3 text-center tracking-wider">System Truth Table</h3>
                                 <table className="w-full text-xs text-center border-collapse border border-border rounded-lg overflow-hidden">
                                     <thead className="bg-muted text-foreground">
                                         <tr>
-                                            {data.inputNames.map((name) => (
+                                            {activeCircuit.inputNames.map((name) => (
                                                 <th key={name} className="px-3 py-2 border border-border font-bold">{name}</th>
                                             ))}
-                                            {data.outputNames.map((name) => (
+                                            {activeCircuit.outputNames.map((name) => (
                                                 <th key={name} className="px-3 py-2 border border-border font-bold text-primary bg-primary/10">{name}</th>
                                             ))}
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-border">
-                                        {data.rows.map((row, i) => (
+                                        {activeCircuit.rows.map((row, i) => (
                                             <tr key={i} className="hover:bg-muted/50 transition-colors">
-                                                {data.inputNames.map((name) => (
+                                                {activeCircuit.inputNames.map((name) => (
                                                     <td key={name} className="px-3 py-1.5 border border-border text-foreground font-mono">{row.inputs[name]}</td>
                                                 ))}
-                                                {data.outputNames.map((name) => (
+                                                {activeCircuit.outputNames.map((name) => (
                                                     <td key={name} className="px-3 py-1.5 font-bold text-primary border border-border bg-primary/5 font-mono">{row.outputs[name]}</td>
                                                 ))}
                                             </tr>
@@ -301,6 +285,15 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
                                 </table>
                             </div>
                         )}
+
+                        {activeTab === 'kmap' && renderKMap()}
+                        {activeTab === 'excitation' && renderExcitationTable()}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
 
                         {/* K-Map View */}
                         {activeTab === 'kmap' && renderKMap()}
