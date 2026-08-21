@@ -44,7 +44,7 @@ impl Config {
         let otp_max_attempts = env::var("OTP_MAX_ATTEMPTS").unwrap_or_else(|_| "5".to_string()).parse::<i32>().unwrap_or(5);
         
         let frontend_url = env::var("FRONTEND_URL")
-            .unwrap_or_else(|_| "https://mmut.prayukti.org".to_string());
+            .unwrap_or_else(|_| "https://mmmut.prayukti.org,http://localhost:3000,http://localhost:3001".to_string());
 
         Self {
             database_url,
@@ -58,5 +58,13 @@ impl Config {
             otp_max_attempts,
             frontend_url,
         }
+    }
+
+    pub fn frontend_origins(&self) -> Vec<String> {
+        self.frontend_url
+            .split(',')
+            .map(|s| s.trim().to_string())
+            .filter(|s| !s.is_empty())
+            .collect()
     }
 }

@@ -113,12 +113,12 @@ async fn main() {
     let rate_limit_state = std::sync::Arc::new(tokio::sync::Mutex::new(std::collections::HashMap::new()));
     let sensitive_rate_limit_state = rate_limit_state.clone();
 
-    let frontend_url = config.frontend_url.clone();
+    let origins = config.frontend_origins();
     // Configure CORS securely
     let cors = CorsLayer::new()
         .allow_origin(tower_http::cors::AllowOrigin::predicate(move |origin: &axum::http::HeaderValue, _| {
             if let Ok(origin_str) = origin.to_str() {
-                origin_str == frontend_url ||
+                origins.iter().any(|o| o == origin_str) ||
                 origin_str == "https://mmmut.prayukti.org" ||
                 origin_str.starts_with("http://localhost:") ||
                 origin_str.ends_with(".vercel.app") ||
