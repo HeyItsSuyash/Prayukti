@@ -44,6 +44,7 @@ export const metadata: Metadata = {
 };
 
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { AxiosConfig } from '@/components/AxiosConfig';
 import { ThemeController } from '@/components/ThemeController';
 
@@ -90,6 +91,7 @@ export default function RootLayout({
         {children}
         <AssistantBot />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

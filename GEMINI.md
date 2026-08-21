@@ -50,3 +50,4 @@ This file contains a growing ruleset that improves over time. **At session start
 11. [STYLE] Ensure DLD simulation canvas strictly uses theme-consistent backgrounds (white in light mode, dark gray in dark mode); remove all lingering blue tint/bg-blue classes.
 12. [UX] Hide scrollbars globally across the entire website while keeping all scrollable areas fully functional (`::-webkit-scrollbar { display: none }` / `scrollbar-width: none`).
 13. [UX] Always use custom React state-driven dropdown menus instead of native HTML `<select>` elements to prevent OS-level blue highlights and ensure 100% theme consistency.
+14. [PROCESS] Never start editing code or executing modifications on informational questions unless explicitly requested by the user — user preference.
