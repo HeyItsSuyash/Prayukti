@@ -294,16 +294,3 @@ export function WorkspacesPanel({ isOpen, onClose, data, loading }: WorkspacesPa
         </div>
     );
 }
-
-                        {/* K-Map View */}
-                        {activeTab === 'kmap' && renderKMap()}
-
-                        {/* Excitation Table View */}
-                        {activeTab === 'excitation' && renderExcitationTable()}
-
-                    </div>
-                )}
-            </div>
-        </div>
-    );
-}
