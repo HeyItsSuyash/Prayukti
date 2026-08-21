@@ -427,17 +427,17 @@ export default function DVRSimulation({ labId }: { labId: string }) {
     };
 
     return (
-        <div className="flex flex-col h-[800px] bg-card font-sans rounded-none-none overflow-hidden border">
+        <div className="flex flex-col h-[800px] bg-card font-sans rounded-xl overflow-hidden border">
             {/* Header & Main Tabs */}
-            <div className="bg-card border-b p-4 flex justify-between items-center shadow-none-none z-10">
+            <div className="bg-card border-b p-4 flex justify-between items-center shadow-md z-10">
                 <div className="flex items-center gap-3">
                     <Workflow className="text-purple-600" />
                     <h2 className="text-xl font-black uppercase tracking-tight text-muted-foreground">DVR Simulator</h2>
 
-                    <div className="ml-6 flex items-center bg-card p-1 rounded-none-none">
-                        <button className={`px-4 py-1.5 text-sm font-semibold rounded-none-none transition-all ${activeTab === 'simulation' ? 'bg-card shadow-none-none text-purple-600' : 'text-muted-foreground hover:text-muted-foreground'}`} onClick={() => setActiveTab('simulation')}>Simulation</button>
-                        <button className={`px-4 py-1.5 text-sm font-semibold rounded-none-none transition-all ${activeTab === 'observation' ? 'bg-card shadow-none-none text-purple-600' : 'text-muted-foreground hover:text-muted-foreground'}`} onClick={() => setActiveTab('observation')}>Observation Logger</button>
-                        <button className={`px-4 py-1.5 text-sm font-semibold rounded-none-none transition-all ${activeTab === 'statistics' ? 'bg-card shadow-none-none text-purple-600' : 'text-muted-foreground hover:text-muted-foreground'}`} onClick={() => setActiveTab('statistics')}>Statistics</button>
+                    <div className="ml-6 flex items-center bg-card p-1 rounded-xl">
+                        <button className={`px-4 py-1.5 text-sm font-semibold rounded-xl  ${activeTab === 'simulation' ? 'bg-card shadow-md text-purple-600' : 'text-muted-foreground hover:text-muted-foreground'}`} onClick={() => setActiveTab('simulation')}>Simulation</button>
+                        <button className={`px-4 py-1.5 text-sm font-semibold rounded-xl  ${activeTab === 'observation' ? 'bg-card shadow-md text-purple-600' : 'text-muted-foreground hover:text-muted-foreground'}`} onClick={() => setActiveTab('observation')}>Observation Logger</button>
+                        <button className={`px-4 py-1.5 text-sm font-semibold rounded-xl  ${activeTab === 'statistics' ? 'bg-card shadow-md text-purple-600' : 'text-muted-foreground hover:text-muted-foreground'}`} onClick={() => setActiveTab('statistics')}>Statistics</button>
                     </div>
                 </div>
 
@@ -475,7 +475,7 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                     <div className="flex-1 relative bg-card flex flex-col">
 
                         {/* Editor Toolbar */}
-                        <div className="bg-card border-b px-4 py-2 flex items-center justify-between text-sm shadow-none-none z-10">
+                        <div className="bg-card border-b px-4 py-2 flex items-center justify-between text-sm shadow-md z-10">
                             <div className="flex items-center gap-2">
                                 <span className="font-semibold text-muted-foreground mr-2 flex items-center gap-1"><Settings2 className="w-4 h-4" /> Tools:</span>
                                 <Button variant={editMode === 'addNode' ? 'default' : 'outline'} size="sm" className="h-7 text-xs" onClick={() => setEditMode(editMode === 'addNode' ? 'none' : 'addNode')}>
@@ -518,7 +518,7 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                                     return (
                                         <g key={link.id} className="pointer-events-auto cursor-pointer group" onClick={(e) => { e.stopPropagation(); handleLinkClick(link.id); }}>
                                             <line x1={`${source.x}%`} y1={`${source.y}%`} x2={`${target.x}%`} y2={`${target.y}%`} stroke="transparent" strokeWidth="25" />
-                                            <line x1={`${source.x}%`} y1={`${source.y}%`} x2={`${target.x}%`} y2={`${target.y}%`} stroke={link.isActive ? "#94a3b8" : "#f87171"} strokeWidth={link.isActive ? "4" : "2"} strokeDasharray={link.isActive ? "none" : "5 5"} className="transition-all duration-300 group-hover:stroke-purple-400" />
+                                            <line x1={`${source.x}%`} y1={`${source.y}%`} x2={`${target.x}%`} y2={`${target.y}%`} stroke={link.isActive ? "#94a3b8" : "#f87171"} strokeWidth={link.isActive ? "4" : "2"} strokeDasharray={link.isActive ? "none" : "5 5"} className=" duration-300 group-hover:stroke-purple-400" />
                                             {link.isActive && (
                                                 <g transform={`translate(calc(${source.x}% / 2 + ${target.x}% / 2), calc(${source.y}% / 2 + ${target.y}% / 2))`}>
                                                     <rect x="-12" y="-12" width="24" height="24" rx="4" fill="white" stroke="#e2e8f0" strokeWidth="2" className="group-hover:stroke-purple-400 transition-colors" />
@@ -545,7 +545,7 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                             {/* Data Packet Routing Animation */}
                             {getPacketPosition() && (
                                 <div
-                                    className="absolute w-4 h-4 bg-primary rounded-none-sm shadow-none-none shadow-none-none-500/50 z-20 border-2 border-white"
+                                    className="absolute w-4 h-4 bg-primary rounded-sm shadow-md shadow-md-500/50 z-20 border-2 border-white"
                                     style={{ left: getPacketPosition()?.x, top: getPacketPosition()?.y, transform: 'translate(-50%, -50%)' }}
                                 />
                             )}
@@ -554,11 +554,11 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                             {Object.values(nodes).map(node => (
                                 <div
                                     key={node.id}
-                                    className={`absolute z-10 flex flex-col items-center justify-center transition-transform hover:scale-105 ${editMode !== 'none' ? 'cursor-pointer' : 'cursor-pointer'}`}
+                                    className={`absolute z-10 flex flex-col items-center justify-center   ${editMode !== 'none' ? 'cursor-pointer' : 'cursor-pointer'}`}
                                     style={{ left: getCoordPx(node.id).x, top: getCoordPx(node.id).y, transform: 'translate(-50%, -50%)' }}
                                     onClick={(e) => { e.stopPropagation(); handleNodeClick(node.id); }}
                                 >
-                                    <div className={`w-14 h-14 rounded-none-full flex items-center justify-center shadow-none-none border-4 ${selectedRouter === node.id ? 'bg-purple-100 border-purple-500' : connectSource === node.id ? 'bg-amber-100 border-amber-500' : 'bg-card border-border'} ${editMode === 'remove' ? 'hover:border-red-500 hover:bg-red-50' : ''}`}>
+                                    <div className={`w-14 h-14 rounded-full flex items-center justify-center shadow-md border-4 ${selectedRouter === node.id ? 'bg-purple-100 border-purple-500' : connectSource === node.id ? 'bg-amber-100 border-amber-500' : 'bg-card border-border'} ${editMode === 'remove' ? 'hover:border-red-500 hover:bg-red-50' : ''}`}>
                                         <Activity className={`w-6 h-6 ${selectedRouter === node.id ? 'text-purple-600' : 'text-muted-foreground'}`} />
                                     </div>
                                     <Badge variant={selectedRouter === node.id ? 'default' : 'secondary'} className={`mt-2 ${selectedRouter === node.id ? 'bg-purple-600' : ''}`}>
@@ -569,7 +569,7 @@ export default function DVRSimulation({ labId }: { labId: string }) {
 
                             {/* Special Link failure button in Infinity mode */}
                             {Object.keys(nodes).length === 3 && nodes['R1'] && nodes['R2'] && nodes['R3'] && links.find(l => l.id === 'L2') && links.find(l => l.id === 'L2')?.isActive && (
-                                <div className="absolute top-4 right-4 bg-card p-3 rounded-none-none shadow-none-none border-l-4 border-amber-500 max-w-xs z-30">
+                                <div className="absolute top-4 right-4 bg-card p-3 rounded-xl shadow-md border-l-4 border-amber-500 max-w-xs z-30">
                                     <p className="text-sm font-bold text-muted-foreground mb-2">Infinity Demo</p>
                                     <Button variant="destructive" size="sm" className="w-full text-xs h-7" onClick={() => breakLink('L2')}>
                                         <Link2Off className="w-3 h-3 mr-1" /> Disconnect R2-R3
@@ -579,16 +579,16 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                         </div>
 
                         {/* Packet Routing Control Strip */}
-                        <div className="bg-card border-t px-4 py-3 flex items-center shadow-none-none z-10">
+                        <div className="bg-card border-t px-4 py-3 flex items-center shadow-md z-10">
                             <span className="font-bold text-muted-foreground text-sm flex items-center gap-2 mr-4">
                                 <Send className="w-4 h-4 text-emerald-600" /> Send Packet:
                             </span>
-                            <select value={packetSrc} onChange={e => setPacketSrc(e.target.value)} className="border rounded-none-none px-2 py-1 text-sm bg-card font-mono w-24">
+                            <select value={packetSrc} onChange={e => setPacketSrc(e.target.value)} className="border rounded-xl px-2 py-1 text-sm bg-card font-mono w-24">
                                 <option value="">Source</option>
                                 {Object.keys(nodes).map(n => <option key={n} value={n}>{n}</option>)}
                             </select>
                             <span className="mx-2 text-muted-foreground">→</span>
-                            <select value={packetDst} onChange={e => setPacketDst(e.target.value)} className="border rounded-none-none px-2 py-1 text-sm bg-card font-mono w-24 mr-4">
+                            <select value={packetDst} onChange={e => setPacketDst(e.target.value)} className="border rounded-xl px-2 py-1 text-sm bg-card font-mono w-24 mr-4">
                                 <option value="">Dest</option>
                                 {Object.keys(nodes).map(n => <option key={n} value={n}>{n}</option>)}
                             </select>
@@ -599,10 +599,10 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                     </div>
 
                     {/* Right Panel: Routing Table Inspector */}
-                    <div className="w-80 bg-card shadow-none-none z-20 flex flex-col relative border-l">
+                    <div className="w-80 bg-card shadow-md z-20 flex flex-col relative border-l">
                         {selectedRouter && nodes[selectedRouter] ? (
                             <div className="flex-1 flex flex-col h-full bg-card">
-                                <div className="bg-purple-600 text-white p-4 shrink-0 shadow-none-none">
+                                <div className="bg-purple-600 text-white p-4 shrink-0 shadow-md">
                                     <h3 className="font-bold text-lg flex justify-between items-center">
                                         Router {selectedRouter}
                                         <Badge variant="outline" className="text-white border-white/30 text-xs">Table</Badge>
@@ -610,7 +610,7 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                                 </div>
                                 <div className="p-4 flex-1 overflow-y-auto custom-scrollbar">
                                     {routingTables[selectedRouter] && (
-                                        <div className="bg-card rounded-none-none shadow-none-none border overflow-hidden">
+                                        <div className="bg-card rounded-xl shadow-md border overflow-hidden">
                                             <table className="w-full text-left text-sm">
                                                 <thead className="bg-card text-muted-foreground uppercase text-xs">
                                                     <tr>
@@ -641,7 +641,7 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                                         </div>
                                     )}
 
-                                    <div className="mt-4 p-4 bg-indigo-50/50 border border-primary rounded-none-none text-sm text-primary shadow-none-none">
+                                    <div className="mt-4 p-4 bg-indigo-50/50 border border-primary rounded-xl text-sm text-primary shadow-md">
                                         <h4 className="font-bold mb-2 flex items-center gap-2"><LinkIcon className="w-4 h-4" /> Interface Links</h4>
                                         <div className="space-y-2">
                                             {links.filter(l => l.isActive && (l.source === selectedRouter || l.target === selectedRouter)).map(l => {
@@ -674,11 +674,11 @@ export default function DVRSimulation({ labId }: { labId: string }) {
             {activeTab === 'observation' && (
                 <div className="flex-1 overflow-y-auto bg-card p-8 custom-scrollbar">
                     <div className="max-w-4xl mx-auto">
-                        <div className="bg-card p-6 rounded-none-none border shadow-none-none">
+                        <div className="bg-card p-6 rounded-xl border shadow-md">
                             <h3 className="text-xl font-bold text-muted-foreground flex items-center gap-2 mb-4">
                                 <Activity className="text-purple-600" /> Event Logger
                             </h3>
-                            <div className="bg-[#0f172a] border border-border rounded-none-none p-4 font-mono text-sm shadow-none-none overflow-hidden flex flex-col h-[550px]">
+                            <div className="bg-[#0f172a] border border-border rounded-xl p-4 font-mono text-sm shadow-md overflow-hidden flex flex-col h-[550px]">
                                 <div className="flex-1 overflow-y-auto space-y-1.5 custom-scrollbar pr-2 leading-relaxed">
                                     {logs.map((log, i) => {
                                         const isSystem = log.startsWith('[SYSTEM]');
@@ -705,19 +705,19 @@ export default function DVRSimulation({ labId }: { labId: string }) {
                 <div className="flex-1 bg-card p-8">
                     <div className="max-w-3xl mx-auto space-y-6">
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="bg-card p-6 rounded-none-none border shadow-none-none flex flex-col items-center justify-center text-center">
+                            <div className="bg-card p-6 rounded-xl border shadow-md flex flex-col items-center justify-center text-center">
                                 <span className="text-sm font-bold tracking-widest text-muted-foreground uppercase mb-2">Total Converged Routing Updates</span>
                                 <span className="text-5xl font-black text-purple-600">{stats.totalUpdates}</span>
                             </div>
-                            <div className="bg-card p-6 rounded-none-none border shadow-none-none flex flex-col items-center justify-center text-center">
+                            <div className="bg-card p-6 rounded-xl border shadow-md flex flex-col items-center justify-center text-center">
                                 <span className="text-sm font-bold tracking-widest text-muted-foreground uppercase mb-2">Total Elapsed Iterations</span>
                                 <span className="text-5xl font-black text-primary">{stepCount}</span>
                             </div>
-                            <div className="bg-card p-6 rounded-none-none border shadow-none-none flex flex-col items-center justify-center text-center">
+                            <div className="bg-card p-6 rounded-xl border shadow-md flex flex-col items-center justify-center text-center">
                                 <span className="text-sm font-bold tracking-widest text-muted-foreground uppercase mb-2">Simulated Data Packets Sent</span>
                                 <span className="text-5xl font-black text-emerald-600">{stats.packetsSent}</span>
                             </div>
-                            <div className="bg-card p-6 rounded-none-none border shadow-none-none flex flex-col items-center justify-center text-center">
+                            <div className="bg-card p-6 rounded-xl border shadow-md flex flex-col items-center justify-center text-center">
                                 <span className="text-sm font-bold tracking-widest text-muted-foreground uppercase mb-2">Loop Prevention Engine</span>
                                 <span className="text-xl font-bold text-muted-foreground">Split Horizon: {splitHorizon ? <span className="text-emerald-500">ON</span> : <span className="text-red-500">OFF</span>}</span>
                                 <span className="text-xl font-bold text-muted-foreground">Poison Reverse: {poisonReverse ? <span className="text-emerald-500">ON</span> : <span className="text-red-500">OFF</span>}</span>

@@ -334,9 +334,9 @@ export default function SelectiveRepeatSimulation() {
     };
 
     return (
-        <div className="flex flex-col h-full bg-[#f8fafc] text-muted-foreground font-sans overflow-hidden">
+        <div className="flex flex-col h-full bg-background text-muted-foreground font-sans overflow-hidden">
             {/* Header Tabs */}
-            <div className="flex bg-card shadow-none-[0_4px_20px_-10px_rgba(0,0,0,0.1)] sticky top-0 z-50">
+            <div className="flex bg-card shadow-[0_4px_20px_-10px_rgba(0,0,0,0.1)] sticky top-0 z-50">
                 {["Simulation", "Observation"].map((tab) => (
                     <button
                         key={tab}
@@ -355,29 +355,29 @@ export default function SelectiveRepeatSimulation() {
                 {activeTab === 'simulation' && (
                     <div className="max-w-[1600px] mx-auto flex flex-col gap-6 h-full">
                         {/* 1. TOP CONTROL PANEL */}
-                        <div className="bg-card border-2 border-border rounded-none-[2rem] p-6 shadow-none-none flex flex-col gap-6 z-20">
+                        <div className="bg-card border-2 border-border rounded-[2rem] p-6 shadow-md flex flex-col gap-6 z-20">
                             {/* Row 1: Primary Controls & Configuration */}
                             <div className="flex items-center justify-between gap-6 flex-wrap xl:flex-nowrap">
                                 {/* Left Side: Simulation Controls */}
                                 <div className="flex items-center gap-4">
-                                    <Button onClick={() => setIsRunning(!isRunning)} className={`h-11 px-8 rounded-none-none text-xs font-black uppercase tracking-[0.15em] ${isRunning ? "bg-amber-500 hover:bg-amber-600 shadow-none-none-200" : "bg-primary hover:bg-primary shadow-none-none-200"} text-white  shadow-none-none `}>
+                                    <Button onClick={() => setIsRunning(!isRunning)} className={`h-11 px-8 rounded-xl text-xs font-black uppercase tracking-[0.15em] ${isRunning ? "bg-amber-500 hover:bg-amber-600 shadow-sm" : "bg-primary hover:bg-primary shadow-sm"} text-white  shadow-md `}>
                                         {isRunning ? <i className="bx bx-pause mr-2 h-4 w-4"  /> : <i className="bx bx-play mr-2 h-4 w-4"  />} {isRunning ? "Pause" : "Start Simulation"}
                                     </Button>
-                                    <Button onClick={reset} variant="outline" className="h-11 px-6 rounded-none-none text-xs font-black uppercase tracking-widest text-muted-foreground border-border hover:bg-card  ">
+                                    <Button onClick={reset} variant="outline" className="h-11 px-6 rounded-xl text-xs font-black uppercase tracking-widest text-muted-foreground border-border hover:bg-card  ">
                                         <i className="bx bx-rotateccw h-4 w-4 mr-2"  /> Reset
                                     </Button>
 
                                     <div className="h-10 w-px bg-card mx-2" />
 
                                     {/* Learning Mode Toggle */}
-                                    <div className="flex items-center space-x-3 bg-card px-4 py-2 rounded-none-none border border-border shadow-none-none">
+                                    <div className="flex items-center space-x-3 bg-card px-4 py-2 rounded-xl border border-border shadow-md">
                                         <Label htmlFor="learning-mode" className="text-[10px] font-black text-muted-foreground uppercase tracking-widest cursor-pointer">Learning Mode</Label>
                                         <button
                                             id="learning-mode"
                                             onClick={() => setLearningMode(!learningMode)}
-                                            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center justify-center rounded-none-full border-2 border-transparent transition-colors focus-visible:outline-none ${learningMode ? 'bg-primary' : 'bg-card'}`}
+                                            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none ${learningMode ? 'bg-primary' : 'bg-card'}`}
                                         >
-                                            <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-none-full bg-card shadow-none-none transition duration-200 ease-in-out ${learningMode ? 'translate-x-2' : '-translate-x-2'}`} />
+                                            <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-card shadow-md transition duration-200 ease-in-out ${learningMode ? 'translate-x-2' : '-translate-x-2'}`} />
                                         </button>
                                     </div>
                                 </div>
@@ -448,7 +448,7 @@ export default function SelectiveRepeatSimulation() {
                                     {/* Manual Injection */}
                                     <div className="flex items-center gap-3">
                                         <span className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mr-2">Manual Inject:</span>
-                                        <div className="flex items-center gap-2 bg-card p-1.5 rounded-none-none border border-border">
+                                        <div className="flex items-center gap-2 bg-card p-1.5 rounded-xl border border-border">
                                             <Select value={manualDropSeq} onValueChange={setManualDropSeq}>
                                                 <SelectTrigger className="h-7 w-16 text-[10px] font-bold bg-card">
                                                     <SelectValue placeholder="Seq" />
@@ -464,7 +464,7 @@ export default function SelectiveRepeatSimulation() {
                                             </Button>
                                         </div>
 
-                                        <div className="flex items-center gap-2 bg-card p-1.5 rounded-none-none border border-border">
+                                        <div className="flex items-center gap-2 bg-card p-1.5 rounded-xl border border-border">
                                             <Select value={manualDropAckSeq} onValueChange={setManualDropAckSeq}>
                                                 <SelectTrigger className="h-7 w-16 text-[10px] font-bold bg-card">
                                                     <SelectValue placeholder="Ack" />
@@ -492,9 +492,9 @@ export default function SelectiveRepeatSimulation() {
                         <div className="flex-1 flex gap-4 p-4 overflow-hidden relative isolate">
 
                             {/* SENDER PANEL */}
-                            <div className="w-[30%] bg-card rounded-none-3xl border border-primary shadow-none-none p-5 flex flex-col relative">
+                            <div className="w-[30%] bg-card rounded-3xl border border-primary shadow-md p-5 flex flex-col relative">
                                 <div className="flex items-center gap-3 mb-4">
-                                    <div className="p-3 bg-primary text-primary rounded-none-none"><i className="bx bx-laptop"  /></div>
+                                    <div className="p-3 bg-primary text-primary rounded-xl"><i className="bx bx-laptop"  /></div>
                                     <div>
                                         <h2 className="text-sm font-black text-primary uppercase tracking-widest">Sender Client</h2>
                                         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Base: {senderBase} | Win: {windowSize}</p>
@@ -508,7 +508,7 @@ export default function SelectiveRepeatSimulation() {
                                         const hasTimer = isInFlight && activeTimers[i] !== undefined;
                                         return (
                                             <div key={`s-${i}`} className="flex flex-col items-center gap-1">
-                                                <div className={`w-8 h-8 flex items-center justify-center rounded-none-none text-[10px] font-black border-2  shadow-none-none
+                                                <div className={`w-8 h-8 flex items-center justify-center rounded-xl text-[10px] font-black border-2  shadow-md
                                         ${isAcked ? 'bg-primary border-emerald-600 text-white' :
                                                         isInFlight ? 'bg-amber-400 border-amber-500 text-amber-900' :
                                                             'bg-card border-border text-muted-foreground'
@@ -529,7 +529,7 @@ export default function SelectiveRepeatSimulation() {
                             </div>
 
                             {/* NETWORK CHANNEL */}
-                            <div className="flex-1 relative flex flex-col justify-center border-y border-dashed border-border bg-card/50 my-6 rounded-none-[2rem]">
+                            <div className="flex-1 relative flex flex-col justify-center border-y border-dashed border-border bg-card/50 my-6 rounded-[2rem]">
                                 <div className="absolute top-2 w-full text-center text-[10px] font-black text-muted-foreground uppercase tracking-[0.5em]">Transmission Channel</div>
 
                                 {packets.map(p => {
@@ -544,7 +544,7 @@ export default function SelectiveRepeatSimulation() {
                                                 transform: `translate(-50%, -50%) scale(${isLost ? 0.7 : 1})`,
                                                 opacity: isLost && p.status === 'error' ? 0 : 1
                                             }}>
-                                            <div className={`px-2 py-1 rounded-none-none flex items-center gap-1 shadow-none-none border-2
+                                            <div className={`px-2 py-1 rounded-xl flex items-center gap-1 shadow-md border-2
                                      ${isLost ? 'bg-rose-100 border-rose-500 text-rose-700 animate-pulse' :
                                                     isData ? 'bg-primary border-primary text-white' :
                                                         'bg-primary border-emerald-600 text-white'}`}>
@@ -558,7 +558,7 @@ export default function SelectiveRepeatSimulation() {
                                 {/* Event Explanation Banner overlay in the center of the channel */}
                                 {learningMode && isWaitingForStep && stepMessage && (
                                     <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 z-30 flex justify-center pointer-events-none">
-                                        <div className="bg-primary/90 text-white p-4 rounded-none-none shadow-none-2xl border border-primary/50 backdrop-blur-sm max-w-sm w-full animate-in fade-in zoom-in duration-200">
+                                        <div className="bg-primary/90 text-white p-4 rounded-xl shadow-2xl border border-primary/50 backdrop-blur-sm max-w-sm w-full animate-in fade-in zoom-in duration-200">
                                             <h4 className="text-[10px] uppercase font-bold tracking-widest text-primary mb-1 flex items-center gap-2">
                                                 <i className="bx bx-info"  /> Education Analysis
                                             </h4>
@@ -569,13 +569,13 @@ export default function SelectiveRepeatSimulation() {
                             </div>
 
                             {/* RECEIVER PANEL */}
-                            <div className="w-[30%] bg-card rounded-none-3xl border border-emerald-100 shadow-none-none p-5 flex flex-col relative">
+                            <div className="w-[30%] bg-card rounded-3xl border border-emerald-100 shadow-md p-5 flex flex-col relative">
                                 <div className="flex items-center gap-3 mb-4 justify-end">
                                     <div className="text-right">
                                         <h2 className="text-sm font-black text-emerald-900 uppercase tracking-widest">Receiver Server</h2>
                                         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Base: {receiverBase} | Buf: {windowSize}</p>
                                     </div>
-                                    <div className="p-3 bg-primary text-emerald-700 rounded-none-none"><i className="bx bx-server"  /></div>
+                                    <div className="p-3 bg-primary text-emerald-700 rounded-xl"><i className="bx bx-server"  /></div>
                                 </div>
 
                                 <div className="flex flex-wrap gap-2 mt-2 content-start justify-end flex-1 relative p-1 overflow-y-auto custom-scrollbar">
@@ -584,7 +584,7 @@ export default function SelectiveRepeatSimulation() {
                                         const isBuffered = receiverBuffered.includes(i);
                                         const inWindow = i >= receiverBase && i < receiverBase + windowSize;
                                         return (
-                                            <div key={`r-${i}`} className={`w-8 h-8 flex items-center justify-center rounded-none-none text-[10px] font-black border-2  shadow-none-none relative
+                                            <div key={`r-${i}`} className={`w-8 h-8 flex items-center justify-center rounded-xl text-[10px] font-black border-2  shadow-md relative
                                      ${isDelivered ? 'bg-primary border-emerald-600 text-white' :
                                                     isBuffered ? 'bg-primary border-primary text-white' :
                                                         inWindow ? 'bg-emerald-50 border-emerald-200 text-emerald-600 border-dashed' :
@@ -592,7 +592,7 @@ export default function SelectiveRepeatSimulation() {
                                                 }
                                  `}>
                                                 {i}
-                                                {isBuffered && <Badge className="absolute -top-2 hover:bg-transparent -left-1 bg-amber-500 text-white leading-none h-4 px-1 text-[8px] p-0 font-bold border-2 border-white shadow-none-none">BUF</Badge>}
+                                                {isBuffered && <Badge className="absolute -top-2 hover:bg-transparent -left-1 bg-amber-500 text-white leading-none h-4 px-1 text-[8px] p-0 font-bold border-2 border-white shadow-md">BUF</Badge>}
                                             </div>
                                         );
                                     })}
@@ -604,7 +604,7 @@ export default function SelectiveRepeatSimulation() {
                         <div className="h-[200px] flex gap-4 px-4 pb-4 shrink-0">
 
                             {/* Stats */}
-                            <div className="w-[40%] bg-card rounded-none-3xl p-5 flex flex-col justify-center text-white shadow-none-none">
+                            <div className="w-[40%] bg-card rounded-3xl p-5 flex flex-col justify-center text-white shadow-md">
                                 <h4 className="text-[10px] font-black uppercase text-muted-foreground tracking-widest mb-4 flex items-center gap-2 border-b border-border pb-2">
                                     <i className="bx bx-activity text-emerald-400"  /> Real-Time Statistics
                                 </h4>
@@ -613,7 +613,7 @@ export default function SelectiveRepeatSimulation() {
                                     <div className="flex-1 text-center border-r border-border"><p className="text-[9px] uppercase font-bold text-emerald-400">Delivered</p><p className="text-2xl font-mono font-black">{receiverBase}</p></div>
                                     <div className="flex-1 text-center border-r border-border"><p className="text-[9px] uppercase font-bold text-rose-400">Lost Frames</p><p className="text-2xl font-mono font-black">{lostFramesCount}</p></div>
                                     <div className="flex-1 text-center border-r border-border"><p className="text-[9px] uppercase font-bold text-amber-400">Retries</p><p className="text-2xl font-mono font-black">{retransmissions}</p></div>
-                                    <div className="flex-1 bg-primary/20 rounded-none-none p-2 text-center border border-primary/30">
+                                    <div className="flex-1 bg-primary/20 rounded-xl p-2 text-center border border-primary/30">
                                         <p className="text-[9px] uppercase font-bold text-primary">Throughput</p>
                                         <p className="text-2xl font-mono font-black">{totalSent > 0 ? ((receiverBase / totalSent) * 100).toFixed(0) : 0}%</p>
                                     </div>
@@ -621,14 +621,14 @@ export default function SelectiveRepeatSimulation() {
                             </div>
 
                             {/* Event Log Pipeline */}
-                            <div className="w-[60%] bg-card rounded-none-3xl border border-border shadow-none-none p-4 flex flex-col">
+                            <div className="w-[60%] bg-card rounded-3xl border border-border shadow-md p-4 flex flex-col">
                                 <h3 className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-3 border-b pb-2 flex items-center gap-2">
                                     <i className="bx bx-info text-primary"  /> Event Console
                                 </h3>
                                 <div className="flex-1 overflow-y-auto space-y-1.5 pr-2 custom-scrollbar text-xs font-mono">
                                     {log.map((entry, idx) => (
                                         <div key={idx} className="flex gap-2 p-1 border-b border-slate-50 last:border-0 hover:bg-card rounded-none">
-                                            <span className={`shrink-0 w-2 h-2 mt-1 rounded-none-full ${entry.type === 'error' ? 'bg-rose-500' : entry.type === 'success' ? 'bg-primary' : entry.type === 'warn' ? 'bg-amber-400' : 'bg-primary'}`} />
+                                            <span className={`shrink-0 w-2 h-2 mt-1 rounded-full ${entry.type === 'error' ? 'bg-rose-500' : entry.type === 'success' ? 'bg-primary' : entry.type === 'warn' ? 'bg-amber-400' : 'bg-primary'}`} />
                                             <span className={`${entry.type === 'error' ? 'text-rose-700' : entry.type === 'success' ? 'text-emerald-700' : entry.type === 'warn' ? 'text-amber-700' : 'text-muted-foreground'}`}>{entry.msg}</span>
                                         </div>
                                     ))}
@@ -649,8 +649,8 @@ export default function SelectiveRepeatSimulation() {
                                 { label: "Frames Buffered", value: bufferedCount, icon: Server, color: "amber" },
                                 { label: "Retransmissions", value: retransmissions, icon: RotateCcw, color: "rose" }
                             ].map((stat, i) => (
-                                <div key={i} className="bg-card p-6 rounded-none-3xl border border-border shadow-none-none flex flex-col items-center text-center gap-2">
-                                    <div className={`p-3 bg-${stat.color}-50 text-${stat.color}-600 rounded-none-none mb-2`}><stat.icon size={24} /></div>
+                                <div key={i} className="bg-card p-6 rounded-3xl border border-border shadow-md flex flex-col items-center text-center gap-2">
+                                    <div className={`p-3 bg-${stat.color}-50 text-${stat.color}-600 rounded-xl mb-2`}><stat.icon size={24} /></div>
                                     <div className="text-2xl font-black text-muted-foreground tracking-tight">{stat.value}</div>
                                     <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{stat.label}</div>
                                 </div>
@@ -659,7 +659,7 @@ export default function SelectiveRepeatSimulation() {
 
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             {/* Detailed Loss Log */}
-                            <div className="bg-card rounded-none-[2.5rem] border-2 border-border shadow-none-none overflow-hidden flex flex-col">
+                            <div className="bg-card rounded-[2.5rem] border-2 border-border shadow-md overflow-hidden flex flex-col">
                                 <div className="bg-card px-8 py-6 border-b border-border flex items-center justify-between">
                                     <h3 className="text-sm font-black text-muted-foreground uppercase tracking-[0.2em] flex items-center gap-3">
                                         <i className="bx bx-xcircle text-rose-500"  /> Detailed Loss Log

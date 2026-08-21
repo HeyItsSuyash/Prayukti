@@ -253,14 +253,14 @@ export default function SlidingWindowSimulation() {
     ];
 
     return (
-        <div className="flex flex-col h-full bg-[#f0f4f8] overflow-hidden">
+        <div className="flex flex-col h-full bg-background overflow-hidden">
             {/* Header Tabs */}
-            <div className="flex bg-card border-b px-8 pt-4 gap-12 shadow-none-none">
+            <div className="flex bg-card border-b px-8 pt-4 gap-12 shadow-md">
                 {["simulation", "logic", "quiz"].map((tab) => (
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab as any)}
-                        className={`pb-4 text-[10px] font-black uppercase tracking-[0.3em] transition-all border-b-4 ${activeTab === tab
+                        className={`pb-4 text-[10px] font-black uppercase tracking-[0.3em]  border-b-4 ${activeTab === tab
                             ? "border-primary text-primary"
                             : "border-transparent text-muted-foreground hover:text-muted-foreground"
                             }`}
@@ -275,7 +275,7 @@ export default function SlidingWindowSimulation() {
                     <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6 h-full">
                         {/* Control Panel */}
                         <div className="lg:col-span-1 space-y-6">
-                            <div className="bg-card/80 backdrop-blur-xl p-8 rounded-none-[3rem] border border-white shadow-none-2xl space-y-10">
+                            <div className="bg-card/80 backdrop-blur-xl p-8 rounded-[3rem] border border-border shadow-2xl space-y-10">
                                 <div>
                                     <h3 className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-6 flex items-center gap-2">
                                         <i className="bx bx-layers h-4 w-4 text-primary"  />
@@ -291,9 +291,9 @@ export default function SlidingWindowSimulation() {
                                                 <button
                                                     key={opt.id}
                                                     onClick={() => setProtocol(opt.id as any)}
-                                                    className={`p-3 rounded-none-none text-[10px] font-bold text-left transition-all border-2 ${protocol === opt.id
-                                                        ? `border-${opt.color}-500 bg-${opt.color}-50 text-${opt.color}-700 shadow-none-none transform scale-105`
-                                                        : "border-border bg-card text-muted-foreground hover:border-border"
+                                                    className={`p-3 rounded-xl text-[10px] font-bold text-left  border-2 transition-all ${protocol === opt.id
+                                                        ? opt.color === 'blue' ? 'border-blue-500 bg-blue-500/10 text-blue-500 shadow-md scale-105' : opt.color === 'indigo' ? 'border-indigo-500 bg-indigo-500/10 text-indigo-500 shadow-md scale-105' : 'border-emerald-500 bg-emerald-500/10 text-emerald-500 shadow-md scale-105'
+                                                        : "border-border bg-card text-muted-foreground hover:border-primary"
                                                         }`}
                                                 >
                                                     {opt.label}
@@ -325,21 +325,21 @@ export default function SlidingWindowSimulation() {
 
                                 <div className="pt-4 space-y-3">
                                     <Button
-                                        className={`w-full rounded-none-3xl h-14 text-xs font-black uppercase tracking-widest ${isRunning ? "bg-rose-500 hover:bg-rose-600" : "bg-primary hover:bg-primary"} shadow-none-none transition-all hover:scale-[1.02]`}
+                                        className={`w-full rounded-3xl h-14 text-xs font-black uppercase tracking-widest ${isRunning ? "bg-rose-500 hover:bg-rose-600" : "bg-primary hover:bg-primary"} shadow-md  hover:scale-[1.02]`}
                                         onClick={() => setIsRunning(!isRunning)}
                                     >
                                         {isRunning ? <i className="bx bx-pause mr-2 h-5 w-5"  /> : <i className="bx bx-play mr-2 h-5 w-5"  />}
                                         {isRunning ? "Halt Lab" : "Initiate Lab"}
                                     </Button>
-                                    <Button variant="ghost" className="w-full rounded-none-3xl text-muted-foreground" onClick={reset}>
+                                    <Button variant="ghost" className="w-full rounded-3xl text-muted-foreground" onClick={reset}>
                                         <i className="bx bx-rotateccw mr-2 h-4 w-4"  /> Reset System
                                     </Button>
                                 </div>
                             </div>
 
                             {/* Live Stats */}
-                            <div className="bg-card text-white p-8 rounded-none-[3rem] shadow-none-2xl relative overflow-hidden group">
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-[80px] rounded-none-full -mr-16 -mt-16 group-hover:bg-primary/20 transition-all duration-700"></div>
+                            <div className="bg-card text-white p-8 rounded-[3rem] shadow-2xl relative overflow-hidden group">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-[80px] rounded-full -mr-16 -mt-16 group-hover:bg-primary/20  duration-700"></div>
                                 <h4 className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-6">Real-time Telemetry</h4>
                                 <div className="grid grid-cols-2 gap-6">
                                     <div>
@@ -357,8 +357,8 @@ export default function SlidingWindowSimulation() {
                                             <span>Link Utilization</span>
                                             <span>{Math.min(100, (packets.length * 10)).toFixed(0)}%</span>
                                         </div>
-                                        <div className="h-1.5 w-full bg-card rounded-none-full overflow-hidden">
-                                            <div className="h-full bg-primary transition-all duration-1000" style={{ width: `${Math.min(100, (packets.length * 10))}%` }}></div>
+                                        <div className="h-1.5 w-full bg-card rounded-full overflow-hidden">
+                                            <div className="h-full bg-primary  duration-1000" style={{ width: `${Math.min(100, (packets.length * 10))}%` }}></div>
                                         </div>
                                     </div>
                                 </div>
@@ -367,13 +367,13 @@ export default function SlidingWindowSimulation() {
 
                         {/* Simulation Stage */}
                         <div className="lg:col-span-3 space-y-6 flex flex-col h-full">
-                            <div className="bg-card rounded-none-[3.5rem] p-10 flex-1 border border-border shadow-none-none relative overflow-hidden flex flex-col justify-between">
+                            <div className="bg-card rounded-[3.5rem] p-10 flex-1 border border-border shadow-md relative overflow-hidden flex flex-col justify-between">
                                 {/* Error Injection Button */}
                                 <Button
                                     size="sm"
                                     onClick={injectError}
                                     disabled={!isRunning}
-                                    className="absolute top-8 right-8 bg-rose-50 text-rose-600 border border-rose-100 hover:bg-rose-100 rounded-none-none text-[9px] font-black uppercase px-4"
+                                    className="absolute top-8 right-8 bg-rose-50 text-rose-600 border border-rose-100 hover:bg-rose-100 rounded-xl text-[9px] font-black uppercase px-4"
                                 >
                                     <i className="bx bx-zap h-3 w-3 mr-1"  /> Inject Packet Loss
                                 </Button>
@@ -382,7 +382,7 @@ export default function SlidingWindowSimulation() {
                                 <div className="space-y-6">
                                     <div className="flex items-center justify-between px-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="p-3 bg-primary rounded-none-none text-primary"><i className="bx bx-desktop"  /></div>
+                                            <div className="p-3 bg-primary rounded-xl text-primary"><i className="bx bx-desktop"  /></div>
                                             <div>
                                                 <h4 className="text-xs font-black text-muted-foreground">Sender Node</h4>
                                                 <p className="text-[9px] text-muted-foreground font-bold uppercase">Window: {senderBase} - {senderBase + (protocol === "sw" ? 0 : windowSize - 1)}</p>
@@ -392,10 +392,10 @@ export default function SlidingWindowSimulation() {
                                             {Array.from({ length: 15 }).map((_, i) => (
                                                 <div
                                                     key={i}
-                                                    className={`w-6 h-8 flex items-center justify-center rounded-none-none text-[10px] font-black transition-all border-2
-                                                        ${i >= senderBase && i < senderBase + (protocol === 'sw' ? 1 : windowSize) ? 'bg-primary border-primary text-white shadow-none-none' :
+                                                    className={`w-6 h-8 flex items-center justify-center rounded-xl text-[10px] font-black  border-2
+                                                        ${i >= senderBase && i < senderBase + (protocol === 'sw' ? 1 : windowSize) ? 'bg-primary border-primary text-white shadow-md' :
                                                             i < senderBase ? 'bg-emerald-50 border-emerald-100 text-emerald-600' : 'bg-card border-border text-muted-foreground'}
-                                                        ${i === nextSeqToSend ? 'animate-pulse scale-110 shadow-none-none-200' : ''}
+                                                        ${i === nextSeqToSend ? 'animate-pulse scale-110 shadow-sm' : ''}
                                                     `}
                                                 >
                                                     {i}
@@ -403,9 +403,9 @@ export default function SlidingWindowSimulation() {
                                             ))}
                                         </div>
                                     </div>
-                                    <div className="h-0.5 w-full bg-card rounded-none-full relative">
+                                    <div className="h-0.5 w-full bg-card rounded-full relative">
                                         <div
-                                            className="absolute h-full bg-primary/30 transition-all duration-500 rounded-none-full"
+                                            className="absolute h-full bg-primary/30  duration-500 rounded-full"
                                             style={{
                                                 left: `${(senderBase / 15) * 100}%`,
                                                 width: `${((protocol === 'sw' ? 1 : windowSize) / 15) * 100}%`
@@ -415,15 +415,15 @@ export default function SlidingWindowSimulation() {
                                 </div>
 
                                 {/* Transmission Channel */}
-                                <div className="h-[300px] w-full relative bg-card/50 rounded-none-3xl border border-dashed border-border mx-auto max-w-[90%] overflow-hidden flex items-center">
+                                <div className="h-[300px] w-full relative bg-card/50 rounded-3xl border border-dashed border-border mx-auto max-w-[90%] overflow-hidden flex items-center">
                                     {/* Central Line */}
-                                    <div className="absolute w-full h-px bg-card top-1/2 -translate-y-1/2"></div>
+                                    <div className="absolute w-full h-px bg-border top-1/2 -translate-y-1/2"></div>
 
                                     {/* Packets */}
                                     {packets.map(p => (
                                         <div
                                             key={p.id}
-                                            className={`absolute transition-all duration-100 ease-linear flex flex-col items-center gap-2
+                                            className={`absolute  duration-100 ease-linear flex flex-col items-center gap-2
                                                 ${p.status === 'lost' ? 'opacity-0 scale-0 pointer-events-none' : 'opacity-100'}
                                             `}
                                             style={{
@@ -433,7 +433,7 @@ export default function SlidingWindowSimulation() {
                                             }}
                                         >
                                             <div className={`
-                                                px-3 py-1.5 rounded-none-none flex items-center gap-1.5 shadow-none-none border-2
+                                                px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-md border-2
                                                 ${p.type === 'data' ? 'bg-card border-primary text-primary' : 'bg-primary border-emerald-400 text-white'}
                                             `}>
                                                 {p.type === 'data' ? <i className="bx bx-send h-3 w-3"  /> : <i className="bx bx-check-circle h-3 w-3"  />}
@@ -452,14 +452,14 @@ export default function SlidingWindowSimulation() {
 
                                 {/* Receiver Area */}
                                 <div className="space-y-6">
-                                    <div className="h-0.5 w-full bg-card rounded-none-full"></div>
+                                    <div className="h-0.5 w-full bg-card rounded-full"></div>
                                     <div className="flex items-center justify-between px-4">
                                         <div className="flex gap-1.5">
                                             {Array.from({ length: 15 }).map((_, i) => (
                                                 <div
                                                     key={i}
-                                                    className={`w-6 h-8 flex items-center justify-center rounded-none-none text-[10px] font-black transition-all border-2
-                                                        ${receivedPackets.includes(i) ? 'bg-primary border-emerald-500 text-white shadow-none-none' :
+                                                    className={`w-6 h-8 flex items-center justify-center rounded-xl text-[10px] font-black  border-2
+                                                        ${receivedPackets.includes(i) ? 'bg-primary border-emerald-500 text-white shadow-md' :
                                                             i === receiverExpected ? 'bg-card border-orange-400 text-orange-600 animate-pulse' : 'bg-card border-border text-muted-foreground'}
                                                     `}
                                                 >
@@ -472,21 +472,21 @@ export default function SlidingWindowSimulation() {
                                                 <h4 className="text-xs font-black text-muted-foreground">Receiver Node</h4>
                                                 <p className="text-[9px] text-muted-foreground font-bold uppercase">Expected: {receiverExpected}</p>
                                             </div>
-                                            <div className="p-3 bg-primary rounded-none-none text-emerald-600"><i className="bx bx-desktop"  /></div>
+                                            <div className="p-3 bg-primary rounded-xl text-emerald-600"><i className="bx bx-desktop"  /></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Console Log */}
-                            <div className="bg-card rounded-none-[2rem] p-6 border border-border h-40 overflow-hidden flex flex-col gap-3">
+                            <div className="bg-card rounded-[2rem] p-6 border border-border h-40 overflow-hidden flex flex-col gap-3">
                                 <h5 className="text-[9px] font-black text-muted-foreground uppercase tracking-widest flex items-center gap-2">
                                     <i className="bx bx-activity h-3 w-3 text-muted-foreground"  />
                                     Protocol Log
                                 </h5>
                                 <div className="space-y-1.5 overflow-y-auto pr-2">
                                     {log.map((entry, i) => (
-                                        <div key={i} className={`text-[10px] font-bold flex items-center gap-2 animate-in slide-in-from-left-2 transition-all duration-300 ${entry.type === 'error' ? 'text-rose-600' : entry.type === 'success' ? 'text-emerald-600' : 'text-muted-foreground'
+                                        <div key={i} className={`text-[10px] font-bold flex items-center gap-2 animate-in slide-in-from-left-2  duration-300 ${entry.type === 'error' ? 'text-rose-600' : entry.type === 'success' ? 'text-emerald-600' : 'text-muted-foreground'
                                             }`}>
                                             {entry.type === 'error' ? <i className="bx bx-xcircle h-3 w-3"  /> : entry.type === 'success' ? <i className="bx bx-check-circle h-3 w-3"  /> : <i className="bx bx-clock h-3 w-3"  />}
                                             {entry.msg}
@@ -525,14 +525,14 @@ export default function SlidingWindowSimulation() {
                                     color: "emerald"
                                 }
                             ].map((p, i) => (
-                                <div key={i} className="bg-card p-8 rounded-none-[3rem] border border-border shadow-none-none flex items-center gap-8">
-                                    <div className={`p-6 bg-${p.color}-100 rounded-none-[2rem] text-${p.color}-600`}>{p.icon}</div>
+                                <div key={i} className="bg-card p-8 rounded-[3rem] border border-border shadow-md flex items-center gap-8">
+                                    <div className={`p-6 rounded-[2rem] ${p.color === 'blue' ? 'bg-blue-500/10 text-blue-500' : p.color === 'indigo' ? 'bg-indigo-500/10 text-indigo-500' : 'bg-emerald-500/10 text-emerald-500'}`}>{p.icon}</div>
                                     <div className="flex-1 space-y-2">
                                         <h3 className="font-bold text-xl">{p.name}</h3>
                                         <p className="text-sm text-muted-foreground" dangerouslySetInnerHTML={{ __html: p.logic }} />
                                         <div className="pt-2">
                                             <span className="text-[10px] font-black uppercase text-muted-foreground mr-2">Implementation Complexity:</span>
-                                            <span className={`text-[10px] font-black uppercase text-${p.color}-600 px-3 py-1 bg-${p.color}-50 rounded-none-full`}>{p.complexity}</span>
+                                            <span className={`text-[10px] font-black uppercase px-3 py-1 rounded-full ${p.color === 'blue' ? 'bg-blue-500/10 text-blue-500' : p.color === 'indigo' ? 'bg-indigo-500/10 text-indigo-500' : 'bg-emerald-500/10 text-emerald-500'}`}>{p.complexity}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -543,7 +543,7 @@ export default function SlidingWindowSimulation() {
 
                 {activeTab === "quiz" && (
                     <div className="p-8 max-w-3xl mx-auto">
-                        <div className="bg-card rounded-none-[3.5rem] border border-border shadow-none-2xl overflow-hidden">
+                        <div className="bg-card rounded-[3.5rem] border border-border shadow-2xl overflow-hidden">
                             <div className="bg-primary p-12 text-white relative">
                                 <div className="absolute top-0 right-0 p-10 opacity-20"><i className="bx bx-help-circle"  /></div>
                                 <h2 className="text-4xl font-black tracking-tighter mb-4 italic">Theory Challenge</h2>
@@ -563,14 +563,14 @@ export default function SlidingWindowSimulation() {
                                                     key={oIdx}
                                                     disabled={showResults}
                                                     onClick={() => setQuizAnswers({ ...quizAnswers, [qIdx]: oIdx })}
-                                                    className={`p-5 text-left text-sm rounded-none-3xl border-2 transition-all ${quizAnswers[qIdx] === oIdx
+                                                    className={`p-5 text-left text-sm rounded-3xl border-2  ${quizAnswers[qIdx] === oIdx
                                                         ? showResults
                                                             ? oIdx === q.correct
-                                                                ? "border-emerald-500 bg-emerald-50 text-emerald-800"
-                                                                : "border-rose-500 bg-rose-50 text-rose-800"
-                                                            : "border-primary bg-blue-50 text-primary font-bold shadow-none-none"
-                                                        : "border-border bg-card text-muted-foreground hover:border-border"
-                                                        } ${showResults && oIdx === q.correct ? "border-emerald-500 bg-emerald-50 shadow-none-none" : ""}`}
+                                                                ? "border-emerald-500 bg-emerald-500/10 text-emerald-500 font-bold"
+                                                                : "border-rose-500 bg-rose-500/10 text-rose-500 font-bold"
+                                                            : "border-primary bg-primary/10 text-primary font-bold shadow-md"
+                                                        : "border-border bg-card text-muted-foreground hover:border-primary"
+                                                        } ${showResults && oIdx === q.correct ? "border-emerald-500 bg-emerald-500/10 text-emerald-500 shadow-md font-bold" : ""}`}
                                                 >
                                                     {opt}
                                                     {showResults && oIdx === q.correct && (
@@ -584,7 +584,7 @@ export default function SlidingWindowSimulation() {
                                 <div className="pt-8 border-t flex flex-col items-center gap-6">
                                     {!showResults ? (
                                         <Button
-                                            className="w-full h-16 bg-primary text-white rounded-none-[2rem] font-black uppercase tracking-widest shadow-none-none-200 shadow-none-none disabled:opacity-50"
+                                            className="w-full h-16 bg-primary text-white rounded-[2rem] font-black uppercase tracking-widest shadow-sm shadow-md disabled:opacity-50"
                                             onClick={() => setShowResults(true)}
                                             disabled={Object.keys(quizAnswers).length < quizQuestions.length}
                                         >
@@ -592,7 +592,7 @@ export default function SlidingWindowSimulation() {
                                         </Button>
                                     ) : (
                                         <div className="flex flex-col items-center gap-6 w-full">
-                                            <div className="text-center p-8 bg-blue-50 rounded-none-[2rem] border border-primary w-full">
+                                            <div className="text-center p-8 bg-primary/10 rounded-[2rem] border border-primary w-full">
                                                 <p className="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-2">Assessment Results</p>
                                                 <p className="text-5xl font-black text-primary">
                                                     {Object.entries(quizAnswers).filter(([idx, ans]) => {
@@ -609,7 +609,7 @@ export default function SlidingWindowSimulation() {
                                                         : "Review the logic and retry."}
                                                 </p>
                                             </div>
-                                            <Button variant="outline" className="h-14 px-12 rounded-none-[1.5rem] border-2 font-bold" onClick={() => { setShowResults(false); setQuizAnswers({}); }}>
+                                            <Button variant="outline" className="h-14 px-12 rounded-[1.5rem] border-2 font-bold" onClick={() => { setShowResults(false); setQuizAnswers({}); }}>
                                                 Retry Assessment
                                             </Button>
                                         </div>
@@ -625,7 +625,7 @@ export default function SlidingWindowSimulation() {
             <div className="bg-card px-8 py-3 flex items-center justify-between text-[10px] font-black uppercase tracking-[0.3em]">
                 <div className="flex items-center gap-6">
                     <div className="flex items-center gap-2 text-primary">
-                        <div className={`w-2 h-2 rounded-none-full ${isRunning ? "bg-primary animate-pulse shadow-none-[0_0_8px_rgba(96,165,250,0.8)]" : "bg-card"}`} />
+                        <div className={`w-2 h-2 rounded-full ${isRunning ? "bg-primary animate-pulse shadow-[0_0_8px_rgba(96,165,250,0.8)]" : "bg-card"}`} />
                         {protocol.toUpperCase()} Engine Active
                     </div>
                     <span className="text-muted-foreground">|</span>
