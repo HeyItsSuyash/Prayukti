@@ -18,6 +18,30 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
+    const [isDark, setIsDark] = useState(false);
+
+    useEffect(() => {
+        setIsDark(document.documentElement.classList.contains('dark'));
+    }, []);
+
+    const toggleTheme = () => {
+        const nextDark = !isDark;
+        setIsDark(nextDark);
+        if (nextDark) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        try {
+            const stored = localStorage.getItem('vlab_settings');
+            let parsed = {};
+            if (stored) {
+                parsed = JSON.parse(stored);
+            }
+            localStorage.setItem('vlab_settings', JSON.stringify({ ...parsed, darkMode: nextDark }));
+        } catch (e) {}
+    };
+
     const NavItem = ({ link, pathname, activeTextClass, textClass, className, onClick }: any) => {
         const [isActive, setIsActive] = useState(pathname === link.href);
         
@@ -139,6 +163,14 @@ export function PremiumNavbar({ pathname }: NavbarProps) {
 
                 {/* CTAs */}
                 <div className="flex items-center gap-4">
+                    {/* Theme Toggle Button */}
+                    <button 
+                        onClick={toggleTheme} 
+                        className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/20 hover:bg-white/10 text-white transition-colors focus:outline-none shrink-0"
+                        aria-label="Toggle Theme"
+                    >
+                        <i className={cn("bx text-xl", isDark ? "bx-sun" : "bx-moon")} />
+                    </button>
                     {user ? (
                         <div className="relative" ref={dropdownRef}>
                             <div className="flex items-center gap-3 cursor-pointer" onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}>

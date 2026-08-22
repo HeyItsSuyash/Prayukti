@@ -22,3 +22,8 @@ target/
 .idea/
 .vscode/
 test_*.js
+
+.env
+.env.local
+.env.*.local
+.env.example

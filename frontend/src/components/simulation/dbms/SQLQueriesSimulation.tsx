@@ -321,8 +321,8 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                             </div>
 
                             {/* Live Feedback Message */}
-                            {mod1Filter === "CUSTOM_DEPT" && <div className="text-xs bg-blue-50 text-primary p-2 mb-2 rounded-none">Displaying Students with Dept = <strong>{mod1CustomQuery}</strong></div>}
-                            {mod1Filter === "CUSTOM_MARKS" && <div className="text-xs bg-blue-50 text-primary p-2 mb-2 rounded-none">Displaying Students with Marks {">"} <strong>{mod1CustomQuery}</strong></div>}
+                            {mod1Filter === "CUSTOM_DEPT" && <div className="text-xs bg-blue-50 dark:bg-blue-950/40 text-blue-900 dark:text-blue-200 p-2 mb-2 rounded-none border border-blue-200/50 dark:border-blue-900/50">Displaying Students with Dept = <strong>{mod1CustomQuery}</strong></div>}
+                            {mod1Filter === "CUSTOM_MARKS" && <div className="text-xs bg-blue-50 dark:bg-blue-950/40 text-blue-900 dark:text-blue-200 p-2 mb-2 rounded-none border border-blue-200/50 dark:border-blue-900/50">Displaying Students with Marks {">"} <strong>{mod1CustomQuery}</strong></div>}
 
                             <div className="overflow-x-auto">
                                 <table className="w-full text-sm border-collapse border">
@@ -339,7 +339,7 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                                             if (mod1Filter === "CUSTOM_MARKS") return s.marks > parseInt(mod1CustomQuery);
                                             return true;
                                         }).map(s => (
-                                            <tr key={s.rollNo} className="hover:bg-blue-50">
+                                            <tr key={s.rollNo} className="hover:bg-blue-50 dark:hover:bg-muted/50">
                                                 <td className="border p-2">{s.rollNo}</td><td className="border p-2">{s.name}</td><td className="border p-2">{s.dept}</td><td className="border p-2">{s.marks}</td>
                                             </tr>
                                         ))}
@@ -386,11 +386,11 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                         <div className="bg-card p-4 rounded-none-none shadow-none-none border">
                             <h3 className="font-bold mb-3 flex items-center gap-2"><i className="bx bx-layers text-purple-600"  /> Relational Algebra</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="border p-4 rounded-none hover:border-purple-300 cursor-pointer " onClick={() => { setMod3Selection({ type: 'DEPT', value: 'CSE' }); setSqlQuery("SELECT * FROM STUDENT WHERE Dept='CSE'"); }}>
-                                    <h4 className="font-mono font-bold text-purple-700 mb-2">Selection (σ)</h4>
+                                <div className="border p-4 rounded-none hover:border-purple-300 dark:hover:border-purple-800 cursor-pointer bg-card text-foreground" onClick={() => { setMod3Selection({ type: 'DEPT', value: 'CSE' }); setSqlQuery("SELECT * FROM STUDENT WHERE Dept='CSE'"); }}>
+                                    <h4 className="font-mono font-bold text-purple-700 dark:text-purple-400 mb-2">Selection (σ)</h4>
                                     <p className="text-xs text-muted-foreground mb-2">σ {mod3Selection.type === 'DEPT' ? `Dept='${mod3Selection.value}'` : `Marks > ${mod3Selection.value}`}(STUDENT)</p>
-                                    <div className="bg-purple-50 p-2 rounded-none text-xs space-y-1 h-32 overflow-y-auto">
-                                        <div className="flex justify-between border-b pb-1 font-bold"><span>Roll</span><span>Name</span><span>Dept</span></div>
+                                    <div className="bg-purple-50 dark:bg-purple-950/40 text-purple-950 dark:text-purple-200 p-2 rounded-none text-xs space-y-1 h-32 overflow-y-auto border border-purple-200/50 dark:border-purple-900/50">
+                                        <div className="flex justify-between border-b border-purple-200 dark:border-purple-900 pb-1 font-bold"><span>Roll</span><span>Name</span><span>Dept</span></div>
                                         {students.filter(s => {
                                             if (mod3Selection.type === 'DEPT') return s.dept === mod3Selection.value;
                                             if (mod3Selection.type === 'MARKS') return s.marks > (mod3Selection.value as number);
@@ -400,11 +400,11 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                                         ))}
                                     </div>
                                 </div>
-                                <div className="border p-4 rounded-none hover:border-purple-300 cursor-pointer " onClick={() => { setMod3ProjectionColumns(["name", "marks"]); setSqlQuery("SELECT Name, Marks FROM STUDENT"); }}>
-                                    <h4 className="font-mono font-bold text-purple-700 mb-2">Projection (π)</h4>
+                                <div className="border p-4 rounded-none hover:border-purple-300 dark:hover:border-purple-800 cursor-pointer bg-card text-foreground" onClick={() => { setMod3ProjectionColumns(["name", "marks"]); setSqlQuery("SELECT Name, Marks FROM STUDENT"); }}>
+                                    <h4 className="font-mono font-bold text-purple-700 dark:text-purple-400 mb-2">Projection (π)</h4>
                                     <p className="text-xs text-muted-foreground mb-2">π {mod3ProjectionColumns.join(', ')}(STUDENT)</p>
-                                    <div className="bg-purple-50 p-2 rounded-none text-xs space-y-1 h-32 overflow-y-auto">
-                                        <div className="flex justify-between border-b pb-1 font-bold">
+                                    <div className="bg-purple-50 dark:bg-purple-950/40 text-purple-950 dark:text-purple-200 p-2 rounded-none text-xs space-y-1 h-32 overflow-y-auto border border-purple-200/50 dark:border-purple-900/50">
+                                        <div className="flex justify-between border-b border-purple-200 dark:border-purple-900 pb-1 font-bold">
                                             {mod3ProjectionColumns.map(c => <span key={c} className="capitalize">{c}</span>)}
                                         </div>
                                         {students.slice(0, 5).map(s => (
@@ -460,8 +460,8 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                                 </div>
 
                                 {/* Result Table */}
-                                <div className="bg-green-50 border rounded-none p-4">
-                                    <h4 className="text-xs font-bold uppercase text-green-800 mb-2">Output Result ({joinType} JOIN)</h4>
+                                <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800/40 rounded-none p-4">
+                                    <h4 className="text-xs font-bold uppercase text-green-800 dark:text-green-300 mb-2">Output Result ({joinType} JOIN)</h4>
                                     <div className="overflow-x-auto">
                                         <table className="w-full text-xs bg-card border">
                                             <thead className="bg-card"><tr><th className="p-2 border">RollNo</th><th className="p-2 border">Name</th><th className="p-2 border">CourseID</th></tr></thead>
@@ -486,27 +486,27 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                     <div className="space-y-6">
                         <div className="bg-card p-4 rounded-none-none shadow-none-none border">
                             <h3 className="font-bold mb-3 flex items-center gap-2"><i className="bx bx-terminal text-primary"  /> Subqueries</h3>
-                            <div className="flex items-center gap-2 mb-4 p-2 bg-card rounded-none">
+                            <div className="flex items-center gap-2 mb-4 p-2 bg-card rounded-none text-foreground border">
                                 <span className="text-sm font-bold">Cutoff Score:</span>
-                                <input type="number" value={cutoff} onChange={(e) => { setCutoff(e.target.value); setSqlQuery(`SELECT * FROM STUDENT WHERE Marks > ${e.target.value}`); }} className="w-20 p-1 border rounded-none text-xs" />
+                                <input type="number" value={cutoff} onChange={(e) => { setCutoff(e.target.value); setSqlQuery(`SELECT * FROM STUDENT WHERE Marks > ${e.target.value}`); }} className="w-20 p-1 border rounded-none text-xs bg-card text-foreground" />
                             </div>
 
-                            <div className="bg-indigo-50 p-4 rounded-none mb-4">
-                                <h4 className="font-bold text-xs uppercase text-primary mb-2">Step 1: Inner Query (Find Cutoff)</h4>
+                            <div className="bg-indigo-50 dark:bg-indigo-950/30 p-4 rounded-none mb-4 border border-indigo-100 dark:border-indigo-900/50 text-indigo-950 dark:text-indigo-200">
+                                <h4 className="font-bold text-xs uppercase text-indigo-800 dark:text-indigo-300 mb-2">Step 1: Inner Query (Find Cutoff)</h4>
                                 <code className="block bg-card p-2 rounded-none border border-primary text-xs mb-2">SELECT AVG(Marks) FROM STUDENT; -- (Avg is fixed at 80 for demo) OR SELECT {cutoff} FROM DUAL</code>
                                 <p className="text-xs text-muted-foreground">Dynamic Cutoff Value: <strong>{cutoff}</strong></p>
                             </div>
 
-                            <div className="bg-green-50 p-4 rounded-none mb-4">
-                                <h4 className="font-bold text-xs uppercase text-green-800 mb-2">Step 2: Outer Query (Filter Students)</h4>
-                                <code className="block bg-card p-2 rounded-none border border-green-200 text-xs mb-2">SELECT Name, Marks FROM STUDENT WHERE Marks &gt; {cutoff};</code>
+                            <div className="bg-green-50 dark:bg-green-950/30 p-4 rounded-none mb-4 border border-green-200 dark:border-green-800/40">
+                                <h4 className="font-bold text-xs uppercase text-green-800 dark:text-green-300 mb-2">Step 2: Outer Query (Filter Students)</h4>
+                                <code className="block bg-card p-2 rounded-none border border-green-200 dark:border-green-800/50 text-xs mb-2">SELECT Name, Marks FROM STUDENT WHERE Marks &gt; {cutoff};</code>
 
                                 <div className="bg-card border rounded-none mt-3">
                                     <table className="w-full text-xs">
                                         <thead className="bg-card"><tr><th className="p-2 border">Name</th><th className="p-2 border">Marks</th></tr></thead>
                                         <tbody>
                                             {students.filter(s => s.marks > parseInt(cutoff)).map(s => (
-                                                <tr key={s.rollNo}><td className="p-2 border">{s.name}</td><td className="p-2 border bg-green-100 font-bold">{s.marks}</td></tr>
+                                                <tr key={s.rollNo}><td className="p-2 border">{s.name}</td><td className="p-2 border bg-green-100 dark:bg-green-900/40 text-green-900 dark:text-green-200 font-bold">{s.marks}</td></tr>
                                             ))}
                                         </tbody>
                                     </table>
@@ -555,11 +555,11 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {/* Helper Panel */}
                                 <div className="space-y-4">
-                                    <div className="border p-4 rounded-none bg-pink-50 text-sm">
-                                        <h4 className="font-bold text-pink-800 text-sm mb-2">Create View</h4>
+                                    <div className="border p-4 rounded-none bg-pink-50 dark:bg-pink-950/30 text-pink-950 dark:text-pink-200 text-sm border-pink-100 dark:border-pink-900/50">
+                                        <h4 className="font-bold text-pink-800 dark:text-pink-300 text-sm mb-2">Create View</h4>
                                         <div className="grid grid-cols-2 gap-2 mb-2 px-1">
-                                            <input type="text" placeholder="Name" value={viewNameInput} onChange={(e) => setViewNameInput(e.target.value)} className="border rounded-none p-1 text-xs" />
-                                            <input type="number" placeholder="Cutoff" value={viewCutoffInput} onChange={(e) => setViewCutoffInput(e.target.value)} className="border rounded-none p-1 text-xs" />
+                                            <input type="text" placeholder="Name" value={viewNameInput} onChange={(e) => setViewNameInput(e.target.value)} className="border rounded-none p-1 text-xs bg-card text-foreground" />
+                                            <input type="number" placeholder="Cutoff" value={viewCutoffInput} onChange={(e) => setViewCutoffInput(e.target.value)} className="border rounded-none p-1 text-xs bg-card text-foreground" />
                                         </div>
                                         <Button size="sm" variant="outline" className="w-full" onClick={() => {
                                             const vName = viewNameInput || "View_Custom";
@@ -569,8 +569,8 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                                             addLog(`SUCCESS: View '${vName}' created.`);
                                         }}>Create View</Button>
                                     </div>
-                                    <div className="border p-4 rounded-none bg-blue-50 text-sm">
-                                        <h4 className="font-bold text-primary text-sm mb-2">Create Trigger</h4>
+                                    <div className="border p-4 rounded-none bg-blue-50 dark:bg-blue-950/30 text-blue-950 dark:text-blue-200 text-sm border-blue-100 dark:border-blue-900/50">
+                                        <h4 className="font-bold text-blue-800 dark:text-blue-300 text-sm mb-2">Create Trigger</h4>
                                         <Button size="sm" variant="outline" className="w-full" onClick={() => {
                                             setSqlQuery("CREATE TRIGGER AuditLog ... ");
                                             if (!createdTriggers.find(t => t.name === "AuditLog")) setCreatedTriggers([...createdTriggers, { name: "AuditLog", type: "INSERT", table: "Student", status: "Active" }]);
@@ -586,12 +586,12 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                                     {/* Views List */}
                                     {createdViews.length > 0 && (
                                         <div className="mb-4">
-                                            <h5 className="text-[10px] font-bold text-pink-700 mb-1 uppercase">Views</h5>
+                                            <h5 className="text-[10px] font-bold text-pink-700 dark:text-pink-400 mb-1 uppercase">Views</h5>
                                             <div className="space-y-1">
                                                 {createdViews.map((view, i) => (
-                                                    <div key={i} className="flex items-center justify-between text-xs bg-pink-50 p-2 rounded-none border border-pink-100">
+                                                    <div key={i} className="flex items-center justify-between text-xs bg-pink-50 dark:bg-pink-950/20 p-2 rounded-none border border-pink-100 dark:border-pink-900/50 text-pink-950 dark:text-pink-200">
                                                         <span>{view.name} <span className="text-muted-foreground text-[10px]">(Marks &gt; {view.cutoff})</span></span>
-                                                        <Button size="sm" variant="ghost" className="h-6 w-6 p-0 hover:bg-pink-200" onClick={() => {
+                                                        <Button size="sm" variant="ghost" className="h-6 w-6 p-0 hover:bg-pink-200 dark:hover:bg-pink-900/50" onClick={() => {
                                                             setSqlQuery(`SELECT * FROM ${view.name}`);
                                                             addLog(`Displaying Content of View: ${view.name}`);
                                                             alert(`View '${view.name}' Content:\n\n` + students.filter(s => s.marks > view.cutoff).map(s => `${s.name} (${s.marks})`).join("\n"));
@@ -605,12 +605,12 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                                     {/* Triggers List */}
                                     {createdTriggers.length > 0 && (
                                         <div>
-                                            <h5 className="text-[10px] font-bold text-primary mb-1 uppercase">Triggers</h5>
+                                            <h5 className="text-[10px] font-bold text-blue-700 dark:text-blue-400 mb-1 uppercase">Triggers</h5>
                                             <div className="space-y-1">
                                                 {createdTriggers.map((trig, i) => (
-                                                    <div key={i} className="flex items-center justify-between text-xs bg-blue-50 p-2 rounded-none border border-primary">
+                                                    <div key={i} className="flex items-center justify-between text-xs bg-blue-50 dark:bg-blue-950/20 p-2 rounded-none border border-blue-200 dark:border-blue-900/50 text-blue-950 dark:text-blue-200">
                                                         <span>{trig.name}</span>
-                                                        <span className="text-[10px] text-primary italic">{trig.status}</span>
+                                                        <span className="text-[10px] text-blue-600 dark:text-blue-400 italic font-bold">{trig.status}</span>
                                                     </div>
                                                 ))}
                                             </div>
@@ -629,10 +629,10 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                         <div className="bg-card p-4 rounded-none-none shadow-none-none border">
                             <h3 className="font-bold mb-3 flex items-center gap-2"><i className="bx bx-table text-muted-foreground"  /> Data Entry</h3>
                             <div className="max-w-md bg-card p-6 rounded-none border space-y-3">
-                                <div><label className="text-xs font-bold text-muted-foreground">Roll No</label><input disabled={readonly} type="number" value={formRollNo} onChange={(e) => setFormRollNo(e.target.value)} className="w-full border rounded-none p-2 text-sm" placeholder="106" /></div>
-                                <div><label className="text-xs font-bold text-muted-foreground">Name</label><input disabled={readonly} type="text" value={formName} onChange={(e) => setFormName(e.target.value)} className="w-full border rounded-none p-2 text-sm" placeholder="Name" /></div>
-                                <div><label className="text-xs font-bold text-muted-foreground">Marks</label><input disabled={readonly} type="number" value={formMarks} onChange={(e) => setFormMarks(e.target.value)} className="w-full border rounded-none p-2 text-sm" placeholder="85" /></div>
-                                {!readonly && <div className="pt-2"><Button size="sm" className="w-full bg-[#f57f17] hover:bg-orange-700" onClick={submitForm}>Submit</Button></div>}
+                                <div><label className="text-xs font-bold text-muted-foreground">Roll No</label><input disabled={readonly} type="number" value={formRollNo} onChange={(e) => setFormRollNo(e.target.value)} className="w-full border rounded-none p-2 text-sm bg-card text-foreground" placeholder="106" /></div>
+                                <div><label className="text-xs font-bold text-muted-foreground">Name</label><input disabled={readonly} type="text" value={formName} onChange={(e) => setFormName(e.target.value)} className="w-full border rounded-none p-2 text-sm bg-card text-foreground" placeholder="Name" /></div>
+                                <div><label className="text-xs font-bold text-muted-foreground">Marks</label><input disabled={readonly} type="number" value={formMarks} onChange={(e) => setFormMarks(e.target.value)} className="w-full border rounded-none p-2 text-sm bg-card text-foreground" placeholder="85" /></div>
+                                {!readonly && <div className="pt-2"><Button size="sm" className="w-full bg-[#f57f17] hover:bg-orange-700 text-white" onClick={submitForm}>Submit</Button></div>}
                             </div>
                         </div>
                     </div>
@@ -671,7 +671,7 @@ export default function SQLQueriesSimulation({ mode = "LEARNING", initialData, r
                         { id: 8, label: "Views & Triggers", icon: BookOpen },
                         { id: 9, label: "Forms & Reports", icon: Table },
                     ].map((m) => (
-                        <button key={m.id} onClick={() => setActiveModule(m.id as ModuleId)} className={`p-4 text-left border-b hover:bg-card flex items-center gap-3 transition-colors ${activeModule === m.id ? "bg-orange-50 text-orange-700 border-l-4 border-l-orange-500" : "text-muted-foreground"}`}>
+                        <button key={m.id} onClick={() => setActiveModule(m.id as ModuleId)} className={`p-4 text-left border-b hover:bg-card flex items-center gap-3 transition-colors ${activeModule === m.id ? "bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-400 border-l-4 border-l-orange-500" : "text-muted-foreground"}`}>
                             <m.icon size={18} /> <span className="font-medium text-sm">{m.label}</span>
                         </button>
                     ))}

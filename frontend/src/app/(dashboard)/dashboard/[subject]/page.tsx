@@ -12,6 +12,8 @@ interface Experiment {
     title: string;
     href: string;
     description?: string;
+    pdfPath?: string;
+    resourcesUrl?: string;
 }
 
 // Full Name Mapping
@@ -60,6 +62,72 @@ const SUBJECT_EXPERIMENTS: Record<string, Experiment[]> = {
     ]
 };
 
+const getExperimentPdfAndResource = (subjectSlug: string, expId: string) => {
+    const slug = subjectSlug.toLowerCase();
+    const id = expId.toLowerCase();
+    
+    const pdfMap: Record<string, string> = {
+        // DBMS
+        "dbms-exp-1": "https://archive.nptel.ac.in/content/syllabus_pdf/106106093.pdf",
+        "dbms-exp-2": "https://www.tutorialspoint.com/dbms/er_model_basic_concepts.htm",
+        "dbms-exp-3": "https://www.cse.iitk.ac.in/users/atrem/courses/cs698f2017fall/lect2.pdf",
+        "dbms-exp-4": "https://www.tutorialspoint.com/dbms/database_normalization.htm",
+        "dbms-exp-5": "https://www.iitk.ac.in/LDP/HOWTO/pdf/Sybase-ASA-HOWTO.pdf",
+        // DLD
+        "dld-exp-1": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_logic_gates.htm",
+        "dld-exp-2": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_adders.htm",
+        "dld-exp-3": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_subtractors.htm",
+        "dld-exp-4": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_code_converters.htm",
+        "dld-exp-5": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_canonical_and_standard_forms.htm",
+        "dld-exp-6": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_decoders.htm",
+        "dld-exp-7": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_multiplexers.htm",
+        "dld-exp-8": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_magnitude_comparator.htm",
+        "dld-exp-9": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_flip_flops.htm",
+        "dld-exp-10": "https://www.tutorialspoint.com/digital_circuits/digital_circuits_counters.htm",
+        // CN
+        "cn-exp-1": "https://www.tutorialspoint.com/data_communication_computer_network/tcp_ip_model.htm",
+        "cn-exp-2": "https://www.tutorialspoint.com/carrier-sense-multiple-access-csma",
+        "cn-exp-3": "https://www.tutorialspoint.com/address-resolution-protocol-arp",
+        "cn-exp-4": "https://www.tutorialspoint.com/distance-vector-routing-algorithm",
+        "cn-exp-5": "https://www.tutorialspoint.com/sliding-window-protocol-selective-repeat-arq",
+        "cn-exp-6": "https://www.tutorialspoint.com/sliding-window-protocol-concepts-and-working",
+        "cn-exp-7": "https://www.tutorialspoint.com/fiber-distributed-data-interface-fddi"
+    };
+
+    const resourceMap: Record<string, string> = {
+        // DBMS
+        "dbms-exp-1": "https://www.geeksforgeeks.org/dbms/introduction-of-dbms/",
+        "dbms-exp-2": "https://www.geeksforgeeks.org/dbms/difference-between-entity-entity-set-and-entity-type/",
+        "dbms-exp-3": "https://www.geeksforgeeks.org/dbms/basic-operators-in-relational-algebra-2/",
+        "dbms-exp-4": "https://www.geeksforgeeks.org/dbms/types-of-normal-forms-in-dbms/",
+        "dbms-exp-5": "https://en.wikipedia.org/wiki/Embedded_SQL",
+        // DLD
+        "dld-exp-1": "https://www.geeksforgeeks.org/digital-logic/logic-gates-in-digital-logic/",
+        "dld-exp-2": "https://www.geeksforgeeks.org/digital-logic/half-adder-and-full-adder-circuit/",
+        "dld-exp-3": "https://www.geeksforgeeks.org/digital-logic/half-subtractor-and-full-subtractor-circuits/",
+        "dld-exp-4": "https://www.geeksforgeeks.org/digital-logic/gray-to-binary-and-binary-to-gray-conversion/",
+        "dld-exp-5": "https://www.geeksforgeeks.org/digital-logic/sum-of-products-sop-form-in-digital-logic/",
+        "dld-exp-6": "https://www.geeksforgeeks.org/digital-logic/encoder-in-digital-logic/",
+        "dld-exp-7": "https://www.geeksforgeeks.org/digital-logic/multiplexers-in-digital-logic/",
+        "dld-exp-8": "https://www.geeksforgeeks.org/digital-logic/magnitude-comparator-in-digital-logic/",
+        "dld-exp-9": "https://www.geeksforgeeks.org/digital-logic/flip-flop-types/",
+        "dld-exp-10": "https://www.geeksforgeeks.org/digital-logic/counters-in-digital-logic/",
+        // CN
+        "cn-exp-1": "https://www.geeksforgeeks.org/computer-network-tutorials/tcp-ip-model/",
+        "cn-exp-2": "https://www.geeksforgeeks.org/computer-network-tutorials/collision-detection-in-csmacd/",
+        "cn-exp-3": "https://www.geeksforgeeks.org/computer-network-tutorials/how-address-resolution-protocol-arp-works/",
+        "cn-exp-4": "https://www.geeksforgeeks.org/computer-network-tutorials/distance-vector-routing-algorithm-routing-protocol/",
+        "cn-exp-5": "https://www.geeksforgeeks.org/computer-network-tutorials/sliding-window-protocol-set-3-selective-repeat/",
+        "cn-exp-6": "https://www.geeksforgeeks.org/computer-network-tutorials/sliding-window-protocol-set-1/",
+        "cn-exp-7": "https://www.geeksforgeeks.org/computer-network-tutorials/token-ring-frame-format/"
+    };
+
+    const pdfPath = pdfMap[id] || `/docs/manuals/${slug}/${id}.pdf`;
+    const resourcesUrl = resourceMap[id] || `https://www.geeksforgeeks.org/computer-science-tutorials/`;
+
+    return { pdfPath, resourcesUrl };
+};
+
 export default function SubjectPage() {
     const params = useParams();
     const subjectSlug = Array.isArray(params.subject) ? params.subject[0] : params.subject;
@@ -89,12 +157,17 @@ export default function SubjectPage() {
                 if (expRes.status === "fulfilled" && expRes.value.ok) {
                     const expData = await expRes.value.json();
                     if (expData.length > 0) {
-                        setExperiments(expData.map((e: any) => ({
-                            id: e._id || e.id,
-                            title: e.title,
-                            href: `/dashboard/${subjectSlug}/${e.slug || e.id || e._id}`,
-                            description: e.description
-                        })));
+                        setExperiments(expData.map((e: any) => {
+                            const { pdfPath, resourcesUrl } = getExperimentPdfAndResource(subjectSlug, e.slug || e.id || e._id);
+                            return {
+                                id: e._id || e.id,
+                                title: e.title,
+                                href: `/dashboard/${subjectSlug}/${e.slug || e.id || e._id}`,
+                                description: e.description,
+                                pdfPath,
+                                resourcesUrl
+                            };
+                        }));
                         return;
                     }
                 }
@@ -102,7 +175,15 @@ export default function SubjectPage() {
             } catch {
                 const slug = subjectSlug?.toLowerCase() || "";
                 const fallback = SUBJECT_EXPERIMENTS[slug] || SUBJECT_EXPERIMENTS["cn"];
-                setExperiments(fallback);
+                const enrichedFallback = fallback.map(e => {
+                    const { pdfPath, resourcesUrl } = getExperimentPdfAndResource(slug, e.id as string);
+                    return {
+                        ...e,
+                        pdfPath,
+                        resourcesUrl
+                    };
+                });
+                setExperiments(enrichedFallback);
             } finally {
                 setLoading(false);
             }
@@ -193,10 +274,20 @@ export default function SubjectPage() {
                                     </p>
                                     
                                     <div className="flex items-center gap-6 pl-5">
-                                        <a href="#" className="flex items-center gap-1.5 text-[#059669] hover:underline text-sm font-semibold">
+                                        <a 
+                                            href={exp.pdfPath || "#"} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="flex items-center gap-1.5 text-[#059669] hover:underline text-sm font-semibold"
+                                        >
                                             <i className="bx bxs-file-pdf text-lg"></i> View PDF
                                         </a>
-                                        <a href="#" className="flex items-center gap-1.5 text-[#059669] hover:underline text-sm font-semibold">
+                                        <a 
+                                            href={exp.resourcesUrl || "#"} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="flex items-center gap-1.5 text-[#059669] hover:underline text-sm font-semibold"
+                                        >
                                             <i className="bx bx-link-external text-lg"></i> Open Resources
                                         </a>
                                     </div>

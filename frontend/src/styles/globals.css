@@ -13,13 +13,13 @@
     --background: 0 0% 100%; /* White */
     --foreground: 222.2 84% 4.9%;
 
-    /* Emerald Green / Teal from lander.png */
-    --primary: 160 84% 39%; /* #10b981 approx */
-    --primary-foreground: 210 40% 98%;
+    /* High-contrast Green / Emerald (WCAG AA/AAA compliant) */
+    --primary: 162 93% 20%; /* #065f46 approx */
+    --primary-foreground: 0 0% 100%;
 
-    /* Dark Teal Backgrounds */
-    --accent: 193 89% 7%; /* #021d24 approx */
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* High-contrast dark green accent */
+    --accent: 162 93% 15%; /* #044e39 approx */
+    --accent-foreground: 0 0% 100%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -27,18 +27,18 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 162 93% 97%; /* soft green bg */
+    --secondary-foreground: 162 93% 20%;
 
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted-foreground: 215.4 16.3% 36%; /* High-contrast Gray-600 */
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 160 84% 39%;
+    --border: 214.3 31.8% 85%; /* Crisp visible boundaries */
+    --input: 214.3 31.8% 85%;
+    --ring: 162 93% 20%;
 
     /* Sharp corners */
     --radius: 0px; 
@@ -72,32 +72,32 @@
 
   .dark {
     --background:         0 0% 9%;
-    --foreground:         216 33% 97%;
+    --foreground:         210 40% 98%;
 
     --card:               0 0% 12%;
-    --card-foreground:    216 33% 97%;
+    --card-foreground:    210 40% 98%;
 
     --popover:            0 0% 12%;
-    --popover-foreground: 216 33% 97%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary:            160 84% 39%;    /* #10b981 */
-    --primary-foreground: 0 0% 100%;
+    --primary:            158 94% 48%;    /* #0ee687 / High-contrast vibrant green */
+    --primary-foreground: 0 0% 9%;
 
-    --secondary:          0 0% 15%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary:          0 0% 16%;
+    --secondary-foreground: 210 40% 98%;
 
-    --accent:             157 83% 46%;    /* #14D98F */
-    --accent-foreground:  0 0% 100%;
+    --accent:             158 94% 48%;
+    --accent-foreground:  0 0% 9%;
 
-    --muted:              0 0% 15%;
-    --muted-foreground:   220 9% 65%;
+    --muted:              0 0% 16%;
+    --muted-foreground:   220 9% 70%;     /* Crisp gray-300 helper text */
 
     --destructive:        0 63% 35%;
     --destructive-foreground: 0 0% 100%;
 
-    --border:             0 0% 20%;
-    --input:              0 0% 20%;
-    --ring:               160 84% 39%;
+    --border:             0 0% 26%;       /* Crisper panel boundaries */
+    --input:              0 0% 26%;
+    --ring:               158 94% 48%;
   }
 }
 

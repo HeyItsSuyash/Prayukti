@@ -3,9 +3,27 @@
   "private": true,
   "workspaces": [
     "frontend",
-    "frontend_teacher"
+    "frontend_teacher",
+    "backend"
   ],
+  "scripts": {
+    "dev:frontend": "npm run dev -w frontend-student",
+    "dev:teacher": "npm run dev -w frontend-teacher",
+    "dev:backend": "npm run dev -w backend",
+    "dev": "concurrently -n \"student,teacher,backend\" -c \"blue,green,magenta\" \"npm run dev:frontend\" \"npm run dev:teacher\" \"npm run dev:backend\"",
+    "build:frontend": "npm run build -w frontend-student",
+    "build:teacher": "npm run build -w frontend-teacher",
+    "build:backend": "npm run build -w backend",
+    "build": "npm run build:frontend && npm run build:teacher && npm run build:backend",
+    "start:frontend": "npm run start -w frontend-student",
+    "start:teacher": "npm run start -w frontend-teacher",
+    "start:backend": "npm run start -w backend",
+    "start": "concurrently -n \"student,teacher,backend\" -c \"blue,green,magenta\" \"npm run start:frontend\" \"npm run start:teacher\" \"npm run start:backend\""
+  },
   "dependencies": {
     "pg": "^8.21.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }

@@ -1,4 +1,12 @@
 {
+  "name": "backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "cargo watch -x run || cargo run",
+    "build": "cargo build --release",
+    "start": "cargo run --release"
+  },
   "dependencies": {
     "pg": "^8.23.0"
   }

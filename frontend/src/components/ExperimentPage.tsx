@@ -30,6 +30,263 @@ const getSubjectName = (id: string) => {
     return "Virtual Lab Assessment";
 };
 
+const getExperimentAcademicDetails = (id: string) => {
+    const key = id.toLowerCase();
+    
+    const store: Record<string, { aim: string; theoryParagraphs: string[]; referencesList: string[] }> = {
+        // DBMS
+        "dbms-exp-1": {
+            aim: "To study and understand the fundamental concepts of Database Management Systems, transaction properties (ACID), and basic query execution.",
+            theoryParagraphs: [
+                "A Database Management System (DBMS) is software designed to store, retrieve, and manage data efficiently, offering data independence and concurrent multi-user execution.",
+                "Database transactions are guaranteed via ACID properties: Atomicity (all-or-nothing execution), Consistency (maintaining database constraints), Isolation (independent concurrent execution), and Durability (persistence of committed changes).",
+                "SQL queries are written in DDL (Data Definition Language like CREATE, ALTER) and DML (Data Manipulation Language like SELECT, INSERT, UPDATE, DELETE) to define and manipulate tables."
+            ],
+            referencesList: [
+                "Database System Concepts by Abraham Silberschatz, Henry F. Korth, and S. Sudarshan (6th Edition).",
+                "Fundamentals of Database Systems by Ramez Elmasri and Shamkant B. Navathe (7th Edition)."
+            ]
+        },
+        "dbms-exp-2": {
+            aim: "To design an Entity-Relationship (E-R) diagram for a real-world scenario and map the schema into relational database tables.",
+            theoryParagraphs: [
+                "The Entity-Relationship (E-R) model is a conceptual data model representing real-world entities (rectangles), their properties or attributes (ovals), and relationships (diamonds).",
+                "During database design, the conceptual E-R model is mapped to a relational schema: strong entity sets become tables, and relationships are mapped using foreign keys or distinct junction tables for many-to-many relationships."
+            ],
+            referencesList: [
+                "Database System Concepts by Abraham Silberschatz, Henry F. Korth, and S. Sudarshan.",
+                "Database Management Systems by Raghu Ramakrishnan and Johannes Gehrke."
+            ]
+        },
+        "dbms-exp-3": {
+            aim: "To study, practice, and execute Relational Algebra operations (Selection, Projection, and Joins) and understand Functional Dependencies.",
+            theoryParagraphs: [
+                "Relational Algebra is a procedural query language that acts on relations to produce new relations. Basic operators include Selection (σ, selects rows), Projection (π, selects columns), and Cartesian Product (x).",
+                "Joins (⋈) combine related tuples across tables. Outer Joins (Left, Right, Full) preserve unmatched tuples by padding missing fields with NULL values."
+            ],
+            referencesList: [
+                "Database System Concepts by Abraham Silberschatz, Henry F. Korth, and S. Sudarshan.",
+                "Fundamentals of Database Systems by Ramez Elmasri and Shamkant B. Navathe."
+            ]
+        },
+        "dbms-exp-4": {
+            aim: "To study and apply normalization rules up to BCNF (Boyce-Codd Normal Form) to minimize database redundancy and anomalies.",
+            theoryParagraphs: [
+                "Normalization organizes schemas to eliminate anomalies (insert, delete, update) and minimize redundancy using functional dependencies.",
+                "Key normal forms include: 1NF (atomic attributes), 2NF (no partial dependencies on candidate keys), 3NF (no transitive dependencies), and BCNF (every determinant is a candidate key)."
+            ],
+            referencesList: [
+                "Database System Concepts by Abraham Silberschatz, Henry F. Korth, and S. Sudarshan.",
+                "Fundamentals of Database Systems by Ramez Elmasri and Shamkant B. Navathe."
+            ]
+        },
+        "dbms-exp-5": {
+            aim: "To study host language integration mechanisms and execute transactional logic using embedded SQL and cursors.",
+            theoryParagraphs: [
+                "Embedded SQL allows standard programming languages (like C, Java) to issue direct database commands. Data is shared using shared host variables.",
+                "Cursors allow host languages to process database result sets row-by-row, while transactional controls (COMMIT, ROLLBACK) manage database transaction state."
+            ],
+            referencesList: [
+                "Oracle Database SQL Language Reference.",
+                "Database System Concepts by Abraham Silberschatz, Henry F. Korth, and S. Sudarshan."
+            ]
+        },
+        // DLD
+        "dld-exp-1": {
+            aim: "To study, construct, and verify the truth tables of basic digital logic gates (AND, OR, NOT, NAND, NOR, XOR, XNOR).",
+            theoryParagraphs: [
+                "Logic gates are the fundamental building blocks of digital logic. AND, OR, and NOT are basic gates. NAND and NOR are universal gates since any logic expression can be built using only NAND/NOR gates.",
+                "Derived gates include XOR (exclusive-OR, outputs high if inputs differ) and XNOR (exclusive-NOR, outputs high if inputs are identical)."
+            ],
+            referencesList: [
+                "Digital Design by M. Morris Mano and Michael D. Ciletti (6th Edition).",
+                "Digital Fundamentals by Thomas L. Floyd (11th Edition)."
+            ]
+        },
+        "dld-exp-2": {
+            aim: "To design and construct Half Adder and Full Adder combinational circuits and verify their Sum and Carry logic.",
+            theoryParagraphs: [
+                "Adders perform arithmetic addition of binary numbers. A Half Adder adds two 1-bit inputs: Sum = A ⊕ B, Carry = A . B.",
+                "A Full Adder adds three 1-bit inputs (including a Carry-in): Sum = A ⊕ B ⊕ Cin, Carry-out = A.B + Cin(A ⊕ B)."
+            ],
+            referencesList: [
+                "Digital Design by M. Morris Mano and Michael D. Ciletti.",
+                "Digital Systems: Principles and Applications by Ronald J. Tocci."
+            ]
+        },
+        "dld-exp-3": {
+            aim: "To design and construct Half Subtractor and Full Subtractor combinational circuits and verify Difference and Borrow logic.",
+            theoryParagraphs: [
+                "Subtractors execute binary subtraction. A Half Subtractor subtracts input B from A: Difference = A ⊕ B, Borrow = A' . B.",
+                "A Full Subtractor subtracts B and Borrow-in Bin from A: Difference = A ⊕ B ⊕ Bin, Borrow-out = A'B + Bin(A ⊕ B)'."
+            ],
+            referencesList: [
+                "Digital Design by M. Morris Mano and Michael D. Ciletti.",
+                "Digital Fundamentals by Thomas L. Floyd."
+            ]
+        },
+        "dld-exp-4": {
+            aim: "To design and implement Binary to Gray and Gray to Binary code converter combinational circuits.",
+            theoryParagraphs: [
+                "Code converters translate between representation formats. Gray code is a unit-distance code where only one bit changes between successive values.",
+                "Binary-to-Gray uses XOR gates: G[i] = B[i] ⊕ B[i+1]. Gray-to-Binary reconstructs values sequentially: B[i] = B[i+1] ⊕ G[i]."
+            ],
+            referencesList: [
+                "Digital Design by M. Morris Mano and Michael D. Ciletti.",
+                "Digital Systems: Principles and Applications by Ronald J. Tocci."
+            ]
+        },
+        "dld-exp-5": {
+            aim: "To simplify and implement logic expressions using Sum of Products (SOP) format and Karnaugh maps.",
+            theoryParagraphs: [
+                "SOP represents boolean functions as sum (OR) of product (AND) terms. Karnaugh maps (K-Maps) group adjacent minterms to simplify expressions, reducing logic gate counts and propagation delays."
+            ],
+            referencesList: [
+                "Digital Design by M. Morris Mano and Michael D. Ciletti.",
+                "Digital Fundamentals by Thomas L. Floyd."
+            ]
+        },
+        "dld-exp-6": {
+            aim: "To design and verify the truth table of Decoder (2-to-4) and Encoder (4-to-2) combinational circuits.",
+            theoryParagraphs: [
+                "Decoders convert N-bit inputs into a maximum of 2^N unique active output lines (representing minterms).",
+                "Encoders perform the inverse operation, converting an active input line back into an N-bit binary code representation."
+            ],
+            referencesList: [
+                "Digital Design by M. Morris Mano and Michael D. Ciletti.",
+                "Digital Systems: Principles and Applications by Ronald J. Tocci."
+            ]
+        },
+        "dld-exp-7": {
+            aim: "To design and verify Multiplexer (4-to-1) and Demultiplexer (1-to-4) combinational logic circuits.",
+            theoryParagraphs: [
+                "A Multiplexer (MUX) selects one of 2^N data inputs and forwards it to a single output line based on N select lines.",
+                "A Demultiplexer (DEMUX) takes a single data input and routes it to one of 2^N outputs based on select line inputs."
+            ],
+            referencesList: [
+                "Digital Design by M. Morris Mano and Michael D. Ciletti.",
+                "Digital Fundamentals by Thomas L. Floyd."
+            ]
+        },
+        "dld-exp-8": {
+            aim: "To design and construct Magnitude Comparator circuits to compare the relative values of binary numbers.",
+            theoryParagraphs: [
+                "Magnitude Comparators determine whether number A is greater than, less than, or equal to number B.",
+                "A 1-bit comparator uses simple gates: (A > B) = A.B', (A < B) = A'.B, and (A = B) = A ⊙ B (XNOR)."
+            ],
+            referencesList: [
+                "Digital Design by M. Morris Mano and Michael D. Ciletti.",
+                "Digital Systems: Principles and Applications by Ronald J. Tocci."
+            ]
+        },
+        "dld-exp-9": {
+            aim: "To study and verify truth tables and state transitions of SR, JK, D, and T flip-flops.",
+            theoryParagraphs: [
+                "Flip-flops are bistable sequential elements that store 1-bit of state. SR flip-flops have an invalid state when S=R=1.",
+                "JK flip-flops resolve the SR conflict by toggling state when J=K=1. D flip-flops capture input state, and T flip-flops toggle state."
+            ],
+            referencesList: [
+                "Digital Design by M. Morris Mano and Michael D. Ciletti.",
+                "Digital Fundamentals by Thomas L. Floyd."
+            ]
+        },
+        "dld-exp-10": {
+            aim: "To design and construct Synchronous and Asynchronous (Ripple) digital counters.",
+            theoryParagraphs: [
+                "Counters cycle through states on clock triggers. Asynchronous counters ripple the clock sequentially through flip-flops.",
+                "Synchronous counters apply the clock to all flip-flops concurrently, eliminating ripple delays and skew errors."
+            ],
+            referencesList: [
+                "Digital Design by M. Morris Mano and Michael D. Ciletti.",
+                "Digital Fundamentals by Thomas L. Floyd."
+            ]
+        },
+        // CN
+        "cn-exp-1": {
+            aim: "To study, analyze, and compare the layers and abstractions of OSI and TCP/IP reference models.",
+            theoryParagraphs: [
+                "OSI is a theoretical 7-layer model (Physical, Data Link, Network, Transport, Session, Presentation, Application) detailing separation of network protocols.",
+                "TCP/IP is a practical 4-layer model (Link, Internet, Transport, Application) that underpins the internet protocol suite."
+            ],
+            referencesList: [
+                "Computer Networks by Andrew S. Tanenbaum and David J. Wetherall (5th Edition).",
+                "Computer Networking: A Top-Down Approach by James F. Kurose and Keith W. Ross (7th Edition)."
+            ]
+        },
+        "cn-exp-2": {
+            aim: "To study and simulate Carrier Sense Multiple Access with Collision Detection (CSMA/CD) protocol operations.",
+            theoryParagraphs: [
+                "CSMA/CD is a MAC layer protocol. Stations listen to the channel before transmitting (Carrier Sense) and monitor for collisions during transmission.",
+                "Upon detecting a collision, stations jam the channel, stop transmitting, and wait a random backoff time using Binary Exponential Backoff."
+            ],
+            referencesList: [
+                "Computer Networks by Andrew S. Tanenbaum.",
+                "Data and Computer Communications by William Stallings (10th Edition)."
+            ]
+        },
+        "cn-exp-3": {
+            aim: "To study and simulate Address Resolution Protocol (ARP) IP-to-MAC resolution broadcasts and unicasts.",
+            theoryParagraphs: [
+                "ARP maps 32-bit IPv4 addresses to 48-bit physical MAC addresses. A host broadcasts an ARP Request, and the target unicasts an ARP Reply."
+            ],
+            referencesList: [
+                "Computer Networking: A Top-Down Approach by James F. Kurose and Keith W. Ross.",
+                "RFC 826 - An Ethernet Address Resolution Protocol."
+            ]
+        },
+        "cn-exp-4": {
+            aim: "To study and simulate Distance Vector Routing (DVR) table convergence using the Bellman-Ford algorithm.",
+            theoryParagraphs: [
+                "DVR calculates shortest path vectors. Routers exchange lists of estimated distances periodically with immediate neighbors.",
+                "Common issues like Count-to-Infinity are resolved using Split Horizon and Poison Reverse routing updates."
+            ],
+            referencesList: [
+                "Computer Networks by Andrew S. Tanenbaum.",
+                "Routing TCP/IP, Volume 1 by Jeff Doyle."
+            ]
+        },
+        "cn-exp-5": {
+            aim: "To simulate Selective Repeat ARQ flow and error control window operations.",
+            theoryParagraphs: [
+                "Selective Repeat ARQ retransmits only corrupted or lost frames (using selective ACKs or NAKs).",
+                "The receiver buffers out-of-order frames, sorting and delivering them sequentially to the network layer."
+            ],
+            referencesList: [
+                "Computer Networking: A Top-Down Approach by James F. Kurose and Keith W. Ross.",
+                "Data and Computer Communications by William Stallings."
+            ]
+        },
+        "cn-exp-6": {
+            aim: "To study flow control sliding window protocols (Go-Back-N and Selective Repeat) and window size constraints.",
+            theoryParagraphs: [
+                "Sliding window protocols allow sending multiple unacknowledged packets to maximize channel capacity utilization.",
+                "The window size limits the number of active packets in transit. Go-Back-N retransmits all frames from the point of error, whereas Selective Repeat only retries failed packets."
+            ],
+            referencesList: [
+                "Computer Networks by Andrew S. Tanenbaum.",
+                "Computer Networking: A Top-Down Approach by James F. Kurose and Keith W. Ross."
+            ]
+        },
+        "cn-exp-7": {
+            aim: "To study and simulate token-passing media access control protocols in Ring topology networks.",
+            theoryParagraphs: [
+                "Token Ring (IEEE 802.5) and FDDI pass a special token frame sequentially around nodes in a ring topology.",
+                "A node can transmit data frames only when it captures the token, ensuring zero-collision channel access."
+            ],
+            referencesList: [
+                "Computer Networks by Andrew S. Tanenbaum.",
+                "Data and Computer Communications by William Stallings."
+            ]
+        }
+    };
+
+    return store[key] || {
+        aim: "To study and analyze the core concepts of this experiment.",
+        theoryParagraphs: ["Detailed theory paragraphs will be loaded shortly."],
+        referencesList: ["Academic references and manuals will be updated soon."]
+    };
+};
+
 const SECTIONS = [
     { id: "aim", label: "Aim" },
     { id: "theory", label: "Theory" },
@@ -111,15 +368,17 @@ function ExperimentPageContent({ id }: { id: string }) {
                         title: fallbackTitle,
                         description: "Interactive Simulation Environment",
                         compilerEnabled: false,
-                        theory: "Detailed theory will be populated here.",
-                        aim: "To study and analyze the core concepts of this experiment.",
+                        ...getExperimentAcademicDetails(id),
                         algorithm: "1. Follow on-screen instructions.\n2. Observe output."
                     });
                     setError(null);
                 };
 
                 if (data && !data.error) {
-                    setExperiment(data);
+                    setExperiment({
+                        ...data,
+                        ...getExperimentAcademicDetails(id)
+                    });
                     setCode(data.codeTemplate || data.defaultCode || "");
                     setCurrentLanguage(data.language || "c");
                 } else {
@@ -151,8 +410,7 @@ function ExperimentPageContent({ id }: { id: string }) {
                     title: fallbackTitle,
                     description: "Interactive Simulation Environment",
                     compilerEnabled: false,
-                    theory: "Detailed theory will be populated here.",
-                    aim: "To study and analyze the core concepts of this experiment.",
+                    ...getExperimentAcademicDetails(id),
                     algorithm: "1. Follow on-screen instructions.\n2. Observe output."
                 });
                 setError(null);
@@ -329,8 +587,14 @@ function ExperimentPageContent({ id }: { id: string }) {
                 return (
                     <div className="p-8 max-w-4xl">
                         <h2 className="text-2xl font-bold mb-6 underline decoration-primary/50 underline-offset-8">Theory</h2>
-                        <div className="prose dark:prose-invert max-w-none text-muted-foreground whitespace-pre-wrap">
-                            This is a dummy sample theory. Newton's law of universal gravitation states that every particle attracts every other particle in the universe with a force proportional to the product of their masses and inversely proportional to the square of the distance between their centers. The formula is F = G(m1m2)/r². This foundational concept revolutionized our understanding of celestial mechanics and the fundamental forces of nature.
+                        <div className="prose dark:prose-invert max-w-none text-muted-foreground space-y-4">
+                            {experiment.theoryParagraphs && experiment.theoryParagraphs.length > 0 ? (
+                                experiment.theoryParagraphs.map((p: string, idx: number) => (
+                                    <p key={idx} className="leading-relaxed text-sm whitespace-pre-wrap">{p}</p>
+                                ))
+                            ) : (
+                                <p className="leading-relaxed text-sm">{experiment.theory || "Theory content is currently being loaded."}</p>
+                            )}
                         </div>
                     </div>
                 );
@@ -387,6 +651,21 @@ function ExperimentPageContent({ id }: { id: string }) {
                 return (
                     <div className="flex-1 flex flex-col h-full">
                         <LabTest labId={simLabId} labTitle={experiment.title} />
+                    </div>
+                );
+            case "references":
+                return (
+                    <div className="p-8 max-w-4xl">
+                        <h2 className="text-2xl font-bold mb-6 underline decoration-primary/50 underline-offset-8">References</h2>
+                        <ul className="list-disc pl-5 space-y-3 text-muted-foreground text-sm font-medium">
+                            {experiment.referencesList && experiment.referencesList.length > 0 ? (
+                                experiment.referencesList.map((ref: string, idx: number) => (
+                                    <li key={idx}>{ref}</li>
+                                ))
+                            ) : (
+                                <li>Textbook and reference manuals will be populated here soon.</li>
+                            )}
+                        </ul>
                     </div>
                 );
             default:
