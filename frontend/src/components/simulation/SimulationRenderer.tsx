@@ -92,13 +92,53 @@ const COMPONENT_MAP: Record<string, React.ComponentType<any>> = {
     "error-detection-exp-3": HammingCode,
     "error-detection-exp-4": ParityCheck,
 
-    // C Programming & DSA (Fallback to CodeCompiler for coding experiments)
+    // C Programming (expanded to 11 experiments)
     "c-exp-1": CodeCompiler,
     "c-exp-2": CodeCompiler,
     "c-exp-3": CodeCompiler,
+    "c-exp-4": CodeCompiler,
+    "c-exp-5": CodeCompiler,
+    "c-exp-6": CodeCompiler,
+    "c-exp-7": CodeCompiler,
+    "c-exp-8": CodeCompiler,
+    "c-exp-9": CodeCompiler,
+    "c-exp-10": CodeCompiler,
+    "c-exp-11": CodeCompiler,
+
+    // Java Programming
+    "java-exp-1": CodeCompiler,
+    "java-exp-2": CodeCompiler,
+    "java-exp-3": CodeCompiler,
+    "java-exp-4": CodeCompiler,
+    "java-exp-5": CodeCompiler,
+    "java-exp-6": CodeCompiler,
+
+    // Python Programming
+    "python-exp-1": CodeCompiler,
+    "python-exp-2": CodeCompiler,
+    "python-exp-3": CodeCompiler,
+    "python-exp-4": CodeCompiler,
+    "python-exp-5": CodeCompiler,
+    "python-exp-6": CodeCompiler,
+    "python-exp-7": CodeCompiler,
+    "python-exp-8": CodeCompiler,
+    "python-exp-9": CodeCompiler,
+    "python-exp-10": CodeCompiler,
+    "python-exp-11": CodeCompiler,
+    "python-exp-12": CodeCompiler,
+    "python-exp-13": CodeCompiler,
+
+    // DSA (Data Structures expanded to 10 experiments)
     "dsa-exp-1": CodeCompiler,
     "dsa-exp-2": CodeCompiler,
     "dsa-exp-3": CodeCompiler,
+    "dsa-exp-4": CodeCompiler,
+    "dsa-exp-5": CodeCompiler,
+    "dsa-exp-6": CodeCompiler,
+    "dsa-exp-7": CodeCompiler,
+    "dsa-exp-8": CodeCompiler,
+    "dsa-exp-9": CodeCompiler,
+    "dsa-exp-10": CodeCompiler,
 
     // OS Experiments
     "os-exp-1": OSSimulator,
@@ -193,7 +233,7 @@ export default function SimulationRenderer({ labId, initialCode, language }: {
         else if (lowerId.startsWith('bee')) Component = BEESimulator;
         else if (lowerId.startsWith('coa')) Component = CircuitCanvas;
         else if (lowerId.startsWith('daa')) Component = DAASimulator;
-        else if (lowerId.startsWith('c-') || lowerId.startsWith('dsa-')) Component = CodeCompiler;
+        else if (lowerId.startsWith('c-') || lowerId.startsWith('dsa-') || lowerId.startsWith('java-') || lowerId.startsWith('python-')) Component = CodeCompiler;
         else Component = COMPONENT_MAP['dld-exp-1']; // Default to DLD circuit builder
     }
 

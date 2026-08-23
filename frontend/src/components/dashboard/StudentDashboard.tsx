@@ -18,8 +18,18 @@ interface Subject {
     slug: string;
 }
 
+const DEFAULT_SUBJECTS: Subject[] = [
+    { _id: "1", slug: "cn", title: "Computer Networks", description: "Simulate protocols, routing, and network behavior.", icon: "cn" },
+    { _id: "2", slug: "dld", title: "Digital Logic and Design", description: "Build and test digital circuits with interactive tools.", icon: "dld" },
+    { _id: "3", slug: "dbms", title: "Database Management Systems", description: "Explore database concepts with practical simulations.", icon: "dbms" },
+    { _id: "11", slug: "c", title: "C Programming Lab", description: "Master C fundamentals — I/O, loops, arrays, pointers, and more.", icon: "c" },
+    { _id: "12", slug: "java", title: "Java Programming Lab", description: "OOP, exception handling, threads, and Swing GUI concepts.", icon: "java" },
+    { _id: "13", slug: "python", title: "Python Programming Lab", description: "Variables, loops, OOP, modules, file I/O, and functional programming.", icon: "python" },
+    { _id: "14", slug: "dsa", title: "Data Structures Lab", description: "Linked lists, stacks, queues, trees, graphs, and Dijkstra's algorithm.", icon: "dsa" },
+];
+
 export function StudentDashboard() {
-    const [subjects, setSubjects] = useState<Subject[]>([]);
+    const [subjects, setSubjects] = useState<Subject[]>(DEFAULT_SUBJECTS);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [user, setUser] = useState<any>(null);
@@ -40,13 +50,21 @@ export function StudentDashboard() {
 
         const fetchSubjects = async () => {
             try {
-                const res = await fetch(`${API_URL}/api/subjects`);
-                if (!res.ok) throw new Error("Failed to synchronize simulation modules");
-                const data = await res.json();
-                setSubjects(data);
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 2000);
+                const res = await fetch(`${API_URL}/api/subjects`, { signal: controller.signal });
+                clearTimeout(timeoutId);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (Array.isArray(data) && data.length > 0) {
+                        setSubjects(data);
+                        return;
+                    }
+                }
+                setSubjects(DEFAULT_SUBJECTS);
             } catch (err: any) {
-                console.error(err);
-                setError(err.message);
+                console.warn("[VLAB] Backend unreachable for subjects, using built-in defaults:", err);
+                setSubjects(DEFAULT_SUBJECTS);
             } finally {
                 setLoading(false);
             }
@@ -78,10 +96,14 @@ export function StudentDashboard() {
 
     const getSubjectImage = (icon: string, title: string) => {
         const lowerTitle = title.toLowerCase();
-        if (icon === "cn" || lowerTitle.includes("network")) return "/cn-module.jpg.jpg";
-        if (icon === "dbms" || lowerTitle.includes("database")) return "/dbms-module.jpg.jpg";
-        if (icon === "dld" || lowerTitle.includes("digital logic")) return "/dld-module.jpg.jpg";
-        if (icon === "oops" || lowerTitle.includes("object oriented")) return "/oops-module.jpg.jpg";
+        const i = icon?.toLowerCase();
+        if (i === "cn" || lowerTitle.includes("network")) return "/cn-module.jpg.jpg";
+        if (i === "dbms" || lowerTitle.includes("database")) return "/dbms-module.jpg.jpg";
+        if (i === "dld" || lowerTitle.includes("digital logic")) return "/dld-module.jpg.jpg";
+        if (i === "oops" || i === "java" || lowerTitle.includes("java") || lowerTitle.includes("object oriented")) return "/oops-module.jpg.jpg";
+        if (i === "c" || lowerTitle.includes("c programming")) return "/cn-module.jpg.jpg";
+        if (i === "python" || lowerTitle.includes("python")) return "/dbms-module.jpg.jpg";
+        if (i === "dsa" || lowerTitle.includes("data structure")) return "/dld-module.jpg.jpg";
         return "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400&q=80";
     };
 
@@ -91,7 +113,11 @@ export function StudentDashboard() {
         if (
             i === "cn" || lowerTitle.includes("network") ||
             i === "dbms" || lowerTitle.includes("database") ||
-            i === "dld" || lowerTitle.includes("digital logic")
+            i === "dld" || lowerTitle.includes("digital logic") ||
+            i === "c" || lowerTitle.includes("c programming") ||
+            i === "java" || lowerTitle.includes("java") ||
+            i === "python" || lowerTitle.includes("python") ||
+            i === "dsa" || lowerTitle.includes("data structure")
         ) {
             return false;
         }

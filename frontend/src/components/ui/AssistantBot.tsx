@@ -192,6 +192,7 @@ export function AssistantBot() {
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setIsOpen(true)}
                         className="w-[117px] h-[117px] flex items-center justify-center  duration-300 relative focus:outline-none focus-visible:outline-none outline-none filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] hover:drop-shadow-[0_15px_25px_rgba(0,0,0,0.2)]"
+                        suppressHydrationWarning
                     >
                         <img
                             src="/prayukti 2.0/illustrations/ai_chatbot.png"

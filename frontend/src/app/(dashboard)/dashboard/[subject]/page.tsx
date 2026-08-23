@@ -7,6 +7,11 @@ import { PremiumNavbar } from "@/components/layout/PremiumNavbar";
 import { API_URL } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 
+import { cExperiments } from "@/data/cLab";
+import { javaExperiments } from "@/data/javaLab";
+import { pythonExperiments } from "@/data/pythonLab";
+import { dsaExperiments } from "@/data/dsaLab";
+
 interface Experiment {
     id: number | string;
     title: string;
@@ -25,11 +30,39 @@ const SUBJECT_FULL_NAMES: Record<string, string> = {
     cd: "Compiler Design",
     "error-detection": "Error Detection",
     bee: "Basic Electrical Engg.",
-    daa: "Data Structures & Algo"
+    daa: "Data Structures & Algo",
+    c: "C Programming Lab",
+    java: "Java Programming Lab",
+    python: "Python Programming Lab",
+    dsa: "Data Structures Lab"
 };
 
 // Fallback Data
 const SUBJECT_EXPERIMENTS: Record<string, Experiment[]> = {
+    c: cExperiments.map(exp => ({
+        id: `c-exp-${exp.id}`,
+        title: exp.title,
+        href: `/dashboard/c/c-exp-${exp.id}`,
+        description: exp.description
+    })),
+    java: javaExperiments.map(exp => ({
+        id: `java-exp-${exp.id}`,
+        title: exp.title,
+        href: `/dashboard/java/java-exp-${exp.id}`,
+        description: exp.description
+    })),
+    python: pythonExperiments.map(exp => ({
+        id: `python-exp-${exp.id}`,
+        title: exp.title,
+        href: `/dashboard/python/python-exp-${exp.id}`,
+        description: exp.description
+    })),
+    dsa: dsaExperiments.map(exp => ({
+        id: `dsa-exp-${exp.id}`,
+        title: exp.title,
+        href: `/dashboard/dsa/dsa-exp-${exp.id}`,
+        description: exp.description
+    })),
     cn: [
         { id: "cn-exp-1", title: "OSI vs TCP/IP Reference Models", href: "/dashboard/cn/cn-exp-1", description: "Study and compare the OSI and TCP/IP reference models through interactive simulation." },
         { id: "cn-exp-2", title: "CSMA/CD Protocol Simulation", href: "/dashboard/cn/cn-exp-2", description: "Simulate CSMA/CD protocol and understand collision detection in Ethernet networks." },

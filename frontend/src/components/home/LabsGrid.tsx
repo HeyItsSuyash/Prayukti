@@ -8,6 +8,10 @@ const allLabs = [
     { _id: "1", slug: "cn", title: "Computer Networks", description: "Simulate protocols, routing, and network behavior.", icon: "bx-globe" },
     { _id: "2", slug: "dld", title: "Digital Logic and Design", description: "Build and test digital circuits with interactive tools.", icon: "bx-chip" },
     { _id: "3", slug: "dbms", title: "Database Management Systems", description: "Explore database concepts with practical simulations.", icon: "bx-data" },
+    { _id: "11", slug: "c", title: "C Programming", description: "Master C fundamentals — I/O, loops, arrays, pointers, and more.", icon: "bx-code-curly" },
+    { _id: "12", slug: "java", title: "Java Programming", description: "OOP, exception handling, threads, and Swing GUI concepts.", icon: "bxl-java" },
+    { _id: "13", slug: "python", title: "Python Programming", description: "Variables, loops, OOP, modules, file I/O, and functional programming.", icon: "bxl-python" },
+    { _id: "14", slug: "dsa", title: "Data Structures", description: "Linked lists, stacks, queues, trees, graphs, and Dijkstra's algorithm.", icon: "bx-git-branch" },
     { _id: "4", slug: "os", title: "Operating Systems", description: "Understand OS concepts through interactive labs.", icon: "bx-cog" },
     { _id: "5", slug: "mpmc", title: "Microprocessors", description: "Experience 8086 architecture with an in-built emulator.", icon: "bx-microchip" },
     { _id: "6", slug: "oops", title: "OOPs", description: "Compile and run code in multiple languages.", icon: "bx-cube-alt" },
@@ -22,11 +26,15 @@ const getSubjectImage = (slug: string) => {
     if (slug === 'dbms') return '/dbms-module.jpg.jpg';
     if (slug === 'dld') return '/dld-module.jpg.jpg';
     if (slug === 'oops') return '/oops-module.jpg.jpg';
+    if (slug === 'c') return '/cn-module.jpg.jpg';
+    if (slug === 'java') return '/oops-module.jpg.jpg';
+    if (slug === 'python') return '/dbms-module.jpg.jpg';
+    if (slug === 'dsa') return '/dld-module.jpg.jpg';
     return '/cn-module.jpg.jpg'; // fallback
 };
 
 const isComingSoon = (slug: string) => {
-    return !['cn', 'dbms', 'dld'].includes(slug);
+    return !['cn', 'dbms', 'dld', 'c', 'java', 'python', 'dsa'].includes(slug);
 };
 
 export function LabsGrid() {
@@ -61,6 +69,7 @@ export function LabsGrid() {
                             setCurrentPage(1); // Reset to page 1 on search
                         }}
                         className="w-full bg-transparent border-none outline-none text-foreground p-3 text-lg"
+                        suppressHydrationWarning
                     />
                 </div>
 
@@ -86,6 +95,7 @@ export function LabsGrid() {
                             onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                             disabled={currentPage === 1}
                             className="w-10 h-10 flex items-center justify-center bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 disabled:opacity-50 hover:bg-slate-50 dark:hover:bg-slate-700 rounded-none transition-colors"
+                            suppressHydrationWarning
                         >
                             <i className="bx bx-chevron-left text-xl"></i>
                         </button>
@@ -99,6 +109,7 @@ export function LabsGrid() {
                                     ? "bg-[#059669] text-white border-[#059669]" 
                                     : "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700"
                                 }`}
+                                suppressHydrationWarning
                             >
                                 {i + 1}
                             </button>
@@ -108,6 +119,7 @@ export function LabsGrid() {
                             onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                             disabled={currentPage === totalPages}
                             className="w-10 h-10 flex items-center justify-center bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 disabled:opacity-50 hover:bg-slate-50 dark:hover:bg-slate-700 rounded-none transition-colors"
+                            suppressHydrationWarning
                         >
                             <i className="bx bx-chevron-right text-xl"></i>
                         </button>
