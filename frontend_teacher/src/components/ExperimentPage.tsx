@@ -10,6 +10,7 @@ import { ExecutionInsights } from "@/components/simulation/core/ExecutionInsight
 import CodeCompiler from "@/components/simulation/core/CodeCompiler";
 import LabTest from "@/components/simulation/core/LabTest";
 import { ChevronRight } from "lucide-react";
+import { LAB_CONTENT } from "@/lib/labs/rich-content";
 
 const getSubjectName = (id: string) => {
     const lower = id.toLowerCase();
@@ -306,6 +307,7 @@ function ExperimentPageContent({ id }: { id: string }) {
 
     const simLabId = experiment.slug || experiment.id || experiment._id;
     const subjectName = getSubjectName(simLabId);
+    const richContent = LAB_CONTENT[simLabId];
 
     const renderContent = () => {
         switch (activeSection) {
@@ -321,7 +323,7 @@ function ExperimentPageContent({ id }: { id: string }) {
                         
                         <div>
                             <h3 className="text-lg font-bold mb-2">Learning Objective of the Experiment</h3>
-                            <p className="text-muted-foreground whitespace-pre-wrap">{experiment.aim || "To study and analyze the core concepts of this experiment."}</p>
+                            <p className="text-muted-foreground whitespace-pre-wrap">{richContent?.aim || experiment.aim || "To study and analyze the core concepts of this experiment."}</p>
                         </div>
                     </div>
                 );
@@ -329,18 +331,30 @@ function ExperimentPageContent({ id }: { id: string }) {
                 return (
                     <div className="p-8 max-w-4xl">
                         <h2 className="text-2xl font-bold mb-6 underline decoration-primary/50 underline-offset-8">Theory</h2>
-                        <div className="prose dark:prose-invert max-w-none text-muted-foreground whitespace-pre-wrap">
-                            This is a dummy sample theory. Newton's law of universal gravitation states that every particle attracts every other particle in the universe with a force proportional to the product of their masses and inversely proportional to the square of the distance between their centers. The formula is F = G(m1m2)/r². This foundational concept revolutionized our understanding of celestial mechanics and the fundamental forces of nature.
-                        </div>
+                        {richContent?.theory ? (
+                            <div className="text-foreground">
+                                {richContent.theory}
+                            </div>
+                        ) : (
+                            <div className="prose dark:prose-invert max-w-none text-muted-foreground whitespace-pre-wrap">
+                                {experiment.theory || "Detailed theory will be populated here."}
+                            </div>
+                        )}
                     </div>
                 );
             case "procedure":
                 return (
                     <div className="p-8 max-w-4xl">
                         <h2 className="text-2xl font-bold mb-6 underline decoration-primary/50 underline-offset-8">Procedure</h2>
-                        <div className="prose dark:prose-invert max-w-none text-muted-foreground whitespace-pre-wrap">
-                            {experiment.algorithm || "1. Read the theory carefully.\n2. Proceed to the simulation section.\n3. Interact with the simulation environment.\n4. Complete the posttest to evaluate your learning."}
-                        </div>
+                        {richContent?.procedure ? (
+                            <div className="text-foreground">
+                                {richContent.procedure}
+                            </div>
+                        ) : (
+                            <div className="prose dark:prose-invert max-w-none text-muted-foreground whitespace-pre-wrap">
+                                {experiment.algorithm || "1. Read the theory carefully.\n2. Proceed to the simulation section.\n3. Interact with the simulation environment.\n4. Complete the posttest to evaluate your learning."}
+                            </div>
+                        )}
                     </div>
                 );
             case "simulation":
@@ -348,7 +362,7 @@ function ExperimentPageContent({ id }: { id: string }) {
                     return (
                         <div className="flex flex-col items-center min-h-full bg-background text-muted-foreground select-none overflow-y-auto pb-12 w-full">
                             <div className="w-full max-w-4xl mt-8">
-                                <div className="bg-gradient-to-br from-[#021D24] to-[#059669] rounded-t-2xl p-8 text-white relative overflow-hidden shadow-lg">
+                                <div className="bg-gradient-to-br from-emerald-800 to-emerald-600 rounded-t-2xl p-8 text-white relative overflow-hidden shadow-lg">
                                     <div className="relative z-10 flex items-start gap-4">
                                         <div className="bg-card/20 p-3 rounded-xl backdrop-blur-sm">
                                             <i className="bx bx-play-circle text-3xl text-white"></i>
